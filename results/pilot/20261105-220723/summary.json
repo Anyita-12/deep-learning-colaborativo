@@ -1,0 +1,101 @@
+{
+  "run_id": "20261105-220723",
+  "device": {
+    "tf": "2.21.0",
+    "keras": "3.15.1",
+    "python": "3.12.10",
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD",
+    "device": "CPU",
+    "gpus": [],
+    "seed": 0,
+    "mixed_precision": false,
+    "deterministic": false
+  },
+  "config": {
+    "img_size": 64,
+    "batch_size": 32,
+    "epochs": 20,
+    "patience": 5,
+    "learning_rate": 0.001,
+    "seeds": [
+      0
+    ],
+    "split_seed": 1234,
+    "frac_train": 0.7,
+    "frac_val": 0.15,
+    "near_dup_max_dist": 2,
+    "augment": true,
+    "class_weights": false,
+    "deterministic": false,
+    "timing_others": true,
+    "budget": {
+      "models": 3,
+      "seeds": 10,
+      "epochs": 20,
+      "hours_max": 2.0
+    }
+  },
+  "n": {
+    "train": 1763,
+    "val": 388,
+    "test": 376
+  },
+  "zip_sha256": "c060e8abfe5d6de0578ca15be1ed8ad0794a865d333c3473d53d1d9ad6e38b8c",
+  "test_fingerprint": "07974cacb0203b7e2d4c3c4c193fce4382a3e948c60b0948325ed6de4988d293",
+  "data_quality": {
+    "corrupt": 0,
+    "exact_dups": 3,
+    "near_dup_pairs": 70,
+    "cross_class_pairs": 23
+  },
+  "dummy_val": {
+    "most_frequent": {
+      "accuracy": 0.24742268041237114,
+      "macro_f1": 0.06611570247933884,
+      "balanced_accuracy": 0.16666666666666666
+    },
+    "stratified": {
+      "accuracy": 0.17010309278350516,
+      "macro_f1": 0.14729598334834307,
+      "balanced_accuracy": 0.14585994876529348
+    }
+  },
+  "cnn_runs": [
+    {
+      "seed": 0,
+      "params": 94694,
+      "epochs_run": 14,
+      "best_epoch": 9,
+      "train_time_s": 208.47787120000066,
+      "first_epoch_s": 20.35536359999969,
+      "median_epoch_s": 14.32135930000004,
+      "train": {
+        "accuracy": 0.553034600113443,
+        "macro_f1": 0.44830502157383795,
+        "balanced_accuracy": 0.4832444110756006
+      },
+      "val": {
+        "accuracy": 0.5567010309278351,
+        "macro_f1": 0.44314469302990167,
+        "balanced_accuracy": 0.4770038680005275
+      }
+    }
+  ],
+  "cnn_val_macro_f1": {
+    "mean": 0.44314469302990167,
+    "sd": null
+  },
+  "timing_s_per_epoch": {
+    "cnn_pequena": 14.32135930000004,
+    "mlp": 2.414041900000484,
+    "mobilenetv2_congelada": 5.751912900000207
+  },
+  "params": {
+    "cnn_pequena": 94694,
+    "mlp": 3147526,
+    "mobilenetv2_congelada": 2265670
+  },
+  "projection_h": 1.2492952277778184,
+  "notebook_time_s": 3598.4671605000003
+}

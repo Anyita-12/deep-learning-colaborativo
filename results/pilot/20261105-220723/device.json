@@ -1,0 +1,12 @@
+{
+  "tf": "2.21.0",
+  "keras": "3.15.1",
+  "python": "3.12.10",
+  "os": "Windows-11-10.0.26200-SP0",
+  "cpu": "AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD",
+  "device": "CPU",
+  "gpus": [],
+  "seed": 0,
+  "mixed_precision": false,
+  "deterministic": false
+}
