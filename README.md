@@ -1,4 +1,8 @@
 # Proyecto Final de Deep Learning
+  ## Autores
+  - Díaz J.
+  - Sanjuan A.
+
 
 Entregables encadenados E1–E3. Dataset de trabajo: TrashNet (clasificación de imágenes).
 
@@ -47,3 +51,6 @@ Descargar TrashNet y colocarlo en `data/raw/` *(instrucciones exactas: [PENDIENT
 
 ## Flujo de trabajo en equipo
 Ramas cortas `feature/<tarea>` → PR revisado por la otra persona → merge a `main`. Commits pequeños. No se sube `data/`, `models/` ni `.venv/`.
+
+
+  > **Aviso:** este repositorio es el entorno de trabajo del Proyecto Final de Deep Learning.
