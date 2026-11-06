@@ -1,0 +1,8 @@
+criterio,valor,semáforo
+Tiempo mediano por época CNN (s),14.32135930000004,ROJO
+Proyección presupuesto (h) [suma de los 3 modelos cronometrados],1.2492952277778184,VERDE
+Macro-F1 val CNN (media de semillas),0.44314469302990167,AMARILLO
+Ventaja vs. mayoritario (Δ macro-F1),0.3770289905505628,info
+Margen de mejora para E3 (macro-F1 < 0.90),0.5568553069700983,VERDE
+Casi-duplicados entre clases,23.0,ROJO
+Archivos corruptos,0.0,VERDE

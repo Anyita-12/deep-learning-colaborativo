@@ -1,0 +1,24 @@
+{
+  "img_size": 64,
+  "batch_size": 32,
+  "epochs": 20,
+  "patience": 5,
+  "learning_rate": 0.001,
+  "seeds": [
+    0
+  ],
+  "split_seed": 1234,
+  "frac_train": 0.7,
+  "frac_val": 0.15,
+  "near_dup_max_dist": 2,
+  "augment": true,
+  "class_weights": false,
+  "deterministic": false,
+  "timing_others": true,
+  "budget": {
+    "models": 3,
+    "seeds": 10,
+    "epochs": 20,
+    "hours_max": 2.0
+  }
+}
