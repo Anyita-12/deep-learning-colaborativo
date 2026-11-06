@@ -1,4 +1,4 @@
-# Proyecto Final de Deep Learning
+# Proyecto Final de Deep Learning - Diaz J., Sanjuan A.
 
 Entregables encadenados E1–E3. Dataset de trabajo: TrashNet (clasificación de imágenes).
 
