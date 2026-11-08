@@ -1,0 +1,5 @@
+﻿Modelo base,Parámetros (M),MAC por imagen (G)
+"CNN estilo VGG reducida (4 bloques × 2 conv, GAP, densa 128)",1.205926,2.586706688
+MobileNetV2 (α = 1.0),2.231558,0.299501952
+MobileNetV2 reducida (α = 0.5),0.695366,0.09585952
+ResNet-18,11.17959,1.813564416
