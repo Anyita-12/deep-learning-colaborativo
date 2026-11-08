@@ -1,0 +1,54 @@
+{
+  "model": "CNN",
+  "seed": 7,
+  "stage": "final",
+  "hp": {
+    "optimizer": "AdamW",
+    "lr": 0.0003,
+    "weight_decay": 0.0005,
+    "dropout": 0.2,
+    "batch_size": 32,
+    "max_epochs": 100,
+    "warmup_epochs": 3,
+    "eta_min_factor": 0.01,
+    "patience": 15,
+    "min_delta": 0.0001,
+    "grad_clip": 5.0,
+    "amp": true,
+    "class_weighted_loss": true
+  },
+  "img_size": 224,
+  "resize": "resize",
+  "augmentation": {
+    "RandomResizedCrop": {
+      "size": 224,
+      "scale": [
+        0.7,
+        1.0
+      ]
+    },
+    "RandomHorizontalFlip": {
+      "p": 0.5
+    },
+    "RandomVerticalFlip": {
+      "p": 0.5
+    },
+    "RandomRotation": {
+      "degrees": 15
+    },
+    "ColorJitter": {
+      "brightness": 0.2,
+      "contrast": 0.2,
+      "saturation": 0.2,
+      "hue": 0.02
+    }
+  },
+  "split_csv": "trashnet_split_v2_s1234.csv",
+  "test_fingerprint": "4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de2360cbd87",
+  "subset": null,
+  "regime": "desde cero (weights=None)",
+  "code_version": "b9cfbe43b9ff",
+  "pilot": false,
+  "hpo_trial": 6,
+  "date_start": "2026-11-08 07:03:41"
+}
