@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Definición del problema y dataset &#8212; Clasificación de residuos con TrashNet</title>
+    <title>1. Definición del problema y conjunto de datos &#8212; Clasificación de residuos con TrashNet</title>
   
   
   
@@ -60,6 +60,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '01_problema_dataset';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -153,6 +155,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -210,7 +216,7 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Definición del problema y dataset</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Definición del problema y conjunto de datos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
 <li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
@@ -222,6 +228,7 @@
 <li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
 <li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_conclusiones.html">7. Conclusiones</a></li>
 </ul>
 
     </div>
@@ -359,7 +366,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -370,11 +379,25 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1. Definición del problema y dataset</h1>
+    <h1>1. Definición del problema y conjunto de datos</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-y-motivacion">1.1 Contexto y motivación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-formal-del-problema">1.2 Definición formal del problema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-de-investigacion-e-hipotesis">1.3 Pregunta de investigación e hipótesis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decisiones-declaradas-antes-del-entrenamiento">1.4 Decisiones declaradas antes del entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion-del-conjunto-de-datos">1.5 Justificación del conjunto de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-tecnica">1.6 Descripción técnica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">Referencias</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -384,8 +407,222 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="definicion-del-problema-y-dataset">
-<h1>1. Definición del problema y dataset<a class="headerlink" href="#definicion-del-problema-y-dataset" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="definicion-del-problema-y-conjunto-de-datos">
+<h1>1. Definición del problema y conjunto de datos<a class="headerlink" href="#definicion-del-problema-y-conjunto-de-datos" title="Link to this heading">#</a></h1>
+<p>En este capítulo planteamos el problema de clasificar imágenes de residuos sólidos según su material, lo formalizamos y declaramos, antes de entrenar, la pregunta de investigación, la hipótesis, las métricas y la unidad de independencia que rigen todo el trabajo. También justificamos el uso de TrashNet y describimos su estructura técnica.</p>
+<section id="contexto-y-motivacion">
+<h2>1.1 Contexto y motivación<a class="headerlink" href="#contexto-y-motivacion" title="Link to this heading">#</a></h2>
+<p>En 2016 se generaron en el mundo 2010 millones de toneladas de residuos sólidos municipales. Al menos el 33 % no se gestionó de forma ambientalmente segura y solo el 13.5 % se recicló (Kaza et al., 2018). Para 2050 se proyecta que la generación anual alcance 3800 millones de toneladas (United Nations Environment Programme [UNEP] y International Solid Waste Association [ISWA], 2024). El aprovechamiento de esos residuos depende de separarlos por material, y la separación manual es lenta, costosa y expone a los operarios a residuos peligrosos (Masand et al., 2021).</p>
+<p>La clasificación automática de imágenes es el componente de percepción de varios sistemas que se han propuesto para resolver este problema:</p>
+<ul class="simple">
+<li><p><strong>Plantas de reciclaje:</strong> robots que separan residuos a partir del reconocimiento de imágenes (Mao et al., 2021).</p></li>
+<li><p><strong>Contenedores inteligentes:</strong> contenedores que clasifican el residuo al depositarlo y lo dirigen al compartimento correspondiente (Yang y Li, 2020). Feng et al. (2022) reportan 146 ms por reconocimiento en su prototipo.</p></li>
+<li><p><strong>Aplicaciones móviles y dispositivos de borde:</strong> clasificadores ejecutados en teléfonos o en hardware de bajo costo que informan al usuario sobre la disposición correcta del residuo en la fuente (Echchidmi y Bouayad, 2026; Huang et al., 2021; Rabano et al., 2018; N.-S. Vo et al., 2024).</p></li>
+<li><p><strong>Redes de Internet de las cosas:</strong> entrenamiento federado entre dispositivos que conserva la privacidad de los datos locales (Quan et al., 2024).</p></li>
+<li><p><strong>Gestión de emergencias:</strong> clasificación de residuos en zonas afectadas por inundaciones (Pitakaso et al., 2024).</p></li>
+</ul>
+<p>En el ámbito regional, Meléndez-Villadiego et al. (2026), de la Universidad del Norte, entrenaron variantes de ResNet con TrashNet combinado con imágenes propias, capturadas en un recinto que simula las condiciones de operación de un sistema de clasificación.</p>
+<p>El desempeño de estos sistemas depende de cuánto se puede confiar en el clasificador y de qué evidencia respalda la elección de su arquitectura. Este trabajo aporta esa evidencia para los modelos base: los comparamos con un protocolo común, con varias réplicas y con pruebas estadísticas, sobre una partición que controla la fuga de información.</p>
+</section>
+<section id="definicion-formal-del-problema">
+<h2>1.2 Definición formal del problema<a class="headerlink" href="#definicion-formal-del-problema" title="Link to this heading">#</a></h2>
+<p>El proyecto corresponde al tipo <strong>7. Clasificación de imágenes</strong>: cada observación es una fotografía de un objeto, y la tarea consiste en asignarle una de seis clases de material.</p>
+<p><strong>Espacio de entrada.</strong> Una imagen RGB redimensionada y normalizada por canal:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{X} = \mathbb{R}^{3 \times 224 \times 224}.\]</div>
+<p><strong>Espacio de salida.</strong> Las seis clases de TrashNet:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{Y} = \{1, \dots, 6\} \equiv \{\texttt{cardboard}, \texttt{glass}, \texttt{metal}, \texttt{paper}, \texttt{plastic}, \texttt{trash}\}.\]</div>
+<p><strong>Función objetivo.</strong> Buscamos una función <span class="math notranslate nohighlight">\(f_\theta : \mathcal{X} \to \Delta^{5}\)</span>, donde <span class="math notranslate nohighlight">\(\Delta^{5}\)</span> es el conjunto de vectores de 6 probabilidades que suman 1. La red asigna a cada imagen una distribución sobre las clases mediante <em>softmax</em>,</p>
+<div class="math notranslate nohighlight">
+\[p_\theta(y = k \mid x) = \frac{\exp\big(z_k(x;\theta)\big)}{\sum_{j=1}^{6} \exp\big(z_j(x;\theta)\big)},\]</div>
+<p>donde <span class="math notranslate nohighlight">\(z(x;\theta) \in \mathbb{R}^6\)</span> son las salidas de la última capa (<em>logits</em>). La clase predicha es <span class="math notranslate nohighlight">\(\hat y = \arg\max_k \, p_\theta(y = k \mid x)\)</span>.</p>
+<p><strong>Función de pérdida.</strong> Minimizamos la entropía cruzada ponderada por clase sobre el conjunto de entrenamiento <span class="math notranslate nohighlight">\(\{(x_i, y_i)\}_{i=1}^{N}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\theta) = -\frac{\sum_{i=1}^{N} w_{y_i} \log p_\theta(y_i \mid x_i)}{\sum_{i=1}^{N} w_{y_i}}, \qquad w_k = \frac{N}{K\, n_k},\]</div>
+<p>donde <span class="math notranslate nohighlight">\(K = 6\)</span> y <span class="math notranslate nohighlight">\(n_k\)</span> es el número de imágenes de la clase <span class="math notranslate nohighlight">\(k\)</span> en entrenamiento. El peso <span class="math notranslate nohighlight">\(w_k\)</span> compensa el desbalance: una imagen de <code class="docutils literal notranslate"><span class="pre">trash</span></code>, la clase menos frecuente, pesa unas cuatro veces más que una de <code class="docutils literal notranslate"><span class="pre">paper</span></code> (sección 2.2). La regularización por decaimiento de pesos se aplica en el optimizador (AdamW) y no forma parte de <span class="math notranslate nohighlight">\(\mathcal{L}\)</span>.</p>
+<p>La métrica primaria, el F1 macro, no es diferenciable respecto a <span class="math notranslate nohighlight">\(\theta\)</span> porque depende de <span class="math notranslate nohighlight">\(\arg\max\)</span>. Por eso entrenamos con <span class="math notranslate nohighlight">\(\mathcal{L}\)</span>, que sí lo es, y evaluamos con F1 macro.</p>
+</section>
+<section id="pregunta-de-investigacion-e-hipotesis">
+<h2>1.3 Pregunta de investigación e hipótesis<a class="headerlink" href="#pregunta-de-investigacion-e-hipotesis" title="Link to this heading">#</a></h2>
+<p><strong>Pregunta.</strong> Al entrenar desde cero con el mismo protocolo, sobre una partición de TrashNet controlada por duplicados, ¿difieren en F1 macro de prueba una CNN estilo VGG reducida, MobileNetV2 y ResNet-18, y alguna diferencia supera el margen de relevancia práctica <span class="math notranslate nohighlight">\(\delta\)</span>?</p>
+<p>Elegimos el entrenamiento desde cero porque la CNN no tiene pesos preentrenados. Preentrenar solo dos de los tres modelos confundiría el efecto de la arquitectura con el de la transferencia desde ImageNet.</p>
+<p><strong>Hipótesis operativa.</strong> Sea <span class="math notranslate nohighlight">\(F_m^{(s)}\)</span> el F1 macro de prueba del modelo <span class="math notranslate nohighlight">\(m\)</span> con la semilla <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_0\)</span> global: las tres arquitecturas tienen la misma distribución de <span class="math notranslate nohighlight">\(F_m^{(s)}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1\)</span> global: al menos una arquitectura difiere.</p></li>
+<li><p>Por pares: <span class="math notranslate nohighlight">\(H_0: \; \mathbb{E}\big[F_a^{(s)} - F_b^{(s)}\big] = 0\)</span>, con la diferencia pareada por semilla.</p></li>
+</ul>
+<p>Una diferencia se considera relevante solo si es estadísticamente significativa y su magnitud alcanza <span class="math notranslate nohighlight">\(\delta\)</span>. El modelo con mayor F1 macro medio define el modelo de referencia, y su desempeño fija el umbral que cualquier modelo posterior debe superar.</p>
+</section>
+<section id="decisiones-declaradas-antes-del-entrenamiento">
+<h2>1.4 Decisiones declaradas antes del entrenamiento<a class="headerlink" href="#decisiones-declaradas-antes-del-entrenamiento" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Decisión</p></th>
+<th class="head"><p>Valor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Métrica primaria</p></td>
+<td><p>F1 macro en prueba: <span class="math notranslate nohighlight">\(\mathrm{F1}_{\text{macro}} = \frac{1}{K}\sum_{k=1}^{K} \frac{2\,P_k R_k}{P_k + R_k}\)</span>, con <span class="math notranslate nohighlight">\(P_k\)</span> y <span class="math notranslate nohighlight">\(R_k\)</span> la precisión y el recall de la clase <span class="math notranslate nohighlight">\(k\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Métricas secundarias</p></td>
+<td><p>Accuracy, balanced accuracy, F1 ponderado y por clase, precisión y recall macro, AUC-ROC y AUC-PR macro (uno contra resto), MCC y error de calibración esperado (ECE)</p></td>
+</tr>
+<tr class="row-even"><td><p>Margen de relevancia práctica</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta = 0.02\)</span> en F1 macro</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nivel de significancia y potencia</p></td>
+<td><p><span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>; potencia objetivo 0.80</p></td>
+</tr>
+<tr class="row-even"><td><p>Unidad de independencia</p></td>
+<td><p>El grupo de casi-duplicados: las fotografías casi idénticas de un mismo objeto forman un grupo, y cada grupo se asigna completo a una sola partición</p></td>
+</tr>
+<tr class="row-odd"><td><p>Unidad de réplica</p></td>
+<td><p>La semilla, que controla la inicialización, el orden de los lotes, el aumento de datos y el dropout; los tres modelos comparten semillas, por lo que las métricas están pareadas</p></td>
+</tr>
+<tr class="row-even"><td><p>Partición</p></td>
+<td><p>Estratificada por clase y agrupada por casi-duplicados, 1800/360/361 imágenes (entrenamiento/validación/prueba), fija para todos los experimentos</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Elegimos el F1 macro porque asigna el mismo peso a las seis clases. Con el desbalance de TrashNet, la accuracy puede ser alta aunque el modelo falle en <code class="docutils literal notranslate"><span class="pre">trash</span></code>. Conservamos la accuracy como métrica secundaria porque es la que reporta la mayoría de los estudios (capítulo 3). El valor de <span class="math notranslate nohighlight">\(\delta\)</span> corresponde a una mejora de dos puntos porcentuales en F1 macro, del orden de la variación esperada entre semillas. Estas decisiones se mantienen sin cambios en las etapas siguientes del proyecto.</p>
+</section>
+<section id="justificacion-del-conjunto-de-datos">
+<h2>1.5 Justificación del conjunto de datos<a class="headerlink" href="#justificacion-del-conjunto-de-datos" title="Link to this heading">#</a></h2>
+<p><strong>Relevancia.</strong> TrashNet clasifica residuos en las fracciones que separa un sistema de reciclaje: cartón, vidrio, metal, papel, plástico y rechazo (<code class="docutils literal notranslate"><span class="pre">trash</span></code>). Las clases corresponden a decisiones reales de aprovechamiento, y las confusiones entre ellas (vidrio y plástico, papel y cartón) son las mismas que dificultan la separación manual.</p>
+<p><strong>Procedencia.</strong> Yang y Thung (2016) construyeron el conjunto de datos en el curso CS229 de la Universidad de Stanford. Fotografiaron cada objeto sobre una cartulina blanca, con luz solar o de interior, usando tres teléfonos (iPhone 7 Plus, iPhone 5S e iPhone SE). Las fotografías originales (~3.5 GB) se redujeron a 512×384 píxeles con el script <code class="docutils literal notranslate"><span class="pre">resize.py</span></code> del repositorio, que además rota las imágenes verticales. En su informe, una SVM con descriptores SIFT alcanzó 63 % de accuracy y una CNN 22 %; tras cambiar la inicialización de pesos, la CNN llegó a cerca de 75 % (Thung, 2017).</p>
+<p><strong>Disponibilidad y licencia.</strong> El conjunto de datos es público en GitHub (Thung, 2017) y en Hugging Face (<code class="docutils literal notranslate"><span class="pre">garythung/trashnet</span></code>). El repositorio se distribuye bajo licencia MIT, que permite usar, copiar, modificar y redistribuir su contenido si se conserva el aviso de copyright.</p>
+<p><strong>Uso previo en la literatura.</strong> TrashNet es el conjunto de referencia para clasificar imágenes de residuos desde 2018, lo que permite comparar nuestros resultados con estudios previos:</p>
+<ul class="simple">
+<li><p>Aral et al. (2018) obtuvieron 95 % de accuracy con DenseNet121 ajustado, y Rabano et al. (2018) 87.2 % con MobileNet, que luego llevaron a una aplicación Android.</p></li>
+<li><p>Ruiz et al. (2019) compararon VGG, Inception y ResNet, con 88.6 % para un modelo Inception-ResNet; A. H. Vo et al. (2019) alcanzaron 94 % con una variante de ResNeXt.</p></li>
+<li><p>Los estudios posteriores reportan valores entre 94 % y 99.6 % con modelos preentrenados, mecanismos de atención u optimización de hiperparámetros (Feng et al., 2022; Huang et al., 2021; Mao et al., 2021; Yang y Li, 2020).</p></li>
+</ul>
+<p>En nuestra revisión (capítulo 3), la mediana de accuracy de los 59 estudios incluidos es cercana a 96 %, pero solo 13 aplican pruebas estadísticas y 44 combinan TrashNet con otros conjuntos de datos. Además, las fotografías contienen un único objeto sobre fondo blanco. Abdu y Noor (2022) señalan que ese fondo limita la generalización a imágenes reales, y Mao et al. (2022) encontraron que un detector entrenado con TrashNet no sirve para escenas con varios objetos. Por eso medimos en el análisis exploratorio si el fondo y la iluminación predicen la clase (sección 2.7) y evaluamos los modelos con el fondo sustituido (sección 5.3).</p>
+</section>
+<section id="descripcion-tecnica">
+<h2>1.6 Descripción técnica<a class="headerlink" href="#descripcion-tecnica" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspecto</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tamaño</p></td>
+<td><p>2527 imágenes en la versión publicada; 2521 tras eliminar 6 imágenes con etiqueta contradictoria (sección 2.3)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Estructura</p></td>
+<td><p>Una carpeta por clase; el nombre del archivo combina la clase y un índice (<code class="docutils literal notranslate"><span class="pre">glass/glass12.jpg</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>Formato</p></td>
+<td><p>JPEG, RGB de 8 bits por canal, 512×384 píxeles (proporción 4:3) en todas las imágenes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dimensionalidad</p></td>
+<td><p><span class="math notranslate nohighlight">\(3 \times 384 \times 512 = 589\,824\)</span> valores por imagen original; <span class="math notranslate nohighlight">\(3 \times 224 \times 224 = 150\,528\)</span> tras el redimensionamiento</p></td>
+</tr>
+<tr class="row-even"><td><p>Tipo de dato y unidad de observación</p></td>
+<td><p>Imagen fotográfica de un único objeto de residuo</p></td>
+</tr>
+<tr class="row-odd"><td><p>Variable objetivo</p></td>
+<td><p>Clase de material, con seis categorías nominales (tabla siguiente)</p></td>
+</tr>
+<tr class="row-even"><td><p>Etiquetado</p></td>
+<td><p>Manual, por los autores, al fotografiar cada objeto</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dependencia entre observaciones</p></td>
+<td><p>Casi-duplicados del mismo objeto y efectos de sesión de captura (fondo, iluminación, teléfono)</p></td>
+</tr>
+<tr class="row-even"><td><p>Versión</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dataset-resized.zip</span></code>, versión de 512×384 píxeles publicada por los autores (<code class="docutils literal notranslate"><span class="pre">garythung/trashnet</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Suma de verificación</p></td>
+<td><p>SHA-256 del archivo comprimido y del conjunto de prueba (abajo), registradas en <code class="docutils literal notranslate"><span class="pre">data/SHA256SUMS.txt</span></code> y verificadas antes de cada corrida</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>c060e8abfe5d6de0578ca15be1ed8ad0794a865d333c3473d53d1d9ad6e38b8c  data/raw/trashnet/dataset-resized.zip
+4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de2360cbd87  test_set:data/splits/trashnet_split_v2_s1234.csv
+</pre></div>
+</div>
+<p><strong>Distribución de clases.</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Clase</p></th>
+<th class="head text-right"><p>Versión publicada</p></th>
+<th class="head text-right"><p>Tras el análisis exploratorio</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cardboard</span></code></p></td>
+<td class="text-right"><p>403</p></td>
+<td class="text-right"><p>403</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">glass</span></code></p></td>
+<td class="text-right"><p>501</p></td>
+<td class="text-right"><p>498</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">metal</span></code></p></td>
+<td class="text-right"><p>410</p></td>
+<td class="text-right"><p>409</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">paper</span></code></p></td>
+<td class="text-right"><p>594</p></td>
+<td class="text-right"><p>594</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">plastic</span></code></p></td>
+<td class="text-right"><p>482</p></td>
+<td class="text-right"><p>480</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">trash</span></code></p></td>
+<td class="text-right"><p>137</p></td>
+<td class="text-right"><p>137</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total</strong></p></td>
+<td class="text-right"><p><strong>2527</strong></p></td>
+<td class="text-right"><p><strong>2521</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La razón de desbalance entre la clase más frecuente y la menos frecuente es 4.34 (<code class="docutils literal notranslate"><span class="pre">paper</span></code> frente a <code class="docutils literal notranslate"><span class="pre">trash</span></code>), y <code class="docutils literal notranslate"><span class="pre">trash</span></code> representa el 5.4 % del total (sección 2.2).</p>
+<p><strong>Ruido de etiqueta esperado.</strong> Cada imagen tiene una sola etiqueta asignada por los autores, sin revisión independiente. Esperamos ruido en tres situaciones: objetos de material mixto (un envase de cartón con plástico), pares de clases visualmente parecidas (vidrio y plástico transparentes, papel y cartón delgado) y la clase <code class="docutils literal notranslate"><span class="pre">trash</span></code>, que agrupa objetos heterogéneos que no pertenecen a las demás. El análisis exploratorio encontró 3 pares de imágenes idénticas con etiquetas distintas, que eliminamos (sección 2.3). La auditoría por muestreo del ruido restante quedó diseñada y se declara como limitación (sección 2.8).</p>
+<p><strong>Estructura de dependencia.</strong> TrashNet no incluye metadatos de objeto, sesión o fecha de captura, por lo que la dependencia se infiere de las imágenes:</p>
+<ul class="simple">
+<li><p><strong>Casi-duplicados:</strong> algunos objetos se fotografiaron dos o más veces con un cambio leve de encuadre. Si una copia queda en entrenamiento y otra en prueba, la métrica de prueba sobreestima el desempeño. Agrupamos estas imágenes con un hash perceptual (2521 imágenes en 2512 grupos) y asignamos cada grupo completo a una partición (sección 2.4).</p></li>
+<li><p><strong>Efectos de sesión:</strong> si cada clase se fotografió en sesiones distintas, el fondo y la iluminación pueden asociarse con la clase. El análisis exploratorio confirmó esa asociación (sección 2.7).</p></li>
+</ul>
+<p>Fuera de los grupos de casi-duplicados, asumimos independencia entre fotografías. Este supuesto condiciona la partición y las pruebas estadísticas de los capítulos 4 y 5.</p>
+</section>
+<section id="referencias">
+<h2>Referencias<a class="headerlink" href="#referencias" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Abdu, H. y Noor, M. H. M. (2022). Domestic trash classification with transfer learning using VGG16. En <em>2022 IEEE 12th International Conference on Control System, Computing and Engineering (ICCSCE)</em> (pp. 137–141). IEEE. <a class="reference external" href="https://doi.org/10.1109/ICCSCE54767.2022.9935653">https://doi.org/10.1109/ICCSCE54767.2022.9935653</a></p></li>
+<li><p>Aral, R. A., Keskin, Ş. R., Kaya, M. y Hacıömeroğlu, M. (2018). Classification of TrashNet dataset based on deep learning models. En <em>2018 IEEE International Conference on Big Data (Big Data)</em> (pp. 2058–2062). IEEE. <a class="reference external" href="https://doi.org/10.1109/BigData.2018.8622212">https://doi.org/10.1109/BigData.2018.8622212</a></p></li>
+<li><p>Echchidmi, M. y Bouayad, A. (2026). Compact waste image classification with multi-student CNNs and edge-oriented model selection. <em>Frontiers in Artificial Intelligence</em>, <em>9</em>, Artículo 1804734. <a class="reference external" href="https://doi.org/10.3389/frai.2026.1804734">https://doi.org/10.3389/frai.2026.1804734</a></p></li>
+<li><p>Feng, Z., Yang, J., Chen, L., Chen, Z. y Li, L. (2022). An intelligent waste-sorting and recycling device based on improved EfficientNet. <em>International Journal of Environmental Research and Public Health</em>, <em>19</em>(23), Artículo 15987. <a class="reference external" href="https://doi.org/10.3390/ijerph192315987">https://doi.org/10.3390/ijerph192315987</a></p></li>
+<li><p>Huang, K., Lei, H., Jiao, Z. y Zhong, Z. (2021). Recycling waste classification using vision transformer on portable device. <em>Sustainability</em>, <em>13</em>(21), Artículo 11572. <a class="reference external" href="https://doi.org/10.3390/su132111572">https://doi.org/10.3390/su132111572</a></p></li>
+<li><p>Kaza, S., Yao, L. C., Bhada-Tata, P. y Van Woerden, F. (2018). <em>What a waste 2.0: A global snapshot of solid waste management to 2050</em>. World Bank. <a class="reference external" href="https://doi.org/10.1596/978-1-4648-1329-0">https://doi.org/10.1596/978-1-4648-1329-0</a></p></li>
+<li><p>Mao, W.-L., Chen, W.-C., Fathurrahman, H. I. K. y Lin, Y.-H. (2022). Deep learning networks for real-time regional domestic waste detection. <em>Journal of Cleaner Production</em>, <em>344</em>, Artículo 131096. <a class="reference external" href="https://doi.org/10.1016/j.jclepro.2022.131096">https://doi.org/10.1016/j.jclepro.2022.131096</a></p></li>
+<li><p>Mao, W.-L., Chen, W.-C., Wang, C.-T. y Lin, Y.-H. (2021). Recycling waste classification using optimized convolutional neural network. <em>Resources, Conservation and Recycling</em>, <em>164</em>, Artículo 105132. <a class="reference external" href="https://doi.org/10.1016/j.resconrec.2020.105132">https://doi.org/10.1016/j.resconrec.2020.105132</a></p></li>
+<li><p>Masand, A., Chauhan, S., Jangid, M., Kumar, R. y Roy, S. (2021). ScrapNet: An efficient approach to trash classification. <em>IEEE Access</em>, <em>9</em>, 130947–130958. <a class="reference external" href="https://doi.org/10.1109/ACCESS.2021.3111230">https://doi.org/10.1109/ACCESS.2021.3111230</a></p></li>
+<li><p>Meléndez-Villadiego, M., Huerta, M. K., Manzur-Urueta, J., Sierra González, O., Oliveros-Corredor, V., Viloria-Núñez, C. y Rueda-Delgado, D. (2026). Recycle AId: Training an artificial intelligence model based on computer vision for solid waste classification. <em>IEEE Access</em>, <em>14</em>, 35384–35395. <a class="reference external" href="https://doi.org/10.1109/ACCESS.2026.3662988">https://doi.org/10.1109/ACCESS.2026.3662988</a></p></li>
+<li><p>Pitakaso, R., Srichok, T., Khonjun, S., Golinska-Dawson, P., Sethanan, K., Nanthasamroeng, N., Gonwirat, S., Luesak, P. y Boonmee, C. (2024). Optimization-driven artificial intelligence-enhanced municipal waste classification system for disaster waste management. <em>Engineering Applications of Artificial Intelligence</em>, <em>133</em>, Artículo 108614. <a class="reference external" href="https://doi.org/10.1016/j.engappai.2024.108614">https://doi.org/10.1016/j.engappai.2024.108614</a></p></li>
+<li><p>Quan, M. K., Nguyen, D. C., Nguyen, V.-D., Wijayasundara, M., Setunge, S. y Pathirana, P. N. (2024). Toward privacy-preserving waste classification in the Internet of Things. <em>IEEE Internet of Things Journal</em>, <em>11</em>(14), 24814–24830. <a class="reference external" href="https://doi.org/10.1109/JIOT.2024.3386727">https://doi.org/10.1109/JIOT.2024.3386727</a></p></li>
+<li><p>Rabano, S. L., Cabatuan, M. K., Sybingco, E., Dadios, E. P. y Calilung, E. J. (2018). Common garbage classification using MobileNet. En <em>2018 IEEE 10th International Conference on Humanoid, Nanotechnology, Information Technology, Communication and Control, Environment and Management (HNICEM)</em> (pp. 1–4). IEEE. <a class="reference external" href="https://doi.org/10.1109/HNICEM.2018.8666300">https://doi.org/10.1109/HNICEM.2018.8666300</a></p></li>
+<li><p>Ruiz, V., Sánchez, Á., Vélez, J. F. y Raducanu, B. (2019). Automatic image-based waste classification. En J. M. Ferrández Vicente, J. R. Álvarez-Sánchez, F. de la Paz López, J. Toledo Moreo y H. Adeli (Eds.), <em>From bioinspired systems and biomedical applications to machine learning</em> (pp. 422–431). Springer. <a class="reference external" href="https://doi.org/10.1007/978-3-030-19651-6_41">https://doi.org/10.1007/978-3-030-19651-6_41</a></p></li>
+<li><p>Thung, G. (2017). <em>trashnet</em> [Conjunto de datos y código fuente]. GitHub. <a class="github reference external" href="https://github.com/garythung/trashnet">garythung/trashnet</a></p></li>
+<li><p>United Nations Environment Programme y International Solid Waste Association. (2024). <em>Global waste management outlook 2024: Beyond an age of waste – Turning rubbish into a resource</em>. United Nations Environment Programme. <a class="reference external" href="https://www.unep.org/resources/global-waste-management-outlook-2024">https://www.unep.org/resources/global-waste-management-outlook-2024</a></p></li>
+<li><p>Vo, A. H., Hoang Son, L., Vo, M. T. y Le, T. (2019). A novel framework for trash classification using deep transfer learning. <em>IEEE Access</em>, <em>7</em>, 178631–178639. <a class="reference external" href="https://doi.org/10.1109/ACCESS.2019.2959033">https://doi.org/10.1109/ACCESS.2019.2959033</a></p></li>
+<li><p>Vo, N.-S., Nguyen, N.-T.-X., Le, G.-P., Nguyen, L.-T.-N. y Pham, H.-A. (2024). An efficient model on AIoT devices for trash classification applications. <em>SN Computer Science</em>, <em>5</em>, Artículo 630. <a class="reference external" href="https://doi.org/10.1007/s42979-024-02988-x">https://doi.org/10.1007/s42979-024-02988-x</a></p></li>
+<li><p>Yang, M. y Thung, G. (2016). <em>Classification of trash for recyclability status</em> [Informe de proyecto, CS229: Machine Learning]. Stanford University. <a class="reference external" href="https://cs229.stanford.edu/proj2016/report/ThungYang-ClassificationOfTrashForRecyclabilityStatus-report.pdf">https://cs229.stanford.edu/proj2016/report/ThungYang-ClassificationOfTrashForRecyclabilityStatus-report.pdf</a></p></li>
+<li><p>Yang, Z. y Li, D. (2020). WasNet: A neural network-based garbage collection management system. <em>IEEE Access</em>, <em>8</em>, 103984–103993. <a class="reference external" href="https://doi.org/10.1109/ACCESS.2020.2999678">https://doi.org/10.1109/ACCESS.2020.2999678</a></p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -442,6 +679,29 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contexto-y-motivacion">1.1 Contexto y motivación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-formal-del-problema">1.2 Definición formal del problema</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-de-investigacion-e-hipotesis">1.3 Pregunta de investigación e hipótesis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decisiones-declaradas-antes-del-entrenamiento">1.4 Decisiones declaradas antes del entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#justificacion-del-conjunto-de-datos">1.5 Justificación del conjunto de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-tecnica">1.6 Descripción técnica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias">Referencias</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

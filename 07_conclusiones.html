@@ -1,0 +1,652 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7. Conclusiones &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '07_conclusiones';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="6. Declaración a priori" href="06_declaracion_apriori.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y conjunto de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Conclusiones</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/07_conclusiones.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>7. Conclusiones</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#respuesta-a-la-pregunta-de-investigacion">7.1 Respuesta a la pregunta de investigación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-referencia">7.2 Modelo de referencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-por-clase-y-errores">7.3 Desempeño por clase y errores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalizacion-y-robustez">7.4 Generalización y robustez</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#costo-computacional">7.5 Costo computacional</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relacion-con-la-literatura">7.6 Relación con la literatura</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones">7.7 Limitaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">7.8 Trabajo futuro</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="conclusiones">
+<h1>7. Conclusiones<a class="headerlink" href="#conclusiones" title="Link to this heading">#</a></h1>
+<p>En este capítulo respondemos la pregunta de investigación de la sección 1.3 con los resultados de los capítulos 4 y 5, definimos el modelo de referencia y señalamos las limitaciones del estudio. Todas las cifras corresponden a 8 semillas por modelo, evaluadas en las 361 imágenes del conjunto de prueba.</p>
+<section id="respuesta-a-la-pregunta-de-investigacion">
+<h2>7.1 Respuesta a la pregunta de investigación<a class="headerlink" href="#respuesta-a-la-pregunta-de-investigacion" title="Link to this heading">#</a></h2>
+<p>Las tres arquitecturas, entrenadas desde cero con el mismo protocolo, no tienen el mismo desempeño. La prueba de Friedman rechaza la hipótesis nula global (<span class="math notranslate nohighlight">\(Q = 9.75\)</span>, <span class="math notranslate nohighlight">\(p\)</span> exacto <span class="math notranslate nohighlight">\(= 0.0048\)</span>, <span class="math notranslate nohighlight">\(W\)</span> de Kendall <span class="math notranslate nohighlight">\(= 0.61\)</span>), y la arquitectura explica el 52 % de la varianza del F1 macro entre corridas (<span class="math notranslate nohighlight">\(\eta^2 = 0.52\)</span>).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Comparación</p></th>
+<th class="head"><p>Diferencia media en F1 macro [IC 95 %]</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(p\)</span> Holm (t / Wilcoxon)</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(d_z\)</span></p></th>
+<th class="head"><p>¿Significativa y <span class="math notranslate nohighlight">\(\geq \delta\)</span>?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ResNet-18 − CNN</p></td>
+<td><p>0.037 [0.018, 0.055]</p></td>
+<td><p>0.005 / 0.031</p></td>
+<td><p>1.64</p></td>
+<td><p>Sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>ResNet-18 − MobileNetV2</p></td>
+<td><p>0.053 [0.029, 0.077]</p></td>
+<td><p>0.003 / 0.023</p></td>
+<td><p>1.87</p></td>
+<td><p>Sí</p></td>
+</tr>
+<tr class="row-even"><td><p>CNN − MobileNetV2</p></td>
+<td><p>0.017 [−0.014, 0.047]</p></td>
+<td><p>0.24 / 0.31</p></td>
+<td><p>0.45</p></td>
+<td><p>No</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>ResNet-18 supera a los otros dos modelos con diferencias significativas y mayores que el margen de relevancia práctica <span class="math notranslate nohighlight">\(\delta = 0.02\)</span>. La ventaja se mantiene en todas las métricas secundarias (accuracy 0.871, balanced accuracy 0.861, MCC 0.842, AUC-ROC 0.979) y ResNet-18 es también el modelo mejor calibrado (ECE 0.051). Entre la CNN y MobileNetV2 no encontramos una diferencia significativa. Como la diferencia mínima detectable del experimento para ese par es 0.036 (sección 7.2), este resultado no demuestra que ambos modelos sean equivalentes.</p>
+<p>Una explicación coherente con estos resultados es el sesgo inductivo de ResNet-18: los atajos identidad facilitan la propagación del gradiente y permiten entrenar desde cero una red más profunda. El experimento no aísla este mecanismo.</p>
+</section>
+<section id="modelo-de-referencia">
+<h2>7.2 Modelo de referencia<a class="headerlink" href="#modelo-de-referencia" title="Link to this heading">#</a></h2>
+<p>El modelo de referencia es <strong>ResNet-18</strong>, con F1 macro de <span class="math notranslate nohighlight">\(0.863 \pm 0.022\)</span> (IC 95 % [0.845, 0.881]) y accuracy de 0.871. Supera a la CNN en 4.4 % y a MobileNetV2 en 6.6 % de F1 macro relativo.</p>
+<p>Un modelo posterior debe superar este valor en al menos <strong>0.036 de F1 macro</strong>, con significancia y bajo el mismo protocolo. El umbral es el máximo entre <span class="math notranslate nohighlight">\(\delta = 0.02\)</span> y la diferencia mínima detectable con 8 semillas (0.036). El experimento tiene menos resolución que la prevista: el piloto estimó desviaciones de las diferencias pareadas de 0.016 a 0.019, y en el experimento completo fueron de 0.022 a 0.037. Con esa variabilidad, 8 semillas no permiten detectar con potencia de 0.80 diferencias del tamaño de <span class="math notranslate nohighlight">\(\delta\)</span>.</p>
+</section>
+<section id="desempeno-por-clase-y-errores">
+<h2>7.3 Desempeño por clase y errores<a class="headerlink" href="#desempeno-por-clase-y-errores" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cardboard</span></code> es la clase mejor clasificada por los tres modelos (F1 entre 0.94 y 0.96) y <code class="docutils literal notranslate"><span class="pre">trash</span></code> la peor (0.61 en la CNN, 0.65 en MobileNetV2 y 0.79 en ResNet-18). En <code class="docutils literal notranslate"><span class="pre">trash</span></code>, ResNet-18 obtiene la mayor ventaja sobre los otros modelos. Las confusiones más frecuentes, sumadas en las 24 corridas, son vidrio y plástico (259), vidrio y metal (190), papel y plástico (180) y papel y <code class="docutils literal notranslate"><span class="pre">trash</span></code> (162). Son los pares de materiales visualmente parecidos que anticipamos en la sección 1.6.</p>
+<p>Hay 19 imágenes de prueba que la mayoría de las semillas de los tres modelos clasifica mal, con predicciones coincidentes entre arquitecturas (por ejemplo, <code class="docutils literal notranslate"><span class="pre">glass278</span></code> y <code class="docutils literal notranslate"><span class="pre">plastic455</span></code> como <code class="docutils literal notranslate"><span class="pre">paper</span></code>). Estos casos pueden ser objetos ambiguos o errores de etiqueta. Sin la auditoría de la sección 2.8 no podemos distinguir entre las dos explicaciones.</p>
+</section>
+<section id="generalizacion-y-robustez">
+<h2>7.4 Generalización y robustez<a class="headerlink" href="#generalizacion-y-robustez" title="Link to this heading">#</a></h2>
+<p>ResNet-18 tiene la mayor brecha entre entrenamiento y validación en la mejor época (0.065, frente a 0.039 de MobileNetV2 y 0.011 de la CNN) y, al mismo tiempo, el mejor desempeño en validación y prueba. Su mayor capacidad le permite ajustar mejor el entrenamiento sin que ese ajuste perjudique el desempeño en imágenes de la misma distribución.</p>
+<p>Ante perturbaciones de la imagen de prueba observamos tres comportamientos:</p>
+<ul class="simple">
+<li><p><strong>Ruido y desenfoque:</strong> los tres modelos pierden la mayor parte de su desempeño. Con ruido gaussiano de <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span>, el F1 macro cae a 0.19 (CNN), 0.28 (MobileNetV2) y 0.39 (ResNet-18). Estas perturbaciones no se incluyeron en el aumento de datos.</p></li>
+<li><p><strong>Brillo y oclusión:</strong> las caídas son moderadas (entre 0.04 y 0.11), coherentes con el aumento fotométrico y el recorte aleatorio usados en el entrenamiento.</p></li>
+<li><p><strong>Fondo sustituido:</strong> el F1 macro cae entre 0.21 y 0.26. La prueba definida antes del entrenamiento, que compara esta caída con el promedio de las perturbaciones genéricas, no indica una dependencia del fondo mayor que la de esas perturbaciones. Sin embargo, ese promedio está dominado por el ruido y el desenfoque. Frente al brillo y la oclusión, la caída con fondo sustituido es entre 2 y 6 veces mayor.</p></li>
+</ul>
+<p>En Grad-CAM, la energía del mapa en el fondo es menor que la proporción de área que este ocupa (cociente mediano entre 0.65 y 0.68), es decir, los mapas se concentran en el objeto. Concluimos que los tres modelos dependen en parte del fondo, sin que ese efecto domine su comportamiento. Ambas medidas son indirectas, por lo que no establecen el desempeño de los modelos con fondos reales.</p>
+</section>
+<section id="costo-computacional">
+<h2>7.5 Costo computacional<a class="headerlink" href="#costo-computacional" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head text-right"><p>CNN</p></th>
+<th class="head text-right"><p>MobileNetV2</p></th>
+<th class="head text-right"><p>ResNet-18</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Parámetros</p></td>
+<td class="text-right"><p>1.2 M</p></td>
+<td class="text-right"><p>2.2 M</p></td>
+<td class="text-right"><p>11.2 M</p></td>
+</tr>
+<tr class="row-odd"><td><p>GMAC por imagen</p></td>
+<td class="text-right"><p>2.59</p></td>
+<td class="text-right"><p>0.30</p></td>
+<td class="text-right"><p>1.81</p></td>
+</tr>
+<tr class="row-even"><td><p>Inferencia en GPU (ms/imagen, lote 32)</p></td>
+<td class="text-right"><p>0.68</p></td>
+<td class="text-right"><p>0.37</p></td>
+<td class="text-right"><p>0.33</p></td>
+</tr>
+<tr class="row-odd"><td><p>Entrenamiento (min por corrida)</p></td>
+<td class="text-right"><p>8.4</p></td>
+<td class="text-right"><p>8.5</p></td>
+<td class="text-right"><p>8.3</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En GPU, el mayor número de parámetros de ResNet-18 no aumenta el tiempo de inferencia ni de entrenamiento. MobileNetV2 requiere 6 veces menos operaciones que ResNet-18, pero no es más rápida en GPU, donde las convoluciones separables en profundidad aprovechan peor el paralelismo. La CNN es la más lenta porque sus primeras capas operan a resolución completa. Medimos los tiempos solo en GPU. En dispositivos de borde sin GPU el orden puede cambiar, y la menor cantidad de operaciones de MobileNetV2 podría compensar su menor desempeño.</p>
+</section>
+<section id="relacion-con-la-literatura">
+<h2>7.6 Relación con la literatura<a class="headerlink" href="#relacion-con-la-literatura" title="Link to this heading">#</a></h2>
+<p>La accuracy de nuestro modelo de referencia (0.871) está 0.089 por debajo de la mediana reportada en TrashNet (~96 %, capítulo 3). La diferencia combina dos efectos que este estudio no separa: el preentrenamiento en ImageNet, que usan todos los estudios revisados, y el protocolo, porque entrenamos desde cero, con partición agrupada por casi-duplicados y varias semillas. La contribución del estudio está en el protocolo: la comparación usa réplicas, intervalos de confianza y pruebas pareadas, y su resultado es una cota de desempeño verificable para los modelos base.</p>
+</section>
+<section id="limitaciones">
+<h2>7.7 Limitaciones<a class="headerlink" href="#limitaciones" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Régimen de entrenamiento:</strong> solo evaluamos modelos entrenados desde cero; no medimos el efecto del preentrenamiento.</p></li>
+<li><p><strong>Búsqueda de hiperparámetros:</strong> usamos una única partición de validación, una semilla y 50 épocas por configuración. El decaimiento de pesos elegido para los tres modelos (5e-4) y el dropout de 0.4 para dos de ellos están en el borde de la malla, por lo que el óptimo podría estar fuera de ella. El F1 de validación supera al de prueba en 0.01 a 0.04, lo que indica una selección algo optimista sobre esas 360 imágenes.</p></li>
+<li><p><strong>Presupuesto de épocas:</strong> 16 de las 24 corridas llegaron al máximo de 100 épocas, con la mejor época cerca del final. No podemos descartar que un presupuesto mayor mejore los tres modelos.</p></li>
+<li><p><strong>Tamaño del conjunto de prueba:</strong> 361 imágenes, de las cuales 19 son de <code class="docutils literal notranslate"><span class="pre">trash</span></code>. Los intervalos por clase son amplios, y la prueba de McNemar solo detecta diferencias en algunas semillas (en 4 de 8 para ResNet-18 frente a MobileNetV2).</p></li>
+<li><p><strong>Datos:</strong> el ruido de etiqueta no se auditó, y todas las imágenes son de estudio, con un solo objeto sobre fondo blanco. Los resultados no se extienden directamente a escenas reales.</p></li>
+<li><p><strong>Determinismo:</strong> algunas operaciones de cuDNN y la precisión mixta introducen una variación residual pequeña entre ejecuciones de una misma semilla.</p></li>
+</ol>
+</section>
+<section id="trabajo-futuro">
+<h2>7.8 Trabajo futuro<a class="headerlink" href="#trabajo-futuro" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Repetir la comparación con modelos preentrenados bajo el mismo protocolo, para separar el efecto de la transferencia del efecto de la arquitectura.</p></li>
+<li><p>Incluir ruido, desenfoque y sustitución de fondo en el aumento de datos, y evaluar con imágenes de residuos en condiciones de operación.</p></li>
+<li><p>Ampliar la malla de hiperparámetros en decaimiento de pesos y dropout, y aumentar el presupuesto de épocas.</p></li>
+<li><p>Completar la auditoría de etiquetas, empezando por las 19 imágenes que fallan los tres modelos.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="06_declaracion_apriori.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">6. Declaración a priori</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#respuesta-a-la-pregunta-de-investigacion">7.1 Respuesta a la pregunta de investigación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-referencia">7.2 Modelo de referencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-por-clase-y-errores">7.3 Desempeño por clase y errores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalizacion-y-robustez">7.4 Generalización y robustez</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#costo-computacional">7.5 Costo computacional</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relacion-con-la-literatura">7.6 Relación con la literatura</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones">7.7 Limitaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">7.8 Trabajo futuro</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan y Juan Díaz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

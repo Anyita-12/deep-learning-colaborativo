@@ -60,10 +60,13 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '06_declaracion_apriori';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Conclusiones" href="07_conclusiones.html" />
     <link rel="prev" title="5.3 Análisis cualitativo, robustez y discusión" href="47_analisis_cualitativo_robustez.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -152,6 +155,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -209,7 +216,7 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y conjunto de datos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
 <li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
@@ -221,6 +228,7 @@
 <li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
 <li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Declaración a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_conclusiones.html">7. Conclusiones</a></li>
 </ul>
 
     </div>
@@ -358,7 +366,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -374,6 +384,21 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-e-hipotesis">6.1 Problema e hipótesis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas">6.2 Métricas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#umbrales-de-decision">6.3 Umbrales de decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-de-independencia-y-unidad-de-replica">6.4 Unidad de independencia y unidad de réplica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion">6.5 Partición</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#protocolo-de-entrenamiento-comun">6.6 Protocolo de entrenamiento común</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tamano-de-muestra">6.7 Tamaño de muestra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-estadistico-planeado">6.8 Análisis estadístico planeado</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -385,6 +410,171 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="declaracion-a-priori">
 <h1>6. Declaración a priori<a class="headerlink" href="#declaracion-a-priori" title="Link to this heading">#</a></h1>
+<p>En este capítulo reunimos las decisiones que fijamos antes de la búsqueda de hiperparámetros y de las corridas definitivas: métricas, umbrales, unidad de independencia, partición, protocolo de entrenamiento, regla de tamaño de muestra y análisis estadístico. Las registramos en un preregistro fechado el 8 de noviembre de 2026 a las 02:12 (<code class="docutils literal notranslate"><span class="pre">results/common/preregistro_2026-11-08.md</span></code>), que el código escribe una sola vez y no sobrescribe. Estas decisiones se mantienen en las etapas siguientes del proyecto: cualquier modelo posterior se evalúa con la misma partición, las mismas métricas y los mismos umbrales.</p>
+<section id="problema-e-hipotesis">
+<h2>6.1 Problema e hipótesis<a class="headerlink" href="#problema-e-hipotesis" title="Link to this heading">#</a></h2>
+<p>El proyecto es de <strong>clasificación de imágenes</strong> en seis clases de material (sección 1.2). La hipótesis nula global establece que las tres arquitecturas (CNN estilo VGG reducida, MobileNetV2 y ResNet-18), entrenadas desde cero con el mismo protocolo, tienen la misma distribución de F1 macro en prueba; la alternativa, que al menos una difiere. Por pares, la hipótesis nula establece que la diferencia media de F1 macro, pareada por semilla, es cero (sección 1.3).</p>
+</section>
+<section id="metricas">
+<h2>6.2 Métricas<a class="headerlink" href="#metricas" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tipo</p></th>
+<th class="head"><p>Métricas</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Primaria</p></td>
+<td><p>F1 macro en el conjunto de prueba</p></td>
+</tr>
+<tr class="row-odd"><td><p>Secundarias</p></td>
+<td><p>Accuracy, balanced accuracy, F1 ponderado y por clase, precisión y recall macro, AUC-ROC y AUC-PR macro (uno contra resto), coeficiente de correlación de Matthews (MCC) y error de calibración esperado (ECE)</p></td>
+</tr>
+<tr class="row-even"><td><p>Costo</p></td>
+<td><p>Parámetros, operaciones por imagen (GMAC), tiempo de entrenamiento y de inferencia</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Elegimos el F1 macro porque asigna el mismo peso a las seis clases y no oculta un mal desempeño en <code class="docutils literal notranslate"><span class="pre">trash</span></code>, la clase minoritaria (sección 2.2). La accuracy se reporta para comparar con la literatura.</p>
+</section>
+<section id="umbrales-de-decision">
+<h2>6.3 Umbrales de decisión<a class="headerlink" href="#umbrales-de-decision" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parámetro</p></th>
+<th class="head"><p>Valor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Nivel de significancia</p></td>
+<td><p><span class="math notranslate nohighlight">\(\alpha = 0.05\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Potencia objetivo</p></td>
+<td><p><span class="math notranslate nohighlight">\(1 - \beta = 0.80\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Margen de relevancia práctica</p></td>
+<td><p><span class="math notranslate nohighlight">\(\delta = 0.02\)</span> en F1 macro</p></td>
+</tr>
+<tr class="row-odd"><td><p>Corrección por comparaciones múltiples</p></td>
+<td><p>Holm, sobre los tres pares de modelos</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Una diferencia entre dos modelos es <strong>relevante</strong> si es significativa tras la corrección de Holm y su magnitud es al menos <span class="math notranslate nohighlight">\(\delta\)</span>. El modelo con mayor F1 macro medio es el modelo de referencia. Un modelo posterior debe superarlo en al menos <span class="math notranslate nohighlight">\(\max(\delta, \text{MDE})\)</span>, donde MDE es la diferencia mínima detectable del experimento con potencia de 0.80.</p>
+</section>
+<section id="unidad-de-independencia-y-unidad-de-replica">
+<h2>6.4 Unidad de independencia y unidad de réplica<a class="headerlink" href="#unidad-de-independencia-y-unidad-de-replica" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Unidad de independencia:</strong> el grupo de casi-duplicados. Las fotografías casi idénticas de un mismo objeto forman un grupo (2521 imágenes en 2512 grupos), y cada grupo se asigna completo a una sola partición. Fuera de los grupos, asumimos independencia entre fotografías (sección 1.6).</p></li>
+<li><p><strong>Unidad de réplica:</strong> la semilla, que controla la inicialización de los pesos, el orden de los lotes, el aumento de datos y el dropout. Los tres modelos comparten partición y semillas, por lo que sus métricas están pareadas por semilla.</p></li>
+</ul>
+</section>
+<section id="particion">
+<h2>6.5 Partición<a class="headerlink" href="#particion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Elemento</p></th>
+<th class="head"><p>Valor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Archivo</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">data/splits/trashnet_split_v2_s1234.csv</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Tamaños</p></td>
+<td><p>1800 entrenamiento, 360 validación y 361 prueba (≈ 71/14/14 %)</p></td>
+</tr>
+<tr class="row-even"><td><p>Esquema</p></td>
+<td><p>Estratificado por clase y agrupado por casi-duplicados, sin las 6 imágenes con etiqueta contradictoria (sección 2.4)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Huella del conjunto de prueba</p></td>
+<td><p>SHA-256 registrado en <code class="docutils literal notranslate"><span class="pre">data/SHA256SUMS.txt</span></code> y verificado antes de cada corrida</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Reglas de uso:</p>
+<ul class="simple">
+<li><p>La búsqueda de hiperparámetros, el early stopping y la selección de la mejor época usan solo el conjunto de validación.</p></li>
+<li><p>El conjunto de prueba se evalúa una vez por corrida, con el modelo de la mejor época.</p></li>
+<li><p>La normalización por canal y los pesos de clase se calculan solo con el conjunto de entrenamiento.</p></li>
+</ul>
+</section>
+<section id="protocolo-de-entrenamiento-comun">
+<h2>6.6 Protocolo de entrenamiento común<a class="headerlink" href="#protocolo-de-entrenamiento-comun" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Elemento</p></th>
+<th class="head"><p>Decisión</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Régimen</p></td>
+<td><p>Desde cero (<code class="docutils literal notranslate"><span class="pre">weights=None</span></code>) para los tres modelos. La CNN no tiene pesos preentrenados, y preentrenar solo dos modelos confundiría el efecto de la arquitectura con el de la transferencia</p></td>
+</tr>
+<tr class="row-odd"><td><p>Entrada</p></td>
+<td><p>224×224, redimensionamiento directo desde 512×384 con interpolación bicúbica; normalización con media y desviación estándar por canal del entrenamiento</p></td>
+</tr>
+<tr class="row-even"><td><p>Pérdida</p></td>
+<td><p>Entropía cruzada ponderada por clase, <span class="math notranslate nohighlight">\(w_k = N/(K\,n_k)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Aumento de datos (solo entrenamiento)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RandomResizedCrop(224,</span> <span class="pre">scale=(0.7,</span> <span class="pre">1.0))</span></code>, volteos horizontal y vertical, <code class="docutils literal notranslate"><span class="pre">RandomRotation(15)</span></code>, <code class="docutils literal notranslate"><span class="pre">ColorJitter(0.2,</span> <span class="pre">0.2,</span> <span class="pre">0.2,</span> <span class="pre">0.02)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Optimización</p></td>
+<td><p>AdamW, lote de 32, 3 épocas de calentamiento y decaimiento coseno hasta 1 % de la tasa inicial, recorte del gradiente en 5, precisión mixta</p></td>
+</tr>
+<tr class="row-odd"><td><p>Duración</p></td>
+<td><p>Máximo 100 épocas; early stopping con paciencia de 15 épocas sobre el F1 macro de validación</p></td>
+</tr>
+<tr class="row-even"><td><p>Búsqueda de hiperparámetros</p></td>
+<td><p>Malla de 8 configuraciones, igual para los tres modelos: tasa de aprendizaje {1e-3, 3e-4} × decaimiento de pesos {1e-4, 5e-4} × dropout {0.2, 0.4}; semilla 100; máximo 50 épocas; selección por F1 macro de validación</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="tamano-de-muestra">
+<h2>6.7 Tamaño de muestra<a class="headerlink" href="#tamano-de-muestra" title="Link to this heading">#</a></h2>
+<p>El número de semillas <span class="math notranslate nohighlight">\(R\)</span> se calcula con un piloto de 5 semillas (0 a 4), ejecutado con la configuración elegida en la búsqueda de hiperparámetros. Para cada par de modelos,</p>
+<div class="math notranslate nohighlight">
+\[R = \frac{\left(z_{1-\alpha/2} + z_{1-\beta}\right)^2 \sigma_d^2}{\delta^2},\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\sigma_d\)</span> es la desviación estándar de las diferencias pareadas de F1 macro de validación en el piloto. Tomamos el máximo de los tres pares, redondeado hacia arriba, y lo acotamos a <span class="math notranslate nohighlight">\(R_{\text{final}} = \min(\max(R, 6), 10)\)</span>. El mínimo de 6 permite aplicar pruebas por rangos y el máximo de 10 lo impone el tiempo de GPU disponible. Las corridas del piloto forman parte del experimento final porque usan la misma configuración.</p>
+</section>
+<section id="analisis-estadistico-planeado">
+<h2>6.8 Análisis estadístico planeado<a class="headerlink" href="#analisis-estadistico-planeado" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Nivel</p></th>
+<th class="head"><p>Prueba</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Global</p></td>
+<td><p>Friedman, con las semillas como bloques y los modelos como tratamientos; <span class="math notranslate nohighlight">\(p\)</span> exacto por permutación y <span class="math notranslate nohighlight">\(W\)</span> de Kendall</p></td>
+</tr>
+<tr class="row-odd"><td><p>Por pares</p></td>
+<td><p>t pareada y Wilcoxon de rangos con signo, con Holm; diferencia media con IC 95 % (t y bootstrap); tamaños de efecto <span class="math notranslate nohighlight">\(d_z\)</span> y correlación rango-biserial; Nemenyi y Conover como complemento</p></td>
+</tr>
+<tr class="row-even"><td><p>Por imagen</p></td>
+<td><p>McNemar por par y por semilla (exacto si <span class="math notranslate nohighlight">\(b + c &lt; 25\)</span>), con Holm dentro de cada semilla</p></td>
+</tr>
+<tr class="row-odd"><td><p>AUC-ROC</p></td>
+<td><p>Bootstrap estratificado y pareado sobre las imágenes de prueba (10 000 remuestreos)</p></td>
+</tr>
+<tr class="row-even"><td><p>Varianza</p></td>
+<td><p>ANOVA de un factor sobre las corridas, con <span class="math notranslate nohighlight">\(\eta^2\)</span> e ICC(1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Robustez</p></td>
+<td><p>F1 macro con ruido gaussiano (<span class="math notranslate nohighlight">\(\sigma\)</span> = 0.05 y 0.10), desenfoque, brillo ±30 %, oclusión y fondo sustituido; comparación pareada de la caída con fondo sustituido frente a la caída media de las perturbaciones genéricas</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Los resultados de este análisis se presentan en el capítulo 5 y se resumen en el capítulo 7.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -426,12 +616,45 @@
         <p class="prev-next-title">5.3 Análisis cualitativo, robustez y discusión</p>
       </div>
     </a>
+    <a class="right-next"
+       href="07_conclusiones.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">7. Conclusiones</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-e-hipotesis">6.1 Problema e hipótesis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas">6.2 Métricas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#umbrales-de-decision">6.3 Umbrales de decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-de-independencia-y-unidad-de-replica">6.4 Unidad de independencia y unidad de réplica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion">6.5 Partición</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#protocolo-de-entrenamiento-comun">6.6 Protocolo de entrenamiento común</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tamano-de-muestra">6.7 Tamaño de muestra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-estadistico-planeado">6.8 Análisis estadístico planeado</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
