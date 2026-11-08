@@ -1,0 +1,9 @@
+format: jb-book
+root: intro
+chapters:
+  - file: 01_problema_dataset
+  - file: 02_eda
+  - file: 03_estado_del_arte
+  - file: 04_implementacion
+  - file: 05_benchmark
+  - file: 06_declaracion_apriori

@@ -52,3 +52,6 @@ Thumbs.db
 # Secretos
 .env
 *.key
+
+docs/_build/
+.ipynb_checkpoints/

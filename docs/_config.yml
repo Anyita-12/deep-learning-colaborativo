@@ -1,0 +1,11 @@
+title: Clasificación de residuos con TrashNet
+author: Anyely Sanjuan y Juan Díaz
+execute:
+  execute_notebooks: "off"
+repository:
+  url: https://github.com/Anyita-12/deep-learning-colaborativo
+  branch: main
+html:
+  use_repository_button: true
+bibtex_bibfiles:
+  - references.bib
