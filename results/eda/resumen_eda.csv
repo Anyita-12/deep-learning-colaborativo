@@ -1,0 +1,10 @@
+criterio,valor,decisión / estado
+Archivos válidos,2527 de 2527,—
+Razón de desbalance,4.34,métrica primaria macro-F1
+Etiquetas contradictorias (exactas),3 grupos (6 imágenes),eliminadas
+Pares casi-duplicados (d ≤ 10),12,agrupados antes de partir
+χ² clases × partición (V de Cramér),0.0040,cumple
+AUC adversarial máxima,0.539,cumple
+"Descriptores equivalentes (TOST, Holm)",88%,ver tabla 2.6
+Sonda de atajo por fondo (ganancia),+0.232,ALERTA
+Ruido de etiquetas,revisión manual pendiente,—

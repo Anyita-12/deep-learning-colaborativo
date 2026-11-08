@@ -1,0 +1,19 @@
+{
+  "split": "trashnet_split_v2_s1234.csv",
+  "resolucion": "original 512x384",
+  "canales": [
+    "R",
+    "G",
+    "B"
+  ],
+  "mean": [
+    0.67182,
+    0.63802,
+    0.60219
+  ],
+  "std": [
+    0.21046,
+    0.21067,
+    0.23221
+  ]
+}

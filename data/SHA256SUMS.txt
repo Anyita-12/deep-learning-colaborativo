@@ -1,2 +1,3 @@
 c060e8abfe5d6de0578ca15be1ed8ad0794a865d333c3473d53d1d9ad6e38b8c  data/raw/trashnet/dataset-resized.zip
 07974cacb0203b7e2d4c3c4c193fce4382a3e948c60b0948325ed6de4988d293  test_set:data/splits/trashnet_split_s1234.csv
+4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de2360cbd87  test_set:data/splits/trashnet_split_v2_s1234.csv

@@ -1,0 +1,17 @@
+{
+  "alpha": 0.05,
+  "correccion_multiple": "Holm, por familia de pruebas",
+  "split_seed": 1234,
+  "n_folds_split": 7,
+  "dhash_bits": 256,
+  "near_dup_max_dist": 10,
+  "conflictos_exactos": "se eliminan todas las copias",
+  "chi2_cramers_v_max": 0.1,
+  "adversarial_auc_max": 0.6,
+  "tost_margen_sd": 0.2,
+  "atajo_ganancia_alerta": 0.1,
+  "ruido_p_max": 0.05,
+  "ruido_p_supuesta": 0.02,
+  "ruido_potencia": 0.8,
+  "n_permutaciones": 100
+}

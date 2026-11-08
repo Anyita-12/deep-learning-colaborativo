@@ -1,0 +1,13 @@
+a,b,label_a,label_b,dist,exacto,entre_clases
+glass/glass115.jpg,metal/metal91.jpg,glass,metal,0,True,True
+glass/glass176.jpg,plastic/plastic152.jpg,glass,plastic,0,True,True
+glass/glass389.jpg,plastic/plastic332.jpg,glass,plastic,0,True,True
+cardboard/cardboard221.jpg,paper/paper385.jpg,cardboard,paper,5,False,True
+paper/paper246.jpg,paper/paper349.jpg,paper,paper,6,False,False
+cardboard/cardboard83.jpg,paper/paper385.jpg,cardboard,paper,7,False,True
+paper/paper101.jpg,paper/paper108.jpg,paper,paper,7,False,False
+paper/paper305.jpg,paper/paper308.jpg,paper,paper,8,False,False
+paper/paper2.jpg,paper/paper40.jpg,paper,paper,9,False,False
+paper/paper385.jpg,paper/paper498.jpg,paper,paper,10,False,False
+paper/paper522.jpg,paper/paper534.jpg,paper,paper,10,False,False
+paper/paper68.jpg,paper/paper74.jpg,paper,paper,10,False,False
