@@ -1,5 +1,6 @@
 title: Clasificación de residuos con TrashNet
-author: Anyely Sanjuan y Juan Díaz
+author: Anyely Sanjuan Benavides y Juan David Díaz Fernández
+copyright: "2026"
 execute:
   execute_notebooks: "off"
 repository:
@@ -9,3 +10,10 @@ html:
   use_repository_button: true
 bibtex_bibfiles:
   - references.bib
+sphinx:
+  config:
+    templates_path: ["_templates"]
+    html_static_path: ["_static"]
+    html_css_files: ["autores.css"]
+    html_sidebars:
+      "**": ["navbar-logo.html", "autores.html", "icon-links.html", "search-button-field.html", "sbt-sidebar-nav.html"]

@@ -78,7 +78,7 @@ Elegimos el F1 macro porque asigna el mismo peso a las seis clases. Con el desba
 
 **Procedencia.** Yang y Thung (2016) construyeron el conjunto de datos en el curso CS229 de la Universidad de Stanford. Fotografiaron cada objeto sobre una cartulina blanca, con luz solar o de interior, usando tres teléfonos (iPhone 7 Plus, iPhone 5S e iPhone SE). Las fotografías originales (~3.5 GB) se redujeron a 512×384 píxeles con el script `resize.py` del repositorio, que además rota las imágenes verticales. En su informe, una SVM con descriptores SIFT alcanzó 63 % de accuracy y una CNN 22 %; tras cambiar la inicialización de pesos, la CNN llegó a cerca de 75 % (Thung, 2017).
 
-**Disponibilidad y licencia.** El conjunto de datos es público en GitHub (Thung, 2017) y en Hugging Face (`garythung/trashnet`). El repositorio se distribuye bajo licencia MIT, que permite usar, copiar, modificar y redistribuir su contenido si se conserva el aviso de copyright; los autores piden citar el repositorio.
+**Disponibilidad y licencia.** El conjunto de datos es público en GitHub (Thung, 2017) y en Hugging Face (`garythung/trashnet`). El repositorio se distribuye bajo licencia MIT, que permite usar, copiar, modificar y redistribuir su contenido si se conserva el aviso de copyright.
 
 **Uso previo en la literatura.** TrashNet es el conjunto de referencia para clasificar imágenes de residuos desde 2018, lo que permite comparar nuestros resultados con estudios previos:
 
