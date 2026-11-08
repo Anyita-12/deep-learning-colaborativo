@@ -1,0 +1,5 @@
+﻿Familia,Estudios,Datasets más usados,"Exactitud destacada en TrashNet, mediana [rango]",Reporta dispersión,Prueba estadística,Usa preentrenamiento,Estudios más citados (ID)
+CNN estilo VGG (VGG),22,"TrashNet (22), Garbage Classification (Kaggle) (20), dataset propio (16)",94.2 [91.2–96.9] (n=8),59%,18%,100%,"R005, R006, R010, R015, R018"
+CNN poco profunda (AlexNet/LeNet),9,"TrashNet (9), Garbage Classification (Kaggle) (7), dataset propio (6)",92.6 [91.2–99.2] (n=3),44%,44%,100%,"R005, R006, R010, R026, R035"
+MobileNet,24,"TrashNet (24), Garbage Classification (Kaggle) (19), dataset propio (17)",93.4 [91.2–99.2] (n=8),54%,29%,100%,"R002, R004, R006, R008, R011"
+ResNet,39,"TrashNet (39), Garbage Classification (Kaggle) (29), dataset propio (27)",96.1 [91.2–99.7] (n=13),59%,26%,100%,"R002, R003, R005, R006, R008"
