@@ -37,6 +37,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -195,16 +196,22 @@
   
   
   
-    
-    
-      
-    
-    
-    <img src="_static/autores_sidebar.png" class="logo__image only-light" alt="Clasificación de residuos con TrashNet - Home"/>
-    <img src="_static/autores_sidebar.png" class="logo__image only-dark pst-js-only" alt="Clasificación de residuos con TrashNet - Home"/>
   
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
   
 </a></div>
+        <div class="sidebar-primary-item"><div class="sidebar-autores">
+  <div class="autor">
+    <img src="_static/autores/anyely.jpg" alt="Anyely Sanjuan Benavides">
+    <p class="autor-nombre">Anyely Sanjuan Benavides</p>
+    <p class="autor-detalle">Msc. Analítica de Datos<br>Universidad del Norte</p>
+  </div>
+  <div class="autor">
+    <img src="_static/autores/juan.jpg" alt="Juan David Díaz Fernández">
+    <p class="autor-nombre">Juan David Díaz Fernández</p>
+    <p class="autor-detalle">Msc. Ingeniería Mecánica<br>Universidad del Norte</p>
+  </div>
+</div></div>
         <div class="sidebar-primary-item">
 
 <button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -398,7 +405,6 @@
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-del-proyecto">Descripción del proyecto</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autores">Autores</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-inteligencia-artificial">Uso de inteligencia artificial</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencia">Referencia</a></li>
 </ul>
@@ -415,18 +421,25 @@
   <section class="tex2jax_ignore mathjax_ignore" id="clasificacion-de-residuos-con-trashnet">
 <h1>Clasificación de residuos con TrashNet<a class="headerlink" href="#clasificacion-de-residuos-con-trashnet" title="Link to this heading">#</a></h1>
 <p><strong>Proyecto final de Deep Learning · Universidad del Norte · Noviembre de 2026</strong></p>
-<p>Profesor: Dr. Lihki Rubio</p>
-<figure class="align-center" id="fig-clases">
-<a class="reference internal image-reference" href="_images/trashnet_clases.jpg"><img alt="_images/trashnet_clases.jpg" src="_images/trashnet_clases.jpg" style="width: 90%;" />
+<p>Autores: Anyely Sanjuan Benavides y Juan David Díaz Fernández · Profesor: Dr. Lihki Rubio</p>
+<figure class="align-center" id="fig-robots">
+<a class="reference internal image-reference" href="_images/robots_reciclaje.jpg"><img alt="_images/robots_reciclaje.jpg" src="_images/robots_reciclaje.jpg" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Una imagen de cada una de las seis clases de TrashNet (Thung, 2017).</span><a class="headerlink" href="#fig-clases" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Separación robótica de residuos por material. Imagen tomada de <em>National High School Journal of Science</em> (2026), <a class="reference external" href="https://nhsjs.com/2026/robotic-waste-sorting-system-using-machine-learning-classification-techniques/">«Robotic waste sorting system using machine learning classification techniques»</a>.</span><a class="headerlink" href="#fig-robots" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="descripcion-del-proyecto">
 <h2>Descripción del proyecto<a class="headerlink" href="#descripcion-del-proyecto" title="Link to this heading">#</a></h2>
 <p>Este libro documenta la clasificación automática de imágenes de residuos sólidos en seis clases de material (cartón, vidrio, metal, papel, plástico y rechazo) con el conjunto de datos TrashNet. La clasificación por material es la tarea de percepción de los sistemas automáticos de separación de residuos, y su calidad depende de la evidencia que respalda la arquitectura elegida.</p>
 <p>Comparamos tres modelos base de Deep Learning, todos entrenados desde cero con el mismo protocolo: una red convolucional estilo VGG reducida, MobileNetV2 y ResNet-18. Entrenamos cada uno con 8 semillas sobre una partición estratificada y agrupada por casi-duplicados, evaluamos con F1 macro y comparamos los modelos con pruebas estadísticas pareadas. ResNet-18 obtiene el mayor F1 macro en prueba (0.863 ± 0.022) y queda como modelo de referencia que cualquier modelo posterior debe superar.</p>
+<figure class="align-center" id="fig-clases">
+<a class="reference internal image-reference" href="_images/trashnet_clases.jpg"><img alt="_images/trashnet_clases.jpg" src="_images/trashnet_clases.jpg" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Una imagen de cada una de las seis clases de TrashNet (Thung, 2017).</span><a class="headerlink" href="#fig-clases" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="contenido">
 <h2>Contenido<a class="headerlink" href="#contenido" title="Link to this heading">#</a></h2>
@@ -447,13 +460,6 @@
 <li class="toctree-l1"><a class="reference internal" href="07_conclusiones.html">7. Conclusiones</a></li>
 </ul>
 </div>
-</section>
-<section id="autores">
-<h2>Autores<a class="headerlink" href="#autores" title="Link to this heading">#</a></h2>
-<figure class="align-center" id="fig-autores">
-<a class="reference internal image-reference" href="_images/autores.png"><img alt="_images/autores.png" src="_images/autores.png" style="width: 85%;" />
-</a>
-</figure>
 </section>
 <section id="uso-de-inteligencia-artificial">
 <h2>Uso de inteligencia artificial<a class="headerlink" href="#uso-de-inteligencia-artificial" title="Link to this heading">#</a></h2>
@@ -524,7 +530,6 @@
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-del-proyecto">Descripción del proyecto</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autores">Autores</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-inteligencia-artificial">Uso de inteligencia artificial</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencia">Referencia</a></li>
 </ul>
