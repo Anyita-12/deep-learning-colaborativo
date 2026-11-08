@@ -1,0 +1,1 @@
+# 2. EDA de TrashNet
