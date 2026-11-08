@@ -20,6 +20,8 @@ data/*
 !data/splits/
 !data/splits/**
 !data/SHA256SUMS.txt
+!data/review/
+!data/review/**
 
 # Modelos / checkpoints (pesados)
 models/*

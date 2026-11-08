@@ -4,5 +4,8 @@ numpy>=1.26,<3
 matplotlib
 pandas
 scikit-learn
+scipy
+statsmodels
+pillow
 ipykernel
 notebook
