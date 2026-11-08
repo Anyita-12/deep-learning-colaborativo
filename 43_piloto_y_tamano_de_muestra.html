@@ -1,0 +1,892 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.4 Estudio piloto y tamaño de muestra &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '43_piloto_y_tamano_de_muestra';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4.5 Entrenamiento final" href="44_entrenamiento_final.html" />
+    <link rel="prev" title="4.3 Búsqueda de hiperparámetros" href="42_busqueda_hiperparametros.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/43_piloto_y_tamano_de_muestra.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4.4 Estudio piloto y tamaño de muestra</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo">Método</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="estudio-piloto-y-tamano-de-muestra">
+<h1>4.4 Estudio piloto y tamaño de muestra<a class="headerlink" href="#estudio-piloto-y-tamano-de-muestra" title="Link to this heading">#</a></h1>
+<p>En esta sección estimamos la variación entre semillas con la configuración seleccionada y calculamos cuántas semillas <span class="math notranslate nohighlight">\(R\)</span> se requieren para detectar una diferencia de <span class="math notranslate nohighlight">\(\delta = 0.02\)</span> en F1 macro con potencia de 0.80.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">ROOT</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"src"</span> <span class="o">/</span> <span class="s2">"config.py"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span> <span class="k">as</span> <span class="n">C</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">plots</span> <span class="k">as</span> <span class="n">P</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.persist</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_done</span><span class="p">,</span> <span class="n">load_pickle</span><span class="p">,</span> <span class="n">save_pickle</span>
+
+<span class="n">P</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+<span class="n">C</span><span class="o">.</span><span class="n">ensure_dirs</span><span class="p">()</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.precision"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Resultados:"</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">RESULTS</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"| modelos:"</span><span class="p">,</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resultados: results | modelos: CNN, MobileNetV2, ResNet-18
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RUN_TRAINING</span> <span class="o">=</span> <span class="kc">False</span>     <span class="c1"># True solo si se quiere entrenar desde aquí; lo recomendado es la terminal</span>
+
+<span class="k">if</span> <span class="n">RUN_TRAINING</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+    <span class="c1"># Se lanza como proceso aparte: así el DataLoader con workers funciona en Windows y</span>
+    <span class="c1"># una corrida interrumpida se reanuda igual que desde la terminal.</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"src.runner"</span><span class="p">,</span> <span class="s2">"pilot"</span><span class="p">],</span> <span class="n">cwd</span><span class="o">=</span><span class="n">ROOT</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"-m"</span><span class="p">,</span> <span class="s2">"src.runner"</span><span class="p">,</span> <span class="s2">"power"</span><span class="p">],</span> <span class="n">cwd</span><span class="o">=</span><span class="n">ROOT</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="metodo">
+<h2>Método<a class="headerlink" href="#metodo" title="Link to this heading">#</a></h2>
+<p>Para cada par de modelos <span class="math notranslate nohighlight">\((A, B)\)</span> y cada semilla <span class="math notranslate nohighlight">\(s\)</span> del piloto calculamos la diferencia pareada del F1 macro de validación, <span class="math notranslate nohighlight">\(d_s = m_{A,s} - m_{B,s}\)</span>, y su desviación estándar <span class="math notranslate nohighlight">\(\hat\sigma_d\)</span>. El número de semillas para una prueba pareada bilateral es</p>
+<div class="math notranslate nohighlight">
+\[R = \left\lceil \frac{\left(z_{1-\alpha/2} + z_{1-\beta}\right)^2 \hat\sigma_d^2}{\delta^2} \right\rceil, \qquad z_{0.975} + z_{0.80} = 2.802.\]</div>
+<p>Tomamos el máximo sobre los tres pares y fijamos <span class="math notranslate nohighlight">\(R_{final} = \min(\max(R, 6), 10)\)</span>. El mínimo de 6 se debe a que, con 5 pares, la prueba de Wilcoxon bilateral no puede alcanzar <span class="math notranslate nohighlight">\(p &lt; 0.0625\)</span>; el máximo de 10 corresponde al tiempo de cómputo disponible. Con <span class="math notranslate nohighlight">\(R_{final}\)</span> semillas, la diferencia mínima detectable es</p>
+<div class="math notranslate nohighlight">
+\[\text{MDE} = \frac{\left(z_{1-\alpha/2} + z_{1-\beta}\right)\hat\sigma_d}{\sqrt{R_{final}}}.\]</div>
+<p>La fórmula se obtiene al exigir que la media de las <span class="math notranslate nohighlight">\(R\)</span> diferencias, con error estándar <span class="math notranslate nohighlight">\(\sigma_d/\sqrt{R}\)</span>, supere el umbral de significancia en el 80 % de los experimentos cuando la diferencia real es <span class="math notranslate nohighlight">\(\delta\)</span>. Si MDE &gt; δ, el experimento no tiene potencia suficiente para diferencias de tamaño δ.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pil</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">COMMON</span> <span class="o">/</span> <span class="s2">"pilot.pkl"</span><span class="p">)</span>
+<span class="n">pa</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">COMMON</span> <span class="o">/</span> <span class="s2">"power_analysis.pkl"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"F1 macro de validación por semilla (piloto):"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pil</span><span class="p">[</span><span class="s2">"tabla_ancha"</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pil</span><span class="p">[</span><span class="s2">"descriptivos"</span><span class="p">]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"mean"</span><span class="p">:</span> <span class="s2">"media"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">:</span> <span class="s2">"DE"</span><span class="p">,</span> <span class="s2">"cv"</span><span class="p">:</span> <span class="s2">"CV"</span><span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F1 macro de validación por semilla (piloto):
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>CNN</th>
+      <th>MobileNetV2</th>
+      <th>ResNet-18</th>
+    </tr>
+    <tr>
+      <th>seed</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.8627</td>
+      <td>0.8388</td>
+      <td>0.8770</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.8431</td>
+      <td>0.8325</td>
+      <td>0.8826</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.8635</td>
+      <td>0.8356</td>
+      <td>0.8607</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.8583</td>
+      <td>0.8515</td>
+      <td>0.8794</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.8626</td>
+      <td>0.8740</td>
+      <td>0.8724</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>media</th>
+      <th>DE</th>
+      <th>CV</th>
+    </tr>
+    <tr>
+      <th>model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CNN</th>
+      <td>0.8580</td>
+      <td>0.0086</td>
+      <td>0.0100</td>
+    </tr>
+    <tr>
+      <th>MobileNetV2</th>
+      <td>0.8465</td>
+      <td>0.0170</td>
+      <td>0.0201</td>
+    </tr>
+    <tr>
+      <th>ResNet-18</th>
+      <td>0.8744</td>
+      <td>0.0085</td>
+      <td>0.0097</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla_r</span> <span class="o">=</span> <span class="n">pa</span><span class="p">[</span><span class="s2">"tabla"</span><span class="p">]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"par"</span><span class="p">:</span> <span class="s2">"par (A − B)"</span><span class="p">,</span> <span class="s2">"media_d"</span><span class="p">:</span> <span class="s2">"media de d"</span><span class="p">,</span> <span class="s2">"sd_d"</span><span class="p">:</span> <span class="s2">"DE de d"</span><span class="p">,</span>
+                                     <span class="s2">"R_par"</span><span class="p">:</span> <span class="s2">"R"</span><span class="p">,</span> <span class="s2">"shapiro_p"</span><span class="p">:</span> <span class="s2">"Shapiro-Wilk p"</span><span class="p">})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">tabla_r</span><span class="p">[[</span><span class="s2">"par (A − B)"</span><span class="p">,</span> <span class="s2">"n_piloto"</span><span class="p">,</span> <span class="s2">"media de d"</span><span class="p">,</span> <span class="s2">"DE de d"</span><span class="p">,</span> <span class="s2">"R"</span><span class="p">,</span> <span class="s2">"Shapiro-Wilk p"</span><span class="p">]]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s2">"R calculado (máximo)"</span><span class="p">:</span> <span class="n">pa</span><span class="p">[</span><span class="s2">"R_calculado"</span><span class="p">],</span> <span class="s2">"R final"</span><span class="p">:</span> <span class="n">pa</span><span class="p">[</span><span class="s2">"R_final"</span><span class="p">],</span>
+                   <span class="s2">"MDE con R final"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">pa</span><span class="p">[</span><span class="s2">"MDE"</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">"delta"</span><span class="p">:</span> <span class="n">pa</span><span class="p">[</span><span class="s2">"delta"</span><span class="p">],</span>
+                   <span class="s2">"MDE &gt; delta"</span><span class="p">:</span> <span class="n">pa</span><span class="p">[</span><span class="s2">"MDE_supera_delta"</span><span class="p">],</span> <span class="s2">"limitado por R máximo"</span><span class="p">:</span> <span class="n">pa</span><span class="p">[</span><span class="s2">"limitado_por_R_max"</span><span class="p">]},</span>
+                  <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">"valor"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>par (A − B)</th>
+      <th>n_piloto</th>
+      <th>media de d</th>
+      <th>DE de d</th>
+      <th>R</th>
+      <th>Shapiro-Wilk p</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CNN - MobileNetV2</td>
+      <td>5</td>
+      <td>0.0116</td>
+      <td>0.0155</td>
+      <td>5</td>
+      <td>0.6825</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CNN - ResNet-18</td>
+      <td>5</td>
+      <td>-0.0164</td>
+      <td>0.0156</td>
+      <td>5</td>
+      <td>0.9214</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MobileNetV2 - ResNet-18</td>
+      <td>5</td>
+      <td>-0.0279</td>
+      <td>0.0192</td>
+      <td>8</td>
+      <td>0.7613</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>R calculado (máximo)</th>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>R final</th>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>MDE con R final</th>
+      <td>0.019</td>
+    </tr>
+    <tr>
+      <th>delta</th>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>MDE &gt; delta</th>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>limitado por R máximo</th>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">pil</span><span class="p">[</span><span class="s2">"tabla_ancha"</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">w</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">row</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#9AA5B1"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">i</span><span class="p">),</span> <span class="n">w</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">P</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">s</span><span class="o">=</span><span class="mi">28</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"F1 macro (validación)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Piloto: F1 macro por semilla (las líneas unen la misma semilla)"</span><span class="p">)</span>
+<span class="n">P</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">"4_4_piloto_pareado"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"tabla"</span><span class="p">:</span> <span class="n">w</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/03424aeb1f7cd181ccdf500211bbe0110eb63908c5374a3ca9a57791ad726c67.png" src="_images/03424aeb1f7cd181ccdf500211bbe0110eb63908c5374a3ca9a57791ad726c67.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normal</span> <span class="o">=</span> <span class="p">(</span><span class="n">pa</span><span class="p">[</span><span class="s2">"tabla"</span><span class="p">][</span><span class="s2">"shapiro_p"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">C</span><span class="o">.</span><span class="n">ALPHA</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="n">txt</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"**Resultado.** La mayor desviación estándar de las diferencias pareadas en el piloto es "</span>
+       <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">pa</span><span class="p">[</span><span class="s1">'tabla'</span><span class="p">][</span><span class="s1">'sd_d'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, de donde R = </span><span class="si">{</span><span class="n">pa</span><span class="p">[</span><span class="s1">'R_calculado'</span><span class="p">]</span><span class="si">}</span><span class="s2">. Entrenamos </span><span class="si">{</span><span class="n">pa</span><span class="p">[</span><span class="s1">'R_final'</span><span class="p">]</span><span class="si">}</span><span class="s2"> semillas por modelo."</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">pa</span><span class="p">[</span><span class="s2">"limitado_por_R_max"</span><span class="p">]:</span>
+    <span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"El valor calculado supera el máximo de </span><span class="si">{</span><span class="n">pa</span><span class="p">[</span><span class="s1">'R_max'</span><span class="p">]</span><span class="si">}</span><span class="s2"> que permite el tiempo de GPU."</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">pa</span><span class="p">[</span><span class="s2">"MDE_supera_delta"</span><span class="p">]:</span>
+    <span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Con </span><span class="si">{</span><span class="n">pa</span><span class="p">[</span><span class="s1">'R_final'</span><span class="p">]</span><span class="si">}</span><span class="s2"> semillas, la diferencia mínima detectable es </span><span class="si">{</span><span class="n">pa</span><span class="p">[</span><span class="s1">'MDE'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, mayor que δ = </span><span class="si">{</span><span class="n">pa</span><span class="p">[</span><span class="s1">'delta'</span><span class="p">]</span><span class="si">}</span><span class="s2">: "</span>
+               <span class="s2">"una diferencia real del tamaño de δ podría no resultar significativa, lo que constituye una limitación del experimento."</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Con </span><span class="si">{</span><span class="n">pa</span><span class="p">[</span><span class="s1">'R_final'</span><span class="p">]</span><span class="si">}</span><span class="s2"> semillas, la diferencia mínima detectable es </span><span class="si">{</span><span class="n">pa</span><span class="p">[</span><span class="s1">'MDE'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, menor o igual que δ = </span><span class="si">{</span><span class="n">pa</span><span class="p">[</span><span class="s1">'delta'</span><span class="p">]</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"La prueba de Shapiro-Wilk no rechaza la normalidad de las diferencias en ningún par; con 5 datos su potencia es baja, "</span>
+           <span class="s2">"por lo que reportamos tanto la t pareada como la prueba de Wilcoxon."</span> <span class="k">if</span> <span class="n">normal</span> <span class="k">else</span>
+           <span class="s2">"La prueba de Shapiro-Wilk rechaza la normalidad en al menos un par; la prueba principal por pares es Wilcoxon y la t pareada es complementaria."</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">txt</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<p><strong>Resultado.</strong> La mayor desviación estándar de las diferencias pareadas en el piloto es 0.0192, de donde R = 8. Entrenamos 8 semillas por modelo. Con 8 semillas, la diferencia mínima detectable es 0.019, menor o igual que δ = 0.02. La prueba de Shapiro-Wilk no rechaza la normalidad de las diferencias en ningún par; con 5 datos su potencia es baja, por lo que reportamos tanto la t pareada como la prueba de Wilcoxon.</p>
+</div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Las 5 semillas del piloto usan la configuración definitiva y forman parte del experimento final. El número de semillas se determinó con una regla fijada antes del entrenamiento, a partir del F1 macro de validación; el conjunto de prueba no intervino en ninguna decisión de diseño.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="42_busqueda_hiperparametros.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4.3 Búsqueda de hiperparámetros</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="44_entrenamiento_final.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4.5 Entrenamiento final</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo">Método</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan y Juan Díaz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

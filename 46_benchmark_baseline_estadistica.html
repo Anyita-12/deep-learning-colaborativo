@@ -1,0 +1,1508 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5.2 Comparación estadística y modelo de referencia &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '46_benchmark_baseline_estadistica';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5.3 Análisis cualitativo, robustez y discusión" href="47_analisis_cualitativo_robustez.html" />
+    <link rel="prev" title="5.1 Resultados de los modelos base" href="45_evaluacion_resultados.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/46_benchmark_baseline_estadistica.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5.2 Comparación estadística y modelo de referencia</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ranking">Ranking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supuestos">Supuestos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-global-friedman">Prueba global: Friedman</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaciones-por-pares">Comparaciones por pares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-de-mcnemar-por-imagen">Prueba de McNemar por imagen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#auc-roc-bootstrap-pareado">AUC-ROC: bootstrap pareado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-referencia-y-umbral-de-mejora">Modelo de referencia y umbral de mejora</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="comparacion-estadistica-y-modelo-de-referencia">
+<h1>5.2 Comparación estadística y modelo de referencia<a class="headerlink" href="#comparacion-estadistica-y-modelo-de-referencia" title="Link to this heading">#</a></h1>
+<p>En esta sección evaluamos si las diferencias entre los tres modelos son estadísticamente significativas y relevantes en la práctica, identificamos el modelo de referencia (<em>baseline</em>) y calculamos la mejora mínima que debe demostrar un modelo más avanzado. Todas las pruebas fueron declaradas en el preregistro y los valores <span class="math notranslate nohighlight">\(p\)</span> se reportan exactos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">ROOT</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"src"</span> <span class="o">/</span> <span class="s2">"config.py"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span> <span class="k">as</span> <span class="n">C</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">plots</span> <span class="k">as</span> <span class="n">P</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.persist</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_done</span><span class="p">,</span> <span class="n">load_pickle</span><span class="p">,</span> <span class="n">save_pickle</span>
+
+<span class="n">P</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+<span class="n">C</span><span class="o">.</span><span class="n">ensure_dirs</span><span class="p">()</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.precision"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Resultados:"</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">RESULTS</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"| modelos:"</span><span class="p">,</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resultados: results | modelos: CNN, MobileNetV2, ResNet-18
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">S</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"metricas_por_corrida.pkl"</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">wide</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>                       <span class="c1"># semilla x modelo, F1 macro en prueba</span>
+<span class="n">R</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>CNN</th>
+      <th>MobileNetV2</th>
+      <th>ResNet-18</th>
+    </tr>
+    <tr>
+      <th>seed</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.8428</td>
+      <td>0.7787</td>
+      <td>0.8815</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.8298</td>
+      <td>0.8045</td>
+      <td>0.8829</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.8257</td>
+      <td>0.8474</td>
+      <td>0.8690</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.8054</td>
+      <td>0.8187</td>
+      <td>0.8716</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.8455</td>
+      <td>0.8377</td>
+      <td>0.8794</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.7833</td>
+      <td>0.8146</td>
+      <td>0.8312</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.8413</td>
+      <td>0.7928</td>
+      <td>0.8567</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.8348</td>
+      <td>0.7815</td>
+      <td>0.8300</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="ranking">
+<h2>Ranking<a class="headerlink" href="#ranking" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ranking</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"model"</span><span class="p">)[</span><span class="s2">"f1_macro"</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">media</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">DE</span><span class="o">=</span><span class="s2">"std"</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"media"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ranking</span><span class="p">[</span><span class="s2">"posición"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ranking</span><span class="p">[</span><span class="s2">"rango medio (Friedman)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ranking</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">display</span><span class="p">(</span><span class="n">ranking</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>media</th>
+      <th>DE</th>
+      <th>posición</th>
+      <th>rango medio (Friedman)</th>
+    </tr>
+    <tr>
+      <th>model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ResNet-18</th>
+      <td>0.8628</td>
+      <td>0.0216</td>
+      <td>1</td>
+      <td>1.125</td>
+    </tr>
+    <tr>
+      <th>CNN</th>
+      <td>0.8261</td>
+      <td>0.0215</td>
+      <td>2</td>
+      <td>2.250</td>
+    </tr>
+    <tr>
+      <th>MobileNetV2</th>
+      <td>0.8095</td>
+      <td>0.0250</td>
+      <td>3</td>
+      <td>2.625</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="supuestos">
+<h2>Supuestos<a class="headerlink" href="#supuestos" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Independencia.</strong> Cada semilla es una corrida independiente. Dentro de una semilla, los tres modelos comparten la partición y el orden de los datos, por lo que las observaciones están pareadas por semilla y se analizan como bloques.</p></li>
+<li><p><strong>Normalidad de las diferencias pareadas.</strong> Es necesaria para la prueba t pareada y se evalúa con Shapiro-Wilk. Con pocas semillas la prueba tiene baja potencia, por lo que también reportamos la prueba de Wilcoxon, que no la requiere.</p></li>
+</ul>
+</section>
+<section id="prueba-global-friedman">
+<h2>Prueba global: Friedman<a class="headerlink" href="#prueba-global-friedman" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(H_0\)</span>: los tres modelos tienen la misma distribución de F1 macro. Dentro de cada semilla se ordenan los modelos de 1 a 3 y el estadístico compara las sumas de rangos <span class="math notranslate nohighlight">\(R_j\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[Q = \frac{12}{n k (k+1)} \sum_{j=1}^{k} R_j^2 - 3n(k+1),\]</div>
+<p>con <span class="math notranslate nohighlight">\(n\)</span> semillas y <span class="math notranslate nohighlight">\(k = 3\)</span> modelos. El valor <span class="math notranslate nohighlight">\(p\)</span> se obtiene de forma exacta, enumerando las <span class="math notranslate nohighlight">\((3!)^n\)</span> asignaciones de rangos posibles bajo <span class="math notranslate nohighlight">\(H_0\)</span>, o por Monte Carlo cuando son demasiadas. El tamaño de efecto es la W de Kendall, <span class="math notranslate nohighlight">\(W = Q / (n(k-1))\)</span>, entre 0 y 1. Con <span class="math notranslate nohighlight">\(k = 3\)</span> y pocas semillas la prueba tiene baja potencia: un resultado no significativo no demuestra equivalencia.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fr</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">friedman_exact</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s2">"Q"</span><span class="p">:</span> <span class="n">fr</span><span class="p">[</span><span class="s2">"Q"</span><span class="p">],</span> <span class="s2">"p exacto"</span><span class="p">:</span> <span class="n">fr</span><span class="p">[</span><span class="s2">"p_exacto"</span><span class="p">],</span> <span class="s2">"método"</span><span class="p">:</span> <span class="n">fr</span><span class="p">[</span><span class="s2">"metodo_p"</span><span class="p">],</span> <span class="s2">"p (aprox. χ²)"</span><span class="p">:</span> <span class="n">fr</span><span class="p">[</span><span class="s2">"p_chi2"</span><span class="p">],</span>
+                   <span class="s2">"W de Kendall"</span><span class="p">:</span> <span class="n">fr</span><span class="p">[</span><span class="s2">"W_kendall"</span><span class="p">],</span> <span class="s2">"semillas"</span><span class="p">:</span> <span class="n">fr</span><span class="p">[</span><span class="s2">"n_bloques"</span><span class="p">]},</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">"valor"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Q</th>
+      <td>9.75</td>
+    </tr>
+    <tr>
+      <th>p exacto</th>
+      <td>0.0048</td>
+    </tr>
+    <tr>
+      <th>método</th>
+      <td>exacto (1679616 permutaciones)</td>
+    </tr>
+    <tr>
+      <th>p (aprox. χ²)</th>
+      <td>0.0076</td>
+    </tr>
+    <tr>
+      <th>W de Kendall</th>
+      <td>0.6094</td>
+    </tr>
+    <tr>
+      <th>semillas</th>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="comparaciones-por-pares">
+<h2>Comparaciones por pares<a class="headerlink" href="#comparaciones-por-pares" title="Link to this heading">#</a></h2>
+<p>Para cada par <span class="math notranslate nohighlight">\((A, B)\)</span> y semilla <span class="math notranslate nohighlight">\(s\)</span> calculamos <span class="math notranslate nohighlight">\(d_s = F1_{A,s} - F1_{B,s}\)</span> y reportamos la diferencia media con su intervalo de confianza del 95 % (t y bootstrap pareado), la prueba t pareada con su tamaño de efecto <span class="math notranslate nohighlight">\(d_z = \bar d / s_d\)</span>, y la prueba de Wilcoxon de rangos con signo con la correlación rango-biserial <span class="math notranslate nohighlight">\(r = (W^+ - W^-)/(W^+ + W^-)\)</span>. Los valores <span class="math notranslate nohighlight">\(p\)</span> se ajustan por Holm sobre las tres comparaciones. Una diferencia se considera relevante si <span class="math notranslate nohighlight">\(|\bar d| \ge \delta = 0.02\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pw</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">pairwise</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"n"</span><span class="p">,</span> <span class="s2">"dif_media"</span><span class="p">,</span> <span class="s2">"ic_t_lo"</span><span class="p">,</span> <span class="s2">"ic_t_hi"</span><span class="p">,</span> <span class="s2">"ic_boot_lo"</span><span class="p">,</span> <span class="s2">"ic_boot_hi"</span><span class="p">,</span> <span class="s2">"d_z"</span><span class="p">,</span> <span class="s2">"p_t"</span><span class="p">,</span> <span class="s2">"p_t_holm"</span><span class="p">,</span>
+        <span class="s2">"W_wilcoxon"</span><span class="p">,</span> <span class="s2">"p_wilcoxon"</span><span class="p">,</span> <span class="s2">"p_wilcoxon_holm"</span><span class="p">,</span> <span class="s2">"r_rango_biserial"</span><span class="p">,</span> <span class="s2">"shapiro_p_dif"</span><span class="p">,</span> <span class="s2">"supera_delta"</span><span class="p">]</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pw</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">pw</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"pruebas_pares.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ph</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">posthoc</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">ph</span><span class="p">[</span><span class="s2">"disponible"</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Post-hoc de Nemenyi (p):"</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">ph</span><span class="p">[</span><span class="s2">"nemenyi"</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Post-hoc de Conover con Holm (p):"</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">ph</span><span class="p">[</span><span class="s2">"conover"</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>n</th>
+      <th>dif_media</th>
+      <th>ic_t_lo</th>
+      <th>ic_t_hi</th>
+      <th>ic_boot_lo</th>
+      <th>ic_boot_hi</th>
+      <th>d_z</th>
+      <th>p_t</th>
+      <th>p_t_holm</th>
+      <th>W_wilcoxon</th>
+      <th>p_wilcoxon</th>
+      <th>p_wilcoxon_holm</th>
+      <th>r_rango_biserial</th>
+      <th>shapiro_p_dif</th>
+      <th>supera_delta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CNN</td>
+      <td>MobileNetV2</td>
+      <td>8</td>
+      <td>0.0166</td>
+      <td>-0.0141</td>
+      <td>0.0473</td>
+      <td>-0.0076</td>
+      <td>0.0404</td>
+      <td>0.4513</td>
+      <td>0.2425</td>
+      <td>0.2425</td>
+      <td>10.0</td>
+      <td>0.3125</td>
+      <td>0.3125</td>
+      <td>0.4444</td>
+      <td>0.4502</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CNN</td>
+      <td>ResNet-18</td>
+      <td>8</td>
+      <td>-0.0367</td>
+      <td>-0.0554</td>
+      <td>-0.0180</td>
+      <td>-0.0503</td>
+      <td>-0.0214</td>
+      <td>-1.6435</td>
+      <td>0.0023</td>
+      <td>0.0047</td>
+      <td>1.0</td>
+      <td>0.0156</td>
+      <td>0.0312</td>
+      <td>-0.9444</td>
+      <td>0.7017</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MobileNetV2</td>
+      <td>ResNet-18</td>
+      <td>8</td>
+      <td>-0.0533</td>
+      <td>-0.0771</td>
+      <td>-0.0295</td>
+      <td>-0.0722</td>
+      <td>-0.0355</td>
+      <td>-1.8690</td>
+      <td>0.0011</td>
+      <td>0.0034</td>
+      <td>0.0</td>
+      <td>0.0078</td>
+      <td>0.0234</td>
+      <td>-1.0000</td>
+      <td>0.8734</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Post-hoc de Nemenyi (p):
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>CNN</th>
+      <th>MobileNetV2</th>
+      <th>ResNet-18</th>
+    </tr>
+    <tr>
+      <th>model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CNN</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>MobileNetV2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>ResNet-18</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Post-hoc de Conover con Holm (p):
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>CNN</th>
+      <th>MobileNetV2</th>
+      <th>ResNet-18</th>
+    </tr>
+    <tr>
+      <th>model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CNN</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>MobileNetV2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>ResNet-18</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">pw</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">"dif_media"</span><span class="p">],</span> <span class="n">i</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="p">[[</span><span class="n">r</span><span class="p">[</span><span class="s2">"dif_media"</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="s2">"ic_t_lo"</span><span class="p">]],</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="s2">"ic_t_hi"</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="s2">"dif_media"</span><span class="p">]]],</span>
+                <span class="n">fmt</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#1C2541"</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="o">-</span><span class="n">C</span><span class="o">.</span><span class="n">DELTA</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">DELTA</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#5BC0BE"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"grey"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pw</span><span class="p">)),</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> − </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pw</span><span class="p">[</span><span class="s2">"A"</span><span class="p">],</span> <span class="n">pw</span><span class="p">[</span><span class="s2">"B"</span><span class="p">])])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"diferencia de F1 macro (IC 95 % t); líneas: ±δ"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">P</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">"5_2_diferencias_pareadas"</span><span class="p">,</span> <span class="n">pw</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/b031323aa0dd9bada0f12fb9098aba64dc39b10931ecb75c62c9ded72d60db58.png" src="_images/b031323aa0dd9bada0f12fb9098aba64dc39b10931ecb75c62c9ded72d60db58.png" />
+</div>
+</div>
+</section>
+<section id="prueba-de-mcnemar-por-imagen">
+<h2>Prueba de McNemar por imagen<a class="headerlink" href="#prueba-de-mcnemar-por-imagen" title="Link to this heading">#</a></h2>
+<p>Para cada semilla y par de modelos contamos las imágenes de prueba que acierta solo <span class="math notranslate nohighlight">\(A\)</span> (<span class="math notranslate nohighlight">\(b\)</span>) y las que acierta solo <span class="math notranslate nohighlight">\(B\)</span> (<span class="math notranslate nohighlight">\(c\)</span>). <span class="math notranslate nohighlight">\(H_0\)</span>: <span class="math notranslate nohighlight">\(b\)</span> y <span class="math notranslate nohighlight">\(c\)</span> tienen la misma probabilidad. Usamos la versión exacta si <span class="math notranslate nohighlight">\(b + c &lt; 25\)</span> y, en otro caso, <span class="math notranslate nohighlight">\(\chi^2 = (|b-c|-1)^2/(b+c)\)</span> con corrección de continuidad. Los valores <span class="math notranslate nohighlight">\(p\)</span> se ajustan por Holm dentro de cada semilla. Esta prueba compara los modelos entrenados con una semilla concreta, no las arquitecturas en general.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seeds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="p">{</span><span class="n">m</span><span class="p">:</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">run_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"test_predictions.pkl"</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seeds</span><span class="p">}</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">}</span>
+<span class="n">mc</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">mcnemar_all</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
+<span class="n">mc</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"mcnemar_por_semilla.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">med</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"semilla_mediana.pkl"</span><span class="p">)</span>
+<span class="n">res_mc</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">semillas</span><span class="o">=</span><span class="p">(</span><span class="s2">"seed"</span><span class="p">,</span> <span class="s2">"count"</span><span class="p">),</span>
+                                    <span class="n">significativas_holm</span><span class="o">=</span><span class="p">(</span><span class="s2">"p_holm_semilla"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">p</span> <span class="o">&lt;</span> <span class="n">C</span><span class="o">.</span><span class="n">ALPHA</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())),</span>
+                                    <span class="n">b_medio</span><span class="o">=</span><span class="p">(</span><span class="s2">"b"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span> <span class="n">c_medio</span><span class="o">=</span><span class="p">(</span><span class="s2">"c"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">))</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">res_mc</span><span class="p">[</span><span class="s2">"proporción significativa"</span><span class="p">]</span> <span class="o">=</span> <span class="n">res_mc</span><span class="p">[</span><span class="s2">"significativas_holm"</span><span class="p">]</span> <span class="o">/</span> <span class="n">res_mc</span><span class="p">[</span><span class="s2">"semillas"</span><span class="p">]</span>
+<span class="n">display</span><span class="p">(</span><span class="n">res_mc</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">s_med</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">med</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Semilla de referencia (la semilla mediana más frecuente entre modelos): </span><span class="si">{</span><span class="n">s_med</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">mc</span><span class="p">[</span><span class="n">mc</span><span class="p">[</span><span class="s2">"seed"</span><span class="p">]</span> <span class="o">==</span> <span class="n">s_med</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>semillas</th>
+      <th>significativas_holm</th>
+      <th>b_medio</th>
+      <th>c_medio</th>
+      <th>proporción significativa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CNN</td>
+      <td>MobileNetV2</td>
+      <td>8</td>
+      <td>1</td>
+      <td>34.500</td>
+      <td>26.875</td>
+      <td>0.125</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CNN</td>
+      <td>ResNet-18</td>
+      <td>8</td>
+      <td>1</td>
+      <td>21.000</td>
+      <td>29.000</td>
+      <td>0.125</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MobileNetV2</td>
+      <td>ResNet-18</td>
+      <td>8</td>
+      <td>4</td>
+      <td>15.125</td>
+      <td>30.750</td>
+      <td>0.500</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Semilla de referencia (la semilla mediana más frecuente entre modelos): 1
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>seed</th>
+      <th>A</th>
+      <th>B</th>
+      <th>b</th>
+      <th>c</th>
+      <th>exacto</th>
+      <th>estadistico</th>
+      <th>p</th>
+      <th>p_holm_semilla</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>CNN</td>
+      <td>MobileNetV2</td>
+      <td>34</td>
+      <td>23</td>
+      <td>False</td>
+      <td>1.7544</td>
+      <td>0.1853</td>
+      <td>0.3707</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>CNN</td>
+      <td>ResNet-18</td>
+      <td>20</td>
+      <td>29</td>
+      <td>False</td>
+      <td>1.3061</td>
+      <td>0.2531</td>
+      <td>0.3707</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>MobileNetV2</td>
+      <td>ResNet-18</td>
+      <td>14</td>
+      <td>34</td>
+      <td>False</td>
+      <td>7.5208</td>
+      <td>0.0061</td>
+      <td>0.0183</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="auc-roc-bootstrap-pareado">
+<h2>AUC-ROC: bootstrap pareado<a class="headerlink" href="#auc-roc-bootstrap-pareado" title="Link to this heading">#</a></h2>
+<p>Para comparar el AUC-ROC macro (uno contra resto) usamos un bootstrap estratificado y pareado: remuestreamos las imágenes de prueba dentro de cada clase 10 000 veces y recalculamos la diferencia de AUC entre dos modelos sobre las mismas imágenes, con la semilla mediana de cada modelo. Elegimos este procedimiento en lugar de la prueba de DeLong porque no disponemos de una implementación verificada para el AUC macro multiclase.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+
+<span class="n">auc</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">pa_</span><span class="p">,</span> <span class="n">pb_</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">med</span><span class="p">[</span><span class="n">a</span><span class="p">]],</span> <span class="n">preds</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">med</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">pa_</span><span class="p">[</span><span class="s2">"idx"</span><span class="p">],</span> <span class="n">pb_</span><span class="p">[</span><span class="s2">"idx"</span><span class="p">])</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">auc_bootstrap</span><span class="p">(</span><span class="n">pa_</span><span class="p">[</span><span class="s2">"y_true"</span><span class="p">],</span> <span class="n">pa_</span><span class="p">[</span><span class="s2">"probs"</span><span class="p">],</span> <span class="n">pb_</span><span class="p">[</span><span class="s2">"probs"</span><span class="p">])</span>
+    <span class="n">auc</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"A"</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">:</span> <span class="n">b</span><span class="p">,</span> <span class="s2">"semilla A"</span><span class="p">:</span> <span class="n">med</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="s2">"semilla B"</span><span class="p">:</span> <span class="n">med</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="o">**</span><span class="n">r</span><span class="p">})</span>
+<span class="n">auc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">auc</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">auc</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>semilla A</th>
+      <th>semilla B</th>
+      <th>dif_auc</th>
+      <th>ic_lo</th>
+      <th>ic_hi</th>
+      <th>p_bootstrap</th>
+      <th>n_boot</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CNN</td>
+      <td>MobileNetV2</td>
+      <td>1</td>
+      <td>5</td>
+      <td>0.0034</td>
+      <td>-0.0044</td>
+      <td>0.0114</td>
+      <td>0.3970</td>
+      <td>10000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CNN</td>
+      <td>ResNet-18</td>
+      <td>1</td>
+      <td>2</td>
+      <td>-0.0098</td>
+      <td>-0.0175</td>
+      <td>-0.0028</td>
+      <td>0.0062</td>
+      <td>10000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MobileNetV2</td>
+      <td>ResNet-18</td>
+      <td>5</td>
+      <td>2</td>
+      <td>-0.0132</td>
+      <td>-0.0219</td>
+      <td>-0.0053</td>
+      <td>0.0004</td>
+      <td>10000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="modelo-de-referencia-y-umbral-de-mejora">
+<h2>Modelo de referencia y umbral de mejora<a class="headerlink" href="#modelo-de-referencia-y-umbral-de-mejora" title="Link to this heading">#</a></h2>
+<p>El modelo de referencia es el de mayor F1 macro medio en prueba. Un modelo más avanzado debe compararse con él bajo el mismo protocolo (misma partición, <span class="math notranslate nohighlight">\(R\)</span> semillas y pruebas pareadas). El umbral de mejora es el mayor valor entre <span class="math notranslate nohighlight">\(\delta\)</span> y la diferencia mínima detectable con potencia de 0.80, <span class="math notranslate nohighlight">\(\text{MDE} = (z_{0.975}+z_{0.80})\,\hat\sigma_d/\sqrt{R}\)</span>, donde <span class="math notranslate nohighlight">\(\hat\sigma_d\)</span> es la mayor desviación estándar de las diferencias pareadas observadas entre los modelos base.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mejor</span> <span class="o">=</span> <span class="n">ranking</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ci_b</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">mean_ci</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">mejor</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="n">mejor</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="n">mejor</span><span class="p">]</span> <span class="o">-</span> <span class="n">w</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"frente a"</span><span class="p">:</span> <span class="n">m</span><span class="p">,</span> <span class="s2">"diferencia absoluta"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="s2">"diferencia relativa (%)"</span><span class="p">:</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">d</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="n">w</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()})</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">Z</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">C</span><span class="o">.</span><span class="n">ALPHA</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">S</span><span class="o">.</span><span class="n">Z</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">POWER</span><span class="p">)</span>
+<span class="n">sd_d</span> <span class="o">=</span> <span class="n">pw</span><span class="p">[</span><span class="s2">"de_dif"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">mde</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="n">sd_d</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+<span class="n">umbral</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">DELTA</span><span class="p">,</span> <span class="n">mde</span><span class="p">)</span>
+<span class="n">baseline</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="n">mejor</span><span class="p">,</span> <span class="s2">"media"</span><span class="p">:</span> <span class="n">ci_b</span><span class="p">[</span><span class="s2">"media"</span><span class="p">],</span> <span class="s2">"DE"</span><span class="p">:</span> <span class="n">ci_b</span><span class="p">[</span><span class="s2">"de"</span><span class="p">],</span> <span class="s2">"IC_t"</span><span class="p">:</span> <span class="n">ci_b</span><span class="p">[</span><span class="s2">"ic_t"</span><span class="p">],</span> <span class="s2">"IC_boot"</span><span class="p">:</span> <span class="n">ci_b</span><span class="p">[</span><span class="s2">"ic_boot"</span><span class="p">],</span>
+            <span class="s2">"R"</span><span class="p">:</span> <span class="n">R</span><span class="p">,</span> <span class="s2">"sd_d"</span><span class="p">:</span> <span class="n">sd_d</span><span class="p">,</span> <span class="s2">"MDE"</span><span class="p">:</span> <span class="n">mde</span><span class="p">,</span> <span class="s2">"delta"</span><span class="p">:</span> <span class="n">C</span><span class="o">.</span><span class="n">DELTA</span><span class="p">,</span> <span class="s2">"umbral_mejora"</span><span class="p">:</span> <span class="n">umbral</span><span class="p">,</span>
+            <span class="s2">"diferencias"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)}</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s2">"baseline"</span><span class="p">:</span> <span class="n">mejor</span><span class="p">,</span> <span class="s2">"F1 macro (media ± DE)"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ci_b</span><span class="p">[</span><span class="s1">'media'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">ci_b</span><span class="p">[</span><span class="s1">'de'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+                   <span class="s2">"IC 95 % t"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">ci_b</span><span class="p">[</span><span class="s1">'ic_t'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ci_b</span><span class="p">[</span><span class="s1">'ic_t'</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]"</span><span class="p">,</span>
+                   <span class="s2">"IC 95 % bootstrap"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">ci_b</span><span class="p">[</span><span class="s1">'ic_boot'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ci_b</span><span class="p">[</span><span class="s1">'ic_boot'</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]"</span><span class="p">,</span>
+                   <span class="s2">"MDE (potencia 0.80)"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">mde</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">"δ"</span><span class="p">:</span> <span class="n">C</span><span class="o">.</span><span class="n">DELTA</span><span class="p">,</span> <span class="s2">"umbral de mejora"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">umbral</span><span class="p">,</span> <span class="mi">4</span><span class="p">)},</span>
+                  <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">"valor"</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">baseline</span><span class="p">[</span><span class="s2">"diferencias"</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>baseline</th>
+      <td>ResNet-18</td>
+    </tr>
+    <tr>
+      <th>F1 macro (media ± DE)</th>
+      <td>0.8628 ± 0.0216</td>
+    </tr>
+    <tr>
+      <th>IC 95 % t</th>
+      <td>[0.8448, 0.8808]</td>
+    </tr>
+    <tr>
+      <th>IC 95 % bootstrap</th>
+      <td>[0.8482, 0.8759]</td>
+    </tr>
+    <tr>
+      <th>MDE (potencia 0.80)</th>
+      <td>0.0364</td>
+    </tr>
+    <tr>
+      <th>δ</th>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>umbral de mejora</th>
+      <td>0.0364</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>frente a</th>
+      <th>diferencia absoluta</th>
+      <th>diferencia relativa (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CNN</td>
+      <td>0.0367</td>
+      <td>4.4464</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>MobileNetV2</td>
+      <td>0.0533</td>
+      <td>6.5849</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">save_pickle</span><span class="p">({</span><span class="s2">"w"</span><span class="p">:</span> <span class="n">w</span><span class="p">,</span> <span class="s2">"ranking"</span><span class="p">:</span> <span class="n">ranking</span><span class="p">,</span> <span class="s2">"friedman"</span><span class="p">:</span> <span class="n">fr</span><span class="p">,</span> <span class="s2">"pares"</span><span class="p">:</span> <span class="n">pw</span><span class="p">,</span>
+             <span class="s2">"posthoc"</span><span class="p">:</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ph</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">"disponible"</span><span class="p">}</span> <span class="k">if</span> <span class="n">ph</span><span class="p">[</span><span class="s2">"disponible"</span><span class="p">]</span> <span class="k">else</span> <span class="p">{},</span>
+             <span class="s2">"mcnemar"</span><span class="p">:</span> <span class="n">mc</span><span class="p">,</span> <span class="s2">"mcnemar_resumen"</span><span class="p">:</span> <span class="n">res_mc</span><span class="p">,</span> <span class="s2">"auc_bootstrap"</span><span class="p">:</span> <span class="n">auc</span><span class="p">,</span> <span class="s2">"baseline"</span><span class="p">:</span> <span class="n">baseline</span><span class="p">,</span>
+             <span class="s2">"alpha"</span><span class="p">:</span> <span class="n">C</span><span class="o">.</span><span class="n">ALPHA</span><span class="p">,</span> <span class="s2">"delta"</span><span class="p">:</span> <span class="n">C</span><span class="o">.</span><span class="n">DELTA</span><span class="p">},</span> <span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"stats.pkl"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretacion">
+<h2>Interpretación<a class="headerlink" href="#interpretacion" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">frase_par</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="n">sig</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">"p_wilcoxon_holm"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">C</span><span class="o">.</span><span class="n">ALPHA</span> <span class="ow">or</span> <span class="n">r</span><span class="p">[</span><span class="s2">"p_t_holm"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">C</span><span class="o">.</span><span class="n">ALPHA</span>
+    <span class="n">rel</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">"dif_media"</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">C</span><span class="o">.</span><span class="n">DELTA</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'A'</span><span class="p">]</span><span class="si">}</span><span class="s2"> − </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'B'</span><span class="p">]</span><span class="si">}</span><span class="s2">: diferencia media </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'dif_media'</span><span class="p">]</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2"> (IC 95 % [</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'ic_t_lo'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'ic_t_hi'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">]), "</span>
+            <span class="sa">f</span><span class="s2">"t pareada p_Holm = </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'p_t_holm'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Wilcoxon p_Holm = </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'p_wilcoxon_holm'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, d_z = </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'d_z'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sig</span> <span class="ow">and</span> <span class="n">rel</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">base</span> <span class="o">+</span> <span class="s2">" Es significativa y supera δ."</span>
+    <span class="k">if</span> <span class="n">sig</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rel</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">base</span> <span class="o">+</span> <span class="s2">" Es significativa, pero menor que δ."</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sig</span> <span class="ow">and</span> <span class="n">rel</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">base</span> <span class="o">+</span> <span class="s2">" Supera δ en promedio, pero no es significativa."</span>
+    <span class="k">return</span> <span class="n">base</span> <span class="o">+</span> <span class="s2">" No es significativa y es menor que δ."</span>
+
+<span class="n">costo</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"model"</span><span class="p">)[[</span><span class="s2">"params"</span><span class="p">,</span> <span class="s2">"ms_per_image"</span><span class="p">]]</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="n">txt</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"**Global.** Friedman da Q = </span><span class="si">{</span><span class="n">fr</span><span class="p">[</span><span class="s1">'Q'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">fr</span><span class="p">[</span><span class="s1">'p_exacto'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">fr</span><span class="p">[</span><span class="s1">'metodo_p'</span><span class="p">]</span><span class="si">}</span><span class="s2">), W de Kendall = </span><span class="si">{</span><span class="n">fr</span><span class="p">[</span><span class="s1">'W_kendall'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">. "</span>
+       <span class="o">+</span> <span class="p">(</span><span class="s2">"Se rechaza que los tres modelos tengan el mismo desempeño."</span> <span class="k">if</span> <span class="n">fr</span><span class="p">[</span><span class="s2">"p_exacto"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">C</span><span class="o">.</span><span class="n">ALPHA</span> <span class="k">else</span>
+          <span class="s2">"No se rechaza la igualdad global; con k = 3 y pocas semillas la prueba tiene baja potencia, por lo que el resultado no demuestra equivalencia."</span><span class="p">)]</span>
+<span class="n">txt</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">"- "</span> <span class="o">+</span> <span class="n">frase_par</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">pw</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()]</span>
+<span class="n">mas_grande</span> <span class="o">=</span> <span class="n">costo</span><span class="p">[</span><span class="s2">"params"</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+<span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"**Complejidad frente a desempeño.** </span><span class="si">{</span><span class="n">mas_grande</span><span class="si">}</span><span class="s2"> tiene más parámetros (</span><span class="si">{</span><span class="n">costo</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mas_grande</span><span class="p">,</span><span class="w"> </span><span class="s1">'params'</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> M). "</span>
+           <span class="o">+</span> <span class="p">(</span><span class="s2">"Además es el de mayor F1 macro medio."</span> <span class="k">if</span> <span class="n">mas_grande</span> <span class="o">==</span> <span class="n">mejor</span> <span class="k">else</span>
+              <span class="sa">f</span><span class="s2">"No es el de mayor F1 macro medio: con unas 1800 imágenes de entrenamiento y sin preentrenamiento, la mayor capacidad no se tradujo en mejor desempeño."</span><span class="p">))</span>
+<span class="n">acc_b</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"model"</span><span class="p">]</span> <span class="o">==</span> <span class="n">mejor</span><span class="p">][</span><span class="s2">"accuracy"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"**Modelo de referencia.** </span><span class="si">{</span><span class="n">mejor</span><span class="si">}</span><span class="s2">, con F1 macro </span><span class="si">{</span><span class="n">ci_b</span><span class="p">[</span><span class="s1">'media'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">ci_b</span><span class="p">[</span><span class="s1">'de'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> y accuracy </span><span class="si">{</span><span class="n">acc_b</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">. "</span>
+           <span class="sa">f</span><span class="s2">"Un modelo más avanzado debe superarlo en al menos </span><span class="si">{</span><span class="n">umbral</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> de F1 macro, con significancia y bajo el mismo protocolo."</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"**Frente a la literatura.** La mediana de accuracy reportada en TrashNet es cercana a 96 % (Sección 3, §10), casi siempre con modelos "</span>
+           <span class="sa">f</span><span class="s2">"preentrenados en ImageNet, una sola corrida y particiones aleatorias que pueden repartir casi-duplicados. "</span>
+           <span class="sa">f</span><span class="s2">"Nuestro modelo de referencia se entrena desde cero, con partición agrupada y varias semillas. La diferencia de </span><span class="si">{</span><span class="mf">0.96</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">acc_b</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> "</span>
+           <span class="s2">"frente a esa cifra combina el efecto del preentrenamiento con el del protocolo."</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">txt</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<p><strong>Global.</strong> Friedman da Q = 9.750, p = 0.0048 (exacto (1679616 permutaciones)), W de Kendall = 0.61. Se rechaza que los tres modelos tengan el mismo desempeño.</p>
+<ul class="simple">
+<li><p>CNN − MobileNetV2: diferencia media +0.017 (IC 95 % [-0.014, 0.047]), t pareada p_Holm = 0.2425, Wilcoxon p_Holm = 0.3125, d_z = 0.45. No es significativa y es menor que δ.</p></li>
+<li><p>CNN − ResNet-18: diferencia media -0.037 (IC 95 % [-0.055, -0.018]), t pareada p_Holm = 0.0047, Wilcoxon p_Holm = 0.0312, d_z = -1.64. Es significativa y supera δ.</p></li>
+<li><p>MobileNetV2 − ResNet-18: diferencia media -0.053 (IC 95 % [-0.077, -0.029]), t pareada p_Holm = 0.0034, Wilcoxon p_Holm = 0.0234, d_z = -1.87. Es significativa y supera δ.</p></li>
+</ul>
+<p><strong>Complejidad frente a desempeño.</strong> ResNet-18 tiene más parámetros (11.2 M). Además es el de mayor F1 macro medio.</p>
+<p><strong>Modelo de referencia.</strong> ResNet-18, con F1 macro 0.863 ± 0.022 y accuracy 0.871. Un modelo más avanzado debe superarlo en al menos 0.036 de F1 macro, con significancia y bajo el mismo protocolo.</p>
+<p><strong>Frente a la literatura.</strong> La mediana de accuracy reportada en TrashNet es cercana a 96 % (Sección 3, §10), casi siempre con modelos preentrenados en ImageNet, una sola corrida y particiones aleatorias que pueden repartir casi-duplicados. Nuestro modelo de referencia se entrena desde cero, con partición agrupada y varias semillas. La diferencia de 0.089 frente a esa cifra combina el efecto del preentrenamiento con el del protocolo.</p>
+</div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Comparamos los tres modelos con pruebas pareadas por semilla, valores <span class="math notranslate nohighlight">\(p\)</span> exactos, intervalos de confianza y tamaños de efecto, distinguiendo la significancia estadística de la relevancia práctica. El modelo de referencia y su umbral de mejora quedan definidos para comparaciones posteriores.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="45_evaluacion_resultados.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">5.1 Resultados de los modelos base</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="47_analisis_cualitativo_robustez.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">5.3 Análisis cualitativo, robustez y discusión</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ranking">Ranking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supuestos">Supuestos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-global-friedman">Prueba global: Friedman</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaciones-por-pares">Comparaciones por pares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-de-mcnemar-por-imagen">Prueba de McNemar por imagen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#auc-roc-bootstrap-pareado">AUC-ROC: bootstrap pareado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-referencia-y-umbral-de-mejora">Modelo de referencia y umbral de mejora</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan y Juan Díaz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. Análisis exploratorio de datos (EDA) &#8212; Clasificación de residuos con TrashNet</title>
+    <title>2. Análisis exploratorio de datos &#8212; Clasificación de residuos con TrashNet</title>
   
   
   
@@ -66,7 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Estado del Arte - Metodología PRISMA" href="03_estado_del_arte.html" />
+    <link rel="next" title="3. Revisión del estado del arte y selección de los modelos base" href="03_estado_del_arte.html" />
     <link rel="prev" title="1. Definición del problema y dataset" href="01_problema_dataset.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -217,10 +217,16 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y dataset</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Análisis exploratorio de datos (EDA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Estado del Arte - Metodología PRISMA</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_implementacion.html">4. Implementación de modelos del Estado del Arte</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_benchmark.html">5. Benchmark</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
 </ul>
 
@@ -372,7 +378,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>2. Análisis exploratorio de datos (EDA)</h1>
+    <h1>2. Análisis exploratorio de datos</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -383,42 +389,42 @@
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inventario-e-integridad">2.1 Inventario e integridad</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-1">Cierre 2.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-y-decisiones">Hallazgos y decisiones</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#balance-de-clases">2.2 Balance de clases</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-2">Cierre 2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Hallazgos y decisiones</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicados-y-etiquetas-contradictorias">2.3 Duplicados y etiquetas contradictorias</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-3">Cierre 2.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Hallazgos y decisiones</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion-estratificada-agrupada-y-test-congelado">2.4 Partición estratificada, agrupada y test congelado</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-4">Cierre 2.4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion-estratificada-y-agrupada">2.4 Partición estratificada y agrupada</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Hallazgos y decisiones</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptores-de-pixeles">2.5 Descriptores de píxeles</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-5">Cierre 2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Hallazgos y decisiones</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#las-particiones-son-representativas-entre-si">2.6 ¿Las particiones son representativas entre sí?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-6">Cierre 2.6</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparabilidad-de-las-particiones">2.6 Comparabilidad de las particiones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Hallazgos y decisiones</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hay-atajos-de-fondo-o-de-adquisicion">2.7 ¿Hay atajos de fondo o de adquisición?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-7">Cierre 2.7</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#atajos-de-fondo-y-de-adquisicion">2.7 Atajos de fondo y de adquisición</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Hallazgos y decisiones</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruido-de-etiquetas">2.8 Ruido de etiquetas</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-8">Cierre 2.8</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Hallazgos y decisiones</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-por-canal-solo-train">2.9 Normalización por canal (solo train)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-9">Cierre 2.9</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-por-canal">2.9 Normalización por canal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Hallazgos y decisiones</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-decisiones-del-eda">2.10 Resumen de decisiones del EDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-decisiones">2.10 Resumen de decisiones</a></li>
 </ul>
             </nav>
         </div>
@@ -430,16 +436,14 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-de-datos-eda">
-<h1>2. Análisis exploratorio de datos (EDA)<a class="headerlink" href="#analisis-exploratorio-de-datos-eda" title="Link to this heading">#</a></h1>
-<p><strong>Objetivo.</strong> Responder, con pruebas y no solo con gráficas, si TrashNet es un dataset <strong>adecuado y representativo</strong> para entrenar y comparar clasificadores de residuos. Que el dataset aparezca en artículos de Scopus o IEEE no prueba su calidad. La prueban (o la refutan) los análisis de este capítulo.</p>
-<p><strong>Qué cambia respecto al EDA tabular del curso de Machine Learning.</strong> En el EDA tabular (k-NN), una variable asociada a la clase es <em>buena</em> y se conserva. En imágenes es al revés: si el <strong>fondo o la iluminación</strong> se asocian con la clase, el modelo puede aprender ese <strong>atajo</strong> (<em>shortcut learning</em>) en lugar del material del residuo. Además, el riesgo principal ya no es la colinealidad (VIF), sino los <strong>duplicados que cruzan particiones</strong>, que inflan las métricas (<em>data leakage</em>).</p>
-<p><strong>Estructura.</strong> Cada análisis termina con el cierre que exige la guía: <strong>decisión de preprocesamiento</strong>, <strong>impacto en la arquitectura</strong> y <strong>riesgos</strong>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-de-datos">
+<h1>2. Análisis exploratorio de datos<a class="headerlink" href="#analisis-exploratorio-de-datos" title="Link to this heading">#</a></h1>
+<p>En este capítulo evaluamos si TrashNet es adecuado para entrenar y comparar clasificadores de residuos. Revisamos la integridad de los archivos, el balance de clases, la presencia de duplicados, la representatividad de las particiones, la existencia de atajos visuales asociados al fondo o a la iluminación, el ruido de etiquetas y las estadísticas de normalización. Cada sección termina con las decisiones de preprocesamiento, su efecto sobre la arquitectura y los riesgos identificados.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>§</p></th>
 <th class="head"><p>Pregunta</p></th>
-<th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Método</p></th>
 </tr>
 </thead>
 <tbody>
@@ -449,35 +453,35 @@
 </tr>
 <tr class="row-odd"><td><p>2.2</p></td>
 <td><p>¿Las clases están balanceadas?</p></td>
-<td><p>Razón de desbalance, entropía</p></td>
+<td><p>Razón de desbalance, entropía normalizada</p></td>
 </tr>
 <tr class="row-even"><td><p>2.3</p></td>
 <td><p>¿Hay duplicados o etiquetas contradictorias?</p></td>
-<td><p>SHA-256, dHash de 256 bits + revisión visual</p></td>
+<td><p>SHA-256, dHash de 256 bits, revisión visual</p></td>
 </tr>
 <tr class="row-odd"><td><p>2.4</p></td>
-<td><p>¿Cómo partimos sin fuga?</p></td>
-<td><p>Partición estratificada y agrupada, huella del test</p></td>
+<td><p>¿Cómo se parte el conjunto sin fuga de información?</p></td>
+<td><p>Partición estratificada y agrupada</p></td>
 </tr>
 <tr class="row-even"><td><p>2.5</p></td>
-<td><p>¿Qué dicen los píxeles?</p></td>
+<td><p>¿Qué propiedades tienen las imágenes?</p></td>
 <td><p>10 descriptores por imagen</p></td>
 </tr>
 <tr class="row-odd"><td><p>2.6</p></td>
-<td><p>¿Las particiones son representativas entre sí?</p></td>
-<td><p>χ², KS, validación adversarial, TOST</p></td>
+<td><p>¿Las particiones son comparables?</p></td>
+<td><p>χ², Kolmogorov–Smirnov, validación adversarial, TOST</p></td>
 </tr>
 <tr class="row-even"><td><p>2.7</p></td>
-<td><p>¿Hay atajos de fondo o adquisición?</p></td>
+<td><p>¿Existen atajos de fondo o de adquisición?</p></td>
 <td><p>Kruskal–Wallis, sonda de atajos</p></td>
 </tr>
 <tr class="row-odd"><td><p>2.8</p></td>
 <td><p>¿Cuánto ruido de etiquetas hay?</p></td>
-<td><p>Revisión manual + binomial exacta</p></td>
+<td><p>Diseño de auditoría, prueba binomial exacta</p></td>
 </tr>
 <tr class="row-even"><td><p>2.9</p></td>
-<td><p>¿Con qué estadísticas normalizamos?</p></td>
-<td><p>Media y DE por canal, <strong>solo train</strong></p></td>
+<td><p>¿Con qué estadísticas se normaliza la entrada?</p></td>
+<td><p>Media y desviación estándar por canal en train</p></td>
 </tr>
 </tbody>
 </table>
@@ -503,7 +507,7 @@
 <span class="n">ROOT</span> <span class="o">=</span> <span class="n">find_repo_root</span><span class="p">()</span>
 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">))</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">data_trashnet</span> <span class="k">as</span> <span class="n">dtn</span>   <span class="c1"># descarga, hashes, huellas (módulo del piloto)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">data_trashnet</span> <span class="k">as</span> <span class="n">dtn</span>   <span class="c1"># descarga, hashes y huellas</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">eda_tests</span> <span class="k">as</span> <span class="n">E</span>         <span class="c1"># descriptores y pruebas de hipótesis</span>
 
 <span class="n">RAW_DIR</span>  <span class="o">=</span> <span class="n">ROOT</span> <span class="o">/</span> <span class="s2">"data"</span> <span class="o">/</span> <span class="s2">"raw"</span> <span class="o">/</span> <span class="s2">"trashnet"</span>     <span class="c1"># ignorado por git</span>
@@ -546,17 +550,17 @@
 </div>
 <section id="inventario-e-integridad">
 <h2>2.1 Inventario e integridad<a class="headerlink" href="#inventario-e-integridad" title="Link to this heading">#</a></h2>
-<p>Se reutiliza el zip del piloto (<code class="docutils literal notranslate"><span class="pre">data/raw/trashnet/</span></code>). Su SHA-256 se compara con el registrado en <code class="docutils literal notranslate"><span class="pre">data/SHA256SUMS.txt</span></code>: si alguien tiene otra versión del dataset, el notebook se detiene. Luego se abre <strong>cada</strong> imagen para detectar archivos corruptos y, en la misma pasada, se calculan:</p>
+<p>Trabajamos con la versión redimensionada de TrashNet (<code class="docutils literal notranslate"><span class="pre">data/raw/trashnet/</span></code>). Verificamos el SHA-256 del archivo comprimido contra el registrado en <code class="docutils literal notranslate"><span class="pre">data/SHA256SUMS.txt</span></code> y abrimos cada imagen para detectar archivos corruptos. En la misma lectura calculamos:</p>
 <ul class="simple">
-<li><p>la huella SHA-256 de cada archivo (duplicados exactos);</p></li>
-<li><p>un <strong>dHash</strong> de 256 bits (casi-duplicados);</p></li>
+<li><p>la huella SHA-256 de cada archivo, para detectar duplicados exactos;</p></li>
+<li><p>un dHash de 256 bits, para detectar casi-duplicados;</p></li>
 <li><p>10 descriptores globales de píxeles y 5 del marco de la imagen (secciones 2.5 y 2.7);</p></li>
-<li><p>sumas por canal para la normalización (sección 2.9).</p></li>
+<li><p>las sumas por canal necesarias para la normalización (sección 2.9).</p></li>
 </ul>
-<p>Todo se guarda en caché en <code class="docutils literal notranslate"><span class="pre">data/interim/</span></code>, así que la segunda ejecución tarda segundos.</p>
+<p>Los resultados intermedios se guardan en <code class="docutils literal notranslate"><span class="pre">data/interim/</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">ZIP_PATH</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>          <span class="c1"># el piloto ya lo descargó; si no, se descarga aquí</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">ZIP_PATH</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>          <span class="c1"># se descarga solo si no existe</span>
     <span class="n">dtn</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">ZIP_PATH</span><span class="p">)</span>
 <span class="n">zip_sha</span> <span class="o">=</span> <span class="n">dtn</span><span class="o">.</span><span class="n">sha256_file</span><span class="p">(</span><span class="n">ZIP_PATH</span><span class="p">)</span>
 <span class="n">st</span> <span class="o">=</span> <span class="n">dtn</span><span class="o">.</span><span class="n">register_checksum</span><span class="p">(</span><span class="n">SUMS</span><span class="p">,</span> <span class="s2">"data/raw/trashnet/dataset-resized.zip"</span><span class="p">,</span> <span class="n">zip_sha</span><span class="p">)</span>
@@ -571,19 +575,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    0 % de 42.8 MB
-   10 % de 42.8 MB
-   20 % de 42.8 MB
-   30 % de 42.8 MB
-   40 % de 42.8 MB
-   50 % de 42.8 MB
-   60 % de 42.8 MB
-   70 % de 42.8 MB
-   80 % de 42.8 MB
-   90 % de 42.8 MB
-  100 % de 42.8 MB
-Descargado: c:\Users\User\Documents\GitHub\deep-learning-colaborativo\data\raw\trashnet\dataset-resized.zip (42.8 MB) en 5 s
-SHA-256 del zip: c060e8abfe5d6de0578ca15be1ed8ad0794a865d333c3473d53d1d9ad6e38b8c -&gt; coincide
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SHA-256 del zip: c060e8abfe5d6de0578ca15be1ed8ad0794a865d333c3473d53d1d9ad6e38b8c -&gt; coincide
 </pre></div>
 </div>
 </div>
@@ -640,7 +632,7 @@ SHA-256 del zip: c060e8abfe5d6de0578ca15be1ed8ad0794a865d333c3473d53d1d9ad6e38b8
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Archivos corruptos: 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Caché leída: data\interim\eda_cache_c060e8abfe5d.npz
 Archivos corruptos: 0 | imágenes válidas: 2527 | F (2527, 10) | B (2527, 5) | H (2527, 256)
 Tamaños (ancho x alto): {(512, 384): 2527}
 Modos de color: {'RGB': 2527}
@@ -648,24 +640,23 @@ Modos de color: {'RGB': 2527}
 </div>
 </div>
 </div>
-<section id="cierre-2-1">
-<h3>Cierre 2.1<a class="headerlink" href="#cierre-2-1" title="Link to this heading">#</a></h3>
-<p>Las 2527 imágenes abren sin error, todas son RGB de 512×384 y los conteos por clase coinciden con el README del repositorio original.</p>
+<section id="hallazgos-y-decisiones">
+<h3>Hallazgos y decisiones<a class="headerlink" href="#hallazgos-y-decisiones" title="Link to this heading">#</a></h3>
+<p>Las 2527 imágenes se abren sin errores, todas son RGB de 512×384 píxeles y los conteos por clase coinciden con los del repositorio original.</p>
 <ul class="simple">
-<li><p><strong>Decisión de preprocesamiento:</strong> no hay archivos que descartar por corrupción. Como el tamaño es único, el redimensionamiento a la entrada del modelo (por ejemplo 64×64 o 224×224) es el mismo para todas las imágenes; al pasar de 4:3 a cuadrado se deforma la proporción de la misma manera en todo el pipeline.</p></li>
-<li><p><strong>Impacto en la arquitectura:</strong> la resolución de entrada se elige por costo computacional, no por heterogeneidad de los datos.</p></li>
-<li><p><strong>Riesgos:</strong> la versión <em>resized</em> fue redimensionada por los autores (<code class="docutils literal notranslate"><span class="pre">resize.py</span></code> rota las fotos verticales y fuerza 512×384), así que ya trae una distorsión de origen. El SHA-256 del zip queda registrado para que ambos integrantes usen exactamente el mismo archivo.</p></li>
+<li><p><strong>Preprocesamiento:</strong> no descartamos ningún archivo. Como el tamaño es único, el redimensionamiento a 224×224 aplica la misma deformación de 4:3 a 1:1 a todas las imágenes.</p></li>
+<li><p><strong>Arquitectura:</strong> la resolución de entrada se fija por costo computacional, no por heterogeneidad de los datos.</p></li>
+<li><p><strong>Riesgos:</strong> la versión redimensionada ya fue procesada por los autores del conjunto (<code class="docutils literal notranslate"><span class="pre">resize.py</span></code> rota las fotos verticales y fuerza 512×384), por lo que contiene una distorsión de origen.</p></li>
+<li><p><strong>Relación con el estado del arte (§13):</strong> la variedad de resoluciones reportada en la literatura (224, 256, 512×384) no proviene del conjunto de datos. Usamos 224×224 para los tres modelos.</p></li>
 </ul>
 </section>
 </section>
 <section id="balance-de-clases">
 <h2>2.2 Balance de clases<a class="headerlink" href="#balance-de-clases" title="Link to this heading">#</a></h2>
-<p>Dos números resumen el balance:</p>
-<ul class="simple">
-<li><p><strong>Razón de desbalance</strong> <span class="math notranslate nohighlight">\(IR = n_{\max}/n_{\min}\)</span>. Con <span class="math notranslate nohighlight">\(IR = 1\)</span> las clases son iguales.</p></li>
-<li><p><strong>Entropía normalizada</strong> <span class="math notranslate nohighlight">\(\tilde H = -\frac{1}{\log K}\sum_{k=1}^{K} p_k \log p_k \in [0,1]\)</span>, donde <span class="math notranslate nohighlight">\(p_k\)</span> es la proporción de la clase <span class="math notranslate nohighlight">\(k\)</span> y <span class="math notranslate nohighlight">\(K=6\)</span>. Vale 1 si todas las clases pesan igual y 0 si hay una sola.</p></li>
-</ul>
-<p>La accuracy es engañosa con desbalance: un modelo que nunca predice <code class="docutils literal notranslate"><span class="pre">trash</span></code> pierde poco en accuracy. Por eso importa cuál es la métrica primaria.</p>
+<p>Medimos el balance con la razón de desbalance <span class="math notranslate nohighlight">\(IR = n_{\max}/n_{\min}\)</span>, que vale 1 cuando todas las clases tienen el mismo tamaño, y con la entropía normalizada</p>
+<div class="math notranslate nohighlight">
+\[\tilde H = -\frac{1}{\log K}\sum_{k=1}^{K} p_k \log p_k \in [0,1],\]</div>
+<p>donde <span class="math notranslate nohighlight">\(p_k\)</span> es la proporción de la clase <span class="math notranslate nohighlight">\(k\)</span> y <span class="math notranslate nohighlight">\(K = 6\)</span>. <span class="math notranslate nohighlight">\(\tilde H\)</span> vale 1 con clases iguales y 0 si existe una sola clase.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_all</span> <span class="o">=</span> <span class="n">meta</span><span class="p">[</span><span class="s2">"label_id"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
@@ -752,26 +743,26 @@ Modos de color: {'RGB': 2527}
 <img alt="_images/8e9af8150bdb0528505f5b27bcd5efd492a7e304b7944f8c8f1e121b33f2874c.png" src="_images/8e9af8150bdb0528505f5b27bcd5efd492a7e304b7944f8c8f1e121b33f2874c.png" />
 </div>
 </div>
-<section id="cierre-2-2">
-<h3>Cierre 2.2<a class="headerlink" href="#cierre-2-2" title="Link to this heading">#</a></h3>
-<p>La clase <code class="docutils literal notranslate"><span class="pre">paper</span></code> tiene 594 imágenes y <code class="docutils literal notranslate"><span class="pre">trash</span></code> solo 137 (razón de desbalance 4.34, 5.4 % del total). La entropía normalizada (0.96) indica que el resto de las clases está razonablemente repartido: el problema se concentra en <code class="docutils literal notranslate"><span class="pre">trash</span></code>.</p>
+<section id="id1">
+<h3>Hallazgos y decisiones<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">paper</span></code> tiene 594 imágenes y <code class="docutils literal notranslate"><span class="pre">trash</span></code> 137 (<span class="math notranslate nohighlight">\(IR\)</span> = 4.34; <code class="docutils literal notranslate"><span class="pre">trash</span></code> representa el 5.4 % del total). La entropía normalizada es 0.96, por lo que el desbalance se concentra en <code class="docutils literal notranslate"><span class="pre">trash</span></code>.</p>
 <ul class="simple">
-<li><p><strong>Decisión de preprocesamiento:</strong> partición <strong>estratificada</strong> para que <code class="docutils literal notranslate"><span class="pre">trash</span></code> tenga la misma proporción en train, val y test. No se usa SMOTE (no tiene sentido sobre píxeles); si hace falta compensar, se usan pesos de clase en la pérdida <strong>solo con estadísticas de train</strong>.</p></li>
-<li><p><strong>Impacto en la arquitectura:</strong> la métrica primaria debe ser <strong>macro-F1</strong> (promedia el F1 de cada clase con el mismo peso), con balanced accuracy como secundaria. La accuracy sola premiaría ignorar <code class="docutils literal notranslate"><span class="pre">trash</span></code>.</p></li>
-<li><p><strong>Riesgos:</strong> con ~19 imágenes de <code class="docutils literal notranslate"><span class="pre">trash</span></code> en test, su F1 tendrá un intervalo de confianza ancho; hay que reportarlo y no sobreinterpretar diferencias entre modelos en esa clase.</p></li>
+<li><p><strong>Preprocesamiento:</strong> usamos una partición estratificada para conservar la proporción de <code class="docutils literal notranslate"><span class="pre">trash</span></code> en train, validación y prueba. Compensamos el desbalance ponderando la pérdida por clase, con pesos calculados solo en train. No usamos sobremuestreo sintético.</p></li>
+<li><p><strong>Arquitectura:</strong> la métrica primaria es el F1 macro, que asigna el mismo peso a cada clase; la accuracy puede ser alta aunque el modelo ignore <code class="docutils literal notranslate"><span class="pre">trash</span></code>. La balanced accuracy es la métrica secundaria.</p></li>
+<li><p><strong>Riesgos:</strong> el conjunto de prueba contiene 19 imágenes de <code class="docutils literal notranslate"><span class="pre">trash</span></code>, por lo que el F1 de esa clase tiene un intervalo de confianza amplio.</p></li>
+<li><p><strong>Relación con el estado del arte (§13):</strong> la mayoría de los estudios reporta solo accuracy. Mantenemos la accuracy como métrica secundaria para comparar con la literatura.</p></li>
 </ul>
 </section>
 </section>
 <section id="duplicados-y-etiquetas-contradictorias">
 <h2>2.3 Duplicados y etiquetas contradictorias<a class="headerlink" href="#duplicados-y-etiquetas-contradictorias" title="Link to this heading">#</a></h2>
-<p><strong>Por qué importa.</strong> Si dos fotos casi iguales quedan una en <em>train</em> y otra en <em>test</em>, el modelo “ya vio” la respuesta y la métrica de test sale inflada (<strong>fuga de información</strong>).</p>
-<p><strong>Cómo se detecta.</strong></p>
+<p>Si dos fotografías casi idénticas quedan una en entrenamiento y otra en prueba, la métrica de prueba sobreestima el desempeño (fuga de información). Detectamos dos tipos de duplicados:</p>
 <ul class="simple">
-<li><p><strong>Duplicado exacto:</strong> dos archivos con la misma huella SHA-256 son byte a byte idénticos.</p></li>
-<li><p><strong>Casi-duplicado:</strong> el <strong>dHash</strong> reduce la imagen a gris de <span class="math notranslate nohighlight">\(17\times16\)</span> y anota, para cada par de píxeles vecinos, si el de la derecha es más brillante (1) o no (0). Son 256 bits que resumen la “forma” de la imagen. Dos fotos casi iguales tienen pocos bits distintos (<strong>distancia de Hamming</strong> pequeña).</p></li>
+<li><p><strong>Duplicado exacto:</strong> dos archivos con el mismo SHA-256.</p></li>
+<li><p><strong>Casi-duplicado:</strong> el dHash reduce la imagen a escala de grises de <span class="math notranslate nohighlight">\(17\times16\)</span> y registra, para cada par de píxeles vecinos, si el de la derecha es más brillante (1) o no (0), lo que produce 256 bits. Dos imágenes similares difieren en pocos bits, es decir, tienen una distancia de Hamming pequeña.</p></li>
 </ul>
-<p><em>Prerrequisito: distancia de Hamming.</em> Es el número de posiciones en que dos cadenas de bits difieren. Con <code class="docutils literal notranslate"><span class="pre">1011</span></code> y <code class="docutils literal notranslate"><span class="pre">1001</span></code> la distancia es 1. Se calcula para todos los pares a la vez con álgebra lineal: <span class="math notranslate nohighlight">\(d(a,b) = \|a\|_1 + \|b\|_1 - 2\,a\cdot b\)</span>, que para bits 0/1 cuenta exactamente las posiciones distintas.</p>
-<p><strong>Por qué 256 bits y no 64.</strong> En el piloto, con 64 bits, los fondos blancos lisos generaban muchos falsos positivos y grupos encadenados de decenas de imágenes. Con 256 bits el hash distingue mejor. Aun así, <strong>cada par señalado se revisa a ojo</strong>.</p>
+<p>La distancia de Hamming es el número de posiciones en que dos cadenas de bits difieren. La calculamos para todos los pares mediante <span class="math notranslate nohighlight">\(d(a,b) = \|a\|_1 + \|b\|_1 - 2\,a\cdot b\)</span>.</p>
+<p>Usamos 256 bits porque con 64 bits los fondos blancos uniformes producían falsos positivos y grupos encadenados de decenas de imágenes. Todos los pares con distancia ≤ 10 se revisaron visualmente.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Duplicados exactos (misma huella SHA-256)</span>
@@ -1046,29 +1037,27 @@ Modos de color: {'RGB': 2527}
 <img alt="_images/195d45614ada8cd90d90226d2df0c182727c7c6c84d350c2874d738145e3baf4.png" src="_images/195d45614ada8cd90d90226d2df0c182727c7c6c84d350c2874d738145e3baf4.png" />
 </div>
 </div>
-<p><strong>Verificación visual (completar o confirmar al ejecutar).</strong> En la corrida de referencia, de los pares señalados:</p>
+<p><strong>Revisión visual de los pares señalados.</strong></p>
 <ul class="simple">
-<li><p><strong>3 pares son la misma foto con dos etiquetas</strong> (distancia 0, SHA-256 idéntico): <code class="docutils literal notranslate"><span class="pre">glass115</span></code>/<code class="docutils literal notranslate"><span class="pre">metal91</span></code>, <code class="docutils literal notranslate"><span class="pre">glass176</span></code>/<code class="docutils literal notranslate"><span class="pre">plastic152</span></code> y <code class="docutils literal notranslate"><span class="pre">glass389</span></code>/<code class="docutils literal notranslate"><span class="pre">plastic332</span></code>.</p></li>
-<li><p><strong>6 pares son casi-duplicados reales</strong> dentro de <code class="docutils literal notranslate"><span class="pre">paper</span></code>: la misma hoja fotografiada dos veces con un leve cambio de encuadre.</p></li>
-<li><p><strong>3 pares son falsos positivos</strong>: <code class="docutils literal notranslate"><span class="pre">paper385</span></code> (un pósit amarillo sobre fondo blanco) se parece en el hash a dos primeros planos de cartón liso y a otra hoja lisa (<code class="docutils literal notranslate"><span class="pre">paper498</span></code>). Todos los falsos positivos involucran superficies casi uniformes.</p></li>
+<li><p><strong>3 pares son la misma fotografía con dos etiquetas</strong> (distancia 0, SHA-256 idéntico): <code class="docutils literal notranslate"><span class="pre">glass115</span></code>/<code class="docutils literal notranslate"><span class="pre">metal91</span></code>, <code class="docutils literal notranslate"><span class="pre">glass176</span></code>/<code class="docutils literal notranslate"><span class="pre">plastic152</span></code> y <code class="docutils literal notranslate"><span class="pre">glass389</span></code>/<code class="docutils literal notranslate"><span class="pre">plastic332</span></code>.</p></li>
+<li><p><strong>6 pares son casi-duplicados</strong> dentro de <code class="docutils literal notranslate"><span class="pre">paper</span></code>: la misma hoja fotografiada dos veces con un ligero cambio de encuadre.</p></li>
+<li><p><strong>3 pares son falsos positivos</strong>: <code class="docutils literal notranslate"><span class="pre">paper385</span></code> (una nota adhesiva amarilla sobre fondo blanco) coincide en el hash con dos primeros planos de cartón liso y con otra hoja lisa (<code class="docutils literal notranslate"><span class="pre">paper498</span></code>). Todos involucran superficies casi uniformes.</p></li>
 </ul>
-<section id="cierre-2-3">
-<h3>Cierre 2.3<a class="headerlink" href="#cierre-2-3" title="Link to this heading">#</a></h3>
+<section id="id2">
+<h3>Hallazgos y decisiones<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Decisión de preprocesamiento:</strong> se eliminan las <strong>6 imágenes</strong> de los 3 pares con etiqueta contradictoria. Sin revisión experta no se puede saber cuál etiqueta es la correcta, y dejar ambas enseña al modelo dos respuestas para la misma entrada. Los casi-duplicados se <strong>agrupan</strong> para que cada grupo caiga entero en una sola partición. Los 3 falsos positivos también se agrupan: es una decisión conservadora que solo junta 4 imágenes y no introduce fuga.</p></li>
-<li><p><strong>Impacto en la arquitectura:</strong> ninguno directo; el efecto es sobre la <strong>validez</strong> de la evaluación de cualquier modelo.</p></li>
-<li><p><strong>Riesgos:</strong> los artículos que reportan más de 99 % de accuracy en TrashNet con particiones aleatorias pudieron tener estos duplicados repartidos entre train y test. Es un punto a mencionar en la comparación crítica del estado del arte (3.4).</p></li>
+<li><p><strong>Preprocesamiento:</strong> eliminamos las 6 imágenes de los 3 pares con etiqueta contradictoria, porque no es posible determinar cuál etiqueta es correcta. Agrupamos los casi-duplicados para que cada grupo quede completo en una sola partición. También agrupamos los 3 falsos positivos; la decisión afecta solo a 4 imágenes y no introduce fuga.</p></li>
+<li><p><strong>Arquitectura:</strong> sin efecto directo; la decisión afecta la validez de la evaluación de cualquier modelo.</p></li>
+<li><p><strong>Riesgos:</strong> los estudios que reportan más de 99 % de accuracy en TrashNet con particiones aleatorias pueden tener estos duplicados repartidos entre entrenamiento y prueba.</p></li>
+<li><p><strong>Relación con el estado del arte (§13):</strong> pocos estudios controlan la fuga de información. Una partición aleatoria, la más usada en los estudios revisados, separa parte de los casi-duplicados entre entrenamiento y prueba (sección 2.4).</p></li>
 </ul>
 </section>
 </section>
-<section id="particion-estratificada-agrupada-y-test-congelado">
-<h2>2.4 Partición estratificada, agrupada y test congelado<a class="headerlink" href="#particion-estratificada-agrupada-y-test-congelado" title="Link to this heading">#</a></h2>
-<p><strong>Unidad de independencia: el grupo de duplicados.</strong> Las imágenes de un mismo grupo (duplicados exactos o casi-duplicados) van <strong>completas</strong> a una sola partición. Los grupos se forman como <strong>componentes conexas</strong> del grafo “a está a distancia ≤ 10 de b”: si A se parece a B y B a C, las tres van juntas.</p>
-<p><strong>Partición.</strong> <code class="docutils literal notranslate"><span class="pre">StratifiedGroupKFold</span></code> con 7 particiones y semilla fija: 5 para train, 1 para validación y 1 para test (≈ 71/14/14 %). <em>Estratificada</em> significa que cada partición conserva las proporciones de clase; <em>agrupada</em>, que ningún grupo se reparte.</p>
-<p><strong>Congelación.</strong> La partición se guarda en <code class="docutils literal notranslate"><span class="pre">data/splits/trashnet_split_v2_s1234.csv</span></code> y la huella SHA-256 del test se registra en <code class="docutils literal notranslate"><span class="pre">SHA256SUMS.txt</span></code>. En ejecuciones posteriores se <strong>carga y verifica</strong>: si cambia algo, el notebook se detiene.</p>
-<blockquote>
-<div><p>Esta partición <strong>v2 reemplaza</strong> a la del piloto (<code class="docutils literal notranslate"><span class="pre">trashnet_split_s1234.csv</span></code>), que agrupaba con un hash de 64 bits y no eliminaba las etiquetas contradictorias. Todos los entrenamientos del Entregable 1 deben usar la v2.</p>
-</div></blockquote>
+<section id="particion-estratificada-y-agrupada">
+<h2>2.4 Partición estratificada y agrupada<a class="headerlink" href="#particion-estratificada-y-agrupada" title="Link to this heading">#</a></h2>
+<p>La unidad de independencia es el grupo de duplicados. Formamos los grupos como componentes conexas del grafo en el que dos imágenes están unidas si su distancia es ≤ 10; así, si A se parece a B y B a C, las tres quedan en el mismo grupo.</p>
+<p>Partimos el conjunto con <code class="docutils literal notranslate"><span class="pre">StratifiedGroupKFold</span></code> (7 pliegues, semilla fija): 5 pliegues para entrenamiento, 1 para validación y 1 para prueba (≈ 71/14/14 %). La estratificación conserva las proporciones de clase y el agrupamiento impide que un grupo se reparta entre particiones.</p>
+<p>La partición se guarda en <code class="docutils literal notranslate"><span class="pre">data/splits/trashnet_split_v2_s1234.csv</span></code> y la huella SHA-256 del conjunto de prueba se registra en <code class="docutils literal notranslate"><span class="pre">SHA256SUMS.txt</span></code>. Todas las ejecuciones posteriores cargan y verifican esta partición.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1) Eliminar las copias con etiquetas contradictorias (decisión declarada a priori)</span>
@@ -1173,8 +1162,8 @@ Modos de color: {'RGB': 2527}
   </tbody>
 </table>
 </div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2521 imágenes en 2512 grupos | grupo más grande: 4 imágenes
-Partición CREADA: data\splits\trashnet_split_v2_s1234.csv -&gt; hacer commit de este archivo
-Huella SHA-256 del test: 4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de2360cbd87 -&gt; nuevo
+Partición cargada y verificada: data\splits\trashnet_split_v2_s1234.csv
+Huella SHA-256 del test: 4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de2360cbd87 -&gt; coincide
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1325,39 +1314,39 @@ Huella SHA-256 del test: 4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de
 </table>
 </div></div></div>
 </div>
-<section id="cierre-2-4">
-<h3>Cierre 2.4<a class="headerlink" href="#cierre-2-4" title="Link to this heading">#</a></h3>
-<p>Quedan 2521 imágenes en 2512 grupos (el grupo más grande tiene 4 imágenes), repartidas 1800/360/361. Cada clase conserva su proporción en las tres particiones y ningún grupo quedó dividido.</p>
-<p>La auditoría muestra para qué sirve agrupar: con una partición aleatoria, 3 de los 9 pares de casi-duplicados habrían quedado separados entre particiones (fuga); con la partición agrupada, ninguno.</p>
+<section id="id3">
+<h3>Hallazgos y decisiones<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Quedan 2521 imágenes en 2512 grupos (el mayor tiene 4 imágenes), repartidas en 1800 de entrenamiento, 360 de validación y 361 de prueba. Cada clase conserva su proporción y ningún grupo está dividido. Con una partición aleatoria, 3 de los 9 pares de casi-duplicados habrían quedado en particiones distintas; con la partición agrupada, ninguno.</p>
 <ul class="simple">
-<li><p><strong>Decisión de preprocesamiento:</strong> todos los modelos del Entregable 1 se entrenan y evalúan con <code class="docutils literal notranslate"><span class="pre">trashnet_split_v2_s1234.csv</span></code>. La partición del piloto queda obsoleta.</p></li>
-<li><p><strong>Impacto en la arquitectura:</strong> con 360 imágenes de validación, el <em>early stopping</em> y la selección de hiperparámetros se hacen sobre val; <strong>test se usa una sola vez</strong> al final.</p></li>
-<li><p><strong>Riesgos:</strong> si alguien regenera la partición con otra semilla o con otro umbral, la huella del test cambia y el notebook se detiene. Quien la cree hace commit del CSV y de <code class="docutils literal notranslate"><span class="pre">SHA256SUMS.txt</span></code>; el otro integrante hace <code class="docutils literal notranslate"><span class="pre">pull</span></code> antes de ejecutar.</p></li>
+<li><p><strong>Preprocesamiento:</strong> todos los modelos se entrenan y evalúan con esta partición.</p></li>
+<li><p><strong>Arquitectura:</strong> el <em>early stopping</em> y la selección de hiperparámetros se hacen sobre validación; el conjunto de prueba se usa una sola vez por corrida.</p></li>
+<li><p><strong>Riesgos:</strong> TrashNet no incluye metadatos de sesión, escena ni cámara. Suponemos independencia entre fotografías de una misma sesión.</p></li>
+<li><p><strong>Relación con el estado del arte (§13):</strong> con 2512 grupos para 2521 imágenes, la unidad de independencia equivale en la práctica a la imagen deduplicada.</p></li>
 </ul>
 </section>
 </section>
 <section id="descriptores-de-pixeles">
 <h2>2.5 Descriptores de píxeles<a class="headerlink" href="#descriptores-de-pixeles" title="Link to this heading">#</a></h2>
-<p>Una imagen es un tensor <span class="math notranslate nohighlight">\((H, W, 3)\)</span> de enteros 0–255. Para poder aplicar pruebas estadísticas, cada imagen se resume en números con significado físico:</p>
+<p>Para aplicar pruebas estadísticas, resumimos cada imagen con descriptores numéricos calculados sobre la imagen escalada a [0, 1]:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Descriptor</p></th>
-<th class="head"><p>Fórmula (sobre la imagen escalada a [0,1])</p></th>
-<th class="head"><p>Qué detecta</p></th>
+<th class="head"><p>Definición</p></th>
+<th class="head"><p>Qué mide</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">brillo</span></code></p></td>
 <td><p>media de la luminancia <span class="math notranslate nohighlight">\(L = 0.299R + 0.587G + 0.114B\)</span></p></td>
-<td><p>sobre o subexposición</p></td>
+<td><p>exposición</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">contraste_rms</span></code></p></td>
 <td><p>desviación estándar de <span class="math notranslate nohighlight">\(L\)</span></p></td>
-<td><p>escenas planas o con mucho contraste</p></td>
+<td><p>contraste</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nitidez_lap</span></code></p></td>
 <td><p>varianza del Laplaciano de <span class="math notranslate nohighlight">\(L\)</span></p></td>
-<td><p>desenfoque</p></td>
+<td><p>enfoque</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">blanco_sat</span></code>, <code class="docutils literal notranslate"><span class="pre">negro_sat</span></code></p></td>
 <td><p>fracción de píxeles en 255 o en 0</p></td>
@@ -1365,14 +1354,14 @@ Huella SHA-256 del test: 4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fondo_claro</span></code></p></td>
 <td><p>fracción de píxeles con mínimo RGB ≥ 200</p></td>
-<td><p>área de fondo blanco (≈ tamaño del objeto)</p></td>
+<td><p>área de fondo blanco</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sesgo_R_menos_B</span></code></p></td>
 <td><p>media de R − media de B</p></td>
-<td><p>balance de blancos, tipo de luz</p></td>
+<td><p>balance de blancos</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dispersion_cromatica</span></code></p></td>
-<td><p>DE promedio de los canales</p></td>
+<td><p>desviación estándar promedio de los canales</p></td>
 <td><p>colorido</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">aspecto_w_h</span></code>, <code class="docutils literal notranslate"><span class="pre">tamano_sqrt_hw</span></code></p></td>
@@ -1382,8 +1371,7 @@ Huella SHA-256 del test: 4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de
 </tbody>
 </table>
 </div>
-<p><em>Prerrequisito: Laplaciano.</em> Es la segunda derivada discreta de la imagen: <span class="math notranslate nohighlight">\(\nabla^2 L \approx L_{i-1,j}+L_{i+1,j}+L_{i,j-1}+L_{i,j+1}-4L_{i,j}\)</span>. En una zona uniforme vale 0; en un borde nítido, mucho. Su varianza es alta en fotos enfocadas y baja en fotos borrosas, igual que la curvatura de una viga se concentra donde cambia bruscamente la carga.</p>
-<p>Los descriptores constantes (por ejemplo, el tamaño, si todas las imágenes miden 512×384) no aportan información y se excluyen de las pruebas.</p>
+<p>El Laplaciano es la segunda derivada discreta de la imagen, <span class="math notranslate nohighlight">\(\nabla^2 L \approx L_{i-1,j}+L_{i+1,j}+L_{i,j-1}+L_{i,j+1}-4L_{i,j}\)</span>; su varianza es alta en imágenes enfocadas y baja en imágenes borrosas. Excluimos de las pruebas los descriptores constantes, como el tamaño.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">DESC_NAMES</span><span class="p">)</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="n">Fk</span><span class="p">[:,</span> <span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
@@ -1537,24 +1525,24 @@ Huella SHA-256 del test: 4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de
 <img alt="_images/b69ac897d0613469755a9d940a37234929f2d5c106302482ba5153e653d50798.png" src="_images/b69ac897d0613469755a9d940a37234929f2d5c106302482ba5153e653d50798.png" />
 </div>
 </div>
-<section id="cierre-2-5">
-<h3>Cierre 2.5<a class="headerlink" href="#cierre-2-5" title="Link to this heading">#</a></h3>
-<p>Los descriptores separan las clases de forma visible. <code class="docutils literal notranslate"><span class="pre">cardboard</span></code> tiene el brillo más bajo, casi nada de fondo claro (las cajas llenan el encuadre) y el mayor sesgo rojo-azul (es marrón). <code class="docutils literal notranslate"><span class="pre">paper</span></code> es la clase más nítida (texto impreso con muchos bordes). <code class="docutils literal notranslate"><span class="pre">trash</span></code> tiene un sesgo R−B alto y poco disperso, compatible con una luz cálida en la sesión de fotos. La imagen promedio por clase confirma que todas las clases, salvo <code class="docutils literal notranslate"><span class="pre">cardboard</span></code>, se fotografiaron centradas sobre fondo blanco.</p>
+<section id="id4">
+<h3>Hallazgos y decisiones<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>Los descriptores difieren entre clases. <code class="docutils literal notranslate"><span class="pre">cardboard</span></code> tiene el menor brillo, casi no muestra fondo claro (las cajas ocupan el encuadre) y presenta el mayor sesgo rojo-azul. <code class="docutils literal notranslate"><span class="pre">paper</span></code> es la clase más nítida, por el texto impreso. <code class="docutils literal notranslate"><span class="pre">trash</span></code> tiene un sesgo R−B alto y poco disperso, compatible con iluminación cálida. La imagen promedio por clase indica que todas las clases, salvo <code class="docutils literal notranslate"><span class="pre">cardboard</span></code>, se fotografiaron centradas sobre fondo blanco.</p>
 <ul class="simple">
-<li><p><strong>Decisión de preprocesamiento:</strong> como el color del objeto es información legítima (el cartón <em>es</em> marrón), no se elimina el color; se agrega <strong>aumento fotométrico</strong> (variación de brillo, contraste y balance de blancos) solo en train para que el modelo no dependa del tono de la luz.</p></li>
-<li><p><strong>Impacto en la arquitectura:</strong> una CNN con <em>global average pooling</em> puede apoyarse en el color medio de la imagen; conviene comparar con y sin aumento fotométrico.</p></li>
-<li><p><strong>Riesgos:</strong> las diferencias en el fondo y la luz entre clases se analizan formalmente en 2.7.</p></li>
+<li><p><strong>Preprocesamiento:</strong> conservamos el color, que es información legítima del material. Para reducir la dependencia del tono de la luz aplicamos aumento fotométrico (brillo, contraste, saturación y tono) solo en entrenamiento.</p></li>
+<li><p><strong>Arquitectura:</strong> una CNN con <em>global average pooling</em> puede apoyarse en el color medio de la imagen; el aumento fotométrico limita ese efecto.</p></li>
+<li><p><strong>Riesgos:</strong> las diferencias de fondo e iluminación entre clases se analizan en la sección 2.7.</p></li>
+<li><p><strong>Relación con el estado del arte (§13):</strong> confirmamos que las imágenes muestran un objeto centrado sobre fondo blanco.</p></li>
 </ul>
 </section>
 </section>
-<section id="las-particiones-son-representativas-entre-si">
-<h2>2.6 ¿Las particiones son representativas entre sí?<a class="headerlink" href="#las-particiones-son-representativas-entre-si" title="Link to this heading">#</a></h2>
-<p>Si val o test tienen una distribución distinta a train, las métricas de evaluación no medirían lo que el modelo aprendió. Se usan cuatro pruebas complementarias. Las que comparan particiones usan <strong>solo las entradas <span class="math notranslate nohighlight">\(X\)</span></strong> (o solo los conteos de clase), nunca el desempeño de un modelo.</p>
-<p><strong>1. χ² de homogeneidad.</strong> <span class="math notranslate nohighlight">\(H_0\)</span>: la proporción de cada clase es la misma en train, val y test. Estadístico <span class="math notranslate nohighlight">\(\chi^2 = \sum \frac{(O-E)^2}{E}\)</span> sobre la tabla clases × particiones. Tamaño de efecto: <strong>V de Cramér</strong> <span class="math notranslate nohighlight">\(= \sqrt{\chi^2 / (n(\min(r,c)-1))}\)</span>, entre 0 (nada) y 1 (total).</p>
-<p><strong>2. Kolmogorov–Smirnov de dos muestras</strong>, por descriptor. <span class="math notranslate nohighlight">\(H_0\)</span>: el descriptor tiene la misma distribución en ambas particiones. Estadístico <span class="math notranslate nohighlight">\(D = \max_x |\hat F_1(x) - \hat F_2(x)|\)</span>, la máxima distancia vertical entre las dos curvas de distribución acumulada; es también el tamaño de efecto. Como se hacen varias pruebas, se corrige con <strong>Holm</strong>.</p>
-<p><em>Prerrequisito: corrección de Holm.</em> Con 8 pruebas al 5 %, la probabilidad de al menos un falso positivo sube a <span class="math notranslate nohighlight">\(1-0.95^8 \approx 34\,\%\)</span>. Holm ordena los <span class="math notranslate nohighlight">\(p\)</span> de menor a mayor y exige al <span class="math notranslate nohighlight">\(k\)</span>-ésimo <span class="math notranslate nohighlight">\(p_{(k)} \le \alpha/(m-k+1)\)</span>: el más pequeño debe pasar <span class="math notranslate nohighlight">\(\alpha/m\)</span>, el siguiente <span class="math notranslate nohighlight">\(\alpha/(m-1)\)</span>, etc.</p>
-<p><strong>3. Validación adversarial.</strong> Se entrena una regresión logística para adivinar si una imagen viene de train o de test usando solo los descriptores. <span class="math notranslate nohighlight">\(H_0\)</span>: AUC = 0.5 (no las distingue). El <span class="math notranslate nohighlight">\(p\)</span> se obtiene por <strong>permutación</strong>: se barajan las etiquetas “train/test” 100 veces y se cuenta cuántas veces el AUC barajado iguala o supera al real.</p>
-<p><strong>4. TOST (equivalencia).</strong> Un KS no significativo <strong>no demuestra</strong> que las particiones sean iguales; solo que no se detectó diferencia. Para afirmar equivalencia se invierte la hipótesis: <span class="math notranslate nohighlight">\(H_0: |\mu_1-\mu_2| \ge \delta\)</span> frente a <span class="math notranslate nohighlight">\(H_1: |\mu_1-\mu_2| &lt; \delta\)</span>, con <span class="math notranslate nohighlight">\(\delta = 0.2\)</span> desviaciones estándar de train (declarado a priori). Se hacen dos pruebas <span class="math notranslate nohighlight">\(t\)</span> unilaterales y se toma el mayor <span class="math notranslate nohighlight">\(p\)</span>. Un <span class="math notranslate nohighlight">\(p\)</span> pequeño <strong>sí</strong> permite decir “equivalentes dentro de ±δ”.</p>
+<section id="comparabilidad-de-las-particiones">
+<h2>2.6 Comparabilidad de las particiones<a class="headerlink" href="#comparabilidad-de-las-particiones" title="Link to this heading">#</a></h2>
+<p>Si validación o prueba difieren de entrenamiento en su distribución, las métricas no reflejan lo aprendido por el modelo. Aplicamos cuatro pruebas sobre las entradas (descriptores o conteos de clase), sin usar el desempeño de ningún modelo.</p>
+<p><strong>1. χ² de homogeneidad.</strong> <span class="math notranslate nohighlight">\(H_0\)</span>: la proporción de cada clase es la misma en las tres particiones. Estadístico <span class="math notranslate nohighlight">\(\chi^2 = \sum (O-E)^2/E\)</span> sobre la tabla clases × particiones; tamaño de efecto V de Cramér, <span class="math notranslate nohighlight">\(\sqrt{\chi^2 / (n(\min(r,c)-1))}\)</span>.</p>
+<p><strong>2. Kolmogorov–Smirnov de dos muestras</strong>, por descriptor. <span class="math notranslate nohighlight">\(H_0\)</span>: el descriptor tiene la misma distribución en ambas particiones. El estadístico <span class="math notranslate nohighlight">\(D = \max_x |\hat F_1(x) - \hat F_2(x)|\)</span> es la máxima distancia entre las distribuciones acumuladas empíricas. Corregimos por comparaciones múltiples con el método de Holm, que ordena los valores <span class="math notranslate nohighlight">\(p\)</span> de menor a mayor y exige <span class="math notranslate nohighlight">\(p_{(k)} \le \alpha/(m-k+1)\)</span>; sin corrección, con 8 pruebas al 5 % la probabilidad de al menos un falso positivo sería <span class="math notranslate nohighlight">\(1-0.95^8 \approx 34\,\%\)</span>.</p>
+<p><strong>3. Validación adversarial.</strong> Entrenamos una regresión logística que intenta distinguir imágenes de entrenamiento y de prueba a partir de los descriptores. <span class="math notranslate nohighlight">\(H_0\)</span>: AUC = 0.5. El valor <span class="math notranslate nohighlight">\(p\)</span> se obtiene por permutación (100 permutaciones de las etiquetas de partición).</p>
+<p><strong>4. TOST (equivalencia).</strong> Un KS no significativo no demuestra igualdad. Para afirmar equivalencia invertimos la hipótesis: <span class="math notranslate nohighlight">\(H_0: |\mu_1-\mu_2| \ge \delta\)</span> frente a <span class="math notranslate nohighlight">\(H_1: |\mu_1-\mu_2| &lt; \delta\)</span>, con <span class="math notranslate nohighlight">\(\delta\)</span> igual a 0.2 desviaciones estándar de entrenamiento, fijado antes del análisis. Se realizan dos pruebas <span class="math notranslate nohighlight">\(t\)</span> unilaterales y se toma el mayor valor <span class="math notranslate nohighlight">\(p\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
@@ -2000,29 +1988,29 @@ Huella SHA-256 del test: 4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de
 <img alt="_images/6ea71ab523fd8c6a4a74c6159f1df9ae117b98bae8225388a23bb926c8714ecf.png" src="_images/6ea71ab523fd8c6a4a74c6159f1df9ae117b98bae8225388a23bb926c8714ecf.png" />
 </div>
 </div>
-<section id="cierre-2-6">
-<h3>Cierre 2.6<a class="headerlink" href="#cierre-2-6" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h3>Hallazgos y decisiones<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>χ²:</strong> p = 1.0 y V de Cramér = 0.004. Las proporciones de clase son prácticamente idénticas en las tres particiones (era de esperar con estratificación; es una verificación, no un hallazgo).</p></li>
-<li><p><strong>KS:</strong> ningún descriptor difiere entre particiones después de Holm, y todos los D están por debajo del D crítico (≈0.078).</p></li>
-<li><p><strong>Validación adversarial:</strong> train vs test AUC = 0.51 (p = 0.30), indistinguibles. Train vs val AUC = 0.54 con p = 0.02: hay una diferencia <strong>detectable pero pequeña</strong>, por debajo del umbral declarado (0.60).</p></li>
-<li><p><strong>TOST:</strong> 14 de 16 comparaciones son equivalentes dentro de ±0.2 DE. Las dos que no alcanzan equivalencia (<code class="docutils literal notranslate"><span class="pre">sesgo_R_menos_B</span></code> en val, diferencia −0.13 DE; <code class="docutils literal notranslate"><span class="pre">nitidez_lap</span></code> en test, −0.13 DE) tienen diferencias estimadas menores que el margen: no se demuestra diferencia, pero con ~360 imágenes tampoco hay potencia para demostrar equivalencia.</p></li>
+<li><p><strong>χ²:</strong> p = 1.0 y V de Cramér = 0.004. Las proporciones de clase son prácticamente iguales en las tres particiones, como corresponde a una partición estratificada.</p></li>
+<li><p><strong>Kolmogorov–Smirnov:</strong> ningún descriptor difiere entre particiones tras la corrección de Holm; todos los valores de D están por debajo del valor crítico (≈ 0.078).</p></li>
+<li><p><strong>Validación adversarial:</strong> entrenamiento frente a prueba da AUC = 0.51 (p = 0.30). Entrenamiento frente a validación da AUC = 0.54 (p = 0.02): la diferencia es detectable pero pequeña y queda por debajo del umbral fijado (0.60).</p></li>
+<li><p><strong>TOST:</strong> 14 de 16 comparaciones son equivalentes dentro de ±0.2 DE. Las dos restantes (<code class="docutils literal notranslate"><span class="pre">sesgo_R_menos_B</span></code> en validación y <code class="docutils literal notranslate"><span class="pre">nitidez_lap</span></code> en prueba, ambas con diferencia de −0.13 DE) tienen diferencias menores que el margen, pero con unas 360 imágenes la prueba no alcanza la potencia necesaria para declarar equivalencia.</p></li>
 </ul>
-<p><strong>Conclusión:</strong> las particiones son representativas entre sí en los descriptores medidos.</p>
+<p>Las particiones son comparables en los descriptores medidos.</p>
 <ul class="simple">
-<li><p><strong>Decisión de preprocesamiento:</strong> se mantiene la partición v2.</p></li>
-<li><p><strong>Impacto en la arquitectura:</strong> ninguno.</p></li>
-<li><p><strong>Riesgos:</strong> estas pruebas solo ven lo que miden los 8 descriptores. Un desplazamiento en algo no medido (por ejemplo la forma de los objetos) pasaría inadvertido. La leve diferencia de val en balance de blancos refuerza el uso de aumento fotométrico.</p></li>
+<li><p><strong>Preprocesamiento:</strong> mantenemos la partición.</p></li>
+<li><p><strong>Arquitectura:</strong> sin efecto.</p></li>
+<li><p><strong>Riesgos:</strong> las pruebas solo cubren los descriptores medidos; un desplazamiento en otras características, como la forma de los objetos, no se detectaría.</p></li>
 </ul>
 </section>
 </section>
-<section id="hay-atajos-de-fondo-o-de-adquisicion">
-<h2>2.7 ¿Hay atajos de fondo o de adquisición?<a class="headerlink" href="#hay-atajos-de-fondo-o-de-adquisicion" title="Link to this heading">#</a></h2>
-<p><strong>Idea.</strong> TrashNet se fotografió sobre cartulina blanca, con luz solar o de interior y varios iPhone. Si cada clase se fotografió en sesiones distintas, la clase puede “leerse” en el fondo o en el color de la luz. Una CNN aprendería ese atajo y fallaría con fotos de otra planta de reciclaje.</p>
-<p><strong>Prueba 1: Kruskal–Wallis por descriptor (solo train).</strong> <span class="math notranslate nohighlight">\(H_0\)</span>: el descriptor tiene la misma distribución en las 6 clases. Es la versión por rangos del ANOVA de una vía, así que no exige normalidad. Tamaño de efecto <span class="math notranslate nohighlight">\(\varepsilon^2 = H/(n-1)\)</span>: ≈0.01 pequeño, ≈0.08 mediano, ≥0.26 grande (guía orientativa).</p>
-<p>Ojo con la interpretación: que el <strong>brillo global</strong> difiera entre clases es esperable, porque el objeto mismo cambia (el vidrio es transparente, el cartón es marrón). Por eso se mira aparte el <strong>marco</strong> de 16 píxeles de la imagen, donde casi siempre hay solo fondo.</p>
-<p><strong>Prueba 2: sonda de atajos.</strong> Se entrena una regresión logística con <strong>solo</strong> los 5 descriptores del marco (color medio R, G, B, dispersión y fracción clara) para predecir la clase. <span class="math notranslate nohighlight">\(H_0\)</span>: balanced accuracy = azar <span class="math notranslate nohighlight">\(= 1/6\)</span>. Si la sonda acierta mucho más que el azar usando solo el fondo, hay una señal de atajo que la red podría explotar.</p>
-<p><em>Limitación honesta:</em> en primeros planos (por ejemplo, cartón que llena el encuadre) el marco contiene parte del objeto, así que la sonda <strong>sobreestima</strong> el atajo. La prueba definitiva viene después de entrenar: evaluar con el fondo enmascarado y revisar mapas de saliencia (Grad-CAM).</p>
+<section id="atajos-de-fondo-y-de-adquisicion">
+<h2>2.7 Atajos de fondo y de adquisición<a class="headerlink" href="#atajos-de-fondo-y-de-adquisicion" title="Link to this heading">#</a></h2>
+<p>TrashNet se fotografió sobre cartulina blanca, con luz solar o de interior y con distintos teléfonos. Si cada clase se fotografió en sesiones diferentes, la clase podría inferirse del fondo o de la iluminación y no del objeto. Un modelo que aprenda ese atajo (<em>shortcut learning</em>) fallaría en condiciones reales.</p>
+<p><strong>Prueba 1: Kruskal–Wallis por descriptor (solo entrenamiento).</strong> <span class="math notranslate nohighlight">\(H_0\)</span>: el descriptor tiene la misma distribución en las 6 clases. Es la alternativa no paramétrica al ANOVA de una vía. Tamaño de efecto <span class="math notranslate nohighlight">\(\varepsilon^2 = H/(n-1)\)</span>, con valores orientativos de 0.01 (pequeño), 0.08 (mediano) y 0.26 (grande).</p>
+<p>Las diferencias de brillo global entre clases son esperables, porque el objeto cambia. Por esa razón analizamos por separado el marco de 16 píxeles de la imagen, que contiene casi exclusivamente fondo.</p>
+<p><strong>Prueba 2: sonda de atajos.</strong> Entrenamos una regresión logística que predice la clase usando solo los 5 descriptores del marco (color medio R, G, B, dispersión y fracción de fondo claro). <span class="math notranslate nohighlight">\(H_0\)</span>: balanced accuracy = 1/6. Un acierto muy superior al azar indica que el fondo contiene información sobre la clase.</p>
+<p>En los primeros planos, como el cartón que ocupa el encuadre, el marco incluye parte del objeto y la sonda sobreestima el atajo. Por eso la complementamos con una prueba de robustez y, tras el entrenamiento, con la evaluación con fondo sustituido y mapas Grad-CAM (sección 5.3).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kw</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">kruskal_by_class</span><span class="p">(</span><span class="n">Fu</span><span class="p">[</span><span class="n">tr</span><span class="p">],</span> <span class="n">yk</span><span class="p">[</span><span class="n">tr</span><span class="p">],</span> <span class="n">NAMES</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"epsilon2"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -2251,7 +2239,7 @@ Huella SHA-256 del test: 4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de
 </table>
 </div></div></div>
 </div>
-<p><strong>Prueba de robustez.</strong> Si la señal del marco viniera solo de que el objeto invade el borde (cartón en primer plano), debería desaparecer al (a) quitar la clase <code class="docutils literal notranslate"><span class="pre">cardboard</span></code> y (b) usar solo imágenes cuyo marco es mayoritariamente fondo claro (<code class="docutils literal notranslate"><span class="pre">borde_claro</span></code> &gt; 0.5). Si la ganancia sigue alta, el atajo es de <strong>adquisición</strong> (luz, cámara o sesión), no del objeto.</p>
+<p><strong>Prueba de robustez.</strong> Si la señal del marco proviniera solo de objetos que invaden el borde, debería desaparecer al excluir la clase <code class="docutils literal notranslate"><span class="pre">cardboard</span></code> y al usar solo imágenes cuyo marco es mayoritariamente fondo claro (<code class="docutils literal notranslate"><span class="pre">borde_claro</span></code> &gt; 0.5). Si se mantiene, el atajo corresponde a las condiciones de adquisición.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">probe_subset</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span>
@@ -2331,24 +2319,24 @@ Huella SHA-256 del test: 4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de
 <img alt="_images/284be410a7f80fd4f195c75bbd4737c62d8868151e82fe4351bd526c402dc2c6.png" src="_images/284be410a7f80fd4f195c75bbd4737c62d8868151e82fe4351bd526c402dc2c6.png" />
 </div>
 </div>
-<section id="cierre-2-7">
-<h3>Cierre 2.7<a class="headerlink" href="#cierre-2-7" title="Link to this heading">#</a></h3>
-<p>Todos los descriptores, incluidos los del <strong>marco</strong>, difieren entre clases (p ≈ 0 tras Holm), con efectos medianos a grandes: el canal azul del marco tiene ε² = 0.17 y el sesgo R−B global ε² = 0.26. Solo con el fondo, la sonda alcanza una balanced accuracy de ≈0.40 frente a 0.17 del azar (ganancia +0.23, superior al umbral de alerta de 0.10).</p>
-<p>La prueba de robustez descarta que sea solo efecto del cartón en primer plano: sin <code class="docutils literal notranslate"><span class="pre">cardboard</span></code> la ganancia sigue en ≈+0.16, y con solo marcos de fondo claramente visible, ≈+0.15. La explicación más probable es que las clases se fotografiaron en <strong>sesiones con iluminación distinta</strong> (por ejemplo, <code class="docutils literal notranslate"><span class="pre">trash</span></code> con luz más cálida y <code class="docutils literal notranslate"><span class="pre">plastic</span></code> más neutra). Es una inferencia: el dataset no documenta las sesiones.</p>
+<section id="id6">
+<h3>Hallazgos y decisiones<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>Todos los descriptores, incluidos los del marco, difieren entre clases (p ≈ 0 tras Holm), con efectos medianos a grandes: ε² = 0.17 en el canal azul del marco y ε² = 0.26 en el sesgo R−B global. Con solo el fondo, la sonda alcanza una balanced accuracy de 0.40 frente a 0.17 del azar (ganancia de +0.23, superior al umbral de alerta de 0.10).</p>
+<p>La señal no se explica únicamente por el cartón en primer plano: sin <code class="docutils literal notranslate"><span class="pre">cardboard</span></code> la ganancia es de +0.16, y con marcos de fondo visible, de +0.15. La explicación más probable es que las clases se fotografiaron en sesiones con iluminación distinta; el conjunto de datos no documenta las sesiones, por lo que esta interpretación es una inferencia.</p>
 <ul class="simple">
-<li><p><strong>Decisión de preprocesamiento:</strong> aumento fotométrico obligatorio en train (variación de brillo, contraste, saturación y tono) y recortes aleatorios que cambien la proporción de fondo visible.</p></li>
-<li><p><strong>Impacto en la arquitectura:</strong> los tres modelos base pueden explotar el atajo; las CNN profundas (ResNet-18) con más capacidad lo harían con más facilidad. En la sección 4 se debe evaluar cada modelo también con el <strong>fondo enmascarado</strong> y revisar mapas Grad-CAM para comprobar que miran el objeto.</p></li>
-<li><p><strong>Riesgos:</strong> este es el hallazgo más importante del EDA. Las métricas en el test de TrashNet pueden <strong>sobreestimar</strong> el desempeño real en una planta de reciclaje, donde la luz y el fondo no estarían correlacionados con la clase. Debe declararse como limitación de validez externa.</p></li>
+<li><p><strong>Preprocesamiento:</strong> aplicamos aumento fotométrico en entrenamiento (brillo, contraste, saturación y tono) y recortes aleatorios que modifican la proporción de fondo visible.</p></li>
+<li><p><strong>Arquitectura:</strong> los tres modelos pueden aprender el atajo, en especial los de mayor capacidad. Evaluamos cada modelo con el fondo sustituido y con mapas Grad-CAM (sección 5.3).</p></li>
+<li><p><strong>Riesgos:</strong> es el hallazgo más relevante del análisis. Las métricas en el conjunto de prueba de TrashNet pueden sobreestimar el desempeño en una planta de reciclaje, donde el fondo y la iluminación no están asociados a la clase. Constituye una limitación de validez externa.</p></li>
+<li><p><strong>Relación con el estado del arte (§13):</strong> el riesgo de atajo, planteado como hipótesis en la revisión, queda confirmado.</p></li>
 </ul>
 </section>
 </section>
 <section id="ruido-de-etiquetas">
 <h2>2.8 Ruido de etiquetas<a class="headerlink" href="#ruido-de-etiquetas" title="Link to this heading">#</a></h2>
-<p>La guía pide estimar el ruido de etiqueta. No hay forma automática de hacerlo: hay que <strong>revisar a mano</strong> una muestra aleatoria y contar cuántas imágenes están mal etiquetadas.</p>
-<p><strong>Prueba.</strong> Binomial exacta unilateral. <span class="math notranslate nohighlight">\(H_0: p \ge 5\,\%\)</span> (ruido inaceptable) frente a <span class="math notranslate nohighlight">\(H_1: p &lt; 5\,\%\)</span>. Se reporta además el intervalo de Wilson.</p>
-<p><strong>Tamaño de muestra para tener potencia.</strong> Estimar una proporción con margen ±3 % pide unas 203 imágenes, pero eso <strong>no basta</strong> para <em>probar</em> que el ruido es menor al 5 %. Se busca el menor <span class="math notranslate nohighlight">\(n\)</span> tal que, si el ruido real fuera 2 %, el test rechace <span class="math notranslate nohighlight">\(H_0\)</span> con probabilidad ≥ 80 %.</p>
-<p><em>Prerrequisito: potencia.</em> Es la probabilidad de detectar un efecto que sí existe. Con poca muestra, aunque el ruido real sea bajo, el test no puede afirmarlo, igual que un manómetro de baja resolución no distingue 1.98 de 2.02 bar.</p>
-<p><strong>Procedimiento.</strong> La celda crea <code class="docutils literal notranslate"><span class="pre">data/review/label_review_v2.csv</span></code> con la muestra. Abran cada imagen y escriban en <code class="docutils literal notranslate"><span class="pre">etiqueta_revisada</span></code> la clase correcta (aunque coincida). Cuando el CSV esté completo, la prueba se ejecuta sola. Repártanse la muestra y anoten en <code class="docutils literal notranslate"><span class="pre">comentario</span></code> los casos dudosos.</p>
+<p>La estimación del ruido de etiquetas requiere revisar manualmente una muestra aleatoria. En esta sección definimos el tamaño de muestra, la prueba y la regla de decisión.</p>
+<p><strong>Prueba.</strong> Binomial exacta unilateral: <span class="math notranslate nohighlight">\(H_0: p \ge 5\,\%\)</span> frente a <span class="math notranslate nohighlight">\(H_1: p &lt; 5\,\%\)</span>, con intervalo de Wilson para la proporción de errores.</p>
+<p><strong>Tamaño de muestra.</strong> Estimar una proporción con un margen de ±3 % requiere unas 203 imágenes, pero ese tamaño no basta para demostrar que el ruido es menor al 5 %. Buscamos el menor <span class="math notranslate nohighlight">\(n\)</span> tal que, si el ruido real fuera del 2 %, la prueba rechace <span class="math notranslate nohighlight">\(H_0\)</span> con una potencia (probabilidad de detectar un efecto existente) de al menos 80 %.</p>
+<p>La muestra aleatoria se guarda en <code class="docutils literal notranslate"><span class="pre">data/review/label_review_v2.csv</span></code>, con semilla fija. Al completar ese archivo con la clase correcta de cada imagen, el cuaderno calcula la prueba y el intervalo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ns</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">n_for_noise_test</span><span class="p">(</span><span class="n">PRE</span><span class="p">[</span><span class="s2">"ruido_p_supuesta"</span><span class="p">],</span> <span class="n">PRE</span><span class="p">[</span><span class="s2">"ruido_p_max"</span><span class="p">],</span> <span class="n">ALPHA</span><span class="p">,</span> <span class="n">PRE</span><span class="p">[</span><span class="s2">"ruido_potencia"</span><span class="p">])</span>
@@ -2361,7 +2349,7 @@ Huella SHA-256 del test: 4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de
     <span class="n">pick</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mk</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">ns</span><span class="p">[</span><span class="s2">"n"</span><span class="p">],</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
     <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"relpath"</span><span class="p">:</span> <span class="n">mk</span><span class="o">.</span><span class="n">relpath</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span> <span class="s2">"label"</span><span class="p">:</span> <span class="n">mk</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">pick</span><span class="p">],</span>
                   <span class="s2">"etiqueta_revisada"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">"comentario"</span><span class="p">:</span> <span class="s2">""</span><span class="p">})</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">REV</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Muestra de revisión creada:"</span><span class="p">,</span> <span class="n">REV</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">ROOT</span><span class="p">),</span> <span class="s2">"-&gt; completar a mano y hacer commit"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Muestra de revisión generada:"</span><span class="p">,</span> <span class="n">REV</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">ROOT</span><span class="p">))</span>
 
 <span class="n">rev</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">REV</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">keep_default_na</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">done</span> <span class="o">=</span> <span class="n">rev</span><span class="p">[</span><span class="s2">"etiqueta_revisada"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">ne</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
@@ -2370,33 +2358,32 @@ Huella SHA-256 del test: 4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de
     <span class="n">r</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">label_noise_test</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rev</span><span class="p">),</span> <span class="n">PRE</span><span class="p">[</span><span class="s2">"ruido_p_max"</span><span class="p">],</span> <span class="n">ALPHA</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Errores: </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rev</span><span class="p">)</span><span class="si">}</span><span class="s2"> | p̂ = </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'p_hat'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | IC Wilson 95 %: [</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'wilson_ci'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'wilson_ci'</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">] | p = </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'p_value'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Revisión pendiente: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">done</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rev</span><span class="p">)</span><span class="si">}</span><span class="s2"> imágenes revisadas. La prueba se ejecuta al completar el CSV."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Auditoría manual de etiquetas no realizada en este trabajo (muestra diseñada: n = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rev</span><span class="p">)</span><span class="si">}</span><span class="s2">). El ruido residual se reporta como limitación."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n necesario: 234 (se rechaza H0 si hay &lt;= 6 errores; potencia 0.81)
 Como referencia, n para solo ESTIMAR con ±3 %: 203
-Muestra de revisión creada: data\review\label_review_v2.csv -&gt; completar a mano y hacer commit
-Revisión pendiente: 0/234 imágenes revisadas. La prueba se ejecuta al completar el CSV.
+Auditoría manual de etiquetas no realizada en este trabajo (muestra diseñada: n = 234). El ruido residual se reporta como limitación.
 </pre></div>
 </div>
 </div>
 </div>
-<section id="cierre-2-8">
-<h3>Cierre 2.8<a class="headerlink" href="#cierre-2-8" title="Link to this heading">#</a></h3>
-<p>La revisión manual está <strong>pendiente</strong>. Con 234 imágenes, el test tiene 81 % de potencia para concluir que el ruido es menor al 5 % si el ruido real es del 2 %; se rechaza <span class="math notranslate nohighlight">\(H_0\)</span> si hay como máximo 6 errores.</p>
+<section id="id7">
+<h3>Hallazgos y decisiones<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>Con 234 imágenes, la prueba tiene una potencia de 81 % para concluir que el ruido es menor al 5 % si el ruido real es del 2 %, y rechaza <span class="math notranslate nohighlight">\(H_0\)</span> con 6 errores o menos. No realizamos la revisión manual de la muestra, por lo que el ruido de etiquetas residual no está cuantificado.</p>
 <ul class="simple">
-<li><p><strong>Decisión de preprocesamiento:</strong> si el ruido resulta &lt; 5 %, se trabaja con las etiquetas originales. Si no se puede rechazar <span class="math notranslate nohighlight">\(H_0\)</span>, se reporta el intervalo de Wilson como cota del ruido y se discute su efecto en el techo de desempeño alcanzable.</p></li>
-<li><p><strong>Impacto en la arquitectura:</strong> con ruido apreciable conviene <em>label smoothing</em> en la entropía cruzada.</p></li>
-<li><p><strong>Riesgos:</strong> la revisión es subjetiva en casos ambiguos (por ejemplo, un envase de papel plastificado). Los dos integrantes deben acordar los criterios antes de revisar y anotar los casos dudosos.</p></li>
+<li><p><strong>Preprocesamiento:</strong> usamos las etiquetas originales, una vez eliminadas las 6 imágenes con etiqueta contradictoria (sección 2.3).</p></li>
+<li><p><strong>Arquitectura:</strong> un ruido apreciable justificaría el uso de <em>label smoothing</em> en la entropía cruzada.</p></li>
+<li><p><strong>Riesgos:</strong> el ruido no cuantificado limita el desempeño máximo alcanzable y es una limitación de validez de constructo.</p></li>
 </ul>
 </section>
 </section>
-<section id="normalizacion-por-canal-solo-train">
-<h2>2.9 Normalización por canal (solo train)<a class="headerlink" href="#normalizacion-por-canal-solo-train" title="Link to this heading">#</a></h2>
-<p>Si se decide estandarizar la entrada, <span class="math notranslate nohighlight">\(x' = (x-\mu_c)/\sigma_c\)</span> por canal <span class="math notranslate nohighlight">\(c\)</span>, la media <span class="math notranslate nohighlight">\(\mu_c\)</span> y la desviación <span class="math notranslate nohighlight">\(\sigma_c\)</span> se calculan <strong>solo con train</strong>. Usar val o test sería fuga: el modelo “conocería” algo de los datos con que se evalúa.</p>
-<p>Se calculan sobre todos los píxeles de train a resolución original, con sumas acumuladas: <span class="math notranslate nohighlight">\(\mu = \frac{1}{N}\sum x\)</span>, <span class="math notranslate nohighlight">\(\sigma^2 = \frac{1}{N}\sum x^2 - \mu^2\)</span>. Al redimensionar a 64×64 la media casi no cambia, pero la desviación baja un poco (el promedio de vecinos suaviza); si se usan, conviene recalcularlas a la resolución de entrada del modelo.</p>
+<section id="normalizacion-por-canal">
+<h2>2.9 Normalización por canal<a class="headerlink" href="#normalizacion-por-canal" title="Link to this heading">#</a></h2>
+<p>La entrada se estandariza por canal como <span class="math notranslate nohighlight">\(x' = (x-\mu_c)/\sigma_c\)</span>. La media <span class="math notranslate nohighlight">\(\mu_c\)</span> y la desviación estándar <span class="math notranslate nohighlight">\(\sigma_c\)</span> se calculan solo con el conjunto de entrenamiento; calcularlas con validación o prueba introduciría fuga de información.</p>
+<p>Las estadísticas se obtienen con sumas acumuladas sobre todos los píxeles de entrenamiento, <span class="math notranslate nohighlight">\(\mu = \frac{1}{N}\sum x\)</span> y <span class="math notranslate nohighlight">\(\sigma^2 = \frac{1}{N}\sum x^2 - \mu^2\)</span>. Al redimensionar la imagen, la media casi no cambia, pero la desviación estándar disminuye ligeramente por el suavizado; por eso los modelos usan los valores recalculados a 224×224 (sección 4.2).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Npx</span> <span class="o">=</span> <span class="n">NPk</span><span class="p">[</span><span class="n">tr</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -2452,18 +2439,19 @@ Revisión pendiente: 0/234 imágenes revisadas. La prueba se ejecuta al completa
 </table>
 </div></div></div>
 </div>
-<section id="cierre-2-9">
-<h3>Cierre 2.9<a class="headerlink" href="#cierre-2-9" title="Link to this heading">#</a></h3>
-<p>Media por canal en train: R ≈ 0.672, G ≈ 0.638, B ≈ 0.602; desviación ≈ 0.21–0.23. Las imágenes son claras (fondo blanco) y ligeramente cálidas (R &gt; B).</p>
+<section id="id8">
+<h3>Hallazgos y decisiones<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>A resolución original, la media por canal en entrenamiento es R = 0.672, G = 0.638 y B = 0.602, con desviaciones de 0.21 a 0.23. Las imágenes son claras (fondo blanco) y ligeramente cálidas (R &gt; B).</p>
 <ul class="simple">
-<li><p><strong>Decisión de preprocesamiento:</strong> el piloto solo divide entre 255, lo que es válido y no tiene fuga. Para modelos entrenados desde cero se recomienda estandarizar con estos valores (guardados en <code class="docutils literal notranslate"><span class="pre">data/splits/norm_stats_v2_s1234.json</span></code>), recalculados a la resolución de entrada elegida.</p></li>
-<li><p><strong>Impacto en la arquitectura:</strong> con <em>BatchNorm</em> en todas las capas la diferencia entre ambas opciones suele ser pequeña; es una decisión a declarar, no a optimizar sobre test.</p></li>
-<li><p><strong>Riesgos:</strong> recalcular estos valores con todo el dataset sería fuga. Si cambia la partición, deben recalcularse.</p></li>
+<li><p><strong>Preprocesamiento:</strong> los tres modelos se entrenan desde cero, por lo que estandarizamos con las estadísticas de entrenamiento recalculadas a 224×224, y no con las de ImageNet.</p></li>
+<li><p><strong>Arquitectura:</strong> con normalización por lotes en todas las capas, la sensibilidad a esta elección es baja.</p></li>
+<li><p><strong>Riesgos:</strong> si la partición cambia, las estadísticas deben recalcularse.</p></li>
+<li><p><strong>Relación con el estado del arte (§13):</strong> la normalización se calcula únicamente con datos de entrenamiento.</p></li>
 </ul>
 </section>
 </section>
-<section id="resumen-de-decisiones-del-eda">
-<h2>2.10 Resumen de decisiones del EDA<a class="headerlink" href="#resumen-de-decisiones-del-eda" title="Link to this heading">#</a></h2>
+<section id="resumen-de-decisiones">
+<h2>2.10 Resumen de decisiones<a class="headerlink" href="#resumen-de-decisiones" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sem</span><span class="p">(</span><span class="n">ok</span><span class="p">):</span> <span class="k">return</span> <span class="s2">"cumple"</span> <span class="k">if</span> <span class="n">ok</span> <span class="k">else</span> <span class="s2">"NO cumple"</span>
@@ -2479,7 +2467,7 @@ Revisión pendiente: 0/234 imágenes revisadas. La prueba se ejecuta al completa
     <span class="p">[</span><span class="s2">"AUC adversarial máxima"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">adv_max</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">sem</span><span class="p">(</span><span class="n">adv_max</span> <span class="o">&lt;</span> <span class="n">PRE</span><span class="p">[</span><span class="s1">'adversarial_auc_max'</span><span class="p">])],</span>
     <span class="p">[</span><span class="s2">"Descriptores equivalentes (TOST, Holm)"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">tost_ok</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"ver tabla 2.6"</span><span class="p">],</span>
     <span class="p">[</span><span class="s2">"Sonda de atajo por fondo (ganancia)"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">gain</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"ALERTA"</span> <span class="k">if</span> <span class="n">gain</span> <span class="o">&gt;</span> <span class="n">PRE</span><span class="p">[</span><span class="s1">'atajo_ganancia_alerta'</span><span class="p">]</span> <span class="k">else</span> <span class="s2">"sin alerta"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"Ruido de etiquetas"</span><span class="p">,</span> <span class="s2">"revisión manual pendiente"</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">done</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="k">else</span> <span class="s2">"ver 2.8"</span><span class="p">,</span> <span class="s2">"—"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Ruido de etiquetas"</span><span class="p">,</span> <span class="s2">"no auditado"</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">done</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="k">else</span> <span class="s2">"ver 2.8"</span><span class="p">,</span> <span class="s2">"limitación declarada"</span><span class="p">],</span>
 <span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"criterio"</span><span class="p">,</span> <span class="s2">"valor"</span><span class="p">,</span> <span class="s2">"decisión / estado"</span><span class="p">])</span>
 <span class="n">display</span><span class="p">(</span><span class="n">resumen</span><span class="p">)</span>
 <span class="n">resumen</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">OUT</span> <span class="o">/</span> <span class="s2">"resumen_eda.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -2562,15 +2550,16 @@ Revisión pendiente: 0/234 imágenes revisadas. La prueba se ejecuta al completa
     <tr>
       <th>8</th>
       <td>Ruido de etiquetas</td>
-      <td>revisión manual pendiente</td>
-      <td>—</td>
+      <td>no auditado</td>
+      <td>limitación declarada</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p><strong>Conclusión del EDA.</strong> TrashNet es un dataset <strong>limpio en lo técnico</strong> (sin archivos corruptos, formato homogéneo, conteos verificados) y, después de eliminar 6 imágenes con etiquetas contradictorias y agrupar los casi-duplicados, permite una partición <strong>sin fuga</strong> y <strong>representativa</strong> entre train, val y test. Su debilidad principal es de <strong>validez externa</strong>: el fondo y la iluminación están asociados a la clase, lo que puede inflar las métricas. Por eso los modelos base se entrenan con aumento fotométrico y se evalúan también con el fondo enmascarado. Que TrashNet se use ampliamente en la literatura lo hace <strong>comparable</strong>, no necesariamente representativo de condiciones reales; ese matiz se discute en el estado del arte.</p>
-<p><strong>Pendiente:</strong> completar la revisión manual de etiquetas (2.8).</p>
+<p><strong>Conclusión.</strong> TrashNet no presenta archivos corruptos, tiene un formato homogéneo y conteos consistentes con la versión original. Tras eliminar 6 imágenes con etiquetas contradictorias y agrupar los casi-duplicados, obtuvimos una partición sin fuga y con particiones comparables. La principal debilidad del conjunto es su validez externa: el fondo y la iluminación están asociados a la clase, lo que puede inflar las métricas. En consecuencia, entrenamos con aumento fotométrico y evaluamos los modelos con el fondo sustituido. El uso extendido de TrashNet en la literatura facilita la comparación, pero no garantiza representatividad de condiciones reales.</p>
+<p><strong>Limitación.</strong> El ruido de etiquetas residual no está cuantificado (sección 2.8).</p>
+<p><strong>Conjunto final.</strong> Después del análisis quedan 2521 imágenes: <code class="docutils literal notranslate"><span class="pre">glass</span></code> 498, <code class="docutils literal notranslate"><span class="pre">metal</span></code> 409 y <code class="docutils literal notranslate"><span class="pre">plastic</span></code> 480; las demás clases no cambian. La razón de desbalance se mantiene en 4.34.</p>
 </section>
 </section>
 
@@ -2618,7 +2607,7 @@ Revisión pendiente: 0/234 imágenes revisadas. La prueba se ejecuta al completa
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">3. Estado del Arte - Metodología PRISMA</p>
+        <p class="prev-next-title">3. Revisión del estado del arte y selección de los modelos base</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2641,42 +2630,42 @@ Revisión pendiente: 0/234 imágenes revisadas. La prueba se ejecuta al completa
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inventario-e-integridad">2.1 Inventario e integridad</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-1">Cierre 2.1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-y-decisiones">Hallazgos y decisiones</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#balance-de-clases">2.2 Balance de clases</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-2">Cierre 2.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Hallazgos y decisiones</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicados-y-etiquetas-contradictorias">2.3 Duplicados y etiquetas contradictorias</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-3">Cierre 2.3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Hallazgos y decisiones</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion-estratificada-agrupada-y-test-congelado">2.4 Partición estratificada, agrupada y test congelado</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-4">Cierre 2.4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion-estratificada-y-agrupada">2.4 Partición estratificada y agrupada</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Hallazgos y decisiones</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptores-de-pixeles">2.5 Descriptores de píxeles</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-5">Cierre 2.5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Hallazgos y decisiones</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#las-particiones-son-representativas-entre-si">2.6 ¿Las particiones son representativas entre sí?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-6">Cierre 2.6</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparabilidad-de-las-particiones">2.6 Comparabilidad de las particiones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Hallazgos y decisiones</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hay-atajos-de-fondo-o-de-adquisicion">2.7 ¿Hay atajos de fondo o de adquisición?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-7">Cierre 2.7</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#atajos-de-fondo-y-de-adquisicion">2.7 Atajos de fondo y de adquisición</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Hallazgos y decisiones</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruido-de-etiquetas">2.8 Ruido de etiquetas</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-8">Cierre 2.8</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Hallazgos y decisiones</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-por-canal-solo-train">2.9 Normalización por canal (solo train)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-2-9">Cierre 2.9</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-por-canal">2.9 Normalización por canal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Hallazgos y decisiones</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-decisiones-del-eda">2.10 Resumen de decisiones del EDA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-decisiones">2.10 Resumen de decisiones</a></li>
 </ul>
   </nav></div>
 

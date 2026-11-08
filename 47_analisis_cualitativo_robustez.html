@@ -1,0 +1,1426 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5.3 Análisis cualitativo, robustez y discusión &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '47_analisis_cualitativo_robustez';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Declaración a priori" href="06_declaracion_apriori.html" />
+    <link rel="prev" title="5.2 Comparación estadística y modelo de referencia" href="46_benchmark_baseline_estadistica.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/47_analisis_cualitativo_robustez.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5.3 Análisis cualitativo, robustez y discusión</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez-ante-perturbaciones">Robustez ante perturbaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grad-cam">Grad-CAM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#casos-dificiles-y-confusiones-frecuentes">Casos difíciles y confusiones frecuentes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discusion">Discusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-cualitativo-robustez-y-discusion">
+<h1>5.3 Análisis cualitativo, robustez y discusión<a class="headerlink" href="#analisis-cualitativo-robustez-y-discusion" title="Link to this heading">#</a></h1>
+<p>En esta sección analizamos en qué regiones de la imagen se apoyan los modelos (Grad-CAM), identificamos los casos difíciles, medimos la caída de desempeño ante perturbaciones controladas, incluida la sustitución del fondo, y discutimos los resultados del capítulo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">ROOT</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"src"</span> <span class="o">/</span> <span class="s2">"config.py"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span> <span class="k">as</span> <span class="n">C</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">plots</span> <span class="k">as</span> <span class="n">P</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.persist</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_done</span><span class="p">,</span> <span class="n">load_pickle</span><span class="p">,</span> <span class="n">save_pickle</span>
+
+<span class="n">P</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+<span class="n">C</span><span class="o">.</span><span class="n">ensure_dirs</span><span class="p">()</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.precision"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Resultados:"</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">RESULTS</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"| modelos:"</span><span class="p">,</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resultados: results | modelos: CNN, MobileNetV2, ResNet-18
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">PERTURBATIONS</span><span class="p">,</span> <span class="n">perturbed_test_set</span><span class="p">,</span> <span class="n">robustness_run</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_cache</span><span class="p">,</span> <span class="n">prepare_common</span>
+
+<span class="n">COMPUTE</span> <span class="o">=</span> <span class="kc">True</span>        <span class="c1"># calcula solo lo que falte; si todo existe, no recalcula nada</span>
+<span class="n">common</span> <span class="o">=</span> <span class="n">prepare_common</span><span class="p">()</span>
+<span class="n">cache</span> <span class="o">=</span> <span class="n">load_cache</span><span class="p">()</span>
+<span class="n">sp</span> <span class="o">=</span> <span class="n">common</span><span class="p">[</span><span class="s2">"splits"</span><span class="p">]</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">"cuda"</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">"cpu"</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"metricas_por_corrida.pkl"</span><span class="p">)</span>
+<span class="n">seeds</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"seed"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="n">med</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"semilla_mediana.pkl"</span><span class="p">)</span>
+<span class="c1"># imágenes de prueba en el orden de las predicciones guardadas</span>
+<span class="n">p0</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">run_dir</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">seeds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="s2">"test_predictions.pkl"</span><span class="p">)</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">r</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sp</span><span class="p">[</span><span class="s2">"test"</span><span class="p">][</span><span class="s2">"relpath"</span><span class="p">])}</span>
+<span class="n">pos_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">pos</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">p0</span><span class="p">[</span><span class="s2">"filepaths"</span><span class="p">]])</span>
+<span class="n">rows_test</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="s2">"test"</span><span class="p">][</span><span class="s2">"rows"</span><span class="p">][</span><span class="n">pos_test</span><span class="p">],</span> <span class="n">p0</span><span class="p">[</span><span class="s2">"y_true"</span><span class="p">]</span>
+<span class="n">relp</span> <span class="o">=</span> <span class="p">[</span><span class="n">sp</span><span class="p">[</span><span class="s2">"test"</span><span class="p">][</span><span class="s2">"relpath"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pos_test</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dispositivo:"</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="s2">"| semillas:"</span><span class="p">,</span> <span class="n">seeds</span><span class="p">,</span> <span class="s2">"| imágenes de prueba:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dispositivo: cuda | semillas: [np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4), np.int64(5), np.int64(6), np.int64(7)] | imágenes de prueba: 361
+</pre></div>
+</div>
+</div>
+</div>
+<section id="robustez-ante-perturbaciones">
+<h2>Robustez ante perturbaciones<a class="headerlink" href="#robustez-ante-perturbaciones" title="Link to this heading">#</a></h2>
+<p>Evaluamos el mejor modelo de cada semilla en el conjunto de prueba perturbado. Las perturbaciones se aplican en <span class="math notranslate nohighlight">\([0, 1]\)</span>, antes de normalizar, con una semilla fija, de modo que todos los modelos y semillas se evalúan sobre las mismas imágenes.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Perturbación</p></th>
+<th class="head"><p>Definición</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ruido 0.05 / 0.10</p></td>
+<td><p>ruido gaussiano con <span class="math notranslate nohighlight">\(\sigma\)</span> = 0.05 o 0.10</p></td>
+</tr>
+<tr class="row-odd"><td><p>desenfoque</p></td>
+<td><p>filtro gaussiano 9×9, <span class="math notranslate nohighlight">\(\sigma\)</span> = 2</p></td>
+</tr>
+<tr class="row-even"><td><p>brillo −30 / +30</p></td>
+<td><p>intensidad × 0.7 o × 1.3</p></td>
+</tr>
+<tr class="row-odd"><td><p>oclusión</p></td>
+<td><p>cuadro gris de 56×56 en posición aleatoria</p></td>
+</tr>
+<tr class="row-even"><td><p>fondo sustituido</p></td>
+<td><p>píxeles de fondo claro (mínimo RGB ≥ 200) reemplazados por un color aleatorio por imagen</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La sustitución del fondo evalúa el atajo identificado en la sección 2.7: si un modelo depende del fondo blanco, su desempeño cae aunque el objeto permanezca intacto.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">COMPUTE</span><span class="p">:</span>
+    <span class="n">faltan</span> <span class="o">=</span> <span class="p">[(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seeds</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">run_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"robustness.pkl"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()]</span>
+    <span class="k">if</span> <span class="n">faltan</span><span class="p">:</span>
+        <span class="n">sets</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">perturbed_test_set</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">sp</span><span class="p">[</span><span class="s2">"test"</span><span class="p">][</span><span class="s2">"rows"</span><span class="p">],</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">PERTURBATIONS</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">faltan</span><span class="p">:</span>
+            <span class="n">robustness_run</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">run_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">),</span> <span class="n">common</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">sets</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Calculadas </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">faltan</span><span class="p">)</span><span class="si">}</span><span class="s2"> evaluaciones de robustez"</span><span class="p">)</span>
+
+<span class="n">rob</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seeds</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">run_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"robustness.pkl"</span><span class="p">)[</span><span class="s2">"results"</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">PERTURBATIONS</span><span class="p">:</span>
+            <span class="n">rob</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="n">m</span><span class="p">,</span> <span class="s2">"semilla"</span><span class="p">:</span> <span class="n">s</span><span class="p">,</span> <span class="s2">"perturbación"</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span> <span class="s2">"F1"</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">"f1_macro"</span><span class="p">],</span>
+                        <span class="s2">"caída"</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">"limpio"</span><span class="p">][</span><span class="s2">"f1_macro"</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">"f1_macro"</span><span class="p">]})</span>
+<span class="n">rob</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rob</span><span class="p">)</span>
+<span class="n">res_rob</span> <span class="o">=</span> <span class="n">rob</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"perturbación"</span><span class="p">,</span> <span class="s2">"modelo"</span><span class="p">])[</span><span class="s2">"F1"</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">])</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span>
+<span class="n">caida</span> <span class="o">=</span> <span class="n">rob</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"perturbación"</span><span class="p">,</span> <span class="s2">"modelo"</span><span class="p">])[</span><span class="s2">"caída"</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">])</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span>
+<span class="n">tab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">m</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">res_rob</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="s1">'mean'</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">res_rob</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="s1">'std'</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">)]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">PERTURBATIONS</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">PERTURBATIONS</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">tab</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CNN</th>
+      <th>MobileNetV2</th>
+      <th>ResNet-18</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>limpio</th>
+      <td>0.826 ± 0.022</td>
+      <td>0.810 ± 0.025</td>
+      <td>0.863 ± 0.022</td>
+    </tr>
+    <tr>
+      <th>ruido_0.05</th>
+      <td>0.185 ± 0.025</td>
+      <td>0.276 ± 0.054</td>
+      <td>0.394 ± 0.048</td>
+    </tr>
+    <tr>
+      <th>ruido_0.10</th>
+      <td>0.132 ± 0.030</td>
+      <td>0.094 ± 0.026</td>
+      <td>0.116 ± 0.040</td>
+    </tr>
+    <tr>
+      <th>desenfoque</th>
+      <td>0.360 ± 0.041</td>
+      <td>0.504 ± 0.050</td>
+      <td>0.608 ± 0.048</td>
+    </tr>
+    <tr>
+      <th>brillo_-30</th>
+      <td>0.720 ± 0.036</td>
+      <td>0.710 ± 0.033</td>
+      <td>0.753 ± 0.015</td>
+    </tr>
+    <tr>
+      <th>brillo_+30</th>
+      <td>0.741 ± 0.031</td>
+      <td>0.748 ± 0.024</td>
+      <td>0.810 ± 0.020</td>
+    </tr>
+    <tr>
+      <th>oclusion</th>
+      <td>0.781 ± 0.023</td>
+      <td>0.764 ± 0.022</td>
+      <td>0.822 ± 0.013</td>
+    </tr>
+    <tr>
+      <th>fondo_sustituido</th>
+      <td>0.568 ± 0.031</td>
+      <td>0.602 ± 0.035</td>
+      <td>0.606 ± 0.028</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">))</span>
+<span class="n">pert</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">PERTURBATIONS</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">"limpio"</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pert</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.27</span><span class="p">,</span> <span class="n">caida</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pert</span><span class="p">,</span> <span class="p">(</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">m</span><span class="p">)],</span> <span class="mf">0.27</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">caida</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pert</span><span class="p">,</span> <span class="p">(</span><span class="s2">"std"</span><span class="p">,</span> <span class="n">m</span><span class="p">)],</span>
+           <span class="n">color</span><span class="o">=</span><span class="n">P</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">error_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">"lw"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">})</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"grey"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pert</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"caída de F1 macro (media ± DE)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"upper center"</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.18</span><span class="p">))</span>
+<span class="n">P</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">"5_3_robustez"</span><span class="p">,</span> <span class="n">rob</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/7c90afaccd40daad6c7a8ed4aeb00249e35ce3bead4a0721d1fe11844014d58e.png" src="_images/7c90afaccd40daad6c7a8ed4aeb00249e35ce3bead4a0721d1fe11844014d58e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">S</span>
+
+<span class="n">caida_fondo</span> <span class="o">=</span> <span class="n">rob</span><span class="p">[</span><span class="n">rob</span><span class="p">[</span><span class="s2">"perturbación"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"fondo_sustituido"</span><span class="p">]</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"semilla"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"modelo"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"caída"</span><span class="p">)[</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">]</span>
+<span class="n">pares_fondo</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">pairwise</span><span class="p">(</span><span class="n">caida_fondo</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Comparación pareada de la caída de F1 con fondo sustituido:"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pares_fondo</span><span class="p">[[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"dif_media"</span><span class="p">,</span> <span class="s2">"ic_t_lo"</span><span class="p">,</span> <span class="s2">"ic_t_hi"</span><span class="p">,</span> <span class="s2">"p_wilcoxon"</span><span class="p">,</span> <span class="s2">"p_wilcoxon_holm"</span><span class="p">]]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Comparación pareada de la caída de F1 con fondo sustituido:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>dif_media</th>
+      <th>ic_t_lo</th>
+      <th>ic_t_hi</th>
+      <th>p_wilcoxon</th>
+      <th>p_wilcoxon_holm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CNN</td>
+      <td>MobileNetV2</td>
+      <td>0.0508</td>
+      <td>-0.0031</td>
+      <td>0.1047</td>
+      <td>0.1094</td>
+      <td>0.2188</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>CNN</td>
+      <td>ResNet-18</td>
+      <td>0.0017</td>
+      <td>-0.0376</td>
+      <td>0.0411</td>
+      <td>0.9453</td>
+      <td>0.9453</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MobileNetV2</td>
+      <td>ResNet-18</td>
+      <td>-0.0490</td>
+      <td>-0.0878</td>
+      <td>-0.0103</td>
+      <td>0.0078</td>
+      <td>0.0234</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Para separar el efecto del fondo de la sensibilidad general a perturbaciones, calculamos en cada corrida el exceso de caída: la caída con fondo sustituido menos la caída media de las perturbaciones genéricas (ruido, desenfoque, brillo y oclusión). Un exceso positivo y significativo (Wilcoxon unilateral sobre las semillas) indica dependencia del fondo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">wilcoxon</span>
+
+<span class="n">genericas</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">PERTURBATIONS</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"limpio"</span><span class="p">,</span> <span class="s2">"fondo_sustituido"</span><span class="p">)]</span>
+<span class="n">gen</span> <span class="o">=</span> <span class="n">rob</span><span class="p">[</span><span class="n">rob</span><span class="p">[</span><span class="s2">"perturbación"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">genericas</span><span class="p">)]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"modelo"</span><span class="p">,</span> <span class="s2">"semilla"</span><span class="p">])[</span><span class="s2">"caída"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">fon</span> <span class="o">=</span> <span class="n">rob</span><span class="p">[</span><span class="n">rob</span><span class="p">[</span><span class="s2">"perturbación"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"fondo_sustituido"</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s2">"modelo"</span><span class="p">,</span> <span class="s2">"semilla"</span><span class="p">])[</span><span class="s2">"caída"</span><span class="p">]</span>
+<span class="n">exceso</span> <span class="o">=</span> <span class="p">(</span><span class="n">fon</span> <span class="o">-</span> <span class="n">gen</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">"exceso"</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">:</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">exceso</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">exceso</span><span class="p">[</span><span class="s2">"modelo"</span><span class="p">]</span> <span class="o">==</span> <span class="n">m</span><span class="p">,</span> <span class="s2">"exceso"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">mean_ci</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">wilcoxon</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s2">"greater"</span><span class="p">)</span><span class="o">.</span><span class="n">pvalue</span><span class="p">)</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">e</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="mf">1.0</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="n">m</span><span class="p">,</span> <span class="s2">"exceso medio"</span><span class="p">:</span> <span class="n">ci</span><span class="p">[</span><span class="s2">"media"</span><span class="p">],</span> <span class="s2">"IC t inf"</span><span class="p">:</span> <span class="n">ci</span><span class="p">[</span><span class="s2">"ic_t"</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"IC t sup"</span><span class="p">:</span> <span class="n">ci</span><span class="p">[</span><span class="s2">"ic_t"</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                  <span class="s2">"Wilcoxon p (exceso &gt; 0)"</span><span class="p">:</span> <span class="n">p</span><span class="p">})</span>
+<span class="n">atajo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">atajo</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">save_pickle</span><span class="p">({</span><span class="s2">"tabla"</span><span class="p">:</span> <span class="n">rob</span><span class="p">,</span> <span class="s2">"pares_fondo"</span><span class="p">:</span> <span class="n">pares_fondo</span><span class="p">,</span> <span class="s2">"exceso_fondo"</span><span class="p">:</span> <span class="n">exceso</span><span class="p">,</span> <span class="s2">"atajo"</span><span class="p">:</span> <span class="n">atajo</span><span class="p">},</span>
+                <span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"robustez.pkl"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>exceso medio</th>
+      <th>IC t inf</th>
+      <th>IC t sup</th>
+      <th>Wilcoxon p (exceso &gt; 0)</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CNN</th>
+      <td>-0.0815</td>
+      <td>-0.1137</td>
+      <td>-0.0493</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>MobileNetV2</th>
+      <td>-0.0864</td>
+      <td>-0.1200</td>
+      <td>-0.0527</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>ResNet-18</th>
+      <td>-0.0225</td>
+      <td>-0.0470</td>
+      <td>0.0020</td>
+      <td>0.9609</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="grad-cam">
+<h2>Grad-CAM<a class="headerlink" href="#grad-cam" title="Link to this heading">#</a></h2>
+<p>Grad-CAM (Selvaraju et al., 2017) pondera cada mapa de activación <span class="math notranslate nohighlight">\(A^c\)</span> de la última capa convolucional por el promedio espacial del gradiente de la clase predicha:</p>
+<div class="math notranslate nohighlight">
+\[\alpha_c = \frac{1}{HW}\sum_{i,j}\frac{\partial y^{\text{clase}}}{\partial A^c_{ij}}, \qquad L = \mathrm{ReLU}\Big(\sum_c \alpha_c A^c\Big).\]</div>
+<p>El mapa <span class="math notranslate nohighlight">\(L\)</span> se interpola a 224×224. Lo calculamos para las 361 imágenes de prueba con la semilla mediana de cada modelo. Para cuantificar la atención al fondo comparamos, en cada imagen, la fracción de la intensidad del mapa ubicada sobre el fondo claro con la fracción del área que ocupa el fondo; un cociente menor que 1 indica que el mapa se concentra en el objeto.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">background_attention</span><span class="p">,</span> <span class="n">gradcam_run</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+
+<span class="n">f_cam</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"gradcam.pkl"</span>
+<span class="k">if</span> <span class="n">COMPUTE</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">f_cam</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">cam</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">rows_test</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">run_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">med</span><span class="p">[</span><span class="n">m</span><span class="p">])</span> <span class="o">/</span> <span class="s2">"test_predictions.pkl"</span><span class="p">)</span>
+        <span class="n">mapas</span> <span class="o">=</span> <span class="n">gradcam_run</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">run_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">med</span><span class="p">[</span><span class="n">m</span><span class="p">]),</span> <span class="n">common</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="s2">"y_pred"</span><span class="p">])</span>
+        <span class="n">bg</span> <span class="o">=</span> <span class="n">background_attention</span><span class="p">(</span><span class="n">mapas</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
+        <span class="n">chicos</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">mapas</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">))[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">56</span><span class="p">,</span> <span class="mi">56</span><span class="p">),</span>
+                               <span class="n">mode</span><span class="o">=</span><span class="s2">"bilinear"</span><span class="p">,</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">)</span>
+        <span class="n">cam</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"seed"</span><span class="p">:</span> <span class="n">med</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="s2">"maps56"</span><span class="p">:</span> <span class="n">chicos</span><span class="p">,</span> <span class="s2">"y_pred"</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s2">"y_pred"</span><span class="p">],</span> <span class="s2">"y_true"</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s2">"y_true"</span><span class="p">],</span> <span class="o">**</span><span class="n">bg</span><span class="p">}</span>
+    <span class="n">save_pickle</span><span class="p">(</span><span class="n">cam</span><span class="p">,</span> <span class="n">f_cam</span><span class="p">)</span>
+<span class="n">cam</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">f_cam</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">wilcoxon</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">:</span>
+    <span class="n">e</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">cam</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="s2">"frac_energia_fondo"</span><span class="p">],</span> <span class="n">cam</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="s2">"frac_area_fondo"</span><span class="p">]</span>
+    <span class="n">ok</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mf">0.05</span>                                   <span class="c1"># se excluyen imágenes casi sin fondo visible</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="n">m</span><span class="p">,</span> <span class="s2">"imágenes"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">ok</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="s2">"energía en fondo (media)"</span><span class="p">:</span> <span class="n">e</span><span class="p">[</span><span class="n">ok</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                  <span class="s2">"área de fondo (media)"</span><span class="p">:</span> <span class="n">a</span><span class="p">[</span><span class="n">ok</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="s2">"energía / área (mediana)"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">ok</span><span class="p">]</span> <span class="o">/</span> <span class="n">a</span><span class="p">[</span><span class="n">ok</span><span class="p">]),</span>
+                  <span class="s2">"Wilcoxon p (energía &gt; área)"</span><span class="p">:</span> <span class="n">wilcoxon</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">ok</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">ok</span><span class="p">],</span> <span class="n">alternative</span><span class="o">=</span><span class="s2">"greater"</span><span class="p">)</span><span class="o">.</span><span class="n">pvalue</span><span class="p">})</span>
+<span class="n">atencion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">atencion</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>imágenes</th>
+      <th>energía en fondo (media)</th>
+      <th>área de fondo (media)</th>
+      <th>energía / área (mediana)</th>
+      <th>Wilcoxon p (energía &gt; área)</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CNN</th>
+      <td>263</td>
+      <td>0.2075</td>
+      <td>0.295</td>
+      <td>0.6678</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>MobileNetV2</th>
+      <td>263</td>
+      <td>0.2090</td>
+      <td>0.295</td>
+      <td>0.6499</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>ResNet-18</th>
+      <td>263</td>
+      <td>0.2080</td>
+      <td>0.295</td>
+      <td>0.6832</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ok_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([</span><span class="n">cam</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="s2">"y_pred"</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">n_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">cam</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="s2">"y_pred"</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sel</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"aciertos"</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">"errores"</span><span class="p">:</span> <span class="p">[]}</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">NUM_CLASSES</span><span class="p">):</span>
+    <span class="n">idk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">sel</span><span class="p">[</span><span class="s2">"aciertos"</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">idk</span><span class="p">[</span><span class="n">ok_all</span><span class="p">[</span><span class="n">idk</span><span class="p">]][:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">errs</span> <span class="o">=</span> <span class="n">idk</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">n_err</span><span class="p">[</span><span class="n">idk</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"stable"</span><span class="p">)]</span>
+    <span class="n">sel</span><span class="p">[</span><span class="s2">"errores"</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">errs</span><span class="p">[</span><span class="n">n_err</span><span class="p">[</span><span class="n">errs</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">][:</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">figura</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">titulo</span><span class="p">,</span> <span class="n">nombre</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No hay imágenes para «</span><span class="si">{</span><span class="n">titulo</span><span class="si">}</span><span class="s2">»."</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">7.2</span><span class="p">,</span> <span class="mf">1.9</span> <span class="o">*</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">cache</span><span class="p">[</span><span class="n">rows_test</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">mp</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">cam</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="s2">"maps56"</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">))[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">),</span>
+                               <span class="n">mode</span><span class="o">=</span><span class="s2">"bilinear"</span><span class="p">,</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+            <span class="n">ax</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mp</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"jet"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">[</span><span class="n">cam</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="s2">"y_pred"</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span>
+            <span class="n">ax</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">"pred: </span><span class="si">{</span><span class="n">pred</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#1C2541"</span> <span class="k">if</span> <span class="n">pred</span> <span class="o">==</span> <span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">else</span> <span class="s2">"#C0392B"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ax</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"imagen"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([]);</span> <span class="n">a</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([]);</span> <span class="n">a</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">"**</span><span class="si">{</span><span class="n">titulo</span><span class="si">}</span><span class="s2">**"</span><span class="p">))</span>
+    <span class="n">P</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="p">{</span><span class="s2">"indices_test"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">indices</span><span class="p">)),</span> <span class="s2">"relpath"</span><span class="p">:</span> <span class="p">[</span><span class="n">relp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]})</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">figura</span><span class="p">(</span><span class="n">sel</span><span class="p">[</span><span class="s2">"aciertos"</span><span class="p">],</span> <span class="s2">"Grad-CAM: aciertos de los tres modelos (2 por clase)"</span><span class="p">,</span> <span class="s2">"5_3_gradcam_aciertos"</span><span class="p">)</span>
+<span class="n">figura</span><span class="p">(</span><span class="n">sel</span><span class="p">[</span><span class="s2">"errores"</span><span class="p">],</span> <span class="s2">"Grad-CAM: errores (2 por clase; en rojo, predicción incorrecta)"</span><span class="p">,</span> <span class="s2">"5_3_gradcam_errores"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<p><strong>Grad-CAM: aciertos de los tres modelos (2 por clase)</strong></p>
+<img alt="_images/6e7427a101b5421cbeaa5c22690099913c348f93b788e6ddfbb146aacd5ad033.png" src="_images/6e7427a101b5421cbeaa5c22690099913c348f93b788e6ddfbb146aacd5ad033.png" />
+<p><strong>Grad-CAM: errores (2 por clase; en rojo, predicción incorrecta)</strong></p>
+<img alt="_images/e8d2afaef0aff71dce52ac275f80120f34e102ae43daf8e24535c7162bac39fe.png" src="_images/e8d2afaef0aff71dce52ac275f80120f34e102ae43daf8e24535c7162bac39fe.png" />
+</div>
+</div>
+</section>
+<section id="casos-dificiles-y-confusiones-frecuentes">
+<h2>Casos difíciles y confusiones frecuentes<a class="headerlink" href="#casos-dificiles-y-confusiones-frecuentes" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">perdidas</span><span class="p">,</span> <span class="n">errados</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seeds</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">run_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"test_predictions.pkl"</span><span class="p">)</span>
+        <span class="n">perdidas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">"probs"</span><span class="p">][</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="n">y</span><span class="p">],</span> <span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)))</span>
+        <span class="n">errados</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">"y_pred"</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">perdidas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">perdidas</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">falla_modelo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">errados</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">seeds</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.5</span>   <span class="c1"># mayoría de semillas</span>
+<span class="n">todos_fallan</span> <span class="o">=</span> <span class="n">falla_modelo</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dificiles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">todos_fallan</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">perdidas</span><span class="p">[</span><span class="n">todos_fallan</span><span class="p">])][:</span><span class="mi">12</span><span class="p">]</span>
+<span class="n">pred_mayoria</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">:</span>
+    <span class="n">P_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">run_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"test_predictions.pkl"</span><span class="p">)[</span><span class="s2">"y_pred"</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seeds</span><span class="p">])</span>
+    <span class="n">pred_mayoria</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">P_m</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">minlength</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))])</span>
+<span class="n">casos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"imagen"</span><span class="p">:</span> <span class="p">[</span><span class="n">relp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dificiles</span><span class="p">],</span> <span class="s2">"real"</span><span class="p">:</span> <span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dificiles</span><span class="p">],</span>
+                      <span class="o">**</span><span class="p">{</span><span class="n">m</span><span class="p">:</span> <span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">[</span><span class="n">pred_mayoria</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dificiles</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">},</span>
+                      <span class="s2">"pérdida media"</span><span class="p">:</span> <span class="n">perdidas</span><span class="p">[</span><span class="n">dificiles</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)})</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">todos_fallan</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2"> imágenes de prueba las falla la mayoría de semillas de los tres modelos. Las 12 de mayor pérdida:"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">casos</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dificiles</span><span class="p">):</span>
+    <span class="n">nc</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dificiles</span><span class="p">))</span>
+    <span class="n">nr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dificiles</span><span class="p">)</span> <span class="o">/</span> <span class="n">nc</span><span class="p">))</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nr</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">1.8</span> <span class="o">*</span> <span class="n">nc</span><span class="p">,</span> <span class="mf">2.1</span> <span class="o">*</span> <span class="n">nr</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">dificiles</span><span class="p">):</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="n">rows_test</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">[</span><span class="n">pred_mayoria</span><span class="p">[</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="n">i</span><span class="p">]]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([]);</span> <span class="n">a</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([]);</span> <span class="n">a</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Casos difíciles (real → predicción mayoritaria de ResNet-18)"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">P</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">"5_3_casos_dificiles"</span><span class="p">,</span> <span class="n">casos</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">cm_total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">run_dir</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"metrics_test.pkl"</span><span class="p">)[</span><span class="s2">"confusion_matrix"</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seeds</span><span class="p">)</span>
+<span class="n">pares</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+        <span class="n">pares</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"par"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"confusiones (ambos sentidos)"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cm_total</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">cm_total</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]),</span>
+                      <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cm_total</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]),</span> <span class="s2">"inversa"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">cm_total</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">])})</span>
+<span class="n">pares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pares</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"confusiones (ambos sentidos)"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pares</span><span class="p">[[</span><span class="s2">"par"</span><span class="p">,</span> <span class="s2">"confusiones (ambos sentidos)"</span><span class="p">]])</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">save_pickle</span><span class="p">({</span><span class="s2">"dificiles"</span><span class="p">:</span> <span class="n">casos</span><span class="p">,</span> <span class="s2">"n_todos_fallan"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">todos_fallan</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="s2">"pares_confundidos"</span><span class="p">:</span> <span class="n">pares</span><span class="p">,</span>
+             <span class="s2">"cm_total"</span><span class="p">:</span> <span class="n">cm_total</span><span class="p">,</span> <span class="s2">"seleccion_gradcam"</span><span class="p">:</span> <span class="n">sel</span><span class="p">},</span> <span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"casos_dificiles.pkl"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19 imágenes de prueba las falla la mayoría de semillas de los tres modelos. Las 12 de mayor pérdida:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>imagen</th>
+      <th>real</th>
+      <th>CNN</th>
+      <th>MobileNetV2</th>
+      <th>ResNet-18</th>
+      <th>pérdida media</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>glass/glass278.jpg</td>
+      <td>glass</td>
+      <td>paper</td>
+      <td>paper</td>
+      <td>paper</td>
+      <td>8.40</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>plastic/plastic455.jpg</td>
+      <td>plastic</td>
+      <td>paper</td>
+      <td>paper</td>
+      <td>paper</td>
+      <td>7.75</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>glass/glass186.jpg</td>
+      <td>glass</td>
+      <td>metal</td>
+      <td>metal</td>
+      <td>metal</td>
+      <td>6.98</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>trash/trash53.jpg</td>
+      <td>trash</td>
+      <td>cardboard</td>
+      <td>cardboard</td>
+      <td>glass</td>
+      <td>6.13</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>plastic/plastic97.jpg</td>
+      <td>plastic</td>
+      <td>paper</td>
+      <td>paper</td>
+      <td>paper</td>
+      <td>5.09</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>trash/trash91.jpg</td>
+      <td>trash</td>
+      <td>paper</td>
+      <td>paper</td>
+      <td>paper</td>
+      <td>4.82</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>trash/trash126.jpg</td>
+      <td>trash</td>
+      <td>glass</td>
+      <td>glass</td>
+      <td>glass</td>
+      <td>3.49</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>plastic/plastic456.jpg</td>
+      <td>plastic</td>
+      <td>metal</td>
+      <td>metal</td>
+      <td>metal</td>
+      <td>3.36</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>plastic/plastic457.jpg</td>
+      <td>plastic</td>
+      <td>glass</td>
+      <td>glass</td>
+      <td>glass</td>
+      <td>3.03</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>cardboard/cardboard279.jpg</td>
+      <td>cardboard</td>
+      <td>paper</td>
+      <td>paper</td>
+      <td>paper</td>
+      <td>2.89</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>metal/metal37.jpg</td>
+      <td>metal</td>
+      <td>glass</td>
+      <td>glass</td>
+      <td>glass</td>
+      <td>2.80</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>paper/paper428.jpg</td>
+      <td>paper</td>
+      <td>plastic</td>
+      <td>plastic</td>
+      <td>plastic</td>
+      <td>2.71</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/83ca73e03ecf7a26b74a71f237fbc73f3ed0f02f9d1e6d9677c13ee3125ecd7f.png" src="_images/83ca73e03ecf7a26b74a71f237fbc73f3ed0f02f9d1e6d9677c13ee3125ecd7f.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>par</th>
+      <th>confusiones (ambos sentidos)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>glass / plastic</td>
+      <td>259</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>glass / metal</td>
+      <td>190</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>paper / plastic</td>
+      <td>180</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>paper / trash</td>
+      <td>162</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cardboard / paper</td>
+      <td>89</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="discusion">
+<h2>Discusión<a class="headerlink" href="#discusion" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"stats.pkl"</span><span class="p">)</span>
+<span class="n">t51</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"tabla_5_1.pkl"</span><span class="p">)</span>
+<span class="n">brecha</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"brecha_train_val.pkl"</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)[</span><span class="s2">"brecha train − val"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">pa</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">COMMON</span> <span class="o">/</span> <span class="s2">"power_analysis.pkl"</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">st</span><span class="p">[</span><span class="s2">"baseline"</span><span class="p">]</span>
+<span class="n">orden</span> <span class="o">=</span> <span class="n">st</span><span class="p">[</span><span class="s2">"ranking"</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">f1m</span> <span class="o">=</span> <span class="n">st</span><span class="p">[</span><span class="s2">"ranking"</span><span class="p">][</span><span class="s2">"media"</span><span class="p">]</span>
+<span class="n">costo</span> <span class="o">=</span> <span class="n">t51</span><span class="p">[</span><span class="s2">"costo"</span><span class="p">]</span>
+<span class="n">cf</span> <span class="o">=</span> <span class="n">caida</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"fondo_sustituido"</span><span class="p">][</span><span class="s2">"mean"</span><span class="p">]</span>
+<span class="n">cg</span> <span class="o">=</span> <span class="n">caida</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"limpio"</span><span class="p">,</span> <span class="s2">"fondo_sustituido"</span><span class="p">])[</span><span class="s2">"mean"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>   <span class="c1"># caída media por modelo (perturbaciones genéricas)</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">cg</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">pw</span> <span class="o">=</span> <span class="n">st</span><span class="p">[</span><span class="s2">"pares"</span><span class="p">]</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">pw</span><span class="p">[(</span><span class="n">pw</span><span class="p">[</span><span class="s2">"p_wilcoxon_holm"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">C</span><span class="o">.</span><span class="n">ALPHA</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">pw</span><span class="p">[</span><span class="s2">"p_t_holm"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">C</span><span class="o">.</span><span class="n">ALPHA</span><span class="p">)]</span>
+<span class="n">rel</span> <span class="o">=</span> <span class="n">sig</span><span class="p">[</span><span class="n">sig</span><span class="p">[</span><span class="s2">"dif_media"</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">C</span><span class="o">.</span><span class="n">DELTA</span><span class="p">]</span>
+
+<span class="n">txt</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"**¿Cuál funciona mejor y por qué?** El orden por F1 macro medio es </span><span class="si">{</span><span class="s1">' &gt; '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">orden</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+           <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="s1">' / '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">f1m</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">orden</span><span class="p">)</span><span class="si">}</span><span class="s2">). "</span>
+           <span class="o">+</span> <span class="p">(</span><span class="sa">f</span><span class="s2">"Las diferencias significativas y mayores que δ son: </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> − </span><span class="si">{</span><span class="n">b_</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">d</span><span class="si">:</span><span class="s1">+.3f</span><span class="si">}</span><span class="s1">)'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b_</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb">zip</span><span class="p">(</span><span class="n">rel</span><span class="p">[</span><span class="s1">'A'</span><span class="p">],</span><span class="w"> </span><span class="n">rel</span><span class="p">[</span><span class="s1">'B'</span><span class="p">],</span><span class="w"> </span><span class="n">rel</span><span class="p">[</span><span class="s1">'dif_media'</span><span class="p">]))</span><span class="si">}</span><span class="s2">. "</span>
+              <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rel</span><span class="p">)</span> <span class="k">else</span> <span class="s2">"Ninguna diferencia entre pares es a la vez significativa y mayor que δ. "</span><span class="p">)</span>
+           <span class="o">+</span> <span class="s2">"Los sesgos inductivos ofrecen una interpretación: ResNet-18 propaga mejor el gradiente gracias a los atajos identidad; "</span>
+             <span class="s2">"MobileNetV2 tiene menos parámetros y depende más de la regularización; la CNN, sin atajos, tiene la menor capacidad, "</span>
+             <span class="s2">"pero opera a resolución completa en sus primeras capas."</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"**¿Cuál generaliza mejor?** La brecha train − val en la mejor época es "</span>
+           <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">brecha</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">)</span><span class="si">}</span><span class="s2">. "</span>
+           <span class="sa">f</span><span class="s2">"Ante perturbaciones genéricas (ruido, desenfoque, brillo, oclusión), la caída media de F1 es "</span>
+           <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">cg</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">)</span><span class="si">}</span><span class="s2">. "</span>
+           <span class="sa">f</span><span class="s2">"Con el fondo sustituido, la caída es </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">cf</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lectura_atajo</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">atajo</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">"Wilcoxon p (exceso &gt; 0)"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">C</span><span class="o">.</span><span class="n">ALPHA</span> <span class="ow">and</span> <span class="n">r</span><span class="p">[</span><span class="s2">"exceso medio"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">C</span><span class="o">.</span><span class="n">DELTA</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> depende del fondo (exceso </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'exceso medio'</span><span class="p">]</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'Wilcoxon p (exceso &gt; 0)'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)"</span>
+    <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s2">"Wilcoxon p (exceso &gt; 0)"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">C</span><span class="o">.</span><span class="n">ALPHA</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> muestra un exceso sistemático pero menor que δ (</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'exceso medio'</span><span class="p">]</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'Wilcoxon p (exceso &gt; 0)'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)"</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> no muestra evidencia de depender del fondo más que de otras perturbaciones (</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'exceso medio'</span><span class="p">]</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'Wilcoxon p (exceso &gt; 0)'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)"</span>
+
+<span class="n">cociente</span> <span class="o">=</span> <span class="p">{</span><span class="n">m</span><span class="p">:</span> <span class="n">atencion</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="s2">"energía / área (mediana)"</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">}</span>
+<span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"**¿Usan el fondo como atajo?** Comparando la caída con fondo sustituido con la de las perturbaciones genéricas: "</span>
+           <span class="o">+</span> <span class="s2">"; "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lectura_atajo</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">)</span> <span class="o">+</span> <span class="s2">". "</span>
+           <span class="sa">f</span><span class="s2">"En Grad-CAM, la mediana del cociente entre la energía del mapa en el fondo y el área de fondo es "</span>
+           <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">cociente</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">)</span><span class="si">}</span><span class="s2">: un valor menor que 1 indica que el mapa se concentra en el objeto. "</span>
+           <span class="s2">"Ambas medidas son indirectas y deben interpretarse en conjunto."</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"**¿Hay compromiso entre desempeño y costo?** Los parámetros son "</span>
+           <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">costo</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="s1">'params'</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> M'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">)</span><span class="si">}</span><span class="s2">, y la inferencia, "</span>
+           <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">costo</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="s1">'ms_img'</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> ms'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">)</span><span class="si">}</span><span class="s2"> por imagen. "</span>
+           <span class="s2">"La figura de desempeño frente a costo (sección 5.1) muestra si el mayor costo se traduce en mejor F1."</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"**Modelo de referencia.** </span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">'modelo'</span><span class="p">]</span><span class="si">}</span><span class="s2">, con F1 macro </span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">'media'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">'DE'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> "</span>
+           <span class="sa">f</span><span class="s2">"(IC 95 % [</span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">'IC_t'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">'IC_t'</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">]); umbral de mejora: </span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="s1">'umbral_mejora'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> en F1 macro."</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"**Margen frente a la literatura.** El ~96 </span><span class="si">% d</span><span class="s2">e accuracy reportado en TrashNet viene de modelos preentrenados, en su mayoría "</span>
+           <span class="s2">"con una sola corrida y particiones aleatorias, que pueden dejar casi-duplicados entre entrenamiento y prueba (Sección 2.3). "</span>
+           <span class="s2">"Es una cota optimista; la contribución del preentrenamiento debe medirse con el mismo protocolo."</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">txt</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">st</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"stats.pkl"</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">t51</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"tabla_5_1.pkl"</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">brecha</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"brecha_train_val.pkl"</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)[</span><span class="s2">"brecha train − val"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">pa</span> <span class="o">=</span> <span class="n">load_pickle</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">COMMON</span> <span class="o">/</span> <span class="s2">"power_analysis.pkl"</span><span class="p">)</span>
+
+<span class="nn">File ~\Documents\GitHub\deep-learning-colaborativo\src\persist.py:96,</span> in <span class="ni">load_pickle</span><span class="nt">(path)</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span> <span class="k">def</span><span class="w"> </span><span class="nf">load_pickle</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>         <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: 'C:\\Users\\User\\Documents\\GitHub\\deep-learning-colaborativo\\results\\summary\\stats.pkl'
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Amenazas a la validez.</strong></p>
+<ul class="simple">
+<li><p><strong>Interna:</strong> usamos una sola partición fija, por lo que las conclusiones dependen de las 361 imágenes de prueba; la búsqueda de hiperparámetros usó una semilla y una validación fija; el determinismo en GPU no es completo. La fuga por duplicados está controlada por la partición agrupada, y el presupuesto de búsqueda fue igual para los tres modelos.</p></li>
+<li><p><strong>Externa:</strong> todas las fotografías son de estudio, con un objeto sobre fondo blanco. En una banda de reciclaje, con varios objetos, suciedad e iluminación variable, el desempeño puede ser menor. La prueba con fondo sustituido cubre solo una parte de este riesgo.</p></li>
+<li><p><strong>De constructo:</strong> el F1 macro asigna el mismo peso a todas las clases, aunque en una planta los errores tienen costos distintos; además, el ruido de etiquetas residual no está cuantificado (sección 2.8).</p></li>
+</ul>
+<p><strong>Limitaciones.</strong> El número de semillas es reducido para pruebas por rangos con <span class="math notranslate nohighlight">\(k = 3\)</span>; no usamos validación cruzada anidada; la entrada de 224×224 deforma la relación de aspecto; y, por diseño, no usamos preentrenamiento.</p>
+<p><strong>Trabajo futuro.</strong> Un modelo más avanzado, por ejemplo con transferencia desde ImageNet, debe compararse con el modelo de referencia bajo la misma partición, las mismas semillas y las mismas pruebas, superar el umbral de mejora calculado en la sección 5.2 e incluir la evaluación con fondo sustituido.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Grad-CAM, la evaluación con fondo sustituido y el análisis de casos difíciles complementan las métricas agregadas: muestran en qué se apoyan los modelos y dónde fallan.</p>
+<p><strong>Referencia adicional.</strong> Selvaraju, R. R., Cogswell, M., Das, A., Vedantam, R., Parikh, D. y Batra, D. (2017). Grad-CAM: Visual Explanations from Deep Networks via Gradient-Based Localization. <em>ICCV</em>, 618–626. <a class="reference external" href="https://doi.org/10.1109/ICCV.2017.74">https://doi.org/10.1109/ICCV.2017.74</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="46_benchmark_baseline_estadistica.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">5.2 Comparación estadística y modelo de referencia</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="06_declaracion_apriori.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">6. Declaración a priori</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez-ante-perturbaciones">Robustez ante perturbaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grad-cam">Grad-CAM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#casos-dificiles-y-confusiones-frecuentes">Casos difíciles y confusiones frecuentes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discusion">Discusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan y Juan Díaz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

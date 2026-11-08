@@ -1,0 +1,975 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.2 Partición y preprocesamiento &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '41_particion_y_preprocesamiento';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4.3 Búsqueda de hiperparámetros" href="42_busqueda_hiperparametros.html" />
+    <link rel="prev" title="4.1 Diseño experimental" href="40_diseno_experimental.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/41_particion_y_preprocesamiento.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4.2 Partición y preprocesamiento</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion">Partición</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redimensionamiento-y-normalizacion">Redimensionamiento y normalización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pesos-de-clase">Pesos de clase</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aumento-de-datos">Aumento de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="particion-y-preprocesamiento">
+<h1>4.2 Partición y preprocesamiento<a class="headerlink" href="#particion-y-preprocesamiento" title="Link to this heading">#</a></h1>
+<p>En esta sección cargamos la partición definida en el análisis exploratorio, verificamos la ausencia de fuga de información y calculamos con el conjunto de entrenamiento las estadísticas de normalización y los pesos de clase.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">ROOT</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"src"</span> <span class="o">/</span> <span class="s2">"config.py"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span> <span class="k">as</span> <span class="n">C</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src</span><span class="w"> </span><span class="kn">import</span> <span class="n">plots</span> <span class="k">as</span> <span class="n">P</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.persist</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_done</span><span class="p">,</span> <span class="n">load_pickle</span><span class="p">,</span> <span class="n">save_pickle</span>
+
+<span class="n">P</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+<span class="n">C</span><span class="o">.</span><span class="n">ensure_dirs</span><span class="p">()</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.precision"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Resultados:"</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">RESULTS</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"| modelos:"</span><span class="p">,</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resultados: results | modelos: CNN, MobileNetV2, ResNet-18
+</pre></div>
+</div>
+</div>
+</div>
+<section id="particion">
+<h2>Partición<a class="headerlink" href="#particion" title="Link to this heading">#</a></h2>
+<p>Usamos la partición de la sección 2.4: sin las 6 imágenes con etiqueta contradictoria, con los casi-duplicados agrupados y cada grupo asignado completo a una sola partición, en proporción 5:1:1 (≈ 71/14/14 %). Antes de cada corrida se verifica la huella SHA-256 del conjunto de prueba.</p>
+<p>La selección de hiperparámetros usa una partición fija de validación. La validación cruzada anidada multiplicaría el costo computacional por el número de pliegues y no fue viable con los recursos disponibles; en consecuencia, la configuración elegida puede ajustarse en parte a las 360 imágenes de validación.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">prepare_common</span>
+
+<span class="n">common</span> <span class="o">=</span> <span class="n">prepare_common</span><span class="p">()</span>
+<span class="n">sp</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">cw</span> <span class="o">=</span> <span class="n">common</span><span class="p">[</span><span class="s2">"splits"</span><span class="p">],</span> <span class="n">common</span><span class="p">[</span><span class="s2">"norm"</span><span class="p">],</span> <span class="n">common</span><span class="p">[</span><span class="s2">"class_weights"</span><span class="p">]</span>
+
+<span class="n">conteos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">s</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">sp</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="s2">"y"</span><span class="p">],</span> <span class="n">minlength</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">NUM_CLASSES</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"train"</span><span class="p">,</span> <span class="s2">"val"</span><span class="p">,</span> <span class="s2">"test"</span><span class="p">)},</span>
+                       <span class="n">index</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">)</span>
+<span class="n">conteos</span><span class="p">[</span><span class="s2">"total"</span><span class="p">]</span> <span class="o">=</span> <span class="n">conteos</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">conteos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"total"</span><span class="p">]</span> <span class="o">=</span> <span class="n">conteos</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">proporcion</span> <span class="o">=</span> <span class="p">(</span><span class="n">conteos</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="n">conteos</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">conteos</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">proporcion</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> (%)"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>train</th>
+      <th>val</th>
+      <th>test</th>
+      <th>total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>cardboard</th>
+      <td>287</td>
+      <td>58</td>
+      <td>58</td>
+      <td>403</td>
+    </tr>
+    <tr>
+      <th>glass</th>
+      <td>355</td>
+      <td>71</td>
+      <td>72</td>
+      <td>498</td>
+    </tr>
+    <tr>
+      <th>metal</th>
+      <td>292</td>
+      <td>59</td>
+      <td>58</td>
+      <td>409</td>
+    </tr>
+    <tr>
+      <th>paper</th>
+      <td>424</td>
+      <td>85</td>
+      <td>85</td>
+      <td>594</td>
+    </tr>
+    <tr>
+      <th>plastic</th>
+      <td>343</td>
+      <td>68</td>
+      <td>69</td>
+      <td>480</td>
+    </tr>
+    <tr>
+      <th>trash</th>
+      <td>99</td>
+      <td>19</td>
+      <td>19</td>
+      <td>137</td>
+    </tr>
+    <tr>
+      <th>total</th>
+      <td>1800</td>
+      <td>360</td>
+      <td>361</td>
+      <td>2521</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>train (%)</th>
+      <th>val (%)</th>
+      <th>test (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>cardboard</th>
+      <td>15.9</td>
+      <td>16.1</td>
+      <td>16.1</td>
+    </tr>
+    <tr>
+      <th>glass</th>
+      <td>19.7</td>
+      <td>19.7</td>
+      <td>19.9</td>
+    </tr>
+    <tr>
+      <th>metal</th>
+      <td>16.2</td>
+      <td>16.4</td>
+      <td>16.1</td>
+    </tr>
+    <tr>
+      <th>paper</th>
+      <td>23.6</td>
+      <td>23.6</td>
+      <td>23.5</td>
+    </tr>
+    <tr>
+      <th>plastic</th>
+      <td>19.1</td>
+      <td>18.9</td>
+      <td>19.1</td>
+    </tr>
+    <tr>
+      <th>trash</th>
+      <td>5.5</td>
+      <td>5.3</td>
+      <td>5.3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pares</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"train"</span><span class="p">,</span> <span class="s2">"val"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"train"</span><span class="p">,</span> <span class="s2">"test"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"val"</span><span class="p">,</span> <span class="s2">"test"</span><span class="p">)]</span>
+<span class="n">verif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"archivos idénticos (SHA-256) compartidos"</span><span class="p">:</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">sp</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="s2">"sha256"</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">sp</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="s2">"sha256"</span><span class="p">]))</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">pares</span><span class="p">],</span>
+    <span class="s2">"grupos de casi-duplicados compartidos"</span><span class="p">:</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">sp</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="s2">"group"</span><span class="p">])</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">sp</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="s2">"group"</span><span class="p">]))</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">pares</span><span class="p">],</span>
+<span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">pares</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">verif</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">verif</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"Hay solapamiento entre particiones"</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Huella del test:"</span><span class="p">,</span> <span class="n">sp</span><span class="p">[</span><span class="s2">"test_fingerprint"</span><span class="p">][:</span><span class="mi">16</span><span class="p">],</span> <span class="s2">"... coincide con la registrada en el EDA"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>archivos idénticos (SHA-256) compartidos</th>
+      <th>grupos de casi-duplicados compartidos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>train / val</th>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>train / test</th>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>val / test</th>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Huella del test: 4e4651dc5c8bbbfc ... coincide con la registrada en el EDA
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="redimensionamiento-y-normalizacion">
+<h2>Redimensionamiento y normalización<a class="headerlink" href="#redimensionamiento-y-normalizacion" title="Link to this heading">#</a></h2>
+<p>Redimensionamos las imágenes de 512×384 a 224×224 con interpolación bicúbica. Descartamos el <em>letterbox</em> (relleno hasta un cuadrado) porque añade franjas que actuarían como fondo artificial, y el fondo ya está asociado a la clase (sección 2.7). La deformación de 4:3 a 1:1 es la misma para todas las imágenes y para los tres modelos.</p>
+<p>Calculamos la media y la desviación estándar por canal con el conjunto de entrenamiento redimensionado y las comparamos con las obtenidas a resolución original.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">eda</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">((</span><span class="n">ROOT</span> <span class="o">/</span> <span class="s2">"data"</span> <span class="o">/</span> <span class="s2">"splits"</span> <span class="o">/</span> <span class="s2">"norm_stats_v2_s1234.json"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">))</span>
+<span class="n">tabla_norm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"media 512×384 (EDA)"</span><span class="p">:</span> <span class="n">eda</span><span class="p">[</span><span class="s2">"mean"</span><span class="p">],</span> <span class="s2">"DE 512×384 (EDA)"</span><span class="p">:</span> <span class="n">eda</span><span class="p">[</span><span class="s2">"std"</span><span class="p">],</span>
+                           <span class="s2">"media 224×224"</span><span class="p">:</span> <span class="n">norm</span><span class="p">[</span><span class="s2">"mean"</span><span class="p">],</span> <span class="s2">"DE 224×224"</span><span class="p">:</span> <span class="n">norm</span><span class="p">[</span><span class="s2">"std"</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"R"</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">tabla_norm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>media 512×384 (EDA)</th>
+      <th>DE 512×384 (EDA)</th>
+      <th>media 224×224</th>
+      <th>DE 224×224</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>R</th>
+      <td>0.6718</td>
+      <td>0.2105</td>
+      <td>0.6718</td>
+      <td>0.2091</td>
+    </tr>
+    <tr>
+      <th>G</th>
+      <td>0.6380</td>
+      <td>0.2107</td>
+      <td>0.6380</td>
+      <td>0.2093</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>0.6022</td>
+      <td>0.2322</td>
+      <td>0.6022</td>
+      <td>0.2309</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="pesos-de-clase">
+<h2>Pesos de clase<a class="headerlink" href="#pesos-de-clase" title="Link to this heading">#</a></h2>
+<p>La pérdida es la entropía cruzada ponderada, <span class="math notranslate nohighlight">\(\mathcal L = -\sum_i w_{y_i}\log p(y_i\mid x_i) / \sum_i w_{y_i}\)</span>, con <span class="math notranslate nohighlight">\(w_k = N/(K\,n_k)\)</span> calculado en entrenamiento. El promedio de los pesos es 1; una imagen de <code class="docutils literal notranslate"><span class="pre">trash</span></code> pesa unas cuatro veces más que una de <code class="docutils literal notranslate"><span class="pre">paper</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla_pesos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"imágenes en train"</span><span class="p">:</span> <span class="n">cw</span><span class="p">[</span><span class="s2">"counts_train"</span><span class="p">],</span> <span class="s2">"peso w_k"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cw</span><span class="p">[</span><span class="s2">"weights"</span><span class="p">],</span> <span class="mi">3</span><span class="p">)},</span>
+                           <span class="n">index</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">tabla_pesos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>imágenes en train</th>
+      <th>peso w_k</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>cardboard</th>
+      <td>287</td>
+      <td>1.045</td>
+    </tr>
+    <tr>
+      <th>glass</th>
+      <td>355</td>
+      <td>0.845</td>
+    </tr>
+    <tr>
+      <th>metal</th>
+      <td>292</td>
+      <td>1.027</td>
+    </tr>
+    <tr>
+      <th>paper</th>
+      <td>424</td>
+      <td>0.708</td>
+    </tr>
+    <tr>
+      <th>plastic</th>
+      <td>343</td>
+      <td>0.875</td>
+    </tr>
+    <tr>
+      <th>trash</th>
+      <td>99</td>
+      <td>3.030</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="aumento-de-datos">
+<h2>Aumento de datos<a class="headerlink" href="#aumento-de-datos" title="Link to this heading">#</a></h2>
+<p>En entrenamiento aplicamos transformaciones que preservan la etiqueta: <code class="docutils literal notranslate"><span class="pre">RandomResizedCrop(224,</span> <span class="pre">scale=(0.7,</span> <span class="pre">1.0))</span></code>, volteos horizontal y vertical, <code class="docutils literal notranslate"><span class="pre">RandomRotation(15)</span></code> y <code class="docutils literal notranslate"><span class="pre">ColorJitter(0.2,</span> <span class="pre">0.2,</span> <span class="pre">0.2,</span> <span class="pre">0.02)</span></code>. La variación de brillo, contraste, saturación y tono responde al atajo de iluminación identificado en la sección 2.7; el recorte modifica la proporción de fondo visible. En validación y prueba solo se normaliza.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">CachedImages</span><span class="p">,</span> <span class="n">load_cache</span><span class="p">,</span> <span class="n">train_transform</span>
+
+<span class="n">cache</span> <span class="o">=</span> <span class="n">load_cache</span><span class="p">()</span>
+<span class="n">ds_vis</span> <span class="o">=</span> <span class="n">CachedImages</span><span class="p">(</span><span class="n">common</span><span class="p">[</span><span class="s2">"cache"</span><span class="p">],</span> <span class="n">sp</span><span class="p">[</span><span class="s2">"train"</span><span class="p">][</span><span class="s2">"rows"</span><span class="p">],</span> <span class="n">sp</span><span class="p">[</span><span class="s2">"train"</span><span class="p">][</span><span class="s2">"y"</span><span class="p">],</span> <span class="n">train_transform</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="n">ejemplos</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">sp</span><span class="p">[</span><span class="s2">"train"</span><span class="p">][</span><span class="s2">"y"</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span><span class="p">)[</span><span class="mi">3</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">5.4</span><span class="p">))</span>
+<span class="n">datos</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ejemplos</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="n">sp</span><span class="p">[</span><span class="s2">"train"</span><span class="p">][</span><span class="s2">"rows"</span><span class="p">][</span><span class="n">p</span><span class="p">]])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">CLASSES</span><span class="p">[</span><span class="n">sp</span><span class="p">[</span><span class="s2">"train"</span><span class="p">][</span><span class="s2">"y"</span><span class="p">][</span><span class="n">p</span><span class="p">]])</span>
+    <span class="n">datos</span><span class="p">[</span><span class="n">sp</span><span class="p">[</span><span class="s2">"train"</span><span class="p">][</span><span class="s2">"relpath"</span><span class="p">][</span><span class="n">p</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ds_vis</span><span class="p">[(</span><span class="n">p</span><span class="p">,</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">j</span> <span class="o">+</span> <span class="n">p</span><span class="p">)]</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">datos</span><span class="p">[</span><span class="n">sp</span><span class="p">[</span><span class="s2">"train"</span><span class="p">][</span><span class="s2">"relpath"</span><span class="p">][</span><span class="n">p</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">j</span> <span class="o">+</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"original"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"aumentada </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([]);</span> <span class="n">a</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([]);</span> <span class="n">a</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Aumentación aplicada en train (semillas por imagen fijas)"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">P</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">"4_2_aumentacion"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"imagenes"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">datos</span><span class="p">),</span> <span class="s2">"semillas"</span><span class="p">:</span> <span class="n">datos</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/a0832a69805332169cbb479c368870d1992d4cf0f19cff22fec2ec4e615665e4.png" src="_images/a0832a69805332169cbb479c368870d1992d4cf0f19cff22fec2ec4e615665e4.png" />
+</div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>La partición no presenta archivos ni grupos de casi-duplicados compartidos entre entrenamiento, validación y prueba. La normalización y los pesos de clase se calcularon solo con entrenamiento. Las estadísticas a 224×224 son casi iguales a las de resolución original, con una desviación estándar ligeramente menor por el suavizado del redimensionamiento.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="40_diseno_experimental.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4.1 Diseño experimental</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="42_busqueda_hiperparametros.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4.3 Búsqueda de hiperparámetros</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion">Partición</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redimensionamiento-y-normalizacion">Redimensionamiento y normalización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pesos-de-clase">Pesos de clase</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aumento-de-datos">Aumento de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan y Juan Díaz
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
