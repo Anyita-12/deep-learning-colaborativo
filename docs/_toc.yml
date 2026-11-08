@@ -4,6 +4,12 @@ chapters:
   - file: 01_problema_dataset
   - file: 02_eda
   - file: 03_estado_del_arte
-  - file: 04_implementacion
-  - file: 05_benchmark
+  - file: 40_diseno_experimental
+  - file: 41_particion_y_preprocesamiento
+  - file: 42_busqueda_hiperparametros
+  - file: 43_piloto_y_tamano_de_muestra
+  - file: 44_entrenamiento_final
+  - file: 45_evaluacion_resultados
+  - file: 46_benchmark_baseline_estadistica
+  - file: 47_analisis_cualitativo_robustez
   - file: 06_declaracion_apriori

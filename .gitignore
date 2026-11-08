@@ -57,3 +57,10 @@ Thumbs.db
 
 docs/_build/
 .ipynb_checkpoints/
+
+# --- agregar al final de .gitignore (modelos base) ---
+results/**/*.pt
+results/**/RUNNING.lock
+results/**/*.tmp
+results/_estimate/
+results_smoke/

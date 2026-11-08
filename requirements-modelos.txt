@@ -1,0 +1,12 @@
+# Dependencias de la implementación (Secciones 4 y 5).
+# PyTorch con CUDA se instala aparte, con el comando de pytorch.org (ver INSTRUCCIONES).
+numpy>=1.26
+pandas>=2.1
+scipy>=1.11
+scikit-learn>=1.4
+statsmodels>=0.14
+matplotlib>=3.8
+pillow>=10
+scikit-posthocs>=0.9
+nbformat>=5.9
+ipykernel>=6.29

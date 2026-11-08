@@ -1,0 +1,4 @@
+modelo,parámetros,tamaño (MB),GMAC por imagen
+CNN,1174758,4.49,2.59
+MobileNetV2,2231558,8.64,0.3
+ResNet-18,11179590,42.68,1.81
