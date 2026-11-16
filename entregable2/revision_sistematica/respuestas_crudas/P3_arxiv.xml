@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/BbVAFXYIg7c+g2TaEWzw2FCYlCo</id>
+  <title>arXiv Query: search_query=( (abs:"waste" OR abs:"garbage" OR abs:"trash") AND (abs:"transfer learning" OR abs:"fine-tuning" OR abs:"pretrained" OR abs:"pre-trained") AND abs:"image classification") AND submittedDate:"201801010000 TO 202612312359"&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-11-16T19:22:43Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=((abs:%22waste%22+OR+(abs:%22garbage%22+OR+abs:%22trash%22))+AND+((abs:%22transfer+learning%22+OR+(abs:%22fine-tuning%22+OR+(abs:%22pretrained%22+OR+abs:%22pre-trained%22)))+AND+abs:%22image+classification%22))+AND+submittedDate:%22201801010000+TO+202612312359%22&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>7</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2004.02168v2</id>
+    <title>Comparative Analysis of Multiple Deep CNN Models for Waste Classification</title>
+    <updated>2020-08-14T09:19:12Z</updated>
+    <link href="https://arxiv.org/abs/2004.02168v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.02168v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Waste is a wealth in a wrong place. Our research focuses on analyzing possibilities for automatic waste sorting and collecting in such a way that helps it for further recycling process. Various approaches are being practiced managing waste but not efficient and require human intervention. The automatic waste segregation would fit in to fill the gap. The project tested well known Deep Learning Network architectures for waste classification with dataset combined from own endeavors and Trash Net. The convolutional neural network is used for image classification. The hardware built in the form of dustbin is used to segregate those wastes into different compartments. Without the human exercise in segregating those waste products, the study would save the precious time and would introduce the automation in the area of waste management. Municipal solid waste is a huge, renewable source of energy. The situation is win-win for both government, society and industrialists. Because of fine-tuning of the ResNet18 Network, the best validation accuracy was found to be 87.8%.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-05T11:50:27Z</published>
+    <arxiv:comment>6 pages, 13 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>5th International Conference on Advanced Engineering and ICT-Convergence 2020</arxiv:journal_ref>
+    <author>
+      <name>Dipesh Gyawali</name>
+    </author>
+    <author>
+      <name>Alok Regmi</name>
+    </author>
+    <author>
+      <name>Aatish Shakya</name>
+    </author>
+    <author>
+      <name>Ashish Gautam</name>
+    </author>
+    <author>
+      <name>Surendra Shrestha</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2112.09153v2</id>
+    <title>An Empirical Investigation of the Role of Pre-training in Lifelong Learning</title>
+    <updated>2023-08-29T17:04:19Z</updated>
+    <link href="https://arxiv.org/abs/2112.09153v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2112.09153v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The lifelong learning paradigm in machine learning is an attractive alternative to the more prominent isolated learning scheme not only due to its resemblance to biological learning but also its potential to reduce energy waste by obviating excessive model re-training. A key challenge to this paradigm is the phenomenon of catastrophic forgetting. With the increasing popularity and success of pre-trained models in machine learning, we pose the question: What role does pre-training play in lifelong learning, specifically with respect to catastrophic forgetting? We investigate existing methods in the context of large, pre-trained models and evaluate their performance on a variety of text and image classification tasks, including a large-scale study using a novel data set of 15 diverse NLP tasks. Across all settings, we observe that generic pre-training implicitly alleviates the effects of catastrophic forgetting when learning multiple tasks sequentially compared to randomly initialized models. We then further investigate why pre-training alleviates forgetting in this setting. We study this phenomenon by analyzing the loss landscape, finding that pre-trained weights appear to ease forgetting by leading to wider minima. Based on this insight, we propose jointly optimizing for current task loss and loss basin sharpness to explicitly encourage wider basins during sequential fine-tuning. We show that this optimization approach outperforms several state-of-the-art task-sequential continual learning algorithms across multiple settings, occasionally even without retaining a memory that scales in size with the number of tasks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-12-16T19:00:55Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Journal of Machine Learning Research 24 (2023) 1-50</arxiv:journal_ref>
+    <author>
+      <name>Sanket Vaibhav Mehta</name>
+    </author>
+    <author>
+      <name>Darshan Patil</name>
+    </author>
+    <author>
+      <name>Sarath Chandar</name>
+    </author>
+    <author>
+      <name>Emma Strubell</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.05768v1</id>
+    <title>Evaluating Data Augmentation Techniques for Coffee Leaf Disease Classification</title>
+    <updated>2024-01-11T09:22:36Z</updated>
+    <link href="https://arxiv.org/abs/2401.05768v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.05768v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The detection and classification of diseases in Robusta coffee leaves are essential to ensure that plants are healthy and the crop yield is kept high. However, this job requires extensive botanical knowledge and much wasted time. Therefore, this task and others similar to it have been extensively researched subjects in image classification. Regarding leaf disease classification, most approaches have used the more popular PlantVillage dataset while completely disregarding other datasets, like the Robusta Coffee Leaf (RoCoLe) dataset. As the RoCoLe dataset is imbalanced and does not have many samples, fine-tuning of pre-trained models and multiple augmentation techniques need to be used. The current paper uses the RoCoLe dataset and approaches based on deep learning for classifying coffee leaf diseases from images, incorporating the pix2pix model for segmentation and cycle-generative adversarial network (CycleGAN) for augmentation. Our study demonstrates the effectiveness of Transformer-based models, online augmentations, and CycleGAN augmentation in improving leaf disease classification. While synthetic data has limitations, it complements real data, enhancing model performance. These findings contribute to developing robust techniques for plant disease detection and classification.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-11T09:22:36Z</published>
+    <arxiv:comment>Accepted by ICAART 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Adrian Gheorghiu</name>
+    </author>
+    <author>
+      <name>Iulian-Marius Tăiatu</name>
+    </author>
+    <author>
+      <name>Dumitru-Clementin Cercel</name>
+    </author>
+    <author>
+      <name>Iuliana Marin</name>
+    </author>
+    <author>
+      <name>Florin Pop</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.15318v3</id>
+    <title>OpenPath: Open-Set Active Learning for Pathology Image Classification via Pre-trained Vision-Language Models</title>
+    <updated>2025-06-28T10:26:44Z</updated>
+    <link href="https://arxiv.org/abs/2506.15318v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.15318v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Pathology image classification plays a crucial role in accurate medical diagnosis and treatment planning. Training high-performance models for this task typically requires large-scale annotated datasets, which are both expensive and time-consuming to acquire. Active Learning (AL) offers a solution by iteratively selecting the most informative samples for annotation, thereby reducing the labeling effort. However, most AL methods are designed under the assumption of a closed-set scenario, where all the unannotated images belong to target classes. In real-world clinical environments, the unlabeled pool often contains a substantial amount of Out-Of-Distribution (OOD) data, leading to low efficiency of annotation in traditional AL methods. Furthermore, most existing AL methods start with random selection in the first query round, leading to a significant waste of labeling costs in open-set scenarios. To address these challenges, we propose OpenPath, a novel open-set active learning approach for pathological image classification leveraging a pre-trained Vision-Language Model (VLM). In the first query, we propose task-specific prompts that combine target and relevant non-target class prompts to effectively select In-Distribution (ID) and informative samples from the unlabeled pool. In subsequent queries, Diverse Informative ID Sampling (DIS) that includes Prototype-based ID candidate Selection (PIS) and Entropy-Guided Stochastic Sampling (EGSS) is proposed to ensure both purity and informativeness in a query, avoiding the selection of OOD samples. Experiments on two public pathology image datasets show that OpenPath significantly enhances the model's performance due to its high purity of selected samples, and outperforms several state-of-the-art open-set AL methods. The code is available at \href{https://github.com/HiLab-git/OpenPath}{https://github.com/HiLab-git/OpenPath}..</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-18T09:47:45Z</published>
+    <arxiv:comment>MICCAI 2025 early accept</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Lanfeng Zhong</name>
+    </author>
+    <author>
+      <name>Xin Liao</name>
+    </author>
+    <author>
+      <name>Shichuan Zhang</name>
+    </author>
+    <author>
+      <name>Shaoting Zhang</name>
+    </author>
+    <author>
+      <name>Guotai Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1901.01703v7</id>
+    <title>Tencent ML-Images: A Large-Scale Multi-Label Image Database for Visual Representation Learning</title>
+    <updated>2020-02-09T14:06:39Z</updated>
+    <link href="https://arxiv.org/abs/1901.01703v7" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1901.01703v7" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In existing visual representation learning tasks, deep convolutional neural networks (CNNs) are often trained on images annotated with single tags, such as ImageNet. However, a single tag cannot describe all important contents of one image, and some useful visual information may be wasted during training. In this work, we propose to train CNNs from images annotated with multiple tags, to enhance the quality of visual representation of the trained CNN model. To this end, we build a large-scale multi-label image database with 18M images and 11K categories, dubbed Tencent ML-Images. We efficiently train the ResNet-101 model with multi-label outputs on Tencent ML-Images, taking 90 hours for 60 epochs, based on a large-scale distributed deep learning framework,i.e.,TFplus. The good quality of the visual representation of the Tencent ML-Images checkpoint is verified through three transfer learning tasks, including single-label image classification on ImageNet and Caltech-256, object detection on PASCAL VOC 2007, and semantic segmentation on PASCAL VOC 2012. The Tencent ML-Images database, the checkpoints of ResNet-101, and all the training codehave been released at https://github.com/Tencent/tencent-ml-images. It is expected to promote other vision tasks in the research and industry community.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-01-07T08:35:15Z</published>
+    <arxiv:comment>This work is accepted to IEEE Access</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Baoyuan Wu</name>
+    </author>
+    <author>
+      <name>Weidong Chen</name>
+    </author>
+    <author>
+      <name>Yanbo Fan</name>
+    </author>
+    <author>
+      <name>Yong Zhang</name>
+    </author>
+    <author>
+      <name>Jinlong Hou</name>
+    </author>
+    <author>
+      <name>Jie Liu</name>
+    </author>
+    <author>
+      <name>Tong Zhang</name>
+    </author>
+    <arxiv:doi>10.1109/ACCESS.2019.2956775</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/ACCESS.2019.2956775" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.01920v2</id>
+    <title>Pool-Select-Refine for Allocation-Aware Generative Dataset Distillation</title>
+    <updated>2026-06-26T02:51:43Z</updated>
+    <link href="https://arxiv.org/abs/2606.01920v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.01920v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Diffusion-based dataset distillation has recently emerged as a promising paradigm for condensing large-scale datasets into compact synthetic sets. By leveraging pretrained generative priors, these methods can produce realistic class-conditional samples more efficiently than traditional matching-based approaches. However, most existing diffusion-based methods still adopt a rigid ``Generate-and-Use'' strategy, where the generated samples are directly treated as the final distilled set under a fixed images-per-class budget. Such a design tightly couples candidate generation with final budget allocation, which may result in redundant waste of the limited budget or insufficiently informative samples. In this paper, we propose ``Pool-Select-Refine'', a two-stage framework for allocation-aware generative dataset distillation. First, instead of directly using a fixed number of generated samples, we construct an over-complete candidate pool and select a compact subset under the target budget. Second, we refine the selected samples in latent space using soft-label supervision derived from the teacher model, improving semantic alignment while preserving the generative prior. This design explicitly decouples generation, selection, and refinement, enabling more effective use of the distillation budget. Experiments on large-scale and fine-grained image classification benchmarks show that the proposed framework delivers consistent gains over diffusion-based baselines. The results suggest that introducing a curation stage before refinement is a simple yet effective way to improve diffusion-based dataset distillation.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-01T08:56:47Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Wenmin Li</name>
+    </author>
+    <author>
+      <name>Shunsuke Sakai</name>
+    </author>
+    <author>
+      <name>Zhongkai Zhao</name>
+    </author>
+    <author>
+      <name>Tatsuhito Hasegawa</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.06772v5</id>
+    <title>Efficient Long-Horizon Learning for Learned Optimization</title>
+    <updated>2026-10-10T17:38:52Z</updated>
+    <link href="https://arxiv.org/abs/2607.06772v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.06772v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Learned optimization aims to improve upon hand-designed optimizers (e.g., Adam and Muon) by meta-learning small neural network optimizers over a distribution of tasks. While recent work has greatly advanced the architectural design and inductive biases of learned optimizers (LOs), their meta-training remains biased toward short-unroll learning on particular tasks, resulting in redundant computation and leaving LOs often unable to compete with hand-designed optimizers. We introduce Efficient Long-hOrizon (ELO) learning, an efficient meta-training algorithm that (1) reallocates wasted meta-training compute to longer failure regimes, achieving efficient long-horizon learning, and (2) enforces decoupled progressive expert supervision, providing stable meta-learning signals that additionally improve the generalization of LOs. Our empirical study evaluates ELO for meta-training both element-wise and matrix-based LOs. Across downstream language modeling (GPT-2 and GPT-3 on FineWeb) and image classification (ViT-B/16, ResNet-50 on ImageNet-1K) tasks, ELO substantially improves the long-unroll performance and out-of-distribution generalization of the base LOs. In particular, ELO-Celo2 outperforms well-tuned AdamW and Muon on GPT-2 (30M and 124M) language pretraining. \textit{Notably, all ELO baselines require less than 7 H100 GPU-hours for meta-training.}</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-07T20:05:22Z</published>
+    <arxiv:comment>Meta-learning, learned optimization</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xiaolong Huang</name>
+    </author>
+    <author>
+      <name>Benjamin Thérien</name>
+    </author>
+    <author>
+      <name>James Harrison</name>
+    </author>
+    <author>
+      <name>Eugene Belilovsky</name>
+    </author>
+  </entry>
+</feed>

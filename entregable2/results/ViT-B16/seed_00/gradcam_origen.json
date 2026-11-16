@@ -1,0 +1,13 @@
+{
+  "modelo": "ViT-B16",
+  "semilla": 0,
+  "reentrenado": true,
+  "code_version": "bbaaae3dddd5",
+  "mejor_epoca_original": 43,
+  "mejor_epoca_reentrenado": 43,
+  "concordancia_predicciones_prueba": 1.0,
+  "f1_macro_prueba_reentrenado": 0.9387527014667224,
+  "f1_macro_prueba_original": 0.9387527014667224,
+  "capa": "LayerNorm",
+  "max_mapa": 1.0
+}
