@@ -1,0 +1,11 @@
+matplotlib==3.11.2
+numpy==2.5.4
+pandas==3.1.1
+pillow==13.0.0
+scikit-learn==1.9.1
+scikit-posthocs==0.18.0
+scipy==1.18.1
+statsmodels==0.15.0
+torch==2.14.1+cu130
+torchvision==0.29.1+cu130
+xgboost==3.4.1

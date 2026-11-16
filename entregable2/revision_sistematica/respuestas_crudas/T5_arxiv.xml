@@ -1,0 +1,1672 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/mhteR3QkKou28ih1SJCvCffQffw</id>
+  <title>arXiv Query: search_query=( (abs:"deep supervision" OR abs:"auxiliary loss" OR abs:"auxiliary classifier") AND (abs:"segmentation" OR abs:"speech" OR abs:"natural language") AND (abs:"transfer" OR abs:"adaptation") ) AND submittedDate:"201801010000 TO 202612312359"&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-11-16T19:23:10Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=((abs:%22deep+supervision%22+OR+(abs:%22auxiliary+loss%22+OR+abs:%22auxiliary+classifier%22))+AND+((abs:%22segmentation%22+OR+(abs:%22speech%22+OR+abs:%22natural+language%22))+AND+(abs:%22transfer%22+OR+abs:%22adaptation%22)))+AND+submittedDate:%22201801010000+TO+202612312359%22&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>63</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2309.16649v1</id>
+    <title>FLIP: Cross-domain Face Anti-spoofing with Language Guidance</title>
+    <updated>2023-09-28T17:53:20Z</updated>
+    <link href="https://arxiv.org/abs/2309.16649v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.16649v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Face anti-spoofing (FAS) or presentation attack detection is an essential component of face recognition systems deployed in security-critical applications. Existing FAS methods have poor generalizability to unseen spoof types, camera sensors, and environmental conditions. Recently, vision transformer (ViT) models have been shown to be effective for the FAS task due to their ability to capture long-range dependencies among image patches. However, adaptive modules or auxiliary loss functions are often required to adapt pre-trained ViT weights learned on large-scale datasets such as ImageNet. In this work, we first show that initializing ViTs with multimodal (e.g., CLIP) pre-trained weights improves generalizability for the FAS task, which is in line with the zero-shot transfer capabilities of vision-language pre-trained (VLP) models. We then propose a novel approach for robust cross-domain FAS by grounding visual representations with the help of natural language. Specifically, we show that aligning the image representation with an ensemble of class descriptions (based on natural language semantics) improves FAS generalizability in low-data regimes. Finally, we propose a multimodal contrastive learning strategy to boost feature generalization further and bridge the gap between source and target domains. Extensive experiments on three standard protocols demonstrate that our method significantly outperforms the state-of-the-art methods, achieving better zero-shot transfer performance than five-shot transfer of adaptive ViTs. Code: https://github.com/koushiksrivats/FLIP</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-28T17:53:20Z</published>
+    <arxiv:comment>Accepted to ICCV-2023. Project Page: https://koushiksrivats.github.io/FLIP/</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Koushik Srivatsan</name>
+    </author>
+    <author>
+      <name>Muzammal Naseer</name>
+    </author>
+    <author>
+      <name>Karthik Nandakumar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2307.12220v2</id>
+    <title>Expediting Building Footprint Extraction from High-resolution Remote Sensing Images via progressive lenient supervision</title>
+    <updated>2024-04-10T13:15:41Z</updated>
+    <link href="https://arxiv.org/abs/2307.12220v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2307.12220v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The efficacy of building footprint segmentation from remotely sensed images has been hindered by model transfer effectiveness. Many existing building segmentation methods were developed upon the encoder-decoder architecture of U-Net, in which the encoder is finetuned from the newly developed backbone networks that are pre-trained on ImageNet. However, the heavy computational burden of the existing decoder designs hampers the successful transfer of these modern encoder networks to remote sensing tasks. Even the widely-adopted deep supervision strategy fails to mitigate these challenges due to its invalid loss in hybrid regions where foreground and background pixels are intermixed. In this paper, we conduct a comprehensive evaluation of existing decoder network designs for building footprint segmentation and propose an efficient framework denoted as BFSeg to enhance learning efficiency and effectiveness. Specifically, a densely-connected coarse-to-fine feature fusion decoder network that facilitates easy and fast feature fusion across scales is proposed. Moreover, considering the invalidity of hybrid regions in the down-sampled ground truth during the deep supervision process, we present a lenient deep supervision and distillation strategy that enables the network to learn proper knowledge from deep supervision. Building upon these advancements, we have developed a new family of building segmentation networks, which consistently surpass prior works with outstanding performance and efficiency across a wide range of newly developed encoder networks.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-07-23T03:55:13Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Haonan Guo</name>
+    </author>
+    <author>
+      <name>Bo Du</name>
+    </author>
+    <author>
+      <name>Chen Wu</name>
+    </author>
+    <author>
+      <name>Xin Su</name>
+    </author>
+    <author>
+      <name>Liangpei Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.14103v2</id>
+    <title>MaskSAM: Towards Auto-prompt SAM with Mask Classification for Volumetric Medical Image Segmentation</title>
+    <updated>2025-03-22T17:02:53Z</updated>
+    <link href="https://arxiv.org/abs/2403.14103v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.14103v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Segment Anything Model (SAM), a prompt-driven foundation model for natural image segmentation, has demonstrated impressive zero-shot performance. However, SAM does not work when directly applied to medical image segmentation, since SAM lacks the ability to predict semantic labels, requires additional prompts, and presents suboptimal performance. Following the above issues, we propose MaskSAM, a novel mask classification prompt-free SAM adaptation framework for medical image segmentation. We design a prompt generator combined with the image encoder in SAM to generate a set of auxiliary classifier tokens, auxiliary binary masks, and auxiliary bounding boxes. Each pair of auxiliary mask and box prompts can solve the requirements of extra prompts. The semantic label prediction can be addressed by the sum of the auxiliary classifier tokens and the learnable global classifier tokens in the mask decoder of SAM. Meanwhile, we design a 3D depth-convolution adapter for image embeddings and a 3D depth-MLP adapter for prompt embeddings to efficiently fine-tune SAM. Our method achieves state-of-the-art performance on AMOS2022, 90.52% Dice, which improved by 2.7% compared to nnUNet. Our method surpasses nnUNet by 1.7% on ACDC and 1.0% on Synapse datasets.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-21T03:28:24Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Bin Xie</name>
+    </author>
+    <author>
+      <name>Hao Tang</name>
+    </author>
+    <author>
+      <name>Bin Duan</name>
+    </author>
+    <author>
+      <name>Dawen Cai</name>
+    </author>
+    <author>
+      <name>Yan Yan</name>
+    </author>
+    <author>
+      <name>Gady Agam</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2007.08139v1</id>
+    <title>Interactive Video Object Segmentation Using Global and Local Transfer Modules</title>
+    <updated>2020-07-16T06:49:07Z</updated>
+    <link href="https://arxiv.org/abs/2007.08139v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2007.08139v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>An interactive video object segmentation algorithm, which takes scribble annotations on query objects as input, is proposed in this paper. We develop a deep neural network, which consists of the annotation network (A-Net) and the transfer network (T-Net). First, given user scribbles on a frame, A-Net yields a segmentation result based on the encoder-decoder architecture. Second, T-Net transfers the segmentation result bidirectionally to the other frames, by employing the global and local transfer modules. The global transfer module conveys the segmentation information in an annotated frame to a target frame, while the local transfer module propagates the segmentation information in a temporally adjacent frame to the target frame. By applying A-Net and T-Net alternately, a user can obtain desired segmentation results with minimal efforts. We train the entire network in two stages, by emulating user scribbles and employing an auxiliary loss. Experimental results demonstrate that the proposed interactive video object segmentation algorithm outperforms the state-of-the-art conventional algorithms. Codes and models are available at https://github.com/yuk6heo/IVOS-ATNet.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-07-16T06:49:07Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yuk Heo</name>
+    </author>
+    <author>
+      <name>Yeong Jun Koh</name>
+    </author>
+    <author>
+      <name>Chang-Su Kim</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.15826v1</id>
+    <title>MS-MT: Multi-Scale Mean Teacher with Contrastive Unpaired Translation for Cross-Modality Vestibular Schwannoma and Cochlea Segmentation</title>
+    <updated>2023-03-28T08:55:00Z</updated>
+    <link href="https://arxiv.org/abs/2303.15826v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.15826v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Domain shift has been a long-standing issue for medical image segmentation. Recently, unsupervised domain adaptation (UDA) methods have achieved promising cross-modality segmentation performance by distilling knowledge from a label-rich source domain to a target domain without labels. In this work, we propose a multi-scale self-ensembling based UDA framework for automatic segmentation of two key brain structures i.e., Vestibular Schwannoma (VS) and Cochlea on high-resolution T2 images. First, a segmentation-enhanced contrastive unpaired image translation module is designed for image-level domain adaptation from source T1 to target T2. Next, multi-scale deep supervision and consistency regularization are introduced to a mean teacher network for self-ensemble learning to further close the domain gap. Furthermore, self-training and intensity augmentation techniques are utilized to mitigate label scarcity and boost cross-modality segmentation performance. Our method demonstrates promising segmentation performance with a mean Dice score of 83.8% and 81.4% and an average asymmetric surface distance (ASSD) of 0.55 mm and 0.26 mm for the VS and Cochlea, respectively in the validation phase of the crossMoDA 2022 challenge.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-28T08:55:00Z</published>
+    <arxiv:comment>Accepted by BrainLes MICCAI proceedings (5th solution for MICCAI 2022 Cross-Modality Domain Adaptation (crossMoDA) Challenge)</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Ziyuan Zhao</name>
+    </author>
+    <author>
+      <name>Kaixin Xu</name>
+    </author>
+    <author>
+      <name>Huai Zhe Yeo</name>
+    </author>
+    <author>
+      <name>Xulei Yang</name>
+    </author>
+    <author>
+      <name>Cuntai Guan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.13357v1</id>
+    <title>Semantic Fusion with Fuzzy-Membership Features for Controllable Language Modelling</title>
+    <updated>2025-09-14T22:11:09Z</updated>
+    <link href="https://arxiv.org/abs/2509.13357v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.13357v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose semantic fusion, a lightweight scheme that augments a Transformer language model (LM) with a parallel, fuzzy-membership feature channel that encodes token-level semantics. Each token is represented by a vector of interpretable features (e.g. part-of-speech cues, shallow roles, boundary flags, sentiment polarity and strength) whose values are graded degrees from differentiable membership functions (e.g. power kernels). These per-token vectors form a sentence-level semantic matrix fused via a gated adapter into the LM. Training uses standard next-token prediction, an auxiliary loss that reconstructs the semantic features from hidden states, and a lightweight uniformizer that regularizes adjective-class distributions. On a synthetic two-clause corpus with held-out adjectives for out-of-distribution (OOD) control, semantic fusion improves perplexity and enables precise, user-controllable generation of polarity and punctuation while maintaining model simplicity. This approach adds only small overhead, remains fully compatible with tied input-output embeddings, and provides an interpretable pathway for conditioned natural language generation.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-14T22:11:09Z</published>
+    <arxiv:comment>16 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yongchao Huang</name>
+    </author>
+    <author>
+      <name>Hassan Raza</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.13295v2</id>
+    <title>Instance-Specific Test-Time Training for Speech Editing in the Wild</title>
+    <updated>2025-11-03T08:25:55Z</updated>
+    <link href="https://arxiv.org/abs/2506.13295v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.13295v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Speech editing systems aim to naturally modify speech content while preserving acoustic consistency and speaker identity. However, previous studies often struggle to adapt to unseen and diverse acoustic conditions, resulting in degraded editing performance in real-world scenarios. To address this, we propose an instance-specific test-time training method for speech editing in the wild. Our approach employs direct supervision from ground-truth acoustic features in unedited regions and indirect supervision in edited regions via auxiliary losses based on duration constraints and phoneme prediction. This strategy mitigates the bandwidth discontinuity problem in speech editing, ensuring smooth acoustic transitions between unedited and edited regions. Additionally, it enables precise control over speech rate by adapting the model to target durations via mask length adjustment during test-time training. Experiments on in-the-wild benchmark datasets demonstrate that our method outperforms existing speech editing systems in both objective and subjective evaluations.</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-16T09:35:23Z</published>
+    <arxiv:comment>Accepted to NeurIPS 2025 Workshop on GenProCC</arxiv:comment>
+    <arxiv:primary_category term="eess.AS"/>
+    <author>
+      <name>Taewoo Kim</name>
+    </author>
+    <author>
+      <name>Uijong Lee</name>
+    </author>
+    <author>
+      <name>Hayoung Park</name>
+    </author>
+    <author>
+      <name>Choongsang Cho</name>
+    </author>
+    <author>
+      <name>Nam In Park</name>
+    </author>
+    <author>
+      <name>Young Han Lee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.09988v1</id>
+    <title>DecoupleNet: Decoupled Network for Domain Adaptive Semantic Segmentation</title>
+    <updated>2022-07-20T15:47:34Z</updated>
+    <link href="https://arxiv.org/abs/2207.09988v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.09988v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Unsupervised domain adaptation in semantic segmentation has been raised to alleviate the reliance on expensive pixel-wise annotations. It leverages a labeled source domain dataset as well as unlabeled target domain images to learn a segmentation network. In this paper, we observe two main issues of the existing domain-invariant learning framework. (1) Being distracted by the feature distribution alignment, the network cannot focus on the segmentation task. (2) Fitting source domain data well would compromise the target domain performance. To address these issues, we propose DecoupleNet that alleviates source domain overfitting and enables the final model to focus more on the segmentation task. Furthermore, we put forward Self-Discrimination (SD) and introduce an auxiliary classifier to learn more discriminative target domain features with pseudo labels. Finally, we propose Online Enhanced Self-Training (OEST) to contextually enhance the quality of pseudo labels in an online manner. Experiments show our method outperforms existing state-of-the-art methods, and extensive ablation studies verify the effectiveness of each component. Code is available at https://github.com/dvlab-research/DecoupleNet.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-20T15:47:34Z</published>
+    <arxiv:comment>Accepted to ECCV 2022. Code is available at https://github.com/dvlab-research/DecoupleNet</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Xin Lai</name>
+    </author>
+    <author>
+      <name>Zhuotao Tian</name>
+    </author>
+    <author>
+      <name>Xiaogang Xu</name>
+    </author>
+    <author>
+      <name>Yingcong Chen</name>
+    </author>
+    <author>
+      <name>Shu Liu</name>
+    </author>
+    <author>
+      <name>Hengshuang Zhao</name>
+    </author>
+    <author>
+      <name>Liwei Wang</name>
+    </author>
+    <author>
+      <name>Jiaya Jia</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2211.08547v1</id>
+    <title>ALIGN-MLM: Word Embedding Alignment is Crucial for Multilingual Pre-training</title>
+    <updated>2022-11-15T22:37:27Z</updated>
+    <link href="https://arxiv.org/abs/2211.08547v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2211.08547v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multilingual pre-trained models exhibit zero-shot cross-lingual transfer, where a model fine-tuned on a source language achieves surprisingly good performance on a target language. While studies have attempted to understand transfer, they focus only on MLM, and the large number of differences between natural languages makes it hard to disentangle the importance of different properties. In this work, we specifically highlight the importance of word embedding alignment by proposing a pre-training objective (ALIGN-MLM) whose auxiliary loss guides similar words in different languages to have similar word embeddings. ALIGN-MLM either outperforms or matches three widely adopted objectives (MLM, XLM, DICT-MLM) when we evaluate transfer between pairs of natural languages and their counterparts created by systematically modifying specific properties like the script. In particular, ALIGN-MLM outperforms XLM and MLM by 35 and 30 F1 points on POS-tagging for transfer between languages that differ both in their script and word order (left-to-right v.s. right-to-left). We also show a strong correlation between alignment and transfer for all objectives (e.g., rho=0.727 for XNLI), which together with ALIGN-MLM's strong performance calls for explicitly aligning word embeddings for multilingual models.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-11-15T22:37:27Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Henry Tang</name>
+    </author>
+    <author>
+      <name>Ameet Deshpande</name>
+    </author>
+    <author>
+      <name>Karthik Narasimhan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1912.11164v3</id>
+    <title>Unsupervised Scene Adaptation with Memory Regularization in vivo</title>
+    <updated>2023-02-07T17:05:26Z</updated>
+    <link href="https://arxiv.org/abs/1912.11164v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1912.11164v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the unsupervised scene adaptation problem of learning from both labeled source data and unlabeled target data. Existing methods focus on minoring the inter-domain gap between the source and target domains. However, the intra-domain knowledge and inherent uncertainty learned by the network are under-explored. In this paper, we propose an orthogonal method, called memory regularization in vivo to exploit the intra-domain knowledge and regularize the model training. Specifically, we refer to the segmentation model itself as the memory module, and minor the discrepancy of the two classifiers, i.e., the primary classifier and the auxiliary classifier, to reduce the prediction inconsistency. Without extra parameters, the proposed method is complementary to the most existing domain adaptation methods and could generally improve the performance of existing methods. Albeit simple, we verify the effectiveness of memory regularization on two synthetic-to-real benchmarks: GTA5 -&gt; Cityscapes and SYNTHIA -&gt; Cityscapes, yielding +11.1% and +11.3% mIoU improvement over the baseline model, respectively. Besides, a similar +12.0% mIoU improvement is observed on the cross-city benchmark: Cityscapes -&gt; Oxford RobotCar.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-12-24T01:12:36Z</published>
+    <arxiv:comment>7 pages, 4 figures, 6 tables (accepted by IJCAI 2020)</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Zhedong Zheng</name>
+    </author>
+    <author>
+      <name>Yi Yang</name>
+    </author>
+    <arxiv:doi>10.24963/ijcai.2020/150</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.24963/ijcai.2020/150" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.04131v2</id>
+    <title>DS$^2$Net: Detail-Semantic Deep Supervision Network for Medical Image Segmentation</title>
+    <updated>2025-08-10T15:13:42Z</updated>
+    <link href="https://arxiv.org/abs/2508.04131v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.04131v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep Supervision Networks exhibit significant efficacy for the medical imaging community. Nevertheless, existing work merely supervises either the coarse-grained semantic features or fine-grained detailed features in isolation, which compromises the fact that these two types of features hold vital relationships in medical image analysis. We advocate the powers of complementary feature supervision for medical image segmentation, by proposing a Detail-Semantic Deep Supervision Network (DS$^2$Net). DS$^2$Net navigates both low-level detailed and high-level semantic feature supervision through Detail Enhance Module (DEM) and Semantic Enhance Module (SEM). DEM and SEM respectively harness low-level and high-level feature maps to create detail and semantic masks for enhancing feature supervision. This is a novel shift from single-view deep supervision to multi-view deep supervision. DS$^2$Net is also equipped with a novel uncertainty-based supervision loss that adaptively assigns the supervision strength of features within distinct scales based on their uncertainty, thus circumventing the sub-optimal heuristic design that typifies previous works. Through extensive experiments on six benchmarks captured under either colonoscopy, ultrasound and microscope, we demonstrate that DS$^2$Net consistently outperforms state-of-the-art methods for medical image analysis.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-06T06:57:36Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Zhaohong Huang</name>
+    </author>
+    <author>
+      <name>Yuxin Zhang</name>
+    </author>
+    <author>
+      <name>Taojian Zhou</name>
+    </author>
+    <author>
+      <name>Guorong Cai</name>
+    </author>
+    <author>
+      <name>Rongrong Ji</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.01828v2</id>
+    <title>Autoadaptive Medical Segment Anything Model</title>
+    <updated>2025-11-01T16:38:04Z</updated>
+    <link href="https://arxiv.org/abs/2507.01828v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.01828v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Medical image segmentation is a key task in the imaging workflow, influencing many image-based decisions. Traditional, fully-supervised segmentation models rely on large amounts of labeled training data, typically obtained through manual annotation, which can be an expensive, time-consuming, and error-prone process. This signals a need for accurate, automatic, and annotation-efficient methods of training these models. We propose ADA-SAM (automated, domain-specific, and adaptive segment anything model), a novel multitask learning framework for medical image segmentation that leverages class activation maps from an auxiliary classifier to guide the predictions of the semi-supervised segmentation branch, which is based on the Segment Anything (SAM) framework. Additionally, our ADA-SAM model employs a novel gradient feedback mechanism to create a learnable connection between the segmentation and classification branches by using the segmentation gradients to guide and improve the classification predictions. We validate ADA-SAM on real-world clinical data collected during rehabilitation trials, and demonstrate that our proposed method outperforms both fully-supervised and semi-supervised baselines by double digits in limited label settings. Our code is available at: https://github.com/tbwa233/ADA-SAM.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-02T15:44:32Z</published>
+    <arxiv:comment>11 pages, 2 figures, 3 tables</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Tyler Ward</name>
+    </author>
+    <author>
+      <name>Meredith K. Owen</name>
+    </author>
+    <author>
+      <name>O'Kira Coleman</name>
+    </author>
+    <author>
+      <name>Brian Noehren</name>
+    </author>
+    <author>
+      <name>Abdullah-Al-Zubaer Imran</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.13328v1</id>
+    <title>Self-Supervised Multi-Stage Domain Unlearning for White-Matter Lesion Segmentation</title>
+    <updated>2026-03-04T22:27:20Z</updated>
+    <link href="https://arxiv.org/abs/2603.13328v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.13328v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Inter-scanner variability of magnetic resonance imaging has an adverse impact on the diagnostic and prognostic quality of the scans and necessitates the development of models robust to domain shift inflicted by the unseen scanner data. Review of recent advances in domain adaptation showed that efficacy of strategies involving modifications or constraints on the latent space appears to be contingent upon the level and/or depth of supervision during model training. In this paper, we therefore propose an unsupervised domain adaptation technique based on self-supervised multi-stage unlearning (SSMSU). Building upon the state-of-the-art segmentation framework nnU-Net, we employ deep supervision at deep encoder stages using domain classifier unlearning, applied sequentially across the deep stages to suppress domain-related latent features. Following self-configurable approach of the nnU-Net, the auxiliary feedback loop implements a self-supervised backpropagation schedule for the unlearning process, since continuous unlearning was found to have a detrimental effect on the main segmentation task. Experiments were carried out on four public datasets for benchmarking white-matter lesion segmentation methods. Five benchmark models and/or strategies, covering passive to active unsupervised domain adaptation, were tested. In comparison, the SSMSU demonstrated the advantage of unlearning by enhancing lesion sensitivity and limiting false detections, which resulted in higher overall segmentation quality in terms of segmentation overlap and relative lesion volume error. The proposed model inputs only the FLAIR modality, which simplifies preprocessing pipelines, eliminates the need for inter-modality registration errors and harmonization, which can introduce variability. Source code is available on https://github.com/Pubec/nnunetv2-unlearning.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-04T22:27:20Z</published>
+    <arxiv:comment>21 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Domen Preložnik</name>
+    </author>
+    <author>
+      <name>Žiga Špiclin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2110.12827v3</id>
+    <title>Novel coronavirus pneumonia lesion segmentation in CT images</title>
+    <updated>2021-12-23T03:31:41Z</updated>
+    <link href="https://arxiv.org/abs/2110.12827v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2110.12827v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Background: The 2019 novel coronavirus disease (COVID-19) has been spread widely in the world, causing a huge threat to people's living environment. Objective: Under computed tomography (CT) imaging, the structure features of COVID-19 lesions are complicated and varied greatly in different cases. To accurately locate COVID-19 lesions and assist doctors to make the best diagnosis and treatment plan, a deep-supervised ensemble learning network is presented for COVID-19 lesion segmentation in CT images. Methods: Considering the fact that a large number of COVID-19 CT images and the corresponding lesion annotations are difficult to obtained, a transfer learning strategy is employed to make up for the shortcoming and alleviate the overfitting problem. Based on the reality that traditional single deep learning framework is difficult to extract COVID-19 lesion features effectively, which may cause some lesions to be undetected. To overcome the problem, a deep-supervised ensemble learning network is presented to combine with local and global features for COVID-19 lesion segmentation. Results: The performance of the proposed method was validated in experiments with a publicly available dataset. Compared with manual annotations, the proposed method acquired a high intersection over union (IoU) of 0.7279. Conclusion: A deep-supervised ensemble learning network was presented for coronavirus pneumonia lesion segmentation in CT images. The effectiveness of the proposed method was verified by visual inspection and quantitative evaluation. Experimental results shown that the proposed mehtod has a perfect performance in COVID-19 lesion segmentation.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-10-25T11:49:20Z</published>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Yuanyuan Peng</name>
+    </author>
+    <author>
+      <name>Zixu Zhang</name>
+    </author>
+    <author>
+      <name>Hongbin Tu</name>
+    </author>
+    <author>
+      <name>Xiong Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.03829v1</id>
+    <title>NE-PADD: Leveraging Named Entity Knowledge for Robust Partial Audio Deepfake Detection via Attention Aggregation</title>
+    <updated>2025-09-04T02:33:00Z</updated>
+    <link href="https://arxiv.org/abs/2509.03829v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.03829v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Different from traditional sentence-level audio deepfake detection (ADD), partial audio deepfake detection (PADD) requires frame-level positioning of the location of fake speech. While some progress has been made in this area, leveraging semantic information from audio, especially named entities, remains an underexplored aspect. To this end, we propose NE-PADD, a novel method for Partial Audio Deepfake Detection (PADD) that leverages named entity knowledge through two parallel branches: Speech Name Entity Recognition (SpeechNER) and PADD. The approach incorporates two attention aggregation mechanisms: Attention Fusion (AF) for combining attention weights and Attention Transfer (AT) for guiding PADD with named entity semantics using an auxiliary loss. Built on the PartialSpoof-NER dataset, experiments show our method outperforms existing baselines, proving the effectiveness of integrating named entity knowledge in PADD. The code is available at https://github.com/AI-S2-Lab/NE-PADD.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-04T02:33:00Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Huhong Xian</name>
+    </author>
+    <author>
+      <name>Rui Liu</name>
+    </author>
+    <author>
+      <name>Berrak Sisman</name>
+    </author>
+    <author>
+      <name>Haizhou Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.13547v1</id>
+    <title>NumColor: Precise Numeric Color Control in Text-to-Image Generation</title>
+    <updated>2026-03-13T19:37:25Z</updated>
+    <link href="https://arxiv.org/abs/2603.13547v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.13547v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Text-to-image diffusion models excel at generating images from natural language descriptions, yet fail to interpret numerical colors such as hex codes (#FF5733) and RGB values (rgb(255,87,51)). This limitation stems from subword tokenization, which fragments color codes into semantically meaningless tokens that text encoders cannot map to coherent color representations. We present NumColor, that enables precise numerical color control across multiple diffusion architectures. NumColor comprises two components: a Color Token Aggregator that detects color specifications regardless of tokenization, and a ColorBook containing 6,707 learnable embeddings that map colors to embedding space of text encoder in perceptually uniform CIE Lab space. We introduce two auxiliary losses, directional alignment and interpolation consistency, to enforce geometric correspondence between Lab and embedding spaces, enabling smooth color interpolation. To train the ColorBook, we construct NumColor-Data, a synthetic dataset of 500K rendered images with unambiguous color-to-pixel correspondence, eliminating the annotation ambiguity inherent in photographic datasets. Although trained solely on FLUX, NumColor transfers zero-shot to SD3, SD3.5, PixArt-α, and PixArt-Σ without model-specific adaptation. NumColor improves numerical color accuracy by 4-9x across five models, while simultaneously improving color harmony scores by 10-30x on GenColorBench benchmark.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-13T19:37:25Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Muhammad Atif Butt</name>
+    </author>
+    <author>
+      <name>Diego Hernandez</name>
+    </author>
+    <author>
+      <name>Alexandra Gomez-Villa</name>
+    </author>
+    <author>
+      <name>Kai Wang</name>
+    </author>
+    <author>
+      <name>Javier Vazquez-Corral</name>
+    </author>
+    <author>
+      <name>Joost Van De Weijer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.15771v1</id>
+    <title>UniUltra: Interactive Parameter-Efficient SAM2 for Universal Ultrasound Segmentation</title>
+    <updated>2025-11-19T17:42:49Z</updated>
+    <link href="https://arxiv.org/abs/2511.15771v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.15771v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Segment Anything Model 2 (SAM2) demonstrates remarkable universal segmentation capabilities on natural images. However, its performance on ultrasound images is significantly degraded due to domain disparities. This limitation raises two critical challenges: how to efficiently adapt SAM2 to ultrasound imaging while maintaining parameter efficiency, and how to deploy the adapted model effectively in resource-constrained clinical environments. To address these issues, we propose UniUltra for universal ultrasound segmentation. Specifically, we first introduce a novel context-edge hybrid adapter (CH-Adapter) that enhances fine-grained perception across diverse ultrasound imaging modalities while achieving parameter-efficient fine-tuning. To further improve clinical applicability, we develop a deep-supervised knowledge distillation (DSKD) technique that transfers knowledge from the large image encoder of the fine-tuned SAM2 to a super lightweight encoder, substantially reducing computational requirements without compromising performance. Extensive experiments demonstrate that UniUltra outperforms state-of-the-arts with superior generalization capabilities. Notably, our framework achieves competitive performance using only 8.91% of SAM2's parameters during fine-tuning, and the final compressed model reduces the parameter count by 94.08% compared to the original SAM2, making it highly suitable for practical clinical deployment. The source code is available at https://github.com/xq141839/UniUltra.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-19T17:42:49Z</published>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Yue Li</name>
+    </author>
+    <author>
+      <name>Qing Xu</name>
+    </author>
+    <author>
+      <name>Yixuan Zhang</name>
+    </author>
+    <author>
+      <name>Xiangjian He</name>
+    </author>
+    <author>
+      <name>Qian Zhang</name>
+    </author>
+    <author>
+      <name>Yuan Yao</name>
+    </author>
+    <author>
+      <name>Fiseha B. Tesema</name>
+    </author>
+    <author>
+      <name>Xin Chen</name>
+    </author>
+    <author>
+      <name>Ruili Wang</name>
+    </author>
+    <author>
+      <name>Zhen Chen</name>
+    </author>
+    <author>
+      <name>Chang Wen Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2202.06498v1</id>
+    <title>Task-Adaptive Feature Transformer with Semantic Enrichment for Few-Shot Segmentation</title>
+    <updated>2022-02-14T06:16:26Z</updated>
+    <link href="https://arxiv.org/abs/2202.06498v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2202.06498v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Few-shot learning allows machines to classify novel classes using only a few labeled samples. Recently, few-shot segmentation aiming at semantic segmentation on low sample data has also seen great interest. In this paper, we propose a learnable module that can be placed on top of existing segmentation networks for performing few-shot segmentation. This module, called the task-adaptive feature transformer (TAFT), linearly transforms task-specific high-level features to a set of task agnostic features well-suited to conducting few-shot segmentation. The task-conditioned feature transformation allows an effective utilization of the semantic information in novel classes to generate tight segmentation masks. We also propose a semantic enrichment (SE) module that utilizes a pixel-wise attention module for high-level feature and an auxiliary loss from an auxiliary segmentation network conducting the semantic segmentation for all training classes. Experiments on PASCAL-$5^i$ and COCO-$20^i$ datasets confirm that the added modules successfully extend the capability of existing segmentators to yield highly competitive few-shot segmentation performances.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-02-14T06:16:26Z</published>
+    <arxiv:comment>8 pages, 7 figures. arXiv admin note: text overlap with arXiv:2010.11437</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jun Seo</name>
+    </author>
+    <author>
+      <name>Young-Hyun Park</name>
+    </author>
+    <author>
+      <name>Sung Whan Yoon</name>
+    </author>
+    <author>
+      <name>Jaekyun Moon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2211.02915v2</id>
+    <title>ESKNet-An enhanced adaptive selection kernel convolution for breast tumors segmentation</title>
+    <updated>2024-01-20T12:34:59Z</updated>
+    <link href="https://arxiv.org/abs/2211.02915v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2211.02915v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Breast cancer is one of the common cancers that endanger the health of women globally. Accurate target lesion segmentation is essential for early clinical intervention and postoperative follow-up. Recently, many convolutional neural networks (CNNs) have been proposed to segment breast tumors from ultrasound images. However, the complex ultrasound pattern and the variable tumor shape and size bring challenges to the accurate segmentation of the breast lesion. Motivated by the selective kernel convolution, we introduce an enhanced selective kernel convolution for breast tumor segmentation, which integrates multiple feature map region representations and adaptively recalibrates the weights of these feature map regions from the channel and spatial dimensions. This region recalibration strategy enables the network to focus more on high-contributing region features and mitigate the perturbation of less useful regions. Finally, the enhanced selective kernel convolution is integrated into U-net with deep supervision constraints to adaptively capture the robust representation of breast tumors. Extensive experiments with twelve state-of-the-art deep learning segmentation methods on three public breast ultrasound datasets demonstrate that our method has a more competitive segmentation performance in breast ultrasound images.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-11-05T14:15:29Z</published>
+    <arxiv:comment>12 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Gongping Chen</name>
+    </author>
+    <author>
+      <name>Lu Zhou</name>
+    </author>
+    <author>
+      <name>Jianxun Zhang</name>
+    </author>
+    <author>
+      <name>Xiaotao Yin</name>
+    </author>
+    <author>
+      <name>Liang Cui</name>
+    </author>
+    <author>
+      <name>Yu Dai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1909.09172v2</id>
+    <title>Robot Sound Interpretation: Combining Sight and Sound in Learning-Based Control</title>
+    <updated>2020-09-16T02:28:07Z</updated>
+    <link href="https://arxiv.org/abs/1909.09172v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1909.09172v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We explore the interpretation of sound for robot decision making, inspired by human speech comprehension. While previous methods separate sound processing unit and robot controller, we propose an end-to-end deep neural network which directly interprets sound commands for visual-based decision making. The network is trained using reinforcement learning with auxiliary losses on the sight and sound networks. We demonstrate our approach on two robots, a TurtleBot3 and a Kuka-IIWA arm, which hear a command word, identify the associated target object, and perform precise control to reach the target. For both robots, we show the effectiveness of our network in generalization to sound types and robotic tasks empirically. We successfully transfer the policy learned in simulator to a real-world TurtleBot3.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-09-19T18:00:22Z</published>
+    <arxiv:comment>Published as a conference paper in IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Peixin Chang</name>
+    </author>
+    <author>
+      <name>Shuijing Liu</name>
+    </author>
+    <author>
+      <name>Haonan Chen</name>
+    </author>
+    <author>
+      <name>Katherine Driggs-Campbell</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2209.14097v1</id>
+    <title>Data Augmentation using Feature Generation for Volumetric Medical Images</title>
+    <updated>2022-09-28T13:46:24Z</updated>
+    <link href="https://arxiv.org/abs/2209.14097v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2209.14097v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Medical image classification is one of the most critical problems in the image recognition area. One of the major challenges in this field is the scarcity of labelled training data. Additionally, there is often class imbalance in datasets as some cases are very rare to happen. As a result, accuracy in classification task is normally low. Deep Learning models, in particular, show promising results on image segmentation and classification problems, but they require very large datasets for training. Therefore, there is a need to generate more of synthetic samples from the same distribution. Previous work has shown that feature generation is more efficient and leads to better performance than corresponding image generation. We apply this idea in the Medical Imaging domain. We use transfer learning to train a segmentation model for the small dataset for which gold-standard class annotations are available. We extracted the learnt features and use them to generate synthetic features conditioned on class labels, using Auxiliary Classifier GAN (ACGAN). We test the quality of the generated features in a downstream classification task for brain tumors according to their severity level. Experimental results show a promising result regarding the validity of these generated features and their overall contribution to balancing the data and improving the classification class-wise accuracy.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-09-28T13:46:24Z</published>
+    <arxiv:comment>8 pages, 11 figures</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Khushboo Mehra</name>
+    </author>
+    <author>
+      <name>Hassan Soliman</name>
+    </author>
+    <author>
+      <name>Soumya Ranjan Sahoo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1807.02804v1</id>
+    <title>Deeply Supervised Rotation Equivariant Network for Lesion Segmentation in Dermoscopy Images</title>
+    <updated>2018-07-08T11:49:49Z</updated>
+    <link href="https://arxiv.org/abs/1807.02804v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1807.02804v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Automatic lesion segmentation in dermoscopy images is an essential step for computer-aided diagnosis of melanoma. The dermoscopy images exhibits rotational and reflectional symmetry, however, this geometric property has not been encoded in the state-of-the-art convolutional neural networks based skin lesion segmentation methods. In this paper, we present a deeply supervised rotation equivariant network for skin lesion segmentation by extending the recent group rotation equivariant network~\cite{cohen2016group}. Specifically, we propose the G-upsampling and G-projection operations to adapt the rotation equivariant classification network for our skin lesion segmentation problem. To further increase the performance, we integrate the deep supervision scheme into our proposed rotation equivariant segmentation architecture. The whole framework is equivariant to input transformations, including rotation and reflection, which improves the network efficiency and thus contributes to the segmentation performance. We extensively evaluate our method on the ISIC 2017 skin lesion challenge dataset. The experimental results show that our rotation equivariant networks consistently excel the regular counterparts with the same model complexity under different experimental settings. Our best model achieves 77.23\%(JA) on the test dataset, outperforming the state-of-the-art challenging methods and further demonstrating the effectiveness of our proposed deeply supervised rotation equivariant segmentation network. Our best model also outperforms the state-of-the-art challenging methods, which further demonstrate the effectiveness of our proposed deeply supervised rotation equivariant segmentation network.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-07-08T11:49:49Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Xiaomeng Li</name>
+    </author>
+    <author>
+      <name>Lequan Yu</name>
+    </author>
+    <author>
+      <name>Chi-Wing Fu</name>
+    </author>
+    <author>
+      <name>Pheng-Ann Heng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2009.13634v1</id>
+    <title>MPG-Net: Multi-Prediction Guided Network for Segmentation of Retinal Layers in OCT Images</title>
+    <updated>2020-09-28T21:22:22Z</updated>
+    <link href="https://arxiv.org/abs/2009.13634v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2009.13634v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Optical coherence tomography (OCT) is a commonly-used method of extracting high resolution retinal information. Moreover there is an increasing demand for the automated retinal layer segmentation which facilitates the retinal disease diagnosis. In this paper, we propose a novel multiprediction guided attention network (MPG-Net) for automated retinal layer segmentation in OCT images. The proposed method consists of two major steps to strengthen the discriminative power of a U-shape Fully convolutional network (FCN) for reliable automated segmentation. Firstly, the feature refinement module which adaptively re-weights the feature channels is exploited in the encoder to capture more informative features and discard information in irrelevant regions. Furthermore, we propose a multi-prediction guided attention mechanism which provides pixel-wise semantic prediction guidance to better recover the segmentation mask at each scale. This mechanism which transforms the deep supervision to supervised attention is able to guide feature aggregation with more semantic information between intermediate layers. Experiments on the publicly available Duke OCT dataset confirm the effectiveness of the proposed method as well as an improved performance over other state-of-the-art approaches.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-09-28T21:22:22Z</published>
+    <arxiv:comment>EUSIPCO2020</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Zeyu Fu</name>
+    </author>
+    <author>
+      <name>Yang Sun</name>
+    </author>
+    <author>
+      <name>Xiangyu Zhang</name>
+    </author>
+    <author>
+      <name>Scott Stainton</name>
+    </author>
+    <author>
+      <name>Shaun Barney</name>
+    </author>
+    <author>
+      <name>Jeffry Hogg</name>
+    </author>
+    <author>
+      <name>William Innes</name>
+    </author>
+    <author>
+      <name>Satnam Dlay</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.18582v1</id>
+    <title>Technical Report for ICRA 2026 GOOSE 2D Fine-Grained Semantic Segmentation Challenge: Leveraging DINOv3 for Robust Outdoor Scene Understanding in Field Robotics</title>
+    <updated>2026-06-17T01:13:22Z</updated>
+    <link href="https://arxiv.org/abs/2606.18582v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.18582v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The GOOSE 2D Fine-Grained Semantic Segmentation Challenge at the ICRA 2026 Workshop on Field Robotics evaluates dense semantic segmentation of off-road imagery over a fine-grained taxonomy of 64 classes and 11 evaluated non-void coarse categories. We present the first-place solution to this challenge. Our solution comprises two complementary improvements: (a) a network-level design that combines a self-supervised DINOv3 ViT-L/16 backbone, a ViT-Adapter, and a Mask2Former mask-classification decoder, together with a coarse-category auxiliary loss on the global [CLS] token; and (b) an inference-time aggregation strategy based on multi-scale and horizontal-flip test-time augmentation and an ensemble of the top three checkpoints selected using Codabench scores. Our method achieves an official composite score of 76.57%, consisting of 69.32% fine-class mIoU and 83.81% category-level mIoU, and ranks first on the final phase leaderboard: www.codabench.org/competitions/14257/#/results-tab.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-17T01:13:22Z</published>
+    <arxiv:comment>5 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jaeil Park</name>
+    </author>
+    <author>
+      <name>Hyobin Choi</name>
+    </author>
+    <author>
+      <name>Sangjin Lee</name>
+    </author>
+    <author>
+      <name>Hyungtae Lim</name>
+    </author>
+    <author>
+      <name>Sung-Hoon Yoon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1803.11303v1</id>
+    <title>Pancreas Segmentation in CT and MRI Images via Domain Specific Network Designing and Recurrent Neural Contextual Learning</title>
+    <updated>2018-03-30T01:31:53Z</updated>
+    <link href="https://arxiv.org/abs/1803.11303v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1803.11303v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Automatic pancreas segmentation in radiology images, eg., computed tomography (CT) and magnetic resonance imaging (MRI), is frequently required by computer-aided screening, diagnosis, and quantitative assessment. Yet pancreas is a challenging abdominal organ to segment due to the high inter-patient anatomical variability in both shape and volume metrics. Recently, convolutional neural networks (CNNs) have demonstrated promising performance on accurate segmentation of pancreas. However, the CNN-based method often suffers from segmentation discontinuity for reasons such as noisy image quality and blurry pancreatic boundary. From this point, we propose to introduce recurrent neural networks (RNNs) to address the problem of spatial non-smoothness of inter-slice pancreas segmentation across adjacent image slices. To inference initial segmentation, we first train a 2D CNN sub-network, where we modify its network architecture with deep-supervision and multi-scale feature map aggregation so that it can be trained from scratch with small-sized training data and presents superior performance than transferred models. Thereafter, the successive CNN outputs are processed by another RNN sub-network, which refines the consistency of segmented shapes. More specifically, the RNN sub-network consists convolutional long short-term memory (CLSTM) units in both top-down and bottom-up directions, which regularizes the segmentation of an image by integrating predictions of its neighboring slices. We train the stacked CNN-RNN model end-to-end and perform quantitative evaluations on both CT and MRI images.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-03-30T01:31:53Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jinzheng Cai</name>
+    </author>
+    <author>
+      <name>Le Lu</name>
+    </author>
+    <author>
+      <name>Fuyong Xing</name>
+    </author>
+    <author>
+      <name>Lin Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.15758v1</id>
+    <title>Uncertainty-Gated Deformable Network for Breast Tumor Segmentation in MR Images</title>
+    <updated>2025-09-19T08:37:33Z</updated>
+    <link href="https://arxiv.org/abs/2509.15758v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.15758v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate segmentation of breast tumors in magnetic resonance images (MRI) is essential for breast cancer diagnosis, yet existing methods face challenges in capturing irregular tumor shapes and effectively integrating local and global features. To address these limitations, we propose an uncertainty-gated deformable network to leverage the complementary information from CNN and Transformers. Specifically, we incorporates deformable feature modeling into both convolution and attention modules, enabling adaptive receptive fields for irregular tumor contours. We also design an Uncertainty-Gated Enhancing Module (U-GEM) to selectively exchange complementary features between CNN and Transformer based on pixel-wise uncertainty, enhancing both local and global representations. Additionally, a Boundary-sensitive Deep Supervision Loss is introduced to further improve tumor boundary delineation. Comprehensive experiments on two clinical breast MRI datasets demonstrate that our method achieves superior segmentation performance compared with state-of-the-art methods, highlighting its clinical potential for accurate breast tumor delineation.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-19T08:37:33Z</published>
+    <arxiv:comment>5 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Yue Zhang</name>
+    </author>
+    <author>
+      <name>Jiahua Dong</name>
+    </author>
+    <author>
+      <name>Chengtao Peng</name>
+    </author>
+    <author>
+      <name>Qiuli Wang</name>
+    </author>
+    <author>
+      <name>Dan Song</name>
+    </author>
+    <author>
+      <name>Guiduo Duan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.02649v2</id>
+    <title>Densely Decoded Networks with Adaptive Deep Supervision for Medical Image Segmentation</title>
+    <updated>2024-03-05T02:28:03Z</updated>
+    <link href="https://arxiv.org/abs/2402.02649v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.02649v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Medical image segmentation using deep neural networks has been highly successful. However, the effectiveness of these networks is often limited by inadequate dense prediction and inability to extract robust features. To achieve refined dense prediction, we propose densely decoded networks (ddn), by selectively introducing 'crutch' network connections. Such 'crutch' connections in each upsampling stage of the network decoder (1) enhance target localization by incorporating high resolution features from the encoder, and (2) improve segmentation by facilitating multi-stage contextual information flow. Further, we present a training strategy based on adaptive deep supervision (ads), which exploits and adapts specific attributes of input dataset, for robust feature extraction. In particular, ads strategically locates and deploys auxiliary supervision, by matching the average input object size with the layer-wise effective receptive fields (lerf) of a network, resulting in a class of ddns. Such inclusion of 'companion objective' from a specific hidden layer, helps the model pay close attention to some distinct input-dependent features, which the network might otherwise 'ignore' during training. Our new networks and training strategy are validated on 4 diverse datasets of different modalities, demonstrating their effectiveness.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-05T00:44:57Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Suraj Mishra</name>
+    </author>
+    <author>
+      <name>Danny Z. Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2308.08449v1</id>
+    <title>Improving CTC-AED model with integrated-CTC and auxiliary loss regularization</title>
+    <updated>2023-08-15T03:31:47Z</updated>
+    <link href="https://arxiv.org/abs/2308.08449v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2308.08449v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Connectionist temporal classification (CTC) and attention-based encoder decoder (AED) joint training has been widely applied in automatic speech recognition (ASR). Unlike most hybrid models that separately calculate the CTC and AED losses, our proposed integrated-CTC utilizes the attention mechanism of AED to guide the output of CTC. In this paper, we employ two fusion methods, namely direct addition of logits (DAL) and preserving the maximum probability (PMP). We achieve dimensional consistency by adaptively affine transforming the attention results to match the dimensions of CTC. To accelerate model convergence and improve accuracy, we introduce auxiliary loss regularization for accelerated convergence. Experimental results demonstrate that the DAL method performs better in attention rescoring, while the PMP method excels in CTC prefix beam search and greedy search.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-08-15T03:31:47Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Daobin Zhu</name>
+    </author>
+    <author>
+      <name>Xiangdong Su</name>
+    </author>
+    <author>
+      <name>Hongbin Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2001.00208v2</id>
+    <title>Multi-organ Segmentation over Partially Labeled Datasets with Multi-scale Feature Abstraction</title>
+    <updated>2020-06-06T14:44:25Z</updated>
+    <link href="https://arxiv.org/abs/2001.00208v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2001.00208v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Shortage of fully annotated datasets has been a limiting factor in developing deep learning based image segmentation algorithms and the problem becomes more pronounced in multi-organ segmentation. In this paper, we propose a unified training strategy that enables a novel multi-scale deep neural network to be trained on multiple partially labeled datasets for multi-organ segmentation. In addition, a new network architecture for multi-scale feature abstraction is proposed to integrate pyramid input and feature analysis into a U-shape pyramid structure. To bridge the semantic gap caused by directly merging features from different scales, an equal convolutional depth mechanism is introduced. Furthermore, we employ a deep supervision mechanism to refine the outputs in different scales. To fully leverage the segmentation features from all the scales, we design an adaptive weighting layer to fuse the outputs in an automatic fashion. All these mechanisms together are integrated into a Pyramid Input Pyramid Output Feature Abstraction Network (PIPO-FAN). Our proposed method was evaluated on four publicly available datasets, including BTCV, LiTS, KiTS and Spleen, where very promising performance has been achieved. The source code of this work is publicly shared at https://github.com/DIAL-RPI/PIPO-FAN for others to easily reproduce the work and build their own models with the introduced mechanisms.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-01-01T13:51:11Z</published>
+    <arxiv:comment>Accepted for publication at IEEE Transactions on Medical Imaging</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Xi Fang</name>
+    </author>
+    <author>
+      <name>Pingkun Yan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.12720v4</id>
+    <title>FLEXITOKENS: Flexible Tokenization for Evolving Language Models</title>
+    <updated>2026-05-13T15:04:08Z</updated>
+    <link href="https://arxiv.org/abs/2507.12720v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.12720v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adapting language models to new data distributions by simple finetuning is challenging. This is due to the rigidity of their subword tokenizers, which typically remain unchanged during adaptation. This inflexibility often leads to inefficient tokenization, causing overfragmentation of text in out-of-distribution domains, unseen languages, or scripts. In this work, we develop byte-level LMs with learnable tokenizers to make tokenization adaptive. Our models include a submodule that learns to predict boundaries given the input byte sequence, encoding it into variable-length segments. Most tokenizer-free methods train this boundary predictor using an auxiliary loss that enforces a fixed compression rate across the training corpus, introducing a new kind of rigidity. We propose FLEXITOKENS, a simplified training objective that enables significantly greater flexibility during adaptation. Evaluating across multiple multilingual benchmarks, morphologically diverse tasks, and domains, we demonstrate that FLEXITOKENS consistently reduces token over-fragmentation and achieves up to 10% point improvements on token classification and generative tasks compared to BPE and other gradient-based tokenizer baselines. We validate our findings using models of varying sizes, and our method demonstrates consistent improvements across scales. Code and data for our experiments will be released at https://github.com/skai-research/flexitokens</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-17T01:55:41Z</published>
+    <arxiv:comment>Accepted to ACL (findings) 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Abraham Toluwase Owodunni</name>
+    </author>
+    <author>
+      <name>Orevaoghene Ahia</name>
+    </author>
+    <author>
+      <name>Sachin Kumar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.07387v1</id>
+    <title>Making the Most of Limited Data: Score-Aware Training for Text-to-Music Generation</title>
+    <updated>2026-06-05T15:24:36Z</updated>
+    <link href="https://arxiv.org/abs/2606.07387v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.07387v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>State-of-the-art text-to-music generation systems rely on massive proprietary datasets and industrial-scale compute, making it impossible to disentangle architectural contributions from resource advantages. We propose \textit{score-aware training}, which treats audio-caption alignment score as a direct supervision signal throughout the pipeline. Rather than discarding low-scoring segments, we repurpose them via a CLAP-conditioned Beta noise timestep schedule that routes them to high-noise training regimes, acting as an effective implicit regularizer. Complementarily, segment-level filtering removes the most misaligned examples, and a two-stage caption procedure bridges the distribution gap between verbose training captions and concise inference prompts. A REPA auxiliary loss further transfers structured semantic knowledge from pretrained CLAP and MuQ encoders without additional data. Our 450M-parameter FluxAudio-based system, submitted to the ICME 2026 ATTM Grand Challenge Efficiency Track, ranked 2nd across both tracks in the objective evaluation and 3rd in the Efficiency Track in the final MOS evaluation.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-05T15:24:36Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yun-Chen Cheng</name>
+    </author>
+    <author>
+      <name>Tzu-Hung Huang</name>
+    </author>
+    <author>
+      <name>Chih-Pin Tan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.00661v1</id>
+    <title>DynMoLE: Boosting Mixture of LoRA Experts Fine-Tuning with a Hybrid Routing Mechanism</title>
+    <updated>2025-04-01T11:14:19Z</updated>
+    <link href="https://arxiv.org/abs/2504.00661v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.00661v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Instruction-based fine-tuning of large language models (LLMs) has achieved remarkable success in various natural language processing (NLP) tasks. Parameter-efficient fine-tuning (PEFT) methods, such as Mixture of LoRA Experts (MoLE), combine the efficiency of Low-Rank Adaptation (LoRA) with the versatility of Mixture of Experts (MoE) models, demonstrating significant potential for handling multiple downstream tasks. However, the existing routing mechanisms for MoLE often involve a trade-off between computational efficiency and predictive accuracy, and they fail to fully address the diverse expert selection demands across different transformer layers. In this work, we propose DynMoLE, a hybrid routing strategy that dynamically adjusts expert selection based on the Tsallis entropy of the router's probability distribution. This approach mitigates router uncertainty, enhances stability, and promotes more equitable expert participation, leading to faster convergence and improved model performance. Additionally, we introduce an auxiliary loss based on Tsallis entropy to further guide the model toward convergence with reduced uncertainty, thereby improving training stability and performance. Our extensive experiments on commonsense reasoning benchmarks demonstrate that DynMoLE achieves substantial performance improvements, outperforming LoRA by 9.6% and surpassing the state-of-the-art MoLE method, MoLA, by 2.3%. We also conduct a comprehensive ablation study to evaluate the contributions of DynMoLE's key components.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-01T11:14:19Z</published>
+    <arxiv:comment>22 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Dengchun Li</name>
+    </author>
+    <author>
+      <name>Naizheng Wang</name>
+    </author>
+    <author>
+      <name>Zihao Zhang</name>
+    </author>
+    <author>
+      <name>Haoyang Yin</name>
+    </author>
+    <author>
+      <name>Lei Duan</name>
+    </author>
+    <author>
+      <name>Meng Xiao</name>
+    </author>
+    <author>
+      <name>Mingjie Tang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.18666v1</id>
+    <title>3D Scene Graph Guided Vision-Language Pre-training</title>
+    <updated>2024-11-27T16:10:44Z</updated>
+    <link href="https://arxiv.org/abs/2411.18666v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.18666v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>3D vision-language (VL) reasoning has gained significant attention due to its potential to bridge the 3D physical world with natural language descriptions. Existing approaches typically follow task-specific, highly specialized paradigms. Therefore, these methods focus on a limited range of reasoning sub-tasks and rely heavily on the hand-crafted modules and auxiliary losses. This highlights the need for a simpler, unified and general-purpose model. In this paper, we leverage the inherent connection between 3D scene graphs and natural language, proposing a 3D scene graph-guided vision-language pre-training (VLP) framework. Our approach utilizes modality encoders, graph convolutional layers and cross-attention layers to learn universal representations that adapt to a variety of 3D VL reasoning tasks, thereby eliminating the need for task-specific designs. The pre-training objectives include: 1) Scene graph-guided contrastive learning, which leverages the strong correlation between 3D scene graphs and natural language to align 3D objects with textual features at various fine-grained levels; and 2) Masked modality learning, which uses cross-modality information to reconstruct masked words and 3D objects. Instead of directly reconstructing the 3D point clouds of masked objects, we use position clues to predict their semantic categories. Extensive experiments demonstrate that our pre-training model, when fine-tuned on several downstream tasks, achieves performance comparable to or better than existing methods in tasks such as 3D visual grounding, 3D dense captioning, and 3D question answering.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-27T16:10:44Z</published>
+    <arxiv:comment>14 pages, 8 figures, 7 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Hao Liu</name>
+    </author>
+    <author>
+      <name>Yanni Ma</name>
+    </author>
+    <author>
+      <name>Yan Liu</name>
+    </author>
+    <author>
+      <name>Haihong Xiao</name>
+    </author>
+    <author>
+      <name>Ying He</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2208.10701v1</id>
+    <title>CM-MLP: Cascade Multi-scale MLP with Axial Context Relation Encoder for Edge Segmentation of Medical Image</title>
+    <updated>2022-08-23T02:53:37Z</updated>
+    <link href="https://arxiv.org/abs/2208.10701v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2208.10701v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The convolutional-based methods provide good segmentation performance in the medical image segmentation task. However, those methods have the following challenges when dealing with the edges of the medical images: (1) Previous convolutional-based methods do not focus on the boundary relationship between foreground and background around the segmentation edge, which leads to the degradation of segmentation performance when the edge changes complexly. (2) The inductive bias of the convolutional layer cannot be adapted to complex edge changes and the aggregation of multiple-segmented areas, resulting in its performance improvement mostly limited to segmenting the body of segmented areas instead of the edge. To address these challenges, we propose the CM-MLP framework on MFI (Multi-scale Feature Interaction) block and ACRE (Axial Context Relation Encoder) block for accurate segmentation of the edge of medical image. In the MFI block, we propose the cascade multi-scale MLP (Cascade MLP) to process all local information from the deeper layers of the network simultaneously and utilize a cascade multi-scale mechanism to fuse discrete local information gradually. Then, the ACRE block is used to make the deep supervision focus on exploring the boundary relationship between foreground and background to modify the edge of the medical image. The segmentation accuracy (Dice) of our proposed CM-MLP framework reaches 96.96%, 96.76%, and 82.54% on three benchmark datasets: CVC-ClinicDB dataset, sub-Kvasir dataset, and our in-house dataset, respectively, which significantly outperform the state-of-the-art method. The source code and trained models will be available at https://github.com/ProgrammerHyy/CM-MLP.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-08-23T02:53:37Z</published>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Jinkai Lv</name>
+    </author>
+    <author>
+      <name>Yuyong Hu</name>
+    </author>
+    <author>
+      <name>Quanshui Fu</name>
+    </author>
+    <author>
+      <name>Zhiwang Zhang</name>
+    </author>
+    <author>
+      <name>Yuqiang Hu</name>
+    </author>
+    <author>
+      <name>Lin Lv</name>
+    </author>
+    <author>
+      <name>Guoqing Yang</name>
+    </author>
+    <author>
+      <name>Jinpeng Li</name>
+    </author>
+    <author>
+      <name>Yi Zhao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.32220v2</id>
+    <title>Angular Supervision for Visual Object Grounding in Autoregressive Vision-Language Models</title>
+    <updated>2026-10-29T04:08:01Z</updated>
+    <link href="https://arxiv.org/abs/2610.32220v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.32220v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autoregressive vision-language models (VLMs) struggle to ground generated text in the correct image regions, and existing explainability methods, such as attention maps and Logit Lens, often produce poor spatial explanations due to weak text-to-vision attention and sink tokens. We propose \textbf{Angular Relevance} ($R_L$), a simple visualization measure based on cosine similarity between visual token embeddings and unembedding-matrix rows. Because $R_L$ is invariant to token norm, it produces substantially sharper and more faithful heatmaps than attention maps or Logit Lens on out-of-the-box models. Without any training, $R_L$ yields competitive referring-expression segmentation (RES), outperforming prior diagnostic maps and CLIP-based training-free methods. To preserve localized object information during cross-modal mixing, we introduce \textbf{Angular Object-Aware Loss (AOL)}, an auxiliary loss that directly supervises visual token embeddings to align angularly with the vocabulary directions of their corresponding object concepts. Finetuning with AOL alongside the standard next-token prediction objective significantly sharpens object localization in heatmaps, showing that the VLM's own visual tokens can be used directly for grounding and improving RES, without training any segmentation heads and without degrading general VQA performance. We further demonstrate that the learned grounding also transfers to category-level segmentation of object categories not seen during training.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-23T06:16:32Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Parsa Esmaeilkhani</name>
+    </author>
+    <author>
+      <name>Longin Jan Latecki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.06191v2</id>
+    <title>A Semantic Segmentation Algorithm for Pleural Effusion Based on DBIF-AUNet</title>
+    <updated>2025-09-22T07:49:11Z</updated>
+    <link href="https://arxiv.org/abs/2508.06191v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.06191v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Pleural effusion semantic segmentation can significantly enhance the accuracy and timeliness of clinical diagnosis and treatment by precisely identifying disease severity and lesion areas. Currently, semantic segmentation of pleural effusion CT images faces multiple challenges. These include similar gray levels between effusion and surrounding tissues, blurred edges, and variable morphology. Existing methods often struggle with diverse image variations and complex edges, primarily because direct feature concatenation causes semantic gaps. To address these challenges, we propose the Dual-Branch Interactive Fusion Attention model (DBIF-AUNet). This model constructs a densely nested skip-connection network and innovatively refines the Dual-Domain Feature Disentanglement module (DDFD). The DDFD module orthogonally decouples the functions of dual-domain modules to achieve multi-scale feature complementarity and enhance characteristics at different levels. Concurrently, we design a Branch Interaction Attention Fusion module (BIAF) that works synergistically with the DDFD. This module dynamically weights and fuses global, local, and frequency band features, thereby improving segmentation robustness. Furthermore, we implement a nested deep supervision mechanism with hierarchical adaptive hybrid loss to effectively address class imbalance. Through validation on 1,622 pleural effusion CT images from Southwest Hospital, DBIF-AUNet achieved IoU and Dice scores of 80.1% and 89.0% respectively. These results outperform state-of-the-art medical image segmentation models U-Net++ and Swin-UNet by 5.7%/2.7% and 2.2%/1.5% respectively, demonstrating significant optimization in segmentation accuracy for complex pleural effusion CT images.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-08T10:14:51Z</published>
+    <arxiv:comment>12 pages, 6 figures, 2 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Ruixiang Tang</name>
+    </author>
+    <author>
+      <name>Mingda Zhang</name>
+    </author>
+    <author>
+      <name>Jianglong Qin</name>
+    </author>
+    <author>
+      <name>Yan Song</name>
+    </author>
+    <author>
+      <name>Yi Wu</name>
+    </author>
+    <author>
+      <name>Wei Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.01243v1</id>
+    <title>CenterMamba-SAM: Center-Prioritized Scanning and Temporal Prototypes for Brain Lesion Segmentation</title>
+    <updated>2025-11-03T05:27:28Z</updated>
+    <link href="https://arxiv.org/abs/2511.01243v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.01243v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Brain lesion segmentation remains challenging due to small, low-contrast lesions, anisotropic sampling, and cross-slice discontinuities. We propose CenterMamba-SAM, an end-to-end framework that freezes a pretrained backbone and trains only lightweight adapters for efficient fine-tuning. At its core is the CenterMamba encoder, which employs a novel 3x3 corner-axis-center short-sequence scanning strategy to enable center-prioritized, axis-reinforced, and diagonally compensated information aggregation. This design enhances sensitivity to weak boundaries and tiny foci while maintaining sparse yet effective feature representation. A memory-driven structural prompt generator maintains a prototype bank across neighboring slices, enabling automatic synthesis of reliable prompts without user interaction, thereby improving inter-slice coherence. The memory-augmented multi-scale decoder integrates memory attention modules at multiple levels, combining deep supervision with progressive refinement to restore fine details while preserving global consistency. Extensive experiments on public benchmarks demonstrate that CenterMamba-SAM achieves state-of-the-art performance in brain lesion segmentation.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-03T05:27:28Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yu Tian</name>
+    </author>
+    <author>
+      <name>Zhongheng Yang</name>
+    </author>
+    <author>
+      <name>Chenshi Liu</name>
+    </author>
+    <author>
+      <name>Yiyun Su</name>
+    </author>
+    <author>
+      <name>Ziwei Hong</name>
+    </author>
+    <author>
+      <name>Zexi Gong</name>
+    </author>
+    <author>
+      <name>Jingyuan Xu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2108.13759v1</id>
+    <title>Enjoy the Salience: Towards Better Transformer-based Faithful Explanations with Word Salience</title>
+    <updated>2021-08-31T11:21:30Z</updated>
+    <link href="https://arxiv.org/abs/2108.13759v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2108.13759v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Pretrained transformer-based models such as BERT have demonstrated state-of-the-art predictive performance when adapted into a range of natural language processing tasks. An open problem is how to improve the faithfulness of explanations (rationales) for the predictions of these models. In this paper, we hypothesize that salient information extracted a priori from the training data can complement the task-specific information learned by the model during fine-tuning on a downstream task. In this way, we aim to help BERT not to forget assigning importance to informative input tokens when making predictions by proposing SaLoss; an auxiliary loss function for guiding the multi-head attention mechanism during training to be close to salient information extracted a priori using TextRank. Experiments for explanation faithfulness across five datasets, show that models trained with SaLoss consistently provide more faithful explanations across four different feature attribution methods compared to vanilla BERT. Using the rationales extracted from vanilla BERT and SaLoss models to train inherently faithful classifiers, we further show that the latter result in higher predictive performance in downstream tasks.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-31T11:21:30Z</published>
+    <arxiv:comment>EMNLP 2021 Pre-print</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>George Chrysostomou</name>
+    </author>
+    <author>
+      <name>Nikolaos Aletras</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.01849v1</id>
+    <title>HED-UNet: Combined Segmentation and Edge Detection for Monitoring the Antarctic Coastline</title>
+    <updated>2021-03-02T16:35:05Z</updated>
+    <link href="https://arxiv.org/abs/2103.01849v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.01849v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep learning-based coastline detection algorithms have begun to outshine traditional statistical methods in recent years. However, they are usually trained only as single-purpose models to either segment land and water or delineate the coastline. In contrast to this, a human annotator will usually keep a mental map of both segmentation and delineation when performing manual coastline detection. To take into account this task duality, we therefore devise a new model to unite these two approaches in a deep learning model. By taking inspiration from the main building blocks of a semantic segmentation framework (UNet) and an edge detection framework (HED), both tasks are combined in a natural way. Training is made efficient by employing deep supervision on side predictions at multiple resolutions. Finally, a hierarchical attention mechanism is introduced to adaptively merge these multiscale predictions into the final model output. The advantages of this approach over other traditional and deep learning-based methods for coastline detection are demonstrated on a dataset of Sentinel-1 imagery covering parts of the Antarctic coast, where coastline detection is notoriously difficult. An implementation of our method is available at \url{https://github.com/khdlr/HED-UNet}.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-02T16:35:05Z</published>
+    <arxiv:comment>This work has been accepted by IEEE TGRS for publication</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Konrad Heidler</name>
+    </author>
+    <author>
+      <name>Lichao Mou</name>
+    </author>
+    <author>
+      <name>Celia Baumhoer</name>
+    </author>
+    <author>
+      <name>Andreas Dietz</name>
+    </author>
+    <author>
+      <name>Xiao Xiang Zhu</name>
+    </author>
+    <arxiv:doi>10.1109/TGRS.2021.3064606</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TGRS.2021.3064606" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2205.03481v1</id>
+    <title>A Conformer-based Waveform-domain Neural Acoustic Echo Canceller Optimized for ASR Accuracy</title>
+    <updated>2022-05-06T21:35:25Z</updated>
+    <link href="https://arxiv.org/abs/2205.03481v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2205.03481v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Acoustic Echo Cancellation (AEC) is essential for accurate recognition of queries spoken to a smart speaker that is playing out audio. Previous work has shown that a neural AEC model operating on log-mel spectral features (denoted "logmel" hereafter) can greatly improve Automatic Speech Recognition (ASR) accuracy when optimized with an auxiliary loss utilizing a pre-trained ASR model encoder. In this paper, we develop a conformer-based waveform-domain neural AEC model inspired by the "TasNet" architecture. The model is trained by jointly optimizing Negative Scale-Invariant SNR (SISNR) and ASR losses on a large speech dataset. On a realistic rerecorded test set, we find that cascading a linear adaptive AEC and a waveform-domain neural AEC is very effective, giving 56-59% word error rate (WER) reduction over the linear AEC alone. On this test set, the 1.6M parameter waveform-domain neural AEC also improves over a larger 6.5M parameter logmel-domain neural AEC model by 20-29% in easy to moderate conditions. By operating on smaller frames, the waveform neural model is able to perform better at smaller sizes and is better suited for applications where memory is limited.</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-05-06T21:35:25Z</published>
+    <arxiv:comment>Submitted to Interspeech 2022</arxiv:comment>
+    <arxiv:primary_category term="eess.AS"/>
+    <author>
+      <name>Sankaran Panchapagesan</name>
+    </author>
+    <author>
+      <name>Arun Narayanan</name>
+    </author>
+    <author>
+      <name>Turaj Zakizadeh Shabestary</name>
+    </author>
+    <author>
+      <name>Shuai Shao</name>
+    </author>
+    <author>
+      <name>Nathan Howard</name>
+    </author>
+    <author>
+      <name>Alex Park</name>
+    </author>
+    <author>
+      <name>James Walker</name>
+    </author>
+    <author>
+      <name>Alexander Gruenstein</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2111.03286v1</id>
+    <title>FBNet: Feature Balance Network for Urban-Scene Segmentation</title>
+    <updated>2021-11-05T06:27:10Z</updated>
+    <link href="https://arxiv.org/abs/2111.03286v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2111.03286v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Image segmentation in the urban scene has recently attracted much attention due to its success in autonomous driving systems. However, the poor performance of concerned foreground targets, e.g., traffic lights and poles, still limits its further practical applications. In urban scenes, foreground targets are always concealed in their surrounding stuff because of the special camera position and 3D perspective projection. What's worse, it exacerbates the unbalance between foreground and background classes in high-level features due to the continuous expansion of the reception field. We call it Feature Camouflage. In this paper, we present a novel add-on module, named Feature Balance Network (FBNet), to eliminate the feature camouflage in urban-scene segmentation. FBNet consists of two key components, i.e., Block-wise BCE(BwBCE) and Dual Feature Modulator(DFM). BwBCE serves as an auxiliary loss to ensure uniform gradients for foreground classes and their surroundings during backpropagation. At the same time, DFM intends to enhance the deep representation of foreground classes in high-level features adaptively under the supervision of BwBCE. These two modules facilitate each other as a whole to ease feature camouflage effectively. Our proposed method achieves a new state-of-the-art segmentation performance on two challenging urban-scene benchmarks, i.e., Cityscapes and BDD100K. Code will be released for reproduction.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-11-05T06:27:10Z</published>
+    <arxiv:comment>Tech Report</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Lei Gan</name>
+    </author>
+    <author>
+      <name>Huabin Huang</name>
+    </author>
+    <author>
+      <name>Banghuai Li</name>
+    </author>
+    <author>
+      <name>Ye Yuan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2306.15349v1</id>
+    <title>SSC-RS: Elevate LiDAR Semantic Scene Completion with Representation Separation and BEV Fusion</title>
+    <updated>2023-06-27T10:02:45Z</updated>
+    <link href="https://arxiv.org/abs/2306.15349v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2306.15349v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Semantic scene completion (SSC) jointly predicts the semantics and geometry of the entire 3D scene, which plays an essential role in 3D scene understanding for autonomous driving systems. SSC has achieved rapid progress with the help of semantic context in segmentation. However, how to effectively exploit the relationships between the semantic context in semantic segmentation and geometric structure in scene completion remains under exploration. In this paper, we propose to solve outdoor SSC from the perspective of representation separation and BEV fusion. Specifically, we present the network, named SSC-RS, which uses separate branches with deep supervision to explicitly disentangle the learning procedure of the semantic and geometric representations. And a BEV fusion network equipped with the proposed Adaptive Representation Fusion (ARF) module is presented to aggregate the multi-scale features effectively and efficiently. Due to the low computational burden and powerful representation ability, our model has good generality while running in real-time. Extensive experiments on SemanticKITTI demonstrate our SSC-RS achieves state-of-the-art performance.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-06-27T10:02:45Z</published>
+    <arxiv:comment>8 pages, 5 figures, IROS2023</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jianbiao Mei</name>
+    </author>
+    <author>
+      <name>Yu Yang</name>
+    </author>
+    <author>
+      <name>Mengmeng Wang</name>
+    </author>
+    <author>
+      <name>Tianxin Huang</name>
+    </author>
+    <author>
+      <name>Xuemeng Yang</name>
+    </author>
+    <author>
+      <name>Yong Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.04676v1</id>
+    <title>DB-MSMUNet:Dual Branch Multi-scale Mamba UNet for Pancreatic CT Scans Segmentation</title>
+    <updated>2026-01-08T07:41:37Z</updated>
+    <link href="https://arxiv.org/abs/2601.04676v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.04676v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate segmentation of the pancreas and its lesions in CT scans is crucial for the precise diagnosis and treatment of pancreatic cancer. However, it remains a highly challenging task due to several factors such as low tissue contrast with surrounding organs, blurry anatomical boundaries, irregular organ shapes, and the small size of lesions. To tackle these issues, we propose DB-MSMUNet (Dual-Branch Multi-scale Mamba UNet), a novel encoder-decoder architecture designed specifically for robust pancreatic segmentation. The encoder is constructed using a Multi-scale Mamba Module (MSMM), which combines deformable convolutions and multi-scale state space modeling to enhance both global context modeling and local deformation adaptation. The network employs a dual-decoder design: the edge decoder introduces an Edge Enhancement Path (EEP) to explicitly capture boundary cues and refine fuzzy contours, while the area decoder incorporates a Multi-layer Decoder (MLD) to preserve fine-grained details and accurately reconstruct small lesions by leveraging multi-scale deep semantic features. Furthermore, Auxiliary Deep Supervision (ADS) heads are added at multiple scales to both decoders, providing more accurate gradient feedback and further enhancing the discriminative capability of multi-scale features. We conduct extensive experiments on three datasets: the NIH Pancreas dataset, the MSD dataset, and a clinical pancreatic tumor dataset provided by collaborating hospitals. DB-MSMUNet achieves Dice Similarity Coefficients of 89.47%, 87.59%, and 89.02%, respectively, outperforming most existing state-of-the-art methods in terms of segmentation accuracy, edge preservation, and robustness across different datasets. These results demonstrate the effectiveness and generalizability of the proposed method for real-world pancreatic CT segmentation tasks.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-08T07:41:37Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Qiu Guan</name>
+    </author>
+    <author>
+      <name>Zhiqiang Yang</name>
+    </author>
+    <author>
+      <name>Dezhang Ye</name>
+    </author>
+    <author>
+      <name>Yang Chen</name>
+    </author>
+    <author>
+      <name>Xinli Xu</name>
+    </author>
+    <author>
+      <name>Ying Tang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1812.05807v1</id>
+    <title>Combating Uncertainty with Novel Losses for Automatic Left Atrium Segmentation</title>
+    <updated>2018-12-14T07:47:10Z</updated>
+    <link href="https://arxiv.org/abs/1812.05807v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1812.05807v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Segmenting left atrium in MR volume holds great potentials in promoting the treatment of atrial fibrillation. However, the varying anatomies, artifacts and low contrasts among tissues hinder the advance of both manual and automated solutions. In this paper, we propose a fully-automated framework to segment left atrium in gadolinium-enhanced MR volumes. The region of left atrium is firstly automatically localized by a detection module. Our framework then originates with a customized 3D deep neural network to fully explore the spatial dependency in the region for segmentation. To alleviate the risk of low training efficiency and potential overfitting, we enhance our deep network with the transfer learning and deep supervision strategy. Main contribution of our network design lies in the composite loss function to combat the boundary ambiguity and hard examples. We firstly adopt the Overlap loss to encourage network reduce the overlap between the foreground and background and thus sharpen the predictions on boundary. We then propose a novel Focal Positive loss to guide the learning of voxel-specific threshold and emphasize the foreground to improve classification sensitivity. Further improvement is obtained with an recursive training scheme. With ablation studies, all the introduced modules prove to be effective. The proposed framework achieves an average Dice of 92.24 in segmenting left atrium with pulmonary veins on 20 testing volumes.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-12-14T07:47:10Z</published>
+    <arxiv:comment>9 pages, 4 figures. MICCAI Workshop on STACOM 2018</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Xin Yang</name>
+    </author>
+    <author>
+      <name>Na Wang</name>
+    </author>
+    <author>
+      <name>Yi Wang</name>
+    </author>
+    <author>
+      <name>Xu Wang</name>
+    </author>
+    <author>
+      <name>Reza Nezafat</name>
+    </author>
+    <author>
+      <name>Dong Ni</name>
+    </author>
+    <author>
+      <name>Pheng-Ann Heng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.00663v1</id>
+    <title>Deep Learning for Longitudinal Gross Tumor Volume Segmentation in MRI-Guided Adaptive Radiotherapy for Head and Neck Cancer</title>
+    <updated>2024-12-01T03:57:18Z</updated>
+    <link href="https://arxiv.org/abs/2412.00663v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.00663v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate segmentation of gross tumor volume (GTV) is essential for effective MRI-guided adaptive radiotherapy (MRgART) in head and neck cancer. However, manual segmentation of the GTV over the course of therapy is time-consuming and prone to interobserver variability. Deep learning (DL) has the potential to overcome these challenges by automatically delineating GTVs. In this study, our team, $\textit{UW LAIR}$, tackled the challenges of both pre-radiotherapy (pre-RT) (Task 1) and mid-radiotherapy (mid-RT) (Task 2) tumor volume segmentation. To this end, we developed a series of DL models for longitudinal GTV segmentation. The backbone of our models for both tasks was SegResNet with deep supervision. For Task 1, we trained the model using a combined dataset of pre-RT and mid-RT MRI data, which resulted in the improved aggregated Dice similarity coefficient (DSCagg) on an internal testing set compared to models trained solely on pre-RT MRI data. In Task 2, we introduced mask-aware attention modules, enabling pre-RT GTV masks to influence intermediate features learned from mid-RT data. This attention-based approach yielded slight improvements over the baseline method, which concatenated mid-RT MRI with pre-RT GTV masks as input. In the final testing phase, the ensemble of 10 pre-RT segmentation models achieved an average DSCagg of 0.794, with 0.745 for primary GTV (GTVp) and 0.844 for metastatic lymph nodes (GTVn) in Task 1. For Task 2, the ensemble of 10 mid-RT segmentation models attained an average DSCagg of 0.733, with 0.607 for GTVp and 0.859 for GTVn, leading us to $\textbf{achieve 1st place}$. In summary, we presented a collection of DL models that could facilitate GTV segmentation in MRgART, offering the potential to streamline radiation oncology workflows. Our code and model weights are available at https://github.com/xtie97/HNTS-MRG24-UWLAIR.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.med-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-01T03:57:18Z</published>
+    <arxiv:comment>12 pages, 4 figures, 4 tables</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Xin Tie</name>
+    </author>
+    <author>
+      <name>Weijie Chen</name>
+    </author>
+    <author>
+      <name>Zachary Huemann</name>
+    </author>
+    <author>
+      <name>Brayden Schott</name>
+    </author>
+    <author>
+      <name>Nuohao Liu</name>
+    </author>
+    <author>
+      <name>Tyler J. Bradshaw</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.08316v3</id>
+    <title>Unlocking 3D Affordance Segmentation with 2D Semantic Knowledge</title>
+    <updated>2026-03-19T06:38:39Z</updated>
+    <link href="https://arxiv.org/abs/2510.08316v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.08316v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Affordance segmentation aims to decompose 3D objects into parts that serve distinct functional roles, enabling models to reason about object interactions rather than mere recognition. Existing methods, mostly following the paradigm of 3D semantic segmentation or prompt-based frameworks, struggle when geometric cues are weak or ambiguous, as sparse point clouds provide limited functional information. To overcome this limitation, we leverage the rich semantic knowledge embedded in large-scale 2D Vision Foundation Models (VFMs) to guide 3D representation learning through a cross-modal alignment mechanism. Specifically, we propose Cross-Modal Affinity Transfer (CMAT), a pretraining strategy that compels the 3D encoder to align with the semantic structures induced by lifted 2D features. CMAT is driven by a core affinity alignment objective, supported by two auxiliary losses, geometric reconstruction and feature diversity, which together encourage structured and discriminative feature learning. Built upon the CMAT-pretrained backbone, we employ a lightweight affordance segmentor that injects text or visual prompts into the learned 3D space through an efficient cross-attention interface, enabling dense and prompt-aware affordance prediction while preserving the semantic organization established during pretraining. Extensive experiments demonstrate consistent improvements over previous state-of-the-art methods in both accuracy and efficiency.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-09T15:01:26Z</published>
+    <arxiv:comment>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yu Huang</name>
+    </author>
+    <author>
+      <name>Zelin Peng</name>
+    </author>
+    <author>
+      <name>Changsong Wen</name>
+    </author>
+    <author>
+      <name>Xiaokang Yang</name>
+    </author>
+    <author>
+      <name>Wei Shen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.13741v3</id>
+    <title>GALA: Generation-Aware Cross-Modal Alignment for Text-to-Time-Series Synthesis</title>
+    <updated>2026-10-13T15:40:48Z</updated>
+    <link href="https://arxiv.org/abs/2608.13741v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.13741v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Synthesizing time series from natural language is emerging as the most expressive form of controllable time series generation. However, existing text-conditioned generators either take caption embeddings frozen from off-the-shelf text encoders, or adapt the encoder end-to-end, letting the denoising loss shape the embeddings only as a by-product. In either case, the conditioning representation is never deliberately matched to the signal modality, leaving it ill-suited to guide generation. We address this by introducing GALA: Generation-Aware cross-modaL Alignment for text conditional time series generation. GALA is a two-stage approach that first contrastively couples a pretrained text encoder with a time-series foundation model into a shared embedding space with both encoders adapted to generation by an auxiliary generative loss, and then freezes the resulting caption embedding to drive a flow-matching generator. On TSFragment-600K, spanning four domains and three fragment lengths, GALA sets a new state of the art, ranking first in 30 of 36 metric columns and reaching an average rank of 1.08/1.08/1.42 at lengths 24/48/96 against 1.92/2.00/1.75 for the strongest baseline. We further find that generator-internal text encoders force a trade-off between fidelity and caption adherence, whereas conditioning on the aligned embedding breaks it: FID, CTTP, and JFTSD all improve at once. Ablating the auxiliary loss degrades FID, CTTP and JFTSD together, it indicates the generative term is a necessary component of the alignment rather than an add-on.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-13T19:57:07Z</published>
+    <arxiv:comment>21 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Haochen Zhang</name>
+    </author>
+    <author>
+      <name>Gengwei Zhang</name>
+    </author>
+    <author>
+      <name>Laura Yao</name>
+    </author>
+    <author>
+      <name>Nicholas Konz</name>
+    </author>
+    <author>
+      <name>Tianlong Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.05941v1</id>
+    <title>Decomposed Knowledge Distillation for Class-Incremental Semantic Segmentation</title>
+    <updated>2022-10-12T06:15:51Z</updated>
+    <link href="https://arxiv.org/abs/2210.05941v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.05941v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Class-incremental semantic segmentation (CISS) labels each pixel of an image with a corresponding object/stuff class continually. To this end, it is crucial to learn novel classes incrementally without forgetting previously learned knowledge. Current CISS methods typically use a knowledge distillation (KD) technique for preserving classifier logits, or freeze a feature extractor, to avoid the forgetting problem. The strong constraints, however, prevent learning discriminative features for novel classes. We introduce a CISS framework that alleviates the forgetting problem and facilitates learning novel classes effectively. We have found that a logit can be decomposed into two terms. They quantify how likely an input belongs to a particular class or not, providing a clue for a reasoning process of a model. The KD technique, in this context, preserves the sum of two terms (i.e., a class logit), suggesting that each could be changed and thus the KD does not imitate the reasoning process. To impose constraints on each term explicitly, we propose a new decomposed knowledge distillation (DKD) technique, improving the rigidity of a model and addressing the forgetting problem more effectively. We also introduce a novel initialization method to train new classifiers for novel classes. In CISS, the number of negative training samples for novel classes is not sufficient to discriminate old classes. To mitigate this, we propose to transfer knowledge of negatives to the classifiers successively using an auxiliary classifier, boosting the performance significantly. Experimental results on standard CISS benchmarks demonstrate the effectiveness of our framework.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-12T06:15:51Z</published>
+    <arxiv:comment>Accepted to NeurIPS 2022</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Donghyeon Baek</name>
+    </author>
+    <author>
+      <name>Youngmin Oh</name>
+    </author>
+    <author>
+      <name>Sanghoon Lee</name>
+    </author>
+    <author>
+      <name>Junghyup Lee</name>
+    </author>
+    <author>
+      <name>Bumsub Ham</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2611.05766v1</id>
+    <title>ME^2FDiff: Multiscale Expert Enhancing Feature Diffusion in Residual Network for Brain Tumor Segmentation</title>
+    <updated>2026-11-04T00:16:59Z</updated>
+    <link href="https://arxiv.org/abs/2611.05766v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2611.05766v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Automated segmentation of post-treatment glioma from MRI is essential for accurate diagnosis and treatment planning, yet remains difficult. Surgery and chemoradiotherapy cause structural changes in brain like resection cavities, edema, and fibrosis, that alter imaging appearance and mimic tumor recurrence. Contemporary segmentation architectures attain high accuracy with two limitations. First, the bottleneck originates from the deepest encoder stage, so one representation must serve sub-regions that differ widely in size and appearance. Second, they produce the segmentation in a single forward pass with no mechanism for refinement. We propose ME^2FDiff, a single-model architecture, addressing both. An attention-conditioned spectral diffusion block refines the bottleneck. It uses the image-conditioned latent diffusion process with two processes: a spatial pre-attention gate and a spectral fusion block whose timestep-adaptive bandpass filter selects the informative frequency band at each noise level. A multiscale expert-enhanced feature block fuses the intermediate encoder scales into the bottleneck through expert-selected shared tokens, guaranteeing balanced utilization without an auxiliary loss. On the BraTS 2024 post-treatment glioma dataset, ME^2FDiff achieves the best results on every tumor sub-region among all single-model baselines (91.23% Dice, 84.52% IOU, 2.13 mm HD95 on whole-tumor) and surpasses a three-expert ensemble on both overlap metrics at roughly one-third of its inference cost. Against recent state-of-the-art methods retrained under identical conditions, it maintains the strongest performance with the fewest parameters of any competing model. These findings demonstrate that a single, compact network can absorb the specialization, usually sought through ensembling or larger architectures.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-11-04T00:16:59Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Afrida Rahman</name>
+    </author>
+    <author>
+      <name>Bijoy Kundu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.21007v3</id>
+    <title>LiteViLNet: Lightweight Vision-LiDAR Fusion Network for Efficient Road Segmentation</title>
+    <updated>2026-09-16T12:02:28Z</updated>
+    <link href="https://arxiv.org/abs/2605.21007v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.21007v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Road segmentation is a fundamental perception task for autonomous driving and mobile robotics, where both appearance and geometric cues must be processed under edge-computing constraints. Existing multi-modal approaches often improve accuracy with large encoders or expensive global interaction, which limits their use on embedded platforms. We present \textbf{LiteViLNet}, a lightweight RGB-geometry fusion network that combines a MobileNetV3 RGB encoder with a 0.12M-parameter depth-wise-separable geometry encoder. A multi-scale feature fusion module performs modality-specific enhancement, global-query cross-modal interaction, and adaptive gating, while a depth-wise large-kernel bridge enlarges the contextual support of the deepest representation with low overhead. The resulting U-Net-style decoder uses deep supervision only during training. On the KITTI Road benchmark, the 14.04M-parameter full model obtains $97.23\pm0.15\%$ MaxF. On the held-out ORFD test set under the released OFF-Net evaluation protocol, the full model achieves $96.74\pm0.09\%$ F-score and $93.68\pm0.18\%$ IoU. On a Jetson Orin NX, model-only PyTorch FP16 inference reaches $22.18\pm0.21$ FPS; a separate TensorRT FP16 measurement reaches $68.73\pm0.06$ FPS on the Jetson. Camera-depth adaptations and perception-and-control demonstrations on three heterogeneous robot platforms further illustrate the portability of the dual-stream design.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-20T10:44:06Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Daojie Peng</name>
+    </author>
+    <author>
+      <name>Bingtao Wang</name>
+    </author>
+    <author>
+      <name>Fulong Ma</name>
+    </author>
+    <author>
+      <name>Liang Zhang</name>
+    </author>
+    <author>
+      <name>Jun Ma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.24988v1</id>
+    <title>Enhancing Hierarchical Reinforcement Learning through Change Point Detection in Time Series</title>
+    <updated>2025-10-28T21:34:23Z</updated>
+    <link href="https://arxiv.org/abs/2510.24988v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.24988v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Hierarchical Reinforcement Learning (HRL) enhances the scalability of decision-making in long-horizon tasks by introducing temporal abstraction through options-policies that span multiple timesteps. Despite its theoretical appeal, the practical implementation of HRL suffers from the challenge of autonomously discovering semantically meaningful subgoals and learning optimal option termination boundaries. This paper introduces a novel architecture that integrates a self-supervised, Transformer-based Change Point Detection (CPD) module into the Option-Critic framework, enabling adaptive segmentation of state trajectories and the discovery of options. The CPD module is trained using heuristic pseudo-labels derived from intrinsic signals to infer latent shifts in environment dynamics without external supervision. These inferred change-points are leveraged in three critical ways: (i) to serve as supervisory signals for stabilizing termination function gradients, (ii) to pretrain intra-option policies via segment-wise behavioral cloning, and (iii) to enforce functional specialization through inter-option divergence penalties over CPD-defined state partitions. The overall optimization objective enhances the standard actor-critic loss using structure-aware auxiliary losses. In our framework, option discovery arises naturally as CPD-defined trajectory segments are mapped to distinct intra-option policies, enabling the agent to autonomously partition its behavior into reusable, semantically meaningful skills. Experiments on the Four-Rooms and Pinball tasks demonstrate that CPD-guided agents exhibit accelerated convergence, higher cumulative returns, and significantly improved option specialization. These findings confirm that integrating structural priors via change-point segmentation leads to more interpretable, sample-efficient, and robust hierarchical policies in complex environments.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-28T21:34:23Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hemanath Arumugam</name>
+    </author>
+    <author>
+      <name>Falong Fan</name>
+    </author>
+    <author>
+      <name>Bo Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.22239v1</id>
+    <title>Synthetic-to-Real Transfer Learning for Chromatin-Sensitive PWS Microscopy</title>
+    <updated>2025-10-25T10:00:34Z</updated>
+    <link href="https://arxiv.org/abs/2510.22239v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.22239v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Chromatin sensitive partial wave spectroscopic (csPWS) microscopy enables label free detection of nanoscale chromatin packing alterations that occur before visible cellular transformation. However, manual nuclear segmentation limits population scale analysis needed for biomarker discovery in early cancer detection. The lack of annotated csPWS imaging data prevents direct use of standard deep learning methods. We present CFU Net, a hierarchical segmentation architecture trained with a three stage curriculum on synthetic multimodal data. CFU Net achieves near perfect performance on held out synthetic test data that represent diverse spectroscopic imaging conditions without manual annotations (Dice 0.9879, IoU 0.9895). Our approach uses physics based rendering that incorporates empirically supported chromatin packing statistics, Mie scattering models, and modality specific noise, combined with a curriculum that progresses from adversarial RGB pretraining to spectroscopic fine tuning and histology validation. CFU Net integrates five architectural elements (ConvNeXt backbone, Feature Pyramid Network, UNet plus plus dense connections, dual attention, and deep supervision) that together improve Dice over a baseline UNet by 8.3 percent. We demonstrate deployment ready INT8 quantization with 74.9 percent compression and 0.15 second inference, giving a 240 times throughput gain over manual analysis. Applied to more than ten thousand automatically segmented nuclei from synthetic test data, the pipeline extracts chromatin biomarkers that distinguish normal from pre cancerous tissue with large effect sizes (Cohens d between 1.31 and 2.98), reaching 94 percent classification accuracy. This work provides a general framework for synthetic to real transfer learning in specialized microscopy and open resources for community validation on clinical specimens.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.QM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-25T10:00:34Z</published>
+    <arxiv:comment>24 pages, 5 figures and 4 tables</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Jahidul Arafat</name>
+    </author>
+    <author>
+      <name>Sanjaya Poudel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.31305v1</id>
+    <title>Cola2: Co-Adaptive Hierarchical Language Modeling with Continuous Semantic Compression and Balanced Discrete Generation</title>
+    <updated>2026-10-22T14:04:07Z</updated>
+    <link href="https://arxiv.org/abs/2610.31305v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.31305v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Hierarchical language generation separates continuous semantic modeling from discrete text realization, but its effectiveness depends on what the latent space compresses and how the discrete generator uses it. We propose Cola2, a framework that jointly studies continuous semantic compression, the balance between reconstruction and generation, and continuous-discrete co-adaptation. Cola2 dynamically segments text into semantic spans, controls the compression rate through auxiliary-loss-free negative feedback, and combines reconstruction and generation supervision to learn compact, predictive latent representations. A block-causal masked diffusion decoder is trained with clean, noisy, and dropped latent conditions, while classifier-free guidance adjusts the balance between semantic reconstruction and autonomous generation. Token-prediction gradients update the encoder through the latents, whereas Flow Matching prior learning is decoupled from representation learning by stop-gradient. During inference, generated text is re-encoded under a fixed span layout to keep the latent history consistent with the actual text context. Experiments on five downstream tasks with about 210 billion training tokens validate the core designs and show competitive, unsaturated scaling. With 346.03 billion source tokens, an unconverged checkpoint reaches a 60.10 average across eight tasks and surpasses Llama-3-8B on HellaSwag and StoryCloze despite its reported pretraining budget being over 43 times larger. These results demonstrate the potential of continuous-latent hierarchical language generation.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-22T14:04:07Z</published>
+    <arxiv:comment>47 pages, 14 figures, 5 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Hongcan Guo</name>
+    </author>
+    <author>
+      <name>Yian Zhao</name>
+    </author>
+    <author>
+      <name>Feng Wang</name>
+    </author>
+    <author>
+      <name>Shen Nie</name>
+    </author>
+    <author>
+      <name>Guoqiang Wei</name>
+    </author>
+    <author>
+      <name>Yan Zeng</name>
+    </author>
+    <author>
+      <name>Hengshuang Zhao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.07467v2</id>
+    <title>Focus U-Net: A novel dual attention-gated CNN for polyp segmentation during colonoscopy</title>
+    <updated>2021-06-22T11:03:09Z</updated>
+    <link href="https://arxiv.org/abs/2105.07467v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.07467v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Background: Colonoscopy remains the gold-standard screening for colorectal cancer. However, significant miss rates for polyps have been reported, particularly when there are multiple small adenomas. This presents an opportunity to leverage computer-aided systems to support clinicians and reduce the number of polyps missed.
+  Method: In this work we introduce the Focus U-Net, a novel dual attention-gated deep neural network, which combines efficient spatial and channel-based attention into a single Focus Gate module to encourage selective learning of polyp features. The Focus U-Net further incorporates short-range skip connections and deep supervision. Furthermore, we introduce the Hybrid Focal loss, a new compound loss function based on the Focal loss and Focal Tversky loss, to handle class-imbalanced image segmentation. For our experiments, we selected five public datasets containing images of polyps obtained during optical colonoscopy: CVC-ClinicDB, Kvasir-SEG, CVC-ColonDB, ETIS-Larib PolypDB and EndoScene test set. To evaluate model performance, we use the Dice similarity coefficient (DSC) and Intersection over Union (IoU) metrics.
+  Results: Our model achieves state-of-the-art results for both CVC-ClinicDB and Kvasir-SEG, with a mean DSC of 0.941 and 0.910, respectively. When evaluated on a combination of five public polyp datasets, our model similarly achieves state-of-the-art results with a mean DSC of 0.878 and mean IoU of 0.809, a 14% and 15% improvement over the previous state-of-the-art results of 0.768 and 0.702, respectively.
+  Conclusions: This study shows the potential for deep learning to provide fast and accurate polyp segmentation results for use during colonoscopy. The Focus U-Net may be adapted for future use in newer non-invasive screening and more broadly to other biomedical image segmentation tasks involving class imbalance and requiring efficiency.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-16T16:10:32Z</published>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Michael Yeung</name>
+    </author>
+    <author>
+      <name>Evis Sala</name>
+    </author>
+    <author>
+      <name>Carola-Bibiane Schönlieb</name>
+    </author>
+    <author>
+      <name>Leonardo Rundo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.19745v2</id>
+    <title>Adaptive Real-Time Multi-Loss Function Optimization Using Dynamic Memory Fusion Framework: A Case Study on Breast Cancer Segmentation</title>
+    <updated>2025-07-27T10:03:47Z</updated>
+    <link href="https://arxiv.org/abs/2410.19745v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.19745v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep learning has proven to be a highly effective tool for a wide range of applications, significantly when leveraging the power of multi-loss functions to optimize performance on multiple criteria simultaneously. However, optimal selection and weighting loss functions in deep learning tasks can significantly influence model performance, yet manual tuning of these functions is often inefficient and inflexible. We propose a novel framework called dynamic memory fusion for adaptive multi-loss function penalizing in real-time to address this. This framework leverages historical loss values data to dynamically adjust the weighting of multiple loss functions throughout the training process. Additionally, this framework integrates an auxiliary loss function to enhance model performance in the early stages. To further research horizons, we introduce the class-balanced dice loss function, designed to address class imbalance by prioritizing underrepresented classes. Experiments on breast ultrasound datasets demonstrate that the framework improves segmentation performance across various metrics. These results demonstrate the effectiveness of our proposed framework in ensuring that the model dynamically adjusts its focus to prioritize the most relevant criteria, leading to improved performance in evolving environments. The source code for our proposed methodology is publicly available on GitHub.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-10T11:23:04Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Amin Golnari</name>
+    </author>
+    <author>
+      <name>Mostafa Diba</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2308.04352v1</id>
+    <title>3D-VisTA: Pre-trained Transformer for 3D Vision and Text Alignment</title>
+    <updated>2023-08-08T15:59:17Z</updated>
+    <link href="https://arxiv.org/abs/2308.04352v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2308.04352v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>3D vision-language grounding (3D-VL) is an emerging field that aims to connect the 3D physical world with natural language, which is crucial for achieving embodied intelligence. Current 3D-VL models rely heavily on sophisticated modules, auxiliary losses, and optimization tricks, which calls for a simple and unified model. In this paper, we propose 3D-VisTA, a pre-trained Transformer for 3D Vision and Text Alignment that can be easily adapted to various downstream tasks. 3D-VisTA simply utilizes self-attention layers for both single-modal modeling and multi-modal fusion without any sophisticated task-specific design. To further enhance its performance on 3D-VL tasks, we construct ScanScribe, the first large-scale 3D scene-text pairs dataset for 3D-VL pre-training. ScanScribe contains 2,995 RGB-D scans for 1,185 unique indoor scenes originating from ScanNet and 3R-Scan datasets, along with paired 278K scene descriptions generated from existing 3D-VL tasks, templates, and GPT-3. 3D-VisTA is pre-trained on ScanScribe via masked language/object modeling and scene-text matching. It achieves state-of-the-art results on various 3D-VL tasks, ranging from visual grounding and dense captioning to question answering and situated reasoning. Moreover, 3D-VisTA demonstrates superior data efficiency, obtaining strong performance even with limited annotations during downstream task fine-tuning.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-08-08T15:59:17Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Ziyu Zhu</name>
+    </author>
+    <author>
+      <name>Xiaojian Ma</name>
+    </author>
+    <author>
+      <name>Yixin Chen</name>
+    </author>
+    <author>
+      <name>Zhidong Deng</name>
+    </author>
+    <author>
+      <name>Siyuan Huang</name>
+    </author>
+    <author>
+      <name>Qing Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.12300v1</id>
+    <title>Automatic extraction of coronary arteries using deep learning in invasive coronary angiograms</title>
+    <updated>2022-06-24T13:52:33Z</updated>
+    <link href="https://arxiv.org/abs/2206.12300v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.12300v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate extraction of coronary arteries from invasive coronary angiography (ICA) is important in clinical decision-making for the diagnosis and risk stratification of coronary artery disease (CAD). In this study, we develop a method using deep learning to automatically extract the coronary artery lumen. Methods. A deep learning model U-Net 3+, which incorporates the full-scale skip connections and deep supervisions, was proposed for automatic extraction of coronary arteries from ICAs. Transfer learning and a hybrid loss function were employed in this novel coronary artery extraction framework. Results. A data set containing 616 ICAs obtained from 210 patients was used. In the technical evaluation, the U-Net 3+ achieved a Dice score of 0.8942 and a sensitivity of 0.8735, which is higher than U-Net ++ (Dice score: 0.8814, the sensitivity of 0.8331) and U-net (Dice score: 0.8799, the sensitivity of 0.8305). Conclusion. Our study demonstrates that the U-Net 3+ is superior to other segmentation frameworks for the automatic extraction of the coronary arteries from ICAs. This result suggests great promise for clinical use.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-24T13:52:33Z</published>
+    <arxiv:comment>22 pages,5 figures</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Yinghui Meng</name>
+    </author>
+    <author>
+      <name>Zhenglong Du</name>
+    </author>
+    <author>
+      <name>Chen Zhao</name>
+    </author>
+    <author>
+      <name>Minghao Dong</name>
+    </author>
+    <author>
+      <name>Drew Pienta</name>
+    </author>
+    <author>
+      <name>Zhihui Xu</name>
+    </author>
+    <author>
+      <name>Weihua Zhou</name>
+    </author>
+    <arxiv:doi>10.3233/THC-230278</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.3233/THC-230278" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.18004v1</id>
+    <title>Unified Spatio-Temporal Token Scoring for Efficient Video VLMs</title>
+    <updated>2026-03-18T17:59:56Z</updated>
+    <link href="https://arxiv.org/abs/2603.18004v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.18004v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Token pruning is essential for enhancing the computational efficiency of vision-language models (VLMs), particularly for video-based tasks where temporal redundancy is prevalent. Prior approaches typically prune tokens either (1) within the vision transformer (ViT) exclusively for unimodal perception tasks such as action recognition and object segmentation, without adapting to downstream vision-language tasks; or (2) only within the LLM while leaving the ViT output intact, often requiring complex text-conditioned token selection mechanisms. In this paper, we introduce Spatio-Temporal Token Scoring (STTS), a simple and lightweight module that prunes vision tokens across both the ViT and the LLM without text conditioning or token merging, and is fully compatible with end-to-end training. By learning how to score temporally via an auxiliary loss and spatially via LLM downstream gradients, aided by our efficient packing algorithm, STTS prunes 50% of vision tokens throughout the entire architecture, resulting in a 62% improvement in efficiency during both training and inference with only a 0.7% drop in average performance across 13 short and long video QA tasks. Efficiency gains increase with more sampled frames per video. Applying test-time scaling for long-video QA further yields performance gains of 0.5-1% compared to the baseline. Overall, STTS represents a novel, simple yet effective technique for unified, architecture-wide vision token pruning.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-18T17:59:56Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jianrui Zhang</name>
+    </author>
+    <author>
+      <name>Yue Yang</name>
+    </author>
+    <author>
+      <name>Rohun Tripathi</name>
+    </author>
+    <author>
+      <name>Winson Han</name>
+    </author>
+    <author>
+      <name>Ranjay Krishna</name>
+    </author>
+    <author>
+      <name>Christopher Clark</name>
+    </author>
+    <author>
+      <name>Yong Jae Lee</name>
+    </author>
+    <author>
+      <name>Sangho Lee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2101.00793v2</id>
+    <title>A Framework for Fast Scalable BNN Inference using Googlenet and Transfer Learning</title>
+    <updated>2021-01-05T07:28:38Z</updated>
+    <link href="https://arxiv.org/abs/2101.00793v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2101.00793v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Efficient and accurate object detection in video and image analysis is one of the major beneficiaries of the advancement in computer vision systems with the help of deep learning. With the aid of deep learning, more powerful tools evolved, which are capable to learn high-level and deeper features and thus can overcome the existing problems in traditional architectures of object detection algorithms. The work in this thesis aims to achieve high accuracy in object detection with good real-time performance.
+  In the area of computer vision, a lot of research is going into the area of detection and processing of visual information, by improving the existing algorithms. The binarized neural network has shown high performance in various vision tasks such as image classification, object detection, and semantic segmentation. The Modified National Institute of Standards and Technology database (MNIST), Canadian Institute for Advanced Research (CIFAR), and Street View House Numbers (SVHN) datasets are used which is implemented using a pre-trained convolutional neural network (CNN) that is 22 layers deep. Supervised learning is used in the work, which classifies the particular dataset with the proper structure of the model. In still images, to improve accuracy, Googlenet is used. The final layer of the Googlenet is replaced with the transfer learning to improve the accuracy of the Googlenet. At the same time, the accuracy in moving images can be maintained by transfer learning techniques. Hardware is the main backbone for any model to obtain faster results with a large number of datasets. Here, Nvidia Jetson Nano is used which is a graphics processing unit (GPU), that can handle a large number of computations in the process of object detection. Results show that the accuracy of objects detected by the transfer learning method is more when compared to the existing methods.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-01-04T06:16:52Z</published>
+    <arxiv:comment>22 pages, 15 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Karthik E</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.26273v1</id>
+    <title>Frequency-Guided Fusion For RGB-Thermal Semantic Segmentation</title>
+    <updated>2026-05-25T18:57:22Z</updated>
+    <link href="https://arxiv.org/abs/2605.26273v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.26273v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Semantic segmentation in complex environments such as urban driving scenes remains challenging under adverse lighting conditions, where RGB images alone provide insufficient information. RGB-Thermal fusion leverages the complementary strengths of visible and infrared imagery to improve scene understanding; however, effectively integrating these heterogeneous modalities at varying levels of feature abstraction remains an open problem. In this paper, we propose a multi-modal fusion architecture built upon dual ConvNeXt V2 backbones that employs stage-wise, modality-adaptive fusion strategies. For early-stage features, we introduce a Frequency-Based Fusion Module that decomposes infrared features into low- and high-frequency components via Gaussian filtering, applies dual-branch spatial attention to selectively emphasize thermal patterns and fine-grained boundaries, and integrates them with RGB features through a confidence-gated residual mechanism. For late-stage features, we design a semantic fusion module with cross-modal attention and multi-scale depthwise convolutions to capture semantic correspondences across modalities. The fused features are decoded via a PANet-style bidirectional decoder with deep supervision. Experiments on MFNet and PST900 demonstrate that our lightest variant achieves 61.73\% and 86.24\% mIoU, respectively, with only 35.43M parameters, outperforming recent methods while using substantially fewer parameters and lower computational cost. Code is available at https://github.com/ismailemrecntz/VISIBLE-INFRARED-SENSOR-FUSION</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-25T18:57:22Z</published>
+    <arxiv:comment>9 pages, 7 figures, To be Presented at Perception Beyond the Visible Spectrum workshop series (IEEE PBVS) at CVPR, 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>İsmail Emre Canıtez</name>
+    </author>
+    <author>
+      <name>Özgür Erkent</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.28857v1</id>
+    <title>MEVL-STP: Multi-Encoder and Vision Language Model for Arbitrarily Shaped Scene Text Spotting</title>
+    <updated>2026-09-23T23:58:17Z</updated>
+    <link href="https://arxiv.org/abs/2609.28857v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.28857v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Scene text spotting remains challenging for arbitrarily shaped text instances such as curved signs and dense multi-oriented characters in natural images, where tightly coupled architectures propagate localization errors directly into recognition failures. We present a two-stage pipeline that combines multi-encoder segmentation with vision-language model recognition to address this problem. In the detection stage, six frozen vision encoders (CLIP, DINOv2, SigLIP, EVA-CLIP, SAM, and ConvNeXt) extract complementary features spanning semantic, spatial, and texture spectra, which are fused through a trainable hierarchical Feature Pyramid Network with channel attention and decoded via a deep-supervision Progressive Scale Expansion network to generate precise instance-level text masks. By keeping the encoders frozen, their independently learned feature spaces remain orthogonal during fusion, preventing the feature homogenization that degrades boundary precision in single-backbone detectors. The detection stage produces tight polygon masks that conform to the actual shape of curved and arbitrarily oriented text, rather than axis-aligned rectangles that inevitably include background content. In the recognition stage, these polygon-masked crops isolate the target text from surrounding clutter, allowing a Qwen3-VL-8B-Instruct model, fine-tuned via Low-Rank Adaptation on polygon-cropped scene text, to focus purely on reading the text without interference from neighbouring words or background noise. Without any synthetic pretraining data, our method achieves 91.99% detection F-measure and 85.86% end-to-end H-mean on CTW1500, setting a new state of the art and achieving strong performance on Total-Text and ICDAR 2015 without any synthetic training data. Code is available at https://github.com/doubleblind-afk/MEVL-STP</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-23T23:58:17Z</published>
+    <arxiv:comment>18 pages, 7 figures, 5 tables. Code: https://github.com/doubleblind-afk/MEVL-STP</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Aman Anand</name>
+    </author>
+    <author>
+      <name>Partha Pratim Roy</name>
+    </author>
+    <author>
+      <name>Shivakumara Palaiahnakote</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.34582v1</id>
+    <title>HobbyLM: A Sparse Mixture-of-Experts Model Family on a Hobby Budget</title>
+    <updated>2026-10-25T21:26:24Z</updated>
+    <link href="https://arxiv.org/abs/2610.34582v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2610.34582v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We describe HobbyLM, a family of small sparse Mixture-of-Experts (MoE) models trained from scratch with a few hundred to a few thousand dollars of rented GPU time. The core is a decoder-only transformer with fine-grained experts, sigmoid routing with auxiliary-loss-free load balancing, grouped-query attention with per-head QK-normalization, and aMuon/AdamW optimizer split. Each of these choices was selected with a single-variable ablation suite at 130M parameters. On this architecture we train a 500M-parameter model (169M active) on 40B FineWeb tokens and post-train it into a chat model, a masked-diffusion language model, a function-calling and computer-use agent, and a single "omni" checkpoint that reads text, images, video, sound and speech through frozen encoders and small projectors. We run these models on a laptop CPU with a from-scratch Rust inference engine. Two of the authors then adopted the architecture without architectural changes to build HobbyLM-1B (1.04B total, 305M active parameters), trained on a 100B-token curated mixture with a high-quality anneal. HobbyLM-1B reaches a 47.5 average on seven zero-shot benchmarks, and its builders also release an instruction-tuned model and an on-device macOS computer-use adapter. Finally, we describe HobbyLM-Image, a 333M-parameter flow-matching diffusion transformer that generates 1024x1024 images in a 32x-compressed latent space, together with a dependency-light CPU implementation of the full text-to-image pipeline. We report what worked, what did not, and where the small-scale ceilings lie. We also state for each component which author designed or built it.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-25T21:26:24Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Harish Santhanalakshmi Ganesan</name>
+    </author>
+    <author>
+      <name>Hariharan M. S.</name>
+    </author>
+    <author>
+      <name>Prabhurajhan R</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.15676v1</id>
+    <title>MambaMPD: A Mamba-Driven Segmentation Framework for Marine Pollution Detection from Remote Sensing Imagery</title>
+    <updated>2026-09-14T14:52:16Z</updated>
+    <link href="https://arxiv.org/abs/2609.15676v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.15676v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate marine pollution detection (MPD) is essential for protecting coastal ecosystems and marine biodiversity. Vision Mamba models have shown promise in remote-sensing semantic segmentation by efficiently capturing long-range dependencies and global context, yet their potential for MPD remains underexplored. MPD is particularly challenging because of low signal-to-noise ratios, fragmented pollution patterns, and indistinct boundaries caused by the visual similarity between pollutants and the surrounding sea. To address these issues, we propose MambaMPD, an enhanced Mamba-based framework incorporating two complementary structural priors: Frequency-Aware Augmentation (FAA) and multi-scale Edge-Guided Attention (EGA). FAA integrates wavelet transforms into the encoder to decompose features into multi-scale frequency subbands, enabling the model to capture low-frequency contextual semantics and high-frequency structural details needed to identify small, low-contrast, and irregular pollution patterns. EGA adaptively fuses hierarchical, Laplacian-derived boundary cues with deep semantic representations, refining encoder features before decoding to sharpen boundaries and reduce ambiguity in visually confusing, spatially fragmented scenes. Together, these modules improve sensitivity to subtle pollution signals while preserving fine boundary structures. A U-Net-style decoder with squeeze-and-excitation attention and deep supervision progressively restores and refines semantic and spatial information across scales. Extensive experiments on two benchmark MPD datasets show that MambaMPD achieves higher mIoU than competing methods while requiring substantially less computation than foundation-model-based approaches. On MADOS, it improves F1 by 3.6% over OSDMamba; on M4D, it raises Oil Spill IoU by 6.82% over TransOilSeg.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-14T14:52:16Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Shuaiyu Chen</name>
+    </author>
+    <author>
+      <name>Wei Han</name>
+    </author>
+    <author>
+      <name>Peng Ren</name>
+    </author>
+    <author>
+      <name>Chunbo Luo</name>
+    </author>
+    <author>
+      <name>Zeyu Fu</name>
+    </author>
+  </entry>
+</feed>

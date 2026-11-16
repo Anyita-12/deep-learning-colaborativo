@@ -1,0 +1,29 @@
+Etapa,Concepto,n,Cómo se calcula
+Identificación,Registros identificados: Scopus,,Bitácora
+Identificación,Registros identificados: IEEE Xplore,,Bitácora
+Identificación,Registros identificados: Web of Science,,Bitácora
+Identificación,Registros identificados: arXiv (complementaria),,Bitácora
+Identificación,TOTAL registros identificados,,Suma
+Identificación,Duplicados eliminados (DOI o título normalizado),,Total menos registros únicos
+Selección,Registros únicos en selección (título y resumen),,Hoja Registros
+Selección,   con decisión registrada,,Incluir+Excluir+Dudoso
+Selección,   desacuerdos pendientes de resolver (RESOLVER),,Muestra común
+Selección,Excluidos en título y resumen,,
+Elegibilidad,Buscados a texto completo (Incluir + Dudoso),,
+Elegibilidad,   no recuperados o fuera del corte de prioridad,,Sin PDF o fuera del corte; declarar en la metodología
+Elegibilidad,Evaluados en texto completo (con decisión TC),,
+Elegibilidad,Excluidos en texto completo,,
+Elegibilidad,   motivo: Sin relación directa con clasificación de imágenes de residuos,,
+Elegibilidad,   motivo: No usa deep learning,,
+Elegibilidad,   motivo: Sin métricas verificables,,
+Elegibilidad,   motivo: Sin modelo de referencia o línea base,,
+Elegibilidad,   motivo: Arquitectura o protocolo insuficiente,,
+Elegibilidad,   motivo: Duplicado no detectado,,
+Elegibilidad,   motivo: Otro (anotar en Notas),,
+Inclusión,ESTUDIOS INCLUIDOS en la síntesis,,Decisión TC = Incluir
+Control,Desacuerdos en la muestra común (Acuerdo = NO),,Para reportar el acuerdo entre revisores
+Control,Registros en la muestra común con ambas decisiones,,
+Control,Kappa de Cohen H1 vs H2 (3 categorías),0.857,"Muestra común de 25; acuerdo observado 0,92"
+Control,Kappa de Cohen H1 vs H2 (pasa / se excluye),1.0,Acuerdo 25/25
+Quién hizo la selección y cómo se resolvieron los desacuerdos (completar para el informe; la selección preliminar fue de Claude):,,,
+"Cribado de título y resumen: selección preliminar de Claude (asistente de IA) con la hoja Guía_criterios para los 168 registros. Dos revisores humanos (H1 y H2) decidieron de forma independiente la muestra común de 25 registros: kappa H1-H2 = 0,857 (1,0 en la decisión pasa / se excluye); kappa con Claude = 0,860 y 0,925. Las 2 discrepancias (R100 y R132) se resolvieron por mayoría de los tres revisores y, sin mayoría, a favor de pasar a texto completo (Dudoso). La lectura a texto completo de los 62 registros de prioridad Alta fue asistida por IA (lectura automática de método y resultados) y los 7 del benchmark se verificaron a mano.",,,

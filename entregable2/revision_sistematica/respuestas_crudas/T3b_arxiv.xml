@@ -1,0 +1,389 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/i0htm5PZHn1bynKj+EzibFbUGts</id>
+  <title>arXiv Query: search_query=( (abs:"noise robustness" OR abs:"robustness to noise" OR abs:"corruption robustness" OR abs:"noise augmentation" OR abs:"noisy images") AND (abs:"deep learning" OR abs:"neural network") AND (abs:"speech" OR abs:"audio" OR abs:"medical image" OR abs:"remote sensing") AND (abs:"adaptation" OR abs:"transfer") ) AND submittedDate:"201801010000 TO 202612312359"&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-11-16T19:30:12Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=((abs:%22noise+robustness%22+OR+(abs:%22robustness+to+noise%22+OR+(abs:%22corruption+robustness%22+OR+(abs:%22noise+augmentation%22+OR+abs:%22noisy+images%22))))+AND+((abs:%22deep+learning%22+OR+abs:%22neural+network%22)+AND+((abs:%22speech%22+OR+(abs:%22audio%22+OR+(abs:%22medical+image%22+OR+abs:%22remote+sensing%22)))+AND+(abs:%22adaptation%22+OR+abs:%22transfer%22))))+AND+submittedDate:%22201801010000+TO+202612312359%22&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>15</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2205.13086v3</id>
+    <title>Audio Data Augmentation for Acoustic-to-articulatory Speech Inversion using Bidirectional Gated RNNs</title>
+    <updated>2023-05-31T21:12:38Z</updated>
+    <link href="https://arxiv.org/abs/2205.13086v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2205.13086v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Data augmentation has proven to be a promising prospect in improving the performance of deep learning models by adding variability to training data. In previous work with developing a noise robust acoustic-to-articulatory speech inversion system, we have shown the importance of noise augmentation to improve the performance of speech inversion in noisy speech. In this work, we compare and contrast different ways of doing data augmentation and show how this technique improves the performance of articulatory speech inversion not only on noisy speech, but also on clean speech data. We also propose a Bidirectional Gated Recurrent Neural Network as the speech inversion system instead of the previously used feed forward neural network. The inversion system uses mel-frequency cepstral coefficients (MFCCs) as the input acoustic features and six vocal tract-variables (TVs) as the output articulatory features. The Performance of the system was measured by computing the correlation between estimated and actual TVs on the U. Wisc. X-ray Microbeam database. The proposed speech inversion system shows a 5% relative improvement in correlation over the baseline noise robust system for clean speech data. The pre-trained model, when adapted to each unseen speaker in the test set, improves the average correlation by another 6%.</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-05-25T23:57:15Z</published>
+    <arxiv:comment>EUSIPCO 2023</arxiv:comment>
+    <arxiv:primary_category term="eess.AS"/>
+    <author>
+      <name>Yashish M. Siriwardena</name>
+    </author>
+    <author>
+      <name>Ahmed Adel Attia</name>
+    </author>
+    <author>
+      <name>Ganesh Sivaraman</name>
+    </author>
+    <author>
+      <name>Carol Espy-Wilson</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.03376v2</id>
+    <title>Transformer-Guided Content-Adaptive Graph Learning for Hyperspectral Unmixing</title>
+    <updated>2026-06-01T23:46:06Z</updated>
+    <link href="https://arxiv.org/abs/2509.03376v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.03376v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Hyperspectral unmixing (HU) targets to decompose each mixed pixel in remote sensing images into a set of endmembers and their corresponding abundances. Despite significant progress in this field using deep learning, most methods fail to simultaneously characterize global dependencies and local consistency, making it difficult to preserve both long-range interactions and boundary details. This letter proposes a novel transformer-guided content-adaptive graph unmixing framework (T-CAGU), which overcomes these challenges by employing a transformer to capture global dependencies and introducing a content-adaptive graph neural network to enhance local relationships. Unlike previous work, T-CAGU integrates multiple propagation orders to dynamically learn the graph structure, ensuring robustness against noise. Furthermore, T-CAGU leverages a graph residual mechanism to preserve global information and stabilize training. Experimental results demonstrate its superiority over the state-of-the-art methods. Our code is available at https://github.com/xianchaoxiu/T-CAGU.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-03T14:53:33Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Hui Chen</name>
+    </author>
+    <author>
+      <name>Liangyu Liu</name>
+    </author>
+    <author>
+      <name>Xianchao Xiu</name>
+    </author>
+    <author>
+      <name>Wanquan Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.09731v1</id>
+    <title>Pre-trained Under Noise: A Framework for Robust Bone Fracture Detection in Medical Imaging</title>
+    <updated>2025-07-13T18:07:34Z</updated>
+    <link href="https://arxiv.org/abs/2507.09731v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.09731v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Medical Imagings are considered one of the crucial diagnostic tools for different bones-related diseases, especially bones fractures. This paper investigates the robustness of pre-trained deep learning models for classifying bone fractures in X-ray images and seeks to address global healthcare disparity through the lens of technology. Three deep learning models have been tested under varying simulated equipment quality conditions. ResNet50, VGG16 and EfficientNetv2 are the three pre-trained architectures which are compared. These models were used to perform bone fracture classification as images were progressively degraded using noise. This paper specifically empirically studies how the noise can affect the bone fractures detection and how the pre-trained models performance can be changes due to the noise that affect the quality of the X-ray images. This paper aims to help replicate real world challenges experienced by medical imaging technicians across the world. Thus, this paper establishes a methodological framework for assessing AI model degradation using transfer learning and controlled noise augmentation. The findings provide practical insight into how robust and generalizable different pre-trained deep learning powered computer vision models can be when used in different contexts.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-13T18:07:34Z</published>
+    <arxiv:comment>7 pages, under review</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Robby Hoover</name>
+    </author>
+    <author>
+      <name>Nelly Elsayed</name>
+    </author>
+    <author>
+      <name>Zag ElSayed</name>
+    </author>
+    <author>
+      <name>Chengcheng Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.07118v1</id>
+    <title>RBA-FE: A Robust Brain-Inspired Audio Feature Extractor for Depression Diagnosis</title>
+    <updated>2025-06-08T13:00:45Z</updated>
+    <link href="https://arxiv.org/abs/2506.07118v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.07118v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This article proposes a robust brain-inspired audio feature extractor (RBA-FE) model for depression diagnosis, using an improved hierarchical network architecture. Most deep learning models achieve state-of-the-art performance for image-based diagnostic tasks, ignoring the counterpart audio features. In order to tailor the noise challenge, RBA-FE leverages six acoustic features extracted from the raw audio, capturing both spatial characteristics and temporal dependencies. This hybrid attribute helps alleviate the precision limitation in audio feature extraction within other learning models like deep residual shrinkage networks. To deal with the noise issues, our model incorporates an improved spiking neuron model, called adaptive rate smooth leaky integrate-and-fire (ARSLIF). The ARSLIF model emulates the mechanism of ``retuning of cellular signal selectivity" in the brain attention systems, which enhances the model robustness against environmental noises in audio data. Experimental results demonstrate that RBA-FE achieves state-of-the-art accuracy on the MODMA dataset, respectively with 0.8750, 0.8974, 0.8750 and 0.8750 in precision, accuracy, recall and F1 score. Extensive experiments on the AVEC2014 and DAIC-WOZ datasets both show enhancements in noise robustness. It is further indicated by comparison that the ARSLIF neuron model suggest the abnormal firing pattern within the feature extraction on depressive audio data, offering brain-inspired interpretability.</summary>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-08T13:00:45Z</published>
+    <arxiv:comment>14 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.SD"/>
+    <author>
+      <name>Yu-Xuan Wu</name>
+    </author>
+    <author>
+      <name>Ziyan Huang</name>
+    </author>
+    <author>
+      <name>Bin Hu</name>
+    </author>
+    <author>
+      <name>Zhi-Hong Guan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.09304v2</id>
+    <title>Adaptive Noise Resilient Keyword Spotting Using One-Shot Learning</title>
+    <updated>2025-08-17T06:00:45Z</updated>
+    <link href="https://arxiv.org/abs/2505.09304v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.09304v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Keyword spotting (KWS) is a key component of smart devices, enabling efficient and intuitive audio interaction. However, standard KWS systems deployed on embedded devices often suffer performance degradation under real-world operating conditions. Resilient KWS systems address this issue by enabling dynamic adaptation, with applications such as adding or replacing keywords, adjusting to specific users, and improving noise robustness. However, deploying resilient, standalone KWS systems with low latency on resource-constrained devices remains challenging due to limited memory and computational resources. This study proposes a low computational approach for continuous noise adaptation of pretrained neural networks used for KWS classification, requiring only 1-shot learning and one epoch. The proposed method was assessed using two pretrained models and three real-world noise sources at signal-to-noise ratios (SNRs) ranging from 24 to -3 dB. The adapted models consistently outperformed the pretrained models across all scenarios, especially at SNR $\leq$ 18 dB, achieving accuracy improvements of 4.9% to 46.0%. These results highlight the efficacy of the proposed methodology while being lightweight enough for deployment on resource-constrained devices.</summary>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-14T11:39:47Z</published>
+    <arxiv:comment>Preprint submitted to the IEEE 11th World Forum on Internet of Things</arxiv:comment>
+    <arxiv:primary_category term="cs.SD"/>
+    <author>
+      <name>Luciano Sebastian Martinez-Rau</name>
+    </author>
+    <author>
+      <name>Quynh Nguyen Phuong Vu</name>
+    </author>
+    <author>
+      <name>Yuxuan Zhang</name>
+    </author>
+    <author>
+      <name>Bengt Oelmann</name>
+    </author>
+    <author>
+      <name>Sebastian Bader</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.05118v2</id>
+    <title>Physics-augmented Deep Learning with Adversarial Domain Adaptation: Applications to STM Image Denoising</title>
+    <updated>2025-02-10T21:54:17Z</updated>
+    <link href="https://arxiv.org/abs/2409.05118v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.05118v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Image denoising is a critical task in various scientific fields such as medical imaging and material characterization, where the accurate recovery of underlying structures from noisy data is essential. Although supervised denoising techniques have achieved significant advancements, they typically require large datasets of paired clean-noisy images for training. Unsupervised methods, while not reliant on paired data, typically necessitate a set of unpaired clean images for training, which are not always accessible. In this paper, we propose a physics-augmented deep learning with adversarial domain adaption (PDA-Net) framework for unsupervised image denoising, with applications to denoise real-world scanning tunneling microscopy (STM) images. Our PDA-Net leverages the underlying physics to simulate and envision the ground truth for denoised STM images. Additionally, built upon Generative Adversarial Networks (GANs), we incorporate a cycle-consistency module and a domain adversarial module into our PDA-Net to address the challenge of lacking paired training data and achieve information transfer between the simulated and real experimental domains. Finally, we propose to implement feature alignment and weight-sharing techniques to fully exploit the similarity between simulated and real experimental images, thereby enhancing the denoising performance in both the simulation and experimental domains. Experimental results demonstrate that the proposed PDA-Net successfully enhances the quality of STM images, offering promising applications to enhance scientific discovery and accelerate experimental quantum material research.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-08T14:57:37Z</published>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Jianxin Xie</name>
+    </author>
+    <author>
+      <name>Wonhee Ko</name>
+    </author>
+    <author>
+      <name>Rui-Xing Zhang</name>
+    </author>
+    <author>
+      <name>Bing Yao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2011.00721v1</id>
+    <title>Robust Raw Waveform Speech Recognition Using Relevance Weighted Representations</title>
+    <updated>2020-10-29T19:32:50Z</updated>
+    <link href="https://arxiv.org/abs/2011.00721v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2011.00721v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Speech recognition in noisy and channel distorted scenarios is often challenging as the current acoustic modeling schemes are not adaptive to the changes in the signal distribution in the presence of noise. In this work, we develop a novel acoustic modeling framework for noise robust speech recognition based on relevance weighting mechanism. The relevance weighting is achieved using a sub-network approach that performs feature selection. A relevance sub-network is applied on the output of first layer of a convolutional network model operating on raw speech signals while a second relevance sub-network is applied on the second convolutional layer output. The relevance weights for the first layer correspond to an acoustic filterbank selection while the relevance weights in the second layer perform modulation filter selection. The model is trained for a speech recognition task on noisy and reverberant speech. The speech recognition experiments on multiple datasets (Aurora-4, CHiME-3, VOiCES) reveal that the incorporation of relevance weighting in the neural network architecture improves the speech recognition word error rates significantly (average relative improvements of 10% over the baseline systems)</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-10-29T19:32:50Z</published>
+    <arxiv:comment>arXiv admin note: text overlap with arXiv:2001.07067</arxiv:comment>
+    <arxiv:primary_category term="eess.AS"/>
+    <arxiv:journal_ref>Proc. Interspeech 2020, 1649-1653 (2020)</arxiv:journal_ref>
+    <author>
+      <name>Purvi Agrawal</name>
+    </author>
+    <author>
+      <name>Sriram Ganapathy</name>
+    </author>
+    <arxiv:doi>10.21437/Interspeech.2020-2301</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.21437/Interspeech.2020-2301" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.17305v1</id>
+    <title>AccentSpeech: Learning Accent from Crowd-sourced Data for Target Speaker TTS with Accents</title>
+    <updated>2022-10-31T13:31:17Z</updated>
+    <link href="https://arxiv.org/abs/2210.17305v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.17305v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Learning accent from crowd-sourced data is a feasible way to achieve a target speaker TTS system that can synthesize accent speech. To this end, there are two challenging problems to be solved. First, direct use of the poor acoustic quality crowd-sourced data and the target speaker data in accent transfer will apparently lead to synthetic speech with degraded quality. To mitigate this problem, we take a bottleneck feature (BN) based TTS approach, in which TTS is decomposed into a Text-to-BN (T2BN) module to learn accent and a BN-to-Mel (BN2Mel) module to learn speaker timbre, where neural network based BN feature serves as the intermediate representation that are robust to noise interference. Second, direct training T2BN using the crowd-sourced data in the two-stage system will produce accent speech of target speaker with poor prosody. This is because the the crowd-sourced recordings are contributed from the ordinary unprofessional speakers. To tackle this problem, we update the two-stage approach to a novel three-stage approach, where T2BN and BN2Mel are trained using the high-quality target speaker data and a new BN-to-BN module is plugged in between the two modules to perform accent transfer. To train the BN2BN module, the parallel unaccented and accented BN features are obtained by a proposed data augmentation procedure. Finally the proposed three-stage approach manages to produce accent speech for the target speaker with good prosody, as the prosody pattern is inherited from the professional target speaker and accent transfer is achieved by the BN2BN module at the same time. The proposed approach, named as AccentSpeech, is validated in a Mandarin TTS accent transfer task.</summary>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-31T13:31:17Z</published>
+    <arxiv:comment>Accepted by ISCSLP2022</arxiv:comment>
+    <arxiv:primary_category term="cs.SD"/>
+    <author>
+      <name>Yongmao Zhang</name>
+    </author>
+    <author>
+      <name>Zhichao Wang</name>
+    </author>
+    <author>
+      <name>Peiji Yang</name>
+    </author>
+    <author>
+      <name>Hongshen Sun</name>
+    </author>
+    <author>
+      <name>Zhisheng Wang</name>
+    </author>
+    <author>
+      <name>Lei Xie</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2010.14602v2</id>
+    <title>CopyPaste: An Augmentation Method for Speech Emotion Recognition</title>
+    <updated>2021-02-11T16:04:35Z</updated>
+    <link href="https://arxiv.org/abs/2010.14602v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2010.14602v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Data augmentation is a widely used strategy for training robust machine learning models. It partially alleviates the problem of limited data for tasks like speech emotion recognition (SER), where collecting data is expensive and challenging. This study proposes CopyPaste, a perceptually motivated novel augmentation procedure for SER. Assuming that the presence of emotions other than neutral dictates a speaker's overall perceived emotion in a recording, concatenation of an emotional (emotion E) and a neutral utterance can still be labeled with emotion E. We hypothesize that SER performance can be improved using these concatenated utterances in model training. To verify this, three CopyPaste schemes are tested on two deep learning models: one trained independently and another using transfer learning from an x-vector model, a speaker recognition model. We observed that all three CopyPaste schemes improve SER performance on all the three datasets considered: MSP-Podcast, Crema-D, and IEMOCAP. Additionally, CopyPaste performs better than noise augmentation and, using them together improves the SER performance further. Our experiments on noisy test sets suggested that CopyPaste is effective even in noisy test conditions.</summary>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-10-27T20:52:47Z</published>
+    <arxiv:comment>Accepted at ICASSP2021</arxiv:comment>
+    <arxiv:primary_category term="cs.SD"/>
+    <author>
+      <name>Raghavendra Pappagari</name>
+    </author>
+    <author>
+      <name>Jesús Villalba</name>
+    </author>
+    <author>
+      <name>Piotr Żelasko</name>
+    </author>
+    <author>
+      <name>Laureano Moro-Velazquez</name>
+    </author>
+    <author>
+      <name>Najim Dehak</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.13975v2</id>
+    <title>On the Effects of Different Types of Label Noise in Multi-Label Remote Sensing Image Classification</title>
+    <updated>2023-01-06T17:40:09Z</updated>
+    <link href="https://arxiv.org/abs/2207.13975v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.13975v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The development of accurate methods for multi-label classification (MLC) of remote sensing (RS) images is one of the most important research topics in RS. To address MLC problems, the use of deep neural networks that require a high number of reliable training images annotated by multiple land-cover class labels (multi-labels) has been found popular in RS. However, collecting such annotations is time-consuming and costly. A common procedure to obtain annotations at zero labeling cost is to rely on thematic products or crowdsourced labels. As a drawback, these procedures come with the risk of label noise that can distort the learning process of the MLC algorithms. In the literature, most label noise robust methods are designed for single-label classification (SLC) problems in computer vision (CV), where each image is annotated by a single label. Unlike SLC, label noise in MLC can be associated with: 1) subtractive label-noise (a land cover class label is not assigned to an image while that class is present in the image); 2) additive label-noise (a land cover class label is assigned to an image although that class is not present in the given image); and 3) mixed label-noise (a combination of both). In this paper, we investigate three different noise robust CV SLC methods and adapt them to be robust for multi-label noise scenarios in RS. During experiments, we study the effects of different types of multi-label noise and evaluate the adapted methods rigorously. To this end, we also introduce a synthetic multi-label noise injection strategy that is more adequate to simulate operational scenarios compared to the uniform label noise injection strategy, in which the labels of absent and present classes are flipped at uniform probability. Further, we study the relevance of different evaluation metrics in MLC problems under noisy multi-labels.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-28T09:38:30Z</published>
+    <arxiv:comment>Accepted at the IEEE Transactions on Geoscience and Remote Sensing</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Tom Burgert</name>
+    </author>
+    <author>
+      <name>Mahdyar Ravanbakhsh</name>
+    </author>
+    <author>
+      <name>Begüm Demir</name>
+    </author>
+    <arxiv:doi>10.1109/TGRS.2022.3226371</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TGRS.2022.3226371" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.18929v1</id>
+    <title>Training-free Quantum-Inspired Image Edge Extraction Method</title>
+    <updated>2025-01-31T07:24:38Z</updated>
+    <link href="https://arxiv.org/abs/2501.18929v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.18929v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Edge detection is a cornerstone of image processing, yet existing methods often face critical limitations. Traditional deep learning edge detection methods require extensive training datasets and fine-tuning, while classical techniques often fail in complex or noisy scenarios, limiting their real-world applicability. To address these limitations, we propose a training-free, quantum-inspired edge detection model. Our approach integrates classical Sobel edge detection, the Schrödinger wave equation refinement, and a hybrid framework combining Canny and Laplacian operators. By eliminating the need for training, the model is lightweight and adaptable to diverse applications. The Schrödinger wave equation refines gradient-based edge maps through iterative diffusion, significantly enhancing edge precision. The hybrid framework further strengthens the model by synergistically combining local and global features, ensuring robustness even under challenging conditions. Extensive evaluations on datasets like BIPED, Multicue, and NYUD demonstrate superior performance of the proposed model, achieving state-of-the-art metrics, including ODS, OIS, AP, and F-measure. Noise robustness experiments highlight its reliability, showcasing its practicality for real-world scenarios. Due to its versatile and adaptable nature, our model is well-suited for applications such as medical imaging, autonomous systems, and environmental monitoring, setting a new benchmark for edge detection.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-31T07:24:38Z</published>
+    <arxiv:comment>12 pages, 6 figure,</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Arti Jain</name>
+    </author>
+    <author>
+      <name>Pradeep Singh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.05916v2</id>
+    <title>SAS: Segment Anything Small for Ultrasound -- A Non-Generative Data Augmentation Technique for Robust Deep Learning in Ultrasound Imaging</title>
+    <updated>2026-08-24T16:39:40Z</updated>
+    <link href="https://arxiv.org/abs/2503.05916v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.05916v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate segmentation of anatomical structures in ultrasound (US) images, particularly small ones, is challenging due to noise and variability in imaging conditions (e.g., probe position, patient anatomy, tissue characteristics and pathology). To address this, we introduce Segment Anything Small (SAS), a simple yet effective scale- and texture-aware data augmentation technique designed to enhance the performance of deep learning models for segmenting small anatomical structures in ultrasound images. SAS employs a dual transformation strategy: (1) simulating diverse organ scales by resizing and embedding organ thumbnails into a black background, and (2) injecting noise into regions of interest to simulate varying tissue textures. These transformations generate realistic and diverse training data without introducing hallucinations or artifacts, improving the model's robustness to noise and variability. We fine-tuned a promptable foundation model on a controlled organ-specific medical imaging dataset and evaluated its performance on one internal and five external datasets. Experimental results demonstrate significant improvements in segmentation performance, with Dice score gains of up to 0.35 and an average improvement of 0.16 [95% CI 0.132,0.188]. Additionally, our iterative point prompts provide precise control and adaptive refinement, achieving performance comparable to bounding box prompts with just two points. SAS enhances model robustness and generalizability across diverse anatomical structures and imaging conditions, particularly for small structures, without compromising the accuracy of larger ones. By offering a computationally efficient solution that eliminates the need for extensive human labeling efforts, SAS emerges as a powerful tool for advancing medical image analysis, particularly in resource-constrained settings.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-07T20:24:35Z</published>
+    <arxiv:comment>25 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <arxiv:journal_ref>Ferreira DL, Gangopadhyay A, Chang H-M, Soni R, Avinash G (2026) PLOS Digital Health 5(4): e0001309</arxiv:journal_ref>
+    <author>
+      <name>Danielle L. Ferreira</name>
+    </author>
+    <author>
+      <name>Ahana Gangopadhyay</name>
+    </author>
+    <author>
+      <name>Hsi-Ming Chang</name>
+    </author>
+    <author>
+      <name>Ravi Soni</name>
+    </author>
+    <author>
+      <name>Gopal Avinash</name>
+    </author>
+    <arxiv:doi>10.1371/journal.pdig.0001309</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1371/journal.pdig.0001309" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2212.11277v1</id>
+    <title>Audio Denoising for Robust Audio Fingerprinting</title>
+    <updated>2022-12-21T09:46:12Z</updated>
+    <link href="https://arxiv.org/abs/2212.11277v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2212.11277v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Music discovery services let users identify songs from short mobile recordings. These solutions are often based on Audio Fingerprinting, and rely more specifically on the extraction of spectral peaks in order to be robust to a number of distortions. Few works have been done to study the robustness of these algorithms to background noise captured in real environments. In particular, AFP systems still struggle when the signal to noise ratio is low, i.e when the background noise is strong. In this project, we tackle this problematic with Deep Learning. We test a new hybrid strategy which consists of inserting a denoising DL model in front of a peak-based AFP algorithm. We simulate noisy music recordings using a realistic data augmentation pipeline, and train a DL model to denoise them. The denoising model limits the impact of background noise on the AFP system's extracted peaks, improving its robustness to noise. We further propose a novel loss function to adapt the DL model to the considered AFP system, increasing its precision in terms of retrieved spectral peaks. To the best of our knowledge, this hybrid strategy has not been tested before.</summary>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-12-21T09:46:12Z</published>
+    <arxiv:comment>63 pages, master thesis</arxiv:comment>
+    <arxiv:primary_category term="cs.SD"/>
+    <author>
+      <name>Kamil Akesbi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.11644v1</id>
+    <title>HetSyn: Versatile Timescale Integration in Spiking Neural Networks via Heterogeneous Synapses</title>
+    <updated>2025-08-01T10:19:56Z</updated>
+    <link href="https://arxiv.org/abs/2508.11644v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.11644v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Spiking Neural Networks (SNNs) offer a biologically plausible and energy-efficient framework for temporal information processing. However, existing studies overlook a fundamental property widely observed in biological neurons-synaptic heterogeneity, which plays a crucial role in temporal processing and cognitive capabilities. To bridge this gap, we introduce HetSyn, a generalized framework that models synaptic heterogeneity with synapse-specific time constants. This design shifts temporal integration from the membrane potential to the synaptic current, enabling versatile timescale integration and allowing the model to capture diverse synaptic dynamics. We implement HetSyn as HetSynLIF, an extended form of the leaky integrate-and-fire (LIF) model equipped with synapse-specific decay dynamics. By adjusting the parameter configuration, HetSynLIF can be specialized into vanilla LIF neurons, neurons with threshold adaptation, and neuron-level heterogeneous models. We demonstrate that HetSynLIF not only improves the performance of SNNs across a variety of tasks-including pattern generation, delayed match-to-sample, speech recognition, and visual recognition-but also exhibits strong robustness to noise, enhanced working memory performance, efficiency under limited neuron resources, and generalization across timescales. In addition, analysis of the learned synaptic time constants reveals trends consistent with empirical observations in biological synapses. These findings underscore the significance of synaptic heterogeneity in enabling efficient neural computation, offering new insights into brain-inspired temporal modeling.</summary>
+    <category term="q-bio.NC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-01T10:19:56Z</published>
+    <arxiv:primary_category term="q-bio.NC"/>
+    <author>
+      <name>Zhichao Deng</name>
+    </author>
+    <author>
+      <name>Zhikun Liu</name>
+    </author>
+    <author>
+      <name>Junxue Wang</name>
+    </author>
+    <author>
+      <name>Shengqian Chen</name>
+    </author>
+    <author>
+      <name>Xiang Wei</name>
+    </author>
+    <author>
+      <name>Qiang Yu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.11615v1</id>
+    <title>Machine Unlearning for Robust DNNs: Attribution-Guided Partitioning and Neuron Pruning in Noisy Environments</title>
+    <updated>2025-06-13T09:37:11Z</updated>
+    <link href="https://arxiv.org/abs/2506.11615v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.11615v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep neural networks (DNNs) have achieved remarkable success across diverse domains, but their performance can be severely degraded by noisy or corrupted training data. Conventional noise mitigation methods often rely on explicit assumptions about noise distributions or require extensive retraining, which can be impractical for large-scale models. Inspired by the principles of machine unlearning, we propose a novel framework that integrates attribution-guided data partitioning, discriminative neuron pruning, and targeted fine-tuning to mitigate the impact of noisy samples. Our approach employs gradient-based attribution to probabilistically distinguish high-quality examples from potentially corrupted ones without imposing restrictive assumptions on the noise. It then applies regression-based sensitivity analysis to identify and prune neurons that are most vulnerable to noise. Finally, the resulting network is fine-tuned on the high-quality data subset to efficiently recover and enhance its generalization performance. This integrated unlearning-inspired framework provides several advantages over conventional noise-robust learning approaches. Notably, it combines data-level unlearning with model-level adaptation, thereby avoiding the need for full model retraining or explicit noise modeling. We evaluate our method on representative tasks (e.g., CIFAR-10 image classification and speech recognition) under various noise levels and observe substantial gains in both accuracy and efficiency. For example, our framework achieves approximately a 10% absolute accuracy improvement over standard retraining on CIFAR-10 with injected label noise, while reducing retraining time by up to 47% in some settings. These results demonstrate the effectiveness and scalability of the proposed approach for achieving robust generalization in noisy environments.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-13T09:37:11Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Deliang Jin</name>
+    </author>
+    <author>
+      <name>Gang Chen</name>
+    </author>
+    <author>
+      <name>Shuo Feng</name>
+    </author>
+    <author>
+      <name>Yufeng Ling</name>
+    </author>
+    <author>
+      <name>Haoran Zhu</name>
+    </author>
+  </entry>
+</feed>

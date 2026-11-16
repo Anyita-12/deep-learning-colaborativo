@@ -1,0 +1,43 @@
+{
+ "identificados_por_base": {
+  "arXiv": 99,
+  "OpenAlex": 3718
+ },
+ "identificados_total": 3817,
+ "duplicados_eliminados": 383,
+ "cribados": 3434,
+ "sin_resumen": 538,
+ "decisiones": {
+  "INCLUIDO": 1558,
+  "X0 tipo de documento no elegible (libro, capítulo, tesis, dataset u otro)": 198,
+  "X1 revisión o encuesta, no estudio primario": 146,
+  "X2 fuera del dominio de residuos": 1278,
+  "X3 no usa imágenes (sensores, espectros, texto o series)": 2,
+  "X4 tarea distinta de clasificación (detección, segmentación, conteo, predicción)": 241,
+  "X5 no usa Deep Learning": 11
+ },
+ "corpus_total": 63,
+ "corpus_recuperado": 60,
+ "corpus_recuperado_e_incluido": 59,
+ "corpus_no_recuperado": [
+  "Common garbage classification using mobilenet",
+  "AN ENSEMBLE OF CNN-ELM MODELS FOR TRASH CLASSIFICATION",
+  "Optimizing DenseNet121 for Waste Classification Using Genetic Algorithm-Based Downsampling and Data Augmentation"
+ ],
+ "corpus_recuperado_pero_excluido": [
+  [
+   "Deep learning networks for real-time regional domestic waste detection",
+   "X4 tarea distinta de clasificación (detección, segmentación, conteo, predicción)"
+  ]
+ ],
+ "solo_conteo_IEEE_Xplore": {
+  "P1": 1839,
+  "P2": 77,
+  "P3": 208,
+  "total": 2124,
+  "fecha": "2026-11-16",
+  "campo": "All Metadata",
+  "nota": "no descargados ni deduplicados"
+ },
+ "solo_conteo_Scopus": "pendiente"
+}
