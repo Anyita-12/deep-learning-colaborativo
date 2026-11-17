@@ -64,3 +64,12 @@ results/**/RUNNING.lock
 results/**/*.tmp
 results/_estimate/
 results_smoke/
+
+# --- Entregable 2 ---
+entregable2/results/**/*.pt
+entregable2/results/**/*.npz
+entregable2/results/**/RUNNING.lock
+entregable2/results/**/*.tmp
+entregable2/data/raw/
+entregable2/data/interim/
+entregable2/.venv/

@@ -1,16 +1,32 @@
 format: jb-book
 root: intro
-chapters:
-  - file: 01_problema_dataset
-  - file: 02_eda
-  - file: 03_estado_del_arte
-  - file: 40_diseno_experimental
-  - file: 41_particion_y_preprocesamiento
-  - file: 42_busqueda_hiperparametros
-  - file: 43_piloto_y_tamano_de_muestra
-  - file: 44_entrenamiento_final
-  - file: 45_evaluacion_resultados
-  - file: 46_benchmark_baseline_estadistica
-  - file: 47_analisis_cualitativo_robustez
-  - file: 06_declaracion_apriori
-  - file: 07_conclusiones
+parts:
+  - caption: "Entregable 1: modelos base"
+    chapters:
+      - file: 01_problema_dataset
+      - file: 02_eda
+      - file: 03_estado_del_arte
+      - file: 40_diseno_experimental
+      - file: 41_particion_y_preprocesamiento
+      - file: 42_busqueda_hiperparametros
+      - file: 43_piloto_y_tamano_de_muestra
+      - file: 44_entrenamiento_final
+      - file: 45_evaluacion_resultados
+      - file: 46_benchmark_baseline_estadistica
+      - file: 47_analisis_cualitativo_robustez
+      - file: 06_declaracion_apriori
+      - file: 07_conclusiones
+  - caption: "Entregable 2: benchmark de diez modelos"
+    chapters:
+      - file: 08_benchmark_introduccion
+      - file: 09_datos_auditoria
+      - file: 10_revision_sistematica
+      - file: 11_protocolo_preregistro
+      - file: 12_paper_guia
+      - file: 13_benchmark_estadistica
+      - file: 14_ajuste_calibracion_incertidumbre
+      - file: 15_robustez_interpretabilidad_errores
+      - file: 16_discusion_benchmark
+      - file: 17_reproducibilidad
+      - file: 18_conclusiones_benchmark
+      - file: 19_referencias_benchmark

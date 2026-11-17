@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/x+ev7OfqLmf+V92hmQjKFVzIIUM</id>
+  <title>arXiv Query: search_query=(abs:"TrashNet") AND submittedDate:"201801010000 TO 202612312359"&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-11-16T19:22:37Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:%22TrashNet%22+AND+submittedDate:%22201801010000+TO+202612312359%22&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>4</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2510.21833v1</id>
+    <title>Towards Accurate and Efficient Waste Image Classification: A Hybrid Deep Learning and Machine Learning Approach</title>
+    <updated>2025-10-22T08:32:51Z</updated>
+    <link href="https://arxiv.org/abs/2510.21833v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.21833v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Automated image-based garbage classification is a critical component of global waste management; however, systematic benchmarks that integrate Machine Learning (ML), Deep Learning (DL), and efficient hybrid solutions remain underdeveloped. This study provides a comprehensive comparison of three paradigms: (1) machine learning algorithms using handcrafted features, (2) deep learning architectures, including ResNet variants and EfficientNetV2S, and (3) a hybrid approach that utilizes deep models for feature extraction combined with classical classifiers such as Support Vector Machine and Logistic Regression to identify the most effective strategy. Experiments on three public datasets - TrashNet, Garbage Classification, and a refined Household Garbage Dataset (with 43 corrected mislabels)- demonstrate that the hybrid method consistently outperforms the others, achieving up to 100% accuracy on TrashNet and the refined Household set, and 99.87% on Garbage Classification, thereby surpassing state-of-the-art benchmarks. Furthermore, feature selection reduces feature dimensionality by over 95% without compromising accuracy, resulting in faster training and inference. This work establishes more reliable benchmarks for waste classification and introduces an efficient hybrid framework that achieves high accuracy while reducing inference cost, making it suitable for scalable deployment in resource-constrained environments.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-22T08:32:51Z</published>
+    <arxiv:comment>31 pages; 7 figures; 16 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>Ain Shams Engineering Journal, 17(4), 104062, 2026</arxiv:journal_ref>
+    <author>
+      <name>Ngoc-Bao-Quang Nguyen</name>
+    </author>
+    <author>
+      <name>Tuan-Minh Do</name>
+    </author>
+    <author>
+      <name>Cong-Tam Phan</name>
+    </author>
+    <author>
+      <name>Thi-Thu-Hong Phan</name>
+    </author>
+    <arxiv:doi>10.1016/j.asej.2026.104062</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.asej.2026.104062" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2011.01353v1</id>
+    <title>Recyclable Waste Identification Using CNN Image Recognition and Gaussian Clustering</title>
+    <updated>2020-11-02T22:26:25Z</updated>
+    <link href="https://arxiv.org/abs/2011.01353v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2011.01353v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Waste recycling is an important way of saving energy and materials in the production process. In general cases recyclable objects are mixed with unrecyclable objects, which raises a need for identification and classification. This paper proposes a convolutional neural network (CNN) model to complete both tasks. The model uses transfer learning from a pretrained Resnet-50 CNN to complete feature extraction. A subsequent fully connected layer for classification was trained on the augmented TrashNet dataset [1]. In the application, sliding-window is used for image segmentation in the pre-classification stage. In the post-classification stage, the labelled sample points are integrated with Gaussian Clustering to locate the object. The resulting model has achieved an overall detection rate of 48.4% in simulation and final classification accuracy of 92.4%.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-11-02T22:26:25Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yuheng Wang</name>
+    </author>
+    <author>
+      <name>Wen Jie Zhao</name>
+    </author>
+    <author>
+      <name>Jiahui Xu</name>
+    </author>
+    <author>
+      <name>Raymond Hong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.20746v1</id>
+    <title>TrashDet: Iterative Neural Architecture Search for Efficient Waste Detection</title>
+    <updated>2025-12-23T20:00:34Z</updated>
+    <link href="https://arxiv.org/abs/2512.20746v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.20746v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper addresses trash detection on the TACO dataset under strict TinyML constraints using an iterative hardware-aware neural architecture search framework targeting edge and IoT devices. The proposed method constructs a Once-for-All-style ResDets supernet and performs iterative evolutionary search that alternates between backbone and neck/head optimization, supported by a population passthrough mechanism and an accuracy predictor to reduce search cost and improve stability. This framework yields a family of deployment-ready detectors, termed TrashDets. On a five-class TACO subset (paper, plastic, bottle, can, cigarette), the strongest variant, TrashDet-l, achieves 19.5 mAP50 with 30.5M parameters, improving accuracy by up to 3.6 mAP50 over prior detectors while using substantially fewer parameters. The TrashDet family spans 1.2M to 30.5M parameters with mAP50 values between 11.4 and 19.5, providing scalable detector options for diverse TinyML deployment budgets on resource-constrained hardware. On the MAX78002 microcontroller with the TrashNet dataset, two specialized variants, TrashDet-ResNet and TrashDet-MBNet, jointly dominate the ai87-fpndetector baseline, with TrashDet-ResNet achieving 7525~$μ$J energy per inference at 26.7 ms latency and 37.45 FPS, and TrashDet-MBNet improving mAP50 by 10.2%; together they reduce energy consumption by up to 88%, latency by up to 78%, and average power by up to 53% compared to existing TinyML detectors.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-23T20:00:34Z</published>
+    <arxiv:comment>10 pages. The paper has been accepted by the WACV 2026 workshop</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Tony Tran</name>
+    </author>
+    <author>
+      <name>Bin Hu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.02241v1</id>
+    <title>Unsupervised Waste Classification By Dual-Encoder Contrastive Learning and Multi-Clustering Voting (DECMCV)</title>
+    <updated>2025-03-04T03:31:01Z</updated>
+    <link href="https://arxiv.org/abs/2503.02241v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.02241v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Waste classification is crucial for improving processing efficiency and reducing environmental pollution. Supervised deep learning methods are commonly used for automated waste classification, but they rely heavily on large labeled datasets, which are costly and inefficient to obtain. Real-world waste data often exhibit category and style biases, such as variations in camera angles, lighting conditions, and types of waste, which can impact the model's performance and generalization ability. Therefore, constructing a bias-free dataset is essential. Manual labeling is not only costly but also inefficient. While self-supervised learning helps address data scarcity, it still depends on some labeled data and generally results in lower accuracy compared to supervised methods. Unsupervised methods show potential in certain cases but typically do not perform as well as supervised models, highlighting the need for an efficient and cost-effective unsupervised approach. This study presents a novel unsupervised method, Dual-Encoder Contrastive Learning with Multi-Clustering Voting (DECMCV). The approach involves using a pre-trained ConvNeXt model for image encoding, leveraging VisionTransformer to generate positive samples, and applying a multi-clustering voting mechanism to address data labeling and domain shift issues. Experimental results demonstrate that DECMCV achieves classification accuracies of 93.78% and 98.29% on the TrashNet and Huawei Cloud datasets, respectively, outperforming or matching supervised models. On a real-world dataset of 4,169 waste images, only 50 labeled samples were needed to accurately label thousands, improving classification accuracy by 29.85% compared to supervised models. This method effectively addresses style differences, enhances model generalization, and contributes to the advancement of automated waste classification.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-04T03:31:01Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Kui Huang</name>
+    </author>
+    <author>
+      <name>Mengke Song</name>
+    </author>
+    <author>
+      <name>Shuo Ba</name>
+    </author>
+    <author>
+      <name>Ling An</name>
+    </author>
+    <author>
+      <name>Huajie Liang</name>
+    </author>
+    <author>
+      <name>Huanxi Deng</name>
+    </author>
+    <author>
+      <name>Yang Liu</name>
+    </author>
+    <author>
+      <name>Zhenyu Zhang</name>
+    </author>
+    <author>
+      <name>Chichun Zhou</name>
+    </author>
+  </entry>
+</feed>

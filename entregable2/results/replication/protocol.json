@@ -1,0 +1,31 @@
+{
+  "replication": {
+    "test_size": 0.2,
+    "random_state": 32,
+    "epochs": 40,
+    "batch_size": 128,
+    "lr": 0.001,
+    "xgb_random_state": 101,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "inner_val_fraction": 0.1,
+    "reported": {
+      "accuracy": 0.994,
+      "precision": 0.9949,
+      "recall": 0.9954,
+      "f1": 0.9951
+    }
+  },
+  "n_images": 2527,
+  "leakage_audit": {
+    "n_test": 506,
+    "test_con_casi_duplicado_en_train": 1,
+    "fraccion": 0.001976284584980237,
+    "excluidas_en_v2_presentes": 2
+  }
+}

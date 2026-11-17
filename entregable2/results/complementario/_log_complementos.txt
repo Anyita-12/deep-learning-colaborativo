@@ -1,0 +1,3 @@
+robustez: 30.1 s
+gradcam: 51.4 s
+bondad: 336.8 s

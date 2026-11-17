@@ -1,0 +1,61 @@
+﻿k,titulo,decision_reglas,decision_manual
+0,Using AI-Powered Vehicle Identification System in Gas Stations (AI-VIS),X2 fuera del dominio de residuos,EXCLUIDO
+1,"An Integrated System for WEEE Sorting Employing X-ray Imaging, AI-based Object Detection and Segmentation, and Delta Robot Manipulation",X2 fuera del dominio de residuos,EXCLUIDO
+2,Exploration of an E-waste Prediction Model for Collection System Optimization Using Deep Learning Models in E-waste Management Facilities,X2 fuera del dominio de residuos,EXCLUIDO
+3,Input size and pooling effects in waste image classification,"X0 tipo de documento no elegible (libro, capítulo, tesis, dataset u otro)",INCLUIDO
+4,Estimating attached mortar paste on the surface of recycled aggregates based on deep learning and mineralogical models,INCLUIDO,EXCLUIDO
+5,Al alloy phase recognition through neural networks using X-ray transmission,"X0 tipo de documento no elegible (libro, capítulo, tesis, dataset u otro)",INCLUIDO
+6,Research on Encrypted Transmission and Recognition of Garbage Images in Low-Illumination Environments,INCLUIDO,INCLUIDO
+7,Empowering vision-guided robotic manipulation tasks with machine learning - with example applications to electric vehicle battery dismantling,"X0 tipo de documento no elegible (libro, capítulo, tesis, dataset u otro)",EXCLUIDO
+8,Image Spam Filtering Using Weighted Spatial Pyramid Networks,X2 fuera del dominio de residuos,EXCLUIDO
+9,Machine Vision Based System for Automated Sorting System for Wire Bundle Quality Inspection,X2 fuera del dominio de residuos,EXCLUIDO
+10,PENGENALAN SAMPAH DAUR ULANG MENGGUNAKAN MACHINE LEARNING UNTUK MENDUKUNG PENGELOLAAN LIMBAH BERKELANJUTAN: PENGENALAN SAMPAH DAUR ULANG MENGGUNAKAN MACHINE LEARNING UNTUK MENDUKUNG PENGELOLAAN LIMBAH BERKELANJUTAN,INCLUIDO,INCLUIDO
+11,Robust deep-learning based refrigerator food recognition,X2 fuera del dominio de residuos,EXCLUIDO
+12,Recyclable Waste Optical Sorting System Based on Neural Networks Ensemble,INCLUIDO,INCLUIDO
+13,Garbage Detection Algorithm Based on Deep Learning,"X4 tarea distinta de clasificación (detección, segmentación, conteo, predicción)",EXCLUIDO
+14,Motion Artifact Detection in PPG Signals Based on Gramian Angular Field and 2-D-CNN,X2 fuera del dominio de residuos,EXCLUIDO
+15,Waste Classification Using Artificial Intelligence Techniques:Literature Review,"X1 revisión o encuesta, no estudio primario",EXCLUIDO
+16,Garbage image classification method based on improved convolution neural network and long short-term memory network,INCLUIDO,INCLUIDO
+17,Design and Development of an AI-Powered Autonomous Waste Sorting Robot Using Faster R-CNN and Robotic Manipulation,INCLUIDO,EXCLUIDO
+18,Anomaly Detection and Classification in Agricultural Produce Using Image Processing and CNN Assisted by a Robotic Arm,X2 fuera del dominio de residuos,EXCLUIDO
+19,The Impact of Artificial Intelligence on Urban Transformation with a Prominent Role in Smart Cities,X2 fuera del dominio de residuos,EXCLUIDO
+20,Robot for plastic garbage recognition,INCLUIDO,INCLUIDO
+21,Review on Non-Destructive Prediction of Recycled Aggregate Crushing Value,"X1 revisión o encuesta, no estudio primario",EXCLUIDO
+22,A manifold intelligent decision system for fusion and benchmarking of deep waste-sorting models,INCLUIDO,INCLUIDO
+23,Research on OCR Detection Technology for Beer Bottle Cap Inkjet Coding in Industrial Scenes Based on Deep Learning,X2 fuera del dominio de residuos,EXCLUIDO
+24,Contactless Fault Diagnosis Technique by Magnetic Field Image Recognition for Lithium Battery,X2 fuera del dominio de residuos,EXCLUIDO
+25,On the Design of Multiple Fruits Recognition Model Using Deep Learning in a Confined Environment,X2 fuera del dominio de residuos,EXCLUIDO
+26,RETRACTED ARTICLE: A framework for promoting sustainable development in rural ecological governance using deep convolutional neural networks,X2 fuera del dominio de residuos,EXCLUIDO
+27,Plug-and-Play Edge–Cloud Architecture for Autonomous Urban Garbage Detection with Self-Supervised Active Learning,"X4 tarea distinta de clasificación (detección, segmentación, conteo, predicción)",EXCLUIDO
+28,ZeroPath APP: AI-Powered Waste Classification for Smart Cities Using EfficientNet,INCLUIDO,INCLUIDO
+29,Garbage image recognition and classification based on CNN,INCLUIDO,INCLUIDO
+30,Optimal selective floor cleaning using deep learning algorithms and reconfigurable robot hTetro,X2 fuera del dominio de residuos,EXCLUIDO
+31,IoT and Cloud-Based Smart Farming with Optimized Convolutional Neural Networks for Grape Fruit Disease Classification,X2 fuera del dominio de residuos,EXCLUIDO
+32,Beach Litter Detection Using Swin Transformer Optimized Model for Drone Image,"X4 tarea distinta de clasificación (detección, segmentación, conteo, predicción)",EXCLUIDO
+33,IoT-Based Agribot for Sustainable and Smart Pest Control Using CNN and ResNet,X2 fuera del dominio de residuos,EXCLUIDO
+34,CNN-Based Visual Inspection and Robotic Arm Integration for Automated Waste Segregation: A Comprehensive Review,"X1 revisión o encuesta, no estudio primario",EXCLUIDO
+35,Development of a Machine Learning-Driven Automated Waste Sorting System,INCLUIDO,INCLUIDO
+36,Classification of sour lemons based on apparent defects using stochastic pooling mechanism in deep convolutional neural networks,X2 fuera del dominio de residuos,EXCLUIDO
+37,Fruit Quality Identification and Classification by Convolutional Neural Network,X2 fuera del dominio de residuos,EXCLUIDO
+38,Trash and Recycled Material Identification using Convolutional Neural Networks (CNN),INCLUIDO,INCLUIDO
+39,Multimodal vision and Artificial Intelligence for the characterization of construction and demolition and municipal solid waste,"X0 tipo de documento no elegible (libro, capítulo, tesis, dataset u otro)",EXCLUIDO
+40,Towards Sustainable Food Systems: Multi-Channel Capsule Neural Network for Fruit Freshness and Spoilage Timeline Analysis,X2 fuera del dominio de residuos,EXCLUIDO
+41,Study on the Effect of Data Augmentation on Image Learning,INCLUIDO,INCLUIDO
+42,Exploration of Data Augmentation in Xception for Waste Classification,INCLUIDO,INCLUIDO
+43,Aqua-Sentinels Safeguarding Inland Waters from Plastic Peril,X2 fuera del dominio de residuos,EXCLUIDO
+44,Enhancing biodegradable waste management in Mauritius through real-time computer vision-based sorting,INCLUIDO,INCLUIDO
+45,"Innovative, Data-Driven Attendance Recognition Via Facial Biometrics and Real-Time Processing: A Paradigmatic Shift in Classroom Engagement and Efficiency",X2 fuera del dominio de residuos,EXCLUIDO
+46,objectclassification: Garbage classification and robotic selection using convolutional neural networks,"X0 tipo de documento no elegible (libro, capítulo, tesis, dataset u otro)",EXCLUIDO
+47,Summarization of Cricket Videos Using Deep Learning Technique,X2 fuera del dominio de residuos,EXCLUIDO
+48,Research on Garbage Detection based on Image Feature Differences using Siamese Network Model,"X4 tarea distinta de clasificación (detección, segmentación, conteo, predicción)",INCLUIDO
+49,Flame Combustion State Identification Based on CNN in Municipal Solid Waste Incineration Process,X2 fuera del dominio de residuos,EXCLUIDO
+50,Detailed Evaluation of Modern Machine Learning Approaches for Optic Plastics Sorting,X2 fuera del dominio de residuos,INCLUIDO
+51,Date Fruit Detection and Classification Based on Its Variety Using Deep Learning Technology,X2 fuera del dominio de residuos,EXCLUIDO
+52,Data-Driven Visual Defect Detection and Analysis in Manufacturing,X2 fuera del dominio de residuos,EXCLUIDO
+53,Eco-friendly semiconductor device design for sustainable systems,INCLUIDO,EXCLUIDO
+54,A Novel Target Recognition System for the Amphibious Robot based on Edge Computing and Neural Network,X2 fuera del dominio de residuos,EXCLUIDO
+55,A Survey - IOT Edge Based Garbage Sorter Bin with Bio Gas Generator,"X1 revisión o encuesta, no estudio primario",EXCLUIDO
+56,WhichWaste: Multiclass Waste Sorting Dataset,"X0 tipo de documento no elegible (libro, capítulo, tesis, dataset u otro)",EXCLUIDO
+57,Benchmarking Analysis of CNN Models for Maturity Levels of Guavas,X2 fuera del dominio de residuos,EXCLUIDO
+58,Efficient Waste Processing with Deep Learning for Material and Brand Recognition,INCLUIDO,INCLUIDO
+59,Klasifikasi Citra Sampah Daur Ulang Menggunakan CNN dengan Fungsi Aktivasi ReLU untuk Mendukung Sistem RVM,INCLUIDO,INCLUIDO

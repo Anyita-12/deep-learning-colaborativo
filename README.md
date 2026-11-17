@@ -20,17 +20,37 @@ Comparamos tres arquitecturas de redes convolucionales entrenadas desde cero con
 
 La prueba de Friedman rechaza la igualdad entre los tres modelos ($p = 0.0048$). ResNet-18 supera a los otros dos con diferencias significativas y mayores que el margen de relevancia práctica ($\delta = 0.02$). El detalle está en los capítulos 4, 5 y 7 del informe.
 
+## Entregable 2: benchmark de diez modelos
+
+Ampliamos la comparación a diez modelos: los tres modelos base y siete modelos publicados sobre TrashNet (Celik-HC, el paper guía; MbXception; ViT-B16; GFN; FocusRCNet; ResMsCapsule y RWCNet), con la misma partición, métrica y umbrales, 8 semillas por modelo y el mismo presupuesto de ajuste. El informe está en los capítulos 8 a 19 del Jupyter Book, y el código y los resultados en `entregable2/`.
+
+| Modelo | F1 macro (media ± DE, 8 semillas) | Preentrenado |
+|---|---|---|
+| RWCNet | 0.945 ± 0.010 | Sí |
+| ViT-B16 | 0.938 ± 0.014 | Sí |
+| GFN | 0.921 ± 0.015 | Sí |
+| Celik-HC (paper guía) | 0.914 ± 0.013 | Sí |
+| ResMsCapsule | 0.899 ± 0.015 | Sí |
+| ResNet-18 (modelo de referencia) | 0.863 ± 0.022 | No |
+| MbXception | 0.861 ± 0.014 | No |
+| CNN estilo VGG reducida | 0.826 ± 0.022 | No |
+| FocusRCNet | 0.811 ± 0.015 | No |
+| MobileNetV2 | 0.809 ± 0.025 | No |
+
+Cuatro modelos preentrenados superan al modelo de referencia por más del umbral de 0.036, con significancia tras Holm. RWCNet y ViT-B16 son equivalentes dentro de $\delta = 0.02$. La accuracy publicada del paper guía (99.4 %) no se reproduce con su propio código (92.5 %), y su ablación muestra que el preentrenamiento, y no la fusión multinivel, explica su desempeño. En RWCNet aportan su extractor DenseNet201 y la supervisión profunda, y no la segunda red. Ante ruido gaussiano, las arquitecturas convolucionales pierden entre 0.30 y 0.67 de F1 y ViT-B16 solo 0.04. El detalle de cómo reproducir el experimento está en `entregable2/README.md` y en el capítulo 17.
+
 ## Estructura del repositorio
 
 ```
 data/                datos y particiones (las imágenes no se versionan; ver "Datos")
   splits/            partición fija (CSV)
   SHA256SUMS.txt     huellas de verificación de los datos
-docs/                informe en Jupyter Book: capítulos en .md y notebooks 02, 03 y 40–47
+docs/                informe en Jupyter Book: capítulos en .md y notebooks 02, 03 y 40–47 (Entregable 1) y 09–15 (Entregable 2)
 notebooks/           exploración inicial
 src/                 código del experimento (datos, modelos, entrenamiento, evaluación, estadística)
 results/             resultados por corrida y resúmenes (CSV, pickles, preregistro)
 models/              checkpoints (no versionados)
+entregable2/         código, resultados y análisis del benchmark de diez modelos (capítulos 8 a 19)
 environment.yml      entorno conda (alternativa)
 requirements.txt     dependencias base
 requirements-modelos.txt   dependencias del entrenamiento y del análisis estadístico

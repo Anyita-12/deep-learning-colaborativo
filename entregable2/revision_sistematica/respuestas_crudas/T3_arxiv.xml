@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/jd0GtzDdMj9T/6NfFXxvtDuUFmc</id>
+  <title>arXiv Query: search_query=( (abs:"noise robustness" OR abs:"robustness to noise" OR abs:"corruption robustness" OR abs:"gaussian noise") AND (abs:"convolutional neural network" OR abs:"vision transformer") AND (abs:"speech" OR abs:"audio" OR abs:"medical image" OR abs:"remote sensing") AND (abs:"adaptation" OR abs:"transfer") ) AND submittedDate:"201801010000 TO 202612312359"&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-11-16T19:23:01Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=((abs:%22noise+robustness%22+OR+(abs:%22robustness+to+noise%22+OR+(abs:%22corruption+robustness%22+OR+abs:%22gaussian+noise%22)))+AND+((abs:%22convolutional+neural+network%22+OR+abs:%22vision+transformer%22)+AND+((abs:%22speech%22+OR+(abs:%22audio%22+OR+(abs:%22medical+image%22+OR+abs:%22remote+sensing%22)))+AND+(abs:%22adaptation%22+OR+abs:%22transfer%22))))+AND+submittedDate:%22201801010000+TO+202612312359%22&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2605.14518v1</id>
+    <title>ArcGate: Adaptive Arctangent Gated Activation</title>
+    <updated>2026-05-14T08:00:46Z</updated>
+    <link href="https://arxiv.org/abs/2605.14518v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.14518v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Activation functions are central to deep networks, influencing non-linearity, feature learning, convergence, and robustness. This paper proposes the Adaptive Arctangent Gated Activation (ArcGate) function, a flexible formulation that generates a broad spectrum of activation shapes via a three-stage non-linear transformation. Unlike conventional fixed-shape activations such as ReLU, GELU, or SiLU, ArcGate uses seven learnable parameters per layer, allowing the neural network to autonomously optimize its non-linearity to the specific requirements of the feature hierarchy and data distribution. We evaluate ArcGate using ResNet-50 and Vision Transformer (ViT-B/16) architectures on three widely used remote sensing benchmarks: PatternNet, UC Merced Land Use, and the 13-band EuroSAT MSI multispectral dataset. Experimental results show that ArcGate consistently outperforms standard baselines, achieving a peak overall accuracy of 99.67% on PatternNet. Most notably, ArcGate exhibits superior structural resilience in noisy environments, maintaining a 26.65% performance lead over ReLU under moderate Gaussian noise (standard deviation 0.1). Analysis of the learned parameters reveals a depth-dependent functional evolution, where the model increases gating strength in deeper layers to enhance signal propagation. These findings suggest that ArcGate is a robust and adaptive general node activation function for high-resolution earth observation tasks.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-14T08:00:46Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Avik Bhattacharya</name>
+    </author>
+    <author>
+      <name>Siddhant Dnyanesh Gole</name>
+    </author>
+    <author>
+      <name>Subhasis Chaudhuri</name>
+    </author>
+    <author>
+      <name>Alejandro C. Frery</name>
+    </author>
+    <author>
+      <name>Biplab Banerjee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.19583v4</id>
+    <title>Brain Tumor Classification on MRI in Light of Molecular Markers</title>
+    <updated>2025-09-29T22:43:34Z</updated>
+    <link href="https://arxiv.org/abs/2409.19583v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.19583v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In research findings, co-deletion of the 1p/19q gene is associated with clinical outcomes in low-grade gliomas. The ability to predict 1p19q status is critical for treatment planning and patient follow-up. This study aims to utilize a specially MRI-based convolutional neural network for brain cancer detection. Although public networks such as RestNet and AlexNet can effectively diagnose brain cancers using transfer learning, the model includes quite a few weights that have nothing to do with medical images. As a result, the diagnostic results are unreliable by the transfer learning model. To deal with the problem of trustworthiness, we create the model from the ground up, rather than depending on a pre-trained model. To enable flexibility, we combined convolution stacking with a dropout and full connect operation, it improved performance by reducing overfitting. During model training, we also supplement the given dataset and inject Gaussian noise. We use three--fold cross-validation to train the best selection model. Comparing InceptionV3, VGG16, and MobileNetV2 fine-tuned with pre-trained models, our model produces better results. On an validation set of 125 codeletion vs. 31 not codeletion images, the proposed network achieves 96.37\% percent F1-score, 97.46\% percent precision, and 96.34\% percent recall when classifying 1p/19q codeletion and not codeletion images.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-bio.QM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-29T07:04:26Z</published>
+    <arxiv:comment>ICAI'22 - The 24th International Conference on Artificial Intelligence, The 2022 World Congress in Computer Science, Computer Engineering, &amp; Applied Computing (CSCE'22), Las Vegas, USA. The paper acceptance rate 17% for regular papers. The publication of the CSCE 2022 conference proceedings has been delayed due to the pandemic</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <arxiv:journal_ref>Springer Nature - Book Series: Transactions on Computational Science &amp; Computational Intelligence, 2022</arxiv:journal_ref>
+    <author>
+      <name>Jun Liu</name>
+    </author>
+    <author>
+      <name>Geng Yuan</name>
+    </author>
+    <author>
+      <name>Weihao Zeng</name>
+    </author>
+    <author>
+      <name>Hao Tang</name>
+    </author>
+    <author>
+      <name>Wenbin Zhang</name>
+    </author>
+    <author>
+      <name>Xue Lin</name>
+    </author>
+    <author>
+      <name>XiaoLin Xu</name>
+    </author>
+    <author>
+      <name>Dong Huang</name>
+    </author>
+    <author>
+      <name>Yanzhi Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.22713v1</id>
+    <title>Chirp Localization via Fine-Tuned Transformer Model: A Proof-of-Concept Study</title>
+    <updated>2025-03-24T14:27:07Z</updated>
+    <link href="https://arxiv.org/abs/2503.22713v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.22713v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Spectrograms are pivotal in time-frequency signal analysis, widely used in audio processing and computational neuroscience. Chirp-like patterns in electroencephalogram (EEG) spectrograms (marked by linear or exponential frequency sweep) are key biomarkers for seizure dynamics, but automated tools for their detection, localization, and feature extraction are lacking. This study bridges this gap by fine-tuning a Vision Transformer (ViT) model on synthetic spectrograms, augmented with Low-Rank Adaptation (LoRA) to boost adaptability. We generated 100000 synthetic spectrograms with chirp parameters, creating the first large-scale benchmark for chirp localization. These spectrograms mimic neural chirps using linear or exponential frequency sweep, Gaussian noise, and smoothing. A ViT model, adapted for regression, predicted chirp parameters. LoRA fine-tuned the attention layers, enabling efficient updates to the pre-trained backbone. Training used MSE loss and the AdamW optimizer, with a learning rate scheduler and early stopping to curb overfitting. Only three features were targeted: Chirp Start Time (Onset Time), Chirp Start Frequency (Onset Frequency), and Chirp End Frequency (Offset Frequency). Performance was evaluated via Pearson correlation between predicted and actual labels. Results showed strong alignment: 0.9841 correlation for chirp start time, with stable inference times (137 to 140s) and minimal bias in error distributions. This approach offers a tool for chirp analysis in EEG time-frequency representation, filling a critical methodological void.</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-24T14:27:07Z</published>
+    <arxiv:comment>19 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="eess.AS"/>
+    <author>
+      <name>Nooshin Bahador</name>
+    </author>
+    <author>
+      <name>Milad Lankarany</name>
+    </author>
+  </entry>
+</feed>

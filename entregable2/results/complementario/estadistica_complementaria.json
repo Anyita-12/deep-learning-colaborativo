@@ -1,0 +1,46 @@
+{
+  "friedman_Q": 64.77272727272725,
+  "friedman_p_chi2": 1.5972820737892692e-10,
+  "iman_davenport_F": 62.73584905660358,
+  "iman_davenport_gl": [
+    9,
+    63
+  ],
+  "iman_davenport_p": 0.0,
+  "nemenyi_q_alpha": 3.164,
+  "nemenyi_CD": 4.7897428601822325,
+  "rangos_medios": {
+    "Celik-HC": 3.75,
+    "MbXception": 6.5,
+    "ViT-B16": 2.0,
+    "GFN": 3.25,
+    "FocusRCNet": 9.125,
+    "ResMsCapsule": 4.75,
+    "RWCNet": 1.5,
+    "CNN": 8.5,
+    "MobileNetV2": 9.125,
+    "ResNet-18": 6.5
+  },
+  "levene_W": 0.9645213965758279,
+  "levene_p": 0.476598011134059,
+  "shapiro_p_por_modelo": {
+    "Celik-HC": 0.29502619460906565,
+    "MbXception": 0.21113405714522643,
+    "ViT-B16": 0.6582335862573349,
+    "GFN": 0.3761615787351995,
+    "FocusRCNet": 0.20285458300786385,
+    "ResMsCapsule": 0.7321434399496183,
+    "RWCNet": 0.817050402785237,
+    "CNN": 0.09806723897189062,
+    "MobileNetV2": 0.6969826534836577,
+    "ResNet-18": 0.061158933977011776
+  },
+  "anova_rm_F": 76.07835347905866,
+  "anova_rm_gl": [
+    9,
+    63
+  ],
+  "gg_epsilon": 0.43678505086019725,
+  "anova_rm_p_gg": 2.0872192862952943e-14,
+  "eta2_parcial": 0.9157421914751299
+}

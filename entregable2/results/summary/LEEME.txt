@@ -1,0 +1,3 @@
+Resumen generado el 2026-11-16 11:49 con 80 corridas finales.
+
+Regla de decisión por pares: una diferencia es relevante y significativa si |diferencia media| >= 0.02 y el p de la t pareada corregido por Holm es < 0.05. La columna relevante_y_significativa_wilcoxon aplica la misma regla con Wilcoxon exacto; con n semillas su p mínimo es 2/2^n y, tras Holm sobre todos los pares, queda acotado por p_wilcoxon_holm_minimo_posible, de modo que con 8 semillas y 45 pares no puede ser < 0,05. shapiro_p_dif permite revisar la normalidad de las diferencias que supone la t. En ablacion.csv, dif_media = modelo completo - variante: un valor positivo indica que el componente retirado aporta.
