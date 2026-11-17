@@ -101,6 +101,8 @@ ABLATIONS: dict[str, tuple[str, dict, dict]] = {
     "GFN/sin_ppm": ("GFN", {"use_ppm": False}, {}),
     "GFN/sin_cbam": ("GFN", {"use_cbam": False}, {}),
     "RWCNet/sin_auxiliares": ("RWCNet", {"use_aux": False}, {"loss": "ce"}),
+    "RWCNet/solo_densenet201": ("RWCNet", {"use_mobilenet": False}, {}),
+    "RWCNet/solo_mobilenetv2": ("RWCNet", {"use_densenet": False}, {}),
     "FocusRCNet/sin_destilacion": ("FocusRCNet", {}, {"loss": "ce"}),
     "FocusRCNet/sin_simam": ("FocusRCNet", {"use_simam": False}, {}),
 }

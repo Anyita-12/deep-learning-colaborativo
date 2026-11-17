@@ -2,7 +2,7 @@
 
 Este repositorio entrena y evalúa siete modelos publicados sobre TrashNet. Usa el mismo protocolo del Entregable 1 (repositorio `deep-learning-colaborativo`, versión `v1.0-entrega1`), así que los tres modelos base (CNN, MobileNetV2 y ResNet-18) entran en la misma comparación estadística.
 
-**Dentro de este repositorio:** el código está en `entregable2/src`, los resultados en `entregable2/results` y los análisis complementarios en `entregable2/analisis`. Las corridas de los modelos base están en `../results`; para regenerar las tablas de resumen, define `TRASHNET_E1_RESULTS` con esa ruta. El informe correspondiente son los capítulos 8 a 17 del Jupyter Book (`docs/`).
+**Dentro de este repositorio:** el código está en `entregable2/src`, los resultados en `entregable2/results` y los análisis complementarios en `entregable2/analisis`. Las corridas de los modelos base están en `../results`; para regenerar las tablas de resumen, define `TRASHNET_E1_RESULTS` con esa ruta. El informe correspondiente son los capítulos 8 a 19 del Jupyter Book (`docs/`).
 
 ## Modelos
 
