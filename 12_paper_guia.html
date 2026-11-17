@@ -1,0 +1,1583 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>12. Paper guía: réplica, limitaciones y ablación &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '12_paper_guia';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="13. Benchmark: resultados e inferencia estadística" href="13_benchmark_estadistica.html" />
+    <link rel="prev" title="11. Preregistro, protocolo común y fichas de modelo" href="11_protocolo_preregistro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><div class="sidebar-autores">
+  <div class="autor">
+    <img src="_static/autores/anyely.jpg" alt="Anyely Sanjuan Benavides">
+    <p class="autor-nombre">Anyely Sanjuan Benavides</p>
+    <p class="autor-detalle">Msc. Analítica de Datos<br>Universidad del Norte</p>
+  </div>
+  <div class="autor">
+    <img src="_static/autores/juan.jpg" alt="Juan David Díaz Fernández">
+    <p class="autor-nombre">Juan David Díaz Fernández</p>
+    <p class="autor-detalle">Msc. Ingeniería Mecánica<br>Universidad del Norte</p>
+  </div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Clasificación de residuos con TrashNet
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 1: modelos base</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y conjunto de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_conclusiones.html">7. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2: benchmark de diez modelos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_benchmark_introduccion.html">8. Benchmark de diez modelos: problema, preguntas e hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datos_auditoria.html">9. Datos: ficha técnica, contrato de datos y auditoría de fuga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_revision_sistematica.html">10. Revisión sistemática ampliada y selección de los modelos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_protocolo_preregistro.html">11. Preregistro, protocolo común y fichas de modelo</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Paper guía: réplica, limitaciones y ablación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_benchmark_estadistica.html">13. Benchmark: resultados e inferencia estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_ajuste_calibracion_incertidumbre.html">14. Bondad de ajuste, sobreajuste, calibración e incertidumbre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_robustez_interpretabilidad_errores.html">15. Robustez, interpretabilidad, errores y techo de desempeño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_discusion_benchmark.html">16. Discusión del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_reproducibilidad.html">17. Reproducibilidad del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_conclusiones_benchmark.html">18. Conclusiones del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_referencias_benchmark.html">19. Referencias del benchmark</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/12_paper_guia.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>12. Paper guía: réplica, limitaciones y ablación</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencia-y-descripcion-del-modelo">12.1 Referencia y descripción del modelo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replica-bajo-las-condiciones-originales">12.2 Réplica bajo las condiciones originales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitacion-1-seleccion-de-la-epoca-con-el-conjunto-de-prueba">12.3 Limitación 1: selección de la época con el conjunto de prueba</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitacion-2-fragilidad-ante-ruido-gaussiano">12.4 Limitación 2: fragilidad ante ruido gaussiano</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-de-xgboost">12.5 Aporte de XGBoost</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ablacion-del-paper-guia">12.6 Ablación del paper guía</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sintesis-para-la-etapa-siguiente">12.7 Síntesis para la etapa siguiente</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="paper-guia-replica-limitaciones-y-ablacion">
+<h1>12. Paper guía: réplica, limitaciones y ablación<a class="headerlink" href="#paper-guia-replica-limitaciones-y-ablacion" title="Link to this heading">#</a></h1>
+<p>El paper guía es Celik (2025), que propone el modelo Celik-HC. Lo elegimos por tres motivos: es el único estudio del corpus con código público completo, reporta la mayor accuracy en TrashNet (99.40 %) y combina dos de las familias más usadas en la literatura, EfficientNet e Inception, con una fusión multinivel. En este capítulo lo describimos, replicamos su resultado con su propio código, validamos el pipeline con los siete modelos publicados, cuantificamos dos limitaciones y aislamos el aporte de sus componentes.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">ROOT</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"entregable2"</span> <span class="o">/</span> <span class="s2">"src"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+<span class="n">E2</span> <span class="o">=</span> <span class="n">ROOT</span> <span class="o">/</span> <span class="s2">"entregable2"</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">(</span><span class="n">E2</span> <span class="o">/</span> <span class="s2">"analisis"</span><span class="p">,</span> <span class="n">E2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">st</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Markdown</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">figuras</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">FG</span>
+<span class="n">FG</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+<span class="n">RES</span> <span class="o">=</span> <span class="n">E2</span> <span class="o">/</span> <span class="s2">"results"</span>
+<span class="n">SUM</span> <span class="o">=</span> <span class="n">RES</span> <span class="o">/</span> <span class="s2">"summary"</span>
+<span class="n">COMP</span> <span class="o">=</span> <span class="n">RES</span> <span class="o">/</span> <span class="s2">"complementario"</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="referencia-y-descripcion-del-modelo">
+<h2>12.1 Referencia y descripción del modelo<a class="headerlink" href="#referencia-y-descripcion-del-modelo" title="Link to this heading">#</a></h2>
+<p>Celik, G. (2025). Multi-layer feature fusion for high-accuracy solid waste classification using a hybrid deep learning model. <em>The Visual Computer</em>, <em>41</em>, 10227–10249. <a class="reference external" href="https://doi.org/10.1007/s00371-025-04031-3">https://doi.org/10.1007/s00371-025-04031-3</a>. Código: <a class="github reference external" href="https://github.com/GaffariCelik/SolidWasteClassification">GaffariCelik/SolidWasteClassification</a></p>
+<p><strong>Arquitectura.</strong> Una imagen <span class="math notranslate nohighlight">\(x \in \mathbb{R}^{224 \times 224 \times 3}\)</span> entra en paralelo a EfficientNet-B0 e InceptionV3, ambas con pesos de ImageNet. De cada red se toman dos mapas de rasgos profundos:</p>
+<ul class="simple">
+<li><p><strong>EfficientNet-B0:</strong> las salidas de <code class="docutils literal notranslate"><span class="pre">block6d_add</span></code> y <code class="docutils literal notranslate"><span class="pre">top_activation</span></code>;</p></li>
+<li><p><strong>InceptionV3:</strong> las salidas de <code class="docutils literal notranslate"><span class="pre">mixed8</span></code> y <code class="docutils literal notranslate"><span class="pre">mixed10</span></code>.</p></li>
+</ul>
+<p>Cada mapa se reduce con <em>global average pooling</em> y los cuatro vectores se concatenan. Esa es la <em>hypercolumn</em>:</p>
+<div class="math notranslate nohighlight">
+\[h(x) = \big[\mathrm{GAP}(F^{E}_{6d}(x)) \,\|\, \mathrm{GAP}(F^{E}_{\text{top}}(x)) \,\|\, \mathrm{GAP}(F^{I}_{8}(x)) \,\|\, \mathrm{GAP}(F^{I}_{10}(x))\big] \in \mathbb{R}^{d_1 + d_2}.\]</div>
+<p>Cinco capas densas con ReLU (512, 256, 128, 64 y 6 neuronas) se entrenan con entropía cruzada. Después, la salida de 64 dimensiones <span class="math notranslate nohighlight">\(z(x)\)</span> se usa como <em>embedding</em> para un clasificador XGBoost, <span class="math notranslate nohighlight">\(\hat y = \mathrm{XGB}(z(x))\)</span>, que suma árboles ajustados al gradiente de la pérdida, <span class="math notranslate nohighlight">\(F_{m+1}(x) = F_m(x) - \gamma\, h_m(x)\)</span>.</p>
+<p><strong>Supuestos del modelo.</strong> Los rasgos de distintas profundidades y de dos arquitecturas son complementarios. Un clasificador por <em>boosting</em> sobre el <em>embedding</em> separa mejor las clases que la <em>softmax</em>. El conjunto de prueba es una muestra independiente de la distribución de interés.</p>
+<p><strong>Relación con el benchmark.</strong> Celik-HC comparte con RWCNet la idea de fusionar dos CNN preentrenadas y con GFN la de combinar escalas. Es el único modelo que añade un clasificador de <em>machine learning</em> clásico. En el benchmark ocupa el cuarto lugar (capítulo 13).</p>
+</section>
+<section id="replica-bajo-las-condiciones-originales">
+<h2>12.2 Réplica bajo las condiciones originales<a class="headerlink" href="#replica-bajo-las-condiciones-originales" title="Link to this heading">#</a></h2>
+<p><strong>Protocolo original.</strong> Reprodujimos el código oficial en PyTorch:</p>
+<ul class="simple">
+<li><p>partición aleatoria 80/20 sobre las 2527 imágenes con <code class="docutils literal notranslate"><span class="pre">random_state</span> <span class="pre">=</span> <span class="pre">32</span></code> (506 de prueba);</p></li>
+<li><p>40 épocas, Adam con tasa de 1e-3, lote de 128, sin aumento de datos;</p></li>
+<li><p>XGBoost con <code class="docutils literal notranslate"><span class="pre">random_state</span> <span class="pre">=</span> <span class="pre">101</span></code>;</p></li>
+<li><p>la época se elige con la mayor accuracy sobre el mismo 20 % que se reporta como prueba, igual que en el repositorio.</p></li>
+</ul>
+<p><strong>Protocolo estricto.</strong> Es idéntico, salvo que la época se elige con un 10 % de validación interno separado del entrenamiento. El 20 % de prueba se evalúa una sola vez.</p>
+<p>Cada protocolo se repitió con 5 semillas.</p>
+<p><strong>Criterio de éxito, fijado antes de ejecutar.</strong> La réplica tiene éxito si la accuracy publicada (0.994) cae dentro del IC 95 % bootstrap de la accuracy de prueba de la corrida.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rep</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">SUM</span> <span class="o">/</span> <span class="s2">"replicacion_paper_guia.csv"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">resumen</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">g</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.975</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">s</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">m</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">h</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">m</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">]"</span>
+<span class="n">tab</span> <span class="o">=</span> <span class="n">rep</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"protocol"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">accuracy_XGBoost</span><span class="o">=</span><span class="p">(</span><span class="s2">"accuracy"</span><span class="p">,</span> <span class="n">resumen</span><span class="p">),</span> <span class="n">f1_macro</span><span class="o">=</span><span class="p">(</span><span class="s2">"f1_macro"</span><span class="p">,</span> <span class="n">resumen</span><span class="p">),</span>
+    <span class="n">accuracy_softmax</span><span class="o">=</span><span class="p">(</span><span class="s2">"accuracy_head"</span><span class="p">,</span> <span class="n">resumen</span><span class="p">),</span> <span class="n">mejor_epoca</span><span class="o">=</span><span class="p">(</span><span class="s2">"best_epoch"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span>
+    <span class="n">corridas_con_exito</span><span class="o">=</span><span class="p">(</span><span class="s2">"reportado_en_ic"</span><span class="p">,</span> <span class="s2">"sum"</span><span class="p">))</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">"original"</span><span class="p">,</span> <span class="s2">"estricto"</span><span class="p">]]</span>
+<span class="n">display</span><span class="p">(</span><span class="n">tab</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">rep</span><span class="p">[[</span><span class="s2">"protocol"</span><span class="p">,</span> <span class="s2">"seed"</span><span class="p">,</span> <span class="s2">"best_epoch"</span><span class="p">,</span> <span class="s2">"selection_accuracy"</span><span class="p">,</span> <span class="s2">"accuracy"</span><span class="p">,</span> <span class="s2">"ic_lo"</span><span class="p">,</span> <span class="s2">"ic_hi"</span><span class="p">,</span> <span class="s2">"reportado_en_ic"</span><span class="p">]]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>accuracy_XGBoost</th>
+      <th>f1_macro</th>
+      <th>accuracy_softmax</th>
+      <th>mejor_epoca</th>
+      <th>corridas_con_exito</th>
+    </tr>
+    <tr>
+      <th>protocol</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>original</th>
+      <td>0.925 ± 0.005 [0.919, 0.930]</td>
+      <td>0.904 ± 0.007 [0.895, 0.914]</td>
+      <td>0.941 ± 0.005 [0.935, 0.946]</td>
+      <td>20.8</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>estricto</th>
+      <td>0.896 ± 0.010 [0.884, 0.909]</td>
+      <td>0.872 ± 0.006 [0.865, 0.879]</td>
+      <td>0.909 ± 0.013 [0.893, 0.925]</td>
+      <td>23.0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>protocol</th>
+      <th>seed</th>
+      <th>best_epoch</th>
+      <th>selection_accuracy</th>
+      <th>accuracy</th>
+      <th>ic_lo</th>
+      <th>ic_hi</th>
+      <th>reportado_en_ic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>original</td>
+      <td>0</td>
+      <td>13</td>
+      <td>0.9368</td>
+      <td>0.9249</td>
+      <td>0.9012</td>
+      <td>0.9466</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>estricto</td>
+      <td>0</td>
+      <td>21</td>
+      <td>0.9557</td>
+      <td>0.8972</td>
+      <td>0.8696</td>
+      <td>0.9229</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>original</td>
+      <td>1</td>
+      <td>15</td>
+      <td>0.9407</td>
+      <td>0.9209</td>
+      <td>0.8972</td>
+      <td>0.9427</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>estricto</td>
+      <td>1</td>
+      <td>27</td>
+      <td>0.9458</td>
+      <td>0.8953</td>
+      <td>0.8676</td>
+      <td>0.9209</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>original</td>
+      <td>2</td>
+      <td>29</td>
+      <td>0.9486</td>
+      <td>0.9308</td>
+      <td>0.9071</td>
+      <td>0.9506</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>estricto</td>
+      <td>2</td>
+      <td>4</td>
+      <td>0.9458</td>
+      <td>0.8854</td>
+      <td>0.8577</td>
+      <td>0.9130</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>original</td>
+      <td>3</td>
+      <td>16</td>
+      <td>0.9387</td>
+      <td>0.9269</td>
+      <td>0.9032</td>
+      <td>0.9466</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>estricto</td>
+      <td>3</td>
+      <td>34</td>
+      <td>0.9507</td>
+      <td>0.9130</td>
+      <td>0.8874</td>
+      <td>0.9368</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>original</td>
+      <td>4</td>
+      <td>31</td>
+      <td>0.9387</td>
+      <td>0.9190</td>
+      <td>0.8933</td>
+      <td>0.9427</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>estricto</td>
+      <td>4</td>
+      <td>29</td>
+      <td>0.9113</td>
+      <td>0.8913</td>
+      <td>0.8636</td>
+      <td>0.9170</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>La réplica no tiene éxito.</strong> El criterio no se cumple en ninguna de las 10 corridas. Con el protocolo original obtenemos una accuracy de 0.925 ± 0.005: 6.9 puntos por debajo de la publicada, y el IC 95 % de cada corrida excluye 0.994. La discrepancia no se explica por casi-duplicados entre las particiones del protocolo original: solo 1 de las 506 imágenes de prueba tiene un casi-duplicado en entrenamiento (<a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/blob/main/entregable2/results/replication/protocol.json"><code class="docutils literal notranslate"><span class="pre">entregable2/results/replication/protocol.json</span></code></a>).</p>
+<p>Atribuimos la brecha a causas que el experimento no separa:</p>
+<ul class="simple">
+<li><p>el cambio de Keras a PyTorch, con pesos de ImageNet de distinta procedencia;</p></li>
+<li><p>un preprocesamiento no documentado en el repositorio;</p></li>
+<li><p>la versión del conjunto de datos y las semillas.</p></li>
+</ul>
+<p>La brecha es grande (unas 14 desviaciones estándar entre semillas), lo que vuelve poco probable que se deba solo a la aleatoriedad del entrenamiento.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">o</span> <span class="o">=</span> <span class="n">rep</span><span class="p">[</span><span class="n">rep</span><span class="o">.</span><span class="n">protocol</span> <span class="o">==</span> <span class="s2">"original"</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"seed"</span><span class="p">);</span> <span class="n">e</span> <span class="o">=</span> <span class="n">rep</span><span class="p">[</span><span class="n">rep</span><span class="o">.</span><span class="n">protocol</span> <span class="o">==</span> <span class="s2">"estricto"</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"seed"</span><span class="p">)</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">met</span><span class="p">,</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"accuracy"</span><span class="p">,</span> <span class="s2">"Accuracy (XGBoost)"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"f1_macro"</span><span class="p">,</span> <span class="s2">"F1 macro (XGBoost)"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"accuracy_head"</span><span class="p">,</span> <span class="s2">"Accuracy (softmax)"</span><span class="p">)]:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="n">met</span><span class="p">]</span> <span class="o">-</span> <span class="n">e</span><span class="p">[</span><span class="n">met</span><span class="p">])</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">ttest_1samp</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.975</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">d</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"métrica"</span><span class="p">:</span> <span class="n">nombre</span><span class="p">,</span> <span class="s2">"original − estricto"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="s2">"IC 95 </span><span class="si">% i</span><span class="s2">nf"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">h</span><span class="p">,</span> <span class="s2">"IC 95 </span><span class="si">% s</span><span class="s2">up"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span>
+                  <span class="s2">"t"</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">statistic</span><span class="p">,</span> <span class="s2">"p"</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">pvalue</span><span class="p">,</span> <span class="s2">"d_z"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="n">d</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"¿La accuracy de selección coincide con la de prueba de la softmax en el protocolo original?"</span><span class="p">,</span>
+      <span class="nb">bool</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">selection_accuracy</span><span class="p">,</span> <span class="n">o</span><span class="o">.</span><span class="n">accuracy_head</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>métrica</th>
+      <th>original − estricto</th>
+      <th>IC 95 % inf</th>
+      <th>IC 95 % sup</th>
+      <th>t</th>
+      <th>p</th>
+      <th>d_z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Accuracy (XGBoost)</td>
+      <td>0.0281</td>
+      <td>0.014</td>
+      <td>0.0421</td>
+      <td>5.5526</td>
+      <td>0.0051</td>
+      <td>2.4832</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>F1 macro (XGBoost)</td>
+      <td>0.0324</td>
+      <td>0.022</td>
+      <td>0.0428</td>
+      <td>8.6705</td>
+      <td>0.0010</td>
+      <td>3.8776</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Accuracy (softmax)</td>
+      <td>0.0320</td>
+      <td>0.012</td>
+      <td>0.0521</td>
+      <td>4.4354</td>
+      <td>0.0114</td>
+      <td>1.9836</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>¿La accuracy de selección coincide con la de prueba de la softmax en el protocolo original? True
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Validación del pipeline con los siete modelos publicados.</strong> La réplica responde dos preguntas distintas: si el resultado publicado de Celik-HC se reproduce, y si nuestro pipeline experimental es fiable. Para la segunda comparamos la accuracy de prueba de los siete modelos publicados, obtenida con el mismo pipeline (código, partición, preprocesamiento y evaluación), con la que reporta cada artículo. Si el pipeline tuviera un error sistemático, todos los modelos quedarían por debajo de su valor publicado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">SUM</span> <span class="o">/</span> <span class="s2">"metricas_por_corrida.csv"</span><span class="p">)</span>
+<span class="n">publicada</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"RWCNet"</span><span class="p">:</span> <span class="mf">95.01</span><span class="p">,</span> <span class="s2">"GFN"</span><span class="p">:</span> <span class="mf">94.21</span><span class="p">,</span> <span class="s2">"ViT-B16"</span><span class="p">:</span> <span class="mf">96.98</span><span class="p">,</span> <span class="s2">"ResMsCapsule"</span><span class="p">:</span> <span class="mf">91.41</span><span class="p">,</span> <span class="s2">"Celik-HC"</span><span class="p">:</span> <span class="mf">99.40</span><span class="p">,</span>
+             <span class="s2">"MbXception"</span><span class="p">:</span> <span class="mf">94.34</span><span class="p">,</span> <span class="s2">"FocusRCNet"</span><span class="p">:</span> <span class="mf">92.0</span><span class="p">}</span>
+<span class="n">causa</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"RWCNet"</span><span class="p">:</span> <span class="s2">"Reproduce el valor publicado"</span><span class="p">,</span>
+         <span class="s2">"GFN"</span><span class="p">:</span> <span class="s2">"Reproduce el valor publicado"</span><span class="p">,</span>
+         <span class="s2">"ViT-B16"</span><span class="p">:</span> <span class="s2">"Variante no declarada (se asume B/16); lote de 32 en lugar de 512"</span><span class="p">,</span>
+         <span class="s2">"ResMsCapsule"</span><span class="p">:</span> <span class="s2">"No comparable: el artículo usa 4 clases"</span><span class="p">,</span>
+         <span class="s2">"Celik-HC"</span><span class="p">:</span> <span class="s2">"Época elegida con la prueba (+2.8 puntos, sección 12.3) y factores no aislados"</span><span class="p">,</span>
+         <span class="s2">"MbXception"</span><span class="p">:</span> <span class="s2">"Entrada de 224 en lugar de 229 píxeles; tope de épocas alcanzado"</span><span class="p">,</span>
+         <span class="s2">"FocusRCNet"</span><span class="p">:</span> <span class="s2">"Valor medido en validación, con entrada de 380 píxeles; tope de épocas alcanzado"</span><span class="p">}</span>
+<span class="n">val</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">publicada</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">mc</span><span class="p">[</span><span class="n">mc</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">accuracy</span>
+    <span class="n">val</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="n">m</span><span class="p">,</span> <span class="s2">"accuracy publicada (%)"</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span> <span class="s2">"accuracy obtenida (%)"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"diferencia (puntos)"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">p</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">"lectura"</span><span class="p">:</span> <span class="n">causa</span><span class="p">[</span><span class="n">m</span><span class="p">]})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>accuracy publicada (%)</th>
+      <th>accuracy obtenida (%)</th>
+      <th>diferencia (puntos)</th>
+      <th>lectura</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>RWCNet</th>
+      <td>95.01</td>
+      <td>95.2 ± 0.7</td>
+      <td>0.2</td>
+      <td>Reproduce el valor publicado</td>
+    </tr>
+    <tr>
+      <th>GFN</th>
+      <td>94.21</td>
+      <td>93.5 ± 1.1</td>
+      <td>-0.7</td>
+      <td>Reproduce el valor publicado</td>
+    </tr>
+    <tr>
+      <th>ViT-B16</th>
+      <td>96.98</td>
+      <td>94.4 ± 1.1</td>
+      <td>-2.6</td>
+      <td>Variante no declarada (se asume B/16); lote de...</td>
+    </tr>
+    <tr>
+      <th>ResMsCapsule</th>
+      <td>91.41</td>
+      <td>91.1 ± 1.2</td>
+      <td>-0.3</td>
+      <td>No comparable: el artículo usa 4 clases</td>
+    </tr>
+    <tr>
+      <th>Celik-HC</th>
+      <td>99.40</td>
+      <td>92.6 ± 1.0</td>
+      <td>-6.8</td>
+      <td>Época elegida con la prueba (+2.8 puntos, secc...</td>
+    </tr>
+    <tr>
+      <th>MbXception</th>
+      <td>94.34</td>
+      <td>87.4 ± 1.3</td>
+      <td>-6.9</td>
+      <td>Entrada de 224 en lugar de 229 píxeles; tope d...</td>
+    </tr>
+    <tr>
+      <th>FocusRCNet</th>
+      <td>92.00</td>
+      <td>83.2 ± 1.1</td>
+      <td>-8.8</td>
+      <td>Valor medido en validación, con entrada de 380...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>El pipeline queda validado.</strong> Con el mismo código y el mismo protocolo, RWCNet reproduce su valor publicado (95.2 % frente a 95.01 %) y GFN queda a 0.7 puntos (93.5 % frente a 94.21 %). Las demás diferencias son heterogéneas (de −2.6 a −8.8 puntos) y cada una se asocia a desviaciones documentadas en el capítulo 11 o, en Celik-HC, al sesgo de selección de la sección 12.3. Ese patrón es el contrario al de un error sistemático del pipeline, que afectaría a todos los modelos por igual.</p>
+<p>Por eso la brecha de Celik-HC se interpreta como un hallazgo sobre el artículo y no como un fallo de la implementación. La réplica de su resultado no tiene éxito según el criterio fijado a priori, y el pipeline con el que se evaluaron los diez modelos del benchmark reproduce los resultados publicados cuando estos son reproducibles.</p>
+</section>
+<section id="limitacion-1-seleccion-de-la-epoca-con-el-conjunto-de-prueba">
+<h2>12.3 Limitación 1: selección de la época con el conjunto de prueba<a class="headerlink" href="#limitacion-1-seleccion-de-la-epoca-con-el-conjunto-de-prueba" title="Link to this heading">#</a></h2>
+<p>El código oficial guarda el modelo de la época con mayor accuracy sobre el conjunto que luego reporta como prueba. La celda anterior muestra el mecanismo: en el protocolo original, la accuracy usada para elegir la época es idéntica a la accuracy de prueba de la <em>softmax</em>, porque ambas se calculan sobre el mismo conjunto. Elegir la época de esta forma infla la accuracy en <strong>2.8 puntos</strong> (IC 95 % [1.4, 4.2], t pareada con 5 semillas, <span class="math notranslate nohighlight">\(p = 0.005\)</span>) y el F1 macro en <strong>3.2 puntos</strong> (IC [2.2, 4.3], <span class="math notranslate nohighlight">\(p = 0.001\)</span>). Este sesgo afecta a cualquier modelo seleccionado así, no solo al paper guía. Por eso nuestro protocolo común elige la época con validación (capítulo 11).</p>
+</section>
+<section id="limitacion-2-fragilidad-ante-ruido-gaussiano">
+<h2>12.4 Limitación 2: fragilidad ante ruido gaussiano<a class="headerlink" href="#limitacion-2-fragilidad-ante-ruido-gaussiano" title="Link to this heading">#</a></h2>
+<p>La segunda limitación es la que sirve de punto de partida para el modelo propio de la etapa siguiente. Ante ruido gaussiano de <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span> sobre la imagen normalizada, el F1 macro de Celik-HC cae de 0.914 a 0.255. La cuantificamos con un IC 95 % bootstrap que remuestrea grupos de casi-duplicados del conjunto de prueba, con 2000 remuestreos, promediando las 8 semillas en cada remuestreo. Para verificar si la limitación es propia del paper guía o compartida por su familia, repetimos el cálculo en los otros modelos del benchmark.</p>
+<p>Las perturbaciones con las que se cuantifica esta limitación (ruido gaussiano con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span> y <span class="math notranslate nohighlight">\(0.10\)</span>) están fijadas en el preregistro. Su análisis como limitación del paper guía es exploratorio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ci</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">COMP</span> <span class="o">/</span> <span class="s2">"robustez_caidas_ic.csv"</span><span class="p">)</span>
+<span class="n">r05</span> <span class="o">=</span> <span class="n">ci</span><span class="p">[</span><span class="n">ci</span><span class="o">.</span><span class="n">perturbacion</span> <span class="o">==</span> <span class="s2">"ruido_0.05"</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"model"</span><span class="p">)</span>
+<span class="n">orden</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Celik-HC"</span><span class="p">,</span> <span class="s2">"MbXception"</span><span class="p">,</span> <span class="s2">"FocusRCNet"</span><span class="p">,</span> <span class="s2">"ResMsCapsule"</span><span class="p">,</span> <span class="s2">"RWCNet"</span><span class="p">,</span> <span class="s2">"GFN"</span><span class="p">,</span> <span class="s2">"ViT-B16"</span><span class="p">]</span>
+<span class="n">display</span><span class="p">(</span><span class="n">r05</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">orden</span><span class="p">,</span> <span class="p">[</span><span class="s2">"caida_f1"</span><span class="p">,</span> <span class="s2">"ic_lo"</span><span class="p">,</span> <span class="s2">"ic_hi"</span><span class="p">]]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"caida_f1"</span><span class="p">:</span> <span class="s2">"caída de F1 (σ = 0.05)"</span><span class="p">}))</span>
+<span class="n">rb</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">SUM</span> <span class="o">/</span> <span class="s2">"robustez.csv"</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">rb</span><span class="p">[</span><span class="n">rb</span><span class="o">.</span><span class="n">perturbacion</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">"limpio"</span><span class="p">,</span> <span class="s2">"ruido_0.05"</span><span class="p">])]</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"model"</span><span class="p">,</span> <span class="s2">"seed"</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"perturbacion"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"f1_macro"</span><span class="p">)</span>
+<span class="n">w</span><span class="p">[</span><span class="s2">"caida"</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="s2">"limpio"</span><span class="p">]</span> <span class="o">-</span> <span class="n">w</span><span class="p">[</span><span class="s2">"ruido_0.05"</span><span class="p">]</span>
+<span class="n">cd</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="s2">"caida"</span><span class="p">]</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"MbXception"</span><span class="p">,</span> <span class="s2">"FocusRCNet"</span><span class="p">,</span> <span class="s2">"ResMsCapsule"</span><span class="p">,</span> <span class="s2">"RWCNet"</span><span class="p">,</span> <span class="s2">"GFN"</span><span class="p">,</span> <span class="s2">"ViT-B16"</span><span class="p">]:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">cd</span><span class="p">[</span><span class="s2">"Celik-HC"</span><span class="p">]</span> <span class="o">-</span> <span class="n">cd</span><span class="p">[</span><span class="n">m</span><span class="p">])</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"contraste"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"Celik-HC − </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"diferencia de caída"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="s2">"p_t"</span><span class="p">:</span> <span class="n">st</span><span class="o">.</span><span class="n">ttest_1samp</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">pvalue</span><span class="p">})</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.multitest</span><span class="w"> </span><span class="kn">import</span> <span class="n">multipletests</span>
+<span class="n">f</span><span class="p">[</span><span class="s2">"p_Holm"</span><span class="p">]</span> <span class="o">=</span> <span class="n">multipletests</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">p_t</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"holm"</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">display</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>caída de F1 (σ = 0.05)</th>
+      <th>ic_lo</th>
+      <th>ic_hi</th>
+    </tr>
+    <tr>
+      <th>model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Celik-HC</th>
+      <td>0.659</td>
+      <td>0.630</td>
+      <td>0.684</td>
+    </tr>
+    <tr>
+      <th>MbXception</th>
+      <td>0.639</td>
+      <td>0.598</td>
+      <td>0.678</td>
+    </tr>
+    <tr>
+      <th>FocusRCNet</th>
+      <td>0.666</td>
+      <td>0.625</td>
+      <td>0.702</td>
+    </tr>
+    <tr>
+      <th>ResMsCapsule</th>
+      <td>0.480</td>
+      <td>0.443</td>
+      <td>0.518</td>
+    </tr>
+    <tr>
+      <th>RWCNet</th>
+      <td>0.297</td>
+      <td>0.263</td>
+      <td>0.332</td>
+    </tr>
+    <tr>
+      <th>GFN</th>
+      <td>0.124</td>
+      <td>0.098</td>
+      <td>0.154</td>
+    </tr>
+    <tr>
+      <th>ViT-B16</th>
+      <td>0.044</td>
+      <td>0.025</td>
+      <td>0.066</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>contraste</th>
+      <th>diferencia de caída</th>
+      <th>p_t</th>
+      <th>p_Holm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Celik-HC − MbXception</td>
+      <td>0.0193</td>
+      <td>0.6712</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Celik-HC − FocusRCNet</td>
+      <td>-0.0078</td>
+      <td>0.7887</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Celik-HC − ResMsCapsule</td>
+      <td>0.1783</td>
+      <td>0.0016</td>
+      <td>0.0048</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Celik-HC − RWCNet</td>
+      <td>0.3614</td>
+      <td>0.0001</td>
+      <td>0.0003</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Celik-HC − GFN</td>
+      <td>0.5342</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Celik-HC − ViT-B16</td>
+      <td>0.6148</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">orden</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">orden</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">r05</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">caida_f1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="p">[[</span><span class="n">r</span><span class="o">.</span><span class="n">caida_f1</span> <span class="o">-</span> <span class="n">r</span><span class="o">.</span><span class="n">ic_lo</span><span class="p">],</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">ic_hi</span> <span class="o">-</span> <span class="n">r</span><span class="o">.</span><span class="n">caida_f1</span><span class="p">]],</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">FG</span><span class="o">.</span><span class="n">color_regimen</span><span class="p">(</span><span class="n">m</span><span class="p">),</span>
+                <span class="n">ecolor</span><span class="o">=</span><span class="n">FG</span><span class="o">.</span><span class="n">INK2</span><span class="p">,</span> <span class="n">elinewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">ic_hi</span> <span class="o">+</span> <span class="mf">0.015</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">caida_f1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">8.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">FG</span><span class="o">.</span><span class="n">INK2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">orden</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">();</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Caída de F1 macro con ruido gaussiano σ = 0.05 (IC 95 % bootstrap por grupo)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"La fragilidad ante el ruido es compartida por las arquitecturas convolucionales"</span><span class="p">)</span>
+<span class="n">FG</span><span class="o">.</span><span class="n">leyenda_regimen</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"lower right"</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/df122c81021c3b0353b96fda8eb6a6b14d2f5f6334b8384e2c1bdf6b6ad22a44.png" src="_images/df122c81021c3b0353b96fda8eb6a6b14d2f5f6334b8384e2c1bdf6b6ad22a44.png" />
+</div>
+</div>
+<p>La limitación no es exclusiva del paper guía:</p>
+<ul class="simple">
+<li><p><strong>CNN pura:</strong> MbXception, FocusRCNet, ResMsCapsule y RWCNet pierden entre 0.30 y 0.67 de F1, con intervalos que excluyen cero, igual que los tres modelos base del capítulo 5.</p></li>
+<li><p><strong>Atención global:</strong> los dos modelos con un codificador Transformer degradan mucho menos. GFN pierde 0.12 y ViT-B16 0.04.</p></li>
+<li><p><strong>Prueba pareada:</strong> la caída de Celik-HC supera a la de los demás modelos, salvo MbXception y FocusRCNet, con <span class="math notranslate nohighlight">\(p\)</span> Holm &lt; 0.05.</p></li>
+</ul>
+<p>La fragilidad ante el ruido es una propiedad de las arquitecturas convolucionales entrenadas sin ruido en el aumento de datos. Esto la vuelve un candidato natural para el modelo propio, en línea con los mecanismos M1 (destilación), M2 (entrenamiento con ruido) y M4 (atención global) de la sección 10.8.</p>
+</section>
+<section id="aporte-de-xgboost">
+<h2>12.5 Aporte de XGBoost<a class="headerlink" href="#aporte-de-xgboost" title="Link to this heading">#</a></h2>
+<p>El artículo atribuye a XGBoost una mejora de la clasificación final. En nuestras 8 semillas del benchmark comparamos, sobre las mismas corridas, la salida de XGBoost con la de la cabeza <em>softmax</em> que la produce.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">SUM</span> <span class="o">/</span> <span class="s2">"celik_xgb_vs_softmax.csv"</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">xs</span><span class="o">.</span><span class="n">f1_macro_xgb</span> <span class="o">-</span> <span class="n">xs</span><span class="o">.</span><span class="n">f1_macro_softmax</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.975</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="o">*</span> <span class="n">d</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"F1 macro: XGBoost </span><span class="si">{</span><span class="n">xs</span><span class="o">.</span><span class="n">f1_macro_xgb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> frente a softmax </span><span class="si">{</span><span class="n">xs</span><span class="o">.</span><span class="n">f1_macro_softmax</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">; "</span>
+      <span class="sa">f</span><span class="s2">"diferencia </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> [IC 95 % </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">h</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">], t pareada p = </span><span class="si">{</span><span class="n">st</span><span class="o">.</span><span class="n">ttest_1samp</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">pvalue</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, "</span>
+      <span class="sa">f</span><span class="s2">"Wilcoxon p = </span><span class="si">{</span><span class="n">st</span><span class="o">.</span><span class="n">wilcoxon</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">pvalue</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F1 macro: XGBoost 0.914 frente a softmax 0.924; diferencia -0.010 [IC 95 % -0.023, 0.002], t pareada p = 0.092, Wilcoxon p = 0.109
+</pre></div>
+</div>
+</div>
+</div>
+<p>XGBoost no mejora a la <em>softmax</em>: la diferencia media es negativa (−0.010) y su intervalo incluye el cero. En la réplica también empeora la accuracy: −1.6 puntos con el protocolo original y −1.2 con el estricto. Mantuvimos XGBoost como salida oficial de Celik-HC para respetar el modelo publicado.</p>
+</section>
+<section id="ablacion-del-paper-guia">
+<h2>12.6 Ablación del paper guía<a class="headerlink" href="#ablacion-del-paper-guia" title="Link to this heading">#</a></h2>
+<p>Aislamos cinco componentes con 8 semillas por variante y el mismo protocolo y la misma configuración de hiperparámetros del modelo completo:</p>
+<ul class="simple">
+<li><p><strong>sin_hypercolumn:</strong> solo la última capa de cada red, sin fusión multinivel;</p></li>
+<li><p><strong>capas_intermedias:</strong> las capas del «Model_1» del artículo (<code class="docutils literal notranslate"><span class="pre">block4c</span></code>, <code class="docutils literal notranslate"><span class="pre">block5c</span></code>, <code class="docutils literal notranslate"><span class="pre">mixed6</span></code> y <code class="docutils literal notranslate"><span class="pre">mixed7</span></code>);</p></li>
+<li><p><strong>solo_efficientnet:</strong> sin InceptionV3;</p></li>
+<li><p><strong>solo_inception:</strong> sin EfficientNet-B0;</p></li>
+<li><p><strong>sin_preentrenamiento:</strong> ambas redes desde cero, con la tasa base y la normalización de ese régimen.</p></li>
+</ul>
+<p>La diferencia es <em>modelo completo − variante</em>: un valor positivo indica que el componente retirado aporta. Las 5 comparaciones forman una familia con corrección de Holm. La ablación no figura en el preregistro y se declara exploratoria. Se ejecutó en la RTX 4060 y el modelo completo en la A100, con el mismo código, configuración y semillas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">SUM</span> <span class="o">/</span> <span class="s2">"ablacion.csv"</span><span class="p">)</span>
+<span class="n">ab</span> <span class="o">=</span> <span class="n">ab</span><span class="p">[</span><span class="n">ab</span><span class="o">.</span><span class="n">variante</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"Celik-HC/"</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">ab</span><span class="p">[</span><span class="s2">"variante"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ab</span><span class="o">.</span><span class="n">variante</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"Celik-HC/"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">ab</span><span class="p">[[</span><span class="s2">"variante"</span><span class="p">,</span> <span class="s2">"f1_media"</span><span class="p">,</span> <span class="s2">"f1_de"</span><span class="p">,</span> <span class="s2">"dif_media"</span><span class="p">,</span> <span class="s2">"ic_t_lo"</span><span class="p">,</span> <span class="s2">"ic_t_hi"</span><span class="p">,</span> <span class="s2">"p_t_holm"</span><span class="p">,</span> <span class="s2">"p_wilcoxon_holm"</span><span class="p">,</span>
+            <span class="s2">"relevante_y_significativa"</span><span class="p">]]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">COMP</span> <span class="o">/</span> <span class="s2">"equivalencia_ablacion.csv"</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">COMP</span> <span class="o">/</span> <span class="s2">"equivalencia_ablacion.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+<span class="k">if</span> <span class="n">eq</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">eq</span><span class="p">[</span><span class="n">eq</span><span class="o">.</span><span class="n">variante</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"Celik-HC/"</span><span class="p">)]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variante</th>
+      <th>f1_media</th>
+      <th>f1_de</th>
+      <th>dif_media</th>
+      <th>ic_t_lo</th>
+      <th>ic_t_hi</th>
+      <th>p_t_holm</th>
+      <th>p_wilcoxon_holm</th>
+      <th>relevante_y_significativa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>capas_intermedias</td>
+      <td>0.9092</td>
+      <td>0.0165</td>
+      <td>0.0047</td>
+      <td>-0.0104</td>
+      <td>0.0199</td>
+      <td>1.0000</td>
+      <td>1.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>sin_hypercolumn</td>
+      <td>0.9090</td>
+      <td>0.0121</td>
+      <td>0.0049</td>
+      <td>-0.0108</td>
+      <td>0.0207</td>
+      <td>1.0000</td>
+      <td>1.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>sin_preentrenamiento</td>
+      <td>0.8289</td>
+      <td>0.0196</td>
+      <td>0.0851</td>
+      <td>0.0647</td>
+      <td>0.1054</td>
+      <td>0.0001</td>
+      <td>0.0391</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>solo_efficientnet</td>
+      <td>0.9148</td>
+      <td>0.0096</td>
+      <td>-0.0008</td>
+      <td>-0.0182</td>
+      <td>0.0166</td>
+      <td>1.0000</td>
+      <td>1.0000</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>solo_inception</td>
+      <td>0.8873</td>
+      <td>0.0139</td>
+      <td>0.0266</td>
+      <td>0.0075</td>
+      <td>0.0457</td>
+      <td>0.0526</td>
+      <td>0.1562</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>base</th>
+      <th>variante</th>
+      <th>f1_variante</th>
+      <th>f1_de</th>
+      <th>f1_completo</th>
+      <th>ece_variante</th>
+      <th>dif_media</th>
+      <th>ic_t_lo</th>
+      <th>ic_t_hi</th>
+      <th>d_z</th>
+      <th>p_t</th>
+      <th>p_wilcoxon</th>
+      <th>p_tost</th>
+      <th>ic90_lo</th>
+      <th>ic90_hi</th>
+      <th>p_t_holm_familia</th>
+      <th>decision</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Celik-HC</td>
+      <td>Celik-HC/capas_intermedias</td>
+      <td>0.9092</td>
+      <td>0.0165</td>
+      <td>0.9139</td>
+      <td>0.0573</td>
+      <td>0.0047</td>
+      <td>-0.0104</td>
+      <td>0.0199</td>
+      <td>0.2602</td>
+      <td>0.4857</td>
+      <td>0.5469</td>
+      <td>0.0242</td>
+      <td>-0.0074</td>
+      <td>0.0169</td>
+      <td>1.0000</td>
+      <td>equivalente (TOST ±δ)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Celik-HC</td>
+      <td>Celik-HC/sin_hypercolumn</td>
+      <td>0.9090</td>
+      <td>0.0121</td>
+      <td>0.9139</td>
+      <td>0.0576</td>
+      <td>0.0049</td>
+      <td>-0.0108</td>
+      <td>0.0207</td>
+      <td>0.2615</td>
+      <td>0.4836</td>
+      <td>0.5469</td>
+      <td>0.0292</td>
+      <td>-0.0077</td>
+      <td>0.0176</td>
+      <td>1.0000</td>
+      <td>equivalente (TOST ±δ)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Celik-HC</td>
+      <td>Celik-HC/sin_preentrenamiento</td>
+      <td>0.8289</td>
+      <td>0.0196</td>
+      <td>0.9139</td>
+      <td>0.1312</td>
+      <td>0.0851</td>
+      <td>0.0647</td>
+      <td>0.1054</td>
+      <td>3.4958</td>
+      <td>0.0000</td>
+      <td>0.0078</td>
+      <td>0.9999</td>
+      <td>0.0688</td>
+      <td>0.1014</td>
+      <td>0.0001</td>
+      <td>significativa y relevante</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Celik-HC</td>
+      <td>Celik-HC/solo_efficientnet</td>
+      <td>0.9148</td>
+      <td>0.0096</td>
+      <td>0.9139</td>
+      <td>0.0550</td>
+      <td>-0.0008</td>
+      <td>-0.0182</td>
+      <td>0.0166</td>
+      <td>-0.0400</td>
+      <td>0.9131</td>
+      <td>1.0000</td>
+      <td>0.0176</td>
+      <td>-0.0148</td>
+      <td>0.0131</td>
+      <td>1.0000</td>
+      <td>equivalente (TOST ±δ)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Celik-HC</td>
+      <td>Celik-HC/solo_inception</td>
+      <td>0.8873</td>
+      <td>0.0139</td>
+      <td>0.9139</td>
+      <td>0.0794</td>
+      <td>0.0266</td>
+      <td>0.0075</td>
+      <td>0.0457</td>
+      <td>1.1662</td>
+      <td>0.0131</td>
+      <td>0.0391</td>
+      <td>0.7811</td>
+      <td>0.0113</td>
+      <td>0.0420</td>
+      <td>0.0526</td>
+      <td>no concluyente</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">7.2</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">))</span>
+<span class="n">abs_</span> <span class="o">=</span> <span class="n">ab</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"dif_media"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">abs_</span><span class="o">.</span><span class="n">itertuples</span><span class="p">()):</span>
+    <span class="n">sig</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">relevante_y_significativa</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">dif_media</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="p">[[</span><span class="n">r</span><span class="o">.</span><span class="n">dif_media</span> <span class="o">-</span> <span class="n">r</span><span class="o">.</span><span class="n">ic_t_lo</span><span class="p">],</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">ic_t_hi</span> <span class="o">-</span> <span class="n">r</span><span class="o">.</span><span class="n">dif_media</span><span class="p">]],</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">FG</span><span class="o">.</span><span class="n">SERIES</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">sig</span> <span class="k">else</span> <span class="n">FG</span><span class="o">.</span><span class="n">NEUTRAL</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="n">FG</span><span class="o">.</span><span class="n">INK2</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">FG</span><span class="o">.</span><span class="n">INK2</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">FG</span><span class="o">.</span><span class="n">GRID</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">abs_</span><span class="p">)),</span> <span class="n">abs_</span><span class="o">.</span><span class="n">variante</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"F1 macro: completo − variante (IC 95 %); banda gris: ±δ"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Solo el preentrenamiento aporta de forma significativa y relevante"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/15543f39860f012829a10d44ebbf4d8f80ce4f0d4a0dc4b4e099615267e99209.png" src="_images/15543f39860f012829a10d44ebbf4d8f80ce4f0d4a0dc4b4e099615267e99209.png" />
+</div>
+</div>
+<p><strong>Lo que sostiene el desempeño de Celik-HC es el preentrenamiento en ImageNet.</strong> Sin él, el F1 cae 0.085 (IC [0.065, 0.105], <span class="math notranslate nohighlight">\(p\)</span> Holm &lt; 0.001), una diferencia significativa y relevante.</p>
+<p>Ninguna de las demás variantes difiere de forma significativa del modelo completo, y tres de ellas son equivalentes dentro de <span class="math notranslate nohighlight">\(\pm\delta\)</span> (TOST, segunda tabla):</p>
+<ul class="simple">
+<li><p><strong>Fusión multinivel:</strong> quitar la <em>hypercolumn</em> o tomar capas intermedias cambia el F1 en 0.005 o menos, con TOST <span class="math notranslate nohighlight">\(p = 0.029\)</span> y <span class="math notranslate nohighlight">\(0.024\)</span>.</p></li>
+<li><p><strong>Dos redes:</strong> usar solo EfficientNet-B0 da el mismo F1 (−0.001, TOST <span class="math notranslate nohighlight">\(p = 0.018\)</span>), con la mitad de los parámetros.</p></li>
+<li><p><strong>Solo InceptionV3:</strong> pierde 0.027, una diferencia que no resulta significativa tras Holm (<span class="math notranslate nohighlight">\(p = 0.053\)</span>).</p></li>
+</ul>
+<p>Las contribuciones centrales del artículo (fusión multinivel, combinación de dos redes y XGBoost) no mejoran el modelo bajo un protocolo controlado. Junto con la réplica, estos resultados cuestionan la superioridad publicada y orientan el modelo propio hacia la robustez y no hacia más capas de fusión.</p>
+</section>
+<section id="sintesis-para-la-etapa-siguiente">
+<h2>12.7 Síntesis para la etapa siguiente<a class="headerlink" href="#sintesis-para-la-etapa-siguiente" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Hallazgo</p></th>
+<th class="head"><p>Evidencia</p></th>
+<th class="head"><p>Implicación para el modelo propio</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>La accuracy publicada (99.4 %) no se reproduce</p></td>
+<td><p>Réplica: 92.5 % con el protocolo original</p></td>
+<td><p>Comparar siempre bajo el protocolo común y con varias semillas</p></td>
+</tr>
+<tr class="row-odd"><td><p>Elegir la época con la prueba infla el resultado</p></td>
+<td><p>+2.8 puntos de accuracy, IC [1.4, 4.2]</p></td>
+<td><p>Selección solo con validación</p></td>
+</tr>
+<tr class="row-even"><td><p>La fusión multinivel, la segunda red y XGBoost no aportan</p></td>
+<td><p>Ablación y comparación con la <em>softmax</em></p></td>
+<td><p>Partir de un único extractor preentrenado (EfficientNet-B0)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fragilidad ante ruido compartida por las CNN</p></td>
+<td><p>Caída de 0.66 en F1 (σ = 0.05), y de 0.30 a 0.67 en otras CNN</p></td>
+<td><p>Atacar la robustez: atención global, aumento con corrupciones o adaptación en prueba</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="11_protocolo_preregistro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">11. Preregistro, protocolo común y fichas de modelo</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="13_benchmark_estadistica.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">13. Benchmark: resultados e inferencia estadística</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencia-y-descripcion-del-modelo">12.1 Referencia y descripción del modelo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replica-bajo-las-condiciones-originales">12.2 Réplica bajo las condiciones originales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitacion-1-seleccion-de-la-epoca-con-el-conjunto-de-prueba">12.3 Limitación 1: selección de la época con el conjunto de prueba</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitacion-2-fragilidad-ante-ruido-gaussiano">12.4 Limitación 2: fragilidad ante ruido gaussiano</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aporte-de-xgboost">12.5 Aporte de XGBoost</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ablacion-del-paper-guia">12.6 Ablación del paper guía</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sintesis-para-la-etapa-siguiente">12.7 Síntesis para la etapa siguiente</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan Benavides y Juan David Díaz Fernández
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

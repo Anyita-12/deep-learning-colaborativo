@@ -1,0 +1,708 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>16. Discusión del benchmark &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '16_discusion_benchmark';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="17. Reproducibilidad del benchmark" href="17_reproducibilidad.html" />
+    <link rel="prev" title="15. Robustez, interpretabilidad, errores y techo de desempeño" href="15_robustez_interpretabilidad_errores.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><div class="sidebar-autores">
+  <div class="autor">
+    <img src="_static/autores/anyely.jpg" alt="Anyely Sanjuan Benavides">
+    <p class="autor-nombre">Anyely Sanjuan Benavides</p>
+    <p class="autor-detalle">Msc. Analítica de Datos<br>Universidad del Norte</p>
+  </div>
+  <div class="autor">
+    <img src="_static/autores/juan.jpg" alt="Juan David Díaz Fernández">
+    <p class="autor-nombre">Juan David Díaz Fernández</p>
+    <p class="autor-detalle">Msc. Ingeniería Mecánica<br>Universidad del Norte</p>
+  </div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Clasificación de residuos con TrashNet
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 1: modelos base</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y conjunto de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_conclusiones.html">7. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2: benchmark de diez modelos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_benchmark_introduccion.html">8. Benchmark de diez modelos: problema, preguntas e hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datos_auditoria.html">9. Datos: ficha técnica, contrato de datos y auditoría de fuga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_revision_sistematica.html">10. Revisión sistemática ampliada y selección de los modelos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_protocolo_preregistro.html">11. Preregistro, protocolo común y fichas de modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_paper_guia.html">12. Paper guía: réplica, limitaciones y ablación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_benchmark_estadistica.html">13. Benchmark: resultados e inferencia estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_ajuste_calibracion_incertidumbre.html">14. Bondad de ajuste, sobreajuste, calibración e incertidumbre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_robustez_interpretabilidad_errores.html">15. Robustez, interpretabilidad, errores y techo de desempeño</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">16. Discusión del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_reproducibilidad.html">17. Reproducibilidad del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_conclusiones_benchmark.html">18. Conclusiones del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_referencias_benchmark.html">19. Referencias del benchmark</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/16_discusion_benchmark.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>16. Discusión del benchmark</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-modelo-funciona-mejor-y-por-que">16.1 Qué modelo funciona mejor y por qué</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalizacion-y-calibracion">16.2 Generalización y calibración</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez-y-cambio-de-distribucion">16.3 Robustez y cambio de distribución</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#significancia-estadistica-y-relevancia-practica">16.4 Significancia estadística y relevancia práctica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-frente-a-costo">16.5 Desempeño frente a costo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#techo-de-desempeno-y-margen-de-mejora">16.6 Techo de desempeño y margen de mejora</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relacion-con-la-literatura-y-con-el-capitulo-7">16.7 Relación con la literatura y con el capítulo 7</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#amenazas-a-la-validez">16.8 Amenazas a la validez</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="discusion-del-benchmark">
+<h1>16. Discusión del benchmark<a class="headerlink" href="#discusion-del-benchmark" title="Link to this heading">#</a></h1>
+<p>En este capítulo interpretamos los resultados de los capítulos 9 a 15: discutimos qué explica las diferencias entre modelos, cómo se relacionan desempeño, robustez y costo, y cuáles son las amenazas a la validez. Las respuestas a las preguntas de investigación, el alcance del estudio y el trabajo futuro se presentan en el capítulo 18. Todas las cifras corresponden a 8 semillas por modelo, evaluadas en las 361 imágenes del conjunto de prueba de la partición v2.</p>
+<section id="que-modelo-funciona-mejor-y-por-que">
+<h2>16.1 Qué modelo funciona mejor y por qué<a class="headerlink" href="#que-modelo-funciona-mejor-y-por-que" title="Link to this heading">#</a></h2>
+<p><strong>RWCNet y ViT-B16 son los mejores modelos, y entre ellos no hay un ganador.</strong> RWCNet obtiene el mayor F1 macro (<span class="math notranslate nohighlight">\(0.945 \pm 0.010\)</span>) y ViT-B16 el segundo (<span class="math notranslate nohighlight">\(0.938 \pm 0.014\)</span>). Su diferencia, 0.007, es equivalente dentro de <span class="math notranslate nohighlight">\(\pm\delta\)</span> (TOST <span class="math notranslate nohighlight">\(p = 0.024\)</span>; probabilidad bayesiana de la ROPE de 1.00), y McNemar no detecta diferencias en ninguna semilla. Dos arquitecturas muy distintas alcanzan el mismo desempeño: una fusión de dos CNN con supervisión profunda y un Transformer puro. Su único rasgo común es el preentrenamiento en ImageNet.</p>
+<p><strong>La evidencia de ablación apunta al preentrenamiento como causa principal de la mejora.</strong></p>
+<ul class="simple">
+<li><p><strong>Los cuatro modelos que superan al de referencia son preentrenados.</strong> Los dos modelos publicados entrenados desde cero no lo superan: MbXception queda a −0.002 y FocusRCNet a −0.052.</p></li>
+<li><p><strong>En el paper guía:</strong> retirar el preentrenamiento cuesta 0.085 de F1, más que la diferencia entre el mejor y el peor modelo preentrenado.</p></li>
+<li><p><strong>En Celik-HC, los componentes añadidos no aportan:</strong> la <em>hypercolumn</em>, la segunda red y XGBoost. Las tres primeras variantes son equivalentes al modelo completo dentro de <span class="math notranslate nohighlight">\(\pm\delta\)</span>.</p></li>
+<li><p><strong>En RWCNet aportan el extractor principal y la supervisión profunda</strong> (sección 15.5): sin la rama DenseNet201 el F1 baja 0.033 (IC [0.027, 0.040]) y sin las salidas auxiliares 0.022 (IC [0.014, 0.030]). La rama MobileNetV2 no muestra un aporte significativo (0.014, IC [−0.005, 0.033]). Cada uno de los dos aportes explica parte de la ventaja de RWCNet sobre GFN y Celik-HC, y ambos son menores que la pérdida que produce retirar el preentrenamiento en el paper guía.</p></li>
+</ul>
+<p>Una explicación coherente es que, con unas 2500 imágenes, la representación aprendida en ImageNet aporta rasgos de material (brillo, transparencia, textura) que una arquitectura no aprende desde cero, por ingeniosa que sea. Sobre esa base ayudan un extractor preentrenado profundo y los componentes que regularizan su entrenamiento, como la supervisión de las capas intermedias. No ayudan, en cambio, los que añaden una segunda red, fusiones de capas o etapas de clasificación: en los dos modelos ablacionados, la segunda red no tiene un aporte significativo. La ablación de Celik-HC aísla el efecto del preentrenamiento; retirarlo también en RWCNet y ViT-B16 extenderá esa separación en la etapa siguiente.</p>
+<p><strong>La interpretabilidad respalda a RWCNet y obliga a cautela con ViT-B16.</strong> Los mapas de Grad-CAM de RWCNet se concentran en el objeto y son estables entre semillas (<span class="math notranslate nohighlight">\(\rho = 0.81\)</span>). Los de ViT-B16 también evitan el fondo, pero cambian mucho entre semillas (<span class="math notranslate nohighlight">\(\rho = 0.16\)</span>), por lo que no sirven como explicación por imagen.</p>
+</section>
+<section id="generalizacion-y-calibracion">
+<h2>16.2 Generalización y calibración<a class="headerlink" href="#generalizacion-y-calibracion" title="Link to this heading">#</a></h2>
+<p><strong>RWCNet es el modelo que mejor generaliza y mejor se calibra:</strong></p>
+<ul class="simple">
+<li><p><strong>Brecha entre entrenamiento y validación:</strong> 0.037, significativamente menor que <span class="math notranslate nohighlight">\(\delta_g = 0.05\)</span>.</p></li>
+<li><p><strong>Diferencia entre validación y prueba:</strong> la menor del benchmark (0.012, con un IC que incluye el cero).</p></li>
+<li><p><strong>Calibración:</strong> el menor ECE (0.027 sin recalibrar y 0.020 con escalado de temperatura) y la menor NLL.</p></li>
+</ul>
+<p>Es el único modelo competitivo que cumple a la vez las cuatro condiciones del criterio de adecuación (sección 14.5). FocusRCNet también las cumple, pero con un F1 de 0.811.</p>
+<p>ViT-B16 y GFN tienen un F1 de validación significativamente mayor que el de prueba (0.030 y 0.033), y su predicción conforme queda por debajo de la cobertura nominal. Parte de esta brecha se debe a una diferencia leve de distribución entre validación y prueba (AUC adversarial de 0.56). Todos los modelos comparten esa validación, por lo que la comparación no se sesga.</p>
+<p>Las redes sin recalibrar son sobreconfiadas: la pendiente de calibración está entre 0.29 y 0.80 en nueve modelos. El escalado de temperatura ajustado en validación lleva el ECE a 0.02–0.04 y debe formar parte de cualquier despliegue. ResMsCapsule es la excepción: es subconfiado, porque las longitudes de las cápsulas no son probabilidades.</p>
+</section>
+<section id="robustez-y-cambio-de-distribucion">
+<h2>16.3 Robustez y cambio de distribución<a class="headerlink" href="#robustez-y-cambio-de-distribucion" title="Link to this heading">#</a></h2>
+<p>ViT-B16 es el modelo más robusto. Conserva el 95 % de su F1 con ruido gaussiano de <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span> y el 89 % con <span class="math notranslate nohighlight">\(\sigma = 0.10\)</span>, y es el que menos pierde con desenfoque (0.07) y con el fondo sustituido (0.02). Con ruido, los modelos se ordenan por su arquitectura y no por su F1 sin perturbar:</p>
+<ul class="simple">
+<li><p><strong>Transformer puro (ViT-B16):</strong> el índice de robustez es 0.95.</p></li>
+<li><p><strong>Híbrido con codificador Transformer (GFN):</strong> 0.83.</p></li>
+<li><p><strong>CNN preentrenadas (RWCNet, Celik-HC, ResMsCapsule):</strong> entre 0.42 y 0.69.</p></li>
+<li><p><strong>CNN desde cero:</strong> entre 0.36 y 0.51.</p></li>
+</ul>
+<p>Ante un fondo distinto, que emula condiciones de planta, los modelos preentrenados pierden entre 0.02 y 0.08 de F1 y los entrenados desde cero entre 0.18 y 0.26. El preentrenamiento reduce la dependencia del fondo blanco que el capítulo 2 identificó como atajo.</p>
+<p>Las perturbaciones son sintéticas y aplicadas a imágenes de estudio. Estos resultados indican qué arquitecturas son más frágiles, pero no estiman el desempeño en una planta de reciclaje.</p>
+</section>
+<section id="significancia-estadistica-y-relevancia-practica">
+<h2>16.4 Significancia estadística y relevancia práctica<a class="headerlink" href="#significancia-estadistica-y-relevancia-practica" title="Link to this heading">#</a></h2>
+<p>De los 45 pares, 32 son significativos y relevantes con la prueba preregistrada, y 37 con el bootstrap o con Conover. Las decisiones que cambian entre pruebas corresponden a diferencias cercanas a <span class="math notranslate nohighlight">\(\delta\)</span> (0.017 a 0.024), que reportamos como no concluyentes.</p>
+<p>Ninguna diferencia significativa del benchmark es menor que <span class="math notranslate nohighlight">\(\delta\)</span>: con 8 semillas, solo alcanzan significancia diferencias de al menos 0.02, por lo que no hay casos de significancia sin relevancia práctica. Las comparaciones confirman equivalencia práctica en dos pares: RWCNet y ViT-B16, y GFN y Celik-HC. La ausencia de significancia en los demás pares no demuestra equivalencia. Para los pares con más varianza, la diferencia mínima detectable con 8 semillas llega a 0.036, y detectar <span class="math notranslate nohighlight">\(\delta\)</span> con potencia de 0.80 requeriría hasta 27 semillas.</p>
+</section>
+<section id="desempeno-frente-a-costo">
+<h2>16.5 Desempeño frente a costo<a class="headerlink" href="#desempeno-frente-a-costo" title="Link to this heading">#</a></h2>
+<p>RWCNet domina a ViT-B16 y a GFN en la frontera de Pareto: obtiene igual o mayor F1 con menos parámetros (25.6 M frente a 85.8 M y 113.7 M) y menos operaciones (4.6 GMAC frente a 17.6 y 5.7). Por F1 ganado por cada GMAC adicional sobre el modelo de referencia, Celik-HC (0.036) y RWCNet (0.030) son los más eficientes, y ViT-B16 el menos (0.005).</p>
+<p>Para un dispositivo de borde, ResMsCapsule (4.2 M parámetros, 1.4 GMAC, F1 de 0.899) y FocusRCNet (0.5 M parámetros, 0.13 GMAC, F1 de 0.811) son los modelos no dominados más livianos. Cuando la robustez al ruido es prioritaria, el costo adicional de ViT-B16 se justifica por esa robustez y no por su F1.</p>
+</section>
+<section id="techo-de-desempeno-y-margen-de-mejora">
+<h2>16.6 Techo de desempeño y margen de mejora<a class="headerlink" href="#techo-de-desempeno-y-margen-de-mejora" title="Link to this heading">#</a></h2>
+<p>TrashNet no tiene una segunda anotación. Estimamos el techo de F1 macro entre 0.98 y 1.00 a partir de los 23 casos que fallan al menos la mitad de las 80 corridas. Solo uno es un error de etiqueta probable; 16 son ambigüedades de material, por transparencia, reflejo o material mixto.</p>
+<p>El mejor modelo deja sin cubrir entre el 4 % y el 6 % del margen sobre el baseline trivial, y entre el 29 % y el 39 % del margen sobre el modelo de referencia. Los 3 a 5 puntos de F1 que quedan se concentran en materiales que una fotografía RGB no distingue con seguridad. Mejorar más el F1 limpio exigiría otra información, y no solo otra arquitectura. En cambio, en robustez queda un margen grande: la mayoría de los modelos pierde más de la mitad de su F1 con ruido moderado.</p>
+</section>
+<section id="relacion-con-la-literatura-y-con-el-capitulo-7">
+<h2>16.7 Relación con la literatura y con el capítulo 7<a class="headerlink" href="#relacion-con-la-literatura-y-con-el-capitulo-7" title="Link to this heading">#</a></h2>
+<p>El modelo de referencia del capítulo 7 (ResNet-18 desde cero, F1 de 0.863) queda superado por cuatro modelos, y el mejor lo mejora en 0.082. La accuracy del mejor modelo (0.952) está a 0.008 de la mediana publicada en TrashNet (~96 %, capítulo 3). Con preentrenamiento, la brecha de 0.089 con la literatura señalada en la sección 7.6 casi desaparece, y lo que queda se explica por el protocolo más estricto.</p>
+<p>La comparación de cada modelo con su valor publicado muestra un sesgo de reporte heterogéneo:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Accuracy publicada</p></th>
+<th class="head"><p>Accuracy obtenida</p></th>
+<th class="head"><p>Diferencia</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Celik-HC</p></td>
+<td><p>99.40 %</p></td>
+<td><p>92.6 %</p></td>
+<td><p>−6.8</p></td>
+</tr>
+<tr class="row-odd"><td><p>MbXception</p></td>
+<td><p>94.34 %</p></td>
+<td><p>87.4 %</p></td>
+<td><p>−6.9</p></td>
+</tr>
+<tr class="row-even"><td><p>ViT-B16</p></td>
+<td><p>96.98 %</p></td>
+<td><p>94.4 %</p></td>
+<td><p>−2.6</p></td>
+</tr>
+<tr class="row-odd"><td><p>GFN</p></td>
+<td><p>94.21 %</p></td>
+<td><p>93.5 %</p></td>
+<td><p>−0.7</p></td>
+</tr>
+<tr class="row-even"><td><p>FocusRCNet</p></td>
+<td><p>~92 %</p></td>
+<td><p>83.2 %</p></td>
+<td><p>−8.8</p></td>
+</tr>
+<tr class="row-odd"><td><p>ResMsCapsule</p></td>
+<td><p>91.41 % (4 clases)</p></td>
+<td><p>91.1 %</p></td>
+<td><p>no comparable</p></td>
+</tr>
+<tr class="row-even"><td><p>RWCNet</p></td>
+<td><p>95.01 %</p></td>
+<td><p>95.2 %</p></td>
+<td><p>+0.2</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>RWCNet y GFN reproducen su valor publicado. RWCNet es, además, el estudio con el protocolo más cuidadoso: validación cruzada e IC.</p>
+<p>Las mayores discrepancias tienen dos orígenes:</p>
+<ul class="simple">
+<li><p><strong>Celik-HC:</strong> selección de la época con el conjunto de prueba, cuantificada en el capítulo 12.</p></li>
+<li><p><strong>MbXception y FocusRCNet:</strong> entrenados aquí con una entrada menor que la de su artículo y con un tope de épocas que alcanzan. Esta explicación es plausible, pero el experimento no la aísla.</p></li>
+</ul>
+</section>
+<section id="amenazas-a-la-validez">
+<h2>16.8 Amenazas a la validez<a class="headerlink" href="#amenazas-a-la-validez" title="Link to this heading">#</a></h2>
+<p><strong>Validez interna.</strong></p>
+<ul class="simple">
+<li><p><strong>Hardware distinto:</strong> las corridas se repartieron entre una A100 y una RTX 4060, con el mismo código, semillas y configuración. La reproducción exacta de ViT-B16 en otra sesión muestra determinismo dentro de una misma máquina, pero no entre máquinas. La ablación de Celik-HC se ejecutó en una GPU distinta de la del modelo completo.</p></li>
+<li><p><strong>Dependencia por objeto:</strong> la auditoría con <em>embeddings</em> encontró vistas distintas de un mismo objeto en entrenamiento y prueba que la partición no agrupó. Excluir las 95 imágenes de prueba sospechosas baja el F1 entre 0.01 y 0.03 y no cambia el orden de los modelos (sección 9.4).</p></li>
+<li><p><strong>Hiperparámetros en el borde de la malla:</strong> seis de los siete modelos eligen el <em>weight decay</em> máximo de la malla, aunque su efecto medio sobre el F1 de validación es menor que 0.011 (sección 11.4). FocusRCNet elige la tasa de aprendizaje máxima, el hiperparámetro al que es más sensible.</p></li>
+<li><p><strong>Subajuste:</strong> MbXception y FocusRCNet alcanzan el tope de 60 épocas en la mayoría de sus semillas.</p></li>
+<li><p><strong>Protocolo de los modelos base:</strong> CNN, MobileNetV2 y ResNet-18 siguen el protocolo del capítulo 4 (hasta 100 épocas), más generoso en épocas que el de los modelos publicados.</p></li>
+</ul>
+<p><strong>Validez externa.</strong> Un solo conjunto de datos, de imágenes de estudio con un objeto sobre fondo blanco, y un único conjunto de prueba de 361 imágenes. Los resultados describen este conjunto y no las condiciones de una planta de reciclaje.</p>
+<p><strong>Validez de constructo.</strong></p>
+<ul class="simple">
+<li><p><strong>F1 macro con 19 imágenes de <code class="docutils literal notranslate"><span class="pre">trash</span></code>:</strong> la métrica es sensible a pocos errores en esa clase.</p></li>
+<li><p><strong>Perturbaciones sintéticas:</strong> la robustez y el fondo sustituido son aproximaciones del cambio de distribución real.</p></li>
+<li><p><strong>Interpretabilidad:</strong> la fracción de energía de Grad-CAM sobre el fondo depende del umbral que define el fondo. La fidelidad de los mapas se confirmó con la prueba de inserción en los cuatro modelos con pesos guardados; la prueba de borrado con píxeles aleatorios está confundida con la sensibilidad de las CNN al ruido disperso (sección 15.2).</p></li>
+</ul>
+<p><strong>Validez estadística.</strong></p>
+<ul class="simple">
+<li><p><strong>Potencia:</strong> 8 semillas no detectan diferencias del tamaño de <span class="math notranslate nohighlight">\(\delta\)</span> en los pares con más varianza.</p></li>
+<li><p><strong>Prueba de decisión:</strong> Wilcoxon con Holm no puede rechazar con 45 pares y 8 semillas, por lo que fijamos la t pareada; la decisión se tomó antes de ver los resultados y está documentada.</p></li>
+<li><p><strong>Análisis exploratorios:</strong> son numerosos (unas 25 tablas de análisis, 13 métricas por modelo, 8 perturbaciones y 8 variantes de ablación), por lo que sus hallazgos se presentan como generadores de hipótesis.</p></li>
+<li><p><strong>Independencia del conjunto de prueba:</strong> las pruebas por imagen (McNemar, DeLong) tratan las imágenes como independientes dentro de cada grupo de casi-duplicados, un supuesto que la dependencia por objeto debilita.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="15_robustez_interpretabilidad_errores.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">15. Robustez, interpretabilidad, errores y techo de desempeño</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="17_reproducibilidad.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">17. Reproducibilidad del benchmark</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-modelo-funciona-mejor-y-por-que">16.1 Qué modelo funciona mejor y por qué</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalizacion-y-calibracion">16.2 Generalización y calibración</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez-y-cambio-de-distribucion">16.3 Robustez y cambio de distribución</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#significancia-estadistica-y-relevancia-practica">16.4 Significancia estadística y relevancia práctica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desempeno-frente-a-costo">16.5 Desempeño frente a costo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#techo-de-desempeno-y-margen-de-mejora">16.6 Techo de desempeño y margen de mejora</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relacion-con-la-literatura-y-con-el-capitulo-7">16.7 Relación con la literatura y con el capítulo 7</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#amenazas-a-la-validez">16.8 Amenazas a la validez</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan Benavides y Juan David Díaz Fernández
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

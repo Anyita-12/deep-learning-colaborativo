@@ -1,0 +1,2739 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>10. Revisión sistemática ampliada y selección de los modelos &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '10_revision_sistematica';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="11. Preregistro, protocolo común y fichas de modelo" href="11_protocolo_preregistro.html" />
+    <link rel="prev" title="9. Datos: ficha técnica, contrato de datos y auditoría de fuga" href="09_datos_auditoria.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><div class="sidebar-autores">
+  <div class="autor">
+    <img src="_static/autores/anyely.jpg" alt="Anyely Sanjuan Benavides">
+    <p class="autor-nombre">Anyely Sanjuan Benavides</p>
+    <p class="autor-detalle">Msc. Analítica de Datos<br>Universidad del Norte</p>
+  </div>
+  <div class="autor">
+    <img src="_static/autores/juan.jpg" alt="Juan David Díaz Fernández">
+    <p class="autor-nombre">Juan David Díaz Fernández</p>
+    <p class="autor-detalle">Msc. Ingeniería Mecánica<br>Universidad del Norte</p>
+  </div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Clasificación de residuos con TrashNet
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 1: modelos base</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y conjunto de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_conclusiones.html">7. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2: benchmark de diez modelos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_benchmark_introduccion.html">8. Benchmark de diez modelos: problema, preguntas e hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datos_auditoria.html">9. Datos: ficha técnica, contrato de datos y auditoría de fuga</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Revisión sistemática ampliada y selección de los modelos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_protocolo_preregistro.html">11. Preregistro, protocolo común y fichas de modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_paper_guia.html">12. Paper guía: réplica, limitaciones y ablación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_benchmark_estadistica.html">13. Benchmark: resultados e inferencia estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_ajuste_calibracion_incertidumbre.html">14. Bondad de ajuste, sobreajuste, calibración e incertidumbre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_robustez_interpretabilidad_errores.html">15. Robustez, interpretabilidad, errores y techo de desempeño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_discusion_benchmark.html">16. Discusión del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_reproducibilidad.html">17. Reproducibilidad del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_conclusiones_benchmark.html">18. Conclusiones del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_referencias_benchmark.html">19. Referencias del benchmark</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/10_revision_sistematica.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>10. Revisión sistemática ampliada y selección de los modelos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-de-busqueda-y-bases-de-datos">10.1 Estrategia de búsqueda y bases de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-inclusion-y-exclusion">10.2 Criterios de inclusión y exclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrama-prisma-2020-y-acuerdo-entre-revisores">10.3 Diagrama PRISMA 2020 y acuerdo entre revisores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hoja-de-extraccion-y-calidad-metodologica">10.4 Hoja de extracción y calidad metodológica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-de-los-modelos-del-benchmark">10.5 Selección de los modelos del benchmark</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puntaje-de-priorizacion">Puntaje de priorización</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-detallado-de-los-modelos">10.6 Análisis detallado de los modelos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#celik-hc-paper-guia">10.6.1 Celik-HC (paper guía)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mbxception">10.6.2 MbXception</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vit-b16">10.6.3 ViT-B16</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gfn">10.6.4 GFN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#focusrcnet">10.6.5 FocusRCNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resmscapsule">10.6.6 ResMsCapsule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rwcnet">10.6.7 RWCNet</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matriz-comparativa-y-tendencias">10.7 Matriz comparativa y tendencias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#busqueda-transversal-de-mecanismos">10.8 Búsqueda transversal de mecanismos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brecha-de-investigacion">10.9 Brecha de investigación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcance-de-la-revision">10.10 Alcance de la revisión</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="revision-sistematica-ampliada-y-seleccion-de-los-modelos">
+<h1>10. Revisión sistemática ampliada y selección de los modelos<a class="headerlink" href="#revision-sistematica-ampliada-y-seleccion-de-los-modelos" title="Link to this heading">#</a></h1>
+<p>En este capítulo extendemos la revisión del capítulo 3. Documentamos las dos búsquedas, los criterios, el diagrama PRISMA y el acuerdo entre revisores. Presentamos la hoja de extracción y la calidad metodológica de los estudios, y seleccionamos y analizamos los siete modelos publicados del benchmark. Cerramos con la búsqueda transversal de mecanismos en otras modalidades y con la brecha de investigación. Los datos, las respuestas crudas de las bases y los scripts están en <a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/tree/main/entregable2/revision_sistematica"><code class="docutils literal notranslate"><span class="pre">entregable2/revision_sistematica/</span></code></a>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">ROOT</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"entregable2"</span> <span class="o">/</span> <span class="s2">"src"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+<span class="n">E2</span> <span class="o">=</span> <span class="n">ROOT</span> <span class="o">/</span> <span class="s2">"entregable2"</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">(</span><span class="n">E2</span> <span class="o">/</span> <span class="s2">"analisis"</span><span class="p">,</span> <span class="n">E2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">FancyBboxPatch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Markdown</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">figuras</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">FG</span>
+
+<span class="n">FG</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_colwidth"</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">REV</span> <span class="o">=</span> <span class="n">E2</span> <span class="o">/</span> <span class="s2">"results"</span> <span class="o">/</span> <span class="s2">"revision"</span>
+<span class="n">RS</span> <span class="o">=</span> <span class="n">E2</span> <span class="o">/</span> <span class="s2">"revision_sistematica"</span> <span class="o">/</span> <span class="s2">"datos"</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">REV</span> <span class="o">/</span> <span class="s2">"cribado_e2.csv"</span><span class="p">)</span>
+<span class="n">reg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RS</span> <span class="o">/</span> <span class="s2">"registro_cadenas.csv"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span><span class="p">)</span>
+<span class="n">hoja</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RS</span> <span class="o">/</span> <span class="s2">"hoja_extraccion.csv"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span><span class="p">)</span>
+<span class="n">pc</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">RS</span> <span class="o">/</span> <span class="s2">"prisma_conteos.json"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Cadenas registradas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">reg</span><span class="p">)</span><span class="si">}</span><span class="s2"> | estudios en la hoja de extracción: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">hoja</span><span class="p">)</span><span class="si">}</span><span class="s2"> | elegibles para el benchmark: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">cr</span><span class="o">.</span><span class="n">elegible_e2</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cadenas registradas: 30 | estudios en la hoja de extracción: 63 | elegibles para el benchmark: 36
+</pre></div>
+</div>
+</div>
+</div>
+<section id="estrategia-de-busqueda-y-bases-de-datos">
+<h2>10.1 Estrategia de búsqueda y bases de datos<a class="headerlink" href="#estrategia-de-busqueda-y-bases-de-datos" title="Link to this heading">#</a></h2>
+<p>La revisión combina dos búsquedas.</p>
+<p><strong>Búsqueda original (7 de noviembre de 2026).</strong> Es la del capítulo 3 y produce el PRISMA principal.</p>
+<ul class="simple">
+<li><p><strong>Cadenas exploratorias:</strong> primero se probaron cuatro cadenas amplias en Scopus, entre las 16:25 y las 16:30. Dieron 1407, 982, 559 y 477 resultados y se descartaron por ruido: residuos de construcción, rutas de recolección y espectroscopía.</p></li>
+<li><p><strong>Cadena definitiva:</strong> “TrashNet”, que restringe la revisión a estudios comparables con nuestro conjunto de datos.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Base</p></th>
+<th class="head"><p>Hora</p></th>
+<th class="head"><p>Cadena exacta</p></th>
+<th class="head"><p>Filtros</p></th>
+<th class="head"><p>Resultados finales</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Scopus</p></td>
+<td><p>16:29</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TITLE-ABS-KEY</span> <span class="pre">(</span> <span class="pre">&quot;TrashNet&quot;</span> <span class="pre">)</span> <span class="pre">AND</span> <span class="pre">PUBYEAR</span> <span class="pre">&gt;</span> <span class="pre">2017</span> <span class="pre">AND</span> <span class="pre">PUBYEAR</span> <span class="pre">&lt;</span> <span class="pre">2027</span> <span class="pre">AND</span> <span class="pre">(</span> <span class="pre">DOCTYPE</span> <span class="pre">(</span> <span class="pre">ar</span> <span class="pre">)</span> <span class="pre">OR</span> <span class="pre">DOCTYPE</span> <span class="pre">(</span> <span class="pre">cp</span> <span class="pre">)</span> <span class="pre">)</span> <span class="pre">AND</span> <span class="pre">LANGUAGE</span> <span class="pre">(</span> <span class="pre">english</span> <span class="pre">)</span></code></p></td>
+<td><p>En la cadena</p></td>
+<td><p>161</p></td>
+</tr>
+<tr class="row-odd"><td><p>IEEE Xplore</p></td>
+<td><p>16:43</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">((&quot;Document</span> <span class="pre">Title&quot;:&quot;TrashNet&quot;)</span> <span class="pre">OR</span> <span class="pre">(&quot;Abstract&quot;:&quot;TrashNet&quot;)</span> <span class="pre">OR</span> <span class="pre">(&quot;Author</span> <span class="pre">Keywords&quot;:&quot;TrashNet&quot;))</span></code></p></td>
+<td><p>2018–2026</p></td>
+<td><p>76</p></td>
+</tr>
+<tr class="row-even"><td><p>Web of Science</p></td>
+<td><p>16:54</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TS=(&quot;TrashNet&quot;)</span> <span class="pre">AND</span> <span class="pre">PY=(2018-2026)</span> <span class="pre">AND</span> <span class="pre">DT=(&quot;Article&quot;</span> <span class="pre">OR</span> <span class="pre">&quot;Proceedings</span> <span class="pre">Paper&quot;)</span> <span class="pre">AND</span> <span class="pre">LA=(&quot;English&quot;)</span></code></p></td>
+<td><p>En la consulta</p></td>
+<td><p>60</p></td>
+</tr>
+<tr class="row-odd"><td><p>arXiv (complementaria)</p></td>
+<td><p>17:15</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">all=TrashNet</span></code></p></td>
+<td><p>2018–2026</p></td>
+<td><p>4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Búsqueda ampliada (16 de noviembre de 2026).</strong> Mide qué deja fuera la restricción a “TrashNet”. Se ejecutó en IEEE Xplore (campo <em>All Metadata</em>) y en arXiv y OpenAlex por API, que permiten descargar y guardar los registros completos. Usa tres cadenas sobre el problema:</p>
+<ul class="simple">
+<li><p><strong>P1:</strong> dominio, tarea y método con sinónimos;</p></li>
+<li><p><strong>P2:</strong> “TrashNet”;</p></li>
+<li><p><strong>P3:</strong> transferencia desde modelos preentrenados.</p></li>
+</ul>
+<p>La consulta exacta enviada a cada base, la fecha y hora (UTC) y el número de resultados están en <a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/blob/main/entregable2/revision_sistematica/datos/registro_cadenas.csv"><code class="docutils literal notranslate"><span class="pre">entregable2/revision_sistematica/datos/registro_cadenas.csv</span></code></a>. IEEE Xplore, una de las bases principales del área, aporta los conteos de referencia. arXiv y OpenAlex complementan la búsqueda porque sus API permiten guardar, deduplicar y cribar de forma reproducible todos los registros recuperados.</p>
+<p><strong>Periodo:</strong> 2018–2026. TrashNet se publicó en 2016–2017 y la literatura de Deep Learning sobre el problema empieza en 2018. Los trabajos fundacionales anteriores se admiten solo como fuentes primarias de mecanismos (sección 10.8).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">r</span><span class="p">[</span><span class="s2">"base_corta"</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">tab</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">tipo</span> <span class="o">==</span> <span class="s2">"principal"</span><span class="p">]</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"id"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"base_corta"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"n_resultados"</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">"first"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">tab</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>base_corta</th>
+      <th>IEEE</th>
+      <th>OpenAlex</th>
+      <th>arXiv</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>P1</th>
+      <td>1839</td>
+      <td>3326</td>
+      <td>88</td>
+    </tr>
+    <tr>
+      <th>P2</th>
+      <td>77</td>
+      <td>242</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>P3</th>
+      <td>208</td>
+      <td>150</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="criterios-de-inclusion-y-exclusion">
+<h2>10.2 Criterios de inclusión y exclusión<a class="headerlink" href="#criterios-de-inclusion-y-exclusion" title="Link to this heading">#</a></h2>
+<p><strong>Inclusión (todos deben cumplirse):</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Código</p></th>
+<th class="head"><p>Criterio</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>I1</p></td>
+<td><p>Estudio primario: artículo de revista, congreso o preprint</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2</p></td>
+<td><p>Residuos sólidos domésticos o municipales reciclables</p></td>
+</tr>
+<tr class="row-even"><td><p>I3</p></td>
+<td><p>Datos de imagen (RGB)</p></td>
+</tr>
+<tr class="row-odd"><td><p>I4</p></td>
+<td><p>Tarea de clasificación o reconocimiento del tipo de residuo</p></td>
+</tr>
+<tr class="row-even"><td><p>I5</p></td>
+<td><p>Método de Deep Learning</p></td>
+</tr>
+<tr class="row-odd"><td><p>I6</p></td>
+<td><p>Publicado entre 2018 y 2026</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Exclusión por título y resumen</strong> (se registra la primera regla que falla):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Código</p></th>
+<th class="head"><p>Motivo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>X0</p></td>
+<td><p>Documento no elegible: tesis, conjunto de datos, software, editorial, libro, resumen, fe de erratas</p></td>
+</tr>
+<tr class="row-odd"><td><p>X1</p></td>
+<td><p>Revisión, encuesta o estudio bibliométrico</p></td>
+</tr>
+<tr class="row-even"><td><p>X2</p></td>
+<td><p>Fuera del dominio: “waste” en otro sentido, residuos de alimentos, electrónicos, de construcción, médicos o aguas residuales</p></td>
+</tr>
+<tr class="row-odd"><td><p>X3</p></td>
+<td><p>No usa imágenes</p></td>
+</tr>
+<tr class="row-even"><td><p>X4</p></td>
+<td><p>Tarea distinta de la clasificación: detección, segmentación, conteo o predicción</p></td>
+</tr>
+<tr class="row-odd"><td><p>X5</p></td>
+<td><p>No usa Deep Learning</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>A texto completo</strong> se exigen métricas reportadas, detalle suficiente para reproducir (arquitectura, partición y entrenamiento) o código, y una revista o congreso de calidad verificable. La calidad de la revista se mide con el <em>2-year mean citedness</em> de OpenAlex en todos los estudios y con el cuartil SJR en los siete del benchmark.</p>
+</section>
+<section id="diagrama-prisma-2020-y-acuerdo-entre-revisores">
+<h2>10.3 Diagrama PRISMA 2020 y acuerdo entre revisores<a class="headerlink" href="#diagrama-prisma-2020-y-acuerdo-entre-revisores" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">7.2</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">"off"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">caja</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">txt</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s2">"#eef4fc"</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">FancyBboxPatch</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">boxstyle</span><span class="o">=</span><span class="s2">"round,pad=0.02,rounding_size=0.15"</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">fc</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="n">FG</span><span class="o">.</span><span class="n">INK2</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">txt</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">8.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">FG</span><span class="o">.</span><span class="n">INK</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">flecha</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">),</span> <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">"-&gt;"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">FG</span><span class="o">.</span><span class="n">INK2</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.9</span><span class="p">))</span>
+<span class="n">caja</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">10.4</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="s2">"Identificación (7-11-2026, «TrashNet», 2018–2026)</span><span class="se">\n</span><span class="s2">301 registros: Scopus 161, IEEE Xplore 76,</span><span class="se">\n</span><span class="s2">Web of Science 60, arXiv 4"</span><span class="p">)</span>
+<span class="n">caja</span><span class="p">(</span><span class="mf">5.6</span><span class="p">,</span> <span class="mf">10.6</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s2">"Duplicados eliminados: 133"</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s2">"#fbeee7"</span><span class="p">)</span>
+<span class="n">caja</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">8.3</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s2">"Cribados por título y resumen: 168</span><span class="se">\n</span><span class="s2">(selección asistida por IA; 2 revisores humanos</span><span class="se">\n</span><span class="s2">en una muestra común de 25, κ = 0.857)"</span><span class="p">)</span>
+<span class="n">caja</span><span class="p">(</span><span class="mf">5.6</span><span class="p">,</span> <span class="mf">8.3</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s2">"Excluidos: 24</span><span class="se">\n</span><span class="s2">sin relación con clasificación de imágenes: 23</span><span class="se">\n</span><span class="s2">no usa Deep Learning: 1"</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s2">"#fbeee7"</span><span class="p">)</span>
+<span class="n">caja</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">6.2</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s2">"Buscados a texto completo: 144</span><span class="se">\n</span><span class="s2">(113 Incluir + 31 Dudoso)"</span><span class="p">)</span>
+<span class="n">caja</span><span class="p">(</span><span class="mf">5.6</span><span class="p">,</span> <span class="mf">6.2</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s2">"Fuera del corte de prioridad</span><span class="se">\n</span><span class="s2">(Media y Baja): 78</span><span class="se">\n</span><span class="s2">No recuperados: 4"</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s2">"#fbeee7"</span><span class="p">)</span>
+<span class="n">caja</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">4.1</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s2">"Evaluados a texto completo: 62</span><span class="se">\n</span><span class="s2">(prioridad Alta)"</span><span class="p">)</span>
+<span class="n">caja</span><span class="p">(</span><span class="mf">5.6</span><span class="p">,</span> <span class="mf">4.1</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s2">"Excluidos: 3</span><span class="se">\n</span><span class="s2">detección YOLOv3: 1</span><span class="se">\n</span><span class="s2">sin línea base: 2"</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s2">"#fbeee7"</span><span class="p">)</span>
+<span class="n">caja</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s2">"Incluidos en la síntesis: 59"</span><span class="p">)</span>
+<span class="n">caja</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Benchmark: 7 modelos publicados</span><span class="se">\n</span><span class="s2">+ 3 modelos base (cribado de la sección 10.5)"</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s2">"#dcefe6"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span> <span class="ow">in</span> <span class="p">[(</span><span class="mf">10.4</span><span class="p">,</span> <span class="mf">9.5</span><span class="p">),</span> <span class="p">(</span><span class="mf">8.3</span><span class="p">,</span> <span class="mf">7.4</span><span class="p">),</span> <span class="p">(</span><span class="mf">6.2</span><span class="p">,</span> <span class="mf">5.3</span><span class="p">),</span> <span class="p">(</span><span class="mf">4.1</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">),</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">)]:</span>
+    <span class="n">flecha</span><span class="p">(</span><span class="mf">2.6</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">11.05</span><span class="p">,</span> <span class="mf">8.9</span><span class="p">,</span> <span class="mf">6.8</span><span class="p">,</span> <span class="mf">4.7</span><span class="p">):</span>
+    <span class="n">flecha</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mf">5.6</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Diagrama PRISMA 2020 de la búsqueda original"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6b7774d8dfb661d875db37fe9f99cc624ff77011e3ca497dc412d0558caeeaae.png" src="_images/6b7774d8dfb661d875db37fe9f99cc624ff77011e3ca497dc412d0558caeeaae.png" />
+</div>
+</div>
+<p><strong>Priorización de la lectura a texto completo.</strong> La lectura a texto completo se concentró en los 62 registros de prioridad Alta: artículos de revista marcados como Incluir o registros con al menos 10 citas. Este criterio dirige el análisis detallado a los estudios de mayor impacto y con revisión por pares completa, que son los que la comunidad usa como referencia. Los 78 registros de prioridad Media o Baja (en su mayoría ponencias con menos de 10 citas) quedan identificados y clasificados en la hoja <code class="docutils literal notranslate"><span class="pre">Registros</span></code> del Excel de selección. La búsqueda ampliada confirma que el núcleo de la literatura comparable está cubierto (sección 10.3).</p>
+<p><strong>Selección y acuerdo entre revisores.</strong> El cribado por título y resumen de los 168 registros lo hizo de forma preliminar un asistente de IA (Claude), con la hoja de criterios del Excel. Dos revisores humanos (H1 y H2) decidieron de forma independiente una muestra común de 25 registros:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Comparación (n = 25)</p></th>
+<th class="head"><p>Acuerdo observado</p></th>
+<th class="head"><p>κ de Cohen (Incluir, Dudoso, Excluir)</p></th>
+<th class="head"><p>κ de Cohen (pasa o se excluye)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>H1 frente a H2</p></td>
+<td><p>0.92</p></td>
+<td><p><strong>0.857</strong></p></td>
+<td><p><strong>1.000</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>H1 frente a IA</p></td>
+<td><p>0.92</p></td>
+<td><p>0.860</p></td>
+<td><p>0.896</p></td>
+</tr>
+<tr class="row-even"><td><p>H2 frente a IA</p></td>
+<td><p>0.96</p></td>
+<td><p>0.925</p></td>
+<td><p>0.896</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>El acuerdo entre los revisores humanos es casi perfecto (Landis y Koch, 1977), y coinciden en los 25 registros en la decisión de pasar o no a texto completo. Las dos discrepancias (R100 y R132) se resolvieron por mayoría de los tres revisores; sin mayoría, el registro pasaba a texto completo como Dudoso. La lectura a texto completo fue asistida por IA, y los siete estudios del benchmark se verificaron a mano.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"etapa"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Identificados en OpenAlex (P1 + P2 + P3)"</span><span class="p">,</span> <span class="s2">"Identificados en arXiv"</span><span class="p">,</span> <span class="s2">"Solo conteo en IEEE Xplore (P1 + P2 + P3)"</span><span class="p">,</span>
+                             <span class="s2">"Duplicados eliminados"</span><span class="p">,</span> <span class="s2">"Cribados por título y resumen"</span><span class="p">,</span> <span class="s2">"Excluidos por reglas (X0–X5)"</span><span class="p">,</span> <span class="s2">"Pasan el cribado"</span><span class="p">,</span>
+                             <span class="s2">"Registros del corpus original recuperados"</span><span class="p">],</span>
+                   <span class="s2">"n"</span><span class="p">:</span> <span class="p">[</span><span class="n">pc</span><span class="p">[</span><span class="s2">"identificados_por_base"</span><span class="p">][</span><span class="s2">"OpenAlex"</span><span class="p">],</span> <span class="n">pc</span><span class="p">[</span><span class="s2">"identificados_por_base"</span><span class="p">][</span><span class="s2">"arXiv"</span><span class="p">],</span> <span class="n">pc</span><span class="p">[</span><span class="s2">"solo_conteo_IEEE_Xplore"</span><span class="p">][</span><span class="s2">"total"</span><span class="p">],</span>
+                         <span class="n">pc</span><span class="p">[</span><span class="s2">"duplicados_eliminados"</span><span class="p">],</span> <span class="n">pc</span><span class="p">[</span><span class="s2">"cribados"</span><span class="p">],</span> <span class="n">pc</span><span class="p">[</span><span class="s2">"cribados"</span><span class="p">]</span> <span class="o">-</span> <span class="n">pc</span><span class="p">[</span><span class="s2">"decisiones"</span><span class="p">][</span><span class="s2">"INCLUIDO"</span><span class="p">],</span>
+                         <span class="n">pc</span><span class="p">[</span><span class="s2">"decisiones"</span><span class="p">][</span><span class="s2">"INCLUIDO"</span><span class="p">],</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">pc</span><span class="p">[</span><span class="s1">'corpus_recuperado'</span><span class="p">]</span><span class="si">}</span><span class="s2"> de </span><span class="si">{</span><span class="n">pc</span><span class="p">[</span><span class="s1">'corpus_total'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">]})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">fl</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pc</span><span class="p">[</span><span class="s2">"decisiones"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">"INCLUIDO"</span><span class="p">},</span> <span class="n">name</span><span class="o">=</span><span class="s2">"excluidos"</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>etapa</th>
+      <th>n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Identificados en OpenAlex (P1 + P2 + P3)</td>
+      <td>3718</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Identificados en arXiv</td>
+      <td>99</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Solo conteo en IEEE Xplore (P1 + P2 + P3)</td>
+      <td>2124</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Duplicados eliminados</td>
+      <td>383</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Cribados por título y resumen</td>
+      <td>3434</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Excluidos por reglas (X0–X5)</td>
+      <td>1876</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Pasan el cribado</td>
+      <td>1558</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Registros del corpus original recuperados</td>
+      <td>60 de 63</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>excluidos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>X0 tipo de documento no elegible (libro, capítulo, tesis, dataset u otro)</th>
+      <td>198</td>
+    </tr>
+    <tr>
+      <th>X1 revisión o encuesta, no estudio primario</th>
+      <td>146</td>
+    </tr>
+    <tr>
+      <th>X2 fuera del dominio de residuos</th>
+      <td>1278</td>
+    </tr>
+    <tr>
+      <th>X3 no usa imágenes (sensores, espectros, texto o series)</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>X4 tarea distinta de clasificación (detección, segmentación, conteo, predicción)</th>
+      <td>241</td>
+    </tr>
+    <tr>
+      <th>X5 no usa Deep Learning</th>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Cobertura de la búsqueda original.</strong> La búsqueda ampliada recupera 60 de los 63 registros del corpus (95 %). El único registro recuperado que sus reglas excluyen (R007, detección) es el mismo que el equipo excluyó a texto completo, lo que muestra que los criterios de las dos búsquedas son coherentes. La búsqueda ampliada identifica además unos 1500 trabajos de clasificación de residuos con otros conjuntos de datos. No entran en la síntesis, porque sus resultados no son comparables con un benchmark sobre TrashNet, y quedan registrados en <code class="docutils literal notranslate"><span class="pre">cribado_principal.csv</span></code> como base para extender la revisión a otros conjuntos de datos.</p>
+<p>El cribado automático de la búsqueda ampliada se contrastó con un segundo revisor asistido por IA, que decidió sin ver la decisión de las reglas:</p>
+<ul class="simple">
+<li><p><strong>Muestra de calibración:</strong> 60 registros, con los que se corrigieron las reglas.</p></li>
+<li><p><strong>Muestra de validación:</strong> 60 registros nuevos, con acuerdo de 0.833, κ = 0.669, sensibilidad de 0.93 y precisión de 0.77. Las reglas son conservadoras.</p></li>
+</ul>
+</section>
+<section id="hoja-de-extraccion-y-calidad-metodologica">
+<h2>10.4 Hoja de extracción y calidad metodológica<a class="headerlink" href="#hoja-de-extraccion-y-calidad-metodologica" title="Link to this heading">#</a></h2>
+<p>La hoja de extracción (<a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/blob/main/entregable2/revision_sistematica/datos/hoja_extraccion.csv"><code class="docutils literal notranslate"><span class="pre">entregable2/revision_sistematica/datos/hoja_extraccion.csv</span></code></a>) tiene una fila por cada uno de los 63 registros del corpus y campos fijos:</p>
+<ul class="simple">
+<li><p><strong>Identificación:</strong> autores, año, título, DOI, revista y tipo;</p></li>
+<li><p><strong>Impacto:</strong> citas en OpenAlex y <em>2-year mean citedness</em> de la revista;</p></li>
+<li><p><strong>Arquitectura y datos:</strong> familias, conjuntos de datos, partición, <em>k-fold</em> y conjunto de validación;</p></li>
+<li><p><strong>Resultados:</strong> métricas y accuracy;</p></li>
+<li><p><strong>Rigor:</strong> repeticiones o semillas, pruebas estadísticas, código público, baselines ajustados por igual y control de duplicados;</p></li>
+<li><p><strong>Calidad:</strong> riesgo de fuga, repeticiones y equidad de los baselines.</p></li>
+</ul>
+<p>La extracción se hizo con patrones explícitos sobre el texto completo (<a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/blob/main/entregable2/revision_sistematica/scripts/extraccion.py"><code class="docutils literal notranslate"><span class="pre">entregable2/revision_sistematica/scripts/extraccion.py</span></code></a>), y los siete estudios del benchmark se verificaron a mano. Las filas automáticas son orientativas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inc</span> <span class="o">=</span> <span class="n">hoja</span><span class="p">[</span><span class="n">hoja</span><span class="o">.</span><span class="n">decision_TC_equipo</span> <span class="o">==</span> <span class="s2">"Incluir"</span><span class="p">]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cuenta</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">cond</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">cond</span><span class="p">(</span><span class="n">inc</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">sint</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"indicador (59 incluidos)"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Declara un conjunto de validación separado"</span><span class="p">,</span> <span class="s2">"Usa validación cruzada k-fold"</span><span class="p">,</span> <span class="s2">"Reporta más de una corrida o semilla"</span><span class="p">,</span>
+                                 <span class="s2">"Usa alguna prueba estadística"</span><span class="p">,</span> <span class="s2">"Código público oficial"</span><span class="p">,</span> <span class="s2">"Declara baselines ajustados por igual"</span><span class="p">,</span>
+                                 <span class="s2">"Riesgo de fuga alto"</span><span class="p">,</span> <span class="s2">"Riesgo de fuga medio"</span><span class="p">,</span> <span class="s2">"Riesgo de fuga bajo"</span><span class="p">],</span>
+    <span class="s2">"estudios"</span><span class="p">:</span> <span class="p">[</span><span class="n">cuenta</span><span class="p">(</span><span class="s2">"conjunto_validacion"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"Sí"</span><span class="p">),</span> <span class="n">cuenta</span><span class="p">(</span><span class="s2">"k_fold"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="o">~</span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"No"</span><span class="p">)),</span>
+                 <span class="n">cuenta</span><span class="p">(</span><span class="s2">"repeticiones"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"Varias"</span><span class="p">)),</span> <span class="n">cuenta</span><span class="p">(</span><span class="s2">"pruebas_estadisticas"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span> <span class="o">!=</span> <span class="s2">"No"</span><span class="p">),</span>
+                 <span class="n">cuenta</span><span class="p">(</span><span class="s2">"codigo_publico"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"Sí, oficial"</span><span class="p">),</span> <span class="n">cuenta</span><span class="p">(</span><span class="s2">"equidad_baselines"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">"Declarada"</span><span class="p">),</span>
+                 <span class="n">cuenta</span><span class="p">(</span><span class="s2">"riesgo_fuga"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"Alto"</span><span class="p">)),</span> <span class="n">cuenta</span><span class="p">(</span><span class="s2">"riesgo_fuga"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"Medio"</span><span class="p">)),</span>
+                 <span class="n">cuenta</span><span class="p">(</span><span class="s2">"riesgo_fuga"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"Bajo"</span><span class="p">))]})</span>
+<span class="n">sint</span><span class="p">[</span><span class="s2">"%"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">sint</span><span class="o">.</span><span class="n">estudios</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">inc</span><span class="p">))</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sint</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>indicador (59 incluidos)</th>
+      <th>estudios</th>
+      <th>%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Declara un conjunto de validación separado</td>
+      <td>24</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Usa validación cruzada k-fold</td>
+      <td>19</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Reporta más de una corrida o semilla</td>
+      <td>9</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Usa alguna prueba estadística</td>
+      <td>9</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Código público oficial</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Declara baselines ajustados por igual</td>
+      <td>12</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Riesgo de fuga alto</td>
+      <td>25</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Riesgo de fuga medio</td>
+      <td>34</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Riesgo de fuga bajo</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Calidad metodológica.</strong> Clasificamos el riesgo de fuga en tres niveles:</p>
+<ul class="simple">
+<li><p><strong>Alto:</strong> no hay validación separada, o el conjunto de prueba selecciona el modelo.</p></li>
+<li><p><strong>Medio:</strong> hay validación o <em>k-fold</em>, pero sin control de duplicados.</p></li>
+<li><p><strong>Bajo:</strong> validación separada y control de duplicados.</p></li>
+</ul>
+<p>Ninguno de los 59 estudios alcanza riesgo bajo, porque ninguno controla los casi-duplicados de TrashNet que el capítulo 2 identificó. 50 reportan una sola corrida y 47 no declaran que sus baselines se ajustaran con el mismo protocolo. En la hoja de calidad del capítulo 3, 13 de los 59 estudios usaban pruebas estadísticas; la extracción de esta etapa, con patrones más estrictos, encuentra 9. Con cualquiera de los dos conteos, la conclusión es la misma: la literatura sobre TrashNet casi nunca reporta varianza entre semillas ni pruebas de hipótesis.</p>
+<p><strong>Los siete estudios del benchmark (verificados a mano).</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Estudio</p></th>
+<th class="head"><p>Partición</p></th>
+<th class="head"><p>Validación separada</p></th>
+<th class="head"><p>Repeticiones</p></th>
+<th class="head"><p>Pruebas estadísticas</p></th>
+<th class="head"><p>Código</p></th>
+<th class="head"><p>Accuracy publicada</p></th>
+<th class="head"><p>Citas (OpenAlex)</p></th>
+<th class="head"><p>Cuartil SJR (año de publicación)</p></th>
+<th class="head"><p>Riesgo de fuga</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Celik-HC (guía)</p></td>
+<td><p>Celik (2025), <em>The Visual Computer</em></p></td>
+<td><p>80/20 aleatoria</p></td>
+<td><p>No: la época se elige con la prueba</p></td>
+<td><p>Una</p></td>
+<td><p>No</p></td>
+<td><p>Sí, oficial</p></td>
+<td><p>99.40 %</p></td>
+<td><p>15</p></td>
+<td><p>Q2</p></td>
+<td><p>Alto</p></td>
+</tr>
+<tr class="row-odd"><td><p>MbXception</p></td>
+<td><p>Shi et al. (2020), <em>IEEE Access</em></p></td>
+<td><p>No reportada</p></td>
+<td><p>No declarada</p></td>
+<td><p>Una</p></td>
+<td><p>No</p></td>
+<td><p>Sí, oficial</p></td>
+<td><p>94.34 %</p></td>
+<td><p>64</p></td>
+<td><p>Q1</p></td>
+<td><p>Alto</p></td>
+</tr>
+<tr class="row-even"><td><p>ViT-B16</p></td>
+<td><p>Huang K. et al. (2021), <em>Sustainability</em></p></td>
+<td><p>70/13/17</p></td>
+<td><p>Sí</p></td>
+<td><p>Una</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>96.98 %</p></td>
+<td><p>68</p></td>
+<td><p>Q1/Q2 según la categoría</p></td>
+<td><p>Medio</p></td>
+</tr>
+<tr class="row-odd"><td><p>GFN</p></td>
+<td><p>Wang Z. et al. (2025), <em>Electronics</em></p></td>
+<td><p>80/10/10</p></td>
+<td><p>Sí</p></td>
+<td><p>Una</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>94.21 %</p></td>
+<td><p>20</p></td>
+<td><p>Q2</p></td>
+<td><p>Medio</p></td>
+</tr>
+<tr class="row-even"><td><p>FocusRCNet</p></td>
+<td><p>Zheng D. et al. (2023), <em>VCIBA</em></p></td>
+<td><p>70/30</p></td>
+<td><p>La validación hace de prueba</p></td>
+<td><p>Una</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>~92 %</p></td>
+<td><p>21</p></td>
+<td><p>Q2</p></td>
+<td><p>Alto</p></td>
+</tr>
+<tr class="row-odd"><td><p>ResMsCapsule</p></td>
+<td><p>Huang L. et al. (2023), <em>ESPR</em></p></td>
+<td><p>80/20, cuatro clases</p></td>
+<td><p>No declarada</p></td>
+<td><p>Media y DE por variante</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>91.41 %</p></td>
+<td><p>10</p></td>
+<td><p>Q1/Q2 según la categoría</p></td>
+<td><p>Alto</p></td>
+</tr>
+<tr class="row-even"><td><p>RWCNet</p></td>
+<td><p>Hossen et al. (2024), <em>IEEE Access</em></p></td>
+<td><p>70/20/10 con 5 pliegues</p></td>
+<td><p>Sí</p></td>
+<td><p>5 pliegues</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>95.01 %</p></td>
+<td><p>127</p></td>
+<td><p>Q1</p></td>
+<td><p>Medio</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Cuatro de los siete se publicaron en revistas Q1. El paper guía (Q2) es el de mayor accuracy publicada y el que más se aleja en la réplica (capítulo 12). Ninguno compara modelos con pruebas de hipótesis.</p>
+<p><strong>Reproducibilidad de la literatura.</strong> Solo 2 de los 59 estudios publican su código oficial (Celik, 2025; Shi et al., 2020). Otros tres ofrecen código parcial, de terceros o a petición, y ninguno publica la partición usada. Esta escasez explica la elección del paper guía: era el único con código completo, condición necesaria para la réplica.</p>
+</section>
+<section id="seleccion-de-los-modelos-del-benchmark">
+<h2>10.5 Selección de los modelos del benchmark<a class="headerlink" href="#seleccion-de-los-modelos-del-benchmark" title="Link to this heading">#</a></h2>
+<p>Sobre los 62 estudios evaluados a texto completo aplicamos criterios propios del benchmark. Garantizan una comparación justa con un presupuesto de cómputo común y se aplican en orden; el primero que se cumple es el motivo registrado.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Código</p></th>
+<th class="head"><p>Criterio de exclusión para el benchmark</p></th>
+<th class="head"><p>Fuente de la evidencia</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>E0</p></td>
+<td><p>Excluido a texto completo en el capítulo 3</p></td>
+<td><p>Hoja <code class="docutils literal notranslate"><span class="pre">Registros</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>E1</p></td>
+<td><p>TrashNet no es el conjunto principal de evaluación (menos de 3 menciones)</p></td>
+<td><p>Texto completo</p></td>
+</tr>
+<tr class="row-even"><td><p>E2</p></td>
+<td><p>No evalúa las seis clases de TrashNet</p></td>
+<td><p>Texto completo</p></td>
+</tr>
+<tr class="row-odd"><td><p>E3</p></td>
+<td><p>La contribución depende de metaheurísticas, aprendizaje por refuerzo, GAN o aprendizaje federado, que entrenan el modelo decenas de veces y rompen la igualdad de presupuesto</p></td>
+<td><p>Título y resumen</p></td>
+</tr>
+<tr class="row-even"><td><p>E4</p></td>
+<td><p>Detección de objetos y no clasificación</p></td>
+<td><p>Título y resumen</p></td>
+</tr>
+<tr class="row-odd"><td><p>E5</p></td>
+<td><p>Ensamble de varias redes completas (presupuesto desigual)</p></td>
+<td><p>Título y resumen</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Los indicadores son recuentos de términos, reproducibles con <code class="docutils literal notranslate"><span class="pre">entregable2/analisis/revision_e2.py</span></code>. La decisión de cada estudio está en <a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/blob/main/entregable2/results/revision/cribado_e2.csv"><code class="docutils literal notranslate"><span class="pre">entregable2/results/revision/cribado_e2.csv</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mot</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">motivo_exclusion_e2</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="s2">"Elegible"</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^(E\d): .*"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\1"</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">mot</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">"estudios"</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>estudios</th>
+    </tr>
+    <tr>
+      <th>motivo_exclusion_e2</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Elegible</th>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>E3</th>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>E5</th>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>E2</th>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>E0</th>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>E1</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>E4</th>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>ResMsCapsule es la única excepción al criterio E2: su artículo reporta resultados con cuatro clases. Lo incluimos porque es el único representante de la familia de redes de cápsulas, necesaria para la diversidad del benchmark, y lo entrenamos con las seis clases de TrashNet bajo el protocolo común. Su valor publicado no es comparable con el nuestro, y la adaptación se registra como desviación en el capítulo 11.</p>
+<section id="puntaje-de-priorizacion">
+<h3>Puntaje de priorización<a class="headerlink" href="#puntaje-de-priorizacion" title="Link to this heading">#</a></h3>
+<p>La selección siguió cuatro requisitos, definidos antes de ver los resultados del benchmark:</p>
+<ol class="arabic simple">
+<li><p>un paper guía con código público completo, que permita la réplica del capítulo 12;</p></li>
+<li><p>arquitectura definida en el artículo;</p></li>
+<li><p>entrenamiento factible con el presupuesto común;</p></li>
+<li><p>diversidad de al menos cuatro familias.</p></li>
+</ol>
+<p>Para hacer la priorización reproducible, calculamos, sobre los estudios elegibles, un puntaje con cuatro componentes de igual peso en <span class="math notranslate nohighlight">\([0, 1]\)</span>:</p>
+<ul class="simple">
+<li><p><strong>citas normalizadas por antigüedad:</strong> percentil de citas por año en OpenAlex, consultadas el 16 de noviembre de 2026;</p></li>
+<li><p><strong>recencia:</strong> <span class="math notranslate nohighlight">\((\text{año} - 2018)/8\)</span>;</p></li>
+<li><p><strong>desempeño reportado en TrashNet:</strong> <span class="math notranslate nohighlight">\((\text{accuracy} - 80)/20\)</span>, recortado a <span class="math notranslate nohighlight">\([0, 1]\)</span>; 0.5 si el resumen no lo reporta;</p></li>
+<li><p><strong>disponibilidad de implementación:</strong> 1 con código propio y 0.5 sin él.</p></li>
+</ul>
+<p>El puntaje no sustituye los requisitos. Es un orden de referencia dentro de cada familia, y verificamos a posteriori cuánto coincide con la selección.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">el</span> <span class="o">=</span> <span class="n">cr</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">elegible_e2</span> <span class="o">|</span> <span class="n">cr</span><span class="o">.</span><span class="n">seleccionado_top7</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"rango_puntaje"</span><span class="p">,</span> <span class="s2">"autores_anio_titulo"</span><span class="p">,</span> <span class="s2">"anio"</span><span class="p">,</span> <span class="s2">"citas_openalex"</span><span class="p">,</span> <span class="s2">"citas_por_anio"</span><span class="p">,</span> <span class="s2">"acc_trashnet"</span><span class="p">,</span>
+        <span class="s2">"codigo_propio"</span><span class="p">,</span> <span class="s2">"s_citas"</span><span class="p">,</span> <span class="s2">"s_recencia"</span><span class="p">,</span> <span class="s2">"s_desempeno"</span><span class="p">,</span> <span class="s2">"s_implementacion"</span><span class="p">,</span> <span class="s2">"puntaje"</span><span class="p">,</span> <span class="s2">"seleccionado_top7"</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"rango_puntaje"</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">t</span><span class="p">[</span><span class="s2">"autores_anio_titulo"</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s2">"autores_anio_titulo"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70</span><span class="p">)</span>
+<span class="n">t</span><span class="p">[</span><span class="s2">"codigo_propio"</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s2">"codigo_propio"</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="kc">True</span><span class="p">:</span> <span class="s2">"sí"</span><span class="p">,</span> <span class="kc">False</span><span class="p">:</span> <span class="s2">"no"</span><span class="p">})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>rango_puntaje</th>
+      <th>autores_anio_titulo</th>
+      <th>anio</th>
+      <th>citas_openalex</th>
+      <th>citas_por_anio</th>
+      <th>acc_trashnet</th>
+      <th>codigo_propio</th>
+      <th>s_citas</th>
+      <th>s_recencia</th>
+      <th>s_desempeno</th>
+      <th>s_implementacion</th>
+      <th>puntaje</th>
+      <th>seleccionado_top7</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>Nguyen N.-B.-Q. et al. - 2026 - Towards accurate and efficient waste i</td>
+      <td>2026</td>
+      <td>14.0</td>
+      <td>14.000</td>
+      <td>99.72</td>
+      <td>no</td>
+      <td>0.750</td>
+      <td>1.000</td>
+      <td>0.986</td>
+      <td>0.5</td>
+      <td>0.809</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.0</td>
+      <td>Celik G. - 2025 - Multi-layer feature fusion for high-accuracy solid w</td>
+      <td>2025</td>
+      <td>15.0</td>
+      <td>7.500</td>
+      <td>NaN</td>
+      <td>sí</td>
+      <td>0.417</td>
+      <td>0.875</td>
+      <td>0.500</td>
+      <td>1.0</td>
+      <td>0.698</td>
+      <td>Celik-HC (paper guía)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.0</td>
+      <td>Devi A. et al. - 2025 - Transforming waste management leveraging recyc</td>
+      <td>2025</td>
+      <td>16.0</td>
+      <td>8.000</td>
+      <td>99.15</td>
+      <td>no</td>
+      <td>0.444</td>
+      <td>0.875</td>
+      <td>0.958</td>
+      <td>0.5</td>
+      <td>0.694</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.0</td>
+      <td>Li L. et al. - 2025 - Enhanced ResNet-50 for garbage classification Fe</td>
+      <td>2025</td>
+      <td>40.0</td>
+      <td>20.000</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.889</td>
+      <td>0.875</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.691</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>Hossen M.M. et al. - 2024 - A Reliable and Robust Deep Learning Model</td>
+      <td>2024</td>
+      <td>127.0</td>
+      <td>42.333</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>1.000</td>
+      <td>0.750</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.688</td>
+      <td>RWCNet</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6.0</td>
+      <td>Alrayes F.S. et al. - 2023 - Waste classification using vision transfo</td>
+      <td>2023</td>
+      <td>62.0</td>
+      <td>15.500</td>
+      <td>95.80</td>
+      <td>no</td>
+      <td>0.778</td>
+      <td>0.625</td>
+      <td>0.790</td>
+      <td>0.5</td>
+      <td>0.673</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7.0</td>
+      <td>Kumar Lilhore U. et al. - 2025 - Intelligent waste sorting for sustain</td>
+      <td>2025</td>
+      <td>34.0</td>
+      <td>17.000</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.806</td>
+      <td>0.875</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.670</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8.0</td>
+      <td>Abu-Qdais H. et al. - 2025 - Intelligent system for solid waste classi</td>
+      <td>2025</td>
+      <td>17.0</td>
+      <td>8.500</td>
+      <td>96.06</td>
+      <td>no</td>
+      <td>0.472</td>
+      <td>0.875</td>
+      <td>0.803</td>
+      <td>0.5</td>
+      <td>0.663</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9.0</td>
+      <td>Zhou H. et al. - 2025 - Optimizing Backbone Networks Through Hybrid–Mo</td>
+      <td>2025</td>
+      <td>8.0</td>
+      <td>4.000</td>
+      <td>96.88</td>
+      <td>no</td>
+      <td>0.306</td>
+      <td>0.875</td>
+      <td>0.844</td>
+      <td>0.5</td>
+      <td>0.631</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10.0</td>
+      <td>Wang Z. et al. - 2025 - GFN A Garbage Classification Fusion Network In</td>
+      <td>2025</td>
+      <td>20.0</td>
+      <td>10.000</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.611</td>
+      <td>0.875</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.622</td>
+      <td>GFN</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11.0</td>
+      <td>Masand A. et al. - 2021 - ScrapNet An Efficient Approach to Trash Clas</td>
+      <td>2021</td>
+      <td>70.0</td>
+      <td>11.667</td>
+      <td>98.00</td>
+      <td>no</td>
+      <td>0.694</td>
+      <td>0.375</td>
+      <td>0.900</td>
+      <td>0.5</td>
+      <td>0.617</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12.0</td>
+      <td>Liu T. et al. - 2026 - ResSeMo deep convolutional neural network integ</td>
+      <td>2026</td>
+      <td>7.0</td>
+      <td>7.000</td>
+      <td>91.30</td>
+      <td>no</td>
+      <td>0.389</td>
+      <td>1.000</td>
+      <td>0.565</td>
+      <td>0.5</td>
+      <td>0.613</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13.0</td>
+      <td>Feng Z. et al. - 2022 - An Intelligent Waste-Sorting and Recycling Dev</td>
+      <td>2022</td>
+      <td>65.0</td>
+      <td>13.000</td>
+      <td>94.23</td>
+      <td>no</td>
+      <td>0.722</td>
+      <td>0.500</td>
+      <td>0.712</td>
+      <td>0.5</td>
+      <td>0.608</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14.0</td>
+      <td>Shi C. et al. - 2021 - A waste classification method based on a multil</td>
+      <td>2021</td>
+      <td>136.0</td>
+      <td>22.667</td>
+      <td>92.60</td>
+      <td>no</td>
+      <td>0.917</td>
+      <td>0.375</td>
+      <td>0.630</td>
+      <td>0.5</td>
+      <td>0.605</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15.0</td>
+      <td>Huang K. et al. - 2021 - Recycling waste classification using vision t</td>
+      <td>2021</td>
+      <td>68.0</td>
+      <td>11.333</td>
+      <td>96.98</td>
+      <td>no</td>
+      <td>0.667</td>
+      <td>0.375</td>
+      <td>0.849</td>
+      <td>0.5</td>
+      <td>0.598</td>
+      <td>ViT-B16</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16.0</td>
+      <td>Wu C. y Yang Y. - 2026 - Dual-stream context aggregation network for w</td>
+      <td>2026</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>96.09</td>
+      <td>no</td>
+      <td>0.069</td>
+      <td>1.000</td>
+      <td>0.805</td>
+      <td>0.5</td>
+      <td>0.593</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17.0</td>
+      <td>Shi C. et al. - 2020 - A Novel Multi-Branch Channel Expansion Network</td>
+      <td>2020</td>
+      <td>64.0</td>
+      <td>9.143</td>
+      <td>NaN</td>
+      <td>sí</td>
+      <td>0.556</td>
+      <td>0.250</td>
+      <td>0.500</td>
+      <td>1.0</td>
+      <td>0.576</td>
+      <td>MbXception</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18.0</td>
+      <td>Mishra S. et al. - 2024 - An integrated deep-learning model for smart</td>
+      <td>2024</td>
+      <td>27.0</td>
+      <td>9.000</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.528</td>
+      <td>0.750</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.569</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19.0</td>
+      <td>Lin Z. et al. - 2024 - Waste classification strategy based on multi-sc</td>
+      <td>2024</td>
+      <td>2.0</td>
+      <td>0.667</td>
+      <td>94.10</td>
+      <td>no</td>
+      <td>0.167</td>
+      <td>0.750</td>
+      <td>0.705</td>
+      <td>0.5</td>
+      <td>0.530</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20.0</td>
+      <td>Potharaju S. et al. - 2025 - Optimizing Waste Management with Squeeze-</td>
+      <td>2025</td>
+      <td>5.0</td>
+      <td>2.500</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.222</td>
+      <td>0.875</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.524</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>20.0</td>
+      <td>Vo A.H. et al. - 2019 - A Novel Framework for Trash Classification Usi</td>
+      <td>2019</td>
+      <td>236.0</td>
+      <td>29.500</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.972</td>
+      <td>0.125</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.524</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>22.0</td>
+      <td>Abdu H. y Noor M.H.M. - 2022 - Domestic Trash Classification with Tran</td>
+      <td>2022</td>
+      <td>17.0</td>
+      <td>3.400</td>
+      <td>96.00</td>
+      <td>no</td>
+      <td>0.278</td>
+      <td>0.500</td>
+      <td>0.800</td>
+      <td>0.5</td>
+      <td>0.519</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>23.0</td>
+      <td>Yoong H.C. et al. - 2025 - Waste Classification Using NasNet-Mobile A</td>
+      <td>2025</td>
+      <td>1.0</td>
+      <td>0.500</td>
+      <td>91.25</td>
+      <td>no</td>
+      <td>0.139</td>
+      <td>0.875</td>
+      <td>0.562</td>
+      <td>0.5</td>
+      <td>0.519</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24.0</td>
+      <td>Echchidmi M. y Bouayad A. - 2026 - Compact waste image classification</td>
+      <td>2026</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.069</td>
+      <td>1.000</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.517</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>24.0</td>
+      <td>İnsel M.A. et al. - 2026 - Classification of wastes by utilizing image</td>
+      <td>2026</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.069</td>
+      <td>1.000</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.517</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>24.0</td>
+      <td>Baskaran S. y Devarasan E. - 2026 - A neutrosophic transfer learning a</td>
+      <td>2026</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.069</td>
+      <td>1.000</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.517</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>27.0</td>
+      <td>Zheng D. et al. - 2023 - Focus-RCNet a lightweight recyclable waste cl</td>
+      <td>2023</td>
+      <td>21.0</td>
+      <td>5.250</td>
+      <td>92.00</td>
+      <td>no</td>
+      <td>0.333</td>
+      <td>0.625</td>
+      <td>0.600</td>
+      <td>0.5</td>
+      <td>0.515</td>
+      <td>FocusRCNet</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>28.0</td>
+      <td>Qin J. et al. - 2022 - A robust framework combined saliency detection</td>
+      <td>2022</td>
+      <td>44.0</td>
+      <td>8.800</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.500</td>
+      <td>0.500</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.500</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>29.0</td>
+      <td>Ruiz V. et al. - 2019 - Automatic Image-Based Waste Classification</td>
+      <td>2019</td>
+      <td>143.0</td>
+      <td>17.875</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.833</td>
+      <td>0.125</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.490</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>30.0</td>
+      <td>Aral R.A. et al. - 2018 - Classification of TrashNet Dataset Based on</td>
+      <td>2018</td>
+      <td>255.0</td>
+      <td>28.333</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.944</td>
+      <td>0.000</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.486</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>30.0</td>
+      <td>Vo N.-S. et al. - 2024 - An Efficient Model on AIoT Devices for Trash</td>
+      <td>2024</td>
+      <td>5.0</td>
+      <td>1.667</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.194</td>
+      <td>0.750</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.486</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>32.0</td>
+      <td>Yang Z. y Li D. - 2020 - WasNet A Neural Network-Based Garbage Collect</td>
+      <td>2020</td>
+      <td>79.0</td>
+      <td>11.286</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.639</td>
+      <td>0.250</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.472</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>33.0</td>
+      <td>Rabano S.L. et al. - 2018 - Common garbage classification using mobile</td>
+      <td>2018</td>
+      <td>177.0</td>
+      <td>19.667</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.861</td>
+      <td>0.000</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.465</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>33.0</td>
+      <td>Yuan Z. y Liu J. - 2022 - A Hybrid Deep Learning Model for Trash Class</td>
+      <td>2022</td>
+      <td>27.0</td>
+      <td>5.400</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.361</td>
+      <td>0.500</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.465</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>35.0</td>
+      <td>Rismiyati et al. - 2020 - Xception Architecture Transfer Learning for</td>
+      <td>2020</td>
+      <td>66.0</td>
+      <td>9.429</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.583</td>
+      <td>0.250</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.458</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>36.0</td>
+      <td>Niu S. et al. - 2020 - Transfer Learning based Data-Efficient Machine</td>
+      <td>2020</td>
+      <td>20.0</td>
+      <td>2.857</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>0.250</td>
+      <td>0.250</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>0.375</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>NaN</td>
+      <td>Huang L. et al. - 2023 - A waste classification method based on a caps</td>
+      <td>2023</td>
+      <td>10.0</td>
+      <td>2.500</td>
+      <td>NaN</td>
+      <td>no</td>
+      <td>NaN</td>
+      <td>0.625</td>
+      <td>0.500</td>
+      <td>0.5</td>
+      <td>NaN</td>
+      <td>ResMsCapsule</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Coincidencia entre el puntaje y la selección.</strong> Celik-HC y RWCNet ocupan los puestos 2 y 5. GFN, ViT-B16 y MbXception están entre los 17 primeros, y FocusRCNet en el 27. Los estudios con mayor puntaje que no seleccionamos se descartaron por un requisito, no por el puntaje:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Estudio con puntaje alto</p></th>
+<th class="head"><p>Motivo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Nguyen et al. (2026), híbrido DL + ML (puesto 1)</p></td>
+<td><p>Misma familia que el paper guía (extracción de rasgos con CNN y clasificador de <em>machine learning</em>), sin código; el paper guía la representa con código verificable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Devi et al. (2025), RecycleTransformerNet</p></td>
+<td><p>Familia Transformer, representada por ViT-B16, cuya configuración publicada es estándar y reproducible</p></td>
+</tr>
+<tr class="row-even"><td><p>Li L. et al. (2025), ResNet-50 con fusión de rasgos</p></td>
+<td><p>Enlace de datos y código no verificable (Figshare, error 403); la familia ResNet ya está en los modelos base</p></td>
+</tr>
+<tr class="row-odd"><td><p>Alrayes et al. (2023), ViT con CNN híbrida</p></td>
+<td><p>Familia ya representada por GFN y ViT-B16</p></td>
+</tr>
+<tr class="row-even"><td><p>Kumar Lilhore et al. (2025), híbrido con transferencia</p></td>
+<td><p>Arquitectura descrita sin dimensiones suficientes para implementarla sin búsqueda de arquitectura</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Modelos más citados que no forman parte del benchmark.</strong> Aral et al. (2018, 255 citas), Vo A. H. et al. (2019, 236), Rabano et al. (2018, 177) y Ruiz et al. (2019, 143) comparan arquitecturas estándar (DenseNet, ResNeXt, MobileNet, Inception-ResNet) ajustadas desde ImageNet. Esas familias están representadas por los modelos base del capítulo 3 y por los componentes de RWCNet (DenseNet201 y MobileNetV2) y de Celik-HC (EfficientNet-B0 e InceptionV3), y ninguno de estos estudios propone una arquitectura nueva.</p>
+<p><strong>Diversidad.</strong> Los siete modelos cubren seis familias. Con los modelos base, el benchmark tiene diez modelos:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Familia</p></th>
+<th class="head"><p>Modelos</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Convolucional clásica, desde cero</p></td>
+<td><p>CNN estilo VGG, MobileNetV2, ResNet-18 (capítulo 3)</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN multirrama, desde cero</p></td>
+<td><p>MbXception</p></td>
+</tr>
+<tr class="row-even"><td><p>CNN ligera con atención y destilación</p></td>
+<td><p>FocusRCNet</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fusión de CNN preentrenadas</p></td>
+<td><p>RWCNet</p></td>
+</tr>
+<tr class="row-even"><td><p>Híbrido DL + ML con fusión multinivel</p></td>
+<td><p>Celik-HC (paper guía)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer con ajuste fino</p></td>
+<td><p>ViT-B16</p></td>
+</tr>
+<tr class="row-even"><td><p>Híbrido CNN-Transformer con atención</p></td>
+<td><p>GFN</p></td>
+</tr>
+<tr class="row-odd"><td><p>Red de cápsulas</p></td>
+<td><p>ResMsCapsule</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Composición del benchmark.</strong> El benchmark compara diez modelos profundos: los tres modelos base del Entregable 1 (CNN, MobileNetV2 y ResNet-18), que se mantienen como referencia, y los siete modelos publicados seleccionados en esta sección. Los siete publicados cubren seis familias, por encima del mínimo de cuatro. Los diez modelos reciben el mismo tratamiento:</p>
+<ul class="simple">
+<li><p>el mismo presupuesto de ajuste (8 configuraciones) y 8 semillas por modelo;</p></li>
+<li><p>la misma partición, métricas, umbrales y evaluación;</p></li>
+<li><p>análisis de calibración, incertidumbre, robustez e interpretabilidad para cada modelo.</p></li>
+</ul>
+<p>Sobre el paper guía se añade la réplica con su propio código, y sobre el paper guía y el mejor modelo, ablaciones con inferencia estadística.</p>
+</section>
+</section>
+<section id="analisis-detallado-de-los-modelos">
+<h2>10.6 Análisis detallado de los modelos<a class="headerlink" href="#analisis-detallado-de-los-modelos" title="Link to this heading">#</a></h2>
+<p>Para cada modelo presentamos la referencia, la familia, el flujo de datos (figura), la formulación de sus bloques centrales, la innovación, los resultados publicados, las fortalezas y limitaciones, la complejidad y el sesgo de reporte. Los parámetros y GMAC se midieron con nuestra implementación para entrada de 224×224 y 6 clases (capítulo 13). Todos los artículos definen la arquitectura, por lo que se implementan tal como los describe cada artículo, sin búsqueda de arquitectura. ViT-B16 y ResMsCapsule tienen definiciones parciales, que completamos con supuestos declarados en el capítulo 11.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flujos</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"Celik-HC"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Imagen</span><span class="se">\n</span><span class="s2">224×224"</span><span class="p">,</span> <span class="s2">"EfficientNet-B0</span><span class="se">\n</span><span class="s2">(bloques 6–7)"</span><span class="p">,</span> <span class="s2">"InceptionV3</span><span class="se">\n</span><span class="s2">(mixed8, mixed10)"</span><span class="p">,</span> <span class="s2">"Hypercolumn</span><span class="se">\n</span><span class="s2">+ GAP"</span><span class="p">,</span> <span class="s2">"Densas</span><span class="se">\n</span><span class="s2">512→64"</span><span class="p">,</span> <span class="s2">"XGBoost"</span><span class="p">],</span>
+    <span class="s2">"MbXception"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Imagen"</span><span class="p">,</span> <span class="s2">"Entrada</span><span class="se">\n</span><span class="s2">Xception"</span><span class="p">,</span> <span class="s2">"Núcleo: 8 ramas</span><span class="se">\n</span><span class="s2">separables en paralelo"</span><span class="p">,</span> <span class="s2">"Suma de</span><span class="se">\n</span><span class="s2">ramas"</span><span class="p">,</span> <span class="s2">"Salida</span><span class="se">\n</span><span class="s2">Xception"</span><span class="p">,</span> <span class="s2">"Softmax"</span><span class="p">],</span>
+    <span class="s2">"ViT-B16"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Imagen"</span><span class="p">,</span> <span class="s2">"Parches 16×16</span><span class="se">\n</span><span class="s2">→ 196 tokens"</span><span class="p">,</span> <span class="s2">"Token de clase</span><span class="se">\n</span><span class="s2">+ posición"</span><span class="p">,</span> <span class="s2">"12 bloques</span><span class="se">\n</span><span class="s2">autoatención"</span><span class="p">,</span> <span class="s2">"Token de</span><span class="se">\n</span><span class="s2">clase"</span><span class="p">,</span> <span class="s2">"Softmax"</span><span class="p">],</span>
+    <span class="s2">"GFN"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Imagen"</span><span class="p">,</span> <span class="s2">"ResNet50"</span><span class="p">,</span> <span class="s2">"PPM</span><span class="se">\n</span><span class="s2">(1, 2, 3, 6)"</span><span class="p">,</span> <span class="s2">"CBAM</span><span class="se">\n</span><span class="s2">(canal + espacio)"</span><span class="p">,</span> <span class="s2">"16 tokens</span><span class="se">\n</span><span class="s2">→ ViT ×12"</span><span class="p">,</span> <span class="s2">"Softmax"</span><span class="p">],</span>
+    <span class="s2">"FocusRCNet"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Imagen"</span><span class="p">,</span> <span class="s2">"Focus</span><span class="se">\n</span><span class="s2">(espacio→canal)"</span><span class="p">,</span> <span class="s2">"Sandglass</span><span class="se">\n</span><span class="s2">×4 etapas"</span><span class="p">,</span> <span class="s2">"SimAM"</span><span class="p">,</span> <span class="s2">"GAP + FC"</span><span class="p">,</span> <span class="s2">"Destilación</span><span class="se">\n</span><span class="s2">(EffNet-B4)"</span><span class="p">],</span>
+    <span class="s2">"ResMsCapsule"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Imagen"</span><span class="p">,</span> <span class="s2">"ResNet-18</span><span class="se">\n</span><span class="s2">(hasta layer3)"</span><span class="p">,</span> <span class="s2">"Cápsulas primarias</span><span class="se">\n</span><span class="s2">multiescala 5/3/1"</span><span class="p">,</span> <span class="s2">"Enrutamiento</span><span class="se">\n</span><span class="s2">dinámico"</span><span class="p">,</span> <span class="s2">"Cápsulas</span><span class="se">\n</span><span class="s2">de clase"</span><span class="p">,</span> <span class="s2">"Longitud</span><span class="se">\n</span><span class="s2">→ clase"</span><span class="p">],</span>
+    <span class="s2">"RWCNet"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Imagen"</span><span class="p">,</span> <span class="s2">"DenseNet201"</span><span class="p">,</span> <span class="s2">"MobileNetV2"</span><span class="p">,</span> <span class="s2">"Fusión de</span><span class="se">\n</span><span class="s2">rasgos"</span><span class="p">,</span> <span class="s2">"Salida principal</span><span class="se">\n</span><span class="s2">+ 2 auxiliares"</span><span class="p">,</span> <span class="s2">"Pérdida</span><span class="se">\n</span><span class="s2">1 / 0.5 / 0.25"</span><span class="p">],</span>
+<span class="p">}</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">flujos</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">1.25</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">flujos</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">bl</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">flujos</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bl</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.7</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">"off"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bl</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">FancyBboxPatch</span><span class="p">((</span><span class="n">i</span> <span class="o">*</span> <span class="mf">1.7</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">),</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.76</span><span class="p">,</span> <span class="n">boxstyle</span><span class="o">=</span><span class="s2">"round,pad=0.01,rounding_size=0.08"</span><span class="p">,</span>
+                                    <span class="n">fc</span><span class="o">=</span><span class="s2">"#eef4fc"</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bl</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="s2">"#f3f2ee"</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="n">FG</span><span class="o">.</span><span class="n">INK2</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mf">1.7</span> <span class="o">+</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">7.6</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">bl</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mf">1.7</span> <span class="o">+</span> <span class="mf">1.72</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mf">1.7</span> <span class="o">+</span> <span class="mf">1.47</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">"-&gt;"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">FG</span><span class="o">.</span><span class="n">INK2</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">"bold"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Flujo de datos de los siete modelos publicados"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">"bold"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7bcc7b885e423be4841d06406161f557632f765263eec55ef29a26d29ba0f387.png" src="_images/7bcc7b885e423be4841d06406161f557632f765263eec55ef29a26d29ba0f387.png" />
+</div>
+</div>
+<section id="celik-hc-paper-guia">
+<h3>10.6.1 Celik-HC (paper guía)<a class="headerlink" href="#celik-hc-paper-guia" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Referencia:</strong> Celik, G. (2025). Multi-layer feature fusion for high-accuracy solid waste classification using a hybrid deep learning model. <em>The Visual Computer</em>, <em>41</em>, 10227–10249. <a class="reference external" href="https://doi.org/10.1007/s00371-025-04031-3">https://doi.org/10.1007/s00371-025-04031-3</a></p></li>
+<li><p><strong>Familia:</strong> híbrido Deep Learning + <em>machine learning</em> con fusión multinivel. Se describe en detalle en el capítulo 12.</p></li>
+<li><p><strong>Bloques centrales:</strong> <span class="math notranslate nohighlight">\(h(x) = [\mathrm{GAP}(F^{E}_{221}), \mathrm{GAP}(F^{E}_{237}), \mathrm{GAP}(F^{I}_{248}), \mathrm{GAP}(F^{I}_{310})]\)</span> concatena rasgos de dos capas de cada red; cinco capas densas reducen <span class="math notranslate nohighlight">\(h\)</span> a 64 dimensiones y XGBoost clasifica, <span class="math notranslate nohighlight">\(\hat y = \mathrm{XGB}(z(x))\)</span>.</p></li>
+<li><p><strong>Innovación declarada:</strong> combinar rasgos de varias profundidades de dos redes y sustituir la <em>softmax</em> por <em>boosting</em>.</p></li>
+<li><p><strong>Resultado publicado (TrashNet):</strong> accuracy 99.40 %, F1 99.51 %, una corrida, sin varianza ni pruebas.</p></li>
+<li><p><strong>Fortalezas:</strong> código público completo; costo moderado (28.4 M parámetros, 3.22 GMAC).</p></li>
+<li><p><strong>Limitaciones:</strong> la época se elige con el conjunto de prueba; la ablación del artículo varía solo las capas, no la presencia de cada red ni de XGBoost.</p></li>
+<li><p><strong>Sesgo de reporte:</strong> los modelos de comparación se entrenan 40 épocas sin búsqueda de hiperparámetros, y la ViT reportada (397 M parámetros) no corresponde a una variante estándar.</p></li>
+</ul>
+</section>
+<section id="mbxception">
+<h3>10.6.2 MbXception<a class="headerlink" href="#mbxception" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Referencia:</strong> Shi, C., Xia, R. y Wang, L. (2020). A novel multi-branch channel expansion network for garbage image classification. <em>IEEE Access</em>, <em>8</em>, 154436–154452. <a class="reference external" href="https://doi.org/10.1109/ACCESS.2020.3016116">https://doi.org/10.1109/ACCESS.2020.3016116</a></p></li>
+<li><p><strong>Familia:</strong> CNN multirrama derivada de Xception.</p></li>
+<li><p><strong>Bloque central:</strong> el núcleo de Xception (8 repeticiones lineales de ReLU, convolución separable y BN) se reemplaza por 8 ramas paralelas que se suman, <span class="math notranslate nohighlight">\(y = \sum_{l=1}^{8} g_l(x)\)</span>. Ensancha la red sin aumentar los parámetros frente a Xception.</p></li>
+<li><p><strong>Innovación declarada:</strong> en TrashNet, ensanchar con ramas sumadas rinde más que profundizar o añadir atajos.</p></li>
+<li><p><strong>Resultado publicado:</strong> accuracy 94.34 %, una corrida.</p></li>
+<li><p><strong>Fortalezas:</strong> código oficial; análisis de oclusión en el artículo.</p></li>
+<li><p><strong>Limitaciones:</strong> 28.4 M parámetros entrenados desde cero con unas 2500 imágenes; entrada de 229×229.</p></li>
+<li><p><strong>Sesgo de reporte:</strong> las variantes se comparan en las mismas condiciones, pero con una sola corrida.</p></li>
+</ul>
+</section>
+<section id="vit-b16">
+<h3>10.6.3 ViT-B16<a class="headerlink" href="#vit-b16" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Referencia:</strong> Huang, K., Lei, H., Jiao, Z. y Zhong, Z. (2021). Recycling waste classification using vision transformer on portable device. <em>Sustainability</em>, <em>13</em>(21), 11572. <a class="reference external" href="https://doi.org/10.3390/su132111572">https://doi.org/10.3390/su132111572</a></p></li>
+<li><p><strong>Familia:</strong> Transformer con ajuste fino desde ImageNet.</p></li>
+<li><p><strong>Bloque central:</strong> autoatención multicabeza sobre 196 parches más un token de clase, <span class="math notranslate nohighlight">\(\mathrm{Attn}(Q, K, V) = \mathrm{softmax}(QK^\top/\sqrt{d_k})\,V\)</span>, en 12 bloques con normalización previa y red <em>feed-forward</em>.</p></li>
+<li><p><strong>Innovación declarada:</strong> primer uso de un ViT puro en TrashNet, con despliegue en un servidor accesible desde el móvil.</p></li>
+<li><p><strong>Resultado publicado:</strong> accuracy 96.98 %, una corrida.</p></li>
+<li><p><strong>Fortalezas:</strong> campo receptivo global desde la primera capa.</p></li>
+<li><p><strong>Limitaciones:</strong> 85.8 M parámetros y 17.6 GMAC; costo cuadrático en el número de parches, <span class="math notranslate nohighlight">\(O(N^2 d)\)</span>; el artículo no declara la variante, por lo que asumimos B/16.</p></li>
+<li><p><strong>Sesgo de reporte:</strong> compara con valores de otros artículos, no con baselines entrenados en sus condiciones.</p></li>
+</ul>
+</section>
+<section id="gfn">
+<h3>10.6.4 GFN<a class="headerlink" href="#gfn" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Referencia:</strong> Wang, Z., Zhou, W. y Li, Y. (2025). GFN: A garbage classification fusion network incorporating multiple attention mechanisms. <em>Electronics</em>, <em>14</em>(1), 75. <a class="reference external" href="https://doi.org/10.3390/electronics14010075">https://doi.org/10.3390/electronics14010075</a></p></li>
+<li><p><strong>Familia:</strong> híbrido CNN-Transformer con atención.</p></li>
+<li><p><strong>Bloques centrales:</strong></p>
+<ul>
+<li><p><strong>PPM:</strong> concatena la entrada con versiones agrupadas a 1, 2, 3 y 6 celdas.</p></li>
+<li><p><strong>CBAM:</strong> aplica atención de canal, <span class="math notranslate nohighlight">\(M_c = \sigma(\mathrm{MLP}(\mathrm{AvgPool}(F)) + \mathrm{MLP}(\mathrm{MaxPool}(F)))\)</span>, y luego espacial, <span class="math notranslate nohighlight">\(M_s = \sigma(f^{7\times7}([\mathrm{AvgPool}(F'); \mathrm{MaxPool}(F')]))\)</span>.</p></li>
+<li><p><strong>Codificador ViT:</strong> recibe 16 tokens de 768 dimensiones.</p></li>
+</ul>
+</li>
+<li><p><strong>Innovación declarada:</strong> combinar rasgos locales de ResNet con contexto global de ViT, con atención multiescala intermedia.</p></li>
+<li><p><strong>Resultado publicado (TrashNet):</strong> accuracy 94.21 %, una corrida.</p></li>
+<li><p><strong>Fortalezas:</strong> ablación de componentes en el artículo, aunque sobre otro conjunto de datos.</p></li>
+<li><p><strong>Limitaciones:</strong> 113.7 M parámetros, el mayor del benchmark; la proyección de 2048×7×7 a 1000×4×4 no se detalla.</p></li>
+<li><p><strong>Sesgo de reporte:</strong> baselines entrenados en las mismas condiciones, con lote de 8 y una corrida.</p></li>
+</ul>
+</section>
+<section id="focusrcnet">
+<h3>10.6.5 FocusRCNet<a class="headerlink" href="#focusrcnet" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Referencia:</strong> Zheng, D., Wang, R., Duan, Y., Pang, P. C.-I. y Tan, T. (2023). Focus-RCNet: A lightweight recyclable waste classification algorithm based on focus and knowledge distillation. <em>Visual Computing for Industry, Biomedicine, and Art</em>, <em>6</em>, 19. <a class="reference external" href="https://doi.org/10.1186/s42492-023-00146-3">https://doi.org/10.1186/s42492-023-00146-3</a></p></li>
+<li><p><strong>Familia:</strong> CNN ligera con atención y destilación de conocimiento.</p></li>
+<li><p><strong>Bloques centrales:</strong></p>
+<ul>
+<li><p><strong>Focus:</strong> reordena cada bloque de 2×2 píxeles en 4 canales sin perder información.</p></li>
+<li><p><strong>SimAM:</strong> pondera cada neurona con una energía de forma cerrada, sin parámetros.</p></li>
+<li><p><strong>Destilación:</strong> minimiza <span class="math notranslate nohighlight">\(\mathcal L = \alpha\,T^2\,\mathrm{KL}(p^{T}_{\text{prof}} \,\|\, p^{T}_{\text{est}}) + (1-\alpha)\,\mathrm{CE}(y, p_{\text{est}})\)</span> con un profesor EfficientNet-B4.</p></li>
+</ul>
+</li>
+<li><p><strong>Innovación declarada:</strong> un modelo de 0.53 M parámetros que conserva la accuracy de modelos mayores.</p></li>
+<li><p><strong>Resultado publicado:</strong> accuracy de alrededor de 92 %, sobre el 30 % de validación.</p></li>
+<li><p><strong>Fortalezas:</strong> el menor costo del benchmark (0.52 M parámetros y 0.13 GMAC).</p></li>
+<li><p><strong>Limitaciones:</strong> no declara <span class="math notranslate nohighlight">\(T\)</span> ni <span class="math notranslate nohighlight">\(\alpha\)</span>; entrada de 380×380.</p></li>
+<li><p><strong>Sesgo de reporte:</strong> no hay conjunto de prueba separado.</p></li>
+</ul>
+</section>
+<section id="resmscapsule">
+<h3>10.6.6 ResMsCapsule<a class="headerlink" href="#resmscapsule" title="Link to this heading">#</a></h3>
+<ul>
+<li><p><strong>Referencia:</strong> Huang, L., Li, M., Xu, T. y Dong, S.-Q. (2023). A waste classification method based on a capsule network. <em>Environmental Science and Pollution Research</em>, <em>30</em>, 86454–86462. <a class="reference external" href="https://doi.org/10.1007/s11356-023-27970-7">https://doi.org/10.1007/s11356-023-27970-7</a></p></li>
+<li><p><strong>Familia:</strong> red de cápsulas con extractor residual.</p></li>
+<li><p><strong>Bloque central:</strong> las cápsulas de clase se obtienen por enrutamiento dinámico,</p>
+<div class="math notranslate nohighlight">
+\[v_j = \frac{\|s_j\|^2}{1 + \|s_j\|^2}\frac{s_j}{\|s_j\|}, \qquad s_j = \sum_i c_{ij} W_{ij} u_i,\]</div>
+<p>y se entrenan con la pérdida de margen,</p>
+<div class="math notranslate nohighlight">
+\[\mathcal L = \sum_k T_k \max(0, m^+ - \|v_k\|)^2 + \lambda (1 - T_k) \max(0, \|v_k\| - m^-)^2.\]</div>
+</li>
+<li><p><strong>Innovación declarada:</strong> cápsulas primarias multiescala sobre rasgos residuales, con el 40 % de los parámetros de ResNet-18.</p></li>
+<li><p><strong>Resultado publicado:</strong> accuracy 91.41 %, <strong>con cuatro clases</strong>.</p></li>
+<li><p><strong>Fortalezas:</strong> modela relaciones parte-todo; 4.2 M parámetros.</p></li>
+<li><p><strong>Limitaciones:</strong> las longitudes de las cápsulas no son probabilidades calibradas (capítulo 14); los núcleos y el número de tipos de cápsula no se declaran.</p></li>
+<li><p><strong>Sesgo de reporte:</strong> reporta el promedio de varias corridas, pero con otra tarea.</p></li>
+</ul>
+</section>
+<section id="rwcnet">
+<h3>10.6.7 RWCNet<a class="headerlink" href="#rwcnet" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Referencia:</strong> Hossen, M. M., Majid, M. E., Kashem, S. B. A., Khandakar, A., Nashbat, M., Ashraf, A., Hasan-Zia, M., Kunju, A. K. A., Kabir, S. y Chowdhury, M. E. H. (2024). A reliable and robust deep learning model for effective recyclable waste classification. <em>IEEE Access</em>, <em>12</em>, 13809–13821. <a class="reference external" href="https://doi.org/10.1109/ACCESS.2024.3354774">https://doi.org/10.1109/ACCESS.2024.3354774</a></p></li>
+<li><p><strong>Familia:</strong> fusión de CNN preentrenadas con salidas auxiliares.</p></li>
+<li><p><strong>Bloque central:</strong> rasgos de DenseNet201 y MobileNetV2 se concatenan para la salida principal; dos ramas auxiliares supervisan rasgos intermedios con <span class="math notranslate nohighlight">\(\mathcal L = \mathcal L_{\text{ppal}} + 0.5\,\mathcal L_{\text{aux},1} + 0.25\,\mathcal L_{\text{aux},2}\)</span> (supervisión profunda).</p></li>
+<li><p><strong>Innovación declarada:</strong> combinar dos redes complementarias y supervisar etapas intermedias.</p></li>
+<li><p><strong>Resultado publicado:</strong> accuracy 95.01 % con validación cruzada de 5 particiones e IC binomial.</p></li>
+<li><p><strong>Fortalezas:</strong> el protocolo publicado más cuidadoso del grupo.</p></li>
+<li><p><strong>Limitaciones:</strong> 25.6 M parámetros y la mayor memoria de entrenamiento (4.9 GB).</p></li>
+<li><p><strong>Sesgo de reporte:</strong> baselines preentrenados con el mismo protocolo, pero con aumento de datos que podría preceder a la división.</p></li>
+</ul>
+</section>
+</section>
+<section id="matriz-comparativa-y-tendencias">
+<h2>10.7 Matriz comparativa y tendencias<a class="headerlink" href="#matriz-comparativa-y-tendencias" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">E2</span> <span class="o">/</span> <span class="s2">"results"</span> <span class="o">/</span> <span class="s2">"summary"</span> <span class="o">/</span> <span class="s2">"tabla_modelos.csv"</span><span class="p">)</span>
+<span class="n">mat</span> <span class="o">=</span> <span class="n">mc</span><span class="p">[[</span><span class="s2">"model"</span><span class="p">,</span> <span class="s2">"family"</span><span class="p">,</span> <span class="s2">"pretrained"</span><span class="p">,</span> <span class="s2">"params_total"</span><span class="p">,</span> <span class="s2">"gmacs"</span><span class="p">,</span> <span class="s2">"defines_architecture"</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">mat</span><span class="p">[</span><span class="s2">"params (M)"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">mat</span><span class="o">.</span><span class="n">params_total</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pub</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Celik-HC"</span><span class="p">:</span> <span class="s2">"Acc 99.40 % (80/20)"</span><span class="p">,</span> <span class="s2">"MbXception"</span><span class="p">:</span> <span class="s2">"Acc 94.34 %"</span><span class="p">,</span> <span class="s2">"ViT-B16"</span><span class="p">:</span> <span class="s2">"Acc 96.98 % (70/13/17)"</span><span class="p">,</span>
+       <span class="s2">"GFN"</span><span class="p">:</span> <span class="s2">"Acc 94.21 % (80/10/10)"</span><span class="p">,</span> <span class="s2">"FocusRCNet"</span><span class="p">:</span> <span class="s2">"Acc ~92 % (70/30)"</span><span class="p">,</span> <span class="s2">"ResMsCapsule"</span><span class="p">:</span> <span class="s2">"Acc 91.41 % (4 clases)"</span><span class="p">,</span>
+       <span class="s2">"RWCNet"</span><span class="p">:</span> <span class="s2">"Acc 95.01 % (CV 5)"</span><span class="p">}</span>
+<span class="n">fort</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Celik-HC"</span><span class="p">:</span> <span class="s2">"código; fusión multinivel"</span><span class="p">,</span> <span class="s2">"MbXception"</span><span class="p">:</span> <span class="s2">"código; ancho sin más parámetros"</span><span class="p">,</span>
+        <span class="s2">"ViT-B16"</span><span class="p">:</span> <span class="s2">"contexto global"</span><span class="p">,</span> <span class="s2">"GFN"</span><span class="p">:</span> <span class="s2">"local + global, atención"</span><span class="p">,</span> <span class="s2">"FocusRCNet"</span><span class="p">:</span> <span class="s2">"0.5 M parámetros"</span><span class="p">,</span>
+        <span class="s2">"ResMsCapsule"</span><span class="p">:</span> <span class="s2">"parte-todo; pocos parámetros"</span><span class="p">,</span> <span class="s2">"RWCNet"</span><span class="p">:</span> <span class="s2">"supervisión profunda; protocolo CV"</span><span class="p">}</span>
+<span class="n">lim</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Celik-HC"</span><span class="p">:</span> <span class="s2">"época elegida con prueba"</span><span class="p">,</span> <span class="s2">"MbXception"</span><span class="p">:</span> <span class="s2">"desde cero, 28 M parámetros"</span><span class="p">,</span>
+       <span class="s2">"ViT-B16"</span><span class="p">:</span> <span class="s2">"costo y datos de preentrenamiento"</span><span class="p">,</span> <span class="s2">"GFN"</span><span class="p">:</span> <span class="s2">"113 M parámetros"</span><span class="p">,</span> <span class="s2">"FocusRCNet"</span><span class="p">:</span> <span class="s2">"sin prueba separada"</span><span class="p">,</span>
+       <span class="s2">"ResMsCapsule"</span><span class="p">:</span> <span class="s2">"4 clases; salida no calibrada"</span><span class="p">,</span> <span class="s2">"RWCNet"</span><span class="p">:</span> <span class="s2">"memoria de entrenamiento"</span><span class="p">}</span>
+<span class="n">mat</span><span class="p">[</span><span class="s2">"datos requeridos"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mat</span><span class="o">.</span><span class="n">pretrained</span><span class="p">,</span> <span class="s2">"ImageNet-1k + TrashNet"</span><span class="p">,</span> <span class="s2">"solo TrashNet"</span><span class="p">)</span>
+<span class="n">mat</span><span class="p">[</span><span class="s2">"métrica publicada"</span><span class="p">]</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">pub</span><span class="p">);</span> <span class="n">mat</span><span class="p">[</span><span class="s2">"fortaleza"</span><span class="p">]</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">fort</span><span class="p">);</span> <span class="n">mat</span><span class="p">[</span><span class="s2">"limitación"</span><span class="p">]</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">lim</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">mat</span><span class="p">[[</span><span class="s2">"model"</span><span class="p">,</span> <span class="s2">"family"</span><span class="p">,</span> <span class="s2">"params (M)"</span><span class="p">,</span> <span class="s2">"gmacs"</span><span class="p">,</span> <span class="s2">"datos requeridos"</span><span class="p">,</span> <span class="s2">"métrica publicada"</span><span class="p">,</span> <span class="s2">"fortaleza"</span><span class="p">,</span> <span class="s2">"limitación"</span><span class="p">]]</span>
+        <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"model"</span><span class="p">:</span> <span class="s2">"modelo"</span><span class="p">,</span> <span class="s2">"family"</span><span class="p">:</span> <span class="s2">"familia"</span><span class="p">,</span> <span class="s2">"gmacs"</span><span class="p">:</span> <span class="s2">"GMAC"</span><span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>modelo</th>
+      <th>familia</th>
+      <th>params (M)</th>
+      <th>GMAC</th>
+      <th>datos requeridos</th>
+      <th>métrica publicada</th>
+      <th>fortaleza</th>
+      <th>limitación</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Celik-HC</td>
+      <td>Híbrido DL + ML (fusión multinivel de CNN + XGBoost)</td>
+      <td>28.42</td>
+      <td>3.22</td>
+      <td>ImageNet-1k + TrashNet</td>
+      <td>Acc 99.40 % (80/20)</td>
+      <td>código; fusión multinivel</td>
+      <td>época elegida con prueba</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>MbXception</td>
+      <td>CNN multirrama (Xception modificada)</td>
+      <td>28.39</td>
+      <td>6.19</td>
+      <td>solo TrashNet</td>
+      <td>Acc 94.34 %</td>
+      <td>código; ancho sin más parámetros</td>
+      <td>desde cero, 28 M parámetros</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ViT-B16</td>
+      <td>Transformer (ViT con ajuste fino)</td>
+      <td>85.80</td>
+      <td>17.56</td>
+      <td>ImageNet-1k + TrashNet</td>
+      <td>Acc 96.98 % (70/13/17)</td>
+      <td>contexto global</td>
+      <td>costo y datos de preentrenamiento</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>GFN</td>
+      <td>Híbrido CNN-Transformer con atención (ResNet50 + PPM + CBAM + ViT)</td>
+      <td>113.67</td>
+      <td>5.67</td>
+      <td>ImageNet-1k + TrashNet</td>
+      <td>Acc 94.21 % (80/10/10)</td>
+      <td>local + global, atención</td>
+      <td>113 M parámetros</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>FocusRCNet</td>
+      <td>CNN ligera con atención y destilación de conocimiento</td>
+      <td>0.52</td>
+      <td>0.13</td>
+      <td>solo TrashNet</td>
+      <td>Acc ~92 % (70/30)</td>
+      <td>0.5 M parámetros</td>
+      <td>sin prueba separada</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ResMsCapsule</td>
+      <td>Red de cápsulas con extractor residual</td>
+      <td>4.22</td>
+      <td>1.42</td>
+      <td>ImageNet-1k + TrashNet</td>
+      <td>Acc 91.41 % (4 clases)</td>
+      <td>parte-todo; pocos parámetros</td>
+      <td>4 clases; salida no calibrada</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>RWCNet</td>
+      <td>Fusión de CNN preentrenadas con salidas auxiliares</td>
+      <td>25.60</td>
+      <td>4.59</td>
+      <td>ImageNet-1k + TrashNet</td>
+      <td>Acc 95.01 % (CV 5)</td>
+      <td>supervisión profunda; protocolo CV</td>
+      <td>memoria de entrenamiento</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Tendencias.</strong></p>
+<ul class="simple">
+<li><p><strong>Preentrenamiento:</strong> cinco de los siete modelos parten de pesos de ImageNet. Los que entrenan desde cero (MbXception y FocusRCNet) reportan las menores accuracies, salvo con destilación desde un profesor preentrenado.</p></li>
+<li><p><strong>Hibridación y atención:</strong> los trabajos recientes (2024–2025) combinan redes o añaden atención (GFN, RWCNet, Celik-HC), con más parámetros que los modelos base.</p></li>
+<li><p><strong>Transformers:</strong> se usan con ajuste fino; ninguno se entrena desde cero en TrashNet.</p></li>
+<li><p><strong>Eficiencia:</strong> FocusRCNet y ResMsCapsule buscan reducir parámetros, pero sin medir latencia ni robustez.</p></li>
+<li><p><strong>Desempeño publicado:</strong> todos reportan accuracies entre 91 % y 99 % con una sola partición aleatoria, sin varianza entre semillas ni pruebas de hipótesis.</p></li>
+</ul>
+</section>
+<section id="busqueda-transversal-de-mecanismos">
+<h2>10.8 Búsqueda transversal de mecanismos<a class="headerlink" href="#busqueda-transversal-de-mecanismos" title="Link to this heading">#</a></h2>
+<p>Buscamos los mecanismos de los modelos del benchmark en otras modalidades para identificar candidatos transferibles al modelo propio de la etapa siguiente. Cada cadena combina:</p>
+<ul class="simple">
+<li><p>(i) la familia del mecanismo;</p></li>
+<li><p>(ii) una modalidad de origen distinta de la clasificación de residuos;</p></li>
+<li><p>(iii) el término <em>transfer</em> o <em>adaptation</em>.</p></li>
+</ul>
+<p>Las cadenas se ejecutaron el 16 de noviembre de 2026 en IEEE Xplore (campo <em>All Metadata</em>, 2018–2026, con captura de pantalla de cada una en <a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/tree/main/entregable2/revision_sistematica/capturas"><code class="docutils literal notranslate"><span class="pre">entregable2/revision_sistematica/capturas/</span></code></a>) y en arXiv y OpenAlex por API, con la respuesta cruda guardada.</p>
+<p>La cadena T3, sobre robustez al ruido, exigía cuatro conceptos a la vez y devolvió muy pocos registros. Por eso se registró también una versión ampliada (T3b), y se reportan las dos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cad</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"T1"</span><span class="p">:</span> <span class="s2">"Fusión multinivel (Celik-HC)"</span><span class="p">,</span> <span class="s2">"T2"</span><span class="p">:</span> <span class="s2">"Destilación (FocusRCNet)"</span><span class="p">,</span> <span class="s2">"T3"</span><span class="p">:</span> <span class="s2">"Robustez al ruido (limitación del paper guía)"</span><span class="p">,</span>
+       <span class="s2">"T3b"</span><span class="p">:</span> <span class="s2">"Robustez al ruido, versión ampliada"</span><span class="p">,</span> <span class="s2">"T4"</span><span class="p">:</span> <span class="s2">"Cápsulas (ResMsCapsule)"</span><span class="p">,</span> <span class="s2">"T5"</span><span class="p">:</span> <span class="s2">"Supervisión profunda (RWCNet)"</span><span class="p">,</span>
+       <span class="s2">"T6"</span><span class="p">:</span> <span class="s2">"Atención de canal y espacial (GFN, FocusRCNet)"</span><span class="p">}</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">tipo</span> <span class="o">==</span> <span class="s2">"transversal"</span><span class="p">]</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"id"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"base_corta"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"n_resultados"</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">"first"</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"mecanismo buscado"</span><span class="p">,</span> <span class="p">[</span><span class="n">cad</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">tipo</span> <span class="o">==</span> <span class="s2">"transversal"</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)[[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"cadena_generica"</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"cadena_generica"</span><span class="p">:</span> <span class="s2">"cadena"</span><span class="p">})</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"id"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>base_corta</th>
+      <th>mecanismo buscado</th>
+      <th>IEEE</th>
+      <th>OpenAlex</th>
+      <th>arXiv</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>T1</th>
+      <td>Fusión multinivel (Celik-HC)</td>
+      <td>274</td>
+      <td>89</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>T2</th>
+      <td>Destilación (FocusRCNet)</td>
+      <td>678</td>
+      <td>789</td>
+      <td>275</td>
+    </tr>
+    <tr>
+      <th>T3</th>
+      <td>Robustez al ruido (limitación del paper guía)</td>
+      <td>180</td>
+      <td>7</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>T3b</th>
+      <td>Robustez al ruido, versión ampliada</td>
+      <td>95</td>
+      <td>28</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>T4</th>
+      <td>Cápsulas (ResMsCapsule)</td>
+      <td>161</td>
+      <td>83</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>T5</th>
+      <td>Supervisión profunda (RWCNet)</td>
+      <td>219</td>
+      <td>137</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <th>T6</th>
+      <td>Atención de canal y espacial (GFN, FocusRCNet)</td>
+      <td>1100</td>
+      <td>447</td>
+      <td>91</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cadena</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>T1</th>
+      <td>("hypercolumn" OR "multi-level feature fusion" OR "multi-layer feature fusio...</td>
+    </tr>
+    <tr>
+      <th>T2</th>
+      <td>("knowledge distillation") AND ("speech" OR "natural language" OR "time seri...</td>
+    </tr>
+    <tr>
+      <th>T3</th>
+      <td>("noise robustness" OR "robustness to noise" OR "corruption robustness" OR "...</td>
+    </tr>
+    <tr>
+      <th>T3b</th>
+      <td>("noise robustness" OR "robustness to noise" OR "corruption robustness" OR "...</td>
+    </tr>
+    <tr>
+      <th>T4</th>
+      <td>("capsule network" OR "capsule networks") AND ("text" OR "signal" OR "EEG" O...</td>
+    </tr>
+    <tr>
+      <th>T5</th>
+      <td>("deep supervision" OR "auxiliary loss" OR "auxiliary classifier") AND ("seg...</td>
+    </tr>
+    <tr>
+      <th>T6</th>
+      <td>("channel attention" OR "spatial attention" OR "CBAM") AND ("time series" OR...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Tabla de mecanismos candidatos.</strong> Para cada mecanismo registramos:</p>
+<ul class="simple">
+<li><p>la aplicación de origen;</p></li>
+<li><p>la fuente primaria, verificada contra OpenAlex o arXiv;</p></li>
+<li><p>ejemplos de transferencia a otras modalidades, tomados de los registros de las cadenas T1–T6;</p></li>
+<li><p>la propiedad estructural que comparte con TrashNet;</p></li>
+<li><p>una valoración preliminar de transferibilidad frente a la evidencia del propio benchmark.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RS</span> <span class="o">/</span> <span class="s2">"tabla_mecanismos.csv"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8-sig"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">tm</span><span class="p">[[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"mecanismo"</span><span class="p">,</span> <span class="s2">"modelo_top10"</span><span class="p">,</span> <span class="s2">"aplicacion_modalidad_origen"</span><span class="p">,</span> <span class="s2">"fuente_primaria"</span><span class="p">,</span> <span class="s2">"propiedad_estructural_compartida"</span><span class="p">,</span>
+            <span class="s2">"transferibilidad_preliminar"</span><span class="p">]]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"id"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mecanismo</th>
+      <th>modelo_top10</th>
+      <th>aplicacion_modalidad_origen</th>
+      <th>fuente_primaria</th>
+      <th>propiedad_estructural_compartida</th>
+      <th>transferibilidad_preliminar</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>M1</th>
+      <td>Destilación de conocimiento (maestro grande → alumno ligero)</td>
+      <td>FocusRCNet</td>
+      <td>Compresión de modelos; lenguaje y voz</td>
+      <td>Hinton et al. 2015, arXiv:1503.02531</td>
+      <td>Dataset pequeño y necesidad de modelo ligero; hay un maestro robusto disponi...</td>
+      <td>Alta</td>
+    </tr>
+    <tr>
+      <th>M2</th>
+      <td>Entrenamiento y aumentación con ruido / corrupciones</td>
+      <td>Ninguno del Top 10 (es la limitación)</td>
+      <td>Voz y audio; imagen médica</td>
+      <td>Hendrycks y Dietterich 2019, arXiv:1903.12261</td>
+      <td>Mismo tipo de perturbación (ruido gaussiano de sensor o cámara) que hace col...</td>
+      <td>Alta</td>
+    </tr>
+    <tr>
+      <th>M3</th>
+      <td>Supervisión profunda / salidas auxiliares</td>
+      <td>RWCNet</td>
+      <td>Segmentación médica y teledetección</td>
+      <td>Lee et al. 2015, arXiv:1409.5185; Szegedy et al. 2015, 10.1109/cvpr.2015.729...</td>
+      <td>Pocos datos: regulariza las capas intermedias</td>
+      <td>Alta</td>
+    </tr>
+    <tr>
+      <th>M4</th>
+      <td>Self-attention / Transformer</td>
+      <td>ViT-B16, GFN</td>
+      <td>Lenguaje (traducción)</td>
+      <td>Vaswani et al. 2017, arXiv:1706.03762; Dosovitskiy et al. 2021, arXiv:2010.1...</td>
+      <td>Contexto global; menor sesgo hacia texturas de alta frecuencia</td>
+      <td>Alta</td>
+    </tr>
+    <tr>
+      <th>M5</th>
+      <td>Adaptación de dominio adversarial</td>
+      <td>Ninguno del Top 10</td>
+      <td>Teledetección, EEG, diagnóstico de fallas</td>
+      <td>Ganin y Lempitsky 2015, arXiv:1409.7495</td>
+      <td>Cambio de dominio: TrashNet tiene fondo blanco y el uso real no (caída con f...</td>
+      <td>Media</td>
+    </tr>
+    <tr>
+      <th>M6</th>
+      <td>Atención de canal y espacial (SE, CBAM) y pooling piramidal</td>
+      <td>GFN, FocusRCNet (SimAM)</td>
+      <td>Visión (ImageNet, segmentación); luego series y señales</td>
+      <td>Hu et al. 2018, 10.1109/cvpr.2018.00745; Woo et al. 2018, 10.1007/978-3-030-...</td>
+      <td>Separar el objeto del fondo (Grad-CAM muestra energía en el fondo)</td>
+      <td>Media</td>
+    </tr>
+    <tr>
+      <th>M7</th>
+      <td>Redes de cápsulas</td>
+      <td>ResMsCapsule</td>
+      <td>Dígitos (MNIST); luego texto, EEG y fallas</td>
+      <td>Sabour et al. 2017, arXiv:1710.09829</td>
+      <td>Relaciones parte-todo y pose de objetos deformados</td>
+      <td>Media</td>
+    </tr>
+    <tr>
+      <th>M8</th>
+      <td>Fusión multinivel (hypercolumn)</td>
+      <td>Celik-HC (paper guía)</td>
+      <td>Segmentación y localización fina</td>
+      <td>Hariharan et al. 2015, 10.1109/cvpr.2015.7298642</td>
+      <td>Texturas finas para distinguir materiales</td>
+      <td>Baja</td>
+    </tr>
+    <tr>
+      <th>M9</th>
+      <td>Gradient boosting sobre embeddings profundos</td>
+      <td>Celik-HC (paper guía)</td>
+      <td>Datos tabulares</td>
+      <td>Chen y Guestrin 2016, 10.1145/2939672.2939785</td>
+      <td>Clasificador final sobre vector de 64 dimensiones</td>
+      <td>Baja</td>
+    </tr>
+    <tr>
+      <th>M10</th>
+      <td>Convoluciones separables y bloques invertidos</td>
+      <td>MbXception, MobileNetV2</td>
+      <td>Visión eficiente</td>
+      <td>Chollet 2017, 10.1109/cvpr.2017.195; Sandler et al. 2018, arXiv:1801.04381</td>
+      <td>Costo bajo para dispositivos de borde</td>
+      <td>Media</td>
+    </tr>
+    <tr>
+      <th>M11</th>
+      <td>Conexiones residuales</td>
+      <td>ResNet-18, GFN, ResMsCapsule</td>
+      <td>Visión</td>
+      <td>He et al. 2016, 10.1109/cvpr.2016.90</td>
+      <td>Optimización de redes profundas</td>
+      <td>Baja (ya presente en todos)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Los mecanismos con mayor transferibilidad atacan la limitación cuantificada del paper guía, su fragilidad ante el ruido (capítulos 12 y 15):</p>
+<ul class="simple">
+<li><p><strong>M1, destilación:</strong> destilar la robustez de un maestro Transformer hacia un alumno ligero.</p></li>
+<li><p><strong>M2, entrenamiento con ruido y corrupciones:</strong> la intervención más directa contra esa limitación.</p></li>
+<li><p><strong>M4, atención global:</strong> ViT-B16 es el único modelo del benchmark que casi no se degrada con ruido.</p></li>
+</ul>
+<p>La cadena T3b muestra que la combinación de destilación y robustez al ruido ya se usa en reconocimiento de voz. En cambio, la evidencia propia del benchmark resta transferibilidad a otros mecanismos:</p>
+<ul class="simple">
+<li><p><strong>M8, fusión multinivel:</strong> no aporta en la ablación del paper guía.</p></li>
+<li><p><strong>M9, <em>boosting</em> sobre <em>embeddings</em>:</strong> empeora frente a la <em>softmax</em>.</p></li>
+<li><p><strong>M7, cápsulas:</strong> son mal calibradas y frágiles al ruido.</p></li>
+</ul>
+<p>La tabla no compromete la elección final del modelo propio.</p>
+<p>Las exportaciones de siete cadenas preliminares de mecanismos (M1–M7), ejecutadas en Scopus e IEEE Xplore antes de fijar las cadenas T1–T6 y sin el conteo total, se conservan en <a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/tree/main/entregable2/results/revision/cadenas_preliminares_M1_M7"><code class="docutils literal notranslate"><span class="pre">entregable2/results/revision/cadenas_preliminares_M1_M7/</span></code></a> como registro.</p>
+</section>
+<section id="brecha-de-investigacion">
+<h2>10.9 Brecha de investigación<a class="headerlink" href="#brecha-de-investigacion" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>Ninguno de los 59 estudios incluidos compara modelos publicados de al menos cuatro familias sobre TrashNet con una partición que controle los casi-duplicados, varias semillas e inferencia estadística, ni compara con inferencia estadística la robustez de esos modelos ante ruido de imagen.</p>
+</div></blockquote>
+<p>La brecha tiene dos partes, y cada una se puede refutar con la hoja de extracción (<a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/blob/main/entregable2/revision_sistematica/datos/hoja_extraccion.csv"><code class="docutils literal notranslate"><span class="pre">hoja_extraccion.csv</span></code></a>) y con el cribado del benchmark (<a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/blob/main/entregable2/results/revision/cribado_e2.csv"><code class="docutils literal notranslate"><span class="pre">cribado_e2.csv</span></code></a>).</p>
+<p><strong>Comparación controlada.</strong></p>
+<ul class="simple">
+<li><p><strong>Familias:</strong> solo 2 de los 59 estudios abarcan cuatro familias de arquitectura (Yusiong, 2022; Yang et al., 2026), y ninguno de los dos aplica pruebas estadísticas.</p></li>
+<li><p><strong>Réplicas e inferencia:</strong> 9 estudios reportan más de una corrida y 9 usan alguna prueba estadística. Solo 4 combinan ambas, con dos o tres familias cada uno.</p></li>
+<li><p><strong>Fuga:</strong> ninguno de los 59 tiene riesgo de fuga bajo.</p></li>
+<li><p><strong>Estudios del benchmark:</strong> ninguno de los siete compara modelos con pruebas de hipótesis.</p></li>
+</ul>
+<p><strong>Robustez ante ruido.</strong> 6 de los 59 textos mencionan ruido o corrupción de imagen (indicador <code class="docutils literal notranslate"><span class="pre">ruido_corrupcion</span></code>). Solo uno mide el efecto del ruido gaussiano sobre imágenes de prueba de TrashNet: Liu et al. (2026) reportan que la accuracy de su modelo ResSeMo cae 4.1 puntos con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span>, frente a modelos como VGG16, en una corrida y sin prueba estadística. Los demás usan el ruido como aumento de datos, lo mencionan como motivación o evalúan fondos complejos (Qin et al., 2022), no ruido.</p>
+<p>La brecha conecta con las preguntas de investigación del capítulo 8:</p>
+<ul class="simple">
+<li><p><strong>RQ1 y RQ2:</strong> la primera parte, con el benchmark controlado.</p></li>
+<li><p><strong>RQ3 y RQ4:</strong> la primera parte aplicada al paper guía, con su réplica y su ablación.</p></li>
+<li><p><strong>RQ5:</strong> la segunda parte, con la robustez ante ruido de los diez modelos.</p></li>
+</ul>
+</section>
+<section id="alcance-de-la-revision">
+<h2>10.10 Alcance de la revisión<a class="headerlink" href="#alcance-de-la-revision" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Foco en TrashNet:</strong> la cadena definitiva restringe la revisión a los estudios evaluados en TrashNet, para garantizar la comparabilidad con nuestro conjunto de datos. Los estudios de clasificación de residuos con otros conjuntos de datos quedan identificados en la búsqueda ampliada (sección 10.3).</p></li>
+<li><p><strong>Priorización de la lectura a texto completo:</strong> el análisis detallado se concentró en los 62 registros de prioridad Alta; los demás quedan clasificados en el Excel de selección.</p></li>
+<li><p><strong>Selección asistida por IA y verificada por personas:</strong> el cribado preliminar y la lectura a texto completo se apoyaron en IA. Dos revisores humanos validaron el cribado en una muestra común (<span class="math notranslate nohighlight">\(\kappa = 0.857\)</span>) y los siete estudios del benchmark se verificaron a mano.</p></li>
+<li><p><strong>Extracción con patrones explícitos:</strong> los indicadores de la hoja de extracción y del cribado del benchmark se obtienen con reglas reproducibles sobre el texto completo y se verificaron a mano en los siete estudios del benchmark.</p></li>
+<li><p><strong>Bases de la búsqueda ampliada:</strong> IEEE Xplore aporta los conteos en una base principal, y arXiv y OpenAlex los registros completos para el cribado reproducible.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="09_datos_auditoria.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">9. Datos: ficha técnica, contrato de datos y auditoría de fuga</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="11_protocolo_preregistro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">11. Preregistro, protocolo común y fichas de modelo</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-de-busqueda-y-bases-de-datos">10.1 Estrategia de búsqueda y bases de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criterios-de-inclusion-y-exclusion">10.2 Criterios de inclusión y exclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrama-prisma-2020-y-acuerdo-entre-revisores">10.3 Diagrama PRISMA 2020 y acuerdo entre revisores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hoja-de-extraccion-y-calidad-metodologica">10.4 Hoja de extracción y calidad metodológica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-de-los-modelos-del-benchmark">10.5 Selección de los modelos del benchmark</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#puntaje-de-priorizacion">Puntaje de priorización</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-detallado-de-los-modelos">10.6 Análisis detallado de los modelos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#celik-hc-paper-guia">10.6.1 Celik-HC (paper guía)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mbxception">10.6.2 MbXception</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vit-b16">10.6.3 ViT-B16</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gfn">10.6.4 GFN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#focusrcnet">10.6.5 FocusRCNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resmscapsule">10.6.6 ResMsCapsule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rwcnet">10.6.7 RWCNet</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matriz-comparativa-y-tendencias">10.7 Matriz comparativa y tendencias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#busqueda-transversal-de-mecanismos">10.8 Búsqueda transversal de mecanismos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brecha-de-investigacion">10.9 Brecha de investigación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcance-de-la-revision">10.10 Alcance de la revisión</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan Benavides y Juan David Díaz Fernández
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,779 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>17. Reproducibilidad del benchmark &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '17_reproducibilidad';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="18. Conclusiones del benchmark" href="18_conclusiones_benchmark.html" />
+    <link rel="prev" title="16. Discusión del benchmark" href="16_discusion_benchmark.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><div class="sidebar-autores">
+  <div class="autor">
+    <img src="_static/autores/anyely.jpg" alt="Anyely Sanjuan Benavides">
+    <p class="autor-nombre">Anyely Sanjuan Benavides</p>
+    <p class="autor-detalle">Msc. Analítica de Datos<br>Universidad del Norte</p>
+  </div>
+  <div class="autor">
+    <img src="_static/autores/juan.jpg" alt="Juan David Díaz Fernández">
+    <p class="autor-nombre">Juan David Díaz Fernández</p>
+    <p class="autor-detalle">Msc. Ingeniería Mecánica<br>Universidad del Norte</p>
+  </div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Clasificación de residuos con TrashNet
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 1: modelos base</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y conjunto de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_conclusiones.html">7. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2: benchmark de diez modelos</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_benchmark_introduccion.html">8. Benchmark de diez modelos: problema, preguntas e hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datos_auditoria.html">9. Datos: ficha técnica, contrato de datos y auditoría de fuga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_revision_sistematica.html">10. Revisión sistemática ampliada y selección de los modelos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_protocolo_preregistro.html">11. Preregistro, protocolo común y fichas de modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_paper_guia.html">12. Paper guía: réplica, limitaciones y ablación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_benchmark_estadistica.html">13. Benchmark: resultados e inferencia estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_ajuste_calibracion_incertidumbre.html">14. Bondad de ajuste, sobreajuste, calibración e incertidumbre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_robustez_interpretabilidad_errores.html">15. Robustez, interpretabilidad, errores y techo de desempeño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_discusion_benchmark.html">16. Discusión del benchmark</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Reproducibilidad del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_conclusiones_benchmark.html">18. Conclusiones del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_referencias_benchmark.html">19. Referencias del benchmark</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/17_reproducibilidad.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>17. Reproducibilidad del benchmark</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-de-los-archivos">17.1 Estructura de los archivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entorno">17.2 Entorno</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comandos">17.3 Comandos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidencia-de-reproduccion">17.4 Evidencia de reproducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ficha-de-ruta-metodologica">17.5 Ficha de ruta metodológica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lista-de-verificacion-de-reproducibilidad-apendice-b">17.6 Lista de verificación de reproducibilidad (Apéndice B)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="reproducibilidad-del-benchmark">
+<h1>17. Reproducibilidad del benchmark<a class="headerlink" href="#reproducibilidad-del-benchmark" title="Link to this heading">#</a></h1>
+<p>En este capítulo describimos cómo regenerar los resultados de los capítulos 8 a 16 a partir del repositorio. Incluimos la ficha de ruta metodológica y la lista de verificación de reproducibilidad.</p>
+<section id="estructura-de-los-archivos">
+<h2>17.1 Estructura de los archivos<a class="headerlink" href="#estructura-de-los-archivos" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>entregable2/
+├── README.md            etapas del experimento y archivos de salida
+├── requirements.txt     dependencias del entrenamiento
+├── src/                 código del benchmark (datos, 7 modelos, entrenamiento, evaluación, estadística, réplica)
+├── notebooks/           cuaderno para ejecutar el entrenamiento en Colab o Kaggle
+├── analisis/            análisis complementarios sobre los resultados guardados (no entrenan redes)
+├── revision_sistematica/  sección 3.1: cadenas con fecha y conteo, PRISMA, kappa, hoja de extracción,
+│                          tabla de mecanismos, capturas, respuestas crudas de las APIs y scripts
+└── results/
+    ├── &lt;Modelo&gt;/seed_XX/     80 corridas finales (configuración, historia, predicciones, métricas, tiempos)
+    ├── &lt;Modelo&gt;/hpo/         las 8 configuraciones de la búsqueda de cada modelo
+    ├── ablation/             ablaciones de Celik-HC (5 variantes) y RWCNet (3 variantes), 8 semillas cada una
+    ├── replication/          réplica del paper guía (protocolos original y estricto)
+    ├── common/               preregistros, partición verificada, estadísticas de normalización, requirements-lock
+    ├── summary/              tablas de resumen del benchmark
+    ├── complementario/       tablas de los análisis complementarios
+    ├── revision/             cribado de los 62 estudios para el benchmark, hojas PRISMA exportadas y cadenas preliminares
+    └── logs/                 registros de ejecución con marca de tiempo (Colab y portátil)
+</pre></div>
+</div>
+<p>Las corridas de los tres modelos base están en <code class="docutils literal notranslate"><span class="pre">results/</span></code> (capítulo 4). Los pesos (<code class="docutils literal notranslate"><span class="pre">.pt</span></code>), los mapas de Grad-CAM (<code class="docutils literal notranslate"><span class="pre">.npz</span></code>) y las imágenes no se versionan por tamaño. Los mapas y los pesos de las corridas del portátil se conservan fuera del repositorio.</p>
+</section>
+<section id="entorno">
+<h2>17.2 Entorno<a class="headerlink" href="#entorno" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Elemento</p></th>
+<th class="head"><p>Valor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Python</p></td>
+<td><p>3.12.10 (portátil) y 3.13.16 (Colab)</p></td>
+</tr>
+<tr class="row-odd"><td><p>PyTorch / torchvision</p></td>
+<td><p>2.14.1+cu130 / 0.29.1+cu130</p></td>
+</tr>
+<tr class="row-even"><td><p>CUDA</p></td>
+<td><p>13.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Otras dependencias</p></td>
+<td><p>Versiones exactas en <code class="docutils literal notranslate"><span class="pre">entregable2/results/common/requirements-lock.txt</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>GPU</p></td>
+<td><p>NVIDIA A100-SXM4 (Colab) y RTX 4060 Laptop (portátil)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sistema operativo</p></td>
+<td><p>Linux (Colab) y Windows 11 (portátil)</p></td>
+</tr>
+<tr class="row-even"><td><p>Semillas</p></td>
+<td><p>0 a 7 en las corridas finales, 100 en la búsqueda y 2026 en las perturbaciones</p></td>
+</tr>
+<tr class="row-odd"><td><p>Determinismo</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cudnn.deterministic</span> <span class="pre">=</span> <span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">cudnn.benchmark</span> <span class="pre">=</span> <span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">use_deterministic_algorithms(True,</span> <span class="pre">warn_only=True)</span></code>, <code class="docutils literal notranslate"><span class="pre">CUBLAS_WORKSPACE_CONFIG=:4096:8</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>El entorno se fija con <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> y <code class="docutils literal notranslate"><span class="pre">requirements-lock.txt</span></code> y se reconstruye con <code class="docutils literal notranslate"><span class="pre">venv</span></code>. En la etapa siguiente el entorno se empaquetará además en una imagen de contenedor.</p>
+</section>
+<section id="comandos">
+<h2>17.3 Comandos<a class="headerlink" href="#comandos" title="Link to this heading">#</a></h2>
+<p><strong>Entrenamiento</strong> (desde <code class="docutils literal notranslate"><span class="pre">entregable2/</span></code>, con GPU; ver <code class="docutils literal notranslate"><span class="pre">entregable2/README.md</span></code>):</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">-m</span> <span class="n">venv</span> <span class="p">.</span><span class="n">venv</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">torch</span> <span class="n">torchvision</span> <span class="p">-</span><span class="n">-index-url</span> <span class="n">https</span><span class="p">://</span><span class="n">download</span><span class="p">.</span><span class="n">pytorch</span><span class="p">.</span><span class="n">org</span><span class="p">/</span><span class="n">whl</span><span class="p">/</span><span class="n">cu130</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">-r</span> <span class="n">requirements</span><span class="p">.</span><span class="n">txt</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-m</span> <span class="n">src</span><span class="p">.</span><span class="n">runner</span> <span class="n">estimate</span> <span class="p">-</span><span class="n">-models</span> <span class="n">RWCNet</span>          <span class="c"># estimación de horas de GPU</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-m</span> <span class="n">src</span><span class="p">.</span><span class="n">runner</span> <span class="n">all</span> <span class="p">-</span><span class="n">-models</span> <span class="n">MbXception</span> <span class="n">FocusRCNet</span> <span class="n">ResMsCapsule</span> <span class="n">RWCNet</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-m</span> <span class="n">src</span><span class="p">.</span><span class="n">runner</span> <span class="n">ablation</span>                           <span class="c"># las 5 variantes del paper guía</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-m</span> <span class="n">src</span><span class="p">.</span><span class="n">runner</span> <span class="n">ablation</span> <span class="p">-</span><span class="n">-variants</span> <span class="n">RWCNet</span><span class="p">/</span><span class="n">sin_auxiliares</span> <span class="n">RWCNet</span><span class="p">/</span><span class="n">solo_densenet201</span> <span class="n">RWCNet</span><span class="p">/</span><span class="n">solo_mobilenetv2</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-m</span> <span class="n">src</span><span class="p">.</span><span class="n">runner</span> <span class="n">replicate</span>                          <span class="c"># réplica del paper guía</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-m</span> <span class="n">src</span><span class="p">.</span><span class="n">runner</span> <span class="n">summary</span>                            <span class="c"># tablas de results/summary</span>
+</pre></div>
+</div>
+<p>Todas las etapas se pueden reanudar: las corridas con <code class="docutils literal notranslate"><span class="pre">DONE</span></code> se saltan y las parciales continúan desde la última época guardada.</p>
+<p><strong>Análisis complementarios</strong> (desde la raíz del repositorio, en CPU):</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">entregable2</span><span class="p">\</span><span class="n">analisis</span><span class="p">\</span><span class="n">complementos</span><span class="p">.</span><span class="n">py</span>          <span class="c"># estadística, calibración, conformal, robustez, errores, eficiencia, ablaciones</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">entregable2</span><span class="p">\</span><span class="n">analisis</span><span class="p">\</span><span class="n">baselines</span><span class="p">.</span><span class="n">py</span>             <span class="c"># baselines trivial y clásico, sanidad con etiquetas permutadas</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">entregable2</span><span class="p">\</span><span class="n">analisis</span><span class="p">\</span><span class="n">casi_duplicados</span><span class="p">.</span><span class="n">py</span>       <span class="c"># auditoría de casi-duplicados con embeddings</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">entregable2</span><span class="p">\</span><span class="n">analisis</span><span class="p">\</span><span class="n">fidelidad_gradcam</span><span class="p">.</span><span class="n">py</span> <span class="p">&lt;</span><span class="n">results</span> <span class="n">con</span> <span class="n">pesos</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="n">código</span> <span class="nb">del </span><span class="n">benchmark</span><span class="p">&gt;</span>   <span class="c"># fidelidad de Grad-CAM</span>
+<span class="p">.</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">entregable2</span><span class="p">\</span><span class="n">analisis</span><span class="p">\</span><span class="n">revision_e2</span><span class="p">.</span><span class="n">py</span> <span class="n">puntuar</span>   <span class="c"># cribado y puntaje de los 62 estudios</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">baselines.py</span></code> y <code class="docutils literal notranslate"><span class="pre">casi_duplicados.py</span></code> necesitan las imágenes en <code class="docutils literal notranslate"><span class="pre">data/raw/trashnet/dataset-resized/</span></code>. La estabilidad de Grad-CAM y la figura de ejemplos necesitan los archivos <code class="docutils literal notranslate"><span class="pre">gradcam.npz</span></code>, cuya ruta se indica con la variable <code class="docutils literal notranslate"><span class="pre">TRASHNET_E2_FULL</span></code>. La prueba de fidelidad necesita además los pesos <code class="docutils literal notranslate"><span class="pre">best_model.pt</span></code> de cada corrida.</p>
+<p><strong>Informe.</strong> Los cuadernos 09 a 15 leen las tablas de <code class="docutils literal notranslate"><span class="pre">entregable2/results/</span></code> y no entrenan. Se ejecutan en orden y se guardan con sus salidas, porque el libro se compila sin ejecutar celdas.</p>
+</section>
+<section id="evidencia-de-reproduccion">
+<h2>17.4 Evidencia de reproducción<a class="headerlink" href="#evidencia-de-reproduccion" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Misma máquina:</strong> el reentrenamiento de las 8 semillas de ViT-B16 en una sesión nueva de Colab reprodujo la misma mejor época, el mismo F1 y el 100 % de las predicciones de prueba (sección 11.6). La discrepancia máxima observada fue 0.</p></li>
+<li><p><strong>Tablas de resumen:</strong> <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">src.runner</span> <span class="pre">summary</span></code> regenera las tablas de <a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/tree/main/entregable2/results/summary"><code class="docutils literal notranslate"><span class="pre">entregable2/results/summary/</span></code></a> a partir de las corridas guardadas, sin GPU.</p></li>
+<li><p><strong>Combinación de máquinas:</strong> las corridas de Colab y del portátil se combinaron en una sola carpeta, y la huella del conjunto de prueba se verificó en ambas máquinas antes de cada corrida.</p></li>
+<li><p><strong>Reproducción independiente de la tabla principal:</strong> recalculamos el F1 macro y la accuracy de las 80 corridas finales directamente desde las predicciones guardadas, con un código distinto del que generó las tablas (<code class="docutils literal notranslate"><span class="pre">entregable2/results/complementario/reproduccion_tabla_principal.csv</span></code>). La discrepancia máxima frente a la tabla principal es 0 en las 80 corridas, y el estadístico de Friedman recalculado (<span class="math notranslate nohighlight">\(Q = 64.77\)</span>) coincide exactamente.</p></li>
+</ul>
+</section>
+<section id="ficha-de-ruta-metodologica">
+<h2>17.5 Ficha de ruta metodológica<a class="headerlink" href="#ficha-de-ruta-metodologica" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Elemento</p></th>
+<th class="head"><p>Valor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tipo de problema</p></td>
+<td><p>7. Clasificación de imágenes (familia F4)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ruta seguida</p></td>
+<td><p>F4a, clasificación de imágenes, pasos I1 a I8 (sección 8.2)</p></td>
+</tr>
+<tr class="row-even"><td><p>Unidad de independencia</p></td>
+<td><p>Grupo de casi-duplicados; dependencia por objeto auditada en la sección 9.4</p></td>
+</tr>
+<tr class="row-odd"><td><p>Métrica primaria</p></td>
+<td><p>F1 macro en prueba; <span class="math notranslate nohighlight">\(\delta = 0.02\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bondad de ajuste (tabla A)</p></td>
+<td><p>Binomial frente al baseline trivial, permutación de etiquetas, AUC frente a 0.5 y MCC frente a 0 con IC bootstrap por grupo, pendiente e intercepto de calibración, Z de Spiegelhalter (sección 14.1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sobreajuste (tabla B)</p></td>
+<td><p>Brecha entre entrenamiento y validación con margen (Wilcoxon y t unilaterales, Holm), validación frente a prueba con IC bootstrap por grupo, validación adversarial, sensibilidad a la semilla, Grad-CAM contra atajos (secciones 9.3, 14.2 y 15.2)</p></td>
+</tr>
+<tr class="row-even"><td><p>Diferencias significativas (tabla C)</p></td>
+<td><p>Friedman con permutación e Iman-Davenport, ANOVA de medidas repetidas con Greenhouse-Geisser, t pareada, Wilcoxon, bootstrap pareado, Conover-Holm y Nemenyi con diagrama de diferencia crítica, TOST, prueba bayesiana con ROPE, McNemar, Q de Cochran, DeLong (capítulo 13)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tamaños de efecto</p></td>
+<td><p><span class="math notranslate nohighlight">\(d_z\)</span>, rango-biserial, <span class="math notranslate nohighlight">\(A_{12}\)</span> de Vargha-Delaney, <span class="math notranslate nohighlight">\(W\)</span> de Kendall, <span class="math notranslate nohighlight">\(\eta^2\)</span> e ICC(1)</p></td>
+</tr>
+<tr class="row-even"><td><p>Familias y corrección</p></td>
+<td><p>45 pares del benchmark (Holm, preregistrada); 7 contrastes frente al modelo de referencia; 5 variantes de la ablación de Celik-HC; 3 variantes de la ablación de RWCNet; 20 contrastes frente a los baselines</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="lista-de-verificacion-de-reproducibilidad-apendice-b">
+<h2>17.6 Lista de verificación de reproducibilidad (Apéndice B)<a class="headerlink" href="#lista-de-verificacion-de-reproducibilidad-apendice-b" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Ítem</p></th>
+<th class="head"><p>Evidencia</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Preregistro fechado antes del primer entrenamiento</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">entregable2/results/common/preregistro_2026-11-14.md</span></code> (20:12) y <code class="docutils literal notranslate"><span class="pre">preregistro_colab_2026-11-15.md</span></code> (sección 11.1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hash del conjunto de datos y del conjunto de prueba</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">data/SHA256SUMS.txt</span></code>; SHA-256 de cada imagen en la partición (sección 9.4)</p></td>
+</tr>
+<tr class="row-even"><td><p>Auditoría de fuga ejecutada</p></td>
+<td><p>Sección 9.4; la dependencia por objeto se cuantificó con un análisis de sensibilidad</p></td>
+</tr>
+<tr class="row-odd"><td><p>Particiones y semillas guardadas</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">data/splits/trashnet_split_v2_s1234.csv</span></code>; semillas en <code class="docutils literal notranslate"><span class="pre">config.json</span></code> de cada corrida</p></td>
+</tr>
+<tr class="row-even"><td><p>Un pipeline por modelo, sin ajustes fuera de entrenamiento</p></td>
+<td><p>Sección 9.4 (fuga por transformaciones) y capítulo 11</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mismo presupuesto de ajuste y configuraciones registradas</p></td>
+<td><p>8 configuraciones por modelo en <code class="docutils literal notranslate"><span class="pre">results/&lt;Modelo&gt;/hpo/</span></code> y <code class="docutils literal notranslate"><span class="pre">busqueda_hiperparametros.csv</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Al menos 6 ejecuciones por modelo y resultados por ejecución</p></td>
+<td><p>8 semillas; <code class="docutils literal notranslate"><span class="pre">metricas_por_corrida.csv</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Análisis de potencia</p></td>
+<td><p>Capítulo 4 y sección 13.10</p></td>
+</tr>
+<tr class="row-even"><td><p>Baselines trivial, clásico y los tres modelos base</p></td>
+<td><p>Sección 13.4; los modelos base conservan el protocolo del capítulo 4</p></td>
+</tr>
+<tr class="row-odd"><td><p>Versiones, hardware y determinismo documentados</p></td>
+<td><p>Secciones 11.6 y 17.2</p></td>
+</tr>
+<tr class="row-even"><td><p>Tablas A, B y C con <span class="math notranslate nohighlight">\(p\)</span> exactos, ajustados, IC y tamaños de efecto</p></td>
+<td><p>Capítulos 13 y 14</p></td>
+</tr>
+<tr class="row-odd"><td><p>Familias de comparaciones declaradas a priori</p></td>
+<td><p>Familia de 45 pares fijada en el preregistro, con Holm; la regla de decisión por pares se precisó antes de ver los resultados (sección 11.2)</p></td>
+</tr>
+<tr class="row-even"><td><p>Techo de desempeño y <span class="math notranslate nohighlight">\(\gamma\)</span></p></td>
+<td><p>Sección 15.4</p></td>
+</tr>
+<tr class="row-odd"><td><p>Búsqueda de arquitectura</p></td>
+<td><p>No aplica: los siete artículos definen la arquitectura (sección 11.5)</p></td>
+</tr>
+<tr class="row-even"><td><p>Robustez con tres niveles; fidelidad y estabilidad de las explicaciones</p></td>
+<td><p>Tres niveles con curva de degradación e índice de robustez en ruido y brillo; desenfoque, oclusión y fondo con el nivel preregistrado del capítulo 5. Estabilidad entre semillas en los siete modelos publicados; fidelidad por inserción en RWCNet, el mejor modelo, y en tres modelos más, 8 de 8 semillas por encima del azar; ViT-B16 y GFN se evalúan con estabilidad y atención sobre el fondo (sección 15.2)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Incertidumbre en los tres mejores modelos con cobertura empírica</p></td>
+<td><p>MC Dropout y predicción conforme (sección 14.4)</p></td>
+</tr>
+<tr class="row-even"><td><p>Un solo acceso al conjunto de prueba por corrida</p></td>
+<td><p>El código evalúa la prueba una vez, con el modelo de la mejor época de validación</p></td>
+</tr>
+<tr class="row-odd"><td><p>Réplica del paper guía con criterio a priori y limitación</p></td>
+<td><p>Capítulo 12: criterio fijado antes de ejecutar, discrepancia con IC y causas; pipeline validado con los siete modelos publicados (sección 12.2)</p></td>
+</tr>
+<tr class="row-even"><td><p>Reproducción independiente de la tabla principal</p></td>
+<td><p>Recálculo desde las predicciones con código independiente: discrepancia máxima 0 en las 80 corridas; reentrenamiento exacto de ViT-B16 (sección 17.4)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Código de extremo a extremo con un comando y entorno reproducible</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">src.runner</span> <span class="pre">all</span></code>, <code class="docutils literal notranslate"><span class="pre">requirements-lock.txt</span></code> y entorno <code class="docutils literal notranslate"><span class="pre">venv</span></code>; contenedor en la etapa siguiente</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="16_discusion_benchmark.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">16. Discusión del benchmark</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="18_conclusiones_benchmark.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">18. Conclusiones del benchmark</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-de-los-archivos">17.1 Estructura de los archivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entorno">17.2 Entorno</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comandos">17.3 Comandos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidencia-de-reproduccion">17.4 Evidencia de reproducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ficha-de-ruta-metodologica">17.5 Ficha de ruta metodológica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lista-de-verificacion-de-reproducibilidad-apendice-b">17.6 Lista de verificación de reproducibilidad (Apéndice B)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan Benavides y Juan David Díaz Fernández
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
