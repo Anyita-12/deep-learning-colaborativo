@@ -26,5 +26,7 @@ parts:
       - file: 13_benchmark_estadistica
       - file: 14_ajuste_calibracion_incertidumbre
       - file: 15_robustez_interpretabilidad_errores
-      - file: 16_discusion_conclusiones
+      - file: 16_discusion_benchmark
       - file: 17_reproducibilidad
+      - file: 18_conclusiones_benchmark
+      - file: 19_referencias_benchmark

@@ -21,7 +21,7 @@ from scipy import stats as st
 from sklearn.metrics import matthews_corrcoef, roc_auc_score
 from statsmodels.stats.multitest import multipletests
 
-from comun import (ALPHA, CLASSES, DELTA, E1_MODELS, E2_MODELS, FULL, MACHINE, MODELS, OUT, RES, SEEDS, aligned,
+from comun import (ALPHA, CLASSES, DELTA, E1_MODELS, E1_RES, E2_MODELS, FULL, MACHINE, MODELS, OUT, RES, SEEDS, aligned,
                    fast_f1_macro, group_bootstrap_indices, groups_for, load_pickle, run_dir, save)
 
 N_BOOT = 2000
@@ -563,17 +563,60 @@ def eficiencia():
     g["eta_ic_hi"] = hi
     save(g.reset_index(), "eficiencia_pareto.csv")
 
-    # Energía aproximada: potencia nominal de la GPU x tiempo de entrenamiento (búsqueda + 8 semillas)
-    tdp = {"A100": 400.0, "RTX 4060": 75.0}
+    energia()
+
+
+# Potencia medida en la RTX 4060 (nvidia-smi, 1 Hz) durante las épocas 1 y 2 de cada modelo (16-11-2026)
+VENTANAS_POTENCIA = {"MbXception": ("16:18:53", "16:19:17"), "FocusRCNet": ("16:19:41", "16:20:01"),
+                     "ResMsCapsule": ("16:20:18", "16:20:35"), "RWCNet": ("16:21:18", "16:22:17")}
+TDP = {"A100": 400.0, "RTX 4060": 75.0}
+PUE = {"A100": 1.09, "RTX 4060": 1.0}             # Google, promedio anual 2024; portátil sin centro de datos
+FE = {"A100": 0.413, "RTX 4060": 0.220}           # kg CO2e/kWh: us-central1 2024 (Google); SIN Colombia 2024 (UPME)
+
+
+def _historia_s(p):
+    try:
+        return float(np.nansum(load_pickle(p)["epoch_time_s"]))
+    except Exception:
+        return np.nan
+
+
+def energia():
+    pw = pd.read_csv(OUT / "potencia_gpu_rtx4060.csv", header=None, names=["t", "W", "util", "mem"])
+    pw["hora"] = pw.t.str.slice(11, 19)
+    med = {m: pw[(pw.hora >= a) & (pw.hora <= b)].W.mean() for m, (a, b) in VENTANAS_POTENCIA.items()}
+    p_local = float(np.mean(list(med.values())))
+    frac_tdp = p_local / TDP["RTX 4060"]
+    pot = {m: med.get(m, p_local) if MACHINE[m] == "RTX 4060" else frac_tdp * TDP["A100"] for m in MODELS}
+    save(pd.DataFrame([{"model": m, "potencia_media_W": v, "fuente": "medida" if m in med else
+                        ("media de los modelos medidos" if MACHINE[m] == "RTX 4060" else
+                         f"{frac_tdp:.2f} x TDP de la A100 (fracción medida en la RTX 4060)")} for m, v in pot.items()]),
+         "potencia_por_modelo.csv")
+
+    mc = pd.read_csv(RES / "summary" / "metricas_por_corrida.csv")
     hp = pd.read_csv(RES / "summary" / "busqueda_hiperparametros.csv").groupby("model").train_time_s.sum()
-    rows = []
+    filas = []
+    def add(comp, m, horas, maquina=None):
+        mq = maquina or MACHINE[m]
+        p = pot[m] if mq == MACHINE[m] else (p_local if mq == "RTX 4060" else frac_tdp * TDP["A100"])
+        kwh = p * horas * PUE[mq] / 1000
+        filas.append({"componente": comp, "modelo": m, "maquina": mq, "horas_gpu": horas, "potencia_W": p,
+                      "kwh": kwh, "kg_co2e": kwh * FE[mq], "kwh_cota_tdp": TDP[mq] * horas * PUE[mq] / 1000})
     for m in MODELS:
-        t_final = mc[mc.model == m].train_time_s.sum()
-        t_hpo = hp.get(m, np.nan)
-        kwh = tdp[MACHINE[m]] * (t_final + (0 if np.isnan(t_hpo) else t_hpo)) / 3.6e6
-        rows.append({"model": m, "maquina": MACHINE[m], "tdp_W": tdp[MACHINE[m]], "horas_finales": t_final / 3600,
-                     "horas_busqueda": t_hpo / 3600 if not np.isnan(t_hpo) else np.nan, "kwh_estimado": kwh})
-    save(pd.DataFrame(rows), "energia_estimada.csv")
+        add("corridas finales (8 semillas)", m, mc[mc.model == m].train_time_s.sum() / 3600)
+        if m in hp.index:
+            add("búsqueda de hiperparámetros (8 configuraciones)", m, hp[m] / 3600)
+        else:
+            t = sum(_historia_s(p) for p in (E1_RES / m / "hpo").glob("trial_*/history.pkl"))
+            add("búsqueda de hiperparámetros (8 configuraciones)", m, t / 3600)
+    add("profesor EfficientNet-B4", "FocusRCNet", _historia_s(RES / "common" / "teacher_effnetb4" / "history.pkl") / 3600)
+    add("regeneración de Grad-CAM (8 semillas)", "ViT-B16", mc[mc.model == "ViT-B16"].train_time_s.sum() / 3600)
+    for base in ("Celik-HC", "RWCNet"):
+        t = sum(load_pickle(p)["train_time_s"] for p in (RES / "ablation" / base).glob("*/seed_*/timing.pkl"))
+        add(f"ablación de {base}", base, t / 3600, maquina="RTX 4060")
+    rep = pd.read_csv(RES / "summary" / "replicacion_paper_guia.csv")
+    add("réplica del paper guía (10 corridas)", "Celik-HC", rep.train_time_s.sum() / 3600, maquina="A100")
+    save(pd.DataFrame(filas), "energia_estimada.csv")
 
 
 # ----------------------------------------------------------------------------------------------

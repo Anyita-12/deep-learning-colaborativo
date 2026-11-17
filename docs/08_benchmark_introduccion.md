@@ -1,22 +1,22 @@
 # 8. Benchmark de diez modelos: problema, preguntas e hipótesis
 
-Los capítulos 1 a 7 fijaron el problema, la partición, la métrica primaria, el margen de relevancia práctica y el modelo de referencia (ResNet-18 entrenada desde cero). En los capítulos 8 a 17 ampliamos la comparación a diez modelos: los tres modelos base y siete modelos publicados sobre TrashNet, seleccionados a partir de la revisión sistemática del capítulo 3. Todos se evalúan con la misma partición, las mismas métricas y los mismos umbrales. Ninguno de los elementos declarados en los capítulos 1, 2 y 6 se modifica.
+Los capítulos 1 a 7 fijaron el problema, la partición, la métrica primaria, el margen de relevancia práctica y el modelo de referencia (ResNet-18 entrenada desde cero). En los capítulos 8 a 19 ampliamos la comparación a diez modelos: los tres modelos base y siete modelos publicados sobre TrashNet, seleccionados con la revisión sistemática del capítulo 10, que amplía la del capítulo 3. Todos se evalúan con la misma partición, las mismas métricas y los mismos umbrales. Ninguno de los elementos declarados en los capítulos 1, 2 y 6 se modifica.
 
 ## 8.1 Resumen estructurado
 
-**Problema.** Clasificación de imágenes de residuos de TrashNet en seis clases de material, con F1 macro en prueba como métrica primaria y $\delta = 0.02$ como margen de relevancia práctica.
+**Problema.** Clasificar imágenes de TrashNet en seis materiales; métrica primaria: F1 macro en prueba, con margen de relevancia $\delta = 0.02$.
 
-**Método.** Seleccionamos siete modelos publicados (Celik-HC, MbXception, ViT-B16, GFN, FocusRCNet, ResMsCapsule y RWCNet) a partir de 62 estudios a texto completo, con un puntaje explícito y diversidad de seis familias. Los entrenamos con un protocolo común preregistrado: partición agrupada por casi-duplicados, la misma búsqueda de 8 configuraciones por modelo y 8 semillas. Los comparamos con los tres modelos base y con dos baselines no profundos mediante pruebas de Friedman, t pareada y Wilcoxon con corrección de Holm, McNemar, DeLong y pruebas de equivalencia. Replicamos el paper guía (Celik, 2025) con su código y realizamos ablaciones sobre el paper guía y sobre el mejor modelo.
+**Método.** Seleccionamos siete modelos publicados de seis familias entre 62 estudios, con un puntaje explícito. Los entrenamos con un protocolo preregistrado: partición agrupada por casi-duplicados, la misma búsqueda de 8 configuraciones y 8 semillas por modelo. Los comparamos con los tres modelos base y dos baselines no profundos (Friedman, t pareada y Wilcoxon con Holm, McNemar, DeLong y equivalencia). Replicamos el paper guía (Celik, 2025) y evaluamos ocho variantes de ablación.
 
-**Resultados.** RWCNet obtiene el mayor F1 macro ($0.945 \pm 0.010$), seguido de ViT-B16 ($0.938 \pm 0.014$). Ambos superan a ResNet-18 por 0.082 y 0.075, con $p$ Holm $\leq 0.004$; su diferencia entre sí (0.007) es equivalente dentro de $\pm\delta$ (TOST $p = 0.024$). El resultado publicado del paper guía (accuracy de 99.4 %) no se replica: con su propio protocolo obtenemos $0.925 \pm 0.005$. Elegir la época mirando el conjunto de prueba infla la accuracy en 2.8 puntos. Su ablación muestra que el preentrenamiento explica la ganancia y que la fusión multinivel no la explica. En RWCNet, en cambio, la supervisión profunda aporta 0.022 de F1. Ante ruido gaussiano, el F1 de las CNN cae entre 0.30 y 0.67, mientras que ViT-B16 pierde 0.04.
+**Resultados.** RWCNet obtiene el mayor F1 macro ($0.945 \pm 0.010$) y ViT-B16 el segundo ($0.938 \pm 0.014$). Ambos superan a ResNet-18 por 0.082 y 0.075 ($p$ Holm $\leq 0.004$) y son equivalentes entre sí dentro de $\pm\delta$ (TOST $p = 0.024$). La accuracy publicada del paper guía (99.4 %) no se replica (su protocolo da $0.925 \pm 0.005$; elegir la época con la prueba la infla 2.8 puntos), aunque el mismo pipeline reproduce RWCNet y GFN. En el paper guía aporta el preentrenamiento (0.085) y en RWCNet su extractor principal (0.033) y la supervisión profunda (0.022); en ninguno la segunda red tiene un aporte significativo. Con ruido gaussiano, el F1 de las CNN cae entre 0.30 y 0.67, y el de ViT-B16, 0.04.
 
-**Conclusión.** Los modelos preentrenados superan de forma significativa y relevante al modelo de referencia del E1. La fragilidad ante el ruido del paper guía es compartida por las arquitecturas convolucionales y define la limitación que atacará el modelo propio del proyecto.
+**Conclusión.** Los modelos preentrenados superan de forma significativa y relevante al modelo de referencia del E1. La fragilidad ante el ruido, compartida por las arquitecturas convolucionales, es la limitación que atacará el modelo propio.
 
 ## 8.2 Tipo de problema y ruta metodológica
 
-El problema sigue siendo de **clasificación de imágenes** (tipo 7, familia F4 de la ruta metodológica). Seguimos la ruta F4a del enunciado:
+El problema sigue siendo de **clasificación de imágenes** (tipo 7, familia F4 de la ruta metodológica). Seguimos la ruta F4a de clasificación de imágenes:
 
-| Paso de la ruta F4a | Dónde se cumple |
+| Paso de la ruta F4a | Dónde se desarrolla |
 |---|---|
 | I1. Tarea y unidad de independencia | Secciones 1.2 y 6.4: grupo de casi-duplicados |
 | I2. Duplicados y partición por unidad de independencia | Sección 2.4 y auditoría de fuga del capítulo 9 |
@@ -71,5 +71,7 @@ Las RQ confirmatorias tienen familias de comparaciones fijadas antes de las corr
 | 13 | Benchmark: tabla principal, ranking, inferencia estadística y eficiencia |
 | 14 | Bondad de ajuste, sobreajuste, calibración e incertidumbre |
 | 15 | Robustez, interpretabilidad, análisis de errores, techo de desempeño y ablación del mejor modelo |
-| 16 | Discusión, respuesta a las RQ, amenazas a la validez y conclusiones |
+| 16 | Discusión: causas de las diferencias, robustez frente a costo, techo de desempeño y amenazas a la validez |
 | 17 | Reproducibilidad: entorno, lista de verificación y comandos |
+| 18 | Conclusiones: respuesta a las RQ, modelo recomendado, alcance, brecha, hipótesis y trabajo futuro |
+| 19 | Referencias en formato APA, con su versión BibTeX |

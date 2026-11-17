@@ -22,7 +22,7 @@ La prueba de Friedman rechaza la igualdad entre los tres modelos ($p = 0.0048$).
 
 ## Entregable 2: benchmark de diez modelos
 
-Ampliamos la comparación a diez modelos: los tres modelos base y siete modelos publicados sobre TrashNet (Celik-HC, el paper guía; MbXception; ViT-B16; GFN; FocusRCNet; ResMsCapsule y RWCNet), con la misma partición, métrica y umbrales, 8 semillas por modelo y el mismo presupuesto de ajuste. El informe está en los capítulos 8 a 17 del Jupyter Book, y el código y los resultados en `entregable2/`.
+Ampliamos la comparación a diez modelos: los tres modelos base y siete modelos publicados sobre TrashNet (Celik-HC, el paper guía; MbXception; ViT-B16; GFN; FocusRCNet; ResMsCapsule y RWCNet), con la misma partición, métrica y umbrales, 8 semillas por modelo y el mismo presupuesto de ajuste. El informe está en los capítulos 8 a 19 del Jupyter Book, y el código y los resultados en `entregable2/`.
 
 | Modelo | F1 macro (media ± DE, 8 semillas) | Preentrenado |
 |---|---|---|
@@ -37,7 +37,7 @@ Ampliamos la comparación a diez modelos: los tres modelos base y siete modelos 
 | FocusRCNet | 0.811 ± 0.015 | No |
 | MobileNetV2 | 0.809 ± 0.025 | No |
 
-Cuatro modelos preentrenados superan al modelo de referencia por más del umbral de 0.036, con significancia tras Holm. RWCNet y ViT-B16 son equivalentes dentro de $\delta = 0.02$. La accuracy publicada del paper guía (99.4 %) no se reproduce con su propio código (92.5 %), y su ablación muestra que el preentrenamiento, y no la fusión multinivel, explica su desempeño. Ante ruido gaussiano, las arquitecturas convolucionales pierden entre 0.30 y 0.67 de F1 y ViT-B16 solo 0.04. El detalle de cómo reproducir el experimento está en `entregable2/README.md` y en el capítulo 17.
+Cuatro modelos preentrenados superan al modelo de referencia por más del umbral de 0.036, con significancia tras Holm. RWCNet y ViT-B16 son equivalentes dentro de $\delta = 0.02$. La accuracy publicada del paper guía (99.4 %) no se reproduce con su propio código (92.5 %), y su ablación muestra que el preentrenamiento, y no la fusión multinivel, explica su desempeño. En RWCNet aportan su extractor DenseNet201 y la supervisión profunda, y no la segunda red. Ante ruido gaussiano, las arquitecturas convolucionales pierden entre 0.30 y 0.67 de F1 y ViT-B16 solo 0.04. El detalle de cómo reproducir el experimento está en `entregable2/README.md` y en el capítulo 17.
 
 ## Estructura del repositorio
 
@@ -50,7 +50,7 @@ notebooks/           exploración inicial
 src/                 código del experimento (datos, modelos, entrenamiento, evaluación, estadística)
 results/             resultados por corrida y resúmenes (CSV, pickles, preregistro)
 models/              checkpoints (no versionados)
-entregable2/         código, resultados y análisis del benchmark de diez modelos (capítulos 8 a 17)
+entregable2/         código, resultados y análisis del benchmark de diez modelos (capítulos 8 a 19)
 environment.yml      entorno conda (alternativa)
 requirements.txt     dependencias base
 requirements-modelos.txt   dependencias del entrenamiento y del análisis estadístico
