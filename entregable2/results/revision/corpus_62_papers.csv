@@ -1,0 +1,63 @@
+﻿id_zotero,autores_anio_titulo,paginas,codigo_propio,nota_codigo,seleccionado_top7,enlaces_detectados
+411,Ali M.A.S. et al. - 2022 - A Feature Selection Based on Improved Artificial Hummingbird Algorithm Using Random Opposition-Based,34,,,,
+412,Celik G. - 2025 - Multi-layer feature fusion for high-accuracy solid waste classification using a hybrid deep learning,23,https://github.com/GaffariCelik/SolidWasteClassification,,Celik-HC (paper guía),github.com/GaffariCelik/SolidWasteClassiﬁcation | github.com/GaffariCelik/SolidWasteClassiﬁcation.Keywords | https://github.com/GaffariCelik/SolidWasteClassification | https://www.kaggle.com/datasets/mostafaabla/garbage-classification | kaggle.com/datasets/mostafaabla/garbage-classiﬁcation | kaggle.com/datasets/mostafaabla/garbage-classiﬁcation.Accessed
+413,Echchidmi M. y Bouayad A. - 2026 - Compact waste image classification with multi-student CNNs and edge-oriented model selection,16,,"repositorio de terceros (tensorflow/tpu, EfficientNet-Lite)",,github.com/garythung/trashnet | github.com/tensorﬂow/tpu | https://github.com/garythung/trashnet | https://github.com/garythung/trashnet/blob/master/LICENSE | https://github.com/tensorflow/tpu/tree/master/models/official/efficientnet/lite
+414,İnsel M.A. et al. - 2026 - Classification of wastes by utilizing image processing and convolutional neural networks,8,,,,github.com/garythung/trashnet
+415,Liu T. et al. - 2026 - ResSeMo deep convolutional neural network integration for high-accuracy waste classification and ef,19,,,,https://huggingface.co/datasets/garythung/trashnet | https://huggingface.co/datasets/saillab/taco-datasets
+416,Maleknya K. et al. - 2026 - A solid waste classification using reinforcement learning boosted by data augmentation and hyperpara,38,,,,https://www.kaggle.com/dimonisochecolo/trash-dataset
+417,Potharaju S. et al. - 2025 - Optimizing Waste Management with Squeeze-and-Excitation and Convolutional Block Attention Integratio,10,,,,https://www.kaggle.com/datasets/feyzazkefe/trashnet/data | kaggle.com/datasets/feyzazkefe/ | kaggle.com/datasets/feyzazkefe/trashnet/data220Saiprasad
+418,Reji M. et al. - 2025 - A solid waste management system based on IoT using swin transformer with ant colony optimization mod,14,,,,
+419,Shukla P.K. et al. - 2026 - HGB-CBSNet hybrid gradient boosting based coot bird search network for solid waste classification i,41,,,,
+420,Wu C. y Yang Y. - 2026 - Dual-stream context aggregation network for waste sorting,19,,,,
+421,Yang Z. et al. - 2022 - A Garbage Classification Method Based on a Small Convolution Neural Network,16,,,,github.com/garythung/trashnet | https://github.com/garythung/trashnet
+422,Yoong H.C. et al. - 2025 - Waste Classification Using NasNet-Mobile A Multi-Stage Deep Learning Approach for Environmental Sus,16,,,,https://www.kaggle.com/datasets/feyzazkefe/trashnet | kaggle.com/datasets/feyzazkefe/trashnet | kaggle.com/datasets/mostafaabla/garbage-classification
+423,Yusiong J.P.T. - 2022 - AN ENSEMBLE OF CNN-ELM MODELS FOR TRASH CLASSIFICATION,8,,,,github.com/garythung/trashnet
+424,Zheng D. et al. - 2023 - Focus-RCNet a lightweight recyclable waste classification algorithm based on focus and knowledge di,9,,,FocusRCNet,https://github.com/garythung/trashnet | https://zenodo.org/record/4679653
+425,Zhou H. et al. - 2025 - Optimizing Backbone Networks Through Hybrid–Modal Fusion A New Strategy for Waste Classification,26,,,,
+426,Alkılınç A. et al. - 2026 - Deep Ensemble Learning Model for Waste Classification Systems,29,,,,github.com/garythung/trashnet | https://github.com/garythung/trashnet | https://www.kaggle.com/datasets/mostafaabla/garbage-classification | https://www.kaggle.com/wangziang/waste-pictures | kaggle.com/datasets/mostafaabla/garbage-classification | kaggle.com/wangziang/waste-pictures
+427,Baskaran S. y Devarasan E. - 2026 - A neutrosophic transfer learning approach for enhanced recyclable waste identification,12,,,,kaggle.com/datasets/feyzazkefe/trashnet
+428,Feng Z. et al. - 2022 - An Intelligent Waste-Sorting and Recycling Device Based on Improved EfficientNet,18,,,,
+429,Hossen M.M. et al. - 2024 - A Reliable and Robust Deep Learning Model for Effective Recyclable Waste Classification,13,,,RWCNet,
+430,Huang K. et al. - 2021 - Recycling waste classification using vision transformer on portable device,14,,enlaza RecycleNet solo como comparación; su ViT no está publicado,ViT-B16,github.com/sangminwoo/RecycleNet | https://github.com/sangminwoo/RecycleNet | https://www.kaggle.com/arkadiyhacks/drinking-waste-classification | kaggle.com/arkadiyhacks/drinking-waste- | kaggle.com/arkadiyhacks/drinking-wasteclassiﬁcation
+431,Li L. et al. - 2025 - Enhanced ResNet-50 for garbage classification Feature fusion and depth-separable convolutions,21,,Figshare enlazado; contenido no verificable (403),,figshare.com/s/ | figshare.com/s/c817706ed7cbc8631fe5.Funding | https://figshare.com/s/c817706ed7cbc8631fe5
+432,Li S. - 2026 - Solid waste classification An approach based on reinforcement learning and differential evolution,29,,,,https://www.kaggle.com/dimonisochecolo/trash-dataset | kaggle.com/dimonisochecolo/trash-dataset
+433,Masand A. et al. - 2021 - ScrapNet An Efficient Approach to Trash Classification,12,,,,github.com/openrecycle/dataset | kaggle.com/techsash/waste-classiﬁcation-data/version/1
+434,Melendez-Villadiego M. et al. - 2026 - Recycle AId Training an Artificial Intelligence Model Based on Computer Vision for Solid Waste Clas,12,,,,kaggle.com/datasets | kaggle.com/datasets/feyzazkefe/trashnet
+435,Nguyen N.-B.-Q. et al. - 2026 - Towards accurate and efficient waste image classification A hybrid deep learning and machine learni,31,,,,https://www.kaggle.com/datasets/feyzazkefe/trashnet | https://www.kaggle.com/datasets/mostafaabla/garbage-classification | https://www.kaggle.com/datasets/sumn2u/garbage-classification-v2 | kaggle.com/dataset | kaggle.com/datasets/feyzazkefe/trashnet | kaggle.com/datasets/feyzazkefe/trashnet27References | kaggle.com/datasets/mostafaabla/ | kaggle.com/datasets/mostafaabla/garbage-classification | kaggle.com/datasets/sumn2u/g | kaggle.com/datasets/sumn2u/garbage-classification-v2
+436,Sayed G.I. et al. - 2024 - Intelligent and sustainable waste classification model based on multi-objective beluga whale optimiz,19,,,,https://www.kaggle.com/datasets/feyzazkefe/trashnet
+437,Shi C. et al. - 2021 - A waste classification method based on a multilayer hybrid convolution neural network,19,,,,
+438,Shi C. et al. - 2020 - A Novel Multi-Branch Channel Expansion Network for Garbage Image Classification,17,https://github.com/scp19801980/Trash-classify-M_b-Xception,,MbXception,github.com/scp19801980/Trash-classify-M_b- | github.com/scp19801980/Trash-classify-M_bXception.INDEX
+439,Wang J. - 2024 - Application research of image classification algorithm based on deep learning in household garbage s,14,,,,github.com/garythung | https://github.com/garythung/trashnet | https://www.kaggle.com/datasets/mostafaabla/garbage-classification | kaggle.com/datasets/mostafaabla/garbage-classification
+440,Wang Z. et al. - 2025 - GFN A Garbage Classification Fusion Network Incorporating Multiple Attention Mechanisms,22,,,GFN,
+441,Wu N. et al. - 2024 - A Hybrid Model for Household Waste Sorting (HWS) Based on an Ensemble of Convolutional Neural Networ,18,,,,https://www.kaggle.com/datasets/mostafaabla/garbage-classification | kaggle.com/datasets/mostafaabla/ | kaggle.com/datasets/mostafaabla/garbage-classification
+442,Yang Y. et al. - 2025 - Dynamic Graph Neural Network for Garbage Classification Based on Multimodal Feature Fusion,25,,,,
+443,Yang Z. y Li D. - 2020 - WasNet A Neural Network-Based Garbage Collection Management System,10,,,,github.com/garythung/trashnet
+444,Zheng H. y Gu Y. - 2021 - Encnn-upmws Waste classification by a CNN ensemble using the UPM weighting strategy,21,,,,https://www.kaggle.com/techsash/waste-classification-data | kaggle.com/techsash/waste- | kaggle.com/techsash/wasteclassiﬁcation-data
+445,Vo A.H. et al. - 2019 - A Novel Framework for Trash Classification Using Deep Transfer Learning,9,,,,
+446,Abdu H. y Noor M.H.M. - 2022 - Domestic Trash Classification with Transfer Learning Using VGG16,5,,,,github.com/datacluster- | github.com/dataclusterlabs/Domestic-Trash-Dataset | github.com/garythung/trashnet
+447,Abu-Qdais H. et al. - 2025 - Intelligent system for solid waste classification using combination of image processing and machine,13,,,,
+448,Alrayes F.S. et al. - 2023 - Waste classification using vision transformer based on multilayer hybrid convolution neural network,14,,,,
+450,Aral R.A. et al. - 2018 - Classification of TrashNet Dataset Based on Deep Learning Models,5,,,,
+451,Devi A. et al. - 2025 - Transforming waste management leveraging recycletransformernet for effective recycling strategies,21,,,,https://www.kaggle.com/datasets/feyzazkefe/trashnet | https://www.kaggle.com/datasets/mostafaabla/garbage-classification?select=garbage_classification
+452,Goel S. et al. - 2024 - SEFWaM–deep learning based smart ensembled framework for waste management,29,,,,https://github.com/garythung/trashnet
+453,Huang L. et al. - 2023 - A waste classification method based on a capsule network,9,,,ResMsCapsule,
+454,Dookhee S. - 2022 - Domestic Solid Waste Classification Using Convolutional Neural Networks,4,,,,
+455,Dharmawan T. et al. - 2025 - Optimizing DenseNet121 for Waste Classification Using Genetic Algorithm-Based Downsampling and Data,7,,,,
+456,Huynh M.-H. et al. - 2020 - Automated Waste Sorting Using Convolutional Neural Network,5,,,,
+457,Kumar Lilhore U. et al. - 2025 - Intelligent waste sorting for sustainable environment A hybrid deep learning and transfer learning,15,,,,
+458,Lilhore U.K. et al. - 2024 - A smart waste classification model using hybrid CNN-LSTM with transfer learning for sustainable envi,25,,,,https://www.kaggle.com/techsash/waste-classification-data
+459,Lin Z. et al. - 2024 - Waste classification strategy based on multi-scale feature fusion for intelligent waste recycling in,12,,,,
+460,Mao W.-L. et al. - 2022 - Deep learning networks for real-time regional domestic waste detection,9,,"repositorio de terceros (AlexeyAB/darknet); detección, no clasificación",,github.com/AlexeyAB/darknet | https://github.com/AlexeyAB/darknet
+461,Mao W.-L. et al. - 2021 - Recycling waste classification using optimized convolutional neural network,9,,,,
+462,Mishra S. et al. - 2024 - An integrated deep-learning model for smart waste classification,15,,,,
+463,Niu S. et al. - 2020 - Transfer Learning based Data-Efficient Machine Learning Enabled Classification,7,,,,kaggle.com/c/waste- | kaggle.com/c/wasteclassiﬁcation/overview
+464,Pitakaso R. et al. - 2024 - Optimization-driven artificial intelligence-enhanced municipal waste classification system for disas,21,,,,https://github.com/garythung/trashnet | https://www.kaggle.com/datasets/engineeringubu/disaster-waste-dataset/
+465,Qin J. et al. - 2022 - A robust framework combined saliency detection and image recognition for garbage classification,11,,,,
+466,Quan M.K. et al. - 2024 - Toward Privacy-Preserving Waste Classification in the Internet of Things,17,,,,
+467,Rabano S.L. et al. - 2018 - Common garbage classification using mobilenet,4,,repositorio de terceros (Zehaos/MobileNet),,github.com/Zehaos/MobileNet | github.com/garythung/trashnet | github.com/tensorflow/models
+468,Rismiyati et al. - 2020 - Xception Architecture Transfer Learning for Garbage Classification,4,,,,github.com/garythung/trashnet
+469,Ruiz V. et al. - 2019 - Automatic Image-Based Waste Classification,488,,,,github.com/andrewssobral/bgslibrary | github.com/andrewssobral/bgslibrary.2 | github.com/ari-dasci/autoencoder-showcase.This | github.com/fchollet/keras | github.com/fchollet/keras6 | github.com/spotify/annoy | github.com/spotify/annoy.406F | https://github.com/andrewssobral/bgslibrary | https://github.com/ari-dasci/autoencoder-showcase | https://github.com/fchollet/keras | https://github.com/spotify/annoy | https://www.kaggle.com/c/diabetic-retinopathy-detection/data | kaggle.com/c/diabetic-retinopathy-detection/data | kaggle.com/c/diabetic-retinopathy-detection/data.4
+470,Sultana R. et al. - 2020 - Trash and Recycled Material Identification using Convolutional Neural Networks (CNN),8,,,,github.com/garythung/trashnet
+471,Vo N.-S. et al. - 2024 - An Efficient Model on AIoT Devices for Trash Classification Applications,13,,,,
+472,Yang Y. et al. - 2026 - Adaptive multi-modal dynamic graph neural networks enhancing structure modeling and discriminabilit,15,,,,
+473,Yuan Z. y Liu J. - 2022 - A Hybrid Deep Learning Model for Trash Classification Based on Deep Trasnsfer Learning,9,,,,

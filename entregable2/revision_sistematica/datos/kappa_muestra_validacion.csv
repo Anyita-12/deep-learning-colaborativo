@@ -1,0 +1,61 @@
+﻿k,titulo,decision_reglas,decision_manual
+0,Plastic Waste Identification using ResNet-50: A Deep Learning Approach,INCLUIDO,INCLUIDO
+1,VTRWC-Net: An Intelligent Pharmaceutical and Biomedical Residual Waste Management Framework: Integrating Vision Transformer with Recommendation System,INCLUIDO,EXCLUIDO
+2,A Hybrid Vision Transformer Model for Efficient Waste Classification,INCLUIDO,INCLUIDO
+3,COMPUTER VISION APPROACHES FOR REAL-TIME WASTE DETECTION AND SEGREGATION: A CRITICAL COMPARATIVE TECHNICAL REVIEW,"X1 revisión o encuesta, no estudio primario",EXCLUIDO
+4,Vision Transformer-Enabled Fruit Profiling: A Multi-Stage Ripeness Classification System,X2 fuera del dominio de residuos,EXCLUIDO
+5,Web-Based Trash Segregation Using Deep Learning Algorithm,"X4 tarea distinta de clasificación (detección, segmentación, conteo, predicción)",INCLUIDO
+6,A Systematic Review of Reimagining Fashion and Textiles Sustainability with AI: A Circular Economy Approach,"X1 revisión o encuesta, no estudio primario",EXCLUIDO
+7,A Self-Adaptive Waste Management System Employing Convolutional Neural Network for Real-Time Categorization,INCLUIDO,INCLUIDO
+8,Detecting marine pollution made simple with YOLOv12: A multi-class approach for real-time debris recognition,X2 fuera del dominio de residuos,EXCLUIDO
+9,Performance Analysis of Nutrient Recovery and NDVI-Based Plant Stress Detection in AI-Enhanced Hydroponic Systems,X2 fuera del dominio de residuos,EXCLUIDO
+10,Recycling Waste Classification Using Vision Transformer on Portable Device,INCLUIDO,INCLUIDO
+11,Convolutional Neural Network Based Technique for Efficient Waste Classification,INCLUIDO,INCLUIDO
+12,An Integrated Learning Approach for Municipal Solid Waste Classification,INCLUIDO,INCLUIDO
+13,CNN Based Smart Waste Segregation and Collection System,INCLUIDO,INCLUIDO
+14,Anthropogenic Waste Classification in Deep Sea Environments,INCLUIDO,INCLUIDO
+15,Automated Waste Segregation System with Conveyor Belt and AI-Driven Sorting,INCLUIDO,INCLUIDO
+16,MobileNetV2 Transfer Learning Implementation for Waste Classification,INCLUIDO,INCLUIDO
+17,Method of Identification of Crop Nutrition Status Based on Convolutional Neural Network,X2 fuera del dominio de residuos,EXCLUIDO
+18,Semi-supervised segmentation for construction and demolition waste recognition in-the-wild: Adversarial dual-view networks,X2 fuera del dominio de residuos,EXCLUIDO
+19,Research on automatic classification and detection of chicken parts based on deep learning algorithm,X2 fuera del dominio de residuos,EXCLUIDO
+20,Deep Learning-Enabled Drywall Classification for C&D Waste: A Recycling-Oriented Dataset,INCLUIDO,EXCLUIDO
+21,AeroSweep - Airborne Intelligence Against Waste using YOLOv10n and MobileNetV2 on Jetson Nano,INCLUIDO,EXCLUIDO
+22,Infectious medical waste characterization using X-ray transmission with Machine learning,INCLUIDO,EXCLUIDO
+23,Green Rural Modern Architectural Design Based on Pose Recognition Algorithm of Thermal Discomfort,X2 fuera del dominio de residuos,EXCLUIDO
+24,Towards Accurate Waste Recognition and Segmentation in Complex Environments,"X0 tipo de documento no elegible (libro, capítulo, tesis, dataset u otro)",EXCLUIDO
+25,Thermoplastic waste segregation classification system using deep learning techniques,INCLUIDO,INCLUIDO
+26,A Computer Vision Model for Detection of Water Pollutants Using Deep Learning Frameworks,X2 fuera del dominio de residuos,EXCLUIDO
+27,Sensor-based characterization of construction and demolition waste at high occupancy densities using synthetic training data and deep learning,X2 fuera del dominio de residuos,EXCLUIDO
+28,A deep learning framework for microstructural analysis of nano-modified cementitious composites using metal intrusion and BSE imaging,INCLUIDO,EXCLUIDO
+29,Image Recognition for Garbage Classification Based on Pixel Distribution Learning,INCLUIDO,INCLUIDO
+30,DSYOLO-trash: An attention mechanism-integrated and object tracking algorithm for solid waste detection,"X4 tarea distinta de clasificación (detección, segmentación, conteo, predicción)",EXCLUIDO
+31,Design of automatic tobacco trash detection system based on quadratic fuzzy theory,"X4 tarea distinta de clasificación (detección, segmentación, conteo, predicción)",EXCLUIDO
+32,The use of Artificial Intelligence for Automatic Waste Segregation in the Garbage Recycling Process,INCLUIDO,INCLUIDO
+33,Freshness detection of fruits and vegetables using multi-task convolutional neural network and ResNet-50,X2 fuera del dominio de residuos,EXCLUIDO
+34,Deep Convolutional Neural Network-Based Detection of Solid Wastes Using Images,X2 fuera del dominio de residuos,EXCLUIDO
+35,Benchmarking analysis of CNN models for pits of sour cherry cultivars,X2 fuera del dominio de residuos,EXCLUIDO
+36,An AI- and IoT-Enabled Smart Waste Management Framework for Real-Time Waste Classification and Collection Optimization,INCLUIDO,INCLUIDO
+37,Image dataset - Evaluating CNN Models and Optimization Techniques for Quality Classification of Dried Chili Peppers (Capsicum annuum L.),"X0 tipo de documento no elegible (libro, capítulo, tesis, dataset u otro)",EXCLUIDO
+38,Garbage Classification Based on ShuffleNet and Edge Detection Preprocessing,INCLUIDO,INCLUIDO
+39,Evaluation of vision-language models for waste classification: Zero- and few-shot with a training-free tip-adapter,"X0 tipo de documento no elegible (libro, capítulo, tesis, dataset u otro)",INCLUIDO
+40,Comparison of ResNet-50 and vision transformer models for trash classification,INCLUIDO,INCLUIDO
+41,PENGEMBANGAN SISTEM KLASIFIKASI SAMPAH UNTUK DAUR ULANG OTOMATIS BERBASIS CITRA MENGGUNAKAN MODEL CNN,INCLUIDO,INCLUIDO
+42,Artificial Intelligence Based Approach to Identify Plastic Bottle for Environment Sustainability,INCLUIDO,INCLUIDO
+43,Floodborne Objects Type Recognition Using Computer Vision to Mitigate Blockage Originated Floods,INCLUIDO,EXCLUIDO
+44,Advancing deep learning-based detection of floating litter using a novel open dataset,"X4 tarea distinta de clasificación (detección, segmentación, conteo, predicción)",EXCLUIDO
+45,Waste plastic bottles classification with deep learning model,INCLUIDO,INCLUIDO
+46,Sustainable Waste Management Through Deep Learning: A Knowledge Distillation Framework for Real-Time Garbage Classification,INCLUIDO,INCLUIDO
+47,AI-Driven Waste Segregation Using Convolutional and Deep Neural Networks,INCLUIDO,INCLUIDO
+48,ARTIFICIAL INTELLIGENCE-DRIVEN QUALITY CONTROL IN MODERN MANUFACTURING SYSTEMS,X2 fuera del dominio de residuos,EXCLUIDO
+49,Image-based Waste Classification Using Convolutional Neural Networks on Diverse Image Data,INCLUIDO,INCLUIDO
+50,Multi-Modal Garment Sorting and Classification Combining Tactile and Visual Sensing,INCLUIDO,EXCLUIDO
+51,Research on the Method of Cargo Detection Based on YOLOv7-Tiny,X2 fuera del dominio de residuos,EXCLUIDO
+52,A Deep Learning-Based Buffalo Optimizer based Squeeze and Excitation Network for Garbage Classification for a Sustainable Environment,INCLUIDO,INCLUIDO
+53,Enhancing Waste Classification Using a Hybrid VGG16-XGBoost Classifier,INCLUIDO,INCLUIDO
+54,A Deep Learning-Based Reverse Logistics Model for Recycling Construction and Demolition Waste,X2 fuera del dominio de residuos,EXCLUIDO
+55,Development of Deep Learning-Based Variable Rate Agrochemical Spraying System for Targeted Weeds Control in Strawberry Crop,X2 fuera del dominio de residuos,EXCLUIDO
+56,GreenGrow AI: AI-based Smart Farming and Organic Waste Management,INCLUIDO,EXCLUIDO
+57,Research on Real-Time Multiple Single Garbage Classification Based on Convolutional Neural Network,INCLUIDO,INCLUIDO
+58,Enhanced and improved garbage identification and classification of YOLOV5 based on data,INCLUIDO,INCLUIDO
+59,Comparative Analysis of ResNet-50 and VGG16 Architecture Accuracy in Garbage Classification System,INCLUIDO,INCLUIDO

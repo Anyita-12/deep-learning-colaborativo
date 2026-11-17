@@ -1,0 +1,70 @@
+{
+  "model": "Celik-HC/sin_preentrenamiento",
+  "seed": 3,
+  "stage": "final",
+  "hp": {
+    "optimizer": "AdamW",
+    "lr": 0.0003,
+    "weight_decay": 0.0005,
+    "dropout": 0.2,
+    "batch_size": 32,
+    "max_epochs": 60,
+    "warmup_epochs": 3,
+    "eta_min_factor": 0.01,
+    "patience": 12,
+    "min_delta": 0.0001,
+    "grad_clip": 5.0,
+    "amp": true,
+    "class_weighted_loss": true
+  },
+  "img_size": 224,
+  "resize": "resize",
+  "augmentation": {
+    "RandomResizedCrop": {
+      "size": 224,
+      "scale": [
+        0.7,
+        1.0
+      ]
+    },
+    "RandomHorizontalFlip": {
+      "p": 0.5
+    },
+    "RandomVerticalFlip": {
+      "p": 0.5
+    },
+    "RandomRotation": {
+      "degrees": 15
+    },
+    "ColorJitter": {
+      "brightness": 0.2,
+      "contrast": 0.2,
+      "saturation": 0.2,
+      "hue": 0.02
+    }
+  },
+  "split_csv": "trashnet_split_v2_s1234.csv",
+  "test_fingerprint": "4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de2360cbd87",
+  "subset": null,
+  "pretrained": false,
+  "normalization": {
+    "kind": "train",
+    "mean": [
+      0.67179,
+      0.63799,
+      0.60217
+    ],
+    "std": [
+      0.20905,
+      0.20926,
+      0.23094
+    ]
+  },
+  "loss": "ce",
+  "post_hoc": "xgb",
+  "accum_steps": 1,
+  "code_version": "77354957acdb",
+  "ablation_of": "Celik-HC",
+  "hpo_trial": 2,
+  "date_start": "2026-11-16 00:49:27"
+}

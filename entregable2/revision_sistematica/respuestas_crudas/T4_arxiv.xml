@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/dXFNnmeEiIihxLxFODkbZmk15ls</id>
+  <title>arXiv Query: search_query=( (abs:"capsule network" OR abs:"capsule networks") AND (abs:"text" OR abs:"signal" OR abs:"EEG" OR abs:"time series" OR abs:"medical image") AND (abs:"transfer" OR abs:"adaptation") ) AND submittedDate:"201801010000 TO 202612312359"&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-11-16T19:23:06Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=((abs:%22capsule+network%22+OR+abs:%22capsule+networks%22)+AND+((abs:%22text%22+OR+(abs:%22signal%22+OR+(abs:%22EEG%22+OR+(abs:%22time+series%22+OR+abs:%22medical+image%22))))+AND+(abs:%22transfer%22+OR+abs:%22adaptation%22)))+AND+submittedDate:%22201801010000+TO+202612312359%22&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>10</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1804.00538v4</id>
+    <title>Investigating Capsule Networks with Dynamic Routing for Text Classification</title>
+    <updated>2018-09-03T09:58:52Z</updated>
+    <link href="https://arxiv.org/abs/1804.00538v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1804.00538v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this study, we explore capsule networks with dynamic routing for text classification. We propose three strategies to stabilize the dynamic routing process to alleviate the disturbance of some noise capsules which may contain "background" information or have not been successfully trained. A series of experiments are conducted with capsule networks on six text classification benchmarks. Capsule networks achieve state of the art on 4 out of 6 datasets, which shows the effectiveness of capsule networks for text classification. We additionally show that capsule networks exhibit significant improvement when transfer single-label to multi-label text classification over strong baseline methods. To the best of our knowledge, this is the first work that capsule networks have been empirically investigated for text modeling.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-03-29T02:27:42Z</published>
+    <arxiv:comment>12 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Wei Zhao</name>
+    </author>
+    <author>
+      <name>Jianbo Ye</name>
+    </author>
+    <author>
+      <name>Min Yang</name>
+    </author>
+    <author>
+      <name>Zeyang Lei</name>
+    </author>
+    <author>
+      <name>Suofei Zhang</name>
+    </author>
+    <author>
+      <name>Zhou Zhao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2005.05431v1</id>
+    <title>Deep Medical Image Analysis with Representation Learning and Neuromorphic Computing</title>
+    <updated>2020-05-11T20:56:37Z</updated>
+    <link href="https://arxiv.org/abs/2005.05431v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2005.05431v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We explore three representative lines of research and demonstrate the utility of our methods on a classification benchmark of brain cancer MRI data. First, we present a capsule network that explicitly learns a representation robust to rotation and affine transformation. This model requires less training data and outperforms both the original convolutional baseline and a previous capsule network implementation. Second, we leverage the latest domain adaptation techniques to achieve a new state-of-the-art accuracy. Our experiments show that non-medical images can be used to improve model performance. Finally, we design a spiking neural network trained on the Intel Loihi neuromorphic chip (Fig. 1 shows an inference snapshot). This model consumes much lower power while achieving reasonable accuracy given model reduction. We posit that more research in this direction combining hardware and learning advancements will power future medical imaging (on-device AI, few-shot prediction, adaptive scanning).</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-05-11T20:56:37Z</published>
+    <arxiv:comment>8 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Neil Getty</name>
+    </author>
+    <author>
+      <name>Thomas Brettin</name>
+    </author>
+    <author>
+      <name>Dong Jin</name>
+    </author>
+    <author>
+      <name>Rick Stevens</name>
+    </author>
+    <author>
+      <name>Fangfang Xia</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1906.02829v1</id>
+    <title>Towards Scalable and Reliable Capsule Networks for Challenging NLP Applications</title>
+    <updated>2019-06-06T21:53:53Z</updated>
+    <link href="https://arxiv.org/abs/1906.02829v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1906.02829v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Obstacles hindering the development of capsule networks for challenging NLP applications include poor scalability to large output spaces and less reliable routing processes. In this paper, we introduce: 1) an agreement score to evaluate the performance of routing processes at instance level; 2) an adaptive optimizer to enhance the reliability of routing; 3) capsule compression and partial routing to improve the scalability of capsule networks. We validate our approach on two NLP tasks, namely: multi-label text classification and question answering. Experimental results show that our approach considerably improves over strong competitors on both tasks. In addition, we gain the best results in low-resource settings with few training instances.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-06-06T21:53:53Z</published>
+    <arxiv:comment>11 pages, ACL19 Camera Ready</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Wei Zhao</name>
+    </author>
+    <author>
+      <name>Haiyun Peng</name>
+    </author>
+    <author>
+      <name>Steffen Eger</name>
+    </author>
+    <author>
+      <name>Erik Cambria</name>
+    </author>
+    <author>
+      <name>Min Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.04748v1</id>
+    <title>Self-Supervised Learning for Pre-training Capsule Networks: Overcoming Medical Imaging Dataset Challenges</title>
+    <updated>2025-02-07T08:32:26Z</updated>
+    <link href="https://arxiv.org/abs/2502.04748v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.04748v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep learning techniques are increasingly being adopted in diagnostic medical imaging. However, the limited availability of high-quality, large-scale medical datasets presents a significant challenge, often necessitating the use of transfer learning approaches. This study investigates self-supervised learning methods for pre-training capsule networks in polyp diagnostics for colon cancer. We used the PICCOLO dataset, comprising 3,433 samples, which exemplifies typical challenges in medical datasets: small size, class imbalance, and distribution shifts between data splits. Capsule networks offer inherent interpretability due to their architecture and inter-layer information routing mechanism. However, their limited native implementation in mainstream deep learning frameworks and the lack of pre-trained versions pose a significant challenge. This is particularly true if aiming to train them on small medical datasets, where leveraging pre-trained weights as initial parameters would be beneficial. We explored two auxiliary self-supervised learning tasks, colourisation and contrastive learning, for capsule network pre-training. We compared self-supervised pre-trained models against alternative initialisation strategies. Our findings suggest that contrastive learning and in-painting techniques are suitable auxiliary tasks for self-supervised learning in the medical domain. These techniques helped guide the model to capture important visual features that are beneficial for the downstream task of polyp classification, increasing its accuracy by 5.26% compared to other weight initialisation methods.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-07T08:32:26Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Heba El-Shimy</name>
+    </author>
+    <author>
+      <name>Hind Zantout</name>
+    </author>
+    <author>
+      <name>Michael A. Lones</name>
+    </author>
+    <author>
+      <name>Neamat El Gayar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.22987v2</id>
+    <title>Capsule Network-Based Multimodal Fusion for Mortgage Risk Assessment from Unstructured Data Sources</title>
+    <updated>2026-11-02T01:42:21Z</updated>
+    <link href="https://arxiv.org/abs/2510.22987v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.22987v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Mortgage risk assessment traditionally relies on structured financial data, which is often proprietary, confidential, and costly. In this study, we propose a novel multimodal deep learning framework that uses cost-free, publicly available, unstructured data sources, including textual information, images, and sentiment scores, to generate credit scores that approximate commercial scorecards. Our framework adopts a two-phase approach. In the unimodal phase, we identify the best-performing models for each modality, i.e. BERT for text, VGG for image data, and a multilayer perceptron for sentiment-based features. In the fusion phase, we introduce the capsule-based fusion network (FusionCapsNet), a novel fusion strategy inspired by capsule networks, but fundamentally redesigned for multimodal integration. Unlike standard capsule networks, our method adapts a specific mechanism in capsule networks to each modality and restructures the fusion process to preserve spatial, contextual, and modality-specific information. It also enables adaptive weighting so that stronger modalities dominate without ignoring complementary signals.
+  Our framework incorporates sentiment analysis across distinct news categories to capture borrower and market dynamics and employs GradCAM-based visualizations as an interpretability tool. These components are designed features of the framework, while our results later demonstrate that they effectively enrich contextual understanding and highlight the influential factors driving mortgage risk predictions. Our results show that our multimodal FusionCapsNet framework not only exceeds individual unimodal models but also outperforms benchmark fusion strategies such as addition, concatenation, and cross attention in terms of AUC, partial AUC, and F1 score, demonstrating clear gains in both predictive accuracy and interpretability for mortgage risk assessment.</summary>
+    <category term="cs.CE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-27T04:11:35Z</published>
+    <arxiv:primary_category term="cs.CE"/>
+    <arxiv:journal_ref>Expert Systems with Applications 334 (2027) 134887</arxiv:journal_ref>
+    <author>
+      <name>Mahsa Tavakoli</name>
+    </author>
+    <author>
+      <name>Rohitash Chandra</name>
+    </author>
+    <author>
+      <name>Cristian Bravo</name>
+    </author>
+    <arxiv:doi>10.1016/j.eswa.2026.134887</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.eswa.2026.134887" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2112.00775v1</id>
+    <title>Routing with Self-Attention for Multimodal Capsule Networks</title>
+    <updated>2021-12-01T19:01:26Z</updated>
+    <link href="https://arxiv.org/abs/2112.00775v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2112.00775v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The task of multimodal learning has seen a growing interest recently as it allows for training neural architectures based on different modalities such as vision, text, and audio. One challenge in training such models is that they need to jointly learn semantic concepts and their relationships across different input representations. Capsule networks have been shown to perform well in context of capturing the relation between low-level input features and higher-level concepts. However, capsules have so far mainly been used only in small-scale fully supervised settings due to the resource demand of conventional routing algorithms. We present a new multimodal capsule network that allows us to leverage the strength of capsules in the context of a multimodal learning framework on large amounts of video data. To adapt the capsules to large-scale input data, we propose a novel routing by self-attention mechanism that selects relevant capsules which are then used to generate a final joint multimodal feature representation. This allows not only for robust training with noisy video data, but also to scale up the size of the capsule network compared to traditional routing methods while still being computationally efficient. We evaluate the proposed architecture by pretraining it on a large-scale multimodal video dataset and applying it on four datasets in two challenging downstream tasks. Results show that the proposed multimodal capsule network is not only able to improve results compared to other routing techniques, but also achieves competitive performance on the task of multimodal learning.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-12-01T19:01:26Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Kevin Duarte</name>
+    </author>
+    <author>
+      <name>Brian Chen</name>
+    </author>
+    <author>
+      <name>Nina Shvetsova</name>
+    </author>
+    <author>
+      <name>Andrew Rouditchenko</name>
+    </author>
+    <author>
+      <name>Samuel Thomas</name>
+    </author>
+    <author>
+      <name>Alexander Liu</name>
+    </author>
+    <author>
+      <name>David Harwath</name>
+    </author>
+    <author>
+      <name>James Glass</name>
+    </author>
+    <author>
+      <name>Hilde Kuehne</name>
+    </author>
+    <author>
+      <name>Mubarak Shah</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.06314v2</id>
+    <title>CAD-Unet: A Capsule Network-Enhanced Unet Architecture for Accurate Segmentation of COVID-19 Lung Infections from CT Images</title>
+    <updated>2025-04-30T01:53:00Z</updated>
+    <link href="https://arxiv.org/abs/2412.06314v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.06314v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Since the outbreak of the COVID-19 pandemic in 2019, medical imaging has emerged as a primary modality for diagnosing COVID-19 pneumonia. In clinical settings, the segmentation of lung infections from computed tomography images enables rapid and accurate quantification and diagnosis of COVID-19. Segmentation of COVID-19 infections in the lungs poses a formidable challenge, primarily due to the indistinct boundaries and limited contrast presented by ground glass opacity manifestations. Moreover, the confounding similarity between infiltrates, lung tissues, and lung walls further complicates this segmentation task. To address these challenges, this paper introduces a novel deep network architecture, called CAD-Unet, for segmenting COVID-19 lung infections. In this architecture, capsule networks are incorporated into the existing Unet framework. Capsule networks represent a novel network architecture that differs from traditional convolutional neural networks. They utilize vectors for information transfer among capsules, facilitating the extraction of intricate lesion spatial information. Additionally, we design a capsule encoder path and establish a coupling path between the unet encoder and the capsule encoder. This design maximizes the complementary advantages of both network structures while achieving efficient information fusion. \noindent Finally, extensive experiments are conducted on four publicly available datasets, encompassing binary segmentation tasks and multi-class segmentation tasks. The experimental results demonstrate the superior segmentation performance of the proposed model. The code has been released at: https://github.com/AmanoTooko-jie/CAD-Unet.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-09T09:08:31Z</published>
+    <arxiv:comment>Published in Medical Image Analysis, Volume 103, 2025, Pages 103583. DOI: 10.1016/j.media.2025.103583 This is the author's pre-print version prior to final journal edits. Final published version available at: https://www.sciencedirect.com/science/article/pii/S1361841525001306</arxiv:comment>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Yijie Dang</name>
+    </author>
+    <author>
+      <name>Weijun Ma</name>
+    </author>
+    <author>
+      <name>Xiaohu Luo</name>
+    </author>
+    <author>
+      <name>Huaizhu Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1806.01501v1</id>
+    <title>Information Aggregation via Dynamic Routing for Sequence Encoding</title>
+    <updated>2018-06-05T05:34:15Z</updated>
+    <link href="https://arxiv.org/abs/1806.01501v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1806.01501v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While much progress has been made in how to encode a text sequence into a sequence of vectors, less attention has been paid to how to aggregate these preceding vectors (outputs of RNN/CNN) into fixed-size encoding vector. Usually, a simple max or average pooling is used, which is a bottom-up and passive way of aggregation and lack of guidance by task information. In this paper, we propose an aggregation mechanism to obtain a fixed-size encoding with a dynamic routing policy. The dynamic routing policy is dynamically deciding that what and how much information need be transferred from each word to the final encoding of the text sequence. Following the work of Capsule Network, we design two dynamic routing policies to aggregate the outputs of RNN/CNN encoding layer into a final encoding vector. Compared to the other aggregation methods, dynamic routing can refine the messages according to the state of final encoding vector. Experimental results on five text classification tasks show that our method outperforms other aggregating models by a significant margin. Related source code is released on our github page.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-06-05T05:34:15Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jingjing Gong</name>
+    </author>
+    <author>
+      <name>Xipeng Qiu</name>
+    </author>
+    <author>
+      <name>Shaojing Wang</name>
+    </author>
+    <author>
+      <name>Xuanjing Huang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.00540v1</id>
+    <title>Capsule Network-Based Semantic Intent Modeling for Human-Computer Interaction</title>
+    <updated>2025-07-01T08:00:12Z</updated>
+    <link href="https://arxiv.org/abs/2507.00540v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.00540v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper proposes a user semantic intent modeling algorithm based on Capsule Networks to address the problem of insufficient accuracy in intent recognition for human-computer interaction. The method represents semantic features in input text through a vectorized capsule structure. It uses a dynamic routing mechanism to transfer information across multiple capsule layers. This helps capture hierarchical relationships and part-whole structures between semantic entities more effectively. The model uses a convolutional feature extraction module as the low-level encoder. After generating initial semantic capsules, it forms high-level abstract intent representations through an iterative routing process. To further enhance performance, a margin-based mechanism is introduced into the loss function. This improves the model's ability to distinguish between intent classes. Experiments are conducted using a public natural language understanding dataset. Multiple mainstream models are used for comparison. Results show that the proposed model outperforms traditional methods and other deep learning structures in terms of accuracy, F1-score, and intent detection rate. The study also analyzes the effect of the number of dynamic routing iterations on model performance. A convergence curve of the loss function during training is provided. These results verify the stability and effectiveness of the proposed method in semantic modeling. Overall, this study presents a new structured modeling approach to improve intent recognition under complex semantic conditions.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-01T08:00:12Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shixiao Wang</name>
+    </author>
+    <author>
+      <name>Yifan Zhuang</name>
+    </author>
+    <author>
+      <name>Runsheng Zhang</name>
+    </author>
+    <author>
+      <name>Zhijun Song</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.00038v1</id>
+    <title>MIMNet: Multi-Interest Meta Network with Multi-Granularity Target-Guided Attention for Cross-domain Recommendation</title>
+    <updated>2024-07-31T13:30:34Z</updated>
+    <link href="https://arxiv.org/abs/2408.00038v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.00038v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Cross-domain recommendation (CDR) plays a critical role in alleviating the sparsity and cold-start problem and substantially boosting the performance of recommender systems. Existing CDR methods prefer to either learn a common preference bridge shared by all users or a personalized preference bridge tailored for each user to transfer user preference from the source domain to the target domain. Although these methods significantly improve the recommendation performance, there are still some limitations. First, these methods usually assume a user only has a unique interest, while ignoring the fact that a user may interact with items with different interest preferences. Second, they learn transformed preference representation mainly relies on the source domain signals, while neglecting the rich information available in the target domain. To handle these issues, in this paper, we propose a novel method named Multi-interest Meta Network with Multi-granularity Target-guided Attention (MIMNet) for cross-domain recommendation. To be specific, we employ the capsule network to learn user multiple interests in the source domain, which will be fed into a meta network to generate multiple interest-level preference bridges. Then, we transfer user representations from the source domain to the target domain based on these multi-interest bridges. In addition, we introduce both fine-grained and coarse-grained target signals to aggregate user transformed interest-level representations by incorporating a novel multi-granularity target-guided attention network. We conduct extensive experimental results on three real-world CDR tasks, and the results show that our proposed approach MIMNet consistently outperforms all baseline methods. The source code of MIMNet is released at https://github.com/marqu22/MIMNet.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-31T13:30:34Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Xiaofei Zhu</name>
+    </author>
+    <author>
+      <name>Yabo Yin</name>
+    </author>
+    <author>
+      <name>Li Wang</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,11 @@
+model,potencia_media_W,fuente
+Celik-HC,270.6775054673721,0.68 x TDP de la A100 (fracción medida en la RTX 4060)
+MbXception,62.4876,medida
+ViT-B16,270.6775054673721,0.68 x TDP de la A100 (fracción medida en la RTX 4060)
+GFN,270.6775054673721,0.68 x TDP de la A100 (fracción medida en la RTX 4060)
+FocusRCNet,49.66238095238094,medida
+ResMsCapsule,40.06222222222222,medida
+RWCNet,50.79592592592593,medida
+CNN,50.75203227513227,media de los modelos medidos
+MobileNetV2,50.75203227513227,media de los modelos medidos
+ResNet-18,50.75203227513227,media de los modelos medidos

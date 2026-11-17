@@ -1,0 +1,57 @@
+{
+  "friedman": {
+    "Q": 64.77272727272725,
+    "p_permutacion": 9.99990000099999e-06,
+    "metodo_p": "Monte Carlo (100000 permutaciones)",
+    "p_chi2": 1.5972820737892692e-10,
+    "W_kendall": 0.8996212121212118,
+    "n_bloques": 8,
+    "k": 10,
+    "rangos_medios": {
+      "Celik-HC": 7.25,
+      "MbXception": 4.5,
+      "ViT-B16": 9.0,
+      "GFN": 7.75,
+      "FocusRCNet": 1.875,
+      "ResMsCapsule": 6.25,
+      "RWCNet": 9.5,
+      "CNN": 2.5,
+      "MobileNetV2": 1.875,
+      "ResNet-18": 4.5
+    }
+  },
+  "descomposicion_varianza": {
+    "F": 73.58142392858298,
+    "p": 3.9831902648419853e-32,
+    "eta2": 0.9044019900066239,
+    "icc1": 0.9007215359325225,
+    "ss_entre": 0.1920840274431444,
+    "ss_dentro": 0.02030385932138779,
+    "gl": [
+      9,
+      70
+    ]
+  },
+  "semillas_usadas": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "modelos": [
+    "Celik-HC",
+    "MbXception",
+    "ViT-B16",
+    "GFN",
+    "FocusRCNet",
+    "ResMsCapsule",
+    "RWCNet",
+    "CNN",
+    "MobileNetV2",
+    "ResNet-18"
+  ]
+}

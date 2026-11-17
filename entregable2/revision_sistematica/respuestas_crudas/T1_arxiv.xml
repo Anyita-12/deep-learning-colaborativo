@@ -1,0 +1,591 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/wZek+wHtSTGWRsOREcreTbfJ7kQ</id>
+  <title>arXiv Query: search_query=( (abs:"hypercolumn" OR abs:"multi-level feature fusion" OR abs:"multi-layer feature fusion" OR abs:"multi-scale feature fusion") AND (abs:"medical image" OR abs:"remote sensing" OR abs:"speech" OR abs:"time series") AND (abs:"transfer" OR abs:"adaptation") ) AND submittedDate:"201801010000 TO 202612312359"&amp;id_list=&amp;start=0&amp;max_results=100</title>
+  <updated>2026-11-16T19:22:49Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=((abs:%22hypercolumn%22+OR+(abs:%22multi-level+feature+fusion%22+OR+(abs:%22multi-layer+feature+fusion%22+OR+abs:%22multi-scale+feature+fusion%22)))+AND+((abs:%22medical+image%22+OR+(abs:%22remote+sensing%22+OR+(abs:%22speech%22+OR+abs:%22time+series%22)))+AND+(abs:%22transfer%22+OR+abs:%22adaptation%22)))+AND+submittedDate:%22201801010000+TO+202612312359%22&amp;start=0&amp;max_results=100&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>100</opensearch:itemsPerPage>
+  <opensearch:totalResults>21</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2604.16609v1</id>
+    <title>IncepDeHazeGAN: Novel Satellite Image Dehazing</title>
+    <updated>2026-04-17T18:05:57Z</updated>
+    <link href="https://arxiv.org/abs/2604.16609v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.16609v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dehazing is a technique in computer vision for enhancing the visual quality of images captured in cloudy or foggy conditions. Dehazing helps to recover clear, high-quality images from haze-affected remote sensing data. In this study, we introduce IncepDeHazeGAN, a novel Generative Adversarial Network (GAN) involving Inception block and multi-layer feature fusion for the task of single-image dehazing. Utilizing the Inception block allows for multi-scale feature extraction. On the other hand, the multi-layer feature fusion design achieves efficient reuse of features as the features extracted at different convolution layers are fused several times. Grad-CAM XAI technique has been applied to our network, highlighting the regions focused on by the network for dehazing and its adaptation to different haze conditions. Experiments demonstrate that our network achieves state-of-the-art results in several datasets.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-17T18:05:57Z</published>
+    <arxiv:comment>Accepted at CV4DC Workshop, ACCV 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Tejeswar Pokuri</name>
+    </author>
+    <author>
+      <name>Shivarth Rai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.11096v1</id>
+    <title>Difference-Driven Gating: Adaptive Feature Fusion for U-Net Decoder</title>
+    <updated>2026-07-13T05:06:35Z</updated>
+    <link href="https://arxiv.org/abs/2607.11096v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.11096v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The U-Net style models have been widely used in many applications. A critical step in these models is to reconstruct the lower-level features using a top-down decoder. This reconstruction requires precise fusion of high-level semantics and low-level details. Existing attention-based fusion methods typically derive attention weights from the top-down decoder features (global) alone or the correlation between the top-down decoder features and the bottom-up encoder features (local), then modulate the encoder features using these weights. In this work, we explore a different paradigm: deriving attention weights from the difference between the two feature streams. To this end, we propose two difference-based gating approaches: Feature-difference gating (FDG), which directly uses the absolute difference between global and local features to generate adaptive gating maps, and Entropy-difference gating (EDG), which measures the representational certainty of each stream via information entropy and uses their signed entropy difference to derive the attention weights. Both methods produce coupled gating maps that simultaneously modulate the global and local features. Experiments on different tasks including medical image segmentation, remote sensing image cloud removal and speech separation showed that both methods outperformed existing attention-based fusion methods, and EDG performed better. The results suggested a new paradigm for multi-scale feature fusion in the U-Net style structures.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-13T05:06:35Z</published>
+    <arxiv:comment>15 pages, 13 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Kai Li</name>
+    </author>
+    <author>
+      <name>Xuechao Zou</name>
+    </author>
+    <author>
+      <name>Jiashen Fu</name>
+    </author>
+    <author>
+      <name>Zijun Yan</name>
+    </author>
+    <author>
+      <name>Xintong Wang</name>
+    </author>
+    <author>
+      <name>Xiaolin Hu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.19406v1</id>
+    <title>A Global-Local Cross-Attention Network for Ultra-high Resolution Remote Sensing Image Semantic Segmentation</title>
+    <updated>2025-06-24T08:20:08Z</updated>
+    <link href="https://arxiv.org/abs/2506.19406v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.19406v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With the rapid development of ultra-high resolution (UHR) remote sensing technology, the demand for accurate and efficient semantic segmentation has increased significantly. However, existing methods face challenges in computational efficiency and multi-scale feature fusion. To address these issues, we propose GLCANet (Global-Local Cross-Attention Network), a lightweight segmentation framework designed for UHR remote sensing imagery.GLCANet employs a dual-stream architecture to efficiently fuse global semantics and local details while minimizing GPU usage. A self-attention mechanism enhances long-range dependencies, refines global features, and preserves local details for better semantic consistency. A masked cross-attention mechanism also adaptively fuses global-local features, selectively enhancing fine-grained details while exploiting global context to improve segmentation accuracy. Experimental results show that GLCANet outperforms state-of-the-art methods regarding accuracy and computational efficiency. The model effectively processes large, high-resolution images with a small memory footprint, providing a promising solution for real-world remote sensing applications.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-24T08:20:08Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Chen Yi</name>
+    </author>
+    <author>
+      <name>Shan LianLei</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.17677v2</id>
+    <title>Understanding differences in applying DETR to natural and medical images</title>
+    <updated>2025-05-31T00:51:33Z</updated>
+    <link href="https://arxiv.org/abs/2405.17677v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.17677v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer-based detectors have shown success in computer vision tasks with natural images. These models, exemplified by the Deformable DETR, are optimized through complex engineering strategies tailored to the typical characteristics of natural scenes. However, medical imaging data presents unique challenges such as extremely large image sizes, fewer and smaller regions of interest, and object classes which can be differentiated only through subtle differences. This study evaluates the applicability of these transformer-based design choices when applied to a screening mammography dataset that represents these distinct medical imaging data characteristics. Our analysis reveals that common design choices from the natural image domain, such as complex encoder architectures, multi-scale feature fusion, query initialization, and iterative bounding box refinement, do not improve and sometimes even impair object detection performance in medical imaging. In contrast, simpler and shallower architectures often achieve equal or superior results. This finding suggests that the adaptation of transformer models for medical imaging data requires a reevaluation of standard practices, potentially leading to more efficient and specialized frameworks for medical diagnosis.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-27T22:06:42Z</published>
+    <arxiv:comment>Accepted for publication at the Journal of Machine Learning for Biomedical Imaging (MELBA) https://melba-journal.org/2025:009</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <arxiv:journal_ref>Machine.Learning.for.Biomedical.Imaging. 3 (2025)</arxiv:journal_ref>
+    <author>
+      <name>Yanqi Xu</name>
+    </author>
+    <author>
+      <name>Yiqiu Shen</name>
+    </author>
+    <author>
+      <name>Carlos Fernandez-Granda</name>
+    </author>
+    <author>
+      <name>Laura Heacock</name>
+    </author>
+    <author>
+      <name>Krzysztof J. Geras</name>
+    </author>
+    <arxiv:doi>10.59275/j.melba.2025-g137</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.59275/j.melba.2025-g137" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.05821v3</id>
+    <title>FuseUNet: A Multi-Scale Feature Fusion Method for U-like Networks</title>
+    <updated>2025-10-23T02:47:38Z</updated>
+    <link href="https://arxiv.org/abs/2506.05821v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.05821v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Medical image segmentation is a critical task in computer vision, with UNet serving as a milestone architecture. The typical component of UNet family is the skip connection, however, their skip connections face two significant limitations: (1) they lack effective interaction between features at different scales, and (2) they rely on simple concatenation or addition operations, which constrain efficient information integration. While recent improvements to UNet have focused on enhancing encoder and decoder capabilities, these limitations remain overlooked. To overcome these challenges, we propose a novel multi-scale feature fusion method that reimagines the UNet decoding process as solving an initial value problem (IVP), treating skip connections as discrete nodes. By leveraging principles from the linear multistep method, we propose an adaptive ordinary differential equation method to enable effective multi-scale feature fusion. Our approach is independent of the encoder and decoder architectures, making it adaptable to various U-Net-like networks. Experiments on ACDC, KiTS2023, MSD brain tumor, and ISIC2017/2018 skin lesion segmentation datasets demonstrate improved feature utilization, reduced network parameters, and maintained high performance. The code is available at https://github.com/nayutayuki/FuseUNet.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-06T07:34:06Z</published>
+    <arxiv:comment>Updated author information to clarify institutional affiliation. The research was conducted prior to the author joining the University of Maryland</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Quansong He</name>
+    </author>
+    <author>
+      <name>Xiangde Min</name>
+    </author>
+    <author>
+      <name>Kaishen Wang</name>
+    </author>
+    <author>
+      <name>Tao He</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.04793v1</id>
+    <title>RMK RetinaNet: Rotated Multi-Kernel RetinaNet for Robust Oriented Object Detection in Remote Sensing Imagery</title>
+    <updated>2026-03-05T04:14:28Z</updated>
+    <link href="https://arxiv.org/abs/2603.04793v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.04793v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Rotated object detection in remote sensing imagery is hindered by three major bottlenecks: non-adaptive receptive field utilization, inadequate long-range multi-scale feature fusion, and discontinuities in angle regression. To address these issues, we propose Rotated Multi-Kernel RetinaNet (RMK RetinaNet). First, we design a Multi-Scale Kernel (MSK) Block to strengthen adaptive multi-scale feature extraction. Second, we incorporate a Multi-Directional Contextual Anchor Attention (MDCAA) mechanism into the feature pyramid to enhance contextual modeling across scales and orientations. Third, we introduce a Bottom-up Path to preserve fine-grained spatial details that are often degraded during downsampling. Finally, we develop an Euler Angle Encoding Module (EAEM) to enable continuous and stable angle regression. Extensive experiments on DOTA-v1.0, HRSC2016, and UCAS-AOD show that RMK RetinaNet achieves performance comparable to state-of-the-art rotated object detectors while improving robustness in multi-scale and multi-orientation scenarios.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-05T04:14:28Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Huiran Sun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.11165v2</id>
+    <title>YOLO-RS: Remote Sensing Enhanced Crop Detection Methods</title>
+    <updated>2025-06-06T10:41:41Z</updated>
+    <link href="https://arxiv.org/abs/2504.11165v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.11165v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With the rapid development of remote sensing technology, crop classification and health detection based on deep learning have gradually become a research hotspot. However, the existing target detection methods show poor performance when dealing with small targets in remote sensing images, especially in the case of complex background and image mixing, which is difficult to meet the practical application requirementsite. To address this problem, a novel target detection model YOLO-RS is proposed in this paper. The model is based on the latest Yolov11 which significantly enhances the detection of small targets by introducing the Context Anchor Attention (CAA) mechanism and an efficient multi-field multi-scale feature fusion network. YOLO-RS adopts a bidirectional feature fusion strategy in the feature fusion process, which effectively enhances the model's performance in the detection of small targets. Small target detection. Meanwhile, the ACmix module at the end of the model backbone network solves the category imbalance problem by adaptively adjusting the contrast and sample mixing, thus enhancing the detection accuracy in complex scenes. In the experiments on the PDT remote sensing crop health detection dataset and the CWC crop classification dataset, YOLO-RS improves both the recall and the mean average precision (mAP) by about 2-3\% or so compared with the existing state-of-the-art methods, while the F1-score is also significantly improved. Moreover, the computational complexity of the model only increases by about 5.2 GFLOPs, indicating its significant advantages in both performance and efficiency. The experimental results validate the effectiveness and application potential of YOLO-RS in the task of detecting small targets in remote sensing images.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-15T13:13:22Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Linlin Xiao</name>
+    </author>
+    <author>
+      <name>Zhang Tiancong</name>
+    </author>
+    <author>
+      <name>Yutong Jia</name>
+    </author>
+    <author>
+      <name>Xinyu Nie</name>
+    </author>
+    <author>
+      <name>Mengyao Wang</name>
+    </author>
+    <author>
+      <name>Xiaohang Shao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.26712v1</id>
+    <title>MLFFM-SegDiff: A Multi-Level Feature Fusion Diffusion Model for Skin Lesion Segmentation</title>
+    <updated>2026-06-25T07:45:28Z</updated>
+    <link href="https://arxiv.org/abs/2606.26712v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.26712v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Skin lesion segmentation is a key task in computer-aided dermatological diagnosis, where accuracy directly impacts downstream analysis and disease classification. However, dermoscopic images are challenging due to blurred boundaries, low contrast, large shape variations, and artifacts such as hair and shadows. Recently, diffusion models have shown strong performance in medical image segmentation thanks to their progressive denoising and distribution modeling capabilities. Nevertheless, existing diffusion-based methods still suffer from limited cross-level feature interaction and insufficient boundary detail recovery.
+  To address these issues, we propose MLFFM-SegDiff, a multi-level feature fusion diffusion model for skin lesion segmentation. Built on a diffusion framework, the method introduces a dual-path U-Net encoder, a Multi-Level Feature Fusion Module (MLFFM), and a boundary-sensitive loss function. The dual-path encoder enhances interaction between noisy mask features and dermoscopic image features. MLFFM improves skip connections via attention, scale alignment, and adaptive cross-level fusion. These designs enable the decoder to jointly leverage shallow boundary cues and deep semantic representations, improving mask reconstruction quality.
+  Experiments on ISIC2018, PH2, and HAM10000 demonstrate that MLFFM-SegDiff outperforms representative methods including DermoSegDiff, U-Net, and SwinUNETR across Accuracy, F1-score, Jaccard index, Recall, and Dice. In particular, it achieves an average Jaccard index of 0.8546 and Dice coefficient of 0.9207. These results validate the effectiveness of the proposed multi-level feature fusion strategy for improving lesion segmentation performance. The code will be released at https://github.com/Qacket/MLFFM-SegDiff.git after publication.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-25T07:45:28Z</published>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Jingjun Gu</name>
+    </author>
+    <author>
+      <name>Chaojie Shen</name>
+    </author>
+    <author>
+      <name>Yifeng Cao</name>
+    </author>
+    <author>
+      <name>Wei Zhang</name>
+    </author>
+    <author>
+      <name>Yiliu Li</name>
+    </author>
+    <author>
+      <name>Aobo Fan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.24005v1</id>
+    <title>DB SwinT: A Dual-Branch Swin Transformer Network for Road Extraction in Optical Remote Sensing Imagery</title>
+    <updated>2026-03-25T07:08:54Z</updated>
+    <link href="https://arxiv.org/abs/2603.24005v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.24005v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With the continuous improvement in the spatial resolution of optical remote sensing imagery, accurate road extraction has become increasingly important for applications such as urban planning, traffic monitoring, and disaster management. However, road extraction in complex urban and rural environments remains challenging, as roads are often occluded by trees, buildings, and other objects, leading to fragmented structures and reduced extraction accuracy. To address this problem, this paper proposes a Dual-Branch Swin Transformer network (DB SwinT) for road extraction. The proposed framework combines the long-range dependency modeling capability of the Swin Transformer with the multi-scale feature fusion strategy of U-Net, and employs a dual-branch encoder to learn complementary local and global representations. Specifically, the local branch focuses on recovering fine structural details in occluded areas, while the global branch captures broader semantic context to preserve the overall continuity of road networks. In addition, an Attentional Feature Fusion (AFF) module is introduced to adaptively fuse features from the two branches, further enhancing the representation of occluded road segments. Experimental results on the Massachusetts and DeepGlobe datasets show that DB SwinT achieves Intersection over Union (IoU) scores of 79.35\% and 74.84\%, respectively, demonstrating its effectiveness for road extraction from optical remote sensing imagery.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-25T07:08:54Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Zongyang He</name>
+    </author>
+    <author>
+      <name>Xiangli Yang</name>
+    </author>
+    <author>
+      <name>Xian Gao</name>
+    </author>
+    <author>
+      <name>Zhiguo Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.07702v1</id>
+    <title>A hybrid Kolmogorov-Arnold network for medical image segmentation</title>
+    <updated>2026-02-07T21:00:38Z</updated>
+    <link href="https://arxiv.org/abs/2602.07702v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.07702v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Medical image segmentation plays a vital role in diagnosis and treatment planning, but remains challenging due to the inherent complexity and variability of medical images, especially in capturing non-linear relationships within the data. We propose U-KABS, a novel hybrid framework that integrates the expressive power of Kolmogorov-Arnold Networks (KANs) with a U-shaped encoder-decoder architecture to enhance segmentation performance. The U-KABS model combines the convolutional and squeeze-and-excitation stage, which enhances channel-wise feature representations, and the KAN Bernstein Spline (KABS) stage, which employs learnable activation functions based on Bernstein polynomials and B-splines. This hybrid design leverages the global smoothness of Bernstein polynomials and the local adaptability of B-splines, enabling the model to effectively capture both broad contextual trends and fine-grained patterns critical for delineating complex structures in medical images. Skip connections between encoder and decoder layers support effective multi-scale feature fusion and preserve spatial details. Evaluated across diverse medical imaging benchmark datasets, U-KABS demonstrates superior performance compared to strong baselines, particularly in segmenting complex anatomical structures.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-07T21:00:38Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Deep Bhattacharyya</name>
+    </author>
+    <author>
+      <name>Ali Ayub</name>
+    </author>
+    <author>
+      <name>A. Ben Hamza</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2209.10218v1</id>
+    <title>HiFuse: Hierarchical Multi-Scale Feature Fusion Network for Medical Image Classification</title>
+    <updated>2022-09-21T09:30:20Z</updated>
+    <link href="https://arxiv.org/abs/2209.10218v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2209.10218v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Medical image classification has developed rapidly under the impetus of the convolutional neural network (CNN). Due to the fixed size of the receptive field of the convolution kernel, it is difficult to capture the global features of medical images. Although the self-attention-based Transformer can model long-range dependencies, it has high computational complexity and lacks local inductive bias. Much research has demonstrated that global and local features are crucial for image classification. However, medical images have a lot of noisy, scattered features, intra-class variation, and inter-class similarities. This paper proposes a three-branch hierarchical multi-scale feature fusion network structure termed as HiFuse for medical image classification as a new method. It can fuse the advantages of Transformer and CNN from multi-scale hierarchies without destroying the respective modeling so as to improve the classification accuracy of various medical images. A parallel hierarchy of local and global feature blocks is designed to efficiently extract local features and global representations at various semantic scales, with the flexibility to model at different scales and linear computational complexity relevant to image size. Moreover, an adaptive hierarchical feature fusion block (HFF block) is designed to utilize the features obtained at different hierarchical levels comprehensively. The HFF block contains spatial attention, channel attention, residual inverted MLP, and shortcut to adaptively fuse semantic information between various scale features of each branch. The accuracy of our proposed model on the ISIC2018 dataset is 7.6% higher than baseline, 21.5% on the Covid-19 dataset, and 10.4% on the Kvasir dataset. Compared with other advanced models, the HiFuse model performs the best. Our code is open-source and available from https://github.com/huoxiangzuo/HiFuse.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-09-21T09:30:20Z</published>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Xiangzuo Huo</name>
+    </author>
+    <author>
+      <name>Gang Sun</name>
+    </author>
+    <author>
+      <name>Shengwei Tian</name>
+    </author>
+    <author>
+      <name>Yan Wang</name>
+    </author>
+    <author>
+      <name>Long Yu</name>
+    </author>
+    <author>
+      <name>Jun Long</name>
+    </author>
+    <author>
+      <name>Wendong Zhang</name>
+    </author>
+    <author>
+      <name>Aolun Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1910.13806v1</id>
+    <title>Unsupervised Representation Learning with Future Observation Prediction for Speech Emotion Recognition</title>
+    <updated>2019-10-24T16:29:16Z</updated>
+    <link href="https://arxiv.org/abs/1910.13806v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1910.13806v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Prior works on speech emotion recognition utilize various unsupervised learning approaches to deal with low-resource samples. However, these methods pay less attention to modeling the long-term dynamic dependency, which is important for speech emotion recognition. To deal with this problem, this paper combines the unsupervised representation learning strategy -- Future Observation Prediction (FOP), with transfer learning approaches (such as Fine-tuning and Hypercolumns). To verify the effectiveness of the proposed method, we conduct experiments on the IEMOCAP database. Experimental results demonstrate that our method is superior to currently advanced unsupervised learning strategies.</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-10-24T16:29:16Z</published>
+    <arxiv:primary_category term="eess.AS"/>
+    <arxiv:journal_ref>Proc. Interspeech 2019, 3840-3844</arxiv:journal_ref>
+    <author>
+      <name>Zheng Lian</name>
+    </author>
+    <author>
+      <name>Jianhua Tao</name>
+    </author>
+    <author>
+      <name>Bin Liu</name>
+    </author>
+    <author>
+      <name>Jian Huang</name>
+    </author>
+    <arxiv:doi>10.21437/Interspeech.2019-1582</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.21437/Interspeech.2019-1582" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.07779v3</id>
+    <title>AFFSegNet: Adaptive Feature Fusion Segmentation Network for Microtumors and Multi-Organ Segmentation</title>
+    <updated>2024-12-10T16:16:12Z</updated>
+    <link href="https://arxiv.org/abs/2409.07779v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.07779v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Medical image segmentation, a crucial task in computer vision, facilitates the automated delineation of anatomical structures and pathologies, supporting clinicians in diagnosis, treatment planning, and disease monitoring. Notably, transformers employing shifted window-based self-attention have demonstrated exceptional performance. However, their reliance on local window attention limits the fusion of local and global contextual information, crucial for segmenting microtumors and miniature organs. To address this limitation, we propose the Adaptive Semantic Segmentation Network (ASSNet), a transformer architecture that effectively integrates local and global features for precise medical image segmentation. ASSNet comprises a transformer-based U-shaped encoder-decoder network. The encoder utilizes shifted window self-attention across five resolutions to extract multi-scale features, which are then propagated to the decoder through skip connections. We introduce an augmented multi-layer perceptron within the encoder to explicitly model long-range dependencies during feature extraction. Recognizing the constraints of conventional symmetrical encoder-decoder designs, we propose an Adaptive Feature Fusion (AFF) decoder to complement our encoder. This decoder incorporates three key components: the Long Range Dependencies (LRD) block, the Multi-Scale Feature Fusion (MFF) block, and the Adaptive Semantic Center (ASC) block. These components synergistically facilitate the effective fusion of multi-scale features extracted by the decoder while capturing long-range dependencies and refining object boundaries. Comprehensive experiments on diverse medical image segmentation tasks, including multi-organ, liver tumor, and bladder tumor segmentation, demonstrate that ASSNet achieves state-of-the-art results. Code and models are available at: \url{https://github.com/lzeeorno/ASSNet}.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-12T06:25:44Z</published>
+    <arxiv:comment>8 pages, 4 figures, 3 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Fuchen Zheng</name>
+    </author>
+    <author>
+      <name>Xinyi Chen</name>
+    </author>
+    <author>
+      <name>Xuhang Chen</name>
+    </author>
+    <author>
+      <name>Haolun Li</name>
+    </author>
+    <author>
+      <name>Xiaojiao Guo</name>
+    </author>
+    <author>
+      <name>Weihuang Liu</name>
+    </author>
+    <author>
+      <name>Chi-Man Pun</name>
+    </author>
+    <author>
+      <name>Shoujun Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.18107v1</id>
+    <title>AdaMixT: Adaptive Weighted Mixture of Multi-Scale Expert Transformers for Time Series Forecasting</title>
+    <updated>2025-09-09T15:30:53Z</updated>
+    <link href="https://arxiv.org/abs/2509.18107v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.18107v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Multivariate time series forecasting involves predicting future values based on historical observations. However, existing approaches primarily rely on predefined single-scale patches or lack effective mechanisms for multi-scale feature fusion. These limitations hinder them from fully capturing the complex patterns inherent in time series, leading to constrained performance and insufficient generalizability. To address these challenges, we propose a novel architecture named Adaptive Weighted Mixture of Multi-Scale Expert Transformers (AdaMixT). Specifically, AdaMixT introduces various patches and leverages both General Pre-trained Models (GPM) and Domain-specific Models (DSM) for multi-scale feature extraction. To accommodate the heterogeneity of temporal features, AdaMixT incorporates a gating network that dynamically allocates weights among different experts, enabling more accurate predictions through adaptive multi-scale fusion. Comprehensive experiments on eight widely used benchmarks, including Weather, Traffic, Electricity, ILI, and four ETT datasets, consistently demonstrate the effectiveness of AdaMixT in real-world scenarios.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-09T15:30:53Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Huanyao Zhang</name>
+    </author>
+    <author>
+      <name>Jiaye Lin</name>
+    </author>
+    <author>
+      <name>Wentao Zhang</name>
+    </author>
+    <author>
+      <name>Haitao Yuan</name>
+    </author>
+    <author>
+      <name>Guoliang Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.22825v2</id>
+    <title>SGP-SAM: Self-Gated Prompting for Transferring 3D Segment Anything Models to Lesion Segmentation</title>
+    <updated>2026-09-28T07:21:27Z</updated>
+    <link href="https://arxiv.org/abs/2604.22825v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.22825v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large segmentation foundation models such as the Segment Anything Model (SAM) have reshaped promptable segmentation in natural images, and recent efforts have extended these models to medical images and volumetric settings. However, directly transferring a 3D SAM-style model to lesion segmentation remains challenging due to (i) weak spatial representational capacity for small, irregular targets in intermediate features, and (ii) extreme foreground-background imbalance in 3D volumes.We propose SGP-SAM, a self-gated prompting framework for efficient and effective transfer to 3D lesion segmentation. Our key component, the Self-Gated Prompting Module (SGPM), performs conditional multi-scale spatial enhancement: a lightweight multi-channel gating unit predicts whether the current features require additional multi-scale fusion, and only then activates a Multi-Scale Feature Fusion Block to enrich spatial context. To further address small-lesion learning, we design a Zoom Loss that up-weights lesion-focused supervision by combining Dice and a voxel-balanced focal term.Experiments on MSD Liver Tumor and MSD Brain Tumor (enhancing tumor) show consistent gains over strong transfer baselines based on SAM-Med3D. On MSD Liver Tumor, SGP-SAM improves mDice by 7.3% over fine-tuning.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-19T10:22:04Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Zequan Yao</name>
+    </author>
+    <author>
+      <name>Zixuan Tang</name>
+    </author>
+    <author>
+      <name>Jielin Ma</name>
+    </author>
+    <author>
+      <name>Shen Zhao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.17079v1</id>
+    <title>SALMONN-2: Advancing General-Purpose Hearing Abilities with Self-Supervised Representations</title>
+    <updated>2026-07-19T05:05:49Z</updated>
+    <link href="https://arxiv.org/abs/2607.17079v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.17079v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent audio large language models (ALLMs) are typically built upon audio encoders trained with large amounts of supervised data. Since self-supervised learning (SSL) audio encoder models are known to learn general-purpose and transferable representations, we investigate whether general-purpose SSL audio representations can serve as an effective foundation for ALLMs. We present SALMONN-2, an ALLM built upon a unified SSL encoder. To better exploit the hierarchical representations learned by SSL encoders, we propose a multi-layer feature fusion (MLF) adapter that aggregates information from all encoder layers before projecting them into the language model. Beyond conventional audio understanding tasks, we further explore multimodal in-context learning (MICL) in ALLMs and study how this capability can be acquired through contextual biasing training. Experimental results show that a general-purpose SSL encoder achieves performance comparable to, or better than, specialised supervised audio encoders while providing a more balanced capability across speech, audio, music and paralinguistic tasks. SALMONN-2 further achieves state-of-the-art performance among comparable-scale open-weight models on ALLM understanding benchmarks, obtaining the best results on MMAU-Pro, MMAR and MMSU. We also show that MICL does not emerge naturally in ALLMs, but can be effectively acquired through targeted contextual biasing training.</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-19T05:05:49Z</published>
+    <arxiv:comment>Disclaimer: This work has been submitted to the IEEE for possible publication</arxiv:comment>
+    <arxiv:primary_category term="eess.AS"/>
+    <author>
+      <name>Xiaoyu Yang</name>
+    </author>
+    <author>
+      <name>Xuenan Xu</name>
+    </author>
+    <author>
+      <name>Wenyi Yu</name>
+    </author>
+    <author>
+      <name>Siyin Wang</name>
+    </author>
+    <author>
+      <name>Changli Tang</name>
+    </author>
+    <author>
+      <name>Terumi Chiba</name>
+    </author>
+    <author>
+      <name>Siyuan Hou</name>
+    </author>
+    <author>
+      <name>Ziyang Zhang</name>
+    </author>
+    <author>
+      <name>Wen Wu</name>
+    </author>
+    <author>
+      <name>Baoxiang Li</name>
+    </author>
+    <author>
+      <name>Guangzhi Sun</name>
+    </author>
+    <author>
+      <name>Chao Zhang</name>
+    </author>
+    <author>
+      <name>Philip Woodland</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.06615v1</id>
+    <title>Multi-Scale Feature Fusion with Image-Driven Spatial Integration for Left Atrium Segmentation from Cardiac MRI Images</title>
+    <updated>2025-02-10T16:12:46Z</updated>
+    <link href="https://arxiv.org/abs/2502.06615v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.06615v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate segmentation of the left atrium (LA) from late gadolinium-enhanced magnetic resonance imaging plays a vital role in visualizing diseased atrial structures, enabling the diagnosis and management of cardiovascular diseases. It is particularly essential for planning treatment with ablation therapy, a key intervention for atrial fibrillation (AF). However, manual segmentation is time-intensive and prone to inter-observer variability, underscoring the need for automated solutions. Class-agnostic foundation models like DINOv2 have demonstrated remarkable feature extraction capabilities in vision tasks. However, their lack of domain specificity and task-specific adaptation can reduce spatial resolution during feature extraction, impacting the capture of fine anatomical detail in medical imaging. To address this limitation, we propose a segmentation framework that integrates DINOv2 as an encoder with a UNet-style decoder, incorporating multi-scale feature fusion and input image integration to enhance segmentation accuracy. The learnable weighting mechanism dynamically prioritizes hierarchical features from different encoder blocks of the foundation model, optimizing feature selection for task relevance. Additionally, the input image is reintroduced during the decoding stage to preserve high-resolution spatial details, addressing limitations of downsampling in the encoder. We validate our approach on the LAScarQS 2022 dataset and demonstrate improved performance with a 92.3% Dice and 84.1% IoU score for giant architecture compared to the nnUNet baseline model. These findings emphasize the efficacy of our approach in advancing the field of automated left atrium segmentation from cardiac MRI.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-10T16:12:46Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Bipasha Kundu</name>
+    </author>
+    <author>
+      <name>Zixin Yang</name>
+    </author>
+    <author>
+      <name>Richard Simon</name>
+    </author>
+    <author>
+      <name>Cristian Linte</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.12203v1</id>
+    <title>CTLformer: A Hybrid Denoising Model Combining Convolutional Layers and Self-Attention for Enhanced CT Image Reconstruction</title>
+    <updated>2025-05-18T02:37:50Z</updated>
+    <link href="https://arxiv.org/abs/2505.12203v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.12203v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Low-dose CT (LDCT) images are often accompanied by significant noise, which negatively impacts image quality and subsequent diagnostic accuracy. To address the challenges of multi-scale feature fusion and diverse noise distribution patterns in LDCT denoising, this paper introduces an innovative model, CTLformer, which combines convolutional structures with transformer architecture. Two key innovations are proposed: a multi-scale attention mechanism and a dynamic attention control mechanism. The multi-scale attention mechanism, implemented through the Token2Token mechanism and self-attention interaction modules, effectively captures both fine details and global structures at different scales, enhancing relevant features and suppressing noise. The dynamic attention control mechanism adapts the attention distribution based on the noise characteristics of the input image, focusing on high-noise regions while preserving details in low-noise areas, thereby enhancing robustness and improving denoising performance. Furthermore, CTLformer integrates convolutional layers for efficient feature extraction and uses overlapping inference to mitigate boundary artifacts, further strengthening its denoising capability. Experimental results on the 2016 National Institutes of Health AAPM Mayo Clinic LDCT Challenge dataset demonstrate that CTLformer significantly outperforms existing methods in both denoising performance and model efficiency, greatly improving the quality of LDCT images. The proposed CTLformer not only provides an efficient solution for LDCT denoising but also shows broad potential in medical image analysis, especially for clinical applications dealing with complex noise patterns.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-18T02:37:50Z</published>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Zhiting Zheng</name>
+    </author>
+    <author>
+      <name>Shuqi Wu</name>
+    </author>
+    <author>
+      <name>Wen Ding</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.18102v1</id>
+    <title>XMUspeech Systems for the ASVspoof 5 Challenge</title>
+    <updated>2025-09-05T15:16:48Z</updated>
+    <link href="https://arxiv.org/abs/2509.18102v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.18102v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we present our submitted XMUspeech systems to the speech deepfake detection track of the ASVspoof 5 Challenge. Compared to previous challenges, the audio duration in ASVspoof 5 database has significantly increased. And we observed that merely adjusting the input audio length can substantially improve system performance. To capture artifacts at multiple levels, we explored the performance of AASIST, HM-Conformer, Hubert, and Wav2vec2 with various input features and loss functions. Specifically, in order to obtain artifact-related information, we trained self-supervised models on the dataset containing spoofing utterances as the feature extractors. And we applied an adaptive multi-scale feature fusion (AMFF) method to integrate features from multiple Transformer layers with the hand-crafted feature to enhance the detection capability. In addition, we conducted extensive experiments on one-class loss functions and provided optimized configurations to better align with the anti-spoofing task. Our fusion system achieved a minDCF of 0.4783 and an EER of 20.45% in the closed condition, and a minDCF of 0.2245 and an EER of 9.36% in the open condition.</summary>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-05T15:16:48Z</published>
+    <arxiv:primary_category term="cs.SD"/>
+    <author>
+      <name>Wangjie Li</name>
+    </author>
+    <author>
+      <name>Xingjia Xie</name>
+    </author>
+    <author>
+      <name>Yishuang Li</name>
+    </author>
+    <author>
+      <name>Wenhao Guan</name>
+    </author>
+    <author>
+      <name>Kaidi Wang</name>
+    </author>
+    <author>
+      <name>Pengyu Ren</name>
+    </author>
+    <author>
+      <name>Lin Li</name>
+    </author>
+    <author>
+      <name>Qingyang Hong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.23738v1</id>
+    <title>MLLA-UNet: Mamba-like Linear Attention in an Efficient U-Shape Model for Medical Image Segmentation</title>
+    <updated>2024-10-31T08:54:23Z</updated>
+    <link href="https://arxiv.org/abs/2410.23738v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.23738v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advancements in medical imaging have resulted in more complex and diverse images, with challenges such as high anatomical variability, blurred tissue boundaries, low organ contrast, and noise. Traditional segmentation methods struggle to address these challenges, making deep learning approaches, particularly U-shaped architectures, increasingly prominent. However, the quadratic complexity of standard self-attention makes Transformers computationally prohibitive for high-resolution images. To address these challenges, we propose MLLA-UNet (Mamba-Like Linear Attention UNet), a novel architecture that achieves linear computational complexity while maintaining high segmentation accuracy through its innovative combination of linear attention and Mamba-inspired adaptive mechanisms, complemented by an efficient symmetric sampling structure for enhanced feature processing. Our architecture effectively preserves essential spatial features while capturing long-range dependencies at reduced computational complexity. Additionally, we introduce a novel sampling strategy for multi-scale feature fusion. Experiments demonstrate that MLLA-UNet achieves state-of-the-art performance on six challenging datasets with 24 different segmentation tasks, including but not limited to FLARE22, AMOS CT, and ACDC, with an average DSC of 88.32%. These results underscore the superiority of MLLA-UNet over existing methods. Our contributions include the novel 2D segmentation architecture and its empirical validation. The code is available via https://github.com/csyfjiang/MLLA-UNet.</summary>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-31T08:54:23Z</published>
+    <arxiv:primary_category term="eess.IV"/>
+    <author>
+      <name>Yufeng Jiang</name>
+    </author>
+    <author>
+      <name>Zongxi Li</name>
+    </author>
+    <author>
+      <name>Xiangyan Chen</name>
+    </author>
+    <author>
+      <name>Haoran Xie</name>
+    </author>
+    <author>
+      <name>Jing Cai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.16937v1</id>
+    <title>PINN-EMFNet: PINN-based and Enhanced Multi-Scale Feature Fusion Network for Breast Ultrasound Images Segmentation</title>
+    <updated>2024-12-22T09:16:00Z</updated>
+    <link href="https://arxiv.org/abs/2412.16937v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.16937v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>With the rapid development of deep learning and computer vision technologies, medical image segmentation plays a crucial role in the early diagnosis of breast cancer. However, due to the characteristics of breast ultrasound images, such as low contrast, speckle noise, and the highly diverse morphology of tumors, existing segmentation methods exhibit significant limitations in terms of accuracy and robustness. To address these challenges, this study proposes a PINN-based and Enhanced Multi-Scale Feature Fusion Network. The network introduces a Hierarchical Aggregation Encoder in the backbone, which efficiently integrates and globally models multi-scale features through several structural innovations and a novel PCAM module. In the decoder section, a Multi-Scale Feature Refinement Decoder is employed, which, combined with a Multi-Scale Supervision Mechanism and a correction module, significantly improves segmentation accuracy and adaptability. Additionally, the loss function incorporating the PINN mechanism introduces physical constraints during the segmentation process, enhancing the model's ability to accurately delineate tumor boundaries. Comprehensive evaluations on two publicly available breast ultrasound datasets, BUSIS and BUSI, demonstrate that the proposed method outperforms previous segmentation approaches in terms of segmentation accuracy and robustness, particularly under conditions of complex noise and low contrast, effectively improving the accuracy and reliability of tumor segmentation. This method provides a more precise and robust solution for computer-aided diagnosis of breast ultrasound images.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-22T09:16:00Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Jiajun Ding</name>
+    </author>
+    <author>
+      <name>Beiyao Zhu</name>
+    </author>
+    <author>
+      <name>Wenjie Wang</name>
+    </author>
+    <author>
+      <name>Shurong Zhang</name>
+    </author>
+    <author>
+      <name>Dian Zhua</name>
+    </author>
+    <author>
+      <name>Zhao Liua</name>
+    </author>
+  </entry>
+</feed>
