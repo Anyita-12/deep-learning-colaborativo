@@ -35,10 +35,12 @@ Las corridas de los tres modelos base están en `results/` (capítulo 4). Los pe
 | PyTorch / torchvision | 2.14.1+cu130 / 0.29.1+cu130 |
 | CUDA | 13.0 |
 | Otras dependencias | Versiones exactas en `entregable2/results/common/requirements-lock.txt` |
-| GPU | NVIDIA A100-SXM4 (Colab) y RTX 4060 Laptop (portátil) |
+| GPU | NVIDIA A100-SXM4 de 80 GB en Colab: ViT-B16, GFN y Celik-HC. NVIDIA RTX 4060 Laptop de 8 GB en el portátil: MbXception, FocusRCNet, ResMsCapsule, RWCNet, las ocho variantes de ablación y los tres modelos base, cuyas corridas son las del capítulo 4. La réplica del paper guía se ejecutó en una A100-SXM4 de 40 GB |
 | Sistema operativo | Linux (Colab) y Windows 11 (portátil) |
 | Semillas | 0 a 7 en las corridas finales, 100 en la búsqueda y 2026 en las perturbaciones |
 | Determinismo | `cudnn.deterministic = True`, `cudnn.benchmark = False`, `use_deterministic_algorithms(True, warn_only=True)`, `CUBLAS_WORKSPACE_CONFIG=:4096:8` |
+
+**Efecto del hardware.** La GPU de cada corrida queda registrada en su `env.pkl`. Las dos máquinas comparten la partición, las semillas, el protocolo y la huella verificada del conjunto de prueba, de modo que el F1 y las demás métricas de desempeño se comparan entre los diez modelos. Los tiempos de entrenamiento, la latencia y la memoria dependen de la GPU: la A100 tiene más capacidad de cómputo y diez veces más memoria (80 GB frente a 8 GB) que la RTX 4060, y ningún modelo se entrenó en las dos, por lo que esas magnitudes solo se comparan entre modelos de una misma máquina (sección 11.6), y la huella energética se calcula con la potencia de cada GPU (sección 13.12).
 
 El entorno se fija con `requirements.txt` y `requirements-lock.txt` y se reconstruye con `venv`. En la etapa siguiente el entorno se empaquetará además en una imagen de contenedor.
 
@@ -113,7 +115,7 @@ Todas las etapas se pueden reanudar: las corridas con `DONE` se saltan y las par
 | Tablas A, B y C con $p$ exactos, ajustados, IC y tamaños de efecto | Capítulos 13 y 14 |
 | Familias de comparaciones declaradas a priori | Familia de 45 pares fijada en el preregistro, con Holm; la regla de decisión por pares se precisó antes de ver los resultados (sección 11.2) |
 | Techo de desempeño y $\gamma$ | Sección 15.4 |
-| Búsqueda de arquitectura | No aplica: los siete artículos definen la arquitectura (sección 11.5) |
+| Búsqueda de arquitectura | No aplica: los siete artículos definen la topología, y los valores de capa no declarados se completan con fuentes primarias o valores estándar (secciones 10.6 y 11.5) |
 | Robustez con tres niveles; fidelidad y estabilidad de las explicaciones | Tres niveles con curva de degradación e índice de robustez en ruido y brillo; desenfoque, oclusión y fondo con el nivel preregistrado del capítulo 5. Estabilidad entre semillas en los siete modelos publicados; fidelidad por inserción en RWCNet, el mejor modelo, y en tres modelos más, 8 de 8 semillas por encima del azar; ViT-B16 y GFN se evalúan con estabilidad y atención sobre el fondo (sección 15.2) |
 | Incertidumbre en los tres mejores modelos con cobertura empírica | MC Dropout y predicción conforme (sección 14.4) |
 | Un solo acceso al conjunto de prueba por corrida | El código evalúa la prueba una vez, con el modelo de la mejor época de validación |

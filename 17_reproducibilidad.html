@@ -484,7 +484,7 @@
 <td><p>Versiones exactas en <code class="docutils literal notranslate"><span class="pre">entregable2/results/common/requirements-lock.txt</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p>GPU</p></td>
-<td><p>NVIDIA A100-SXM4 (Colab) y RTX 4060 Laptop (portátil)</p></td>
+<td><p>NVIDIA A100-SXM4 de 80 GB en Colab: ViT-B16, GFN y Celik-HC. NVIDIA RTX 4060 Laptop de 8 GB en el portátil: MbXception, FocusRCNet, ResMsCapsule, RWCNet, las ocho variantes de ablación y los tres modelos base, cuyas corridas son las del capítulo 4. La réplica del paper guía se ejecutó en una A100-SXM4 de 40 GB</p></td>
 </tr>
 <tr class="row-odd"><td><p>Sistema operativo</p></td>
 <td><p>Linux (Colab) y Windows 11 (portátil)</p></td>
@@ -498,6 +498,7 @@
 </tbody>
 </table>
 </div>
+<p><strong>Efecto del hardware.</strong> La GPU de cada corrida queda registrada en su <code class="docutils literal notranslate"><span class="pre">env.pkl</span></code>. Las dos máquinas comparten la partición, las semillas, el protocolo y la huella verificada del conjunto de prueba, de modo que el F1 y las demás métricas de desempeño se comparan entre los diez modelos. Los tiempos de entrenamiento, la latencia y la memoria dependen de la GPU: la A100 tiene más capacidad de cómputo y diez veces más memoria (80 GB frente a 8 GB) que la RTX 4060, y ningún modelo se entrenó en las dos, por lo que esas magnitudes solo se comparan entre modelos de una misma máquina (sección 11.6), y la huella energética se calcula con la potencia de cada GPU (sección 13.12).</p>
 <p>El entorno se fija con <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> y <code class="docutils literal notranslate"><span class="pre">requirements-lock.txt</span></code> y se reconstruye con <code class="docutils literal notranslate"><span class="pre">venv</span></code>. En la etapa siguiente el entorno se empaquetará además en una imagen de contenedor.</p>
 </section>
 <section id="comandos">
@@ -624,7 +625,7 @@
 <td><p>Sección 15.4</p></td>
 </tr>
 <tr class="row-odd"><td><p>Búsqueda de arquitectura</p></td>
-<td><p>No aplica: los siete artículos definen la arquitectura (sección 11.5)</p></td>
+<td><p>No aplica: los siete artículos definen la topología, y los valores de capa no declarados se completan con fuentes primarias o valores estándar (secciones 10.6 y 11.5)</p></td>
 </tr>
 <tr class="row-even"><td><p>Robustez con tres niveles; fidelidad y estabilidad de las explicaciones</p></td>
 <td><p>Tres niveles con curva de degradación e índice de robustez en ruido y brillo; desenfoque, oclusión y fondo con el nivel preregistrado del capítulo 5. Estabilidad entre semillas en los siete modelos publicados; fidelidad por inserción en RWCNet, el mejor modelo, y en tres modelos más, 8 de 8 semillas por encima del azar; ViT-B16 y GFN se evalúan con estabilidad y atención sobre el fondo (sección 15.2)</p></td>

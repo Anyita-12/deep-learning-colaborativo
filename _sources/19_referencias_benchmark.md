@@ -26,6 +26,8 @@ Devi, A., Saravanan, A., Reeta, R., & Anitha, V. P. (2025). Transforming waste m
 
 Dietterich, T. G. (1998). Approximate statistical tests for comparing supervised classification learning algorithms. *Neural Computation*, *10*(7), 1895–1923. https://doi.org/10.1162/089976698300017197
 
+Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner, T., Dehghani, M., Minderer, M., Heigold, G., Gelly, S., Uszkoreit, J., & Houlsby, N. (2021). An image is worth 16x16 words: Transformers for image recognition at scale. *International Conference on Learning Representations*. https://doi.org/10.48550/arXiv.2010.11929
+
 Efron, B., & Tibshirani, R. J. (1993). *An introduction to the bootstrap*. Chapman & Hall/CRC. https://doi.org/10.1201/9780429246593
 
 Friedman, M. (1937). The use of ranks to avoid the assumption of normality implicit in the analysis of variance. *Journal of the American Statistical Association*, *32*(200), 675–701. https://doi.org/10.1080/01621459.1937.10503522
@@ -75,6 +77,8 @@ Rabano, S. L., Cabatuan, M. K., Sybingco, E., Dadios, E. P., & Calilung, E. J. (
 Romano, Y., Sesia, M., & Candès, E. (2020). Classification with valid and adaptive coverage. *Advances in Neural Information Processing Systems*, *33*, 3581–3591. https://proceedings.neurips.cc/paper/2020/hash/244edd7e85dc81602b7615cd705545f5-Abstract.html
 
 Ruiz, V., Sánchez, Á., Vélez, J. F., & Raducanu, B. (2019). Automatic Image-Based Waste Classification. From Bioinspired Systems and Biomedical Applications to Machine Learning, 422-431. https://doi.org/10.1007/978-3-030-19651-6_41
+
+Sabour, S., Frosst, N., & Hinton, G. E. (2017). Dynamic routing between capsules. *Advances in Neural Information Processing Systems*, *30*. https://proceedings.neurips.cc/paper/2017/hash/2cad8fa47bbef282badbb8de5374b894-Abstract.html
 
 Sadinle, M., Lei, J., & Wasserman, L. (2019). Least ambiguous set-valued classifiers with bounded error levels. *Journal of the American Statistical Association*, *114*(525), 223–234. https://doi.org/10.1080/01621459.2017.1395341
 

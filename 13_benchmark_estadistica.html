@@ -789,6 +789,7 @@
 </table>
 </div></div></div>
 </div>
+<p>El IC de cada modelo es el intervalo percentil 2.5–97.5 de 10 000 remuestreos bootstrap de sus 8 semillas, con el mismo método en los diez modelos. Para ResNet-18 da [0.848, 0.876]. El capítulo 7 reporta [0.845, 0.881] para las mismas 8 corridas porque usa el intervalo t de Student, que es el que muestra la figura siguiente; con 8 semillas, el bootstrap percentil es algo más estrecho que el t.</p>
 <p>La tabla completa de métricas secundarias por modelo (F1 ponderado, precisión y recall macro, AUC-PR, NLL, Brier, tiempos) está en <code class="docutils literal notranslate"><span class="pre">entregable2/results/summary/tabla_benchmark.csv</span></code>, y las métricas de cada corrida en <code class="docutils literal notranslate"><span class="pre">metricas_por_corrida.csv</span></code>. Los modelos del capítulo 4 no guardaron NLL ni Brier.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

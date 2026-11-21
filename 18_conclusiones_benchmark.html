@@ -648,7 +648,7 @@
 <h2>18.6 Relación con la literatura y con el paper guía<a class="headerlink" href="#relacion-con-la-literatura-y-con-el-paper-guia" title="Link to this heading">#</a></h2>
 <p>Con preentrenamiento, la brecha de 0.089 con la mediana publicada en TrashNet que señalamos en la sección 7.6 casi desaparece: la accuracy de RWCNet (0.952) queda a 0.008 de esa mediana. La diferencia restante es coherente con un protocolo más estricto, con partición agrupada, varias semillas y conjunto de prueba usado una sola vez.</p>
 <p>El mismo pipeline reproduce la accuracy publicada de RWCNet (95.2 % frente a 95.01 %) y de GFN (a 0.7 puntos), y las brechas de los demás modelos son heterogéneas y tienen causas documentadas (sección 12.2). El pipeline queda así validado, y las discrepancias se atribuyen a cada artículo y no a la implementación. Celik-HC, el paper guía, queda 6.8 puntos por debajo: con su protocolo original obtenemos 0.925, y la selección de la época con el conjunto de prueba explica 2.8 de esos puntos. Su ablación muestra que la <em>hypercolumn</em>, la segunda red y XGBoost no aportan sobre un único extractor preentrenado; el preentrenamiento sí aporta, con 0.085 de F1. En RWCNet, la ablación de tres componentes muestra el mismo patrón: aportan el extractor principal (DenseNet201, 0.033 de F1) y la supervisión profunda (0.022), mientras que la segunda red (MobileNetV2) no tiene un aporte significativo.</p>
-<p>La contribución de este estudio es una comparación de diez modelos de seis familias con el mismo protocolo, réplicas, inferencia estadística con control de comparaciones múltiples y análisis de calibración, robustez e interpretabilidad. Ningún estudio de la revisión sistemática del capítulo 10 reúne estas condiciones sobre TrashNet.</p>
+<p>La contribución de este estudio es una comparación de diez modelos de cuatro familias amplias de arquitectura con el mismo protocolo, réplicas, inferencia estadística con control de comparaciones múltiples y análisis de calibración, robustez e interpretabilidad. Ningún estudio de la revisión sistemática del capítulo 10 reúne estas condiciones sobre TrashNet.</p>
 </section>
 <section id="alcance-del-estudio">
 <h2>18.7 Alcance del estudio<a class="headerlink" href="#alcance-del-estudio" title="Link to this heading">#</a></h2>
@@ -680,7 +680,7 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Comparación controlada de modelos publicados</p></td>
-<td><p>Diez modelos de seis familias con la misma partición agrupada, 8 semillas, prueba de Friedman y 45 contrastes pareados con Holm. Cuatro modelos superan al de referencia y dos pares son equivalentes dentro de <span class="math notranslate nohighlight">\(\pm\delta\)</span></p></td>
+<td><p>Diez modelos de cuatro familias amplias con la misma partición agrupada, 8 semillas, prueba de Friedman y 45 contrastes pareados con Holm. Cuatro modelos superan al de referencia y dos pares son equivalentes dentro de <span class="math notranslate nohighlight">\(\pm\delta\)</span></p></td>
 <td><p>RQ1, RQ2</p></td>
 </tr>
 <tr class="row-odd"><td><p>La misma comparación aplicada al paper guía</p></td>
