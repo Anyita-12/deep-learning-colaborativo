@@ -6,3 +6,4 @@ statsmodels>=0.14
 pillow>=10.0
 xgboost>=2.0
 scikit-posthocs>=0.9
+openpyxl>=3.1   # solo para revision_sistematica/scripts/fuera_corpus.py
