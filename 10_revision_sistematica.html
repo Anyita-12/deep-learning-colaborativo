@@ -677,6 +677,7 @@
 </section>
 <section id="diagrama-prisma-2020-y-acuerdo-entre-revisores">
 <h2>10.3 Diagrama PRISMA 2020 y acuerdo entre revisores<a class="headerlink" href="#diagrama-prisma-2020-y-acuerdo-entre-revisores" title="Link to this heading">#</a></h2>
+<p>El flujo de registros sigue la declaración PRISMA 2020 (Page et al., 2021), la guía de reporte de revisiones sistemáticas que define las etapas de identificación, cribado, elegibilidad e inclusión, y exige reportar las exclusiones con su motivo en cada etapa.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">7.2</span><span class="p">))</span>
@@ -738,7 +739,7 @@
 </tbody>
 </table>
 </div>
-<p>El acuerdo entre los revisores humanos es casi perfecto (Landis y Koch, 1977), y coinciden en los 25 registros en la decisión de pasar o no a texto completo. Las dos discrepancias (R100 y R132) se resolvieron por mayoría de los tres revisores; sin mayoría, el registro pasaba a texto completo como Dudoso. La lectura a texto completo fue asistida por IA, y los siete estudios del benchmark se verificaron a mano.</p>
+<p>El κ de Cohen (Cohen, 1960) corrige el acuerdo observado por el que se esperaría solo por azar, dadas las proporciones de cada decisión: vale 0 si los revisores coinciden como dos clasificadores aleatorios y 1 si coinciden siempre. Para leer su magnitud usamos la escala de Landis y Koch (1977), la referencia habitual para κ: 0.41–0.60 es acuerdo moderado, 0.61–0.80 sustancial y 0.81–1.00 casi perfecto. El κ de 0.857 entre los dos revisores humanos cae en el tramo casi perfecto: coinciden en 23 de los 25 registros con tres categorías (acuerdo observado de 0.92) y en los 25 en la decisión de pasar o no a texto completo (κ = 1.000). Las dos discrepancias (R100 y R132) se resolvieron por mayoría, y los registros que superaron el cribado se revisaron a texto completo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"etapa"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Identificados en OpenAlex (P1 + P2 + P3)"</span><span class="p">,</span> <span class="s2">"Identificados en arXiv"</span><span class="p">,</span> <span class="s2">"Solo conteo en IEEE Xplore (P1 + P2 + P3)"</span><span class="p">,</span>
@@ -872,7 +873,7 @@
 <p>El cribado automático de la búsqueda ampliada se contrastó con un segundo revisor asistido por IA, que decidió sin ver la decisión de las reglas:</p>
 <ul class="simple">
 <li><p><strong>Muestra de calibración:</strong> 60 registros, con los que se corrigieron las reglas.</p></li>
-<li><p><strong>Muestra de validación:</strong> 60 registros nuevos, con acuerdo de 0.833, κ = 0.669, sensibilidad de 0.93 y precisión de 0.77. Las reglas son conservadoras.</p></li>
+<li><p><strong>Muestra de validación:</strong> 60 registros nuevos, con acuerdo de 0.833, κ = 0.669 (sustancial en la escala de Landis y Koch), sensibilidad de 0.93 y precisión de 0.77. Las reglas son conservadoras.</p></li>
 </ul>
 </section>
 <section id="hoja-de-extraccion-y-calidad-metodologica">
@@ -1931,7 +1932,7 @@
 </tbody>
 </table>
 </div>
-<p><strong>Composición del benchmark.</strong> El benchmark compara diez modelos profundos: los tres modelos base del Entregable 1 (CNN, MobileNetV2 y ResNet-18), que se mantienen como referencia, y los siete modelos publicados seleccionados en esta sección. Los siete publicados cubren seis familias, por encima del mínimo de cuatro. Los diez modelos reciben el mismo tratamiento:</p>
+<p><strong>Composición del benchmark.</strong> El benchmark compara diez modelos profundos: los tres modelos base del Entregable 1 (CNN, MobileNetV2 y ResNet-18), que sirven como referencia, y los siete modelos publicados seleccionados en esta sección. Los siete publicados cubren seis familias, por encima del mínimo de cuatro. Los diez modelos reciben el mismo tratamiento:</p>
 <ul class="simple">
 <li><p>el mismo presupuesto de ajuste (8 configuraciones) y 8 semillas por modelo;</p></li>
 <li><p>la misma partición, métricas, umbrales y evaluación;</p></li>

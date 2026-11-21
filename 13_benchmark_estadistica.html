@@ -418,7 +418,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-principal-del-benchmark-plantilla-a-2">13.1 Tabla principal del benchmark (plantilla A.2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-principal-del-benchmark">13.1 Tabla principal del benchmark</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-de-cada-modelo">13.2 Resultados de cada modelo</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rwcnet">13.2.1 RWCNet</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vit-b16">13.2.2 ViT-B16</a></li>
@@ -436,7 +436,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baselines-no-profundos">13.4 Baselines no profundos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-global-y-supuestos">13.5 Prueba global y supuestos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrama-de-diferencia-critica">13.6 Diagrama de diferencia crítica</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastes-confirmatorios-plantilla-a-3">13.7 Contrastes confirmatorios (plantilla A.3)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastes-confirmatorios">13.7 Contrastes confirmatorios</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaciones-entre-los-mejores-modelos-equivalencia-y-sensibilidad">13.8 Comparaciones entre los mejores modelos, equivalencia y sensibilidad</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-por-imagen-mcnemar-q-de-cochran-y-delong">13.9 Pruebas por imagen: McNemar, Q de Cochran y DeLong</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#potencia-y-diferencia-minima-detectable">13.10 Potencia y diferencia mínima detectable</a></li>
@@ -491,8 +491,8 @@
 </div>
 </details>
 </div>
-<section id="tabla-principal-del-benchmark-plantilla-a-2">
-<h2>13.1 Tabla principal del benchmark (plantilla A.2)<a class="headerlink" href="#tabla-principal-del-benchmark-plantilla-a-2" title="Link to this heading">#</a></h2>
+<section id="tabla-principal-del-benchmark">
+<h2>13.1 Tabla principal del benchmark<a class="headerlink" href="#tabla-principal-del-benchmark" title="Link to this heading">#</a></h2>
 <p>Para cada modelo reportamos:</p>
 <ul class="simple">
 <li><p><strong>F1 macro:</strong> media ± DE sobre 8 semillas, con IC 95 % bootstrap sobre las semillas (10 000 remuestreos).</p></li>
@@ -1681,11 +1681,12 @@
 <p><strong>Supuestos.</strong></p>
 <ul class="simple">
 <li><p><strong>Independencia:</strong> cada semilla es una corrida independiente; dentro de una semilla, los diez modelos comparten la partición y el orden de los datos, por lo que las semillas actúan como bloques.</p></li>
-<li><p><strong>Normalidad:</strong> se evalúa con Shapiro-Wilk sobre el F1 de cada modelo y sobre las diferencias pareadas.</p></li>
+<li><p><strong>Normalidad:</strong> se evalúa con Shapiro-Wilk (Shapiro y Wilk, 1965) sobre el F1 de cada modelo y sobre las diferencias pareadas.</p></li>
 <li><p><strong>Homocedasticidad:</strong> se evalúa con Levene (centrado en la mediana).</p></li>
-<li><p><strong>Solapamiento del entrenamiento:</strong> las 8 corridas de cada modelo usan la misma partición y solo varían la semilla (pesos iniciales, orden de lotes, aumento y <em>dropout</em>). No hay particiones repetidas con conjuntos de entrenamiento solapados, por lo que la corrección de Nadeau y Bengio no aplica. La contrapartida es que la inferencia se refiere a este conjunto de prueba y a la variabilidad por semilla, no a la variabilidad por partición.</p></li>
+<li><p><strong>Solapamiento del entrenamiento:</strong> las 8 corridas de cada modelo usan la misma partición y solo varían la semilla (pesos iniciales, orden de lotes, aumento y <em>dropout</em>). No hay particiones repetidas con conjuntos de entrenamiento solapados, por lo que la corrección de Nadeau y Bengio (2003), que ajusta la varianza cuando los conjuntos de entrenamiento se solapan entre repeticiones, no aplica. La contrapartida es que la inferencia se refiere a este conjunto de prueba y a la variabilidad por semilla, no a la variabilidad por partición.</p></li>
 </ul>
 <p>Como la potencia de estas pruebas es baja con 8 semillas, reportamos en paralelo una prueba paramétrica (ANOVA de medidas repetidas con corrección de Greenhouse-Geisser) y una no paramétrica (Friedman con <span class="math notranslate nohighlight">\(p\)</span> por permutación y corrección de Iman-Davenport).</p>
+<p>Para comparar varios clasificadores seguimos el procedimiento de Demšar (2006), la referencia habitual en aprendizaje automático: una prueba global de Friedman (1937) sobre los rangos dentro de cada bloque, que no supone normalidad, y comparaciones post hoc por pares con control de comparaciones múltiples. Usamos la corrección de Iman y Davenport (1980) porque el estadístico original de Friedman es conservador con pocos bloques. La corrección de Greenhouse y Geisser (1959) ajusta los grados de libertad del ANOVA de medidas repetidas cuando no se cumple la esfericidad. Con diez modelos y ocho semillas la esfericidad no se puede contrastar, porque la prueba de Mauchly necesita más bloques que niveles, así que aplicamos la corrección en todos los casos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sh</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">glob</span><span class="p">[</span><span class="s2">"shapiro_p_por_modelo"</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">"Shapiro-Wilk p"</span><span class="p">)</span>
@@ -1819,7 +1820,7 @@ Shapiro-Wilk sobre las 45 diferencias pareadas: 3 con p &lt; 0.05 (se esperan 2.
 </section>
 <section id="diagrama-de-diferencia-critica">
 <h2>13.6 Diagrama de diferencia crítica<a class="headerlink" href="#diagrama-de-diferencia-critica" title="Link to this heading">#</a></h2>
-<p>El diagrama ordena los modelos por su rango medio (1 = mejor) y une con una barra los grupos cuya diferencia de rango es menor que la diferencia crítica de Nemenyi,</p>
+<p>El diagrama ordena los modelos por su rango medio (1 = mejor) y une con una barra los grupos cuya diferencia de rango es menor que la diferencia crítica de Nemenyi, tal como lo propone Demšar (2006):</p>
 <div class="math notranslate nohighlight">
 \[\text{CD} = q_\alpha \sqrt{\frac{k(k+1)}{6N}} = 3.164\sqrt{\frac{10 \cdot 11}{6 \cdot 8}} = 4.79.\]</div>
 <div class="cell docutils container">
@@ -1859,14 +1860,15 @@ Shapiro-Wilk sobre las 45 diferencias pareadas: 3 con p &lt; 0.05 (se esperan 2.
 </div>
 <p>Nemenyi es conservadora con 10 modelos y 8 bloques: solo separa pares con diferencias de rango mayores que 4.79. Por eso los grupos se solapan. RWCNet, ViT-B16, GFN, Celik-HC y ResMsCapsule no se distinguen entre sí por rangos, pero sí del grupo inferior (FocusRCNet, MobileNetV2 y CNN). Las comparaciones por pares de la sección 13.7 usan las diferencias de F1 y no solo los rangos, y tienen más potencia.</p>
 </section>
-<section id="contrastes-confirmatorios-plantilla-a-3">
-<h2>13.7 Contrastes confirmatorios (plantilla A.3)<a class="headerlink" href="#contrastes-confirmatorios-plantilla-a-3" title="Link to this heading">#</a></h2>
-<p><strong>RQ2: cada modelo publicado frente al modelo de referencia (ResNet-18).</strong> Los 7 contrastes forman parte de la familia preregistrada de 45 pares, y el <span class="math notranslate nohighlight">\(p\)</span> se ajusta por Holm sobre los 45. Como análisis de sensibilidad mostramos también el ajuste dentro de la subfamilia de 7. Cada contraste se evalúa con tres pruebas distintas:</p>
+<section id="contrastes-confirmatorios">
+<h2>13.7 Contrastes confirmatorios<a class="headerlink" href="#contrastes-confirmatorios" title="Link to this heading">#</a></h2>
+<p><strong>RQ2: cada modelo publicado frente al modelo de referencia (ResNet-18).</strong> Los 7 contrastes forman parte de la familia preregistrada de 45 pares, y el <span class="math notranslate nohighlight">\(p\)</span> se ajusta por Holm (1979) sobre los 45. Elegimos Holm porque controla la probabilidad de cometer al menos un falso positivo en la familia, igual que Bonferroni, pero rechaza siempre al menos tanto como este. Como análisis de sensibilidad mostramos también el ajuste dentro de la subfamilia de 7. Cada contraste se evalúa con tres pruebas distintas:</p>
 <ol class="arabic simple">
 <li><p>t pareada, con normalidad verificada (prueba paramétrica pareada);</p></li>
-<li><p>Wilcoxon (no paramétrica);</p></li>
-<li><p>Friedman con post hoc de Conover-Holm (procedimiento global con control de comparaciones múltiples, sección 13.8).</p></li>
+<li><p>Wilcoxon de rangos con signo (Wilcoxon, 1945), no paramétrica;</p></li>
+<li><p>Friedman con post hoc de Conover (Conover, 1999) y Holm (procedimiento global con control de comparaciones múltiples, sección 13.8).</p></li>
 </ol>
+<p>Los IC bootstrap son percentiles sobre 10 000 remuestreos de las semillas (Efron y Tibshirani, 1993), y no suponen normalidad de las diferencias.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fam</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">COMP</span> <span class="o">/</span> <span class="s2">"familia_vs_resnet18.csv"</span><span class="p">)</span>
@@ -2319,9 +2321,9 @@ Shapiro-Wilk sobre las 45 diferencias pareadas: 3 con p &lt; 0.05 (se esperan 2.
 </div>
 <p>Además de la diferencia y su <span class="math notranslate nohighlight">\(p\)</span> ajustado, la tabla incluye tres medidas:</p>
 <ul class="simple">
-<li><p><strong>Equivalencia (TOST):</strong> con margen <span class="math notranslate nohighlight">\(\pm\delta\)</span>; el IC 90 % de la diferencia debe quedar dentro de <span class="math notranslate nohighlight">\((-0.02, 0.02)\)</span>.</p></li>
-<li><p><strong>Prueba bayesiana de rangos con signo</strong> (Benavoli et al., 2017): probabilidad de que A sea peor, equivalente dentro de la región de equivalencia práctica (ROPE <span class="math notranslate nohighlight">\(= \pm\delta\)</span>) o mejor.</p></li>
-<li><p><strong>Probabilidad de superioridad</strong> <span class="math notranslate nohighlight">\(A_{12}\)</span> de Vargha y Delaney entre semillas.</p></li>
+<li><p><strong>Equivalencia (TOST):</strong> las dos pruebas unilaterales de Schuirmann (1987), con margen <span class="math notranslate nohighlight">\(\pm\delta\)</span>; el IC 90 % de la diferencia debe quedar dentro de <span class="math notranslate nohighlight">\((-0.02, 0.02)\)</span>. A diferencia de una prueba de diferencias, su hipótesis nula es que los modelos difieren en al menos <span class="math notranslate nohighlight">\(\delta\)</span>, de modo que rechazarla permite afirmar equivalencia.</p></li>
+<li><p><strong>Prueba bayesiana de rangos con signo</strong> (Benavoli et al., 2017): probabilidad de que A sea peor, equivalente dentro de la región de equivalencia práctica (ROPE <span class="math notranslate nohighlight">\(= \pm\delta\)</span>) o mejor. Benavoli et al. la proponen para comparar clasificadores porque, a diferencia del <span class="math notranslate nohighlight">\(p\)</span> frecuentista, cuantifica directamente la probabilidad de equivalencia práctica, que una ausencia de significancia no permite afirmar.</p></li>
+<li><p><strong>Probabilidad de superioridad</strong> <span class="math notranslate nohighlight">\(A_{12}\)</span> (Vargha y Delaney, 2000): probabilidad de que una semilla de A supere a una de B. Es un tamaño de efecto no paramétrico que complementa a <span class="math notranslate nohighlight">\(d_z\)</span> cuando la distribución no es normal.</p></li>
 </ul>
 <p>Los resultados entre los mejores modelos son:</p>
 <ul class="simple">
@@ -2403,7 +2405,7 @@ Shapiro-Wilk sobre las 45 diferencias pareadas: 3 con p &lt; 0.05 (se esperan 2.
 </section>
 <section id="pruebas-por-imagen-mcnemar-q-de-cochran-y-delong">
 <h2>13.9 Pruebas por imagen: McNemar, Q de Cochran y DeLong<a class="headerlink" href="#pruebas-por-imagen-mcnemar-q-de-cochran-y-delong" title="Link to this heading">#</a></h2>
-<p>Las pruebas por imagen comparan modelos sobre el mismo conjunto de prueba dentro de cada semilla. Su unidad de análisis es la imagen, por lo que su conclusión se refiere a este conjunto de prueba y no a la variabilidad entre entrenamientos.</p>
+<p>Las pruebas por imagen comparan modelos sobre el mismo conjunto de prueba dentro de cada semilla. McNemar (1947) compara dos modelos por las imágenes en que solo uno acierta; Dietterich (1998) la recomienda para comparar clasificadores evaluados sobre un mismo conjunto de prueba por su baja tasa de error tipo I. La Q de Cochran (1950) la extiende a los diez modelos, y la prueba de DeLong et al. (1988) compara AUC estimadas sobre las mismas imágenes, teniendo en cuenta su correlación. Su unidad de análisis es la imagen, por lo que su conclusión se refiere a este conjunto de prueba y no a la variabilidad entre entrenamientos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">SUM</span> <span class="o">/</span> <span class="s2">"mcnemar_por_semilla.csv"</span><span class="p">)</span>
@@ -3000,11 +3002,11 @@ Semillas necesarias para detectar δ = 0.02: mediana 11 (rango 4–27); pares co
 </tr>
 <tr class="row-even"><td><p>PUE</p></td>
 <td><p>1.0 (sin centro de datos)</p></td>
-<td><p>1.09, promedio anual 2024 de los centros de datos de Google</p></td>
+<td><p>1.09, promedio anual 2024 que Google publica para sus centros de datos (Google, 2025)</p></td>
 </tr>
 <tr class="row-odd"><td><p>FE</p></td>
-<td><p>0.220 kg CO₂e/kWh, factor del Sistema Interconectado Nacional 2024 (UPME)</p></td>
-<td><p>0.413 kg CO₂e/kWh, intensidad de la red de la región <code class="docutils literal notranslate"><span class="pre">us-central1</span></code> en 2024 (Google Cloud)</p></td>
+<td><p>0.220 kg CO₂e/kWh, factor oficial de emisión del Sistema Interconectado Nacional para 2024 (Unidad de Planeación Minero Energética [UPME], 2025)</p></td>
+<td><p>0.413 kg CO₂e/kWh, intensidad de la red de la región <code class="docutils literal notranslate"><span class="pre">us-central1</span></code> en 2024, publicada por el proveedor (Google Cloud, 2025)</p></td>
 </tr>
 </tbody>
 </table>
@@ -3547,7 +3549,7 @@ Semillas necesarias para detectar δ = 0.02: mediana 11 (rango 4–27); pares co
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-principal-del-benchmark-plantilla-a-2">13.1 Tabla principal del benchmark (plantilla A.2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-principal-del-benchmark">13.1 Tabla principal del benchmark</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-de-cada-modelo">13.2 Resultados de cada modelo</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rwcnet">13.2.1 RWCNet</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vit-b16">13.2.2 ViT-B16</a></li>
@@ -3565,7 +3567,7 @@ Semillas necesarias para detectar δ = 0.02: mediana 11 (rango 4–27); pares co
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baselines-no-profundos">13.4 Baselines no profundos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-global-y-supuestos">13.5 Prueba global y supuestos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrama-de-diferencia-critica">13.6 Diagrama de diferencia crítica</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastes-confirmatorios-plantilla-a-3">13.7 Contrastes confirmatorios (plantilla A.3)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrastes-confirmatorios">13.7 Contrastes confirmatorios</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparaciones-entre-los-mejores-modelos-equivalencia-y-sensibilidad">13.8 Comparaciones entre los mejores modelos, equivalencia y sensibilidad</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-por-imagen-mcnemar-q-de-cochran-y-delong">13.9 Pruebas por imagen: McNemar, Q de Cochran y DeLong</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#potencia-y-diferencia-minima-detectable">13.10 Potencia y diferencia mínima detectable</a></li>

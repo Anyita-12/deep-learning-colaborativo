@@ -805,7 +805,7 @@
 </section>
 <section id="interpretabilidad-grad-cam-fondo-y-estabilidad-entre-semillas">
 <h2>15.2 Interpretabilidad: Grad-CAM, fondo y estabilidad entre semillas<a class="headerlink" href="#interpretabilidad-grad-cam-fondo-y-estabilidad-entre-semillas" title="Link to this heading">#</a></h2>
-<p>El Grad-CAM pondera los mapas de la última capa convolucional (o la normalización previa del último bloque, en los Transformers) por el gradiente de la clase verdadera. Lo calculamos sobre 10 imágenes de prueba por clase, las mismas en todas las semillas. Medimos dos cosas:</p>
+<p>El Grad-CAM (Selvaraju et al., 2017) pondera los mapas de la última capa convolucional (o la normalización previa del último bloque, en los Transformers) por el gradiente de la clase verdadera. Lo calculamos sobre 10 imágenes de prueba por clase, las mismas en todas las semillas. Medimos dos cosas:</p>
 <ul class="simple">
 <li><p><strong>Fracción de la energía del mapa sobre el fondo:</strong> compara cuánta energía cae en los píxeles de fondo, detectados por umbral de brillo, con la fracción del área que ocupa el fondo.</p></li>
 <li><p><strong>Estabilidad entre semillas:</strong> correlación de Spearman entre los mapas de la misma imagen en cada par de semillas, y solapamiento (IoU) del 20 % de píxeles con mayor activación.</p></li>
@@ -933,7 +933,7 @@
 <li><p><strong>Estabilidad intermedia:</strong> FocusRCNet (0.55), ResMsCapsule (0.48) y GFN (0.38).</p></li>
 <li><p><strong>ViT-B16:</strong> el menos estable (<span class="math notranslate nohighlight">\(\rho = 0.16\)</span>; IoU del 20 % superior de 0.22), a pesar de que sus predicciones son estables. Sus explicaciones por imagen no son evidencia sólida de qué región usa el modelo.</p></li>
 </ul>
-<p><strong>Fidelidad.</strong> Verificamos si los mapas señalan las regiones que de verdad usa el modelo con las pruebas de inserción y borrado (Petsiuk et al., 2018), aplicadas a las 60 imágenes de la muestra de Grad-CAM en las 8 semillas de los cuatro modelos entrenados en el portátil: RWCNet, ResMsCapsule, MbXception y FocusRCNet (<code class="docutils literal notranslate"><span class="pre">entregable2/analisis/fidelidad_gradcam.py</span></code>).</p>
+<p><strong>Fidelidad.</strong> Verificamos si los mapas señalan las regiones que de verdad usa el modelo con las pruebas de inserción y borrado que Petsiuk et al. (2018) propusieron para evaluar mapas de atribución: si un mapa señala lo que el modelo usa, insertar primero esos píxeles debe recuperar la predicción antes que un orden aleatorio, y borrarlos primero debe destruirla antes. Las aplicamos a las 60 imágenes de la muestra de Grad-CAM en las 8 semillas de los cuatro modelos entrenados en el portátil: RWCNet, ResMsCapsule, MbXception y FocusRCNet (<code class="docutils literal notranslate"><span class="pre">entregable2/analisis/fidelidad_gradcam.py</span></code>).</p>
 <ul class="simple">
 <li><p><strong>Inserción:</strong> partimos de una imagen neutra (la media del entrenamiento) y añadimos los píxeles en orden decreciente de activación del mapa.</p></li>
 <li><p><strong>Borrado:</strong> retiramos los píxeles en ese mismo orden.</p></li>

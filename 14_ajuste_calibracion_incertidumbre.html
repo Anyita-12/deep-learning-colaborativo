@@ -502,7 +502,7 @@
 <td><p>Pendiente 1 e intercepto 0 en la regresión logística del acierto sobre el logit de la confianza</p></td>
 <td><p>Prueba de razón de verosimilitud conjunta (2 gl)</p></td>
 </tr>
-<tr class="row-odd"><td><p>Z de Spiegelhalter</p></td>
+<tr class="row-odd"><td><p>Z de Spiegelhalter (1986)</p></td>
 <td><p>El Brier de la confianza es compatible con probabilidades calibradas</p></td>
 <td><p><span class="math notranslate nohighlight">\(Z\)</span> normal estándar bajo <span class="math notranslate nohighlight">\(H_0\)</span></p></td>
 </tr>
@@ -1088,7 +1088,7 @@
 </section>
 <section id="calibracion">
 <h2>14.3 Calibración<a class="headerlink" href="#calibracion" title="Link to this heading">#</a></h2>
-<p>Reportamos el ECE con 15 bins de igual ancho, que es el preregistrado. Como el ECE depende de la discretización, añadimos un ECE adaptativo (15 bins de igual masa) y un ECE por clase. El escalado de temperatura divide los <em>logits</em> por un escalar <span class="math notranslate nohighlight">\(T\)</span> ajustado en validación, <span class="math notranslate nohighlight">\(p = \mathrm{softmax}(z/T)\)</span>; no se aplica a Celik-HC, cuyas probabilidades vienen de XGBoost, ni a los modelos del capítulo 4.</p>
+<p>Reportamos el ECE con 15 bins de igual ancho, que es el preregistrado. Como el ECE depende de la discretización, añadimos un ECE adaptativo (15 bins de igual masa) y un ECE por clase. El escalado de temperatura (Guo et al., 2017) divide los <em>logits</em> por un escalar <span class="math notranslate nohighlight">\(T\)</span> ajustado en validación, <span class="math notranslate nohighlight">\(p = \mathrm{softmax}(z/T)\)</span>. Lo elegimos porque Guo et al. muestran que, con un solo parámetro, corrige la sobreconfianza de las redes profundas modernas sin cambiar la clase predicha, y por tanto sin alterar el F1; no se aplica a Celik-HC, cuyas probabilidades vienen de XGBoost, ni a los modelos del capítulo 4.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ca</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">COMP</span> <span class="o">/</span> <span class="s2">"calibracion_ampliada.csv"</span><span class="p">)</span>
@@ -1295,7 +1295,7 @@
 </section>
 <section id="incertidumbre-predictiva">
 <h2>14.4 Incertidumbre predictiva<a class="headerlink" href="#incertidumbre-predictiva" title="Link to this heading">#</a></h2>
-<p><strong>MC Dropout (preregistrado).</strong> Con 20 pasadas estocásticas por imagen, descomponemos la entropía predictiva en una parte aleatoria y otra epistémica, la información mutua <span class="math notranslate nohighlight">\(I = H[\bar p] - \overline{H[p]}\)</span>. Una incertidumbre útil debe ser mayor en los errores que en los aciertos.</p>
+<p><strong>MC Dropout (preregistrado).</strong> Gal y Ghahramani (2016) muestran que mantener el <em>dropout</em> activo en inferencia aproxima la distribución predictiva de un modelo bayesiano, sin reentrenar. Con 20 pasadas estocásticas por imagen, descomponemos la entropía predictiva en una parte aleatoria y otra epistémica, la información mutua <span class="math notranslate nohighlight">\(I = H[\bar p] - \overline{H[p]}\)</span>. Una incertidumbre útil debe ser mayor en los errores que en los aciertos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mcd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">SUM</span> <span class="o">/</span> <span class="s2">"incertidumbre_mc_dropout.csv"</span><span class="p">)</span>
@@ -1410,10 +1410,10 @@
 </div></div></div>
 </div>
 <p>En los siete modelos con capas de <em>dropout</em>, la información mutua es mayor en los errores que en los aciertos. La razón va de 1.5 (ResMsCapsule) a 11 (GFN) y es de 8 a 9 en ViT-B16 y RWCNet. Promediar las 20 pasadas no cambia el F1 de forma apreciable (≤ 0.004). Los modelos del capítulo 4 no guardaron MC Dropout.</p>
-<p><strong>Predicción conforme (exploratoria).</strong> Para los diez modelos aplicamos predicción conforme dividida con dos puntajes:</p>
+<p><strong>Predicción conforme (exploratoria).</strong> Para los diez modelos aplicamos predicción conforme dividida (Angelopoulos y Bates, 2023). Su interés es que garantiza una cobertura de al menos <span class="math notranslate nohighlight">\(1 - \alpha\)</span> sin supuestos sobre el modelo, solo con que los datos de calibración y de prueba sean intercambiables. Usamos dos puntajes:</p>
 <ul class="simple">
-<li><p><strong>LAC:</strong> <span class="math notranslate nohighlight">\(1 - \hat p_y\)</span>;</p></li>
-<li><p><strong>APS:</strong> masa acumulada hasta la clase verdadera, sin aleatorización.</p></li>
+<li><p><strong>LAC</strong> (Sadinle et al., 2019): <span class="math notranslate nohighlight">\(1 - \hat p_y\)</span>, que produce los conjuntos más pequeños con la cobertura pedida;</p></li>
+<li><p><strong>APS</strong> (Romano et al., 2020): masa acumulada hasta la clase verdadera, sin aleatorización, que adapta el tamaño del conjunto a la dificultad de cada imagen.</p></li>
 </ul>
 <p>Calibramos el umbral con el conjunto de validación de la misma corrida, disjunto del de entrenamiento y del de prueba, y medimos en prueba la cobertura empírica y el tamaño medio del conjunto para <span class="math notranslate nohighlight">\(\alpha = 0.10\)</span> y <span class="math notranslate nohighlight">\(0.05\)</span>.</p>
 <div class="cell docutils container">

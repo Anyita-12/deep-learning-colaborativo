@@ -96,7 +96,7 @@ Todas las etapas se pueden reanudar: las corridas con `DONE` se saltan y las par
 | Tamaños de efecto | $d_z$, rango-biserial, $A_{12}$ de Vargha-Delaney, $W$ de Kendall, $\eta^2$ e ICC(1) |
 | Familias y corrección | 45 pares del benchmark (Holm, preregistrada); 7 contrastes frente al modelo de referencia; 5 variantes de la ablación de Celik-HC; 3 variantes de la ablación de RWCNet; 20 contrastes frente a los baselines |
 
-## 17.6 Lista de verificación de reproducibilidad (Apéndice B)
+## 17.6 Lista de verificación de reproducibilidad
 
 | Ítem | Evidencia |
 |---|---|
