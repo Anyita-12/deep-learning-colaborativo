@@ -873,6 +873,55 @@
 </div>
 <p><strong>Cobertura de la búsqueda original.</strong> La búsqueda ampliada recupera 60 de los 63 registros del corpus (95 %). Esta cifra mide la sensibilidad de la búsqueda ampliada frente al corpus, no la relevancia de los 78 registros no leídos. El único registro recuperado que sus reglas excluyen (R007, detección) es el mismo que el equipo excluyó a texto completo, lo que muestra que los criterios de las dos búsquedas son coherentes.</p>
 <p>De los 1558 registros que pasan el cribado de la búsqueda ampliada, 1499 no están en el corpus. 1376 no mencionan TrashNet en el título ni en el resumen: son estudios de clasificación de residuos con otros conjuntos de datos o sin conjunto declarado en el resumen. Los otros 123 sí lo mencionan; los devolvió la cadena P2 en OpenAlex, que busca en el título y el resumen, y no las bases de la búsqueda original (Scopus, IEEE Xplore, Web of Science y arXiv). 121 de ellos solo están en OpenAlex y 77 son de 2025 o 2026. Ninguno de estos registros entra en la síntesis, cuyo corpus define la búsqueda original; quedan identificados en <code class="docutils literal notranslate"><span class="pre">cribado_principal.csv</span></code> para extenderla.</p>
+<p><strong>Fuentes de los 123 registros que mencionan TrashNet.</strong> Cruzamos la fuente de cada registro con la lista oficial de fuentes de Scopus de octubre de 2026 (Elsevier): por ISSN y con cobertura en el año de publicación para revistas y series, y por el nombre de la serie y el año para las actas de congresos. El resultado de cada registro está en <a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/blob/main/entregable2/revision_sistematica/datos/trashnet_fuera_corpus.csv"><code class="docutils literal notranslate"><span class="pre">trashnet_fuera_corpus.csv</span></code></a>, generado con <a class="reference external" href="https://github.com/Anyita-12/deep-learning-colaborativo/blob/main/entregable2/revision_sistematica/scripts/fuera_corpus.py"><code class="docutils literal notranslate"><span class="pre">fuera_corpus.py</span></code></a>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tipo de fuente</p></th>
+<th class="head"><p>Indexada en Scopus</p></th>
+<th class="head"><p>No consta en Scopus</p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Revista</p></td>
+<td><p>24</p></td>
+<td><p>28</p></td>
+<td><p>52</p></td>
+</tr>
+<tr class="row-odd"><td><p>Congreso</p></td>
+<td><p>33</p></td>
+<td><p>11</p></td>
+<td><p>44</p></td>
+</tr>
+<tr class="row-even"><td><p>Serie de libros o de actas</p></td>
+<td><p>10</p></td>
+<td><p>2</p></td>
+<td><p>12</p></td>
+</tr>
+<tr class="row-odd"><td><p>Capítulo de libro</p></td>
+<td><p>0</p></td>
+<td><p>3</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>Repositorio de preprints</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sin fuente identificada</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total</strong></p></td>
+<td><p><strong>67</strong></p></td>
+<td><p><strong>44</strong></p></td>
+<td><p><strong>123</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Algo más de la mitad (67) se publicó en fuentes indexadas en Scopus, en su mayoría actas de congresos (33) y revistas (24). Siete de los 11 congresos que no constan son de 2026; la hoja de actas de la lista llega a junio de 2026, de modo que parte de ellos puede deberse al desfase de indexación.</p>
 <p>El cribado automático de la búsqueda ampliada se contrastó con un segundo revisor asistido por IA, que decidió sin ver la decisión de las reglas:</p>
 <ul class="simple">
 <li><p><strong>Muestra de calibración:</strong> 60 registros, con los que se corrigieron las reglas.</p></li>
@@ -2597,6 +2646,7 @@
 <li><p><strong>Estudios del benchmark:</strong> ninguno de los siete compara modelos con pruebas de hipótesis.</p></li>
 </ul>
 <p><strong>Robustez ante ruido.</strong> 6 de los 59 textos mencionan ruido o corrupción de imagen (indicador <code class="docutils literal notranslate"><span class="pre">ruido_corrupcion</span></code>). Solo uno mide el efecto del ruido gaussiano sobre imágenes de prueba de TrashNet: Liu et al. (2026) reportan que la accuracy de su modelo ResSeMo cae 4.1 puntos con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span>, frente a modelos como VGG16, en una corrida y sin prueba estadística. Los demás usan el ruido como aumento de datos, lo mencionan como motivación o evalúan fondos complejos (Qin et al., 2022), no ruido.</p>
+<p><strong>Contraste con los registros fuera del corpus.</strong> La brecha se formula sobre el corpus de la síntesis, pero la contrastamos también con los 123 registros que mencionan TrashNet y quedaron fuera de él (sección 10.3). Como no se leyeron a texto completo, aplicamos al título y al resumen las mismas reglas de la hoja de extracción: 2 registros abarcan cuatro o más familias, 2 declaran más de una corrida o semilla y 5 mencionan pruebas estadísticas. Ninguno cumple los tres criterios a la vez, y solo uno cumple dos (más de una corrida y pruebas estadísticas, con dos familias). 104 de los 123 tienen resumen en OpenAlex; en los 19 restantes, las reglas se aplican solo al título. La brecha se mantiene también fuera del corpus.</p>
 <p>La brecha conecta con las preguntas de investigación del capítulo 8:</p>
 <ul class="simple">
 <li><p><strong>RQ1 y RQ2:</strong> la primera parte, con el benchmark controlado.</p></li>
