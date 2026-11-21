@@ -9,6 +9,9 @@ Paso 2:
   une los indicadores con los metadatos de Zotero (DOI, año, revista), la tabla de síntesis del
   capítulo 3 y las citas de OpenAlex, aplica las reglas de elegibilidad en orden y calcula el puntaje
   de priorización. Guarda results/revision/cribado_e2.csv.
+Paso 3 (opcional):
+    python entregable2/analisis/revision_e2.py repuntuar
+  recalcula el puntaje sobre cribado_e2.csv con las citas ya guardadas, sin consultar OpenAlex.
 """
 from __future__ import annotations
 
@@ -154,34 +157,58 @@ def puntuar():
     df["motivo_exclusion_e2"] = df.apply(motivo, axis=1)
     df["elegible_e2"] = df["motivo_exclusion_e2"] == ""
 
-    # Puntaje de priorización (pesos iguales, cada componente en [0, 1])
     edad = (2026 - df["anio"] + 1).clip(lower=1)
     df["citas_por_anio"] = df["citas_openalex"].fillna(0) / edad
-    el = df["elegible_e2"]
+    df["familia_seleccion"] = df["seleccionado_top7"].map(FAMILIA)
+    guardar(calcular_puntaje(df))
+
+
+# Accuracy en TrashNet verificada a mano en el texto de los siete estudios del benchmark
+# (revision_sistematica/datos/top7_verificado.json). La tabla de síntesis del capítulo 3 la deja vacía
+# en Celik-HC, RWCNet, GFN y MbXception. ResMsCapsule reporta 4 clases y no es elegible (E2).
+ACC_VERIFICADA = {"Celik-HC (paper guía)": 99.40, "MbXception": 94.34, "ViT-B16": 96.98, "GFN": 94.21,
+                  "FocusRCNet": 92.0, "RWCNet": 95.01}
+
+COLS = ["id_adjunto", "id_cap3", "autores_anio_titulo", "anio", "doi", "revista", "paginas", "trashnet",
+        "seis_clases", "cuatro_clases", "metaheuristica", "refuerzo", "gan", "federado", "deteccion", "ensamble",
+        "estadistica", "ruido_corrupcion", "repeticiones", "id_registro", "decision_tc", "prueba_estadistica_cap3",
+        "dispersion_cap3", "codigo_propio", "nota_codigo", "acc_trashnet", "acc_verificada", "acc_puntaje",
+        "citas_openalex", "fecha_citas", "citas_por_anio", "motivo_exclusion_e2", "elegible_e2", "resumen", "s_citas",
+        "s_recencia", "s_desempeno", "s_implementacion", "puntaje", "rango_puntaje", "seleccionado_top7",
+        "familia_seleccion"]
+
+
+def calcular_puntaje(df: pd.DataFrame) -> pd.DataFrame:
+    """Puntaje de priorización: cuatro componentes de igual peso en [0, 1]."""
+    el = df["elegible_e2"].astype(bool)
     df["s_citas"] = np.nan
     df.loc[el, "s_citas"] = df.loc[el, "citas_por_anio"].rank(pct=True)
     df["s_recencia"] = (df["anio"] - 2018) / (2026 - 2018)
-    acc = pd.to_numeric(df["acc_trashnet"], errors="coerce")
-    df["s_desempeno"] = ((acc - 80) / 20).clip(0, 1).fillna(0.5)
+    df["acc_verificada"] = df["seleccionado_top7"].map(ACC_VERIFICADA)
+    df["acc_puntaje"] = df["acc_verificada"].fillna(pd.to_numeric(df["acc_trashnet"], errors="coerce"))
+    df["s_desempeno"] = ((df["acc_puntaje"] - 80) / 20).clip(0, 1).fillna(0.5)
     df["s_implementacion"] = np.where(df["codigo_propio"].notna(), 1.0, 0.5)
     df["puntaje"] = df[["s_citas", "s_recencia", "s_desempeno", "s_implementacion"]].mean(axis=1)
     df.loc[~el, "puntaje"] = np.nan
     df["rango_puntaje"] = df["puntaje"].rank(ascending=False, method="min")
-    df["familia_seleccion"] = df["seleccionado_top7"].map(FAMILIA)
-    cols = ["id_adjunto", "id_cap3", "autores_anio_titulo", "anio", "doi", "revista", "paginas", "trashnet",
-            "seis_clases", "cuatro_clases", "metaheuristica", "refuerzo", "gan", "federado", "deteccion", "ensamble",
-            "estadistica", "ruido_corrupcion", "repeticiones", "id_registro", "decision_tc", "prueba_estadistica_cap3",
-            "dispersion_cap3", "codigo_propio", "nota_codigo", "acc_trashnet", "citas_openalex", "fecha_citas",
-            "citas_por_anio", "motivo_exclusion_e2", "elegible_e2", "resumen", "s_citas", "s_recencia", "s_desempeno",
-            "s_implementacion", "puntaje", "rango_puntaje", "seleccionado_top7", "familia_seleccion"]
-    df[cols].sort_values(["elegible_e2", "puntaje"], ascending=[False, False]).to_csv(REV / "cribado_e2.csv", index=False)
-    print(df["motivo_exclusion_e2"].replace("", "elegible").value_counts())
-    print(df.loc[df.seleccionado_top7.notna(), ["seleccionado_top7", "elegible_e2", "motivo_exclusion_e2", "puntaje",
-                                                 "rango_puntaje", "citas_openalex"]])
+    return df
+
+
+def guardar(df: pd.DataFrame):
+    df[COLS].sort_values(["elegible_e2", "puntaje"], ascending=[False, False]).to_csv(REV / "cribado_e2.csv", index=False)
+    print(df["motivo_exclusion_e2"].fillna("").replace("", "elegible").value_counts())
+    print(df.loc[df.seleccionado_top7.notna(), ["seleccionado_top7", "acc_puntaje", "puntaje", "rango_puntaje"]])
+
+
+def repuntuar():
+    """Recalcula el puntaje sobre cribado_e2.csv sin volver a consultar OpenAlex (conserva las citas guardadas)."""
+    guardar(calcular_puntaje(pd.read_csv(REV / "cribado_e2.csv")))
 
 
 if __name__ == "__main__":
     if sys.argv[1] == "marcar":
         marcar(sys.argv[2])
+    elif sys.argv[1] == "repuntuar":
+        repuntuar()
     else:
         puntuar()
