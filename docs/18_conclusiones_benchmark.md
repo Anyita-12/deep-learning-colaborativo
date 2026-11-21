@@ -80,7 +80,7 @@ Con preentrenamiento, la brecha de 0.089 con la mediana publicada en TrashNet qu
 
 El mismo pipeline reproduce la accuracy publicada de RWCNet (95.2 % frente a 95.01 %) y de GFN (a 0.7 puntos), y las brechas de los demás modelos son heterogéneas y tienen causas documentadas (sección 12.2). El pipeline queda así validado, y las discrepancias se atribuyen a cada artículo y no a la implementación. Celik-HC, el paper guía, queda 6.8 puntos por debajo: con su protocolo original obtenemos 0.925, y la selección de la época con el conjunto de prueba explica 2.8 de esos puntos. Su ablación muestra que la *hypercolumn*, la segunda red y XGBoost no aportan sobre un único extractor preentrenado; el preentrenamiento sí aporta, con 0.085 de F1. En RWCNet, la ablación de tres componentes muestra el mismo patrón: aportan el extractor principal (DenseNet201, 0.033 de F1) y la supervisión profunda (0.022), mientras que la segunda red (MobileNetV2) no tiene un aporte significativo.
 
-La contribución de este estudio es una comparación de diez modelos de seis familias con el mismo protocolo, réplicas, inferencia estadística con control de comparaciones múltiples y análisis de calibración, robustez e interpretabilidad. Ningún estudio de la revisión sistemática del capítulo 10 reúne estas condiciones sobre TrashNet.
+La contribución de este estudio es una comparación de diez modelos de cuatro familias amplias de arquitectura con el mismo protocolo, réplicas, inferencia estadística con control de comparaciones múltiples y análisis de calibración, robustez e interpretabilidad. Ningún estudio de la revisión sistemática del capítulo 10 reúne estas condiciones sobre TrashNet.
 
 ## 18.7 Alcance del estudio
 
@@ -104,7 +104,7 @@ Los resultados se refieren a las siguientes condiciones del estudio:
 
 | Parte de la brecha | Qué aporta el benchmark | Preguntas |
 |---|---|---|
-| Comparación controlada de modelos publicados | Diez modelos de seis familias con la misma partición agrupada, 8 semillas, prueba de Friedman y 45 contrastes pareados con Holm. Cuatro modelos superan al de referencia y dos pares son equivalentes dentro de $\pm\delta$ | RQ1, RQ2 |
+| Comparación controlada de modelos publicados | Diez modelos de cuatro familias amplias con la misma partición agrupada, 8 semillas, prueba de Friedman y 45 contrastes pareados con Holm. Cuatro modelos superan al de referencia y dos pares son equivalentes dentro de $\pm\delta$ | RQ1, RQ2 |
 | La misma comparación aplicada al paper guía | Réplica con criterio a priori y ablación de cinco componentes: la accuracy publicada no se reproduce y solo el preentrenamiento aporta | RQ3, RQ4 |
 | Robustez ante ruido con inferencia estadística | Caída de F1 con ruido gaussiano $\sigma = 0.05$ y $0.10$, con IC bootstrap por grupo en los siete modelos publicados y la misma perturbación en los tres modelos base: ViT-B16 pierde 0.04 con $\sigma = 0.05$, GFN 0.12, y las CNN, incluido el paper guía, entre 0.30 y 0.67 | RQ5 |
 
