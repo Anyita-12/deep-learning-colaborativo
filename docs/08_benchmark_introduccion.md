@@ -1,6 +1,6 @@
 # 8. Benchmark de diez modelos: problema, preguntas e hipótesis
 
-Los capítulos 1 a 7 fijaron el problema, la partición, la métrica primaria, el margen de relevancia práctica y el modelo de referencia (ResNet-18 entrenada desde cero). En los capítulos 8 a 19 ampliamos la comparación a diez modelos: los tres modelos base y siete modelos publicados sobre TrashNet, seleccionados con la revisión sistemática del capítulo 10, que amplía la del capítulo 3. Todos se evalúan con la misma partición, las mismas métricas y los mismos umbrales. Ninguno de los elementos declarados en los capítulos 1, 2 y 6 se modifica.
+Los capítulos 1 a 7 fijaron el problema, la partición, la métrica primaria, el margen de relevancia práctica y el modelo de referencia (ResNet-18 entrenada desde cero). En los capítulos 8 a 19 ampliamos la comparación a diez modelos: los tres modelos base y siete modelos publicados sobre TrashNet, seleccionados con la revisión sistemática del capítulo 10, que amplía la del capítulo 3. Todos se evalúan con la partición, las métricas y los umbrales definidos en los capítulos 1, 2 y 6, de modo que sus resultados son directamente comparables con los del capítulo 7.
 
 ## 8.1 Resumen estructurado
 
@@ -21,19 +21,19 @@ El problema sigue siendo de **clasificación de imágenes** (tipo 7, familia F4 
 | I1. Tarea y unidad de independencia | Secciones 1.2 y 6.4: grupo de casi-duplicados |
 | I2. Duplicados y partición por unidad de independencia | Sección 2.4 y auditoría de fuga del capítulo 9 |
 | I3. Normalización calculada solo en entrenamiento | Sección 6.6 y capítulo 11 (estadísticas de ImageNet para los modelos preentrenados) |
-| I4. Aumento de datos solo en entrenamiento | Sección 6.6, sin cambios |
+| I4. Aumento de datos solo en entrenamiento | Sección 6.6 |
 | I5. Baselines y 10 modelos con igual presupuesto | Capítulos 11 y 13 |
 | I6. Misma política de inferencia | Sin *test-time augmentation* en ningún modelo |
 | I7. Pruebas de ajuste, sobreajuste y comparación | Capítulos 13 y 14 |
 | I8. Interpretabilidad y análisis de errores | Capítulo 15 |
 
-La formulación matemática de la sección 1.2 se mantiene. Cada modelo define una función $f_\theta : \mathcal{X} \to \Delta^5$, y el riesgo esperado
+La formulación matemática es la de la sección 1.2. Cada modelo define una función $f_\theta : \mathcal{X} \to \Delta^5$, y el riesgo esperado
 
 $$R(f) = \mathbb{E}_{(x, y) \sim P}\big[\mathcal{L}(f(x), y)\big]$$
 
 se estima con el riesgo empírico sobre el conjunto de prueba sellado, de 361 imágenes. El espacio de hipótesis $\mathcal{H}$ cambia en cada modelo; sus arquitecturas se describen en los capítulos 10 y 12. Tres modelos sustituyen la entropía cruzada ponderada por una pérdida propia, siempre con los mismos pesos de clase: FocusRCNet usa destilación de conocimiento, ResMsCapsule la pérdida de margen de las redes de cápsulas y RWCNet suma pérdidas de sus salidas auxiliares.
 
-## 8.3 Elementos heredados del capítulo 6
+## 8.3 Métricas, umbrales y unidades de análisis
 
 | Elemento | Valor |
 |---|---|
