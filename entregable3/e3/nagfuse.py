@@ -93,6 +93,20 @@ def mixture_log_prob(lv: torch.Tensor, lc: torch.Tensor, pi: torch.Tensor) -> to
     return torch.where(full, lv, mix)
 
 
+def finite_logits(fn, x: torch.Tensor, training: bool) -> torch.Tensor:
+    """Evalúa una rama. Si en inferencia la salida no es finita (desbordamiento de fp16 con imágenes muy ruidosas
+    en la rama CNN sin contracción), repite la evaluación en fp32. Si sigue sin ser finita, falla con un mensaje claro.
+    Cuando la salida ya es finita no cambia nada, así que no altera ningún resultado previo."""
+    z = fn(x)
+    if training or bool(torch.isfinite(z).all()):
+        return z
+    with torch.autocast(device_type=x.device.type, enabled=False):
+        z = fn(x.float())
+    if not bool(torch.isfinite(z).all()):
+        raise FloatingPointError("logits no finitos incluso en fp32")
+    return z
+
+
 def load_noise_stats(path: str | None = None) -> dict | None:
     path = path or os.environ.get("E3_NOISE_STATS")
     if path and os.path.exists(path):
@@ -158,9 +172,10 @@ class NAGFuse(nn.Module):
         sigma = self.noise_sigma(x)
         out = {"sigma": sigma}
         if self.use_vit:
-            out["z_v"] = self.vit(x)
+            out["z_v"] = finite_logits(self.vit, x, self.training)
         if self.use_cnn:
-            out["z_c"] = self.cnn_head(self.cnn(self._cnn_input(x, sigma)))
+            xc = self._cnn_input(x, sigma)
+            out["z_c"] = finite_logits(lambda inp: self.cnn_head(self.cnn(inp)), xc, self.training)
         return out
 
     def forward(self, x: torch.Tensor):

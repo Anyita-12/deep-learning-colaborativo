@@ -118,3 +118,33 @@ def test_variantes(name):
     with torch.no_grad():
         o = m(_norm(torch.rand(1, 3, 224, 224)))
     assert o.shape == (1, 6)
+
+
+def test_finite_logits_reintenta_en_fp32_y_no_altera_salidas_finitas():
+    x = torch.zeros(2, 3)
+    llamadas = []
+
+    def fn_inestable(inp):
+        llamadas.append(inp.dtype)
+        return torch.full((2, 6), float("nan")) if len(llamadas) == 1 else torch.ones(2, 6)
+
+    z = N.finite_logits(fn_inestable, x, training=False)
+    assert torch.isfinite(z).all() and len(llamadas) == 2
+
+    n = []
+    z2 = N.finite_logits(lambda inp: (n.append(1), torch.ones(2, 6))[1], x, training=False)
+    assert len(n) == 1 and torch.equal(z2, torch.ones(2, 6))      # salida finita: una sola evaluación
+
+
+def test_finite_logits_falla_si_fp32_tambien_es_no_finita():
+    with pytest.raises(FloatingPointError):
+        N.finite_logits(lambda inp: torch.full((1, 6), float("inf")), torch.zeros(1, 3), training=False)
+
+
+def test_variante_sin_denoising_finita_con_ruido_fuerte_y_compuerta_apagada():
+    torch.manual_seed(1)
+    m = N.NAGFuse(num_classes=6, pretrained=False, s_lo=0.01, rho=2.0, denoise=False).eval()
+    x01 = (torch.rand(2, 3, 224, 224) + 0.5 * torch.randn(2, 3, 224, 224)).clamp(0, 1)
+    for mode in ("on", "off"):
+        m.gate_mode = mode
+        assert torch.isfinite(m(_norm(x01))).all()
