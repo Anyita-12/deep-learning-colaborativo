@@ -18,3 +18,10 @@ Partición de desarrollo: conjunto de validación (360 imágenes) y predicciones
 **Propuesta considerada y no evaluada.** Se consideró usar VGG-16 como rama convolucional. Se descartó sin entrenarla: tiene 138 M de parámetros y 15.5 GFLOPS según torchvision (EfficientNet-B0: 0.39), su accuracy top-1 en ImageNet (71.6 %; 73.4 % con BN) es menor que la de EfficientNet-B0 (77.7 %) y DenseNet201 (76.9 %), y la evidencia de desarrollo muestra que el F1 de la fusión casi no depende de la red convolucional elegida (filas 1 a 6). Además, VGG-16 ya aparece combinada con otras CNN en la literatura de TrashNet, lo que restaría novedad.
 
 **Lectura de la bitácora para el diseño.** La evidencia de desarrollo indica que ninguna fusión supera a ViT-B16 en F1 limpio por más de 0.002 en validación. El aporte esperado de NAGFuse es la robustez sin pérdida en limpio, y así se refleja en el hallazgo alternativo de `estandar.md`.
+
+## 2026-11-22: corrección `e3-protocolo-v2` (declarada)
+- **Hallazgo:** la variante de ablación `NAGFuse/sin_denoising` falló en `_nag_analysis` con `ValueError: Input contains NaN` (probabilidades no finitas) al evaluar con la compuerta apagada o con otro ρ: la rama CNN sin contracción recibe imágenes muy ruidosas y sus logits dejan de ser finitos en fp16. En la evaluación normal el defecto quedaba oculto porque con π = 1 la mezcla devuelve exactamente la rama ViT (`torch.where`). La variante completa no lo sufre porque su rama CNN ve imágenes contraídas.
+- **Corrección (no cambia ningún resultado de entrenamiento ni de evaluación ya producido):**
+  1. `finite_logits`: si los logits de una rama no son finitos en inferencia, se reevalúan en fp32; si siguen sin serlo, se produce un error explícito. Cuando son finitos no se altera nada.
+  2. El análisis exploratorio de NAGFuse (`_nag_analysis`) ya no hace fallar una corrida entrenada: registra el aviso y el error (`nagfuse_analisis_ERROR.json`) y continúa. Se comprueba además que las probabilidades sean finitas, para localizar el caso.
+- **Alcance:** solo afecta a las corridas de ablación `sin_denoising` (semillas 3 a 5 y siguientes). Las corridas ya terminadas no se tocan.

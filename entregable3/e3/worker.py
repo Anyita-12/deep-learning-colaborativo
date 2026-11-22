@@ -238,6 +238,8 @@ def _nag_analysis(model, common, mean, std, dev, run: Path, log) -> None:
         for kind in A.PERTURBATIONS:
             x01 = A.perturbed_test_set(cache, rows, kind)      # mismas perturbaciones y semillas del E2
             p = A.probs_from_images(model, x01, mean, std, dev)
+            if not np.isfinite(p).all():
+                raise ValueError(f"probabilidades no finitas en {key}/{kind}")
             out["robustez"][key][kind] = {"f1_macro": compute_metrics(y, p)["f1_macro"],
                                           "y_pred": p.argmax(1).astype(np.int64)}
     model.gate_mode = "on"
@@ -376,7 +378,12 @@ def task_e2(t: dict, worker: str) -> None:
                 return model.details(((x01 - m_t) / s_t).to(dev))["pi"].float().cpu().numpy()[:, None]
             pis = _probs_batches(sig, x)[:, 0]
             return {"pi": pis.astype(np.float32)}
-        _nag_analysis(model, common, mean, std, dev, run, log)
+        try:
+            _nag_analysis(model, common, mean, std, dev, run, log)
+        except Exception as e:      # el análisis exploratorio no debe tumbar una corrida ya entrenada y evaluada
+            import traceback
+            log(f"  AVISO: el análisis exploratorio de NAGFuse falló ({e!r}); la corrida continúa sin nagfuse_analisis.pkl")
+            S.write_json_atomic({"error": repr(e), "traza": traceback.format_exc()}, run / "nagfuse_analisis_ERROR.json")
     missing = extra_eval(run, prob_fn, log, extra_fn)
     keep_weights(t, run, missing, log)
     S.write_json_atomic({"tarea": t, "faltan_extra": missing, "fecha": time.strftime("%Y-%m-%d %H:%M:%S")},
