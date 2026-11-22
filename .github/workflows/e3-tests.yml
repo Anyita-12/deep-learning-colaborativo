@@ -1,0 +1,24 @@
+name: Pruebas del Entregable 3
+
+on:
+  push:
+    paths: ["entregable3/**", ".github/workflows/e3-tests.yml"]
+  pull_request:
+    paths: ["entregable3/**"]
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Dependencias (PyTorch para CPU)
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+          pip install numpy scipy pytest
+      - name: Pruebas del modelo propio y de las propiedades formales
+        working-directory: entregable3
+        run: python -m pytest -q tests

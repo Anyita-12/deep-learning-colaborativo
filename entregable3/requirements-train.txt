@@ -1,0 +1,11 @@
+# Entrenamiento del Entregable 3 en Colab (torch y torchvision ya vienen instalados en Colab con CUDA)
+numpy>=1.26
+pandas>=2.0
+scipy>=1.11
+scikit-learn>=1.3
+statsmodels>=0.14
+pillow>=10.0
+xgboost>=2.0
+scikit-posthocs>=0.9
+kagglehub>=0.3
+pytest>=8.0
