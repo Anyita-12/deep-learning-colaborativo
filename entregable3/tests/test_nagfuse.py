@@ -109,7 +109,7 @@ def test_cota_de_la_mezcla_en_el_modelo(model):
 
 def test_state_dict_guarda_s_lo_y_rho(model):
     sd = model.state_dict()
-    assert math.isclose(float(sd["s_lo"]), 0.01) and math.isclose(float(sd["rho"]), 2.0)
+    assert math.isclose(float(sd["s_lo"]), 0.01, rel_tol=1e-6) and math.isclose(float(sd["rho"]), 2.0, rel_tol=1e-6)  # float32
 
 
 @pytest.mark.parametrize("name", list(N.VARIANT_KW))
