@@ -25,3 +25,20 @@ Partición de desarrollo: conjunto de validación (360 imágenes) y predicciones
   1. `finite_logits`: si los logits de una rama no son finitos en inferencia, se reevalúan en fp32; si siguen sin serlo, se produce un error explícito. Cuando son finitos no se altera nada.
   2. El análisis exploratorio de NAGFuse (`_nag_analysis`) ya no hace fallar una corrida entrenada: registra el aviso y el error (`nagfuse_analisis_ERROR.json`) y continúa. Se comprueba además que las probabilidades sean finitas, para localizar el caso.
 - **Alcance:** solo afecta a las corridas de ablación `sin_denoising` (semillas 3 a 5 y siguientes). Las corridas ya terminadas no se tocan.
+
+## 2026-11-22: enmienda `e3-protocolo-v3` (declarada): adelanto de la hora de corte
+
+**Qué se modifica.** La sección 6 de `protocolo.md` fijaba el corte del análisis confirmatorio en el lunes 23 de noviembre de 2026, 06:00 (Bogotá). Se reemplaza por: **el corte es la hora del commit de esta enmienda** (domingo 22 de noviembre de 2026, noche, Bogotá). Todo lo demás de la sección 6 queda igual: se usan todas las corridas terminadas al corte, cada contraste usa las semillas comunes a ambos modelos en orden (0, 1, 2, ...), sin selección, y se reportan el número final de semillas, la diferencia mínima detectable y la potencia.
+
+**Motivo.** La cola de 144 tareas terminó (`144/144`, «Cola completa», 22/11 23:49 UTC) y no queda nada por entrenar. La regla de las 06:00 existía para impedir que el análisis dependiera de qué corridas habían terminado. Con la cola completa, el conjunto de corridas al corte es el mismo a cualquier hora: 144 marcas `.done` en `claims`. Esperar hasta las 06:00 no cambia ningún dato y consume horas del plazo (lunes 23:00).
+
+**Qué NO cambia.** Hipótesis (H1, H2, no inferioridad), contrastes, δ = 0.02, pruebas (t pareada, Wilcoxon exacta, bootstrap jerárquico), corrección de Holm, tamaños de efecto, semillas y todo `estandar.md`.
+
+**Exposición declarada (anterior a esta enmienda).**
+1. Los logs de entrenamiento imprimen el F1 macro de prueba y por dataset adicional de cada corrida (código congelado del E2). No se usó para ninguna decisión; se declara en el informe.
+2. Tras cerrar la cola solo se inspeccionó la estructura de carpetas y nombres de archivo de los resultados. No se abrió ninguna métrica de prueba al redactar esta enmienda.
+3. Corrección `e3-protocolo-v2` (fp32 en `finite_logits`, análisis exploratorio no fatal): solo afecta a las corridas de ablación `sin_denoising`; los `ERROR_*` previos a la corrección están en `logs/`.
+4. `sin_denoising-s07` terminó el entrenamiento en una sesión anterior que se liberó antes de su evaluación ampliada; esa evaluación quedó omitida (sin pesos). En la ablación sobre datasets adicionales se usarán solo semillas con datos completos.
+5. Incidente de disco: se borraron checkpoints antiguos de corridas ya cerradas; no afecta a resultados.
+
+**Regla de apertura.** Las métricas de prueba se abren únicamente después de que exista el commit con esta enmienda y su tag `e3-protocolo-v3`.
