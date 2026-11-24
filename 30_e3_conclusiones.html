@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
@@ -268,8 +268,11 @@
 <li class="toctree-l1"><a class="reference internal" href="24_e3_literatura_novedad.html">24. Literatura y verificación de novedad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="25_e3_diseno.html">25. Diseño de NAGFuse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="26_e3_implementacion_demostracion.html">26. Implementación y demostración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26a_e3_curvas_entrenamiento.html">26a. Curvas de entrenamiento y diagnóstico de sobreajuste</a></li>
 <li class="toctree-l1"><a class="reference internal" href="27_e3_protocolo_validacion.html">27. Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27a_e3_pruebas_hipotesis.html">27a. Reproducción de las pruebas de hipótesis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="28_e3_evaluacion_ampliada.html">28. Evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28a_e3_evaluacion_ampliada.html">28a. Reproducción de la evaluación ampliada</a></li>
 <li class="toctree-l1"><a class="reference internal" href="29_e3_dashboard.html">29. Dashboard</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">30. Conclusiones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
@@ -453,7 +456,7 @@
 <section id="respuestas">
 <h2>30.1 Respuestas<a class="headerlink" href="#respuestas" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>P1 (H1). No.</strong> NAGFuse supera a 10 de los 12 rivales en F1 limpio por más de <span class="math notranslate nohighlight">\(\delta\)</span>, pero empata con RWCNet y ViT-B16. La potencia frente a ellos (0.99 y 0.83) indica que el empate es real, no falta de semillas. La condición de superioridad sobre toda la familia no se cumple.</p></li>
+<li><p><strong>P1 (H1). No.</strong> NAGFuse supera a 9 de los 12 rivales en F1 limpio por más de <span class="math notranslate nohighlight">\(\delta\)</span>, pero empata con RWCNet y ViT-B16. La potencia frente a ellos (0.99 y 0.83) indica que el empate es real, no falta de semillas. La condición de superioridad sobre toda la familia no se cumple.</p></li>
 <li><p><strong>P2 (H2). Frente a las CNN, sí; frente a ViT-B16, no.</strong> Con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span> supera a todas las CNN por 0.12 a 0.76; frente a ViT-B16 la ventaja (+0.012) no es significativa.</p></li>
 <li><p><strong>P3 (H3). Sí.</strong> Es equivalente al mejor rival, RWCNet, dentro de <span class="math notranslate nohighlight">\(\pm\delta\)</span> (TOST <span class="math notranslate nohighlight">\(p &lt; 0.001\)</span>), y tiene la mejor calibración del benchmark, empatada con RWCNet.</p></li>
 <li><p><strong>P4 (mecanismo). En parte.</strong></p>
@@ -483,6 +486,10 @@
 <li><p><strong>Costo.</strong> 89.8 M de parámetros y la inferencia de dos redes. Es el modelo más pesado después de GFN.</p></li>
 <li><p><strong>Hardware mezclado.</strong> Las semillas 0–7 de los rivales del E2 se entrenaron en otra GPU. Con RWCNet se observó una diferencia de −0.014 entre las dos máquinas (capítulo 21).</p></li>
 <li><p><strong>Conjuntos adicionales.</strong> Para los rivales, solo semillas 8 a 19 (u 8 a 11); con 4 semillas las pruebas no pueden ser significativas.</p></li>
+<li><p><strong>Bloque B incompleto.</strong> No se midió la latencia en CPU con mediana y p95 para todos los modelos (solo NAGFuse en el dashboard), ni la memoria en inferencia, y no se probó cuantización, poda ni destilación con TOST. Los costos reportados son parámetros, GFLOPs y latencia en GPU.</p></li>
+<li><p><strong>Sin curva de aprendizaje frente al tamaño de muestra</strong> (10–50 % del entrenamiento), por presupuesto de cómputo.</p></li>
+<li><p><strong>Interpretabilidad sin prueba de fidelidad.</strong> El dashboard usa oclusión (no Grad-CAM, porque el ONNX en CPU no da gradientes) y la explicación global se apoya en el propio mecanismo (<span class="math notranslate nohighlight">\(\pi\)</span> y F1 de cada rama), sin pruebas de fidelidad ni de estabilidad.</p></li>
+<li><p><strong>Verificaciones por terceros pendientes.</strong> La repetición de la búsqueda de novedad y la reproducción independiente del análisis no las hizo una persona ajena al código antes de la entrega (capítulos 24 y 31).</p></li>
 </ul>
 </section>
 <section id="trabajo-futuro">

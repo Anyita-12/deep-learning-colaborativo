@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
@@ -68,7 +68,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="30. Conclusiones" href="30_e3_conclusiones.html" />
-    <link rel="prev" title="28. Evaluación ampliada" href="28_e3_evaluacion_ampliada.html" />
+    <link rel="prev" title="28a. Reproducción de la evaluación ampliada" href="28a_e3_evaluacion_ampliada.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -264,8 +264,11 @@
 <li class="toctree-l1"><a class="reference internal" href="24_e3_literatura_novedad.html">24. Literatura y verificación de novedad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="25_e3_diseno.html">25. Diseño de NAGFuse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="26_e3_implementacion_demostracion.html">26. Implementación y demostración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26a_e3_curvas_entrenamiento.html">26a. Curvas de entrenamiento y diagnóstico de sobreajuste</a></li>
 <li class="toctree-l1"><a class="reference internal" href="27_e3_protocolo_validacion.html">27. Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27a_e3_pruebas_hipotesis.html">27a. Reproducción de las pruebas de hipótesis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="28_e3_evaluacion_ampliada.html">28. Evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28a_e3_evaluacion_ampliada.html">28a. Reproducción de la evaluación ampliada</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">29. Dashboard</a></li>
 <li class="toctree-l1"><a class="reference internal" href="30_e3_conclusiones.html">30. Conclusiones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
@@ -433,7 +436,7 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="dashboard">
 <h1>29. Dashboard<a class="headerlink" href="#dashboard" title="Link to this heading">#</a></h1>
-<p>El dashboard (Dash + Plotly) tiene tres páginas y lee <strong>la misma tabla maestra que este libro</strong> (<code class="docutils literal notranslate"><span class="pre">dashboard/data/tabla_maestra.csv</span></code>, copia de <code class="docutils literal notranslate"><span class="pre">entregable3/resultados/</span></code>). La prueba automática <code class="docutils literal notranslate"><span class="pre">dashboard/tests/test_consistencia.py</span></code> verifica dos cosas: que los CSV del libro y del dashboard son idénticos byte a byte (SHA-256) y que las cifras de los capítulos 27 y 28 coinciden con ellos.</p>
+<p>El dashboard (Dash + Plotly) tiene tres páginas y una ficha del modelo y lee <strong>la misma tabla maestra que este libro</strong> (<code class="docutils literal notranslate"><span class="pre">dashboard/data/tabla_maestra.csv</span></code>, copia de <code class="docutils literal notranslate"><span class="pre">entregable3/resultados/</span></code>). La prueba automática <code class="docutils literal notranslate"><span class="pre">dashboard/tests/test_consistencia.py</span></code> verifica dos cosas: que los CSV del libro y del dashboard son idénticos byte a byte (SHA-256) y que las cifras de los capítulos 27 y 28 coinciden con ellos.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Página</p></th>
@@ -448,7 +451,10 @@
 <td><p>Imágenes por clase y partición, distribución de <span class="math notranslate nohighlight">\(\hat\sigma\)</span> con los umbrales de la compuerta y resumen de los conjuntos adicionales</p></td>
 </tr>
 <tr class="row-even"><td><p>Modelos</p></td>
-<td><p>Selector de modelos, tabla de métricas con IC, curva de robustez, gráficos de bosque de H1 y H2, explorador de las 361 imágenes de prueba con cada perturbación, y clasificación de una imagen propia</p></td>
+<td><p>Tabla de líderes ordenable y filtrable (familia, F1 macro media y DE, ECE, parámetros, GFLOPs, latencia); tabla de métricas con IC y curva de robustez; bosques de H1 y H2; diagnóstico del modelo seleccionado (matriz de confusión, ROC y precisión-exhaustividad por clase, diagrama de confiabilidad); diagrama de diferencia crítica y fronteras de Pareto frente a GFLOPs y latencia; interpretabilidad global (peso <span class="math notranslate nohighlight">\(\pi\)</span> y F1 de cada rama por condición); subsección de NAGFuse (procedencia, pseudocódigo, curvas de entrenamiento con media ± DE entre semillas, tabla de pruebas con p de Holm y tamaños de efecto, ablación y veredicto de no superioridad); explorador de las 361 imágenes de prueba; clasificación de una imagen propia con latencia en CPU</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ficha del modelo</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MODEL_CARD.md</span></code> completo dentro de la aplicación</p></td>
 </tr>
 </tbody>
 </table>
@@ -467,6 +473,16 @@
 <li><p><strong>Interpretabilidad:</strong> un mapa de oclusión (rejilla de 4 × 4) muestra qué regiones sostienen la predicción. Se usa oclusión en lugar de Grad-CAM porque funciona sobre el modelo exportado sin acceso a gradientes.</p></li>
 </ul>
 <p><strong>Despliegue.</strong> Render (<code class="docutils literal notranslate"><span class="pre">dashboard/render.yaml</span></code>): Python 3.11.9 y <code class="docutils literal notranslate"><span class="pre">gunicorn</span> <span class="pre">app:server</span> <span class="pre">--workers</span> <span class="pre">1</span> <span class="pre">--threads</span> <span class="pre">2</span> <span class="pre">--timeout</span> <span class="pre">120</span></code>. El modelo ONNX (360 MB) no cabe en la memoria del plan gratuito (512 MB). En ese plan, el dashboard muestra todo excepto la clasificación de imágenes nuevas y lo indica en pantalla. Con el modelo disponible (variable <code class="docutils literal notranslate"><span class="pre">NAGFUSE_ONNX</span></code>, contenedor con volumen o plan de más memoria) la clasificación funciona igual.</p>
+<p><strong>Datos de la página Modelos.</strong> Además de la tabla maestra, <code class="docutils literal notranslate"><span class="pre">entregable3/analisis/datos_dashboard_diagnostico.py</span></code> reorganiza, sin recalcular nada, los historiales por época (<code class="docutils literal notranslate"><span class="pre">curvas.csv</span></code>), las probabilidades en prueba de una semilla por modelo (<code class="docutils literal notranslate"><span class="pre">probs_prueba.csv.gz</span></code>, la menor semilla guardada) y el costo medido durante el entrenamiento (<code class="docutils literal notranslate"><span class="pre">costo.csv</span></code>: mediana entre semillas de parámetros, GFLOPs y latencia).</p>
+<p><strong>Prueba de humo.</strong> <code class="docutils literal notranslate"><span class="pre">dashboard/tests/prueba_humo.py</span></code> construye cada página, ejecuta cada callback con una entrada de ejemplo (incluida una predicción en vivo si el ONNX está disponible) y, si se le pasa la URL pública, comprueba que cada ruta responde. Su salida se anexa en el capítulo 31.</p>
+<p><strong>Limitaciones del dashboard (declaradas).</strong></p>
+<ul class="simple">
+<li><p>La aplicación enruta con <code class="docutils literal notranslate"><span class="pre">dcc.Location</span></code> en un solo <code class="docutils literal notranslate"><span class="pre">app.py</span></code> en lugar de <code class="docutils literal notranslate"><span class="pre">use_pages=True</span></code> y una carpeta <code class="docutils literal notranslate"><span class="pre">pages/</span></code>, y usa una hoja de estilos propia en lugar de <code class="docutils literal notranslate"><span class="pre">dash-bootstrap-components</span></code>. La separación entre interfaz, datos y artefactos se mantiene: la aplicación no importa PyTorch ni código de entrenamiento.</p></li>
+<li><p>La explicación local es un mapa de oclusión, no Grad-CAM: el modelo exportado a ONNX no expone gradientes en CPU. La interpretabilidad global se apoya en el propio mecanismo (<span class="math notranslate nohighlight">\(\pi\)</span> y desempeño de cada rama), no en un método de atribución con prueba de fidelidad.</p></li>
+<li><p>La latencia de la tabla de líderes se midió en GPU (A100, AMP, lote de 1) durante el entrenamiento; la latencia en CPU solo se mide para NAGFuse al clasificar una imagen. No se midieron memoria en inferencia ni energía, y los baselines desde cero no registraron FLOPs.</p></li>
+<li><p>No se calculó la curva de aprendizaje frente al tamaño de muestra (10–50 % del entrenamiento) por falta de presupuesto de cómputo.</p></li>
+<li><p>Solo NAGFuse tiene inferencia en vivo; los demás modelos se muestran con resultados precalculados (Sección 9.2 del enunciado).</p></li>
+</ul>
 <p><strong>Contingencia para la sustentación.</strong> Ejecución local (<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">app.py</span></code>) con el modelo, y capturas y un video corto de cada página por si falla la red.</p>
 </section>
 
@@ -501,12 +517,12 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="28_e3_evaluacion_ampliada.html"
+       href="28a_e3_evaluacion_ampliada.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">28. Evaluación ampliada</p>
+        <p class="prev-next-title">28a. Reproducción de la evaluación ampliada</p>
       </div>
     </a>
     <a class="right-next"

@@ -1,5 +1,9 @@
 # 28. Evaluación ampliada
 
+```{note}
+Las tablas y figuras de este capítulo (robustez, ablación, conformal, calibración y costo con frontera de Pareto) se reproducen con código ejecutable en el cuaderno {doc}`28a_e3_evaluacion_ampliada`.
+```
+
 Todas las cifras salen de la tabla maestra única (`entregable3/resultados/tabla_maestra.csv`), la misma que lee el dashboard.
 
 ## 28.1 Robustez a perturbaciones

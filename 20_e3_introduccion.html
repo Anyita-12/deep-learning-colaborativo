@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
@@ -268,8 +268,11 @@
 <li class="toctree-l1"><a class="reference internal" href="24_e3_literatura_novedad.html">24. Literatura y verificación de novedad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="25_e3_diseno.html">25. Diseño de NAGFuse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="26_e3_implementacion_demostracion.html">26. Implementación y demostración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26a_e3_curvas_entrenamiento.html">26a. Curvas de entrenamiento y diagnóstico de sobreajuste</a></li>
 <li class="toctree-l1"><a class="reference internal" href="27_e3_protocolo_validacion.html">27. Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27a_e3_pruebas_hipotesis.html">27a. Reproducción de las pruebas de hipótesis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="28_e3_evaluacion_ampliada.html">28. Evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28a_e3_evaluacion_ampliada.html">28a. Reproducción de la evaluación ampliada</a></li>
 <li class="toctree-l1"><a class="reference internal" href="29_e3_dashboard.html">29. Dashboard</a></li>
 <li class="toctree-l1"><a class="reference internal" href="30_e3_conclusiones.html">30. Conclusiones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
@@ -434,8 +437,9 @@
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">20.1 Objetivo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preguntas">20.2 Preguntas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-resultados">20.3 Resumen de resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contribuciones">20.2 Contribuciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preguntas">20.3 Preguntas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-resultados">20.4 Resumen de resultados</a></li>
 </ul>
             </nav>
         </div>
@@ -509,12 +513,22 @@
 </tbody>
 </table>
 </div>
+<p><strong>Dashboard desplegado:</strong> <em>(pegar aquí la URL pública de Render)</em></p>
 <section id="objetivo">
 <h2>20.1 Objetivo<a class="headerlink" href="#objetivo" title="Link to this heading">#</a></h2>
 <p>El E2 dejó una limitación medida con inferencia: con ruido gaussiano de <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span> las CNN de la familia pierden entre 0.30 y 0.67 de F1 macro, mientras ViT-B16 pierde 0.04. El E3 propone un modelo original, <strong>NAGFuse</strong> (<em>Noise-Adaptive Gated Fusion</em>), que combina ViT-B/16 y EfficientNet-B0 con una compuerta guiada por un estimador del nivel de ruido, y lo compara con la familia completa del E2 bajo un protocolo preregistrado.</p>
 </section>
+<section id="contribuciones">
+<h2>20.2 Contribuciones<a class="headerlink" href="#contribuciones" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>NAGFuse</strong>, una fusión de ViT-B/16 y EfficientNet-B0 cuyo peso de mezcla lo fija, sin parámetros entrenables, un estimador del nivel de ruido (MAD de los coeficientes diagonales de Haar), con contracción de ondícula solo en la rama sensible al ruido (capítulos 25 y 26).</p></li>
+<li><p><strong>Dos propiedades demostradas y verificadas numéricamente:</strong> una cota de error del estimador (Teorema 1, con la desigualdad DKW) y la garantía de que con ruido fuerte la mezcla coincide con la rama robusta (Teorema 2) (capítulo 26).</p></li>
+<li><p><strong>Una comparación preregistrada</strong> contra la familia completa del E2 (12 rivales, 12 a 20 semillas, tres pruebas por contraste, Holm, TOST, Friedman–Nemenyi, conformal) que identifica qué parte del mecanismo funciona y cuál no (capítulos 27 y 28).</p></li>
+<li><p><strong>Un dashboard y un análisis reproducibles</strong> que leen la misma tabla maestra que este libro, con prueba automática de consistencia (capítulos 29 y 31).</p></li>
+</ol>
+</section>
 <section id="preguntas">
-<h2>20.2 Preguntas<a class="headerlink" href="#preguntas" title="Link to this heading">#</a></h2>
+<h2>20.3 Preguntas<a class="headerlink" href="#preguntas" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>P1 (H1).</strong> ¿NAGFuse supera en F1 macro limpio a cada uno de los 12 rivales (10 modelos y 2 baselines) por más de <span class="math notranslate nohighlight">\(\delta = 0.02\)</span>?</p></li>
 <li><p><strong>P2 (H2).</strong> ¿Los supera con ruido <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span>?</p></li>
@@ -524,10 +538,10 @@
 </ul>
 </section>
 <section id="resumen-de-resultados">
-<h2>20.3 Resumen de resultados<a class="headerlink" href="#resumen-de-resultados" title="Link to this heading">#</a></h2>
+<h2>20.4 Resumen de resultados<a class="headerlink" href="#resumen-de-resultados" title="Link to this heading">#</a></h2>
 <p>Se entrenaron 144 corridas nuevas (19.1 h de GPU A100) y se analizaron junto con las 88 del E2: 20 semillas para NAGFuse y los cinco rivales más cercanos, 12 para el resto.</p>
 <ul class="simple">
-<li><p><strong>H1 no se cumple en su forma fuerte.</strong> NAGFuse (F1 <span class="math notranslate nohighlight">\(0.9365 \pm 0.011\)</span>) supera a 10 de 12 rivales, pero empata con RWCNet (<span class="math notranslate nohighlight">\(-0.0004\)</span>) y ViT-B16 (<span class="math notranslate nohighlight">\(+0.0002\)</span>). La condición de superioridad sobre toda la familia (R3) no se alcanza.</p></li>
+<li><p><strong>H1 no se cumple en su forma fuerte.</strong> NAGFuse (F1 <span class="math notranslate nohighlight">\(0.9365 \pm 0.011\)</span>) supera a 9 de 12 rivales, pero empata con RWCNet (<span class="math notranslate nohighlight">\(-0.0004\)</span>) y ViT-B16 (<span class="math notranslate nohighlight">\(+0.0002\)</span>). La condición de superioridad sobre toda la familia (R3) no se alcanza.</p></li>
 <li><p><strong>H3 se cumple.</strong> NAGFuse es equivalente al mejor rival, RWCNet, dentro de <span class="math notranslate nohighlight">\(\pm\delta\)</span> (TOST <span class="math notranslate nohighlight">\(p &lt; 0.001\)</span>).</p></li>
 <li><p><strong>H2 se cumple frente a todas las CNN</strong> (ventajas de 0.12 a 0.76), pero no frente a ViT-B16 (<span class="math notranslate nohighlight">\(+0.012\)</span>, no significativo).</p></li>
 <li><p><strong>El mecanismo se verifica en parte.</strong> El estimador detecta el ruido como predice el Teorema 1 y la contracción de Haar protege a la rama convolucional. Con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span>, sin embargo, la compuerta casi no aporta (P1 falla); su efecto aparece con <span class="math notranslate nohighlight">\(\sigma = 0.10\)</span>.</p></li>
@@ -604,8 +618,9 @@
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">20.1 Objetivo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preguntas">20.2 Preguntas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-resultados">20.3 Resumen de resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contribuciones">20.2 Contribuciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preguntas">20.3 Preguntas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-resultados">20.4 Resumen de resultados</a></li>
 </ul>
   </nav></div>
 

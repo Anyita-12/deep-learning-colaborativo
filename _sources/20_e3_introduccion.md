@@ -17,11 +17,20 @@ Los capítulos 20 a 31 forman el Entregable 3. Siguen uno a uno la estructura pe
 | 10. Conclusiones | 30 | Respuestas, límites y trabajo futuro |
 | 11. Reproducibilidad | 31 | Entorno, artefactos, autoría y uso de herramientas |
 
+**Dashboard desplegado:** *(pegar aquí la URL pública de Render)*
+
 ## 20.1 Objetivo
 
 El E2 dejó una limitación medida con inferencia: con ruido gaussiano de $\sigma = 0.05$ las CNN de la familia pierden entre 0.30 y 0.67 de F1 macro, mientras ViT-B16 pierde 0.04. El E3 propone un modelo original, **NAGFuse** (*Noise-Adaptive Gated Fusion*), que combina ViT-B/16 y EfficientNet-B0 con una compuerta guiada por un estimador del nivel de ruido, y lo compara con la familia completa del E2 bajo un protocolo preregistrado.
 
-## 20.2 Preguntas
+## 20.2 Contribuciones
+
+1. **NAGFuse**, una fusión de ViT-B/16 y EfficientNet-B0 cuyo peso de mezcla lo fija, sin parámetros entrenables, un estimador del nivel de ruido (MAD de los coeficientes diagonales de Haar), con contracción de ondícula solo en la rama sensible al ruido (capítulos 25 y 26).
+2. **Dos propiedades demostradas y verificadas numéricamente:** una cota de error del estimador (Teorema 1, con la desigualdad DKW) y la garantía de que con ruido fuerte la mezcla coincide con la rama robusta (Teorema 2) (capítulo 26).
+3. **Una comparación preregistrada** contra la familia completa del E2 (12 rivales, 12 a 20 semillas, tres pruebas por contraste, Holm, TOST, Friedman–Nemenyi, conformal) que identifica qué parte del mecanismo funciona y cuál no (capítulos 27 y 28).
+4. **Un dashboard y un análisis reproducibles** que leen la misma tabla maestra que este libro, con prueba automática de consistencia (capítulos 29 y 31).
+
+## 20.3 Preguntas
 
 - **P1 (H1).** ¿NAGFuse supera en F1 macro limpio a cada uno de los 12 rivales (10 modelos y 2 baselines) por más de $\delta = 0.02$?
 - **P2 (H2).** ¿Los supera con ruido $\sigma = 0.05$?
@@ -29,11 +38,11 @@ El E2 dejó una limitación medida con inferencia: con ruido gaussiano de $\sigm
 - **P4 (mecanismo).** ¿Funciona por las razones previstas? Se contrasta con cinco predicciones secundarias y una ablación.
 - **P5 (generalización).** ¿Se mantiene la ventaja en tres conjuntos de otra procedencia, sin reentrenar?
 
-## 20.3 Resumen de resultados
+## 20.4 Resumen de resultados
 
 Se entrenaron 144 corridas nuevas (19.1 h de GPU A100) y se analizaron junto con las 88 del E2: 20 semillas para NAGFuse y los cinco rivales más cercanos, 12 para el resto.
 
-- **H1 no se cumple en su forma fuerte.** NAGFuse (F1 $0.9365 \pm 0.011$) supera a 10 de 12 rivales, pero empata con RWCNet ($-0.0004$) y ViT-B16 ($+0.0002$). La condición de superioridad sobre toda la familia (R3) no se alcanza.
+- **H1 no se cumple en su forma fuerte.** NAGFuse (F1 $0.9365 \pm 0.011$) supera a 9 de 12 rivales, pero empata con RWCNet ($-0.0004$) y ViT-B16 ($+0.0002$). La condición de superioridad sobre toda la familia (R3) no se alcanza.
 - **H3 se cumple.** NAGFuse es equivalente al mejor rival, RWCNet, dentro de $\pm\delta$ (TOST $p < 0.001$).
 - **H2 se cumple frente a todas las CNN** (ventajas de 0.12 a 0.76), pero no frente a ViT-B16 ($+0.012$, no significativo).
 - **El mecanismo se verifica en parte.** El estimador detecta el ruido como predice el Teorema 1 y la contracción de Haar protege a la rama convolucional. Con $\sigma = 0.05$, sin embargo, la compuerta casi no aporta (P1 falla); su efecto aparece con $\sigma = 0.10$.

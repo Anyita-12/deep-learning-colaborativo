@@ -1,0 +1,758 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>26a. Curvas de entrenamiento y diagnóstico de sobreajuste &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '26a_e3_curvas_entrenamiento';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="27. Protocolo y validación estadística" href="27_e3_protocolo_validacion.html" />
+    <link rel="prev" title="26. Implementación y demostración" href="26_e3_implementacion_demostracion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><div class="sidebar-autores">
+  <div class="autor">
+    <img src="_static/autores/anyely.jpg" alt="Anyely Sanjuan Benavides">
+    <p class="autor-nombre">Anyely Sanjuan Benavides</p>
+    <p class="autor-detalle">Msc. Analítica de Datos<br>Universidad del Norte</p>
+  </div>
+  <div class="autor">
+    <img src="_static/autores/juan.jpg" alt="Juan David Díaz Fernández">
+    <p class="autor-nombre">Juan David Díaz Fernández</p>
+    <p class="autor-detalle">Msc. Ingeniería Mecánica<br>Universidad del Norte</p>
+  </div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Clasificación de residuos con TrashNet
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 1: modelos base</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y conjunto de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_conclusiones.html">7. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2: benchmark de diez modelos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_benchmark_introduccion.html">8. Benchmark de diez modelos: problema, preguntas e hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datos_auditoria.html">9. Datos: ficha técnica, contrato de datos y auditoría de fuga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_revision_sistematica.html">10. Revisión sistemática ampliada y selección de los modelos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_protocolo_preregistro.html">11. Preregistro, protocolo común y fichas de modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_paper_guia.html">12. Paper guía: réplica, limitaciones y ablación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_benchmark_estadistica.html">13. Benchmark: resultados e inferencia estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_ajuste_calibracion_incertidumbre.html">14. Bondad de ajuste, sobreajuste, calibración e incertidumbre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_robustez_interpretabilidad_errores.html">15. Robustez, interpretabilidad, errores y techo de desempeño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_discusion_benchmark.html">16. Discusión del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_reproducibilidad.html">17. Reproducibilidad del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_conclusiones_benchmark.html">18. Conclusiones del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_referencias_benchmark.html">19. Referencias del benchmark</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 3: modelo propio y evaluación ampliada</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20_e3_introduccion.html">20. Entregable 3: introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_e3_correcciones.html">21. Correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_e3_datos.html">22. Datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_e3_benchmark.html">23. Benchmark: configuraciones, semillas y artefactos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_e3_literatura_novedad.html">24. Literatura y verificación de novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25_e3_diseno.html">25. Diseño de NAGFuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_e3_implementacion_demostracion.html">26. Implementación y demostración</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">26a. Curvas de entrenamiento y diagnóstico de sobreajuste</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_e3_protocolo_validacion.html">27. Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27a_e3_pruebas_hipotesis.html">27a. Reproducción de las pruebas de hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_e3_evaluacion_ampliada.html">28. Evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28a_e3_evaluacion_ampliada.html">28a. Reproducción de la evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_e3_dashboard.html">29. Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_e3_conclusiones.html">30. Conclusiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/26a_e3_curvas_entrenamiento.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>26a. Curvas de entrenamiento y diagnóstico de sobreajuste</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="a-curvas-de-entrenamiento-y-diagnostico-de-sobreajuste">
+<h1>26a. Curvas de entrenamiento y diagnóstico de sobreajuste<a class="headerlink" href="#a-curvas-de-entrenamiento-y-diagnostico-de-sobreajuste" title="Link to this heading">#</a></h1>
+<p>Este cuaderno reproduce, a partir de los historiales guardados en cada corrida (<code class="docutils literal notranslate"><span class="pre">history.pkl</span></code>), las curvas de
+entrenamiento y validación de NAGFuse y de los tres rivales más fuertes. Para cada época se muestra la media entre
+semillas y una banda de ± 1 desviación estándar. La línea vertical punteada marca la mediana de la época elegida
+por <em>early stopping</em> (máximo F1 macro en validación). Los entrenamientos son costosos (≈ 19 h de GPU), así que se
+usan resultados precalculados y versionados; el código que los genera es <code class="docutils literal notranslate"><span class="pre">entregable3/e3/worker.py</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuración común. El cuaderno funciona desde docs/ (Jupyter Book) o desde la raíz del repositorio.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">REPO</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">&quot;entregable3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">())</span>
+<span class="n">RES</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s2">&quot;entregable3&quot;</span> <span class="o">/</span> <span class="s2">&quot;resultados&quot;</span>   <span class="c1"># tablas congeladas del análisis (hash SHA-256 en el capítulo 21)</span>
+<span class="n">RUNS</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s2">&quot;entregable3&quot;</span> <span class="o">/</span> <span class="s2">&quot;results&quot;</span>     <span class="c1"># corridas versionadas, sin pesos</span>
+<span class="n">CLASES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cardboard&quot;</span><span class="p">,</span> <span class="s2">&quot;glass&quot;</span><span class="p">,</span> <span class="s2">&quot;metal&quot;</span><span class="p">,</span> <span class="s2">&quot;paper&quot;</span><span class="p">,</span> <span class="s2">&quot;plastic&quot;</span><span class="p">,</span> <span class="s2">&quot;trash&quot;</span><span class="p">]</span>
+<span class="n">COLOR</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;NAGFuse&quot;</span><span class="p">:</span> <span class="s2">&quot;#c0392b&quot;</span><span class="p">,</span> <span class="s2">&quot;ViT-B16&quot;</span><span class="p">:</span> <span class="s2">&quot;#2e86c1&quot;</span><span class="p">,</span> <span class="s2">&quot;RWCNet&quot;</span><span class="p">:</span> <span class="s2">&quot;#27ae60&quot;</span><span class="p">,</span> <span class="s2">&quot;GFN&quot;</span><span class="p">:</span> <span class="s2">&quot;#8e44ad&quot;</span><span class="p">,</span> <span class="s2">&quot;Celik-HC&quot;</span><span class="p">:</span> <span class="s2">&quot;#d68910&quot;</span><span class="p">}</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;axes.grid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;grid.alpha&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.precision&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Repositorio:&quot;</span><span class="p">,</span> <span class="n">REPO</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Repositorio: deep-learning-colaborativo
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carga los historiales por época de cada modelo y semilla (solo corridas terminadas, con archivo DONE)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">historiales</span><span class="p">(</span><span class="n">modelo</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">RUNS</span> <span class="o">/</span> <span class="s2">&quot;results_e2&quot;</span> <span class="o">/</span> <span class="n">modelo</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;seed_*&quot;</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="s2">&quot;DONE&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">continue</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="s2">&quot;history.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>                 <span class="c1"># dict de listas, una entrada por época</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="s2">&quot;timing.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>                  <span class="c1"># incluye best_epoch y tiempos</span>
+        <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;modelo&quot;</span><span class="p">:</span> <span class="n">modelo</span><span class="p">,</span> <span class="s2">&quot;semilla&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="mi">5</span><span class="p">:]),</span> <span class="s2">&quot;epoca&quot;</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">&quot;epoch&quot;</span><span class="p">],</span>
+                                   <span class="s2">&quot;train_loss&quot;</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">&quot;train_loss&quot;</span><span class="p">],</span> <span class="s2">&quot;val_loss&quot;</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">],</span>
+                                   <span class="s2">&quot;train_f1&quot;</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">&quot;train_f1_macro&quot;</span><span class="p">],</span> <span class="s2">&quot;val_f1&quot;</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">&quot;val_f1_macro&quot;</span><span class="p">],</span>
+                                   <span class="s2">&quot;mejor_epoca&quot;</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="s2">&quot;best_epoch&quot;</span><span class="p">]}))</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+
+<span class="n">MODELOS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NAGFuse&quot;</span><span class="p">,</span> <span class="s2">&quot;ViT-B16&quot;</span><span class="p">,</span> <span class="s2">&quot;RWCNet&quot;</span><span class="p">,</span> <span class="s2">&quot;GFN&quot;</span><span class="p">]</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">historiales</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">MODELOS</span><span class="p">])</span>
+<span class="n">H</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">semilla</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;semillas&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>modelo
+GFN        12
+NAGFuse    20
+RWCNet     12
+ViT-B16    12
+Name: semillas, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figura 26a.1: pérdida y F1 macro por época (media ± DE entre semillas)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ejes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">met</span><span class="p">,</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">ejes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;loss&quot;</span><span class="p">,</span> <span class="s2">&quot;Pérdida (entropía cruzada, nats)&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">ejes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;f1&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 macro&quot;</span><span class="p">)]:</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">MODELOS</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">H</span><span class="p">[</span><span class="n">H</span><span class="o">.</span><span class="n">modelo</span> <span class="o">==</span> <span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;epoca&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">parte</span><span class="p">,</span> <span class="n">estilo</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;val&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)]:</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">parte</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">met</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">();</span> <span class="n">ok</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>    <span class="c1"># épocas a las que llegó al menos la mitad de las semillas</span>
+            <span class="n">mu</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="n">ok</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="n">ok</span><span class="p">]</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mu</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">estilo</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="s1">&#39;entrenamiento&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">parte</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;train&#39;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;validación&#39;</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">mu</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">mu</span> <span class="o">-</span> <span class="n">sd</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">sd</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.12</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">H</span><span class="p">[</span><span class="n">H</span><span class="o">.</span><span class="n">modelo</span> <span class="o">==</span> <span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;semilla&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mejor_epoca</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Época&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
+<span class="n">ejes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Pérdida por época&quot;</span><span class="p">);</span> <span class="n">ejes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;F1 macro por época&quot;</span><span class="p">)</span>
+<span class="n">ejes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Figura 26a.1. Curvas de entrenamiento (media ± DE entre semillas; punteada: época elegida)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d4fa7e449c3505e8c2a3a18d4784c091c7b25bac13185742a85372a8079489b3.png" src="_images/d4fa7e449c3505e8c2a3a18d4784c091c7b25bac13185742a85372a8079489b3.png" />
+</div>
+</div>
+<p><strong>Interpretación.</strong> Las cuatro redes, todas preentrenadas en ImageNet, bajan la pérdida de entrenamiento casi a
+cero mientras la de validación se estanca o sube después de las primeras épocas: es el patrón típico de un <em>fine-tuning</em>
+sobre un conjunto pequeño (1800 imágenes). El <em>early stopping</em> corta en la zona donde el F1 de validación ya es
+estable, así que el sobreajuste de la pérdida no se traslada al F1. La tabla siguiente lo cuantifica.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 26a.1: diagnóstico de sobreajuste en la época elegida, por semilla y luego media ± DE entre semillas</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">en_mejor</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">epoca</span> <span class="o">==</span> <span class="n">d</span><span class="o">.</span><span class="n">mejor_epoca</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s2">&quot;mejor_epoca&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">epoca</span><span class="p">,</span> <span class="s2">&quot;epocas_corridas&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">epoca</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;F1_train&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">train_f1</span><span class="p">,</span>
+                      <span class="s2">&quot;F1_val&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">val_f1</span><span class="p">,</span> <span class="s2">&quot;brecha_F1&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">train_f1</span> <span class="o">-</span> <span class="n">r</span><span class="o">.</span><span class="n">val_f1</span><span class="p">,</span> <span class="s2">&quot;perdida_val&quot;</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">val_loss</span><span class="p">})</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;modelo&quot;</span><span class="p">,</span> <span class="s2">&quot;semilla&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">en_mejor</span><span class="p">,</span> <span class="n">include_groups</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">tabla</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">tabla</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="s1">&#39;media&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;mean&#39;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;DE&#39;</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">tabla</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+<span class="n">tabla</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mejor_epoca (media)</th>
+      <th>mejor_epoca (DE)</th>
+      <th>epocas_corridas (media)</th>
+      <th>epocas_corridas (DE)</th>
+      <th>F1_train (media)</th>
+      <th>F1_train (DE)</th>
+      <th>F1_val (media)</th>
+      <th>F1_val (DE)</th>
+      <th>brecha_F1 (media)</th>
+      <th>brecha_F1 (DE)</th>
+      <th>perdida_val (media)</th>
+      <th>perdida_val (DE)</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>GFN</th>
+      <td>29.9167</td>
+      <td>12.0865</td>
+      <td>42.9167</td>
+      <td>12.0865</td>
+      <td>0.9893</td>
+      <td>0.0105</td>
+      <td>0.9555</td>
+      <td>0.0111</td>
+      <td>0.0338</td>
+      <td>0.0123</td>
+      <td>0.2150</td>
+      <td>0.0528</td>
+    </tr>
+    <tr>
+      <th>NAGFuse</th>
+      <td>26.9000</td>
+      <td>10.8865</td>
+      <td>39.7000</td>
+      <td>10.4484</td>
+      <td>0.9979</td>
+      <td>0.0024</td>
+      <td>0.9665</td>
+      <td>0.0063</td>
+      <td>0.0314</td>
+      <td>0.0054</td>
+      <td>0.1335</td>
+      <td>0.0145</td>
+    </tr>
+    <tr>
+      <th>RWCNet</th>
+      <td>19.1667</td>
+      <td>9.3501</td>
+      <td>32.1667</td>
+      <td>9.3501</td>
+      <td>0.9924</td>
+      <td>0.0083</td>
+      <td>0.9587</td>
+      <td>0.0077</td>
+      <td>0.0337</td>
+      <td>0.0070</td>
+      <td>0.1626</td>
+      <td>0.0292</td>
+    </tr>
+    <tr>
+      <th>ViT-B16</th>
+      <td>15.4167</td>
+      <td>6.5430</td>
+      <td>28.4167</td>
+      <td>6.5430</td>
+      <td>0.9949</td>
+      <td>0.0075</td>
+      <td>0.9648</td>
+      <td>0.0065</td>
+      <td>0.0301</td>
+      <td>0.0054</td>
+      <td>0.1517</td>
+      <td>0.0351</td>
+    </tr>
+  </tbody>
+</table></div></div>
+</div>
+<p><strong>Lectura de la tabla.</strong> En los cuatro modelos el F1 de validación en la época elegida es de 0.955–0.967 y la
+brecha con el de entrenamiento es de unos 3 puntos, sin diferencias grandes entre ellos. La brecha entre el F1 de entrenamiento y el de validación en la época elegida mide el
+sobreajuste que queda después del <em>early stopping</em>. Una brecha de pocos puntos con F1 de validación estable entre
+semillas indica que el modelo generaliza dentro de la distribución de TrashNet. La generalización fuera de ella es
+otro problema (conjuntos adicionales, capítulo 28).</p>
+<p><strong>Curva de aprendizaje frente al tamaño de muestra.</strong> El enunciado (Sección 8.8) pide reentrenar con el 10 %, 25 % y
+50 % del entrenamiento. No se hizo, por falta de presupuesto de cómputo (cada punto exige reentrenar los modelos con
+varias semillas). Queda declarado como limitación en los capítulos 29 y 30.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="26_e3_implementacion_demostracion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">26. Implementación y demostración</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="27_e3_protocolo_validacion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">27. Protocolo y validación estadística</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan Benavides y Juan David Díaz Fernández
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

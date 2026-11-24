@@ -1,5 +1,9 @@
 # 27. Protocolo y validación estadística
 
+```{note}
+Las tablas y figuras de este capítulo, incluida una verificación independiente de la corrección de Holm, se reproducen con código ejecutable en el cuaderno {doc}`27a_e3_pruebas_hipotesis`.
+```
+
 ## 27.1 Preregistro
 
 | Documento | Contenido | Fecha y tag |
@@ -50,7 +54,7 @@ El p del bootstrap tiene una resolución de $10^{-4}$, de modo que su valor ajus
 Diferencias pareadas NAGFuse − rival con IC 95 % del bootstrap jerárquico (eje simétrico-logarítmico). La línea discontinua es $\delta = 0.02$.
 ```
 
-**Resultado.** NAGFuse supera a 10 de los 12 rivales con diferencia mayor que $\delta$. Frente a GFN la ventaja es significativa pero menor que $\delta$ (+0.0125). Frente a RWCNet y ViT-B16 no hay diferencia. **La condición de superioridad sobre toda la familia no se cumple.**
+**Resultado.** NAGFuse supera a 9 de los 12 rivales con diferencia mayor que $\delta$. Frente a GFN la ventaja es significativa pero menor que $\delta$ (+0.0125). Frente a RWCNet y ViT-B16 no hay diferencia. **La condición de superioridad sobre toda la familia no se cumple.**
 
 **Potencia observada.** Con las desviaciones pareadas observadas y 20 semillas, la potencia para detectar $\delta$ al nivel 0.05/12 es de 0.99 frente a RWCNet ($\sigma_d = 0.015$) y de 0.83 frente a ViT-B16 ($\sigma_d = 0.021$). Estas comparaciones podían detectar $\delta$; el empate es informativo y no se debe a falta de semillas. Las diferencias mínimas detectables son 0.016 y 0.021. Frente a FocusRCNet, MobileNetV2 y CNN (12 semillas, $\sigma_d$ entre 0.019 y 0.025) la potencia para $\delta$ es baja, pero las diferencias observadas superan 0.1.
 

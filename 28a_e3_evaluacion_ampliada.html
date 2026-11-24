@@ -1,0 +1,1584 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>28a. Reproducción de la evaluación ampliada &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '28a_e3_evaluacion_ampliada';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="29. Dashboard" href="29_e3_dashboard.html" />
+    <link rel="prev" title="28. Evaluación ampliada" href="28_e3_evaluacion_ampliada.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><div class="sidebar-autores">
+  <div class="autor">
+    <img src="_static/autores/anyely.jpg" alt="Anyely Sanjuan Benavides">
+    <p class="autor-nombre">Anyely Sanjuan Benavides</p>
+    <p class="autor-detalle">Msc. Analítica de Datos<br>Universidad del Norte</p>
+  </div>
+  <div class="autor">
+    <img src="_static/autores/juan.jpg" alt="Juan David Díaz Fernández">
+    <p class="autor-nombre">Juan David Díaz Fernández</p>
+    <p class="autor-detalle">Msc. Ingeniería Mecánica<br>Universidad del Norte</p>
+  </div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Clasificación de residuos con TrashNet
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 1: modelos base</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y conjunto de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_conclusiones.html">7. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2: benchmark de diez modelos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_benchmark_introduccion.html">8. Benchmark de diez modelos: problema, preguntas e hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datos_auditoria.html">9. Datos: ficha técnica, contrato de datos y auditoría de fuga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_revision_sistematica.html">10. Revisión sistemática ampliada y selección de los modelos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_protocolo_preregistro.html">11. Preregistro, protocolo común y fichas de modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_paper_guia.html">12. Paper guía: réplica, limitaciones y ablación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_benchmark_estadistica.html">13. Benchmark: resultados e inferencia estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_ajuste_calibracion_incertidumbre.html">14. Bondad de ajuste, sobreajuste, calibración e incertidumbre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_robustez_interpretabilidad_errores.html">15. Robustez, interpretabilidad, errores y techo de desempeño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_discusion_benchmark.html">16. Discusión del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_reproducibilidad.html">17. Reproducibilidad del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_conclusiones_benchmark.html">18. Conclusiones del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_referencias_benchmark.html">19. Referencias del benchmark</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 3: modelo propio y evaluación ampliada</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20_e3_introduccion.html">20. Entregable 3: introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_e3_correcciones.html">21. Correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_e3_datos.html">22. Datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_e3_benchmark.html">23. Benchmark: configuraciones, semillas y artefactos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_e3_literatura_novedad.html">24. Literatura y verificación de novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25_e3_diseno.html">25. Diseño de NAGFuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_e3_implementacion_demostracion.html">26. Implementación y demostración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26a_e3_curvas_entrenamiento.html">26a. Curvas de entrenamiento y diagnóstico de sobreajuste</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_e3_protocolo_validacion.html">27. Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27a_e3_pruebas_hipotesis.html">27a. Reproducción de las pruebas de hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_e3_evaluacion_ampliada.html">28. Evaluación ampliada</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">28a. Reproducción de la evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_e3_dashboard.html">29. Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_e3_conclusiones.html">30. Conclusiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/28a_e3_evaluacion_ampliada.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>28a. Reproducción de la evaluación ampliada</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="a-reproduccion-de-la-evaluacion-ampliada">
+<h1>28a. Reproducción de la evaluación ampliada<a class="headerlink" href="#a-reproduccion-de-la-evaluacion-ampliada" title="Link to this heading">#</a></h1>
+<p>Este cuaderno regenera las tablas y figuras del capítulo 28 (robustez, conjuntos adicionales, ablación, calibración,
+predicción conforme y costo computacional) desde la tabla maestra congelada (<code class="docutils literal notranslate"><span class="pre">tabla_maestra.csv</span></code>, la misma que lee el
+dashboard) y desde las corridas versionadas. Todas las barras llevan su intervalo de confianza al 95 %.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuración común. El cuaderno funciona desde docs/ (Jupyter Book) o desde la raíz del repositorio.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">REPO</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">&quot;entregable3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">())</span>
+<span class="n">RES</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s2">&quot;entregable3&quot;</span> <span class="o">/</span> <span class="s2">&quot;resultados&quot;</span>   <span class="c1"># tablas congeladas del análisis (hash SHA-256 en el capítulo 21)</span>
+<span class="n">RUNS</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s2">&quot;entregable3&quot;</span> <span class="o">/</span> <span class="s2">&quot;results&quot;</span>     <span class="c1"># corridas versionadas, sin pesos</span>
+<span class="n">CLASES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cardboard&quot;</span><span class="p">,</span> <span class="s2">&quot;glass&quot;</span><span class="p">,</span> <span class="s2">&quot;metal&quot;</span><span class="p">,</span> <span class="s2">&quot;paper&quot;</span><span class="p">,</span> <span class="s2">&quot;plastic&quot;</span><span class="p">,</span> <span class="s2">&quot;trash&quot;</span><span class="p">]</span>
+<span class="n">COLOR</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;NAGFuse&quot;</span><span class="p">:</span> <span class="s2">&quot;#c0392b&quot;</span><span class="p">,</span> <span class="s2">&quot;ViT-B16&quot;</span><span class="p">:</span> <span class="s2">&quot;#2e86c1&quot;</span><span class="p">,</span> <span class="s2">&quot;RWCNet&quot;</span><span class="p">:</span> <span class="s2">&quot;#27ae60&quot;</span><span class="p">,</span> <span class="s2">&quot;GFN&quot;</span><span class="p">:</span> <span class="s2">&quot;#8e44ad&quot;</span><span class="p">,</span> <span class="s2">&quot;Celik-HC&quot;</span><span class="p">:</span> <span class="s2">&quot;#d68910&quot;</span><span class="p">}</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;axes.grid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;grid.alpha&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.precision&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Repositorio:&quot;</span><span class="p">,</span> <span class="n">REPO</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Repositorio: deep-learning-colaborativo
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla maestra: una fila por modelo, media e IC 95 % (t) entre semillas para cada escenario</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RES</span> <span class="o">/</span> <span class="s2">&quot;tabla_maestra.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">)</span>
+<span class="n">ESC</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;F1 limpio&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 ruido 0.05&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 ruido 0.10&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 desenfoque&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 oclusión&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 fondo&quot;</span><span class="p">,</span>
+       <span class="s2">&quot;F1 RealWaste&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 Garbage v2&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 WaRP-C&quot;</span><span class="p">]</span>
+<span class="n">M</span><span class="p">[[</span><span class="s2">&quot;R&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">ESC</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;ECE&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;F1 limpio&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>R</th>
+      <th>F1 limpio</th>
+      <th>F1 ruido 0.05</th>
+      <th>F1 ruido 0.10</th>
+      <th>F1 desenfoque</th>
+      <th>F1 oclusión</th>
+      <th>F1 fondo</th>
+      <th>F1 RealWaste</th>
+      <th>F1 Garbage v2</th>
+      <th>F1 WaRP-C</th>
+      <th>ECE</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>RWCNet</th>
+      <td>20</td>
+      <td>0.9369</td>
+      <td>0.5960</td>
+      <td>0.3430</td>
+      <td>0.8141</td>
+      <td>0.9260</td>
+      <td>0.8954</td>
+      <td>0.4255</td>
+      <td>0.5123</td>
+      <td>0.3316</td>
+      <td>0.0296</td>
+    </tr>
+    <tr>
+      <th>NAGFuse</th>
+      <td>20</td>
+      <td>0.9365</td>
+      <td>0.9036</td>
+      <td>0.8594</td>
+      <td>0.8645</td>
+      <td>0.9275</td>
+      <td>0.9198</td>
+      <td>0.4670</td>
+      <td>0.5227</td>
+      <td>0.3643</td>
+      <td>0.0297</td>
+    </tr>
+    <tr>
+      <th>ViT-B16</th>
+      <td>20</td>
+      <td>0.9363</td>
+      <td>0.8915</td>
+      <td>0.8395</td>
+      <td>0.8643</td>
+      <td>0.9317</td>
+      <td>0.9158</td>
+      <td>0.5198</td>
+      <td>0.5862</td>
+      <td>0.4357</td>
+      <td>0.0385</td>
+    </tr>
+    <tr>
+      <th>NAGFuse/sin_denoising</th>
+      <td>12</td>
+      <td>0.9313</td>
+      <td>0.8930</td>
+      <td>0.8553</td>
+      <td>0.8608</td>
+      <td>0.9237</td>
+      <td>0.9148</td>
+      <td>0.4757</td>
+      <td>0.5210</td>
+      <td>0.3479</td>
+      <td>0.0303</td>
+    </tr>
+    <tr>
+      <th>NAGFuse/solo_cnn</th>
+      <td>12</td>
+      <td>0.9272</td>
+      <td>0.6416</td>
+      <td>0.3837</td>
+      <td>0.8150</td>
+      <td>0.9064</td>
+      <td>0.8879</td>
+      <td>0.2791</td>
+      <td>0.5038</td>
+      <td>0.3253</td>
+      <td>0.0349</td>
+    </tr>
+    <tr>
+      <th>GFN</th>
+      <td>20</td>
+      <td>0.9240</td>
+      <td>0.7833</td>
+      <td>0.5221</td>
+      <td>0.7748</td>
+      <td>0.9223</td>
+      <td>0.8961</td>
+      <td>0.4154</td>
+      <td>0.5253</td>
+      <td>0.2880</td>
+      <td>0.0509</td>
+    </tr>
+    <tr>
+      <th>NAGFuse/solo_vit</th>
+      <td>12</td>
+      <td>0.9155</td>
+      <td>0.8921</td>
+      <td>0.8467</td>
+      <td>0.8289</td>
+      <td>0.9087</td>
+      <td>0.8873</td>
+      <td>0.4788</td>
+      <td>0.5121</td>
+      <td>0.3240</td>
+      <td>0.0531</td>
+    </tr>
+    <tr>
+      <th>Celik-HC</th>
+      <td>20</td>
+      <td>0.9092</td>
+      <td>0.2435</td>
+      <td>0.1282</td>
+      <td>0.7284</td>
+      <td>0.8924</td>
+      <td>0.8693</td>
+      <td>0.3568</td>
+      <td>0.4319</td>
+      <td>0.2825</td>
+      <td>0.0570</td>
+    </tr>
+    <tr>
+      <th>ResMsCapsule</th>
+      <td>20</td>
+      <td>0.9056</td>
+      <td>0.4269</td>
+      <td>0.1490</td>
+      <td>0.5781</td>
+      <td>0.8646</td>
+      <td>0.8126</td>
+      <td>0.3511</td>
+      <td>0.4150</td>
+      <td>0.2851</td>
+      <td>0.1884</td>
+    </tr>
+    <tr>
+      <th>MbXception</th>
+      <td>12</td>
+      <td>0.8647</td>
+      <td>0.2247</td>
+      <td>0.0962</td>
+      <td>0.5958</td>
+      <td>0.8312</td>
+      <td>0.6329</td>
+      <td>0.2042</td>
+      <td>0.2672</td>
+      <td>0.1481</td>
+      <td>0.0550</td>
+    </tr>
+    <tr>
+      <th>ResNet-18</th>
+      <td>12</td>
+      <td>0.8627</td>
+      <td>0.3971</td>
+      <td>0.1144</td>
+      <td>0.6125</td>
+      <td>0.8204</td>
+      <td>0.5956</td>
+      <td>0.2078</td>
+      <td>0.2565</td>
+      <td>0.1329</td>
+      <td>0.0521</td>
+    </tr>
+    <tr>
+      <th>CNN</th>
+      <td>12</td>
+      <td>0.8229</td>
+      <td>0.1828</td>
+      <td>0.1368</td>
+      <td>0.3604</td>
+      <td>0.7789</td>
+      <td>0.5589</td>
+      <td>0.2634</td>
+      <td>0.2712</td>
+      <td>0.1521</td>
+      <td>0.0556</td>
+    </tr>
+    <tr>
+      <th>FocusRCNet</th>
+      <td>12</td>
+      <td>0.8080</td>
+      <td>0.1434</td>
+      <td>0.0705</td>
+      <td>0.5198</td>
+      <td>0.7741</td>
+      <td>0.6300</td>
+      <td>0.1828</td>
+      <td>0.2865</td>
+      <td>0.1558</td>
+      <td>0.1241</td>
+    </tr>
+    <tr>
+      <th>MobileNetV2</th>
+      <td>12</td>
+      <td>0.8049</td>
+      <td>0.2861</td>
+      <td>0.0955</td>
+      <td>0.5206</td>
+      <td>0.7589</td>
+      <td>0.6062</td>
+      <td>0.2165</td>
+      <td>0.2560</td>
+      <td>0.1211</td>
+      <td>0.0733</td>
+    </tr>
+  </tbody>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figura 28a.1: F1 macro frente a la intensidad del ruido gaussiano (media e IC 95 %)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">cols</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;F1 limpio&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 ruido 0.05&quot;</span><span class="p">,</span> <span class="s2">&quot;F1 ruido 0.10&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;NAGFuse&quot;</span><span class="p">,</span> <span class="s2">&quot;ViT-B16&quot;</span><span class="p">,</span> <span class="s2">&quot;RWCNet&quot;</span><span class="p">,</span> <span class="s2">&quot;GFN&quot;</span><span class="p">,</span> <span class="s2">&quot;Celik-HC&quot;</span><span class="p">]:</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="s2">&quot; IC_lo&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="s2">&quot; IC_hi&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="p">[</span><span class="n">y</span> <span class="o">-</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">-</span> <span class="n">y</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Desviación del ruido gaussiano σ (imagen en [0, 1])&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F1 macro en prueba&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Figura 28a.1. Degradación con el ruido&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6cf5452c1aee83968a4549d855d6bf67498488951da5f97c5177134b320a5b57.png" src="_images/6cf5452c1aee83968a4549d855d6bf67498488951da5f97c5177134b320a5b57.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figura 28a.2: F1 macro por escenario (barras con IC 95 %) para NAGFuse y sus dos rivales más fuertes</span>
+<span class="n">mods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NAGFuse&quot;</span><span class="p">,</span> <span class="s2">&quot;ViT-B16&quot;</span><span class="p">,</span> <span class="s2">&quot;RWCNet&quot;</span><span class="p">];</span> <span class="n">w</span> <span class="o">=</span> <span class="mf">0.27</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mods</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">ESC</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="o">-</span> <span class="n">M</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="s2">&quot; IC_lo&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ESC</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="s2">&quot; IC_hi&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ESC</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span> <span class="o">-</span> <span class="n">y</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ESC</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">err</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ESC</span><span class="p">)),</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;F1 &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ESC</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F1 macro (IC 95 %)&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Figura 28a.2. Robustez y cambio de dominio (los tres últimos conjuntos, sin reentrenar)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/44211845d832274e3050f0b5f721434b68a0b72c5263e2f95c6e770d708c27e5.png" src="_images/44211845d832274e3050f0b5f721434b68a0b72c5263e2f95c6e770d708c27e5.png" />
+</div>
+</div>
+<p><strong>Interpretación.</strong> NAGFuse conserva el F1 limpio del mejor rival y es el más estable ante ruido y desenfoque. En los
+tres conjuntos adicionales (otro dominio, sin reentrenar) todos los modelos pierden entre 0.4 y 0.6 de F1 y
+ViT-B16 queda por encima de NAGFuse: la mejora de robustez al ruido no se traduce en robustez al cambio de dominio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 28a.1: ablación (familia de Holm propia; 12 semillas). dif = completo − variante</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RES</span> <span class="o">/</span> <span class="s2">&quot;ablacion.csv&quot;</span><span class="p">)</span>
+<span class="n">A</span><span class="p">[[</span><span class="s2">&quot;cond&quot;</span><span class="p">,</span> <span class="s2">&quot;variante&quot;</span><span class="p">,</span> <span class="s2">&quot;completo&quot;</span><span class="p">,</span> <span class="s2">&quot;variante_f1&quot;</span><span class="p">,</span> <span class="s2">&quot;dif&quot;</span><span class="p">,</span> <span class="s2">&quot;ic&quot;</span><span class="p">,</span> <span class="s2">&quot;p_max_holm&quot;</span><span class="p">,</span> <span class="s2">&quot;cliff&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cond</th>
+      <th>variante</th>
+      <th>completo</th>
+      <th>variante_f1</th>
+      <th>dif</th>
+      <th>ic</th>
+      <th>p_max_holm</th>
+      <th>cliff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>limpio</td>
+      <td>compuerta apagada</td>
+      <td>0.9339</td>
+      <td>0.9339</td>
+      <td>0.0000</td>
+      <td>(np.float64(0.0), np.float64(0.0))</td>
+      <td>1.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>limpio</td>
+      <td>sin_denoising</td>
+      <td>0.9339</td>
+      <td>0.9313</td>
+      <td>0.0027</td>
+      <td>(np.float64(-0.0058), np.float64(0.0104))</td>
+      <td>1.0000</td>
+      <td>0.1667</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>limpio</td>
+      <td>solo_vit</td>
+      <td>0.9339</td>
+      <td>0.9155</td>
+      <td>0.0185</td>
+      <td>(np.float64(0.0104), np.float64(0.0277))</td>
+      <td>0.0098</td>
+      <td>0.6667</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>limpio</td>
+      <td>solo_cnn</td>
+      <td>0.9339</td>
+      <td>0.9272</td>
+      <td>0.0068</td>
+      <td>(np.float64(0.0014), np.float64(0.0116))</td>
+      <td>0.1025</td>
+      <td>0.5000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ruido_0.05</td>
+      <td>compuerta apagada</td>
+      <td>0.9044</td>
+      <td>0.9032</td>
+      <td>0.0012</td>
+      <td>(np.float64(-0.0033), np.float64(0.0057))</td>
+      <td>0.6772</td>
+      <td>0.1667</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ruido_0.05</td>
+      <td>sin_denoising</td>
+      <td>0.9044</td>
+      <td>0.8930</td>
+      <td>0.0114</td>
+      <td>(np.float64(-0.0004), np.float64(0.0235))</td>
+      <td>0.2979</td>
+      <td>0.5000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>ruido_0.05</td>
+      <td>solo_vit</td>
+      <td>0.9044</td>
+      <td>0.8921</td>
+      <td>0.0123</td>
+      <td>(np.float64(-0.0011), np.float64(0.0273))</td>
+      <td>0.4668</td>
+      <td>0.1667</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>ruido_0.05</td>
+      <td>solo_cnn</td>
+      <td>0.9044</td>
+      <td>0.6416</td>
+      <td>0.2628</td>
+      <td>(np.float64(0.2381), np.float64(0.2882))</td>
+      <td>0.0020</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>ruido_0.10</td>
+      <td>compuerta apagada</td>
+      <td>0.8604</td>
+      <td>0.8476</td>
+      <td>0.0127</td>
+      <td>(np.float64(0.0065), np.float64(0.0188))</td>
+      <td>0.0146</td>
+      <td>0.8333</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>ruido_0.10</td>
+      <td>sin_denoising</td>
+      <td>0.8604</td>
+      <td>0.8553</td>
+      <td>0.0051</td>
+      <td>(np.float64(-0.0152), np.float64(0.0277))</td>
+      <td>0.9097</td>
+      <td>0.1667</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>ruido_0.10</td>
+      <td>solo_vit</td>
+      <td>0.8604</td>
+      <td>0.8467</td>
+      <td>0.0137</td>
+      <td>(np.float64(-0.001), np.float64(0.0276))</td>
+      <td>0.1996</td>
+      <td>0.6667</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>ruido_0.10</td>
+      <td>solo_cnn</td>
+      <td>0.8604</td>
+      <td>0.3837</td>
+      <td>0.4767</td>
+      <td>(np.float64(0.433), np.float64(0.5207))</td>
+      <td>0.0020</td>
+      <td>1.0000</td>
+    </tr>
+  </tbody>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 28a.2 y figura 28a.3: cobertura empírica de la predicción conforme (LAC, nominal 90 %) por clase</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RES</span> <span class="o">/</span> <span class="s2">&quot;conforme.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">)</span>
+<span class="n">cob</span> <span class="o">=</span> <span class="n">C</span><span class="p">[[</span><span class="sa">f</span><span class="s2">&quot;cob_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">CLASES</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">:])</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;NAGFuse&quot;</span><span class="p">,</span> <span class="s2">&quot;ViT-B16&quot;</span><span class="p">,</span> <span class="s2">&quot;RWCNet&quot;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">CLASES</span><span class="p">,</span> <span class="n">cob</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> (global </span><span class="si">{</span><span class="n">C</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;cobertura&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">0.90</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;nominal 0.90&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cobertura empírica en prueba&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Clase&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Figura 28a.3. Cobertura conforme por clase (media entre semillas)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">C</span><span class="p">[[</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;cobertura&quot;</span><span class="p">,</span> <span class="s2">&quot;tamano&quot;</span><span class="p">,</span> <span class="s2">&quot;peor_clase&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;cobertura&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4eb46dd7eb65305ea62e165f8ed2a379c4e72e0c0810d2caa9a9615e4628adc3.png" src="_images/4eb46dd7eb65305ea62e165f8ed2a379c4e72e0c0810d2caa9a9615e4628adc3.png" />
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>R</th>
+      <th>cobertura</th>
+      <th>tamano</th>
+      <th>peor_clase</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>RWCNet</th>
+      <td>20</td>
+      <td>0.884</td>
+      <td>0.900</td>
+      <td>0.755</td>
+    </tr>
+    <tr>
+      <th>GFN</th>
+      <td>20</td>
+      <td>0.883</td>
+      <td>0.911</td>
+      <td>0.737</td>
+    </tr>
+    <tr>
+      <th>Celik-HC</th>
+      <td>20</td>
+      <td>0.882</td>
+      <td>0.915</td>
+      <td>0.663</td>
+    </tr>
+    <tr>
+      <th>NAGFuse</th>
+      <td>20</td>
+      <td>0.879</td>
+      <td>0.896</td>
+      <td>0.763</td>
+    </tr>
+    <tr>
+      <th>ViT-B16</th>
+      <td>20</td>
+      <td>0.872</td>
+      <td>0.890</td>
+      <td>0.700</td>
+    </tr>
+  </tbody>
+</table></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figura 28a.4: diagrama de confiabilidad de NAGFuse (semilla 0) recalculado desde las predicciones guardadas</span>
+<span class="n">tp</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">RUNS</span> <span class="o">/</span> <span class="s2">&quot;results_e2&quot;</span> <span class="o">/</span> <span class="s2">&quot;NAGFuse&quot;</span> <span class="o">/</span> <span class="s2">&quot;seed_00&quot;</span> <span class="o">/</span> <span class="s2">&quot;test_predictions.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+<span class="n">P</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">tp</span><span class="p">[</span><span class="s2">&quot;probs&quot;</span><span class="p">],</span> <span class="n">tp</span><span class="p">[</span><span class="s2">&quot;y_true&quot;</span><span class="p">]</span>                       <span class="c1"># P: (361, 6) probabilidades; y: (361,) clases reales</span>
+<span class="n">conf</span><span class="p">,</span> <span class="n">acierto</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">((</span><span class="n">conf</span> <span class="o">*</span> <span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="mi">14</span><span class="p">)</span>            <span class="c1"># 15 intervalos de confianza de igual ancho</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">acierto</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="n">cmed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ece</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">acc</span> <span class="o">-</span> <span class="n">cmed</span><span class="p">))</span>          <span class="c1"># ECE = Σ (n_b / N) |exactitud_b − confianza_b|</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">4.6</span><span class="p">))</span>
+<span class="n">ee</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">acc</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">acc</span><span class="p">[</span><span class="n">v</span><span class="p">])</span> <span class="o">/</span> <span class="n">n</span><span class="p">[</span><span class="n">v</span><span class="p">])</span> <span class="o">*</span> <span class="mf">1.96</span>      <span class="c1"># IC 95 % binomial (aprox. normal) de la exactitud por intervalo</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">cmed</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">acc</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">ee</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2e86c1&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;exactitud por intervalo&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;k--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;calibración perfecta&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Confianza media del intervalo&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Exactitud&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Figura 28a.4. Confiabilidad de NAGFuse, semilla 0 (ECE = </span><span class="si">{</span><span class="n">ece</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/652cb0df948291969a3f1e0ff170959fc66057d3a00f207d38055a627fb08581.png" src="_images/652cb0df948291969a3f1e0ff170959fc66057d3a00f207d38055a627fb08581.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 28a.3 y figura 28a.5: costo computacional y frontera de Pareto (mediana entre semillas)</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">carpeta</span> <span class="ow">in</span> <span class="p">(</span><span class="n">RUNS</span> <span class="o">/</span> <span class="s2">&quot;results_e2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">carpeta</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;seed_*&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="s2">&quot;model_info.pkl&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="s2">&quot;timing.pkl&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">mi</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="s2">&quot;model_info.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)),</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="s2">&quot;timing.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+            <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;modelo&quot;</span><span class="p">:</span> <span class="n">mi</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span> <span class="s2">&quot;parametros_M&quot;</span><span class="p">:</span> <span class="n">mi</span><span class="p">[</span><span class="s2">&quot;params_total&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">,</span> <span class="s2">&quot;GFLOPs&quot;</span><span class="p">:</span> <span class="n">mi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gflops&quot;</span><span class="p">),</span>
+                          <span class="s2">&quot;latencia_lote1_ms&quot;</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="s2">&quot;inference&quot;</span><span class="p">][</span><span class="s2">&quot;latency_bs1_ms_mean&quot;</span><span class="p">],</span>
+                          <span class="s2">&quot;entrenamiento_min&quot;</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="s2">&quot;train_time_s&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">60</span><span class="p">})</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">K</span><span class="p">[</span><span class="s2">&quot;F1 limpio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="s2">&quot;F1 limpio&quot;</span><span class="p">]</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;GFLOPs&quot;</span><span class="p">)</span>
+<span class="n">K</span><span class="p">[</span><span class="s2">&quot;Pareto&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">K</span><span class="p">[</span><span class="s2">&quot;F1 limpio&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">K</span><span class="p">[</span><span class="s2">&quot;F1 limpio&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cummax</span><span class="p">()</span>        <span class="c1"># nadie más barato tiene mejor F1</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span>
+<span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">K</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;F1 limpio IC_lo&quot;</span><span class="p">],</span> <span class="n">M</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">K</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;F1 limpio IC_hi&quot;</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">GFLOPs</span><span class="p">,</span> <span class="n">K</span><span class="p">[</span><span class="s2">&quot;F1 limpio&quot;</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="p">[</span><span class="n">K</span><span class="p">[</span><span class="s2">&quot;F1 limpio&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">-</span> <span class="n">K</span><span class="p">[</span><span class="s2">&quot;F1 limpio&quot;</span><span class="p">]],</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">GFLOPs</span><span class="p">[</span><span class="n">K</span><span class="o">.</span><span class="n">Pareto</span><span class="p">],</span> <span class="n">K</span><span class="p">[</span><span class="s2">&quot;F1 limpio&quot;</span><span class="p">][</span><span class="n">K</span><span class="o">.</span><span class="n">Pareto</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#27ae60&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;frontera de Pareto&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">K</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">GFLOPs</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;F1 limpio&quot;</span><span class="p">]),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">12</span> <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="s2">&quot;ViT-B16&quot;</span> <span class="k">else</span> <span class="mi">4</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">COLOR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;GFLOPs por imagen (escala log)&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;F1 macro limpio (IC 95 %)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Figura 28a.5. Desempeño frente a costo&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">K</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/dd82da821b31ff3c25e9c8b5ca1968086aa56958ef0f789a29c2898c23b19898.png" src="_images/dd82da821b31ff3c25e9c8b5ca1968086aa56958ef0f789a29c2898c23b19898.png" />
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>parametros_M</th>
+      <th>GFLOPs</th>
+      <th>latencia_lote1_ms</th>
+      <th>entrenamiento_min</th>
+      <th>F1 limpio</th>
+      <th>Pareto</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>FocusRCNet</th>
+      <td>0.521</td>
+      <td>0.253</td>
+      <td>9.164</td>
+      <td>5.417</td>
+      <td>0.808</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>ResMsCapsule</th>
+      <td>4.217</td>
+      <td>2.840</td>
+      <td>4.950</td>
+      <td>5.236</td>
+      <td>0.906</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>Celik-HC</th>
+      <td>28.424</td>
+      <td>6.446</td>
+      <td>33.762</td>
+      <td>6.038</td>
+      <td>0.909</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>RWCNet</th>
+      <td>25.604</td>
+      <td>9.178</td>
+      <td>55.272</td>
+      <td>7.652</td>
+      <td>0.937</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>GFN</th>
+      <td>113.671</td>
+      <td>11.350</td>
+      <td>28.839</td>
+      <td>5.467</td>
+      <td>0.924</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>MbXception</th>
+      <td>28.393</td>
+      <td>12.390</td>
+      <td>10.125</td>
+      <td>5.846</td>
+      <td>0.865</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>ViT-B16</th>
+      <td>85.803</td>
+      <td>35.126</td>
+      <td>11.488</td>
+      <td>2.748</td>
+      <td>0.936</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>NAGFuse</th>
+      <td>89.819</td>
+      <td>35.895</td>
+      <td>29.123</td>
+      <td>5.081</td>
+      <td>0.936</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table></div></div>
+</div>
+<p><strong>Control de capacidad.</strong> NAGFuse (89.8 M de parámetros, 35.9 GFLOPs) tiene un tamaño comparable al de ViT-B16
+(85.8 M, 35.1 GFLOPs), que forma parte de la familia de contrastes con 20 semillas. La comparación con ViT-B16 hace
+de variante del benchmark de tamaño comparable: con casi el mismo cómputo, NAGFuse empata en limpio y no lo supera
+con ruido. Además, la ablación (tabla 28a.1) compara contra cada rama sola con el mismo protocolo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 28a.4: calibración antes y después del escalado de temperatura (ajustado en validación), media entre semillas</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">carpeta</span> <span class="ow">in</span> <span class="p">(</span><span class="n">RUNS</span> <span class="o">/</span> <span class="s2">&quot;results_e2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">carpeta</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;seed_*&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="s2">&quot;calibration.pkl&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="s2">&quot;calibration.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;aplicable&quot;</span><span class="p">):</span>
+                <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;modelo&quot;</span><span class="p">:</span> <span class="n">carpeta</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">:</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">],</span>
+                              <span class="o">**</span><span class="p">{</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> antes&quot;</span><span class="p">:</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;antes&quot;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ece&quot;</span><span class="p">,</span> <span class="s2">&quot;nll&quot;</span><span class="p">,</span> <span class="s2">&quot;brier&quot;</span><span class="p">]},</span>
+                              <span class="o">**</span><span class="p">{</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> después&quot;</span><span class="p">:</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;despues&quot;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ece&quot;</span><span class="p">,</span> <span class="s2">&quot;nll&quot;</span><span class="p">,</span> <span class="s2">&quot;brier&quot;</span><span class="p">]}})</span>
+<span class="n">CAL</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">])</span>
+<span class="n">CAL</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="s1">&#39;media&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;mean&#39;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;DE&#39;</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">CAL</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+<span class="n">CAL</span><span class="p">[[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">CAL</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s2">&quot;media&quot;</span> <span class="ow">in</span> <span class="n">c</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;ece antes (media)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>T (media)</th>
+      <th>ece antes (media)</th>
+      <th>nll antes (media)</th>
+      <th>brier antes (media)</th>
+      <th>ece después (media)</th>
+      <th>nll después (media)</th>
+      <th>brier después (media)</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>NAGFuse</th>
+      <td>1.0752</td>
+      <td>0.0297</td>
+      <td>0.1911</td>
+      <td>0.0142</td>
+      <td>0.0282</td>
+      <td>0.1879</td>
+      <td>0.0141</td>
+    </tr>
+    <tr>
+      <th>RWCNet</th>
+      <td>1.2749</td>
+      <td>0.0312</td>
+      <td>0.1944</td>
+      <td>0.0146</td>
+      <td>0.0238</td>
+      <td>0.1785</td>
+      <td>0.0142</td>
+    </tr>
+    <tr>
+      <th>ViT-B16</th>
+      <td>1.2346</td>
+      <td>0.0365</td>
+      <td>0.2143</td>
+      <td>0.0149</td>
+      <td>0.0291</td>
+      <td>0.1917</td>
+      <td>0.0145</td>
+    </tr>
+    <tr>
+      <th>MbXception</th>
+      <td>1.5113</td>
+      <td>0.0507</td>
+      <td>0.3904</td>
+      <td>0.0287</td>
+      <td>0.0403</td>
+      <td>0.3591</td>
+      <td>0.0287</td>
+    </tr>
+    <tr>
+      <th>GFN</th>
+      <td>1.5564</td>
+      <td>0.0509</td>
+      <td>0.3055</td>
+      <td>0.0179</td>
+      <td>0.0319</td>
+      <td>0.2294</td>
+      <td>0.0167</td>
+    </tr>
+    <tr>
+      <th>FocusRCNet</th>
+      <td>2.2989</td>
+      <td>0.1088</td>
+      <td>0.7959</td>
+      <td>0.0479</td>
+      <td>0.0535</td>
+      <td>0.5309</td>
+      <td>0.0436</td>
+    </tr>
+    <tr>
+      <th>ResMsCapsule</th>
+      <td>0.5289</td>
+      <td>0.1851</td>
+      <td>0.4207</td>
+      <td>0.0282</td>
+      <td>0.0346</td>
+      <td>0.2940</td>
+      <td>0.0203</td>
+    </tr>
+  </tbody>
+</table></div></div>
+</div>
+<p><strong>Interpretación.</strong> El escalado de temperatura (un solo parámetro <span class="math notranslate nohighlight">\(T\)</span> ajustado en validación) reduce el ECE de todos
+los modelos sin cambiar sus predicciones, porque no altera el orden de las probabilidades. Un <span class="math notranslate nohighlight">\(T\)</span> cercano a 1 indica
+que el modelo ya estaba bien calibrado. Los diagramas de confiabilidad por intervalo están en la figura 28a.4 y en el
+dashboard.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 28a.5 (exploratoria): sensibilidad del F1 macro a los hiperparámetros propios de la compuerta, ρ y s_lo.</span>
+<span class="c1"># Usa las salidas guardadas de la semilla 0 (p_V, p_C y σ̂ por imagen): π se recalcula y la mezcla se rehace sin</span>
+<span class="c1"># reentrenar, porque ninguna rama depende de ρ ni de s_lo. Es un análisis posterior, no confirmatorio.</span>
+<span class="n">IMG</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">REPO</span> <span class="o">/</span> <span class="s2">&quot;dashboard&quot;</span> <span class="o">/</span> <span class="s2">&quot;data&quot;</span> <span class="o">/</span> <span class="s2">&quot;nagfuse_s00_por_imagen.csv.gz&quot;</span><span class="p">)</span>
+<span class="n">PI0</span><span class="p">,</span> <span class="n">SLO</span> <span class="o">=</span> <span class="mf">0.509</span><span class="p">,</span> <span class="mf">0.014535</span>                       <span class="c1"># valores congelados en el protocolo (π0 de validación, cuantil 0.99)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f1_macro</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yp</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">yp</span> <span class="o">==</span> <span class="n">k</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">k</span><span class="p">))</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">yp</span> <span class="o">==</span> <span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">k</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)])</span>
+
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">rho</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">fac</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ρ&quot;</span><span class="p">:</span> <span class="n">rho</span><span class="p">,</span> <span class="s2">&quot;s_lo&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fac</span><span class="si">}</span><span class="s2"> × </span><span class="si">{</span><span class="n">SLO</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">cond</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;limpio&quot;</span><span class="p">,</span> <span class="s2">&quot;ruido_0.05&quot;</span><span class="p">,</span> <span class="s2">&quot;ruido_0.10&quot;</span><span class="p">]:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">IMG</span><span class="p">[</span><span class="n">IMG</span><span class="o">.</span><span class="n">cond</span> <span class="o">==</span> <span class="n">cond</span><span class="p">];</span> <span class="n">s_lo</span> <span class="o">=</span> <span class="n">fac</span> <span class="o">*</span> <span class="n">SLO</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">((</span><span class="n">d</span><span class="o">.</span><span class="n">sigma</span><span class="o">.</span><span class="n">values</span> <span class="o">-</span> <span class="n">s_lo</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">rho</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">s_lo</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>       <span class="c1"># compuerta g(σ̂)</span>
+            <span class="n">pi</span> <span class="o">=</span> <span class="n">PI0</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">PI0</span><span class="p">)</span> <span class="o">*</span> <span class="n">g</span>                                               <span class="c1"># peso de la rama ViT</span>
+            <span class="n">pv</span><span class="p">,</span> <span class="n">pc</span> <span class="o">=</span> <span class="n">d</span><span class="p">[[</span><span class="sa">f</span><span class="s2">&quot;pv_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">d</span><span class="p">[[</span><span class="sa">f</span><span class="s2">&quot;pc_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]]</span><span class="o">.</span><span class="n">values</span>
+            <span class="n">r</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;F1 </span><span class="si">{</span><span class="n">cond</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f1_macro</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="p">(</span><span class="n">pi</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">pv</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pi</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">*</span> <span class="n">pc</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="n">SENS</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+<span class="n">SENS</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ρ</th>
+      <th>s_lo</th>
+      <th>F1 limpio</th>
+      <th>F1 ruido_0.05</th>
+      <th>F1 ruido_0.10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.5</td>
+      <td>0.5 × 0.014535</td>
+      <td>0.9416</td>
+      <td>0.9141</td>
+      <td>0.8574</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.5</td>
+      <td>1.0 × 0.014535</td>
+      <td>0.9392</td>
+      <td>0.9141</td>
+      <td>0.8574</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.5</td>
+      <td>2.0 × 0.014535</td>
+      <td>0.9392</td>
+      <td>0.9141</td>
+      <td>0.8574</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.0</td>
+      <td>0.5 × 0.014535</td>
+      <td>0.9416</td>
+      <td>0.9141</td>
+      <td>0.8574</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.0</td>
+      <td>1.0 × 0.014535</td>
+      <td>0.9392</td>
+      <td>0.9141</td>
+      <td>0.8574</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2.0</td>
+      <td>2.0 × 0.014535</td>
+      <td>0.9392</td>
+      <td>0.9141</td>
+      <td>0.8574</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>3.0</td>
+      <td>0.5 × 0.014535</td>
+      <td>0.9392</td>
+      <td>0.9141</td>
+      <td>0.8574</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>3.0</td>
+      <td>1.0 × 0.014535</td>
+      <td>0.9392</td>
+      <td>0.9141</td>
+      <td>0.8574</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>3.0</td>
+      <td>2.0 × 0.014535</td>
+      <td>0.9392</td>
+      <td>0.9166</td>
+      <td>0.8574</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>4.0</td>
+      <td>0.5 × 0.014535</td>
+      <td>0.9392</td>
+      <td>0.9141</td>
+      <td>0.8574</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>4.0</td>
+      <td>1.0 × 0.014535</td>
+      <td>0.9392</td>
+      <td>0.9141</td>
+      <td>0.8574</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>4.0</td>
+      <td>2.0 × 0.014535</td>
+      <td>0.9392</td>
+      <td>0.9166</td>
+      <td>0.8576</td>
+    </tr>
+  </tbody>
+</table></div></div>
+</div>
+<p><strong>Interpretación.</strong> El valor preregistrado (<span class="math notranslate nohighlight">\(\rho = 2\)</span>, <span class="math notranslate nohighlight">\(s_{lo}\)</span> = cuantil 0.99) está marcado por la fila
+<span class="math notranslate nohighlight">\(\rho = 2.0\)</span>, <span class="math notranslate nohighlight">\(1.0 \times s_{lo}\)</span>. En toda la rejilla (<span class="math notranslate nohighlight">\(\rho\)</span> de 1.5 a 4 y <span class="math notranslate nohighlight">\(s_{lo}\)</span> de la mitad al doble) el F1 cambia como
+máximo 0.0025, muy por debajo de <span class="math notranslate nohighlight">\(\delta\)</span>: el resultado no depende de esta elección. La razón es que <span class="math notranslate nohighlight">\(\hat\sigma\)</span>
+separa con claridad las dos situaciones: en limpio es casi siempre 0 (la compuerta queda cerrada) y con ruido supera
+con holgura cualquier umbral razonable (la compuerta se abre del todo).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 28a.6: análisis de errores de NAGFuse (semilla 0). Pares de clases más confundidos por condición</span>
+<span class="c1"># y comparación imagen a imagen con su rama ViT (p_V), que es el modelo más fuerte con ruido.</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">cond</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;limpio&quot;</span><span class="p">,</span> <span class="s2">&quot;ruido_0.05&quot;</span><span class="p">,</span> <span class="s2">&quot;ruido_0.10&quot;</span><span class="p">]:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">IMG</span><span class="p">[</span><span class="n">IMG</span><span class="o">.</span><span class="n">cond</span> <span class="o">==</span> <span class="n">cond</span><span class="p">];</span> <span class="n">y</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="p">;</span> <span class="n">yn</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">pred</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">yv</span> <span class="o">=</span> <span class="n">d</span><span class="p">[[</span><span class="sa">f</span><span class="s2">&quot;pv_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">CLASES</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">CLASES</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">yn</span> <span class="o">!=</span> <span class="n">y</span><span class="p">],</span> <span class="n">yn</span><span class="p">[</span><span class="n">yn</span> <span class="o">!=</span> <span class="n">y</span><span class="p">])])</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;condición&quot;</span><span class="p">:</span> <span class="n">cond</span><span class="p">,</span> <span class="s2">&quot;errores NAGFuse&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">yn</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="s2">&quot;errores rama ViT&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">yv</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                  <span class="s2">&quot;NAGFuse falla y ViT acierta&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(((</span><span class="n">yn</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">yv</span> <span class="o">==</span> <span class="n">y</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                  <span class="s2">&quot;ViT falla y NAGFuse acierta&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(((</span><span class="n">yv</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">yn</span> <span class="o">==</span> <span class="n">y</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                  <span class="s2">&quot;3 confusiones más frecuentes&quot;</span><span class="p">:</span> <span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pares</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>condición</th>
+      <th>errores NAGFuse</th>
+      <th>errores rama ViT</th>
+      <th>NAGFuse falla y ViT acierta</th>
+      <th>ViT falla y NAGFuse acierta</th>
+      <th>3 confusiones más frecuentes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>limpio</td>
+      <td>20</td>
+      <td>24</td>
+      <td>1</td>
+      <td>5</td>
+      <td>plastic → glass (4); cardboard → paper (3); glass → metal (3)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ruido_0.05</td>
+      <td>27</td>
+      <td>27</td>
+      <td>0</td>
+      <td>0</td>
+      <td>plastic → glass (4); cardboard → paper (3); glass → metal (3)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ruido_0.10</td>
+      <td>43</td>
+      <td>43</td>
+      <td>0</td>
+      <td>0</td>
+      <td>cardboard → paper (6); glass → plastic (5); glass → metal (4)</td>
+    </tr>
+  </tbody>
+</table></div></div>
+</div>
+<p><strong>Interpretación.</strong> Los errores se concentran en pares de materiales visualmente parecidos (por ejemplo, papel y
+cartón, o vidrio y plástico) y en la clase trash, la menos frecuente y la más heterogénea. Con ruido, NAGFuse y su rama ViT
+cometen exactamente los mismos errores, porque <span class="math notranslate nohighlight">\(\pi = 1\)</span> y la mezcla es la rama ViT. En limpio, la mezcla corrige 5
+errores de la rama ViT y comete 1 nuevo (semilla 0): ahí es donde la rama convolucional aporta.</p>
+<p><strong>Interpretación del costo.</strong> NAGFuse es el modelo más costoso (≈ 36 GFLOPs, dos redes en paralelo) y <strong>no está en
+la frontera de Pareto del F1 limpio</strong>: RWCNet logra el mismo F1 con la cuarta parte del cómputo. El costo adicional
+solo se justifica por la robustez al ruido (figura 28a.1), donde RWCNet colapsa. La latencia se midió en GPU A100 con AMP;
+la latencia en CPU del modelo exportado se mide en el dashboard.</p>
+<p><strong>Consumo energético estimado.</strong> Las 144 tareas de entrenamiento sumaron 19.1 h de GPU A100. Con una potencia media
+de 0.25–0.40 kW (rango del consumo nominal de la tarjeta), el consumo estimado es de 5–8 kWh. Es una estimación por
+potencia nominal, no una medición.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="28_e3_evaluacion_ampliada.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">28. Evaluación ampliada</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="29_e3_dashboard.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">29. Dashboard</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan Benavides y Juan David Díaz Fernández
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

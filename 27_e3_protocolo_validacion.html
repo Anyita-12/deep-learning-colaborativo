@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
@@ -67,8 +67,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="28. Evaluación ampliada" href="28_e3_evaluacion_ampliada.html" />
-    <link rel="prev" title="26. Implementación y demostración" href="26_e3_implementacion_demostracion.html" />
+    <link rel="next" title="27a. Reproducción de las pruebas de hipótesis" href="27a_e3_pruebas_hipotesis.html" />
+    <link rel="prev" title="26a. Curvas de entrenamiento y diagnóstico de sobreajuste" href="26a_e3_curvas_entrenamiento.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -268,8 +268,11 @@
 <li class="toctree-l1"><a class="reference internal" href="24_e3_literatura_novedad.html">24. Literatura y verificación de novedad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="25_e3_diseno.html">25. Diseño de NAGFuse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="26_e3_implementacion_demostracion.html">26. Implementación y demostración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26a_e3_curvas_entrenamiento.html">26a. Curvas de entrenamiento y diagnóstico de sobreajuste</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">27. Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27a_e3_pruebas_hipotesis.html">27a. Reproducción de las pruebas de hipótesis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="28_e3_evaluacion_ampliada.html">28. Evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28a_e3_evaluacion_ampliada.html">28a. Reproducción de la evaluación ampliada</a></li>
 <li class="toctree-l1"><a class="reference internal" href="29_e3_dashboard.html">29. Dashboard</a></li>
 <li class="toctree-l1"><a class="reference internal" href="30_e3_conclusiones.html">30. Conclusiones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
@@ -453,6 +456,10 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="protocolo-y-validacion-estadistica">
 <h1>27. Protocolo y validación estadística<a class="headerlink" href="#protocolo-y-validacion-estadistica" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Las tablas y figuras de este capítulo, incluida una verificación independiente de la corrección de Holm, se reproducen con código ejecutable en el cuaderno <a class="reference internal" href="27a_e3_pruebas_hipotesis.html"><span class="doc">27a. Reproducción de las pruebas de hipótesis</span></a>.</p>
+</div>
 <section id="preregistro">
 <h2>27.1 Preregistro<a class="headerlink" href="#preregistro" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -661,7 +668,7 @@
 <p><span class="caption-number">Fig. 4 </span><span class="caption-text">Diferencias pareadas NAGFuse − rival con IC 95 % del bootstrap jerárquico (eje simétrico-logarítmico). La línea discontinua es <span class="math notranslate nohighlight">\(\delta = 0.02\)</span>.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p><strong>Resultado.</strong> NAGFuse supera a 10 de los 12 rivales con diferencia mayor que <span class="math notranslate nohighlight">\(\delta\)</span>. Frente a GFN la ventaja es significativa pero menor que <span class="math notranslate nohighlight">\(\delta\)</span> (+0.0125). Frente a RWCNet y ViT-B16 no hay diferencia. <strong>La condición de superioridad sobre toda la familia no se cumple.</strong></p>
+<p><strong>Resultado.</strong> NAGFuse supera a 9 de los 12 rivales con diferencia mayor que <span class="math notranslate nohighlight">\(\delta\)</span>. Frente a GFN la ventaja es significativa pero menor que <span class="math notranslate nohighlight">\(\delta\)</span> (+0.0125). Frente a RWCNet y ViT-B16 no hay diferencia. <strong>La condición de superioridad sobre toda la familia no se cumple.</strong></p>
 <p><strong>Potencia observada.</strong> Con las desviaciones pareadas observadas y 20 semillas, la potencia para detectar <span class="math notranslate nohighlight">\(\delta\)</span> al nivel 0.05/12 es de 0.99 frente a RWCNet (<span class="math notranslate nohighlight">\(\sigma_d = 0.015\)</span>) y de 0.83 frente a ViT-B16 (<span class="math notranslate nohighlight">\(\sigma_d = 0.021\)</span>). Estas comparaciones podían detectar <span class="math notranslate nohighlight">\(\delta\)</span>; el empate es informativo y no se debe a falta de semillas. Las diferencias mínimas detectables son 0.016 y 0.021. Frente a FocusRCNet, MobileNetV2 y CNN (12 semillas, <span class="math notranslate nohighlight">\(\sigma_d\)</span> entre 0.019 y 0.025) la potencia para <span class="math notranslate nohighlight">\(\delta\)</span> es baja, pero las diferencias observadas superan 0.1.</p>
 </section>
 <section id="sensibilidad-de-la-conclusion">
@@ -934,20 +941,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="26_e3_implementacion_demostracion.html"
+       href="26a_e3_curvas_entrenamiento.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">26. Implementación y demostración</p>
+        <p class="prev-next-title">26a. Curvas de entrenamiento y diagnóstico de sobreajuste</p>
       </div>
     </a>
     <a class="right-next"
-       href="28_e3_evaluacion_ampliada.html"
+       href="27a_e3_pruebas_hipotesis.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">28. Evaluación ampliada</p>
+        <p class="prev-next-title">27a. Reproducción de las pruebas de hipótesis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
