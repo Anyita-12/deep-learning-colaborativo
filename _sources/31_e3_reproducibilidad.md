@@ -14,6 +14,36 @@
 **Determinismo.** `cudnn.deterministic = True`, `benchmark = False`, `use_deterministic_algorithms(True, warn_only=True)`, `CUBLAS_WORKSPACE_CONFIG=:4096:8`. Dos operaciones no tienen implementación determinista en CUDA (la mediana con índices y el *backward* de la atención con Flash Attention); se aceptan con advertencia. Por eso la reproducción de una corrida puede diferir en el último decimal.
 
 **Resultados versionados.** Las 232 corridas (sin pesos) están en `results/`, `entregable2/results/` y `entregable3/results/`, con los hashes del capítulo 21. Los pesos de NAGFuse (semillas 0–2) y de cada rival (semilla 8), y los modelos exportados, están fuera del repositorio por su tamaño: Zenodo, DOI en `CITATION.cff`. Herramienta Render: https://nagfuse-trashnet.onrender.com
+Prueba de humo: PS C:\dev1\deep-learning-colaborativo> python dashboard/tests/prueba_humo.py https://nagfuse-trashnet.onrender.com
+Prueba de humo · 2026-11-23 22:44
+página /                                      OK              6 ms
+página /eda                                   OK           1589 ms
+página /modelos                               OK            360 ms
+página /ficha                                 OK              0 ms
+tabla y curva de ruido                        OK             59 ms
+curvas de entrenamiento                       OK            112 ms
+diagnóstico CNN                               OK            167 ms
+diagnóstico Celik-HC                          OK             93 ms
+diagnóstico FocusRCNet                        OK             87 ms
+diagnóstico GFN                               OK             87 ms
+diagnóstico MbXception                        OK            148 ms
+diagnóstico MobileNetV2                       OK            102 ms
+diagnóstico NAGFuse                           OK             97 ms
+diagnóstico RWCNet                            OK            100 ms
+diagnóstico ResMsCapsule                      OK            100 ms
+diagnóstico ResNet-18                         OK             98 ms
+diagnóstico ViT-B16                           OK            122 ms
+explorador de imagen de prueba                OK             34 ms
+predicción en vivo NAGFuse (ONNX, CPU)        OK           2263 ms
+predicción en vivo + oclusión                 OK          16039 ms
+GET https://nagfuse-trashnet.onrender.com/                       200       289 ms
+GET https://nagfuse-trashnet.onrender.com/eda                    200       243 ms
+GET https://nagfuse-trashnet.onrender.com/modelos                200       251 ms
+GET https://nagfuse-trashnet.onrender.com/ficha                  200       261 ms
+GET https://nagfuse-trashnet.onrender.com/_dash-layout           200       248 ms
+
+«La predicción en vivo se ejecutó localmente con el ONNX; en el plan gratuito de Render no hay memoria para cargarlo (512 MB), por lo que allí se muestra el aviso.»
+
 
 **Reproducción independiente.** Pendiente: un tercero debe ejecutar el análisis desde los resultados versionados y reportar la discrepancia máxima frente a `tabla_maestra.csv`.
 

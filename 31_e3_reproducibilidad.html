@@ -489,7 +489,35 @@
 </table>
 </div>
 <p><strong>Determinismo.</strong> <code class="docutils literal notranslate"><span class="pre">cudnn.deterministic</span> <span class="pre">=</span> <span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">benchmark</span> <span class="pre">=</span> <span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">use_deterministic_algorithms(True,</span> <span class="pre">warn_only=True)</span></code>, <code class="docutils literal notranslate"><span class="pre">CUBLAS_WORKSPACE_CONFIG=:4096:8</span></code>. Dos operaciones no tienen implementación determinista en CUDA (la mediana con índices y el <em>backward</em> de la atención con Flash Attention); se aceptan con advertencia. Por eso la reproducción de una corrida puede diferir en el último decimal.</p>
-<p><strong>Resultados versionados.</strong> Las 232 corridas (sin pesos) están en <code class="docutils literal notranslate"><span class="pre">results/</span></code>, <code class="docutils literal notranslate"><span class="pre">entregable2/results/</span></code> y <code class="docutils literal notranslate"><span class="pre">entregable3/results/</span></code>, con los hashes del capítulo 21. Los pesos de NAGFuse (semillas 0–2) y de cada rival (semilla 8), y los modelos exportados, están fuera del repositorio por su tamaño: Zenodo, DOI en <code class="docutils literal notranslate"><span class="pre">CITATION.cff</span></code>. Herramienta Render: <a class="reference external" href="https://nagfuse-trashnet.onrender.com">https://nagfuse-trashnet.onrender.com</a></p>
+<p><strong>Resultados versionados.</strong> Las 232 corridas (sin pesos) están en <code class="docutils literal notranslate"><span class="pre">results/</span></code>, <code class="docutils literal notranslate"><span class="pre">entregable2/results/</span></code> y <code class="docutils literal notranslate"><span class="pre">entregable3/results/</span></code>, con los hashes del capítulo 21. Los pesos de NAGFuse (semillas 0–2) y de cada rival (semilla 8), y los modelos exportados, están fuera del repositorio por su tamaño: Zenodo, DOI en <code class="docutils literal notranslate"><span class="pre">CITATION.cff</span></code>. Herramienta Render: <a class="reference external" href="https://nagfuse-trashnet.onrender.com">https://nagfuse-trashnet.onrender.com</a>
+Prueba de humo: PS C:\dev1\deep-learning-colaborativo&gt; python dashboard/tests/prueba_humo.py <a class="reference external" href="https://nagfuse-trashnet.onrender.com">https://nagfuse-trashnet.onrender.com</a>
+Prueba de humo · 2026-11-23 22:44
+página /                                      OK              6 ms
+página /eda                                   OK           1589 ms
+página /modelos                               OK            360 ms
+página /ficha                                 OK              0 ms
+tabla y curva de ruido                        OK             59 ms
+curvas de entrenamiento                       OK            112 ms
+diagnóstico CNN                               OK            167 ms
+diagnóstico Celik-HC                          OK             93 ms
+diagnóstico FocusRCNet                        OK             87 ms
+diagnóstico GFN                               OK             87 ms
+diagnóstico MbXception                        OK            148 ms
+diagnóstico MobileNetV2                       OK            102 ms
+diagnóstico NAGFuse                           OK             97 ms
+diagnóstico RWCNet                            OK            100 ms
+diagnóstico ResMsCapsule                      OK            100 ms
+diagnóstico ResNet-18                         OK             98 ms
+diagnóstico ViT-B16                           OK            122 ms
+explorador de imagen de prueba                OK             34 ms
+predicción en vivo NAGFuse (ONNX, CPU)        OK           2263 ms
+predicción en vivo + oclusión                 OK          16039 ms
+GET <a class="reference external" href="https://nagfuse-trashnet.onrender.com/">https://nagfuse-trashnet.onrender.com/</a>                       200       289 ms
+GET <a class="reference external" href="https://nagfuse-trashnet.onrender.com/eda">https://nagfuse-trashnet.onrender.com/eda</a>                    200       243 ms
+GET <a class="reference external" href="https://nagfuse-trashnet.onrender.com/modelos">https://nagfuse-trashnet.onrender.com/modelos</a>                200       251 ms
+GET <a class="reference external" href="https://nagfuse-trashnet.onrender.com/ficha">https://nagfuse-trashnet.onrender.com/ficha</a>                  200       261 ms
+GET <a class="reference external" href="https://nagfuse-trashnet.onrender.com/_dash-layout">https://nagfuse-trashnet.onrender.com/_dash-layout</a>           200       248 ms</p>
+<p>«La predicción en vivo se ejecutó localmente con el ONNX; en el plan gratuito de Render no hay memoria para cargarlo (512 MB), por lo que allí se muestra el aviso.»</p>
 <p><strong>Reproducción independiente.</strong> Pendiente: un tercero debe ejecutar el análisis desde los resultados versionados y reportar la discrepancia máxima frente a <code class="docutils literal notranslate"><span class="pre">tabla_maestra.csv</span></code>.</p>
 </section>
 <section id="artefactos-del-repositorio">
