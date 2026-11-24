@@ -13,7 +13,7 @@
 
 **Determinismo.** `cudnn.deterministic = True`, `benchmark = False`, `use_deterministic_algorithms(True, warn_only=True)`, `CUBLAS_WORKSPACE_CONFIG=:4096:8`. Dos operaciones no tienen implementación determinista en CUDA (la mediana con índices y el *backward* de la atención con Flash Attention); se aceptan con advertencia. Por eso la reproducción de una corrida puede diferir en el último decimal.
 
-**Resultados versionados.** Las 232 corridas (sin pesos) están en `results/`, `entregable2/results/` y `entregable3/results/`, con los hashes del capítulo 21. Los pesos de NAGFuse (semillas 0–2) y de cada rival (semilla 8), y los modelos exportados, están fuera del repositorio por su tamaño: Zenodo, DOI en `CITATION.cff`.
+**Resultados versionados.** Las 232 corridas (sin pesos) están en `results/`, `entregable2/results/` y `entregable3/results/`, con los hashes del capítulo 21. Los pesos de NAGFuse (semillas 0–2) y de cada rival (semilla 8), y los modelos exportados, están fuera del repositorio por su tamaño: Zenodo, DOI en `CITATION.cff`. Herramienta Render: https://nagfuse-trashnet.onrender.com
 
 **Reproducción independiente.** Pendiente: un tercero debe ejecutar el análisis desde los resultados versionados y reportar la discrepancia máxima frente a `tabla_maestra.csv`.
 
