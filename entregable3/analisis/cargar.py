@@ -30,7 +30,7 @@ def lp(p):
 
 def cargar():
     rows, preds = [], {}
-    for m in ["NAGFuse"] + E2M + E1M + [f"abl:{a}" for a in ABL]:
+    for m in ["NAGFuse", "NAGFuse-B"] + E2M + E1M + [f"abl:{a}" for a in ABL]:   # NAGFuse-B: opción B (v4), si existe
         for s, d in dirs(m).items():
             mt = lp(f"{d}/metrics_test.pkl"); tp = lp(f"{d}/test_predictions.pkl")
             rb = lp(f"{d}/robustness.pkl"); ex = lp(f"{d}/extra_eval.pkl")

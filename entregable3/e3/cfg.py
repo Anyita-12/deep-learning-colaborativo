@@ -56,8 +56,21 @@ RHO_SENSITIVITY = [1.5, 3.0]             # análisis de sensibilidad (explorator
 LAMBDA_BRANCH = 0.5                      # peso de la supervisión de cada rama
 NOISE_QUANTILE = 0.99                    # s_lo = cuantil 0.99 de sigma_hat en las imágenes limpias de train
 
+# ------------------------------------------------------------------ opción B (protocolo v4, experiments/protocolo_v4_opcion_B.md)
+# Cola que ejecuta el orquestador: "a" = cola congelada de los protocolos v1-v3 (por defecto, no cambia nada);
+# "b_piloto" = piloto en VALIDACIÓN de los candidatos B1-B3 (sin conjunto de prueba);
+# "b" = corridas confirmatorias del candidato elegido.
+COLA = os.environ.get("E3_COLA", "a").strip().lower()
+MODEL_B = "NAGFuse-B"
+CANDIDATOS_B = ["NAGFuse-B1", "NAGFuse-B2", "NAGFuse-B3"]   # ver VARIANT_KW en nagfuse.py
+PILOTO_TRIAL = 1                         # mismo intento de la búsqueda que eligió la versión A (lr 1e-4, wd 1e-4,
+                                         # dropout 0.4, 30 épocas máx., semilla 100): F1 val de A = 0.9688
+REF_PILOTO_A = 0.9688057                 # F1 de validación de A en ese mismo intento (hpo_selected.pkl)
+ELEGIDO_B = None                         # se fija tras el piloto con la regla del protocolo v4, p. ej. "NAGFuse-B1"
+SEEDS_B = list(range(20))                # mismas semillas que NAGFuse A y los 5 rivales más cercanos
+
 # Pesos que se conservan en Drive (el resto se borra tras la evaluación ampliada).
-KEEP_WEIGHTS = {MODEL: [0, 1, 2], **{m: [8] for m in E2_MODELS + E1_MODELS}}
+KEEP_WEIGHTS = {MODEL: [0, 1, 2], MODEL_B: [0, 1, 2], **{m: [8] for m in E2_MODELS + E1_MODELS}}
 
 # ------------------------------------------------------------------ conjuntos adicionales (evaluación sin reentrenar)
 EXTRA_SEED = 2026
@@ -101,6 +114,23 @@ def task_id(t: dict) -> str:
 
 
 def build_queue() -> list[dict]:
+    """Cola según E3_COLA. Sin la variable devuelve la cola congelada de los protocolos v1-v3."""
+    if COLA == "b_piloto":
+        return _con_id([{"fam": "nag", "kind": "hpo", "model": m, "trial": PILOTO_TRIAL} for m in CANDIDATOS_B])
+    if COLA == "b":
+        if ELEGIDO_B is None:
+            raise SystemExit("E3_COLA=b pero cfg.ELEGIDO_B no está fijado: corre antes el piloto y congela la elección.")
+        return _con_id([{"fam": "nag", "kind": "final", "model": MODEL_B, "seed": s} for s in SEEDS_B])
+    return build_queue_a()
+
+
+def _con_id(q: list[dict]) -> list[dict]:
+    for t in q:
+        t["id"] = task_id(t)
+    return q
+
+
+def build_queue_a() -> list[dict]:
     """Orden de prioridad. Dentro de cada bloque se intercalan semillas para que, si el tiempo se acaba,
     todos los modelos queden con una cobertura pareja (lección de la Tarea 2)."""
     q: list[dict] = []
@@ -125,6 +155,12 @@ def build_queue() -> list[dict]:
 
 
 def smoke_queue() -> list[dict]:
+    if COLA in ("b", "b_piloto"):
+        # prueba de humo de la opción B: un intento del piloto por candidato y una corrida final con el primero
+        q = [{"fam": "nag", "kind": "hpo", "model": "NAGFuse", "trial": 0}]
+        q += [{"fam": "nag", "kind": "hpo", "model": m, "trial": PILOTO_TRIAL} for m in CANDIDATOS_B]
+        q += [{"fam": "nag", "kind": "final", "model": CANDIDATOS_B[0], "seed": 0}]
+        return _con_id(q)
     q = [{"fam": "nag", "kind": "hpo", "model": MODEL, "trial": 0},
          {"fam": "nag", "kind": "final", "model": MODEL, "seed": 0},
          {"fam": "nag", "kind": "final", "model": "NAGFuse/solo_cnn", "seed": 0},

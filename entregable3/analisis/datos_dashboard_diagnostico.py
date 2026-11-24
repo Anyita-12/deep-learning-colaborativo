@@ -47,6 +47,8 @@ def main() -> None:
                               "gflops": mi.get("gflops"), "lat_bs1_ms": inf.get("latency_bs1_ms_mean"),
                               "ms_img_lote": inf.get("ms_per_image_mean"), "dispositivo": inf.get("device"),
                               "amp": inf.get("amp"), "t_entreno_s": t.get("train_time_s")})
+        if not semillas:                     # p. ej. candidatos del piloto de la opción B (solo validación)
+            continue
         s0 = semillas[0]
         tp = leer(s0 / "test_predictions.pkl")
         d = pd.DataFrame(np.asarray(tp["probs"], dtype=float), columns=[f"p_{k}" for k in range(6)])

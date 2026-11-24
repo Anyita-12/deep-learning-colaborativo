@@ -48,11 +48,12 @@ FAMILIA = {"NAGFuse": "Original: fusión ViT + CNN con compuerta de ruido", "ViT
            "RWCNet": "CNN residual (preentrenada)", "GFN": "Fusión de CNN (preentrenada)",
            "Celik-HC": "CNN híbrida (preentrenada)", "ResMsCapsule": "Cápsulas multiescala",
            "MbXception": "CNN separable (preentrenada)", "FocusRCNet": "CNN ligera con atención",
+           "NAGFuse-B": "Original, opción B (protocolo v4): mismo mecanismo, otras ramas",
            "CNN": "Baseline: CNN desde cero", "MobileNetV2": "Baseline: MobileNetV2 desde cero",
            "ResNet-18": "Baseline: ResNet-18 desde cero"}
 PALETA = ["#c0392b", "#2e86c1", "#27ae60", "#8e44ad", "#d68910", "#16a085", "#7f8c8d"]
 
-COLORES = {"NAGFuse": "#c0392b", "ViT-B16": "#2e86c1", "RWCNet": "#27ae60", "GFN": "#8e44ad", "Celik-HC": "#d68910"}
+COLORES = {"NAGFuse": "#c0392b", "NAGFuse-B": "#e67e22", "ViT-B16": "#2e86c1", "RWCNet": "#27ae60", "GFN": "#8e44ad", "Celik-HC": "#d68910"}
 COND = {"limpio": "Limpio", "ruido_0.05": "Ruido σ = 0.05", "ruido_0.10": "Ruido σ = 0.10", "desenfoque": "Desenfoque",
         "brillo_-30": "Brillo −30 %", "brillo_+30": "Brillo +30 %", "oclusion": "Oclusión",
         "fondo_sustituido": "Fondo sustituido"}

@@ -148,3 +148,38 @@ def test_variante_sin_denoising_finita_con_ruido_fuerte_y_compuerta_apagada():
     for mode in ("on", "off"):
         m.gate_mode = mode
         assert torch.isfinite(m(_norm(x01))).all()
+
+
+# ------------------------------------------------------------------ opción B (protocolo v4)
+def test_version_a_conserva_nombres_de_pesos():
+    """La refactorización de las ramas no cambia los nombres del state_dict de A (sus pesos siguen cargando)."""
+    m = N.NAGFuse(num_classes=6, pretrained=False, s_lo=0.01)
+    k = m.state_dict().keys()
+    assert "vit.heads.1.weight" in k and "cnn_head.3.weight" in k and "pi_logit" in k
+    assert m.vit.heads[1].in_features == 768 and m.cnn_head[3].in_features == 1280
+
+
+@pytest.mark.parametrize("nombre", ["NAGFuse-B1", "NAGFuse-B2", "NAGFuse-B3"])
+def test_candidatos_b_formas_y_compuerta(nombre):
+    torch.manual_seed(0)
+    m = N.NAGFuse(num_classes=6, dropout=0.1, pretrained=False, s_lo=0.01, rho=2.0, **N.VARIANT_KW[nombre]).eval()
+    x = _norm(torch.rand(2, 3, 224, 224))
+    with torch.no_grad():
+        logp = m(x)
+    assert logp.shape == (2, 6) and torch.allclose(logp.exp().sum(1), torch.ones(2), atol=1e-5)
+    m.train()
+    out = m(x)
+    assert isinstance(out, tuple) and out[1].shape == (2, 6) and out[2].shape == (2, 6)
+    m.eval()
+    xr = _norm((0.5 + 0.2 * torch.randn(2, 3, 224, 224)).clamp(0, 1))      # ruido fuerte: pi = 1
+    with torch.no_grad():
+        d = m.details(xr)
+        assert torch.all(d["pi"] == 1.0)
+        assert torch.allclose(m(xr), torch.log_softmax(m.vit(xr).float(), 1), atol=1e-6)   # Teorema 2 en B
+
+
+def test_nagfuse_b_exige_candidato_elegido(monkeypatch):
+    from e3 import cfg
+    monkeypatch.setattr(cfg, "ELEGIDO_B", None)
+    with pytest.raises(ValueError):
+        N.build_nagfuse("NAGFuse-B", pretrained=False)

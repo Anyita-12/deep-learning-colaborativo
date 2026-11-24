@@ -6,6 +6,8 @@
     python -m e3.orchestrator status
     python -m e3.orchestrator extra-pass            # evalúa lo que quedó pendiente en los conjuntos adicionales
     python -m e3.orchestrator smoke                 # prueba de humo completa en carpetas _smoke
+    python -m e3.orchestrator piloto                # opción B: resumen del piloto en validación y regla de elección
+La cola la elige la variable E3_COLA (a | b_piloto | b); sin ella se usa la cola congelada de v1-v3.
 
 Cada tarea corre en un proceso aparte (e3.worker). Si la sesión se corta, basta con volver a ejecutar
 setup y run: lo terminado se salta (marcas .done en Drive) y lo parcial se reanuda desde el último
@@ -218,6 +220,47 @@ def extra_pass(worker: str = "0") -> None:
         run_task(t, worker)
 
 
+PARAMS_M = {"NAGFuse-B1": 76.6, "NAGFuse-B2": 52.8, "NAGFuse-B3": 113.6}   # millones aprox. (cabezas de 6 clases), para desempatar
+
+
+def piloto() -> int:
+    """Resume el piloto de la opción B (solo validación) y aplica la regla del protocolo v4."""
+    import pickle
+    filas = []
+    for m in cfg.CANDIDATOS_B:
+        t = {"fam": "nag", "kind": "hpo", "model": m, "trial": cfg.PILOTO_TRIAL}
+        run = run_path(t)
+        f = run / "result.pkl"
+        if not f.exists():
+            f = cfg.DRIVE_RESULTS["e2"] / run.relative_to(cfg.RESULTS["e2"]) / "result.pkl"
+        if not f.exists():
+            print(f"{m}: sin resultado todavía ({f})")
+            continue
+        r = pickle.load(open(f, "rb"))
+        filas.append({"candidato": m, "f1_val": float(r["selection_val_f1_macro"]), "mejor_epoca": int(r["best_epoch"]),
+                      "epocas": int(r["epochs_run"]), "minutos": round(r["train_time_s"] / 60, 1),
+                      "params_M": PARAMS_M[m]})
+    for r in filas:
+        print(f"{r['candidato']:12s} F1 val {r['f1_val']:.4f} | época {r['mejor_epoca']}/{r['epocas']} | "
+              f"{r['minutos']} min | {r['params_M']} M parámetros")
+    print(f"Referencia: versión A en el mismo intento = {cfg.REF_PILOTO_A:.4f}")
+    if len(filas) < len(cfg.CANDIDATOS_B):
+        print("Piloto incompleto: no se aplica la regla todavía.")
+        return 1
+    mejor = max(r["f1_val"] for r in filas)
+    empatados = [r for r in filas if mejor - r["f1_val"] < 0.002]          # regla: empate dentro de 0.002 -> menos parámetros
+    elegido = min(empatados, key=lambda r: r["params_M"])
+    lanzar = elegido["f1_val"] > cfg.REF_PILOTO_A
+    res = {"filas": filas, "referencia_A": cfg.REF_PILOTO_A, "elegido": elegido["candidato"], "lanzar": lanzar,
+           "regla": "máximo F1 de validación; empate < 0.002 -> menos parámetros; se lanza solo si supera a A",
+           "fecha": time.strftime("%Y-%m-%d %H:%M:%S")}
+    S.write_json_atomic(res, cfg.DRIVE / "piloto_opcion_B.json")
+    print(f"\nELEGIDO: {elegido['candidato']} | ¿se lanza la fase confirmatoria? {'SÍ' if lanzar else 'NO'}")
+    print(f"Guardado en {cfg.DRIVE / 'piloto_opcion_B.json'}. Siguiente paso: fijar ELEGIDO_B = "
+          f"\"{elegido['candidato']}\" en e3/cfg.py, registrar en design_log.md y crear el tag e3-protocolo-v4.")
+    return 0
+
+
 def smoke() -> int:
     os.environ["E3_SMOKE"] = "1"
     import importlib
@@ -235,7 +278,7 @@ def smoke() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["setup", "prepare", "run", "status", "extra-pass", "smoke"])
+    ap.add_argument("cmd", choices=["setup", "prepare", "run", "status", "extra-pass", "smoke", "piloto"])
     ap.add_argument("--worker", default="0")
     ap.add_argument("--hours", type=float, default=1e9)
     ap.add_argument("--only", choices=["nag", "e2", "e1"], default=None)
@@ -252,6 +295,8 @@ def main() -> int:
         status()
     elif a.cmd == "extra-pass":
         extra_pass(a.worker)
+    elif a.cmd == "piloto":
+        return piloto()
     return 0
 
 
