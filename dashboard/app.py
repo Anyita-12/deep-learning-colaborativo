@@ -11,6 +11,7 @@ import base64
 import io
 import json
 import os
+import time
 from functools import lru_cache
 from pathlib import Path
 
@@ -38,6 +39,18 @@ EDA = pd.read_csv(DATA / "eda_conteos.csv")
 IMG = pd.read_csv(DATA / "nagfuse_s00_por_imagen.csv.gz")
 PRED = pd.read_csv(DATA / "predicciones.csv")
 MODELOS = [m for m in M.modelo if not m.startswith("NAGFuse/")]
+CURV = pd.read_csv(DATA / "curvas.csv")                  # historial por época (datos_dashboard_diagnostico.py)
+PROBS = pd.read_csv(DATA / "probs_prueba.csv.gz")        # probabilidades en prueba, una semilla por modelo
+COSTO = pd.read_csv(DATA / "costo.csv").set_index("modelo")
+FICHA = (DATA / "MODEL_CARD.md").read_text(encoding="utf-8")
+DIAG = sorted(PROBS.modelo.unique())
+FAMILIA = {"NAGFuse": "Original: fusión ViT + CNN con compuerta de ruido", "ViT-B16": "Transformer (preentrenado)",
+           "RWCNet": "CNN residual (preentrenada)", "GFN": "Fusión de CNN (preentrenada)",
+           "Celik-HC": "CNN híbrida (preentrenada)", "ResMsCapsule": "Cápsulas multiescala",
+           "MbXception": "CNN separable (preentrenada)", "FocusRCNet": "CNN ligera con atención",
+           "CNN": "Baseline: CNN desde cero", "MobileNetV2": "Baseline: MobileNetV2 desde cero",
+           "ResNet-18": "Baseline: ResNet-18 desde cero"}
+PALETA = ["#c0392b", "#2e86c1", "#27ae60", "#8e44ad", "#d68910", "#16a085", "#7f8c8d"]
 
 COLORES = {"NAGFuse": "#c0392b", "ViT-B16": "#2e86c1", "RWCNet": "#27ae60", "GFN": "#8e44ad", "Celik-HC": "#d68910"}
 COND = {"limpio": "Limpio", "ruido_0.05": "Ruido σ = 0.05", "ruido_0.10": "Ruido σ = 0.10", "desenfoque": "Desenfoque",
@@ -167,9 +180,187 @@ def tabla_metricas(sel: list[str]) -> list[dict]:
     return out
 
 
+def tabla_lideres() -> list[dict]:
+    de = RUN.groupby("model").f1.std()
+    out = []
+    for m in MODELOS:
+        c = COSTO.loc[m] if m in COSTO.index else None
+        num = lambda v, k=1: None if v is None or pd.isna(v) else round(float(v), k)
+        out.append({"Modelo": m, "Familia": FAMILIA.get(m, "—"), "Semillas": int(fila(m, "R")),
+                    "F1 macro (media)": round(fila(m, "F1 limpio"), 4), "DE": num(de.get(m), 4),
+                    "F1 ruido 0.05": round(fila(m, "F1 ruido 0.05"), 4), "ECE": round(fila(m, "ECE"), 4),
+                    "Parámetros (M)": num(None if c is None else c.params / 1e6),
+                    "GFLOPs": num(None if c is None else c.gflops, 2),
+                    "Latencia lote 1 (ms)": num(None if c is None else c.lat_bs1_ms)})
+    return out
+
+
+def color(i: int, m: str) -> str:
+    return COLORES.get(m, PALETA[i % len(PALETA)])
+
+
+def rgba(h: str, a: float) -> str:
+    return f"rgba({int(h[1:3], 16)}, {int(h[3:5], 16)}, {int(h[5:7], 16)}, {a})"
+
+
+def fig_curvas(sel: list[str], met: str) -> go.Figure:
+    """Media ± DE entre semillas, por época; solo épocas a las que llegó al menos la mitad de las semillas."""
+    fig = go.Figure()
+    for i, m in enumerate(sel):
+        g = CURV[CURV.modelo == m].groupby("epoca"); c = color(i, m)
+        for parte, estilo in [("train", "dash"), ("val", "solid")]:
+            col = f"{parte}_{met}"; n = g[col].count(); ok = n >= max(2, n.max() / 2)
+            mu, sd = g[col].mean()[ok], g[col].std().fillna(0)[ok]; x = list(mu.index)
+            fig.add_trace(go.Scatter(x=x + x[::-1], y=list(mu + sd) + list((mu - sd)[::-1]), fill="toself",
+                                     fillcolor=rgba(c, 0.12), line=dict(width=0), hoverinfo="skip", showlegend=False))
+            fig.add_trace(go.Scatter(x=x, y=mu, name=f"{m} · {'entrenamiento' if parte == 'train' else 'validación'}",
+                                     line=dict(color=c, dash=estilo)))
+        mejor = CURV[CURV.modelo == m].groupby("semilla").mejor_epoca.first().median()
+        if not pd.isna(mejor):
+            fig.add_vline(x=float(mejor), line_color=c, line_dash="dot")
+    eje = "Pérdida (entropía cruzada)" if met == "loss" else "F1 macro"
+    return layout_fig(fig, f"{eje} por época (media ± DE entre semillas)", "Época", eje, 380)
+
+
+def roc_pr(y: np.ndarray, s: np.ndarray):
+    o = np.argsort(-s); y = y[o]; tp = np.cumsum(y); fp = np.cumsum(1 - y)
+    tpr = np.r_[0, tp / y.sum()]; fpr = np.r_[0, fp / (len(y) - y.sum())]
+    prec = tp / np.arange(1, len(y) + 1); rec = tp / y.sum()
+    auc = float(np.sum(np.diff(fpr) * (tpr[1:] + tpr[:-1]) / 2)); ap = float(np.sum(np.diff(np.r_[0, rec]) * prec))
+    return fpr, tpr, auc, rec, prec, ap
+
+
+def figs_diagnostico(m: str) -> list[go.Figure]:
+    d = PROBS[PROBS.modelo == m]; P = d[[f"p_{k}" for k in range(6)]].to_numpy(); y = d.y.to_numpy()
+    yp = P.argmax(1); sem = int(d.semilla.iloc[0])
+    cm = np.zeros((6, 6)); np.add.at(cm, (y, yp), 1); cmn = cm / cm.sum(1, keepdims=True)
+    f1 = go.Figure(go.Heatmap(z=cmn, x=CL, y=CL, colorscale="Blues", zmin=0, zmax=1, text=cm.astype(int),
+                              texttemplate="%{text}", hovertemplate="real %{y} → predicha %{x}: %{z:.2f}<extra></extra>"))
+    f1.update_yaxes(autorange="reversed")
+    layout_fig(f1, f"Matriz de confusión normalizada por fila ({m}, semilla {sem})", "Clase predicha", "Clase real", 400)
+    f2, f3 = go.Figure(), go.Figure()
+    for k in range(6):
+        fpr, tpr, auc, rec, prec, ap = roc_pr((y == k).astype(float), P[:, k])
+        f2.add_trace(go.Scatter(x=fpr, y=tpr, name=f"{CL[k]} (AUC {auc:.3f})", line=dict(color=PALETA[k % 7])))
+        f3.add_trace(go.Scatter(x=rec, y=prec, name=f"{CL[k]} (AP {ap:.3f})", line=dict(color=PALETA[k % 7])))
+    f2.add_trace(go.Scatter(x=[0, 1], y=[0, 1], line=dict(dash="dash", color="gray"), showlegend=False))
+    layout_fig(f2, "Curvas ROC por clase (uno contra el resto)", "Tasa de falsos positivos", "Tasa de verdaderos positivos", 380)
+    layout_fig(f3, "Curvas precisión-exhaustividad por clase", "Exhaustividad (recall)", "Precisión", 380)
+    conf, ok = P.max(1), (yp == y).astype(float); b = np.minimum((conf * 15).astype(int), 14)
+    cnt = np.bincount(b, minlength=15); acc = np.bincount(b, ok, 15) / np.maximum(cnt, 1)
+    cmed = np.bincount(b, conf, 15) / np.maximum(cnt, 1); ece = float(np.sum(cnt / len(y) * np.abs(acc - cmed)))
+    v = cnt > 0; f4 = go.Figure()
+    f4.add_bar(x=cmed[v], y=acc[v], width=1 / 15 * 0.9, name="Exactitud por intervalo", marker_color="#2e86c1",
+               customdata=cnt[v], hovertemplate="confianza %{x:.2f}<br>exactitud %{y:.2f}<br>n = %{customdata}<extra></extra>")
+    f4.add_trace(go.Scatter(x=[0, 1], y=[0, 1], name="Calibración perfecta", line=dict(dash="dash", color="gray")))
+    layout_fig(f4, f"Diagrama de confiabilidad (15 intervalos, ECE = {ece:.3f})", "Confianza media", "Exactitud", 380)
+    return [f1, f2, f3, f4]
+
+
+def fig_pareto(eje: str, titulo: str) -> go.Figure:
+    d = pd.DataFrame([{"m": m, "x": COSTO.loc[m, eje] if m in COSTO.index else np.nan, "y": fila(m, "F1 limpio")}
+                      for m in MODELOS]).dropna().sort_values("x")
+    front, mejor = [], -1.0
+    for r in d.itertuples():
+        if r.y > mejor:
+            front.append(r); mejor = r.y
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=d.x, y=d.y, mode="markers+text", text=d.m, textposition="top center",
+                             marker=dict(size=10, color=["#c0392b" if m == "NAGFuse" else "#7f8c8d" for m in d.m]),
+                             name="Modelos", hovertemplate="%{text}: F1 %{y:.3f}, %{x:.2f}<extra></extra>"))
+    fig.add_trace(go.Scatter(x=[r.x for r in front], y=[r.y for r in front], mode="lines", name="Frontera de Pareto",
+                             line=dict(dash="dash", color="#27ae60")))
+    fig.update_xaxes(type="log")
+    return layout_fig(fig, titulo, titulo.split(" frente a ")[-1], "F1 macro limpio", 400)
+
+
+def fig_global() -> go.Figure:
+    """Interpretabilidad global del mecanismo: peso medio de la rama ViT y F1 de cada rama por condición."""
+    from_cond = [c for c in COND if c in set(IMG.cond)]
+    def f1m(y, yp):
+        f = [];
+        for k in range(6):
+            tp = np.sum((yp == k) & (y == k)); f.append(2 * tp / max(np.sum(yp == k) + np.sum(y == k), 1))
+        return float(np.mean(f))
+    filas = []
+    for c in from_cond:
+        d = IMG[IMG.cond == c]; y = d.y.to_numpy()
+        pv = d[[f"pv_{k}" for k in range(6)]].to_numpy().argmax(1); pc = d[[f"pc_{k}" for k in range(6)]].to_numpy().argmax(1)
+        filas.append((COND[c], d.pi.mean(), f1m(y, d.pred.to_numpy()), f1m(y, pv), f1m(y, pc)))
+    t = pd.DataFrame(filas, columns=["cond", "pi", "nag", "vit", "cnn"]); fig = go.Figure()
+    fig.add_bar(x=t.cond, y=t.nag, name="NAGFuse (mezcla)", marker_color="#c0392b")
+    fig.add_bar(x=t.cond, y=t.vit, name="Rama ViT-B/16 sola", marker_color="#2e86c1")
+    fig.add_bar(x=t.cond, y=t.cnn, name="Rama EfficientNet-B0 sola", marker_color="#27ae60")
+    fig.add_trace(go.Scatter(x=t.cond, y=t.pi, name="π medio (peso de ViT)", mode="lines+markers",
+                             line=dict(color="black", dash="dot")))
+    fig.update_layout(barmode="group", yaxis_range=[0, 1.05])
+    return layout_fig(fig, "Interpretabilidad global: qué rama decide en cada condición (semilla 0, 361 imágenes)",
+                      "Condición", "F1 macro / π", 420)
+
+
+def tabla_hipotesis() -> list[dict]:
+    out = []
+    for nombre, t in [("H1 F1 limpio", H1), ("H2 F1 ruido 0.05", H2)]:
+        for r in t.itertuples():
+            out.append({"Hipótesis": nombre, "Rival": r.rival, "Semillas": int(r.R), "Diferencia": round(r.media_dif, 4),
+                        "IC 95 %": f"[{r.ic_lo:+.4f}, {r.ic_hi:+.4f}]", "p máx. Holm": float(f"{r.p_max_holm:.2g}"),
+                        "Cliff δ": round(r.cliff, 2), "d_z": round(r.dz, 2), "Veredicto": "Supera" if r.supera else "No supera"})
+    return out
+
+
+def seccion_original() -> html.Div:
+    return html.Div([
+        html.H3("Modelo original: NAGFuse"),
+        html.P("Procedencia: el estimador de ruido y la contracción vienen de la eliminación de ruido por ondículas "
+               "(Donoho y Johnstone, 1994; Donoho, 1995); la mezcla, de las mezclas de expertos (Jacobs et al., 1991). "
+               "Diferencias: la compuerta es analítica (sin parámetros entrenables), el estimador usa los tres canales, "
+               "la contracción solo se aplica a la rama sensible al ruido y la mezcla se hace en el espacio de "
+               "probabilidades. El paper guía y los rivales usan un único extractor sin adaptación al ruido."),
+        html.Pre("""entrada x (3×224×224, escala [0, 1])
+σ̂  ← mediana(|HH1(x)|) / 0.6745            # Haar ortonormal, 3 canales
+π  ← π0 + (1 − π0) · clip((σ̂ − s_lo) / ((ρ − 1) s_lo), 0, 1)
+p_V ← softmax(ViT-B/16(x))
+p_C ← softmax(EfficientNet-B0(contracción_ondícula(x, σ̂)))
+p  ← π · p_V + (1 − π) · p_C                  # predicción = argmax p""", style={"background": "#fff", "padding": "10px"}),
+        html.H4("Curvas de entrenamiento"),
+        dcc.Dropdown(DIAG, ["NAGFuse", "ViT-B16"], multi=True, id="sel-curvas"),
+        html.Div([dcc.Graph(id="fig-curvas-loss"), dcc.Graph(id="fig-curvas-f1")], className="dos"),
+        html.P("Línea discontinua: entrenamiento; continua: validación; vertical punteada: mediana de la época elegida "
+               "por early stopping. NAGFuse tiene 20 semillas; los rivales, las semillas guardadas en el repositorio "
+               "del E3 (4 a 12). La curva de aprendizaje frente al tamaño de muestra no se calculó (ver capítulo 29, limitaciones).",
+               className="n"),
+        html.H4("Pruebas de hipótesis (p ajustados por Holm, máximo de t, Wilcoxon y bootstrap jerárquico)"),
+        dash_table.DataTable(data=tabla_hipotesis(), sort_action="native", filter_action="native", page_size=12,
+                             style_cell={"fontSize": 12}, style_table={"overflowX": "auto"}),
+        html.H4("Ablación"),
+        dash_table.DataTable(data=ABL[["cond", "variante", "completo", "variante_f1", "dif", "p_max_holm"]].round(4)
+                             .to_dict("records"), style_cell={"fontSize": 12}),
+        html.H4("Veredicto"),
+        html.P("No superioridad general: NAGFuse es equivalente al mejor rival en datos limpios (TOST con RWCNet) y "
+               "supera a las CNN con ruido σ = 0.05, pero no supera a ViT-B16 con ruido ni en los conjuntos adicionales, "
+               "donde ViT-B16 es mejor. Robustez sin pérdida en limpio, no superioridad.", className="aviso"),
+    ])
+
+
+def pagina_ficha() -> html.Div:
+    return html.Div([dcc.Markdown(FICHA, mathjax=True)])
+
+
 def pagina_modelos() -> html.Div:
     return html.Div([
         html.H2("Modelos y resultados"),
+        html.H3("Tabla de líderes"),
+        dash_table.DataTable(data=tabla_lideres(), sort_action="native", filter_action="native",
+                             sort_by=[{"column_id": "F1 macro (media)", "direction": "desc"}],
+                             style_cell={"fontSize": 12, "whiteSpace": "normal", "textAlign": "left"},
+                             style_table={"overflowX": "auto"},
+                             style_data_conditional=[{"if": {"filter_query": '{Modelo} = "NAGFuse"'},
+                                                      "fontWeight": "bold"}]),
+        html.P("F1 macro limpio en prueba: media y desviación estándar entre semillas. Parámetros, GFLOPs y latencia: "
+               "mediana de las mediciones guardadas en el entrenamiento (GPU A100 con AMP, lote de 1). La latencia en "
+               "CPU del ONNX de NAGFuse se muestra al clasificar una imagen propia. Los baselines desde cero no "
+               "registraron FLOPs.", className="n"),
+        html.Label("Modelos a comparar"),
         html.Label("Modelos a comparar"),
         dcc.Dropdown(MODELOS, ["NAGFuse", "ViT-B16", "RWCNet", "GFN"], multi=True, id="sel-modelos"),
         dash_table.DataTable(id="tabla-metricas", style_cell={"fontSize": 12, "whiteSpace": "normal"},
@@ -181,6 +372,23 @@ def pagina_modelos() -> html.Div:
                   dcc.Graph(figure=fig_forest(H2, "H2: F1 con ruido σ = 0.05"))], className="dos"),
         html.P("Rojo: supera por más de δ = 0.02 con p de Holm < 0.05 (máximo de t, Wilcoxon y bootstrap jerárquico); "
                "naranja: significativo pero menor que δ; gris: no significativo.", className="n"),
+        html.H3("Diagnóstico del modelo seleccionado"),
+        dcc.Dropdown(DIAG, "NAGFuse", id="sel-diag", clearable=False),
+        html.Div([dcc.Graph(id="fig-conf"), dcc.Graph(id="fig-fiab")], className="dos"),
+        html.Div([dcc.Graph(id="fig-roc"), dcc.Graph(id="fig-pr")], className="dos"),
+        html.H3("Comparación estadística y costo"),
+        html.Img(src="/assets/diferencia_critica.png", alt="Diagrama de diferencia crítica de Nemenyi con los 11 "
+                 "modelos ordenados por rango medio en 12 escenarios", style={"maxWidth": "100%"}),
+        html.P("Diagrama de diferencia crítica (Friedman + Nemenyi, CD = 4.36, 11 modelos, 12 escenarios). Los modelos "
+               "unidos por una barra no difieren significativamente.", className="n"),
+        html.Div([dcc.Graph(figure=fig_pareto("gflops", "F1 limpio frente a GFLOPs")),
+                  dcc.Graph(figure=fig_pareto("lat_bs1_ms", "F1 limpio frente a latencia (ms)"))], className="dos"),
+        html.H3("Interpretabilidad global"),
+        dcc.Graph(figure=fig_global()),
+        html.P("Con ruido, π sube a 1 y NAGFuse responde como su rama ViT (el mejor benchmark con ruido); en limpio "
+               "promedia ambas ramas. Esto compara directamente la explicación del modelo original con la del mejor "
+               "benchmark: la decisión con ruido la toma la misma red.", className="n"),
+        seccion_original(),
         html.H3("Explorar una imagen de prueba"),
         html.Div([
             html.Div([html.Label("Imagen (índice 0–360)"),
@@ -263,22 +471,39 @@ app = Dash(__name__, suppress_callback_exceptions=True, title="NAGFuse · TrashN
 server = app.server
 app.layout = html.Div([
     dcc.Location(id="url"),
-    html.Nav([dcc.Link("Contexto", href="/"), dcc.Link("EDA", href="/eda"), dcc.Link("Modelos", href="/modelos")],
+    html.Nav([dcc.Link("Contexto", href="/"), dcc.Link("EDA", href="/eda"), dcc.Link("Modelos", href="/modelos"),
+              dcc.Link("Ficha del modelo", href="/ficha")],
              className="nav"),
     html.Div(id="pagina", className="page"),
-    html.Footer("Anyely Sanjuan Benavides y Juan David Díaz Fernández · Deep Learning, Universidad del Norte · 2026"),
+    html.Footer([html.Div("Anyely Sanjuan Benavides y Juan David Díaz Fernández · Deep Learning, Universidad del Norte · "
+                          "versión E3 · actualizado el 23-11-2026"),
+                 html.Div("Privacidad: las imágenes subidas se procesan solo en memoria para la predicción; no se "
+                          "guardan, no se registran y no se comparten.")]),
 ])
 
 
 @app.callback(Output("pagina", "children"), Input("url", "pathname"))
 def enrutar(path):
-    return {"/eda": pagina_eda, "/modelos": pagina_modelos}.get(path, pagina_contexto)()
+    return {"/eda": pagina_eda, "/modelos": pagina_modelos, "/ficha": pagina_ficha}.get(path, pagina_contexto)()
 
 
 @app.callback(Output("tabla-metricas", "data"), Output("fig-ruido", "figure"), Input("sel-modelos", "value"))
 def actualizar(sel):
     sel = sel or ["NAGFuse"]
     return tabla_metricas(sel), fig_ruido(sel)
+
+
+@app.callback(Output("fig-curvas-loss", "figure"), Output("fig-curvas-f1", "figure"), Input("sel-curvas", "value"))
+def curvas(sel):
+    sel = sel or ["NAGFuse"]
+    return fig_curvas(sel, "loss"), fig_curvas(sel, "f1")
+
+
+@app.callback(Output("fig-conf", "figure"), Output("fig-roc", "figure"), Output("fig-pr", "figure"),
+              Output("fig-fiab", "figure"), Input("sel-diag", "value"))
+def diagnostico(m):
+    f = figs_diagnostico(m or "NAGFuse")
+    return f[0], f[1], f[2], f[3]
 
 
 @app.callback(Output("detalle-img", "children"), Input("sel-img", "value"), Input("sel-cond", "value"))
@@ -294,6 +519,8 @@ def detalle(i, cond):
 def clasificar(contenido, ocl):
     if not contenido:
         return html.P("Aún no hay imagen.", className="n")
+    if len(contenido) > 8_000_000:                           # ~6 MB de imagen codificada en base64
+        return html.P("La imagen supera el tamaño máximo (6 MB). Suba una más pequeña.", className="aviso")
     if not MODEL_PATH.exists():
         return html.P("El modelo ONNX no está disponible en este despliegue (supera la memoria del plan gratuito). "
                       "Use el explorador de imágenes de prueba o ejecute el dashboard localmente con "
@@ -301,11 +528,16 @@ def clasificar(contenido, ocl):
     try:
         x, fondo = preparar(contenido)
         s = sesion(str(MODEL_PATH))
+        t0 = time.perf_counter()
         p, sigma, pi, pv, pc = [o[0] for o in s.run(None, {"x": x})]
+        lat = (time.perf_counter() - t0) * 1000
     except Exception as e:                                   # imagen ilegible o error de inferencia
         return html.P(f"No se pudo procesar la imagen: {e}", className="aviso")
     hijos = [dcc.Graph(figure=barras_prob(p, pv, pc, "Imagen subida")),
-             resumen_incertidumbre(p, float(sigma), float(pi), fondo)]
+             resumen_incertidumbre(p, float(sigma), float(pi), fondo),
+             html.P(f"Latencia de esta inferencia en CPU (ONNX Runtime, 2 hilos): {lat:.0f} ms. Probabilidad "
+                    f"calibrada: ECE de NAGFuse en prueba = {fila('NAGFuse', 'ECE'):.3f}; el conjunto conforme tiene "
+                    f"cobertura nominal del 90 %.", className="n")]
     if ocl:
         h = oclusion(s, x, int(p.argmax()))
         fig = go.Figure(go.Heatmap(z=h, colorscale="Reds", colorbar=dict(title="Caída de p")))

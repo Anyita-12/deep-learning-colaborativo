@@ -1,5 +1,9 @@
 # 26. Implementación y demostración
 
+```{note}
+Las curvas de entrenamiento y validación y el diagnóstico de sobreajuste se reproducen con código ejecutable en el cuaderno {doc}`26a_e3_curvas_entrenamiento`.
+```
+
 ## 26.1 Código
 
 El núcleo de NAGFuse está escrito a partir de la formulación del capítulo 25, sin código de terceros (`entregable3/e3/nagfuse.py`): transformada de Haar ortonormal y su inversa, estimador MAD, contracción suave, compuerta y mezcla estable en el espacio logarítmico. De torchvision solo se importan las redes ViT-B/16 y EfficientNet-B0 con sus pesos de ImageNet, la misma fuente que usan los rivales.

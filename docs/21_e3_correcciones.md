@@ -1,8 +1,7 @@
 # 21. Correcciones del Entregable 2
 
 ## 21.1 Trazabilidad
-
-Las observaciones del docente sobre el E2 no se habían recibido en la fecha de cierre. La tabla recoge las correcciones que encontramos al revisar nuestro propio trabajo; la última fila queda abierta.
+ La tabla recoge las correcciones que encontramos al revisar nuestro propio trabajo; la última fila queda abierta.
 
 | N.° | Hallazgo | Dónde | Corrección | Efecto en resultados |
 |---|---|---|---|---|

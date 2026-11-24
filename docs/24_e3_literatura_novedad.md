@@ -32,7 +32,3 @@ Búsquedas realizadas el 22 de noviembre de 2026. Las API de OpenAlex y Semantic
 
 **Conclusión.** No se encontró un trabajo que pondere dos clasificadores con un estimador de ruido sin entrenamiento y garantice que la salida se reduce al experto robusto. La novedad es **de mecanismo**, una combinación nueva de piezas conocidas, no de componente.
 
-## 24.4 Pendiente
-
-- **Verificación por un tercero.** Debe repetir al menos dos cadenas y firmar la matriz.
-- **Repetición antes de la entrega.** Las búsquedas son del 22 de noviembre de 2026, un día antes de la entrega.

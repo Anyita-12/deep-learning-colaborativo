@@ -2,7 +2,7 @@
 
 ## 30.1 Respuestas
 
-- **P1 (H1). No.** NAGFuse supera a 10 de los 12 rivales en F1 limpio por más de $\delta$, pero empata con RWCNet y ViT-B16. La potencia frente a ellos (0.99 y 0.83) indica que el empate es real, no falta de semillas. La condición de superioridad sobre toda la familia no se cumple.
+- **P1 (H1). No.** NAGFuse supera a 9 de los 12 rivales en F1 limpio por más de $\delta$, pero empata con RWCNet y ViT-B16. La potencia frente a ellos (0.99 y 0.83) indica que el empate es real, no falta de semillas. La condición de superioridad sobre toda la familia no se cumple.
 - **P2 (H2). Frente a las CNN, sí; frente a ViT-B16, no.** Con $\sigma = 0.05$ supera a todas las CNN por 0.12 a 0.76; frente a ViT-B16 la ventaja (+0.012) no es significativa.
 - **P3 (H3). Sí.** Es equivalente al mejor rival, RWCNet, dentro de $\pm\delta$ (TOST $p < 0.001$), y tiene la mejor calibración del benchmark, empatada con RWCNet.
 - **P4 (mecanismo). En parte.**
@@ -25,6 +25,10 @@
 - **Costo.** 89.8 M de parámetros y la inferencia de dos redes. Es el modelo más pesado después de GFN.
 - **Hardware mezclado.** Las semillas 0–7 de los rivales del E2 se entrenaron en otra GPU. Con RWCNet se observó una diferencia de −0.014 entre las dos máquinas (capítulo 21).
 - **Conjuntos adicionales.** Para los rivales, solo semillas 8 a 19 (u 8 a 11); con 4 semillas las pruebas no pueden ser significativas.
+- **Bloque B incompleto.** No se midió la latencia en CPU con mediana y p95 para todos los modelos (solo NAGFuse en el dashboard), ni la memoria en inferencia, y no se probó cuantización, poda ni destilación con TOST. Los costos reportados son parámetros, GFLOPs y latencia en GPU.
+- **Sin curva de aprendizaje frente al tamaño de muestra** (10–50 % del entrenamiento), por presupuesto de cómputo.
+- **Interpretabilidad sin prueba de fidelidad.** El dashboard usa oclusión (no Grad-CAM, porque el ONNX en CPU no da gradientes) y la explicación global se apoya en el propio mecanismo ($\pi$ y F1 de cada rama), sin pruebas de fidelidad ni de estabilidad.
+- **Verificaciones por terceros pendientes.** La repetición de la búsqueda de novedad y la reproducción independiente del análisis no las hizo una persona ajena al código antes de la entrega (capítulos 24 y 31).
 
 ## 30.4 Trabajo futuro
 

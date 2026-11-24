@@ -39,8 +39,11 @@ parts:
       - file: 24_e3_literatura_novedad
       - file: 25_e3_diseno
       - file: 26_e3_implementacion_demostracion
+      - file: 26a_e3_curvas_entrenamiento
       - file: 27_e3_protocolo_validacion
+      - file: 27a_e3_pruebas_hipotesis
       - file: 28_e3_evaluacion_ampliada
+      - file: 28a_e3_evaluacion_ampliada
       - file: 29_e3_dashboard
       - file: 30_e3_conclusiones
       - file: 31_e3_reproducibilidad
