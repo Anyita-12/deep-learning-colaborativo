@@ -13,6 +13,10 @@ Notación (por imagen):
     pi(x) = pi0 + (1 - pi0) g(sigma_hat),  g(s) = clip((s - s_lo) / ((rho - 1) s_lo), 0, 1)
     p(x) = pi(x) p_V + (1 - pi(x)) p_C            mezcla en el espacio de probabilidades
 La compuerta g solo actúa en inferencia; en entrenamiento pi = pi0 (aprendido).
+
+Opción B (protocolo v4): el mecanismo es idéntico; solo cambian las redes de cada rama (``rob_arch`` para la rama
+robusta, ``cnn_arch`` para la rama convolucional con contracción). Los valores por defecto reproducen exactamente
+la versión A (ViT-B/16 + EfficientNet-B0), con los mismos nombres de módulos, así que sus pesos siguen cargando.
 """
 from __future__ import annotations
 
@@ -115,6 +119,37 @@ def load_noise_stats(path: str | None = None) -> dict | None:
     return None
 
 
+# ------------------------------------------------------------------ redes de cada rama (pesos ImageNet-1K de torchvision)
+def _build_robust(arch: str, num_classes: int, dropout: float, pretrained: bool) -> nn.Module:
+    """Rama robusta (transformer). Devuelve el modelo completo con una cabeza nueva de num_classes salidas."""
+    from torchvision import models as tvm
+    if arch == "vit_b_16":                                   # versión A
+        m = tvm.vit_b_16(weights=tvm.ViT_B_16_Weights.IMAGENET1K_V1 if pretrained else None)
+        m.heads = nn.Sequential(nn.Dropout(dropout), nn.Linear(m.hidden_dim, num_classes))
+        return m
+    if arch == "swin_s":                                     # opción B: Swin-S, 224 px nativo, 49.6 M parámetros
+        m = tvm.swin_s(weights=tvm.Swin_S_Weights.IMAGENET1K_V1 if pretrained else None)
+        m.head = nn.Sequential(nn.Dropout(dropout), nn.Linear(m.head.in_features, num_classes))
+        return m
+    raise ValueError(f"rama robusta desconocida: {arch}")
+
+
+def _build_cnn(arch: str, num_classes: int, dropout: float, pretrained: bool):
+    """Rama convolucional. Devuelve (extractor de rasgos, cabeza) con los mismos nombres de módulos de la versión A."""
+    from torchvision import models as tvm
+    if arch == "efficientnet_b0":                            # versión A
+        eff = tvm.efficientnet_b0(weights=tvm.EfficientNet_B0_Weights.IMAGENET1K_V1 if pretrained else None)
+        head = nn.Sequential(nn.AdaptiveAvgPool2d(1), nn.Flatten(), nn.Dropout(dropout), nn.Linear(1280, num_classes))
+        return eff.features, head
+    if arch == "convnext_tiny":                              # opción B: ConvNeXt-T, 28.6 M parámetros
+        cx = tvm.convnext_tiny(weights=tvm.ConvNeXt_Tiny_Weights.IMAGENET1K_V1 if pretrained else None)
+        # cabeza de torchvision = avgpool -> LayerNorm2d(768) -> Flatten -> Linear; se conserva la LayerNorm preentrenada
+        head = nn.Sequential(cx.avgpool, cx.classifier[0], nn.Flatten(1), nn.Dropout(dropout),
+                             nn.Linear(768, num_classes))
+        return cx.features, head
+    raise ValueError(f"rama convolucional desconocida: {arch}")
+
+
 # ------------------------------------------------------------------ modelo
 class NAGFuse(nn.Module):
     """use_vit / use_cnn permiten las variantes de una sola rama; denoise activa la contracción de la rama CNN.
@@ -122,20 +157,16 @@ class NAGFuse(nn.Module):
 
     def __init__(self, num_classes: int = 6, dropout: float = 0.3, pretrained: bool = True, use_vit: bool = True,
                  use_cnn: bool = True, denoise: bool = True, s_lo: float | None = None, rho: float = 2.0,
-                 shrink_levels: int = 2):
+                 shrink_levels: int = 2, rob_arch: str = "vit_b_16", cnn_arch: str = "efficientnet_b0"):
         super().__init__()
         if not (use_vit or use_cnn):
             raise ValueError("NAGFuse necesita al menos una rama")
-        from torchvision import models as tvm
         self.use_vit, self.use_cnn, self.denoise, self.shrink_levels = use_vit, use_cnn, denoise, shrink_levels
-        if use_vit:
-            self.vit = tvm.vit_b_16(weights=tvm.ViT_B_16_Weights.IMAGENET1K_V1 if pretrained else None)
-            self.vit.heads = nn.Sequential(nn.Dropout(dropout), nn.Linear(self.vit.hidden_dim, num_classes))
+        self.rob_arch, self.cnn_arch = rob_arch, cnn_arch
+        if use_vit:                                          # rama robusta (se llama `vit` por compatibilidad con A)
+            self.vit = _build_robust(rob_arch, num_classes, dropout, pretrained)
         if use_cnn:
-            eff = tvm.efficientnet_b0(weights=tvm.EfficientNet_B0_Weights.IMAGENET1K_V1 if pretrained else None)
-            self.cnn = eff.features
-            self.cnn_head = nn.Sequential(nn.AdaptiveAvgPool2d(1), nn.Flatten(), nn.Dropout(dropout),
-                                          nn.Linear(1280, num_classes))
+            self.cnn, self.cnn_head = _build_cnn(cnn_arch, num_classes, dropout, pretrained)
         self.pi_logit = nn.Parameter(torch.zeros(()))              # pi0 = 0.5 al inicio
         if s_lo is None:
             st = load_noise_stats()
@@ -206,7 +237,9 @@ class NAGFuse(nn.Module):
         return d
 
     def cam_layer(self):
-        return self.vit.encoder.layers[-1].ln_1 if self.use_vit else self.cnn[-1]
+        if not self.use_vit:
+            return self.cnn[-1]
+        return self.vit.encoder.layers[-1].ln_1 if self.rob_arch == "vit_b_16" else self.vit.features[-1]
 
 
 VARIANT_KW = {
@@ -214,9 +247,18 @@ VARIANT_KW = {
     "NAGFuse/sin_denoising": {"denoise": False},
     "NAGFuse/solo_vit": {"use_cnn": False, "denoise": False},
     "NAGFuse/solo_cnn": {"use_vit": False},
+    # Opción B (protocolo v4). Candidatos del piloto en validación; el elegido se entrena como "NAGFuse-B".
+    "NAGFuse-B1": {"rob_arch": "swin_s", "cnn_arch": "convnext_tiny"},
+    "NAGFuse-B2": {"rob_arch": "swin_s", "cnn_arch": "efficientnet_b0"},
+    "NAGFuse-B3": {"rob_arch": "vit_b_16", "cnn_arch": "convnext_tiny"},
 }
 
 
 def build_nagfuse(name: str, dropout: float = 0.3, num_classes: int = 6, pretrained: bool = True,
                   rho: float = 2.0) -> NAGFuse:
+    if name == "NAGFuse-B":                     # modelo confirmatorio de la opción B = candidato elegido en el piloto
+        from .cfg import ELEGIDO_B
+        if ELEGIDO_B not in VARIANT_KW:
+            raise ValueError("Opción B sin candidato elegido: fija cfg.ELEGIDO_B tras el piloto (protocolo v4)")
+        name = ELEGIDO_B
     return NAGFuse(num_classes, dropout, pretrained=pretrained, rho=rho, **VARIANT_KW[name])

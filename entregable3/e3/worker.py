@@ -42,7 +42,7 @@ def run_path(t: dict) -> Path:
     root = cfg.RESULTS[fam]
     if t["kind"] == "hpo":
         return root / t["model"] / "hpo" / f"trial_{t['trial']:02d}"
-    if t["fam"] == "nag" and t["model"] != cfg.MODEL:
+    if t["fam"] == "nag" and t["model"] not in (cfg.MODEL, cfg.MODEL_B):
         return root / "ablation" / t["model"] / f"seed_{t['seed']:02d}"
     return root / t["model"] / f"seed_{t['seed']:02d}"
 
@@ -176,6 +176,11 @@ def _register_nagfuse():
     M.SPECS["NAGFuse/sin_denoising"] = spec("NAGFuse/sin_denoising", "mix", "Ablación: sin contracción de Haar")
     M.SPECS["NAGFuse/solo_vit"] = spec("NAGFuse/solo_vit", "ce", "Ablación: solo la rama ViT-B/16")
     M.SPECS["NAGFuse/solo_cnn"] = spec("NAGFuse/solo_cnn", "ce", "Ablación: solo la rama EfficientNet-B0 con contracción")
+    # Opción B (protocolo v4): mismo mecanismo y misma pérdida; solo cambian las redes de cada rama
+    M.SPECS["NAGFuse-B1"] = spec("NAGFuse-B1", "mix", "Opción B, candidato 1: Swin-S + ConvNeXt-T")
+    M.SPECS["NAGFuse-B2"] = spec("NAGFuse-B2", "mix", "Opción B, candidato 2: Swin-S + EfficientNet-B0")
+    M.SPECS["NAGFuse-B3"] = spec("NAGFuse-B3", "mix", "Opción B, candidato 3: ViT-B/16 + ConvNeXt-T")
+    M.SPECS["NAGFuse-B"] = spec("NAGFuse-B", "mix", f"Opción B confirmatoria ({cfg.ELEGIDO_B})")
 
     orig_build = T.build_model
 
@@ -332,8 +337,11 @@ def task_e2(t: dict, worker: str) -> None:
         _ensure_teacher(T, C, common, subset, log, tid, worker)
     install_mirror(T, "e2", tid, worker, hp["max_epochs"])
     extra = {"hpo_trial": sel[base]["trial"], "entregable": 3}
-    if t["fam"] == "nag" and name != cfg.MODEL:
+    if t["fam"] == "nag" and name not in (cfg.MODEL, cfg.MODEL_B):
         extra["ablation_of"] = cfg.MODEL
+    if name == cfg.MODEL_B:
+        extra.update({"opcion": "B", "protocolo": "v4", "candidato": cfg.ELEGIDO_B,
+                      "hp_de": "búsqueda de la versión A (intento %d)" % sel[base]["trial"]})
     if not is_done(run):
         ck = S.restore_checkpoint(run, "e2")
         if ck:

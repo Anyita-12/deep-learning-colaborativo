@@ -25,3 +25,15 @@ Partición de desarrollo: conjunto de validación (360 imágenes) y predicciones
   1. `finite_logits`: si los logits de una rama no son finitos en inferencia, se reevalúan en fp32; si siguen sin serlo, se produce un error explícito. Cuando son finitos no se altera nada.
   2. El análisis exploratorio de NAGFuse (`_nag_analysis`) ya no hace fallar una corrida entrenada: registra el aviso y el error (`nagfuse_analisis_ERROR.json`) y continúa. Se comprueba además que las probabilidades sean finitas, para localizar el caso.
 - **Alcance:** solo afecta a las corridas de ablación `sin_denoising` (semillas 3 a 5 y siguientes). Las corridas ya terminadas no se tocan.
+
+## Opción B: segundo intento autorizado (protocolo v4, `protocolo_v4_opcion_B.md`)
+- **Motivo:** la versión A no cumplió R3 (empate con RWCNet y ViT-B16 en F1 limpio). El docente autorizó un segundo intento con declaración completa. Los resultados de A en prueba ya eran conocidos; ver la sección 2 del protocolo v4.
+- **Antes del piloto (tag `e3-protocolo-v4-piloto`):** candidatos fijados a priori, sin usar prueba ni conjuntos adicionales: B1 = Swin-S + ConvNeXt-T, B2 = Swin-S + EfficientNet-B0, B3 = ViT-B/16 + ConvNeXt-T. Mecanismo, pérdida, hiperparámetros (intento 1 de la búsqueda de A) y protocolo de entrenamiento idénticos a A.
+
+| N.° | Variante evaluada (piloto, semilla 100, solo validación) | F1 val | Decisión | Fecha |
+|---|---|---|---|---|
+| 8 | NAGFuse-B1 (Swin-S + ConvNeXt-T) | _completar_ | _completar_ | _completar_ |
+| 9 | NAGFuse-B2 (Swin-S + EfficientNet-B0) | _completar_ | _completar_ | _completar_ |
+| 10 | NAGFuse-B3 (ViT-B/16 + ConvNeXt-T) | _completar_ | _completar_ | _completar_ |
+
+Referencia: versión A en el mismo intento de la búsqueda, F1 val 0.9688. **Nd = 10.** La tabla se completa con la salida de `python -m e3.orchestrator piloto` antes del tag `e3-protocolo-v4`.

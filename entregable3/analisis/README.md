@@ -13,3 +13,7 @@ Lee los resultados versionados (`results/`, `entregable2/results/`, `entregable3
 | 7 | `congelar.py` | SHA-256 de los directorios congelados (capítulo 21) |
 
 `estad.py` contiene las pruebas. El bootstrap usa semilla 2026 y 10 000 réplicas; regenerar desde cero da los mismos archivos byte a byte.
+
+## Opción B (protocolo v4)
+
+Con las corridas de `NAGFuse-B` copiadas en `entregable3/results/results_e2/NAGFuse-B/`: `python cargar.py` (ya incluye NAGFuse-B) y luego `python analisis_b.py`, que escribe `entregable3/resultados_b/` (contrastes con α_B = 0.025, H3, conjuntos adicionales, Friedman con B, B frente a A, mecanismo y `resumen_b.json`). Después, `tablas_y_figuras.py`, `datos_dashboard.py`, `datos_dashboard_diagnostico.py` y `congelar.py` como en la versión A. Los resultados de A no cambian.
