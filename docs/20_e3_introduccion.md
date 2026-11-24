@@ -17,7 +17,7 @@ Los capítulos 20 a 31 forman el Entregable 3. Siguen uno a uno la estructura pe
 | 10. Conclusiones | 30 | Respuestas, límites y trabajo futuro |
 | 11. Reproducibilidad | 31 | Entorno, artefactos, autoría y uso de herramientas |
 
-**Dashboard desplegado:** *(pegar aquí la URL pública de Render)*
+**Dashboard desplegado:** https://nagfuse-trashnet.onrender.com
 
 ## 20.1 Objetivo
 
