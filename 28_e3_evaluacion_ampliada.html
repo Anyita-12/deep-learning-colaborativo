@@ -1,0 +1,863 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>28. Evaluación ampliada &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '28_e3_evaluacion_ampliada';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="29. Dashboard" href="29_e3_dashboard.html" />
+    <link rel="prev" title="27. Protocolo y validación estadística" href="27_e3_protocolo_validacion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><div class="sidebar-autores">
+  <div class="autor">
+    <img src="_static/autores/anyely.jpg" alt="Anyely Sanjuan Benavides">
+    <p class="autor-nombre">Anyely Sanjuan Benavides</p>
+    <p class="autor-detalle">Msc. Analítica de Datos<br>Universidad del Norte</p>
+  </div>
+  <div class="autor">
+    <img src="_static/autores/juan.jpg" alt="Juan David Díaz Fernández">
+    <p class="autor-nombre">Juan David Díaz Fernández</p>
+    <p class="autor-detalle">Msc. Ingeniería Mecánica<br>Universidad del Norte</p>
+  </div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Clasificación de residuos con TrashNet
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 1: modelos base</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y conjunto de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_conclusiones.html">7. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2: benchmark de diez modelos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_benchmark_introduccion.html">8. Benchmark de diez modelos: problema, preguntas e hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datos_auditoria.html">9. Datos: ficha técnica, contrato de datos y auditoría de fuga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_revision_sistematica.html">10. Revisión sistemática ampliada y selección de los modelos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_protocolo_preregistro.html">11. Preregistro, protocolo común y fichas de modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_paper_guia.html">12. Paper guía: réplica, limitaciones y ablación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_benchmark_estadistica.html">13. Benchmark: resultados e inferencia estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_ajuste_calibracion_incertidumbre.html">14. Bondad de ajuste, sobreajuste, calibración e incertidumbre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_robustez_interpretabilidad_errores.html">15. Robustez, interpretabilidad, errores y techo de desempeño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_discusion_benchmark.html">16. Discusión del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_reproducibilidad.html">17. Reproducibilidad del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_conclusiones_benchmark.html">18. Conclusiones del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_referencias_benchmark.html">19. Referencias del benchmark</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 3: modelo propio y evaluación ampliada</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20_e3_introduccion.html">20. Entregable 3: introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_e3_correcciones.html">21. Correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_e3_datos.html">22. Datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_e3_benchmark.html">23. Benchmark: configuraciones, semillas y artefactos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_e3_literatura_novedad.html">24. Literatura y verificación de novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25_e3_diseno.html">25. Diseño de NAGFuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_e3_implementacion_demostracion.html">26. Implementación y demostración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_e3_protocolo_validacion.html">27. Protocolo y validación estadística</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">28. Evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_e3_dashboard.html">29. Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_e3_conclusiones.html">30. Conclusiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/28_e3_evaluacion_ampliada.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>28. Evaluación ampliada</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez-a-perturbaciones">28.1 Robustez a perturbaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ablacion-y-predicciones-del-mecanismo">28.2 Ablación y predicciones del mecanismo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjuntos-adicionales">28.3 Conjuntos adicionales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibracion-y-prediccion-conforme">28.4 Calibración y predicción conforme</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="evaluacion-ampliada">
+<h1>28. Evaluación ampliada<a class="headerlink" href="#evaluacion-ampliada" title="Link to this heading">#</a></h1>
+<p>Todas las cifras salen de la tabla maestra única (<code class="docutils literal notranslate"><span class="pre">entregable3/resultados/tabla_maestra.csv</span></code>), la misma que lee el dashboard.</p>
+<section id="robustez-a-perturbaciones">
+<h2>28.1 Robustez a perturbaciones<a class="headerlink" href="#robustez-a-perturbaciones" title="Link to this heading">#</a></h2>
+<p>Perturbaciones del E2 (semilla 2026), aplicadas a la imagen de prueba en <span class="math notranslate nohighlight">\([0, 1]\)</span>. Media sobre semillas; R = 20 para los seis primeros modelos y 12 para el resto.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Limpio</p></th>
+<th class="head"><p>Ruido 0.05</p></th>
+<th class="head"><p>Ruido 0.10</p></th>
+<th class="head"><p>Desenfoque</p></th>
+<th class="head"><p>Oclusión</p></th>
+<th class="head"><p>Fondo sustituido</p></th>
+<th class="head"><p>ECE</p></th>
+<th class="head"><p>NLL</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>NAGFuse</strong></p></td>
+<td><p>0.936</p></td>
+<td><p><strong>0.904</strong></p></td>
+<td><p><strong>0.859</strong></p></td>
+<td><p><strong>0.865</strong></p></td>
+<td><p>0.928</p></td>
+<td><p><strong>0.920</strong></p></td>
+<td><p><strong>0.030</strong></p></td>
+<td><p>0.191</p></td>
+</tr>
+<tr class="row-odd"><td><p>ViT-B16</p></td>
+<td><p>0.936</p></td>
+<td><p>0.892</p></td>
+<td><p>0.840</p></td>
+<td><p>0.864</p></td>
+<td><p><strong>0.932</strong></p></td>
+<td><p>0.916</p></td>
+<td><p>0.039</p></td>
+<td><p>0.224</p></td>
+</tr>
+<tr class="row-even"><td><p>RWCNet</p></td>
+<td><p><strong>0.937</strong></p></td>
+<td><p>0.596</p></td>
+<td><p>0.343</p></td>
+<td><p>0.814</p></td>
+<td><p>0.926</p></td>
+<td><p>0.895</p></td>
+<td><p><strong>0.030</strong></p></td>
+<td><p><strong>0.187</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>GFN</p></td>
+<td><p>0.924</p></td>
+<td><p>0.783</p></td>
+<td><p>0.522</p></td>
+<td><p>0.775</p></td>
+<td><p>0.922</p></td>
+<td><p>0.896</p></td>
+<td><p>0.051</p></td>
+<td><p>0.309</p></td>
+</tr>
+<tr class="row-even"><td><p>Celik-HC</p></td>
+<td><p>0.909</p></td>
+<td><p>0.243</p></td>
+<td><p>0.128</p></td>
+<td><p>0.728</p></td>
+<td><p>0.892</p></td>
+<td><p>0.869</p></td>
+<td><p>0.057</p></td>
+<td><p>0.381</p></td>
+</tr>
+<tr class="row-odd"><td><p>ResMsCapsule</p></td>
+<td><p>0.906</p></td>
+<td><p>0.427</p></td>
+<td><p>0.149</p></td>
+<td><p>0.578</p></td>
+<td><p>0.865</p></td>
+<td><p>0.813</p></td>
+<td><p>0.188</p></td>
+<td><p>0.433</p></td>
+</tr>
+<tr class="row-even"><td><p>ResNet-18</p></td>
+<td><p>0.863</p></td>
+<td><p>0.397</p></td>
+<td><p>0.114</p></td>
+<td><p>0.613</p></td>
+<td><p>0.820</p></td>
+<td><p>0.596</p></td>
+<td><p>0.052</p></td>
+<td><p>—</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/curva_ruido.png"><img alt="_images/curva_ruido.png" src="_images/curva_ruido.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">F1 macro frente al nivel de ruido (media e IC 95 % t). NAGFuse y ViT-B16 se degradan poco; las CNN caen entre 0.3 y 0.7.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>NAGFuse tiene el mejor o casi el mejor F1 en todas las perturbaciones y la mejor calibración, empatado con RWCNet. Con ruido <span class="math notranslate nohighlight">\(\sigma = 0.10\)</span> su ventaja sobre RWCNet crece de 0.31 a 0.52 (predicción P3).</p>
+</section>
+<section id="ablacion-y-predicciones-del-mecanismo">
+<h2>28.2 Ablación y predicciones del mecanismo<a class="headerlink" href="#ablacion-y-predicciones-del-mecanismo" title="Link to this heading">#</a></h2>
+<p>Familia de 4 contrastes contra el modelo completo, semillas 0–11, Holm sobre el máximo de t y Wilcoxon. La “compuerta apagada” usa las mismas corridas con <span class="math notranslate nohighlight">\(\pi = \pi_0\)</span> fijo; las otras tres variantes se reentrenaron.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variante</p></th>
+<th class="head"><p>Limpio</p></th>
+<th class="head"><p>Ruido 0.05</p></th>
+<th class="head"><p>Ruido 0.10</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Compuerta apagada</p></td>
+<td><p>0.000</p></td>
+<td><p>+0.001 (n.s.)</p></td>
+<td><p><strong>+0.013</strong> (<span class="math notranslate nohighlight">\(p_{Holm} = 0.015\)</span>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sin contracción de Haar</p></td>
+<td><p>+0.003 (n.s.)</p></td>
+<td><p>+0.011 (n.s.)</p></td>
+<td><p>+0.005 (n.s.)</p></td>
+</tr>
+<tr class="row-even"><td><p>Solo rama ViT</p></td>
+<td><p><strong>+0.019</strong> (<span class="math notranslate nohighlight">\(p = 0.010\)</span>)</p></td>
+<td><p>+0.012 (n.s.)</p></td>
+<td><p>+0.014 (n.s.)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Solo rama CNN (con Haar)</p></td>
+<td><p>+0.007 (n.s.)</p></td>
+<td><p><strong>+0.263</strong> (<span class="math notranslate nohighlight">\(p = 0.002\)</span>)</p></td>
+<td><p><strong>+0.477</strong> (<span class="math notranslate nohighlight">\(p = 0.002\)</span>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Las cifras son F1 del modelo completo menos F1 de la variante.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/ablacion.png"><img alt="_images/ablacion.png" src="_images/ablacion.png" style="width: 85%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Ablación con IC 95 % bootstrap sobre semillas. Punto relleno: significativo con Holm.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Predicción (declarada antes de los experimentos)</p></th>
+<th class="head"><p>Resultado</p></th>
+<th class="head"><p>¿Se cumple?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>P1. Apagar la compuerta reduce el F1 con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span> en al menos <span class="math notranslate nohighlight">\(\delta\)</span></p></td>
+<td><p>Reducción de 0.001, no significativa</p></td>
+<td><p><strong>No</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>P2. Apagar la compuerta no cambia el F1 limpio en más de 0.005</p></td>
+<td><p>Cambio de 0.000</p></td>
+<td><p>Sí</p></td>
+</tr>
+<tr class="row-even"><td><p>P3. La ventaja sobre la mejor CNN crece de <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span> a 0.10</p></td>
+<td><p>De 0.308 a 0.516 sobre RWCNet</p></td>
+<td><p>Sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>P4. <span class="math notranslate nohighlight">\(\hat\sigma\)</span> crece con <span class="math notranslate nohighlight">\(\sigma\)</span> y con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span> la compuerta se abre del todo en ≥ 95 % de las imágenes</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat\sigma\)</span>: 0.000 / 0.051 / 0.098; <span class="math notranslate nohighlight">\(\pi = 1\)</span> en el 100 %</p></td>
+<td><p>Sí</p></td>
+</tr>
+<tr class="row-even"><td><p>P5. La contracción de Haar mejora la rama CNN con ruido</p></td>
+<td><p>Rama CNN con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span>: 0.625 con Haar frente a 0.216 sin ella (11 semillas)</p></td>
+<td><p>Sí</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Lectura.</strong></p>
+<ul class="simple">
+<li><p><strong>La compuerta no es la que protege con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span>.</strong> P1 falla porque, aun con la compuerta apagada (<span class="math notranslate nohighlight">\(\pi \approx 0.51\)</span>), la mezcla sigue dominada por la rama ViT y la rama CNN ya está protegida por la contracción (0.625 frente a 0.216).</p></li>
+<li><p><strong>Con <span class="math notranslate nohighlight">\(\sigma = 0.10\)</span> la compuerta sí aporta</strong>, 0.013 de forma significativa: la rama CNN cae a 0.38 y conviene descartarla del todo.</p></li>
+<li><p><strong>El entrenamiento conjunto también importa.</strong> La rama ViT dentro de NAGFuse supera a la variante “solo ViT” en limpio (+0.019), y con ruido NAGFuse es igual a su rama ViT (<span class="math notranslate nohighlight">\(\pi = 1\)</span>). La pequeña ventaja sobre ViT-B16 con ruido (+0.012, n.s.) viene, por tanto, de esa rama entrenada con supervisión de la mezcla, no de la compuerta.</p></li>
+<li><p><strong>La variante sin contracción empata con el modelo completo en limpio y con ruido.</strong> Con la compuerta abierta la salida es la rama ViT, así que la contracción solo influye cuando la compuerta está cerrada o a medio abrir.</p></li>
+</ul>
+<p>El mecanismo hace lo que dicen los teoremas (detecta y conmuta), pero su efecto sobre el F1 con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span> es menor que el previsto.</p>
+</section>
+<section id="conjuntos-adicionales">
+<h2>28.3 Conjuntos adicionales<a class="headerlink" href="#conjuntos-adicionales" title="Link to this heading">#</a></h2>
+<p>Las corridas de los rivales con semillas 0–7 se entrenaron en el E2 sin conservar los pesos, de modo que no se pudieron evaluar en estos conjuntos. Las comparaciones usan las semillas comunes: 8–19 para los rivales de nivel 2 y 8–11 para el resto.</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="_images/conjuntos_adicionales.png"><img alt="_images/conjuntos_adicionales.png" src="_images/conjuntos_adicionales.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">F1 macro sin reentrenar (clases presentes) en RealWaste, Garbage v2 y WaRP-C.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Conjunto</p></th>
+<th class="head"><p>NAGFuse</p></th>
+<th class="head"><p>ViT-B16</p></th>
+<th class="head"><p>RWCNet</p></th>
+<th class="head"><p>GFN</p></th>
+<th class="head"><p>Mejor CNN del E1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RealWaste</p></td>
+<td><p>0.462</p></td>
+<td><p><strong>0.520</strong></p></td>
+<td><p>0.426</p></td>
+<td><p>0.415</p></td>
+<td><p>0.263 (CNN)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Garbage v2</p></td>
+<td><p>0.522</p></td>
+<td><p><strong>0.586</strong></p></td>
+<td><p>0.512</p></td>
+<td><p>0.525</p></td>
+<td><p>0.271 (CNN)</p></td>
+</tr>
+<tr class="row-even"><td><p>WaRP-C</p></td>
+<td><p>0.364</p></td>
+<td><p><strong>0.436</strong></p></td>
+<td><p>0.332</p></td>
+<td><p>0.288</p></td>
+<td><p>0.152 (CNN)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>NAGFuse es significativamente peor que ViT-B16 en los tres conjuntos</strong> (−0.058, −0.064 y −0.072; Holm <span class="math notranslate nohighlight">\(p \le 0.013\)</span>).</p></li>
+<li><p>Supera a RWCNet en RealWaste (+0.036) y empata con él en Garbage v2 y WaRP-C.</p></li>
+<li><p>Supera a Celik-HC, ResMsCapsule y GFN en la mayoría de los casos.</p></li>
+<li><p><strong>El criterio de consistencia entre conjuntos no se cumple.</strong> El protocolo pedía mejor media en al menos 2 de 3 y no ser significativamente peor que ningún rival.</p></li>
+<li><p><strong>Con 4 semillas comunes, la Wilcoxon exacta no puede bajar de <span class="math notranslate nohighlight">\(p = 0.125\)</span></strong>, así que los contrastes contra MbXception, FocusRCNet y los modelos del E1 no pueden ser significativos aunque las diferencias superen 0.2.</p></li>
+</ul>
+<p><strong>Explicación probable.</strong> La rama EfficientNet-B0 aprendió rasgos más ligados al dominio de TrashNet (fondo blanco, una sola pieza) que la rama ViT. Fuera de ese dominio <span class="math notranslate nohighlight">\(\hat\sigma\)</span> ya no es cero: los fondos texturizados producen coeficientes diagonales grandes. La compuerta puede entonces abrirse o cerrarse por textura y no por ruido; el supuesto (A2) del Teorema 1 deja de cumplirse. Medir <span class="math notranslate nohighlight">\(\pi\)</span> en estos conjuntos es el siguiente paso.</p>
+</section>
+<section id="calibracion-y-prediccion-conforme">
+<h2>28.4 Calibración y predicción conforme<a class="headerlink" href="#calibracion-y-prediccion-conforme" title="Link to this heading">#</a></h2>
+<p><strong>Calibración.</strong> NAGFuse y RWCNet tienen el menor ECE (0.030), por debajo de ViT-B16 (0.039).</p>
+<p><strong>Predicción conforme.</strong> Se usó predicción conforme dividida con <span class="math notranslate nohighlight">\(\alpha = 0.10\)</span> (<em>LAC</em>), calibrada en validación y medida en prueba, con 20 semillas por modelo:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Cobertura</p></th>
+<th class="head"><p>Tamaño medio del conjunto</p></th>
+<th class="head"><p>Peor clase (cobertura)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NAGFuse</p></td>
+<td><p>0.879</p></td>
+<td><p>0.90</p></td>
+<td><p>trash (0.763)</p></td>
+</tr>
+<tr class="row-odd"><td><p>RWCNet</p></td>
+<td><p>0.884</p></td>
+<td><p>0.90</p></td>
+<td><p>trash (0.755)</p></td>
+</tr>
+<tr class="row-even"><td><p>GFN</p></td>
+<td><p>0.883</p></td>
+<td><p>0.91</p></td>
+<td><p>trash (0.737)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ViT-B16</p></td>
+<td><p>0.872</p></td>
+<td><p>0.89</p></td>
+<td><p>trash (0.700)</p></td>
+</tr>
+<tr class="row-even"><td><p>Celik-HC</p></td>
+<td><p>0.882</p></td>
+<td><p>0.92</p></td>
+<td><p>trash (0.663)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>Todos quedan algo por debajo de la cobertura nominal de 0.90.</strong> Coincide con la diferencia de distribución entre validación y prueba ya documentada en el E2.</p></li>
+<li><p><strong>La clase trash es la peor cubierta en todos los modelos.</strong> NAGFuse tiene la mejor cobertura en esa clase.</p></li>
+<li><p><strong>El tamaño medio menor que 1 indica que hay conjuntos vacíos.</strong> Pasa en las imágenes en que ninguna clase supera el umbral de confianza, y conviene tratarlas como “no sé”.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="27_e3_protocolo_validacion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">27. Protocolo y validación estadística</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="29_e3_dashboard.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">29. Dashboard</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustez-a-perturbaciones">28.1 Robustez a perturbaciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ablacion-y-predicciones-del-mecanismo">28.2 Ablación y predicciones del mecanismo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjuntos-adicionales">28.3 Conjuntos adicionales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibracion-y-prediccion-conforme">28.4 Calibración y predicción conforme</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan Benavides y Juan David Díaz Fernández
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

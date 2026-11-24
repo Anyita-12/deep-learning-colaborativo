@@ -1,0 +1,1033 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>27. Protocolo y validación estadística &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '27_e3_protocolo_validacion';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="28. Evaluación ampliada" href="28_e3_evaluacion_ampliada.html" />
+    <link rel="prev" title="26. Implementación y demostración" href="26_e3_implementacion_demostracion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><div class="sidebar-autores">
+  <div class="autor">
+    <img src="_static/autores/anyely.jpg" alt="Anyely Sanjuan Benavides">
+    <p class="autor-nombre">Anyely Sanjuan Benavides</p>
+    <p class="autor-detalle">Msc. Analítica de Datos<br>Universidad del Norte</p>
+  </div>
+  <div class="autor">
+    <img src="_static/autores/juan.jpg" alt="Juan David Díaz Fernández">
+    <p class="autor-nombre">Juan David Díaz Fernández</p>
+    <p class="autor-detalle">Msc. Ingeniería Mecánica<br>Universidad del Norte</p>
+  </div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Clasificación de residuos con TrashNet
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 1: modelos base</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y conjunto de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_conclusiones.html">7. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2: benchmark de diez modelos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_benchmark_introduccion.html">8. Benchmark de diez modelos: problema, preguntas e hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datos_auditoria.html">9. Datos: ficha técnica, contrato de datos y auditoría de fuga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_revision_sistematica.html">10. Revisión sistemática ampliada y selección de los modelos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_protocolo_preregistro.html">11. Preregistro, protocolo común y fichas de modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_paper_guia.html">12. Paper guía: réplica, limitaciones y ablación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_benchmark_estadistica.html">13. Benchmark: resultados e inferencia estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_ajuste_calibracion_incertidumbre.html">14. Bondad de ajuste, sobreajuste, calibración e incertidumbre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_robustez_interpretabilidad_errores.html">15. Robustez, interpretabilidad, errores y techo de desempeño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_discusion_benchmark.html">16. Discusión del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_reproducibilidad.html">17. Reproducibilidad del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_conclusiones_benchmark.html">18. Conclusiones del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_referencias_benchmark.html">19. Referencias del benchmark</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 3: modelo propio y evaluación ampliada</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20_e3_introduccion.html">20. Entregable 3: introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_e3_correcciones.html">21. Correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_e3_datos.html">22. Datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_e3_benchmark.html">23. Benchmark: configuraciones, semillas y artefactos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_e3_literatura_novedad.html">24. Literatura y verificación de novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25_e3_diseno.html">25. Diseño de NAGFuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_e3_implementacion_demostracion.html">26. Implementación y demostración</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">27. Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_e3_evaluacion_ampliada.html">28. Evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_e3_dashboard.html">29. Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_e3_conclusiones.html">30. Conclusiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/27_e3_protocolo_validacion.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>27. Protocolo y validación estadística</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preregistro">27.1 Preregistro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas">27.2 Pruebas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h1-f1-macro-limpio">27.3 H1: F1 macro limpio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad-de-la-conclusion">27.4 Sensibilidad de la conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h3-no-inferioridad-frente-al-mejor-rival">27.5 H3: no inferioridad frente al mejor rival</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h2-ruido-gaussiano-sigma-0-05">27.6 H2: ruido gaussiano <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-global">27.7 Comparación global</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="protocolo-y-validacion-estadistica">
+<h1>27. Protocolo y validación estadística<a class="headerlink" href="#protocolo-y-validacion-estadistica" title="Link to this heading">#</a></h1>
+<section id="preregistro">
+<h2>27.1 Preregistro<a class="headerlink" href="#preregistro" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Documento</p></th>
+<th class="head"><p>Contenido</p></th>
+<th class="head"><p>Fecha y tag</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">estandar.md</span></code></p></td>
+<td><p>Estándar de profundidad, rivales, conjuntos adicionales y <strong>hallazgo alternativo</strong> si NAGFuse no supera a toda la familia</p></td>
+<td><p>2026-11-21, <code class="docutils literal notranslate"><span class="pre">e3-protocolo-v1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">protocolo.md</span></code></p></td>
+<td><p>Hipótesis, predicciones, familias de contrastes, pruebas, semillas, potencia y regla de corte</p></td>
+<td><p>2026-11-21, <code class="docutils literal notranslate"><span class="pre">e3-protocolo-v1</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">design_log.md</span></code></p></td>
+<td><p>Bitácora de desarrollo (<span class="math notranslate nohighlight">\(N_d = 7\)</span>) y enmiendas</p></td>
+<td><p>v1, v2 (22-nov) y v3 (22-nov)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>El tag <code class="docutils literal notranslate"><span class="pre">e3-protocolo-v1</span></code> se creó antes de la primera corrida definitiva. Hubo dos enmiendas, ambas declaradas en <code class="docutils literal notranslate"><span class="pre">design_log.md</span></code> antes de abrir cualquier métrica de prueba:</p>
+<ul class="simple">
+<li><p><strong>v2: corrección técnica.</strong> Logits no finitos en la variante sin contracción; solo afectó a la ablación.</p></li>
+<li><p><strong>v3: adelanto de la hora de corte.</strong> Se pasó del lunes a las 06:00 a la noche del domingo, porque las 144 tareas ya habían terminado. El conjunto de corridas al corte es el mismo a cualquier hora.</p></li>
+</ul>
+<p><strong>Exposición declarada.</strong> Los registros de entrenamiento del código congelado del E2 imprimen el F1 de prueba de cada corrida. No se usaron para ninguna decisión: todas las decisiones de diseño son anteriores a v1, y después de v1 no se cambió ningún hiperparámetro, rival, conjunto ni métrica.</p>
+</section>
+<section id="pruebas">
+<h2>27.2 Pruebas<a class="headerlink" href="#pruebas" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Familia principal (m = 12).</strong> NAGFuse frente a cada rival, en F1 macro de prueba.</p></li>
+<li><p><strong>Tres pruebas por contraste:</strong></p>
+<ol class="arabic simple">
+<li><p>t pareada sobre semillas;</p></li>
+<li><p>Wilcoxon de rangos con signo exacta;</p></li>
+<li><p>bootstrap pareado jerárquico (10 000 réplicas): se remuestrean semillas y, dentro de cada semilla, los grupos de casi duplicados del conjunto de prueba.</p></li>
+</ol>
+</li>
+<li><p><strong>Holm</strong> por prueba. <strong>Decide el máximo de los tres p ajustados.</strong></p></li>
+<li><p><strong>Criterio para “supera”:</strong> p ajustado &lt; 0.05, diferencia media &gt; <span class="math notranslate nohighlight">\(\delta = 0.02\)</span> y límite inferior del IC 95 % &gt; 0.</p></li>
+<li><p><strong>Baselines deterministas.</strong> HistGradientBoosting y el trivial se tratan como constantes.</p></li>
+</ul>
+<p>El p del bootstrap tiene una resolución de <span class="math notranslate nohighlight">\(10^{-4}\)</span>, de modo que su valor ajustado mínimo es 0.0012.</p>
+</section>
+<section id="h1-f1-macro-limpio">
+<h2>27.3 H1: F1 macro limpio<a class="headerlink" href="#h1-f1-macro-limpio" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rival</p></th>
+<th class="head"><p>R</p></th>
+<th class="head"><p>Diferencia</p></th>
+<th class="head"><p>IC 95 %</p></th>
+<th class="head"><p>p t (Holm)</p></th>
+<th class="head"><p>p Wilcoxon (Holm)</p></th>
+<th class="head"><p>p bootstrap (Holm)</p></th>
+<th class="head"><p>δ de Cliff</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(d_z\)</span></p></th>
+<th class="head"><p>Decisión</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Celik-HC</p></td>
+<td><p>20</p></td>
+<td><p>+0.0272</p></td>
+<td><p>[0.0168, 0.0392]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.001</p></td>
+<td><p>0.90</p></td>
+<td><p>1.49</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-odd"><td><p>MbXception</p></td>
+<td><p>12</p></td>
+<td><p>+0.0692</p></td>
+<td><p>[0.0566, 0.0832]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.004</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>6.07</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-even"><td><p>ViT-B16</p></td>
+<td><p>20</p></td>
+<td><p>+0.0002</p></td>
+<td><p>[-0.0110, 0.0118]</p></td>
+<td><p>1.000</p></td>
+<td><p>1.000</p></td>
+<td><p>1.000</p></td>
+<td><p>0.10</p></td>
+<td><p>0.01</p></td>
+<td><p>No significativa</p></td>
+</tr>
+<tr class="row-odd"><td><p>GFN</p></td>
+<td><p>20</p></td>
+<td><p>+0.0125</p></td>
+<td><p>[0.0030, 0.0224]</p></td>
+<td><p>0.006</p></td>
+<td><p>0.005</p></td>
+<td><p>0.043</p></td>
+<td><p>0.50</p></td>
+<td><p>0.81</p></td>
+<td><p>Mejor, &lt; δ</p></td>
+</tr>
+<tr class="row-even"><td><p>FocusRCNet</p></td>
+<td><p>12</p></td>
+<td><p>+0.1260</p></td>
+<td><p>[0.1088, 0.1462]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.004</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>5.02</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ResMsCapsule</p></td>
+<td><p>20</p></td>
+<td><p>+0.0308</p></td>
+<td><p>[0.0197, 0.0427]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.001</p></td>
+<td><p>0.80</p></td>
+<td><p>1.57</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-even"><td><p>RWCNet</p></td>
+<td><p>20</p></td>
+<td><p>-0.0004</p></td>
+<td><p>[-0.0096, 0.0088]</p></td>
+<td><p>1.000</p></td>
+<td><p>1.000</p></td>
+<td><p>1.000</p></td>
+<td><p>-0.10</p></td>
+<td><p>-0.03</p></td>
+<td><p>No significativa</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN</p></td>
+<td><p>12</p></td>
+<td><p>+0.1110</p></td>
+<td><p>[0.0956, 0.1283]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.004</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>5.74</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-even"><td><p>MobileNetV2</p></td>
+<td><p>12</p></td>
+<td><p>+0.1291</p></td>
+<td><p>[0.1123, 0.1477]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.004</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>5.73</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ResNet-18</p></td>
+<td><p>12</p></td>
+<td><p>+0.0713</p></td>
+<td><p>[0.0572, 0.0870]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.004</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>4.23</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-even"><td><p>HistGradientBoosting</p></td>
+<td><p>20</p></td>
+<td><p>+0.1763</p></td>
+<td><p>[0.1673, 0.1836]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>15.85</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Trivial</p></td>
+<td><p>20</p></td>
+<td><p>+0.8729</p></td>
+<td><p>[0.8639, 0.8802]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>78.49</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/forest_H1_H2.png"><img alt="_images/forest_H1_H2.png" src="_images/forest_H1_H2.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Diferencias pareadas NAGFuse − rival con IC 95 % del bootstrap jerárquico (eje simétrico-logarítmico). La línea discontinua es <span class="math notranslate nohighlight">\(\delta = 0.02\)</span>.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Resultado.</strong> NAGFuse supera a 10 de los 12 rivales con diferencia mayor que <span class="math notranslate nohighlight">\(\delta\)</span>. Frente a GFN la ventaja es significativa pero menor que <span class="math notranslate nohighlight">\(\delta\)</span> (+0.0125). Frente a RWCNet y ViT-B16 no hay diferencia. <strong>La condición de superioridad sobre toda la familia no se cumple.</strong></p>
+<p><strong>Potencia observada.</strong> Con las desviaciones pareadas observadas y 20 semillas, la potencia para detectar <span class="math notranslate nohighlight">\(\delta\)</span> al nivel 0.05/12 es de 0.99 frente a RWCNet (<span class="math notranslate nohighlight">\(\sigma_d = 0.015\)</span>) y de 0.83 frente a ViT-B16 (<span class="math notranslate nohighlight">\(\sigma_d = 0.021\)</span>). Estas comparaciones podían detectar <span class="math notranslate nohighlight">\(\delta\)</span>; el empate es informativo y no se debe a falta de semillas. Las diferencias mínimas detectables son 0.016 y 0.021. Frente a FocusRCNet, MobileNetV2 y CNN (12 semillas, <span class="math notranslate nohighlight">\(\sigma_d\)</span> entre 0.019 y 0.025) la potencia para <span class="math notranslate nohighlight">\(\delta\)</span> es baja, pero las diferencias observadas superan 0.1.</p>
+</section>
+<section id="sensibilidad-de-la-conclusion">
+<h2>27.4 Sensibilidad de la conclusión<a class="headerlink" href="#sensibilidad-de-la-conclusion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rival</p></th>
+<th class="head"><p>F1, tres pruebas</p></th>
+<th class="head"><p>t de Nadeau–Bengio</p></th>
+<th class="head"><p>MCC</p></th>
+<th class="head"><p>Semillas 0–9</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Celik-HC</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>&lt; δ</p></td>
+</tr>
+<tr class="row-odd"><td><p>MbXception</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+</tr>
+<tr class="row-even"><td><p>ViT-B16</p></td>
+<td><p>n.s.</p></td>
+<td><p>n.s.</p></td>
+<td><p>n.s.</p></td>
+<td><p>n.s.</p></td>
+</tr>
+<tr class="row-odd"><td><p>GFN</p></td>
+<td><p>&lt; δ</p></td>
+<td><p>n.s.</p></td>
+<td><p>n.s.</p></td>
+<td><p>n.s.</p></td>
+</tr>
+<tr class="row-even"><td><p>FocusRCNet</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+</tr>
+<tr class="row-odd"><td><p>ResMsCapsule</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+</tr>
+<tr class="row-even"><td><p>RWCNet</p></td>
+<td><p>n.s.</p></td>
+<td><p>n.s.</p></td>
+<td><p>n.s.</p></td>
+<td><p>n.s.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+</tr>
+<tr class="row-even"><td><p>MobileNetV2</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+</tr>
+<tr class="row-odd"><td><p>ResNet-18</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+</tr>
+<tr class="row-even"><td><p>HistGradientBoosting</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+</tr>
+<tr class="row-odd"><td><p>Trivial</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+<td><p>Supera</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La conclusión sobre RWCNet y ViT-B16 (sin diferencia) no cambia con ninguna variante: la prueba, la métrica o el subconjunto de semillas. Frente a GFN, la ventaja deja de ser significativa con la t corregida, con MCC y con 10 semillas, así que es frágil. Frente a Celik-HC, con solo 10 semillas la diferencia (0.0199) queda justo por debajo de <span class="math notranslate nohighlight">\(\delta\)</span>.</p>
+</section>
+<section id="h3-no-inferioridad-frente-al-mejor-rival">
+<h2>27.5 H3: no inferioridad frente al mejor rival<a class="headerlink" href="#h3-no-inferioridad-frente-al-mejor-rival" title="Link to this heading">#</a></h2>
+<p>El mejor rival en F1 limpio es RWCNet (0.9369, 20 semillas). Diferencia pareada: <span class="math notranslate nohighlight">\(-0.0004\)</span>, IC 90 % <span class="math notranslate nohighlight">\([-0.0063, 0.0054]\)</span>. Está dentro de <span class="math notranslate nohighlight">\(\pm\delta\)</span>, con TOST <span class="math notranslate nohighlight">\(p = 7\times10^{-6}\)</span>. <strong>NAGFuse es equivalente al mejor modelo del benchmark.</strong></p>
+</section>
+<section id="h2-ruido-gaussiano-sigma-0-05">
+<h2>27.6 H2: ruido gaussiano <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span><a class="headerlink" href="#h2-ruido-gaussiano-sigma-0-05" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rival</p></th>
+<th class="head"><p>R</p></th>
+<th class="head"><p>Diferencia</p></th>
+<th class="head"><p>IC 95 %</p></th>
+<th class="head"><p>p t (Holm)</p></th>
+<th class="head"><p>p Wilcoxon (Holm)</p></th>
+<th class="head"><p>p bootstrap (Holm)</p></th>
+<th class="head"><p>δ de Cliff</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(d_z\)</span></p></th>
+<th class="head"><p>Decisión</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Celik-HC</p></td>
+<td><p>20</p></td>
+<td><p>+0.6602</p></td>
+<td><p>[0.6165, 0.7011]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>6.95</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-odd"><td><p>MbXception</p></td>
+<td><p>12</p></td>
+<td><p>+0.6797</p></td>
+<td><p>[0.6451, 0.7139]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.003</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>11.85</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-even"><td><p>ViT-B16</p></td>
+<td><p>20</p></td>
+<td><p>+0.0121</p></td>
+<td><p>[-0.0009, 0.0258]</p></td>
+<td><p>0.034</p></td>
+<td><p>0.021</p></td>
+<td><p>0.066</p></td>
+<td><p>0.50</p></td>
+<td><p>0.51</p></td>
+<td><p>No significativa</p></td>
+</tr>
+<tr class="row-odd"><td><p>GFN</p></td>
+<td><p>20</p></td>
+<td><p>+0.1203</p></td>
+<td><p>[0.0921, 0.1517]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>1.85</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-even"><td><p>FocusRCNet</p></td>
+<td><p>12</p></td>
+<td><p>+0.7611</p></td>
+<td><p>[0.7274, 0.7937]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.003</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>13.47</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ResMsCapsule</p></td>
+<td><p>20</p></td>
+<td><p>+0.4767</p></td>
+<td><p>[0.4403, 0.5154]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>5.78</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-even"><td><p>RWCNet</p></td>
+<td><p>20</p></td>
+<td><p>+0.3077</p></td>
+<td><p>[0.2712, 0.3430]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>3.88</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN</p></td>
+<td><p>12</p></td>
+<td><p>+0.7216</p></td>
+<td><p>[0.7024, 0.7440]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.003</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>18.63</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-even"><td><p>MobileNetV2</p></td>
+<td><p>12</p></td>
+<td><p>+0.6184</p></td>
+<td><p>[0.5922, 0.6494]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.003</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>11.71</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ResNet-18</p></td>
+<td><p>12</p></td>
+<td><p>+0.5073</p></td>
+<td><p>[0.4884, 0.5260]</p></td>
+<td><p>&lt;0.001</p></td>
+<td><p>0.003</p></td>
+<td><p>0.001</p></td>
+<td><p>1.00</p></td>
+<td><p>14.74</p></td>
+<td><p>Supera (&gt; δ)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Los dos baselines deterministas no tienen evaluación con ruido en el E2, así que la familia de H2 queda en m = 10. Para los modelos del E1 no se guardaron predicciones por imagen con ruido, y en esos casos el bootstrap remuestrea solo semillas.</p>
+<p><strong>Resultado.</strong> NAGFuse supera a todas las CNN de la familia con márgenes de 0.12 (GFN) a 0.76 (FocusRCNet). Frente a ViT-B16 la ventaja es de +0.012, no significativa y menor que <span class="math notranslate nohighlight">\(\delta\)</span>. <strong>La hipótesis del mecanismo, tal como se preregistró (mejorar frente a cada CNN en al menos <span class="math notranslate nohighlight">\(\delta\)</span> sin perder más de <span class="math notranslate nohighlight">\(\delta\)</span> en limpio), se confirma.</strong></p>
+</section>
+<section id="comparacion-global">
+<h2>27.7 Comparación global<a class="headerlink" href="#comparacion-global" title="Link to this heading">#</a></h2>
+<p>Friedman con la corrección de Iman–Davenport sobre los 11 modelos profundos (semillas 0–11): <span class="math notranslate nohighlight">\(\chi^2 = 106.9\)</span>, <span class="math notranslate nohighlight">\(F_{ID} = 89.8\)</span>, <span class="math notranslate nohighlight">\(p &lt; 10^{-40}\)</span>. Los rangos medios son RWCNet 2.00, ViT-B16 2.25, <strong>NAGFuse 2.83</strong>, GFN 3.75 y Celik-HC 5.00. La diferencia crítica de Nemenyi es 4.36, de modo que los cinco primeros no se distinguen entre sí con este procedimiento, que es más conservador que los contrastes pareados.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/diferencia_critica.png"><img alt="_images/diferencia_critica.png" src="_images/diferencia_critica.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Diagrama de diferencia crítica. Las barras unen modelos cuya diferencia de rango medio no supera la diferencia crítica.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="26_e3_implementacion_demostracion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">26. Implementación y demostración</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="28_e3_evaluacion_ampliada.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">28. Evaluación ampliada</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preregistro">27.1 Preregistro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas">27.2 Pruebas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h1-f1-macro-limpio">27.3 H1: F1 macro limpio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sensibilidad-de-la-conclusion">27.4 Sensibilidad de la conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h3-no-inferioridad-frente-al-mejor-rival">27.5 H3: no inferioridad frente al mejor rival</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h2-ruido-gaussiano-sigma-0-05">27.6 H2: ruido gaussiano <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-global">27.7 Comparación global</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan Benavides y Juan David Díaz Fernández
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
