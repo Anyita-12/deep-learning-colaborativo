@@ -1,0 +1,41 @@
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 524, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 379, in task_e2
+    _nag_analysis(model, common, mean, std, dev, run, log)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 241, in _nag_analysis
+    out["robustez"][key][kind] = {"f1_macro": compute_metrics(y, p)["f1_macro"],
+                                              ~~~~~~~~~~~~~~~^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/evaluate.py", line 99, in compute_metrics
+    "brier": float(np.mean([brier_score_loss(onehot[:, j], probs[:, j]) for j in range(k)])),
+                            ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/sklearn/utils/_param_validation.py", line 216, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py", line 3296, in brier_score_loss
+    assert_all_finite(y_proba)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py", line 210, in assert_all_finite
+    _assert_all_finite(
+    ~~~~~~~~~~~~~~~~~~^
+        X.data if sp.issparse(X) else X,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        input_name=input_name,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py", line 120, in _assert_all_finite
+    _assert_all_finite_element_wise(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        X,
+        ^^
+    ...<4 lines>...
+        input_name=input_name,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py", line 169, in _assert_all_finite_element_wise
+    raise ValueError(msg_err)
+ValueError: Input contains NaN.

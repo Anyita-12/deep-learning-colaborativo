@@ -1,0 +1,11 @@
+{
+  "tarea": {
+    "fam": "e1",
+    "model": "ResNet-18",
+    "kind": "final",
+    "seed": 9,
+    "id": "e1-final-ResNet-18-s09"
+  },
+  "faltan_extra": [],
+  "fecha": "2026-11-22 07:14:09"
+}

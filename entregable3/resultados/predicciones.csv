@@ -1,0 +1,8 @@
+prediccion,resultado
+P1 compuerta reduce F1 ruido0.05 >= delta,"(np.float64(0.0012), np.False_)"
+P2 compuerta no cambia F1 limpio > 0.005,"(np.float64(0.0), np.True_)"
+P3 ventaja sobre RWCNet crece 0.05->0.10,"('0.308 -> 0.516', np.True_)"
+P4 sigma mediana limpio/0.05/0.10,"(np.float32(0.0), np.float32(0.0507), np.float32(0.0982))"
+"P4 frac pi=1 con ruido 0.05 (media, min)","(np.float64(1.0), np.float64(1.0), np.True_)"
+P5 semillas usadas,"[0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11]"
+"P5 rama CNN con Haar vs sin, ruido0.05","('0.625 vs 0.216', np.True_)"

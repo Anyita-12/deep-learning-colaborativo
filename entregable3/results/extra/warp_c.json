@@ -1,0 +1,36 @@
+{
+  "nombre": "warp_c",
+  "fuente": "Kaggle parohod/warp-waste-recycling-plant-dataset, parte WaRP-C (Yudin et al., 2024)",
+  "licencia": "MIT",
+  "kaggle": "parohod/warp-waste-recycling-plant-dataset",
+  "dominio": "banda transportadora de planta de reciclaje; recortes de 40 a 700 px; solo test_crops",
+  "regla_mapeo": "regla_warp",
+  "fecha_descarga": "2026-11-22 01:39",
+  "kaggle_path": "/root/.cache/kagglehub/datasets/parohod/warp-waste-recycling-plant-dataset/versions/3",
+  "conteo_mapeado": {
+    "cardboard": 179,
+    "glass": 86,
+    "metal": 98,
+    "paper": 0,
+    "plastic": 1188,
+    "trash": 0
+  },
+  "ilegibles": 0,
+  "casi_duplicados_trashnet": 1,
+  "conteo_final": {
+    "cardboard": 179,
+    "glass": 86,
+    "metal": 98,
+    "paper": 0,
+    "plastic": 500,
+    "trash": 0
+  },
+  "n_final": 863,
+  "clases_presentes": [
+    "cardboard",
+    "glass",
+    "metal",
+    "plastic"
+  ],
+  "sha256_cache": "bcf53dd77f5dde6a17d7578915711ff4ef20fdf99e07979b4a4b49874ac76a1d"
+}

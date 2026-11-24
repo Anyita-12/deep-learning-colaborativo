@@ -73,3 +73,10 @@ entregable2/results/**/*.tmp
 entregable2/data/raw/
 entregable2/data/interim/
 entregable2/.venv/
+
+# Entregable 3: intermedios del análisis (se regeneran con entregable3/analisis) y modelos exportados
+entregable3/analisis/*.pkl
+entregable3/analisis/tablas/
+dashboard/modelos/
+*.onnx
+*.torchscript.pt

@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Si usa este trabajo, cítelo así."
+title: "Clasificación de residuos con TrashNet: benchmark con inferencia estadística y NAGFuse, fusión CNN-ViT con compuerta adaptativa al ruido"
+authors:
+  - family-names: Sanjuan Benavides
+    given-names: Anyely
+    affiliation: Universidad del Norte
+  - family-names: Díaz Fernández
+    given-names: Juan David
+    affiliation: Universidad del Norte
+version: "3.0.0"
+date-released: 2026-11-23
+license: MIT
+repository-code: "https://github.com/Anyita-12/deep-learning-colaborativo"
+url: "https://anyita-12.github.io/deep-learning-colaborativo/"
+# doi: 10.5281/zenodo.XXXXXXX   <- completar al publicar el release en Zenodo
+keywords: [deep learning, waste classification, TrashNet, robustness, vision transformer, mixture of experts]

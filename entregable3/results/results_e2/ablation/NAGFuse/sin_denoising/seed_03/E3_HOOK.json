@@ -1,0 +1,11 @@
+{
+  "tarea": {
+    "fam": "nag",
+    "kind": "final",
+    "model": "NAGFuse/sin_denoising",
+    "seed": 3,
+    "id": "nag-final-NAGFuse__sin_denoising-s03"
+  },
+  "faltan_extra": [],
+  "fecha": "2026-11-22 18:26:57"
+}
