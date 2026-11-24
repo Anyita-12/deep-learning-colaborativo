@@ -1,0 +1,11 @@
+{
+  "tarea": {
+    "fam": "nag",
+    "kind": "final",
+    "model": "NAGFuse/solo_vit",
+    "seed": 9,
+    "id": "nag-final-NAGFuse__solo_vit-s09"
+  },
+  "faltan_extra": [],
+  "fecha": "2026-11-22 23:08:33"
+}

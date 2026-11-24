@@ -1,0 +1,45 @@
+{
+  "nombre": "gd_v2",
+  "fuente": "Kaggle sumn2u/garbage-classification-v2 (Kunwar, 2026)",
+  "licencia": "declarada en la página del conjunto (se registra al descargar)",
+  "kaggle": "sumn2u/garbage-classification-v2",
+  "dominio": "fotos de celular, web y comunidad; fondos variados",
+  "regla_mapeo": {
+    "cardboard": "cardboard",
+    "glass": "glass",
+    "metal": "metal",
+    "paper": "paper",
+    "plastic": "plastic",
+    "trash": "trash"
+  },
+  "fecha_descarga": "2026-11-22 01:34",
+  "kaggle_path": "/kaggle/input/garbage-classification-v2",
+  "conteo_mapeado": {
+    "cardboard": 4233,
+    "glass": 5208,
+    "metal": 2790,
+    "paper": 4008,
+    "plastic": 4791,
+    "trash": 1359
+  },
+  "ilegibles": 0,
+  "casi_duplicados_trashnet": 7220,
+  "conteo_final": {
+    "cardboard": 500,
+    "glass": 500,
+    "metal": 500,
+    "paper": 500,
+    "plastic": 500,
+    "trash": 500
+  },
+  "n_final": 3000,
+  "clases_presentes": [
+    "cardboard",
+    "glass",
+    "metal",
+    "paper",
+    "plastic",
+    "trash"
+  ],
+  "sha256_cache": "9a466335282d256fff441700ba7e10c9ead2b7e2465f767c2ae1ff2c887924f5"
+}

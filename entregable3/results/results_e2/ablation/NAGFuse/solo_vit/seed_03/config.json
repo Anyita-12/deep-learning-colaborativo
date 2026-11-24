@@ -1,0 +1,71 @@
+{
+  "model": "NAGFuse/solo_vit",
+  "seed": 3,
+  "stage": "final",
+  "hp": {
+    "optimizer": "AdamW",
+    "lr": 0.0001,
+    "weight_decay": 0.0001,
+    "dropout": 0.4,
+    "batch_size": 32,
+    "max_epochs": 60,
+    "warmup_epochs": 3,
+    "eta_min_factor": 0.01,
+    "patience": 12,
+    "min_delta": 0.0001,
+    "grad_clip": 5.0,
+    "amp": true,
+    "class_weighted_loss": true
+  },
+  "img_size": 224,
+  "resize": "resize",
+  "augmentation": {
+    "RandomResizedCrop": {
+      "size": 224,
+      "scale": [
+        0.7,
+        1.0
+      ]
+    },
+    "RandomHorizontalFlip": {
+      "p": 0.5
+    },
+    "RandomVerticalFlip": {
+      "p": 0.5
+    },
+    "RandomRotation": {
+      "degrees": 15
+    },
+    "ColorJitter": {
+      "brightness": 0.2,
+      "contrast": 0.2,
+      "saturation": 0.2,
+      "hue": 0.02
+    }
+  },
+  "split_csv": "trashnet_split_v2_s1234.csv",
+  "test_fingerprint": "4e4651dc5c8bbbfcb53ca1d6ed761112c01b2b364e5a12105bd19de2360cbd87",
+  "subset": null,
+  "pretrained": true,
+  "normalization": {
+    "kind": "imagenet",
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "loss": "ce",
+  "post_hoc": null,
+  "accum_steps": 1,
+  "code_version": "804b77e6b6b1",
+  "hpo_trial": 1,
+  "entregable": 3,
+  "ablation_of": "NAGFuse",
+  "date_start": "2026-11-22 13:01:55"
+}

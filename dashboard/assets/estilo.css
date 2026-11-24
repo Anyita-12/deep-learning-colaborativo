@@ -1,0 +1,13 @@
+body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; color: #222; background: #fafafa; }
+.nav { display: flex; gap: 24px; padding: 14px 28px; background: #1f3a2e; }
+.nav a { color: #fff; text-decoration: none; font-weight: 600; }
+.page { max-width: 1150px; margin: 0 auto; padding: 18px 28px 40px; }
+.cards { display: flex; flex-wrap: wrap; gap: 14px; margin: 16px 0; }
+.card { flex: 1 1 200px; background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 12px 16px; }
+.card .t { font-size: 12px; color: #666; } .card .v { font-size: 28px; font-weight: 700; color: #c0392b; }
+.card .n, .n { font-size: 12px; color: #666; }
+.dos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.upload { border: 2px dashed #999; border-radius: 8px; padding: 22px; text-align: center; margin: 8px 0; background: #fff; }
+.aviso { color: #8a4b00; }
+footer { text-align: center; font-size: 12px; color: #777; padding: 20px; }
+@media (max-width: 800px) { .dos { grid-template-columns: 1fr; } }

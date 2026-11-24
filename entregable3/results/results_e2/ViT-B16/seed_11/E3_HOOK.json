@@ -1,0 +1,11 @@
+{
+  "tarea": {
+    "fam": "e2",
+    "model": "ViT-B16",
+    "kind": "final",
+    "seed": 11,
+    "id": "e2-final-ViT-B16-s11"
+  },
+  "faltan_extra": [],
+  "fecha": "2026-11-22 09:52:29"
+}

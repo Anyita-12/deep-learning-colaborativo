@@ -1,0 +1,45 @@
+{
+  "nombre": "realwaste",
+  "fuente": "UCI ML Repository, id 908 (Single, Iranmanesh y Raad, 2023)",
+  "licencia": "CC BY 4.0",
+  "url": "https://archive.ics.uci.edu/static/public/908/realwaste.zip",
+  "dominio": "vertedero real, fondos desordenados, 524x524",
+  "regla_mapeo": {
+    "Cardboard": "cardboard",
+    "Glass": "glass",
+    "Metal": "metal",
+    "Paper": "paper",
+    "Plastic": "plastic",
+    "Miscellaneous Trash": "trash"
+  },
+  "fecha_descarga": "2026-11-22 01:33",
+  "sha256_zip": "1ede08b32358ee62065bcc1c8cb47a2ece04e8dff5b1fb53342bb8750895b2f3",
+  "conteo_mapeado": {
+    "cardboard": 461,
+    "glass": 420,
+    "metal": 790,
+    "paper": 500,
+    "plastic": 921,
+    "trash": 495
+  },
+  "ilegibles": 0,
+  "casi_duplicados_trashnet": 387,
+  "conteo_final": {
+    "cardboard": 388,
+    "glass": 319,
+    "metal": 500,
+    "paper": 470,
+    "plastic": 500,
+    "trash": 463
+  },
+  "n_final": 2640,
+  "clases_presentes": [
+    "cardboard",
+    "glass",
+    "metal",
+    "paper",
+    "plastic",
+    "trash"
+  ],
+  "sha256_cache": "accc2bdc444b7b8ad406fcb5868192f69a538cdc6b244ca5aba10d11e0db1d57"
+}

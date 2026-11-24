@@ -30,3 +30,17 @@ parts:
       - file: 17_reproducibilidad
       - file: 18_conclusiones_benchmark
       - file: 19_referencias_benchmark
+  - caption: "Entregable 3: modelo propio y evaluación ampliada"
+    chapters:
+      - file: 20_e3_introduccion
+      - file: 21_e3_correcciones
+      - file: 22_e3_datos
+      - file: 23_e3_benchmark
+      - file: 24_e3_literatura_novedad
+      - file: 25_e3_diseno
+      - file: 26_e3_implementacion_demostracion
+      - file: 27_e3_protocolo_validacion
+      - file: 28_e3_evaluacion_ampliada
+      - file: 29_e3_dashboard
+      - file: 30_e3_conclusiones
+      - file: 31_e3_reproducibilidad

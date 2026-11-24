@@ -1,0 +1,11 @@
+{
+  "tarea": {
+    "fam": "e1",
+    "model": "MobileNetV2",
+    "kind": "final",
+    "seed": 8,
+    "id": "e1-final-MobileNetV2-s08"
+  },
+  "faltan_extra": [],
+  "fecha": "2026-11-22 05:11:50"
+}

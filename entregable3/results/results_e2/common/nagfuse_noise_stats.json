@@ -1,0 +1,10 @@
+{
+  "s_lo": 0.014535326510667801,
+  "cuantil": 0.99,
+  "calculado_en": "train (1800 imágenes limpias, sin aumentación)",
+  "n": 1800,
+  "mediana": 0.0,
+  "p95": 0.008721189573407173,
+  "max": 0.040698882192373276,
+  "fecha": "2026-11-22 02:38:16"
+}
