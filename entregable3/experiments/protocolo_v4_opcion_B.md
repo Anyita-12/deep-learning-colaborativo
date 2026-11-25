@@ -76,8 +76,8 @@ B2 y B3 separan el efecto de cada rama. Los tres se implementan en `e3/nagfuse.p
 
 | Campo | Valor |
 |---|---|
-| F1 val B1 / B2 / B3 | `...` / `...` / `...` |
-| Elegido y motivo según la regla | `...` |
-| ¿Supera 0.9688? ¿Se lanza la fase confirmatoria? | `...` |
-| Fecha y hora del tag `e3-protocolo-v4` | `AAAA-MM-DD HH:MM` |
-| Fecha y hora de corte de la fase confirmatoria | `AAAA-MM-DD HH:MM` |
+| F1 val B1 / B2 / B3 | 0.9801 / 0.9851 / 0.9703 |
+| Elegido y motivo según la regla | NAGFuse-B2: mayor F1 de validación; la diferencia con B1 (0.0050) supera el umbral de empate de 0.002. |
+| ¿Supera 0.9688? ¿Se lanza la fase confirmatoria? | Sí (0.9851 > 0.9688). Se lanza. |
+| Fecha y hora del tag `e3-protocolo-v4` | 2026-11-24 20:45 (America/Bogota) |
+| Fecha y hora de corte de la fase confirmatoria | 2026-11-25 06:45 (America/Bogota) |

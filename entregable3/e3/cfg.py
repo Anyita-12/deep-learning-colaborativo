@@ -66,7 +66,7 @@ CANDIDATOS_B = ["NAGFuse-B1", "NAGFuse-B2", "NAGFuse-B3"]   # ver VARIANT_KW en 
 PILOTO_TRIAL = 1                         # mismo intento de la búsqueda que eligió la versión A (lr 1e-4, wd 1e-4,
                                          # dropout 0.4, 30 épocas máx., semilla 100): F1 val de A = 0.9688
 REF_PILOTO_A = 0.9688057                 # F1 de validación de A en ese mismo intento (hpo_selected.pkl)
-ELEGIDO_B = None                         # se fija tras el piloto con la regla del protocolo v4, p. ej. "NAGFuse-B1"
+ELEGIDO_B = "NAGFuse-B2"                 # fijado tras el piloto con la regla del protocolo v4
 SEEDS_B = list(range(20))                # mismas semillas que NAGFuse A y los 5 rivales más cercanos
 
 # Pesos que se conservan en Drive (el resto se borra tras la evaluación ampliada).
