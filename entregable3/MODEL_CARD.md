@@ -29,6 +29,18 @@ TrashNet (Yang y Thung, 2016), partición v2 agrupada por casi duplicados: 1800 
 | ECE | 0.030 | RWCNet 0.030 |
 | F1 macro RealWaste / Garbage v2 / WaRP-C (sin reentrenar) | 0.46 / 0.52 / 0.36 | ViT-B16 0.52 / 0.59 / 0.44 |
 
+## Variante NAGFuse-B (opción B, protocolo v4)
+Mismo mecanismo con otras ramas: Swin-S como rama robusta y EfficientNet-B0 como rama convolucional (52 857 107 parámetros, 18.2 GFLOPs). Se eligió con un piloto en validación y se evaluó con 20 semillas en el mismo conjunto de prueba que A (capítulo 32 del libro). No se exportó: la inferencia en vivo del dashboard usa la versión A.
+
+| Métrica (prueba, media sobre 20 semillas) | NAGFuse-B | NAGFuse (A) |
+|---|---|---|
+| F1 macro limpio | 0.948 [0.944, 0.952] | 0.936 [0.931, 0.942] |
+| F1 macro, ruido $\sigma = 0.05$ / $\sigma = 0.10$ | 0.903 / 0.827 | 0.904 / 0.859 |
+| ECE | 0.027 | 0.030 |
+| F1 macro RealWaste / Garbage v2 / WaRP-C (sin reentrenar) | 0.52 / 0.60 / 0.40 | 0.47 / 0.52 / 0.36 |
+
+Frente a ViT-B16 y RWCNet, NAGFuse-B es mejor en limpio por menos de $\delta = 0.02$ (+0.012 y +0.011). Las semillas 3 a 19 se entrenaron en GPU T4 y las de A en A100.
+
 ## Limitaciones y riesgos
 - **Fuera de dominio.** Fuera de fotos de un objeto sobre fondo claro, el F1 cae a 0.36–0.52, y es peor que el de ViT-B16 solo.
 - **El estimador asume fondos lisos.** Con fondos texturizados $\hat\sigma$ puede confundir textura con ruido.

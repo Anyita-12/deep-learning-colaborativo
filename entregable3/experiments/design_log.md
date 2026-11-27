@@ -5,9 +5,9 @@ Partición de desarrollo: conjunto de validación (360 imágenes) y predicciones
 | N.° | Variante evaluada | F1 val (desarrollo) | Decisión | Motivo y fecha |
 |---|---|---|---|---|
 | 0 | Referencias individuales: ViT-B16 0.9679 ± 0.0059; DenseNet201 (rama de RWCNet) 0.9618 ± 0.0046; RWCNet 0.9572 ± 0.0079; EfficientNet-B0 (rama de Celik-HC) 0.9377 ± 0.0115 | — | Línea de partida | 2026-11-21 |
-| 8 | NAGFuse-B1 (Swin-S + ConvNeXt-T) | 0.9801 | Descartado por la regla (mayor F1 val: B2) | 2026-11-24 |
-| 9 | NAGFuse-B2 (Swin-S + EfficientNet-B0) | 0.9851 | Elegido | 2026-11-24 |
-| 10 | NAGFuse-B3 (ViT-B/16 + ConvNeXt-T) | 0.9703 | Descartado por la regla | 2026-11-24 |
+| 1 | Fusión ViT-B16 + RWCNet | 0.9689 ± 0.0075 | Descartar como base | +0.001 sobre ViT-B16: la fusión por sí sola no aporta en limpio; RWCNet es costoso (25.6 M, 4.6 GMAC). 2026-11-21 |
+| 2 | Fusión ViT-B16 + DenseNet201 | 0.9687 ± 0.0046 | Descartar como base | Igual aporte que 1, con 18 M de parámetros más que EfficientNet-B0. 2026-11-21 |
+| 3 | Fusión ViT-B16 + EfficientNet-B0 | 0.9680 ± 0.0051 | **Conservar** | Mismo F1 que 1 y 2, la menor correlación de errores con ViT-B16 (0.435 frente a 0.481 y 0.539) y el menor costo (5.3 M de parámetros, 0.39 GFLOPS según torchvision). Coincide con el extractor de la hipótesis del E2 (sección 18.8). 2026-11-21 |
 | 4 | Fusión ViT-B16 + GFN | 0.9660 ± 0.0098 | Descartar | Menor F1 y modelo de 113.7 M. 2026-11-21 |
 | 5 | Fusión ViT-B16 + Celik-HC | 0.9690 ± 0.0042 | Descartar | Mismo F1 que 3 con dos redes convolucionales y XGBoost (componentes sin aporte en la ablación del E2). 2026-11-21 |
 | 6 | Fusión ViT-B16 + ResMsCapsule | 0.9660 ± 0.0052 | Descartar | Menor F1; cápsulas mal calibradas en el E2. 2026-11-21 |
@@ -32,8 +32,10 @@ Partición de desarrollo: conjunto de validación (360 imágenes) y predicciones
 
 | N.° | Variante evaluada (piloto, semilla 100, solo validación) | F1 val | Decisión | Fecha |
 |---|---|---|---|---|
-| 8 | NAGFuse-B1 (Swin-S + ConvNeXt-T) | _completar_ | _completar_ | _completar_ |
-| 9 | NAGFuse-B2 (Swin-S + EfficientNet-B0) | _completar_ | _completar_ | _completar_ |
-| 10 | NAGFuse-B3 (ViT-B/16 + ConvNeXt-T) | _completar_ | _completar_ | _completar_ |
+| 8 | NAGFuse-B1 (Swin-S + ConvNeXt-T) | 0.9801 | Descartado por la regla (mayor F1 val: B2) | 2026-11-24 |
+| 9 | NAGFuse-B2 (Swin-S + EfficientNet-B0) | 0.9851 | Elegido | 2026-11-24 |
+| 10 | NAGFuse-B3 (ViT-B/16 + ConvNeXt-T) | 0.9703 | Descartado por la regla | 2026-11-24 |
 
-Referencia: versión A en el mismo intento de la búsqueda, F1 val 0.9688. **Nd = 10.** La tabla se completa con la salida de `python -m e3.orchestrator piloto` antes del tag `e3-protocolo-v4`.
+Referencia: versión A en el mismo intento de la búsqueda, F1 val 0.9688. **Nd = 10.** Valores de `piloto_opcion_B.json` (salida de `python -m e3.orchestrator piloto`).
+
+**Corrección (26-11-2026).** Al registrar el piloto (PR #22, tag `e3-protocolo-v4`), las filas 8 a 10 se pegaron en la tabla de la versión A en lugar de las filas 1 a 3, que quedaron borradas, y esta tabla quedó sin completar. Restauramos las filas 1 a 3 tal como estaban en el tag `e3-protocolo-v3` y movimos aquí las filas 8 a 10. No cambia ningún valor.
