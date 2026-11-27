@@ -1,0 +1,123 @@
+[2026-11-25 00:43:55] Caché y partición del E1 verificadas.
+[2026-11-25 00:44:35]   NAGFuse-B1    trial_01 ep   0 | loss 2.735/0.793 | F1 val 0.8256 (mejor 0.8256 @ 0) |  20.0s *
+[2026-11-25 00:44:53]   NAGFuse-B1    trial_01 ep   1 | loss 1.233/0.323 | F1 val 0.8988 (mejor 0.8988 @ 1) |  11.8s *
+[2026-11-25 00:45:09]   NAGFuse-B1    trial_01 ep   2 | loss 0.667/0.238 | F1 val 0.8850 (mejor 0.8988 @ 1) |  11.5s
+[2026-11-25 00:45:27]   NAGFuse-B1    trial_01 ep   3 | loss 0.427/0.222 | F1 val 0.9244 (mejor 0.9244 @ 3) |  11.6s *
+[2026-11-25 00:45:44]   NAGFuse-B1    trial_01 ep   4 | loss 0.250/0.150 | F1 val 0.9309 (mejor 0.9309 @ 4) |  11.5s *
+[2026-11-25 00:46:02]   NAGFuse-B1    trial_01 ep   5 | loss 0.209/0.133 | F1 val 0.9524 (mejor 0.9524 @ 5) |  11.6s *
+[2026-11-25 00:46:18]   NAGFuse-B1    trial_01 ep   6 | loss 0.135/0.155 | F1 val 0.9318 (mejor 0.9524 @ 5) |  11.6s
+[2026-11-25 00:46:35]   NAGFuse-B1    trial_01 ep   7 | loss 0.123/0.119 | F1 val 0.9360 (mejor 0.9524 @ 5) |  11.7s
+[2026-11-25 00:46:53]   NAGFuse-B1    trial_01 ep   8 | loss 0.077/0.084 | F1 val 0.9670 (mejor 0.9670 @ 8) |  11.7s *
+[2026-11-25 00:47:10]   NAGFuse-B1    trial_01 ep   9 | loss 0.074/0.125 | F1 val 0.9742 (mejor 0.9742 @ 9) |  11.5s *
+[2026-11-25 00:47:26]   NAGFuse-B1    trial_01 ep  10 | loss 0.053/0.094 | F1 val 0.9648 (mejor 0.9742 @ 9) |  11.5s
+[2026-11-25 00:47:43]   NAGFuse-B1    trial_01 ep  11 | loss 0.033/0.162 | F1 val 0.9524 (mejor 0.9742 @ 9) |  11.5s
+[2026-11-25 00:47:59]   NAGFuse-B1    trial_01 ep  12 | loss 0.049/0.115 | F1 val 0.9524 (mejor 0.9742 @ 9) |  11.7s
+[2026-11-25 00:48:15]   NAGFuse-B1    trial_01 ep  13 | loss 0.033/0.102 | F1 val 0.9642 (mejor 0.9742 @ 9) |  11.6s
+[2026-11-25 00:48:32]   NAGFuse-B1    trial_01 ep  14 | loss 0.026/0.077 | F1 val 0.9675 (mejor 0.9742 @ 9) |  11.7s
+[2026-11-25 00:48:48]   NAGFuse-B1    trial_01 ep  15 | loss 0.020/0.206 | F1 val 0.9567 (mejor 0.9742 @ 9) |  11.4s
+[2026-11-25 00:49:04]   NAGFuse-B1    trial_01 ep  16 | loss 0.020/0.113 | F1 val 0.9617 (mejor 0.9742 @ 9) |  11.6s
+[2026-11-25 00:49:21]   NAGFuse-B1    trial_01 ep  17 | loss 0.007/0.091 | F1 val 0.9688 (mejor 0.9742 @ 9) |  11.6s
+[2026-11-25 00:49:37]   NAGFuse-B1    trial_01 ep  18 | loss 0.007/0.122 | F1 val 0.9673 (mejor 0.9742 @ 9) |  11.7s
+[2026-11-25 00:49:54]   NAGFuse-B1    trial_01 ep  19 | loss 0.007/0.092 | F1 val 0.9669 (mejor 0.9742 @ 9) |  11.7s
+[2026-11-25 00:50:10]   NAGFuse-B1    trial_01 ep  20 | loss 0.010/0.079 | F1 val 0.9672 (mejor 0.9742 @ 9) |  11.8s
+[2026-11-25 00:50:28]   NAGFuse-B1    trial_01 ep  21 | loss 0.016/0.114 | F1 val 0.9777 (mejor 0.9777 @ 21) |  11.6s *
+[2026-11-25 00:50:44]   NAGFuse-B1    trial_01 ep  22 | loss 0.007/0.101 | F1 val 0.9671 (mejor 0.9777 @ 21) |  11.7s
+[2026-11-25 00:51:02]   NAGFuse-B1    trial_01 ep  23 | loss 0.003/0.106 | F1 val 0.9801 (mejor 0.9801 @ 23) |  11.6s *
+[2026-11-25 00:51:18]   NAGFuse-B1    trial_01 ep  24 | loss 0.004/0.103 | F1 val 0.9713 (mejor 0.9801 @ 23) |  11.6s
+[2026-11-25 00:51:35]   NAGFuse-B1    trial_01 ep  25 | loss 0.002/0.102 | F1 val 0.9753 (mejor 0.9801 @ 23) |  12.1s
+[2026-11-25 00:51:52]   NAGFuse-B1    trial_01 ep  26 | loss 0.003/0.109 | F1 val 0.9775 (mejor 0.9801 @ 23) |  12.3s
+[2026-11-25 00:52:09]   NAGFuse-B1    trial_01 ep  27 | loss 0.004/0.107 | F1 val 0.9799 (mejor 0.9801 @ 23) |  12.1s
+[2026-11-25 00:52:26]   NAGFuse-B1    trial_01 ep  28 | loss 0.003/0.104 | F1 val 0.9799 (mejor 0.9801 @ 23) |  12.0s
+[2026-11-25 00:52:42]   NAGFuse-B1    trial_01 ep  29 | loss 0.006/0.103 | F1 val 0.9799 (mejor 0.9801 @ 23) |  11.9s
+[2026-11-25 00:53:25]   NAGFuse-B2    trial_01 ep   0 | loss 2.913/0.946 | F1 val 0.8156 (mejor 0.8156 @ 0) |  25.6s *
+[2026-11-25 00:53:43]   NAGFuse-B2    trial_01 ep   1 | loss 1.865/0.575 | F1 val 0.9113 (mejor 0.9113 @ 1) |  13.7s *
+[2026-11-25 00:54:00]   NAGFuse-B2    trial_01 ep   2 | loss 1.301/0.409 | F1 val 0.9054 (mejor 0.9113 @ 1) |  13.1s
+[2026-11-25 00:54:18]   NAGFuse-B2    trial_01 ep   3 | loss 0.844/0.274 | F1 val 0.9208 (mejor 0.9208 @ 3) |  13.0s *
+[2026-11-25 00:54:35]   NAGFuse-B2    trial_01 ep   4 | loss 0.560/0.264 | F1 val 0.9173 (mejor 0.9208 @ 3) |  12.8s
+[2026-11-25 00:54:51]   NAGFuse-B2    trial_01 ep   5 | loss 0.411/0.222 | F1 val 0.9106 (mejor 0.9208 @ 3) |  12.9s
+[2026-11-25 00:55:08]   NAGFuse-B2    trial_01 ep   6 | loss 0.301/0.141 | F1 val 0.9533 (mejor 0.9533 @ 6) |  12.9s *
+[2026-11-25 00:55:25]   NAGFuse-B2    trial_01 ep   7 | loss 0.261/0.181 | F1 val 0.9235 (mejor 0.9533 @ 6) |  12.8s
+[2026-11-25 00:55:41]   NAGFuse-B2    trial_01 ep   8 | loss 0.220/0.137 | F1 val 0.9493 (mejor 0.9533 @ 6) |  12.8s
+[2026-11-25 00:55:59]   NAGFuse-B2    trial_01 ep   9 | loss 0.161/0.148 | F1 val 0.9597 (mejor 0.9597 @ 9) |  12.8s *
+[2026-11-25 00:56:16]   NAGFuse-B2    trial_01 ep  10 | loss 0.138/0.114 | F1 val 0.9573 (mejor 0.9597 @ 9) |  12.9s
+[2026-11-25 00:56:32]   NAGFuse-B2    trial_01 ep  11 | loss 0.116/0.145 | F1 val 0.9391 (mejor 0.9597 @ 9) |  12.8s
+[2026-11-25 00:56:49]   NAGFuse-B2    trial_01 ep  12 | loss 0.107/0.154 | F1 val 0.9436 (mejor 0.9597 @ 9) |  12.8s
+[2026-11-25 00:57:05]   NAGFuse-B2    trial_01 ep  13 | loss 0.094/0.134 | F1 val 0.9494 (mejor 0.9597 @ 9) |  12.7s
+[2026-11-25 00:57:22]   NAGFuse-B2    trial_01 ep  14 | loss 0.062/0.103 | F1 val 0.9654 (mejor 0.9654 @ 14) |  12.6s *
+[2026-11-25 00:57:40]   NAGFuse-B2    trial_01 ep  15 | loss 0.063/0.106 | F1 val 0.9690 (mejor 0.9690 @ 15) |  12.4s *
+[2026-11-25 00:57:56]   NAGFuse-B2    trial_01 ep  16 | loss 0.054/0.104 | F1 val 0.9530 (mejor 0.9690 @ 15) |  12.9s
+[2026-11-25 00:58:13]   NAGFuse-B2    trial_01 ep  17 | loss 0.058/0.095 | F1 val 0.9674 (mejor 0.9690 @ 15) |  12.6s
+[2026-11-25 00:58:30]   NAGFuse-B2    trial_01 ep  18 | loss 0.050/0.112 | F1 val 0.9697 (mejor 0.9697 @ 18) |  12.7s *
+[2026-11-25 00:58:46]   NAGFuse-B2    trial_01 ep  19 | loss 0.044/0.105 | F1 val 0.9675 (mejor 0.9697 @ 18) |  12.7s
+[2026-11-25 00:59:04]   NAGFuse-B2    trial_01 ep  20 | loss 0.040/0.087 | F1 val 0.9748 (mejor 0.9748 @ 20) |  12.5s *
+[2026-11-25 00:59:21]   NAGFuse-B2    trial_01 ep  21 | loss 0.037/0.096 | F1 val 0.9851 (mejor 0.9851 @ 21) |  12.6s *
+[2026-11-25 00:59:37]   NAGFuse-B2    trial_01 ep  22 | loss 0.038/0.097 | F1 val 0.9798 (mejor 0.9851 @ 21) |  12.6s
+[2026-11-25 00:59:53]   NAGFuse-B2    trial_01 ep  23 | loss 0.033/0.090 | F1 val 0.9746 (mejor 0.9851 @ 21) |  12.5s
+[2026-11-25 01:00:10]   NAGFuse-B2    trial_01 ep  24 | loss 0.037/0.095 | F1 val 0.9723 (mejor 0.9851 @ 21) |  12.6s
+[2026-11-25 01:00:26]   NAGFuse-B2    trial_01 ep  25 | loss 0.033/0.098 | F1 val 0.9695 (mejor 0.9851 @ 21) |  12.5s
+[2026-11-25 01:00:42]   NAGFuse-B2    trial_01 ep  26 | loss 0.029/0.100 | F1 val 0.9697 (mejor 0.9851 @ 21) |  12.7s
+[2026-11-25 01:00:59]   NAGFuse-B2    trial_01 ep  27 | loss 0.029/0.101 | F1 val 0.9721 (mejor 0.9851 @ 21) |  12.8s
+[2026-11-25 01:01:15]   NAGFuse-B2    trial_01 ep  28 | loss 0.026/0.104 | F1 val 0.9740 (mejor 0.9851 @ 21) |  12.6s
+[2026-11-25 01:01:32]   NAGFuse-B2    trial_01 ep  29 | loss 0.031/0.105 | F1 val 0.9794 (mejor 0.9851 @ 21) |  12.8s
+[2026-11-25 01:02:04]   NAGFuse-B3    trial_01 ep   0 | loss 2.347/0.641 | F1 val 0.8819 (mejor 0.8819 @ 0) |  11.2s *
+[2026-11-25 01:02:20]   NAGFuse-B3    trial_01 ep   1 | loss 0.999/0.315 | F1 val 0.8930 (mejor 0.8930 @ 1) |   7.5s *
+[2026-11-25 01:02:35]   NAGFuse-B3    trial_01 ep   2 | loss 0.536/0.236 | F1 val 0.9105 (mejor 0.9105 @ 2) |   7.2s *
+[2026-11-25 01:02:50]   NAGFuse-B3    trial_01 ep   3 | loss 0.335/0.237 | F1 val 0.9186 (mejor 0.9186 @ 3) |   7.2s *
+[2026-11-25 01:03:04]   NAGFuse-B3    trial_01 ep   4 | loss 0.240/0.218 | F1 val 0.9048 (mejor 0.9186 @ 3) |   7.7s
+[2026-11-25 01:03:21]   NAGFuse-B3    trial_01 ep   5 | loss 0.204/0.150 | F1 val 0.9310 (mejor 0.9310 @ 5) |   7.6s *
+[2026-11-25 01:03:36]   NAGFuse-B3    trial_01 ep   6 | loss 0.152/0.163 | F1 val 0.9470 (mejor 0.9470 @ 6) |   7.4s *
+[2026-11-25 01:03:52]   NAGFuse-B3    trial_01 ep   7 | loss 0.142/0.153 | F1 val 0.9533 (mejor 0.9533 @ 7) |   7.3s *
+[2026-11-25 01:04:07]   NAGFuse-B3    trial_01 ep   8 | loss 0.097/0.185 | F1 val 0.9703 (mejor 0.9703 @ 8) |   7.4s *
+[2026-11-25 01:04:21]   NAGFuse-B3    trial_01 ep   9 | loss 0.097/0.177 | F1 val 0.9462 (mejor 0.9703 @ 8) |   7.4s
+[2026-11-25 01:04:35]   NAGFuse-B3    trial_01 ep  10 | loss 0.072/0.157 | F1 val 0.9490 (mejor 0.9703 @ 8) |   7.6s
+[2026-11-25 01:04:48]   NAGFuse-B3    trial_01 ep  11 | loss 0.053/0.140 | F1 val 0.9658 (mejor 0.9703 @ 8) |   7.3s
+[2026-11-25 01:05:02]   NAGFuse-B3    trial_01 ep  12 | loss 0.058/0.143 | F1 val 0.9607 (mejor 0.9703 @ 8) |   7.5s
+[2026-11-25 01:05:16]   NAGFuse-B3    trial_01 ep  13 | loss 0.028/0.171 | F1 val 0.9611 (mejor 0.9703 @ 8) |   7.6s
+[2026-11-25 01:05:30]   NAGFuse-B3    trial_01 ep  14 | loss 0.028/0.183 | F1 val 0.9537 (mejor 0.9703 @ 8) |   7.5s
+[2026-11-25 01:05:43]   NAGFuse-B3    trial_01 ep  15 | loss 0.022/0.180 | F1 val 0.9571 (mejor 0.9703 @ 8) |   7.3s
+[2026-11-25 01:05:57]   NAGFuse-B3    trial_01 ep  16 | loss 0.017/0.174 | F1 val 0.9530 (mejor 0.9703 @ 8) |   7.2s
+[2026-11-25 01:06:11]   NAGFuse-B3    trial_01 ep  17 | loss 0.011/0.147 | F1 val 0.9641 (mejor 0.9703 @ 8) |   7.2s
+[2026-11-25 01:06:24]   NAGFuse-B3    trial_01 ep  18 | loss 0.015/0.134 | F1 val 0.9691 (mejor 0.9703 @ 8) |   7.1s
+[2026-11-25 01:06:38]   NAGFuse-B3    trial_01 ep  19 | loss 0.003/0.135 | F1 val 0.9667 (mejor 0.9703 @ 8) |   7.2s
+[2026-11-25 01:06:51]   NAGFuse-B3    trial_01 ep  20 | loss 0.004/0.147 | F1 val 0.9666 (mejor 0.9703 @ 8) |   7.2s
+[2026-11-25 23:48:04] Descargando TrashNet desde https://github.com/garythung/trashnet/raw/master/data/dataset-resized.zip
+[2026-11-25 23:48:34] Caché y partición del E1 verificadas.
+[2026-11-25 23:49:17]   NAGFuse-B     seed_00 ep   0 | loss 3.018/0.963 | F1 val 0.7871 (mejor 0.7871 @ 0) |  25.5s *
+[2026-11-25 23:49:35]   NAGFuse-B     seed_00 ep   1 | loss 1.867/0.642 | F1 val 0.8383 (mejor 0.8383 @ 1) |  12.5s *
+[2026-11-25 23:49:52]   NAGFuse-B     seed_00 ep   2 | loss 1.213/0.367 | F1 val 0.8962 (mejor 0.8962 @ 2) |  12.5s *
+[2026-11-25 23:50:09]   NAGFuse-B     seed_00 ep   3 | loss 0.787/0.274 | F1 val 0.9182 (mejor 0.9182 @ 3) |  12.4s *
+[2026-11-25 23:50:26]   NAGFuse-B     seed_00 ep   4 | loss 0.539/0.274 | F1 val 0.8940 (mejor 0.9182 @ 3) |  12.6s
+[2026-11-25 23:50:43]   NAGFuse-B     seed_00 ep   5 | loss 0.421/0.211 | F1 val 0.9442 (mejor 0.9442 @ 5) |  12.3s *
+[2026-11-25 23:50:59]   NAGFuse-B     seed_00 ep   6 | loss 0.338/0.188 | F1 val 0.9358 (mejor 0.9442 @ 5) |  12.6s
+[2026-11-25 23:51:15]   NAGFuse-B     seed_00 ep   7 | loss 0.231/0.196 | F1 val 0.9258 (mejor 0.9442 @ 5) |  12.5s
+[2026-11-25 23:51:32]   NAGFuse-B     seed_00 ep   8 | loss 0.220/0.176 | F1 val 0.9411 (mejor 0.9442 @ 5) |  12.5s
+[2026-11-25 23:51:49]   NAGFuse-B     seed_00 ep   9 | loss 0.178/0.174 | F1 val 0.9516 (mejor 0.9516 @ 9) |  12.2s *
+[2026-11-25 23:52:05]   NAGFuse-B     seed_00 ep  10 | loss 0.134/0.164 | F1 val 0.9444 (mejor 0.9516 @ 9) |  12.4s
+[2026-11-25 23:52:21]   NAGFuse-B     seed_00 ep  11 | loss 0.124/0.167 | F1 val 0.9453 (mejor 0.9516 @ 9) |  12.3s
+[2026-11-25 23:52:37]   NAGFuse-B     seed_00 ep  12 | loss 0.121/0.159 | F1 val 0.9463 (mejor 0.9516 @ 9) |  12.3s
+[2026-11-25 23:52:53]   NAGFuse-B     seed_00 ep  13 | loss 0.114/0.191 | F1 val 0.9474 (mejor 0.9516 @ 9) |  12.2s
+[2026-11-25 23:53:10]   NAGFuse-B     seed_00 ep  14 | loss 0.086/0.176 | F1 val 0.9324 (mejor 0.9516 @ 9) |  12.4s
+[2026-11-25 23:53:27]   NAGFuse-B     seed_00 ep  15 | loss 0.072/0.149 | F1 val 0.9532 (mejor 0.9532 @ 15) |  12.3s *
+[2026-11-25 23:53:43]   NAGFuse-B     seed_00 ep  16 | loss 0.069/0.145 | F1 val 0.9397 (mejor 0.9532 @ 15) |  12.1s
+[2026-11-25 23:53:59]   NAGFuse-B     seed_00 ep  17 | loss 0.071/0.131 | F1 val 0.9508 (mejor 0.9532 @ 15) |  12.3s
+[2026-11-25 23:54:15]   NAGFuse-B     seed_00 ep  18 | loss 0.067/0.133 | F1 val 0.9453 (mejor 0.9532 @ 15) |  12.5s
+[2026-11-25 23:54:33]   NAGFuse-B     seed_00 ep  19 | loss 0.064/0.132 | F1 val 0.9568 (mejor 0.9568 @ 19) |  12.5s *
+[2026-11-25 23:54:49]   NAGFuse-B     seed_00 ep  20 | loss 0.055/0.111 | F1 val 0.9524 (mejor 0.9568 @ 19) |  12.4s
+[2026-11-25 23:55:06]   NAGFuse-B     seed_00 ep  21 | loss 0.065/0.142 | F1 val 0.9630 (mejor 0.9630 @ 21) |  12.3s *
+[2026-11-25 23:55:22]   NAGFuse-B     seed_00 ep  22 | loss 0.055/0.159 | F1 val 0.9416 (mejor 0.9630 @ 21) |  12.2s
+[2026-11-25 23:55:38]   NAGFuse-B     seed_00 ep  23 | loss 0.044/0.136 | F1 val 0.9506 (mejor 0.9630 @ 21) |  12.3s
+[2026-11-25 23:55:54]   NAGFuse-B     seed_00 ep  24 | loss 0.035/0.125 | F1 val 0.9464 (mejor 0.9630 @ 21) |  12.3s
+[2026-11-25 23:56:10]   NAGFuse-B     seed_00 ep  25 | loss 0.025/0.124 | F1 val 0.9553 (mejor 0.9630 @ 21) |  12.5s
+[2026-11-25 23:56:27]   NAGFuse-B     seed_00 ep  26 | loss 0.034/0.135 | F1 val 0.9546 (mejor 0.9630 @ 21) |  12.3s
+[2026-11-25 23:56:43]   NAGFuse-B     seed_00 ep  27 | loss 0.027/0.116 | F1 val 0.9597 (mejor 0.9630 @ 21) |  12.3s
+[2026-11-25 23:56:59]   NAGFuse-B     seed_00 ep  28 | loss 0.031/0.123 | F1 val 0.9624 (mejor 0.9630 @ 21) |  12.3s
+[2026-11-25 23:57:16]   NAGFuse-B     seed_00 ep  29 | loss 0.029/0.106 | F1 val 0.9690 (mejor 0.9690 @ 29) |  12.2s *
+[2026-11-25 23:57:33]   NAGFuse-B     seed_00 ep  30 | loss 0.021/0.118 | F1 val 0.9714 (mejor 0.9714 @ 30) |  12.3s *
+[2026-11-25 23:57:49]   NAGFuse-B     seed_00 ep  31 | loss 0.038/0.107 | F1 val 0.9668 (mejor 0.9714 @ 30) |  12.3s
+[2026-11-25 23:58:05]   NAGFuse-B     seed_00 ep  32 | loss 0.032/0.116 | F1 val 0.9640 (mejor 0.9714 @ 30) |  12.5s
+[2026-11-25 23:58:22]   NAGFuse-B     seed_00 ep  33 | loss 0.014/0.114 | F1 val 0.9600 (mejor 0.9714 @ 30) |  12.5s
+[2026-11-25 23:58:39]   NAGFuse-B     seed_00 ep  34 | loss 0.014/0.107 | F1 val 0.9743 (mejor 0.9743 @ 34) |  12.2s *
+[2026-11-25 23:58:55]   NAGFuse-B     seed_00 ep  35 | loss 0.018/0.108 | F1 val 0.9660 (mejor 0.9743 @ 34) |  12.5s
+[2026-11-25 23:59:12]   NAGFuse-B     seed_00 ep  36 | loss 0.022/0.138 | F1 val 0.9654 (mejor 0.9743 @ 34) |  12.5s
+[2026-11-25 23:59:28]   NAGFuse-B     seed_00 ep  37 | loss 0.017/0.111 | F1 val 0.9674 (mejor 0.9743 @ 34) |  12.4s
+[2026-11-25 23:59:44]   NAGFuse-B     seed_00 ep  38 | loss 0.018/0.120 | F1 val 0.9548 (mejor 0.9743 @ 34) |  12.4s

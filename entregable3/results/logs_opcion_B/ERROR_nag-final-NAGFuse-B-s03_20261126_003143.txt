@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 115, in train_run
+    return _train_run(model_name, seed, hp, run, common, stage, subset, log, extra_config or {})
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 158, in _train_run
+    return _loop(model_name, spec, seed, hp, run, common, stage, subset, log, dev, mean, std, cache,
+                 tr_rows, tr_y, va_rows, te_rows, te_y, sampler, dl_tr, dl_va, micro)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 257, in _loop
+    save_torch({"model": model.state_dict(), "optimizer": opt.state_dict(), "scheduler": sched.state_dict(),
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                "scaler": scaler.state_dict(), "epoch": epoch, "history": hist, "best_f1": best_f1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                "best_epoch": best_epoch, "bad_epochs": bad, "train_time_s": train_time, "stopped_early": stopped,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                "rng": get_rng_state(), "best_model": best_state}, ck_last, keep_previous=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 142, in save_torch_mirrored
+    r = orig(obj, path, *a, **k)
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 103, in save_torch
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error

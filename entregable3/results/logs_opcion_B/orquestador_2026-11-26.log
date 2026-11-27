@@ -1,0 +1,112 @@
+[2026-11-26 00:03:30] <<< nag-final-NAGFuse-B-s00 terminada en 14.9 min | 1/20 tareas terminadas
+[2026-11-26 00:03:30] >>> nag-final-NAGFuse-B-s01
+[2026-11-26 00:11:14] <<< nag-final-NAGFuse-B-s01 terminada en 7.7 min | 2/20 tareas terminadas
+[2026-11-26 00:11:14] >>> nag-final-NAGFuse-B-s02
+[2026-11-26 00:25:55] <<< nag-final-NAGFuse-B-s02 terminada en 14.7 min | 3/20 tareas terminadas
+[2026-11-26 00:25:55] >>> nag-final-NAGFuse-B-s03
+[2026-11-26 00:31:44] !!! nag-final-NAGFuse-B-s03 falló (código 4, intento 1/2)
+[2026-11-26 00:31:44] >>> nag-final-NAGFuse-B-s03
+[2026-11-26 00:31:50] !!! nag-final-NAGFuse-B-s03 falló (código 4, intento 2/2)
+[2026-11-26 00:31:50] >>> nag-final-NAGFuse-B-s04
+[2026-11-26 00:31:55] !!! nag-final-NAGFuse-B-s04 falló (código 4, intento 1/2)
+[2026-11-26 00:31:55] >>> nag-final-NAGFuse-B-s04
+[2026-11-26 00:32:01] !!! nag-final-NAGFuse-B-s04 falló (código 4, intento 2/2)
+[2026-11-26 00:32:01] >>> nag-final-NAGFuse-B-s05
+[2026-11-26 00:32:06] !!! nag-final-NAGFuse-B-s05 falló (código 4, intento 1/2)
+[2026-11-26 00:32:06] >>> nag-final-NAGFuse-B-s05
+[2026-11-26 00:32:11] !!! nag-final-NAGFuse-B-s05 falló (código 4, intento 2/2)
+[2026-11-26 00:32:11] >>> nag-final-NAGFuse-B-s06
+[2026-11-26 00:32:16] !!! nag-final-NAGFuse-B-s06 falló (código 4, intento 1/2)
+[2026-11-26 00:32:17] >>> nag-final-NAGFuse-B-s06
+[2026-11-26 00:32:22] !!! nag-final-NAGFuse-B-s06 falló (código 4, intento 2/2)
+[2026-11-26 00:32:22] >>> nag-final-NAGFuse-B-s07
+[2026-11-26 00:32:27] !!! nag-final-NAGFuse-B-s07 falló (código 4, intento 1/2)
+[2026-11-26 00:32:27] >>> nag-final-NAGFuse-B-s07
+[2026-11-26 00:32:32] !!! nag-final-NAGFuse-B-s07 falló (código 4, intento 2/2)
+[2026-11-26 00:32:32] >>> nag-final-NAGFuse-B-s08
+[2026-11-26 00:32:38] !!! nag-final-NAGFuse-B-s08 falló (código 4, intento 1/2)
+[2026-11-26 00:32:38] >>> nag-final-NAGFuse-B-s08
+[2026-11-26 00:32:43] !!! nag-final-NAGFuse-B-s08 falló (código 4, intento 2/2)
+[2026-11-26 00:32:43] >>> nag-final-NAGFuse-B-s09
+[2026-11-26 00:32:49] !!! nag-final-NAGFuse-B-s09 falló (código 4, intento 1/2)
+[2026-11-26 00:32:49] >>> nag-final-NAGFuse-B-s09
+[2026-11-26 00:32:54] !!! nag-final-NAGFuse-B-s09 falló (código 4, intento 2/2)
+[2026-11-26 00:32:54] >>> nag-final-NAGFuse-B-s10
+[2026-11-26 00:33:00] !!! nag-final-NAGFuse-B-s10 falló (código 4, intento 1/2)
+[2026-11-26 00:33:00] >>> nag-final-NAGFuse-B-s10
+[2026-11-26 00:33:05] !!! nag-final-NAGFuse-B-s10 falló (código 4, intento 2/2)
+[2026-11-26 00:33:05] >>> nag-final-NAGFuse-B-s11
+[2026-11-26 00:33:10] !!! nag-final-NAGFuse-B-s11 falló (código 4, intento 1/2)
+[2026-11-26 00:33:10] >>> nag-final-NAGFuse-B-s11
+[2026-11-26 00:33:15] !!! nag-final-NAGFuse-B-s11 falló (código 4, intento 2/2)
+[2026-11-26 00:33:15] >>> nag-final-NAGFuse-B-s12
+[2026-11-26 00:33:20] !!! nag-final-NAGFuse-B-s12 falló (código 4, intento 1/2)
+[2026-11-26 00:33:21] >>> nag-final-NAGFuse-B-s12
+[2026-11-26 00:33:26] !!! nag-final-NAGFuse-B-s12 falló (código 4, intento 2/2)
+[2026-11-26 00:33:26] >>> nag-final-NAGFuse-B-s13
+[2026-11-26 00:33:31] !!! nag-final-NAGFuse-B-s13 falló (código 4, intento 1/2)
+[2026-11-26 00:33:31] >>> nag-final-NAGFuse-B-s13
+[2026-11-26 00:33:36] !!! nag-final-NAGFuse-B-s13 falló (código 4, intento 2/2)
+[2026-11-26 00:33:36] >>> nag-final-NAGFuse-B-s14
+[2026-11-26 00:33:41] !!! nag-final-NAGFuse-B-s14 falló (código 4, intento 1/2)
+[2026-11-26 00:33:41] >>> nag-final-NAGFuse-B-s14
+[2026-11-26 00:33:47] !!! nag-final-NAGFuse-B-s14 falló (código 4, intento 2/2)
+[2026-11-26 00:33:47] >>> nag-final-NAGFuse-B-s15
+[2026-11-26 00:33:52] !!! nag-final-NAGFuse-B-s15 falló (código 4, intento 1/2)
+[2026-11-26 00:33:52] >>> nag-final-NAGFuse-B-s15
+[2026-11-26 00:33:57] !!! nag-final-NAGFuse-B-s15 falló (código 4, intento 2/2)
+[2026-11-26 00:33:57] >>> nag-final-NAGFuse-B-s16
+[2026-11-26 00:34:02] !!! nag-final-NAGFuse-B-s16 falló (código 4, intento 1/2)
+[2026-11-26 00:34:02] >>> nag-final-NAGFuse-B-s16
+[2026-11-26 00:34:08] !!! nag-final-NAGFuse-B-s16 falló (código 4, intento 2/2)
+[2026-11-26 00:34:08] >>> nag-final-NAGFuse-B-s17
+[2026-11-26 00:34:13] !!! nag-final-NAGFuse-B-s17 falló (código 4, intento 1/2)
+[2026-11-26 00:34:13] >>> nag-final-NAGFuse-B-s17
+[2026-11-26 00:34:19] !!! nag-final-NAGFuse-B-s17 falló (código 4, intento 2/2)
+[2026-11-26 00:34:19] >>> nag-final-NAGFuse-B-s18
+[2026-11-26 00:34:24] !!! nag-final-NAGFuse-B-s18 falló (código 4, intento 1/2)
+[2026-11-26 00:34:24] >>> nag-final-NAGFuse-B-s18
+[2026-11-26 00:34:29] !!! nag-final-NAGFuse-B-s18 falló (código 4, intento 2/2)
+[2026-11-26 00:34:29] >>> nag-final-NAGFuse-B-s19
+[2026-11-26 00:34:35] !!! nag-final-NAGFuse-B-s19 falló (código 4, intento 1/2)
+[2026-11-26 00:34:35] >>> nag-final-NAGFuse-B-s19
+[2026-11-26 00:34:40] !!! nag-final-NAGFuse-B-s19 falló (código 4, intento 2/2)
+[2026-11-26 00:34:40] Cola completa.
+[2026-11-26 00:34:40] Tareas con error persistente: ['nag-final-NAGFuse-B-s03', 'nag-final-NAGFuse-B-s04', 'nag-final-NAGFuse-B-s05', 'nag-final-NAGFuse-B-s06', 'nag-final-NAGFuse-B-s07', 'nag-final-NAGFuse-B-s08', 'nag-final-NAGFuse-B-s09', 'nag-final-NAGFuse-B-s10', 'nag-final-NAGFuse-B-s11', 'nag-final-NAGFuse-B-s12', 'nag-final-NAGFuse-B-s13', 'nag-final-NAGFuse-B-s14', 'nag-final-NAGFuse-B-s15', 'nag-final-NAGFuse-B-s16', 'nag-final-NAGFuse-B-s17', 'nag-final-NAGFuse-B-s18', 'nag-final-NAGFuse-B-s19']
+[2026-11-26 02:47:32] setup listo | trabajo /content/e3_work | Drive /content/drive/MyDrive/E3_TrashNet | archivos restaurados {'e2': 2208, 'e1': 168}
+[2026-11-26 02:48:07] Inicio de la cola: 20 tareas, 3 ya terminadas, worker 0, límite 11 h
+[2026-11-26 02:48:07] >>> nag-final-NAGFuse-B-s03
+[2026-11-26 03:06:52] <<< nag-final-NAGFuse-B-s03 terminada en 18.8 min | 4/20 tareas terminadas
+[2026-11-26 03:06:52] >>> nag-final-NAGFuse-B-s04
+[2026-11-26 03:27:24] <<< nag-final-NAGFuse-B-s04 terminada en 20.5 min | 5/20 tareas terminadas
+[2026-11-26 03:27:24] >>> nag-final-NAGFuse-B-s05
+[2026-11-26 03:58:19] <<< nag-final-NAGFuse-B-s05 terminada en 30.9 min | 6/20 tareas terminadas
+[2026-11-26 03:58:20] >>> nag-final-NAGFuse-B-s06
+[2026-11-26 04:27:33] <<< nag-final-NAGFuse-B-s06 terminada en 29.2 min | 7/20 tareas terminadas
+[2026-11-26 04:27:33] >>> nag-final-NAGFuse-B-s07
+[2026-11-26 04:55:47] <<< nag-final-NAGFuse-B-s07 terminada en 28.2 min | 8/20 tareas terminadas
+[2026-11-26 04:55:47] >>> nag-final-NAGFuse-B-s08
+[2026-11-26 05:33:53] <<< nag-final-NAGFuse-B-s08 terminada en 38.1 min | 9/20 tareas terminadas
+[2026-11-26 05:33:53] >>> nag-final-NAGFuse-B-s09
+[2026-11-26 05:53:16] <<< nag-final-NAGFuse-B-s09 terminada en 19.4 min | 10/20 tareas terminadas
+[2026-11-26 05:53:16] >>> nag-final-NAGFuse-B-s10
+[2026-11-26 06:21:55] <<< nag-final-NAGFuse-B-s10 terminada en 28.7 min | 11/20 tareas terminadas
+[2026-11-26 06:21:55] >>> nag-final-NAGFuse-B-s11
+[2026-11-26 07:00:04] <<< nag-final-NAGFuse-B-s11 terminada en 38.1 min | 12/20 tareas terminadas
+[2026-11-26 07:00:04] >>> nag-final-NAGFuse-B-s12
+[2026-11-26 07:21:43] <<< nag-final-NAGFuse-B-s12 terminada en 21.7 min | 13/20 tareas terminadas
+[2026-11-26 07:21:43] >>> nag-final-NAGFuse-B-s13
+[2026-11-26 07:45:00] <<< nag-final-NAGFuse-B-s13 terminada en 23.3 min | 14/20 tareas terminadas
+[2026-11-26 07:45:00] >>> nag-final-NAGFuse-B-s14
+[2026-11-26 08:07:50] <<< nag-final-NAGFuse-B-s14 terminada en 22.8 min | 15/20 tareas terminadas
+[2026-11-26 08:07:50] >>> nag-final-NAGFuse-B-s15
+[2026-11-26 08:29:01] <<< nag-final-NAGFuse-B-s15 terminada en 21.2 min | 16/20 tareas terminadas
+[2026-11-26 08:29:01] >>> nag-final-NAGFuse-B-s16
+[2026-11-26 08:59:31] <<< nag-final-NAGFuse-B-s16 terminada en 30.5 min | 17/20 tareas terminadas
+[2026-11-26 08:59:31] >>> nag-final-NAGFuse-B-s17
+[2026-11-26 09:21:09] <<< nag-final-NAGFuse-B-s17 terminada en 21.6 min | 18/20 tareas terminadas
+[2026-11-26 09:21:09] >>> nag-final-NAGFuse-B-s18
+[2026-11-26 09:46:45] <<< nag-final-NAGFuse-B-s18 terminada en 25.6 min | 19/20 tareas terminadas
+[2026-11-26 09:46:45] >>> nag-final-NAGFuse-B-s19
+[2026-11-26 10:07:20] <<< nag-final-NAGFuse-B-s19 terminada en 20.6 min | 20/20 tareas terminadas
+[2026-11-26 10:07:20] Cola completa.

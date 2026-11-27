@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error

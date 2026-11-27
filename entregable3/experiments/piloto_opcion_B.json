@@ -1,0 +1,33 @@
+{
+  "filas": [
+    {
+      "candidato": "NAGFuse-B1",
+      "f1_val": 0.9800947824707634,
+      "mejor_epoca": 23,
+      "epocas": 30,
+      "minutos": 6.0,
+      "params_M": 76.6
+    },
+    {
+      "candidato": "NAGFuse-B2",
+      "f1_val": 0.9850899836873995,
+      "mejor_epoca": 21,
+      "epocas": 30,
+      "minutos": 6.6,
+      "params_M": 52.8
+    },
+    {
+      "candidato": "NAGFuse-B3",
+      "f1_val": 0.9703160070894926,
+      "mejor_epoca": 8,
+      "epocas": 21,
+      "minutos": 2.6,
+      "params_M": 113.6
+    }
+  ],
+  "referencia_A": 0.9688057,
+  "elegido": "NAGFuse-B2",
+  "lanzar": true,
+  "regla": "máximo F1 de validación; empate < 0.002 -> menos parámetros; se lanza solo si supera a A",
+  "fecha": "2026-11-25 01:06:55"
+}
