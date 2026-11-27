@@ -1,6 +1,6 @@
 # 20. Entregable 3: introducción
 
-Los capítulos 20 a 31 forman el Entregable 3. Siguen uno a uno la estructura pedida (capítulos 0 a 11 del enunciado):
+Los capítulos 20 a 32 forman el Entregable 3. Los capítulos 20 a 31 siguen uno a uno la estructura pedida (capítulos 0 a 11 del enunciado); el 32 añade un segundo intento, la opción B:
 
 | Enunciado | Capítulo del libro | Contenido |
 |---|---|---|
@@ -16,6 +16,7 @@ Los capítulos 20 a 31 forman el Entregable 3. Siguen uno a uno la estructura pe
 | 9. Dashboard | 29 | Aplicación desplegada |
 | 10. Conclusiones | 30 | Respuestas, límites y trabajo futuro |
 | 11. Reproducibilidad | 31 | Entorno, artefactos, autoría y uso de herramientas |
+| — | 32 | Opción B: segundo intento con otras ramas (protocolo v4) |
 
 **Dashboard desplegado:** https://nagfuse-trashnet.onrender.com
 
@@ -49,3 +50,11 @@ Se entrenaron 144 corridas nuevas (19.1 h de GPU A100) y se analizaron junto con
 - **En los conjuntos adicionales NAGFuse es peor que ViT-B16** (entre $-0.06$ y $-0.07$), aunque supera a las CNN.
 
 El trabajo se sustenta por tanto en el hallazgo alternativo declarado antes de los experimentos (`estandar.md`): robustez frente a las CNN sin pérdida en limpio, no inferioridad frente al mejor rival y una verificación del mecanismo que identifica qué parte funciona y cuál no.
+
+## 20.5 Segundo intento: opción B
+
+Tras conocer los resultados de A, el docente nos recomendó explorar combinaciones de modelos o metodologías y dejó a nuestro criterio contar con planes alternativos. Registramos un segundo intento (protocolo v4, capítulo 32): el mismo mecanismo con otras ramas, elegidas con un piloto en validación (Swin-S + EfficientNet-B0, NAGFuse-B), y una decisión con $\alpha_B = 0.025$ por haber usado dos veces el mismo conjunto de prueba.
+
+- **R3 tampoco se cumple con B.** NAGFuse-B (F1 $0.9477$, 20 semillas) supera a 10 de los 12 rivales. Frente a ViT-B16 (+0.0115) y RWCNet (+0.0109) la diferencia es positiva y su IC excluye el cero, pero es menor que $\delta$.
+- **B supera a A en limpio** (+0.011, exploratorio), tiene mayor media que A en los tres conjuntos adicionales y la mejor media de la familia en RealWaste y Garbage v2. Cumple el criterio de consistencia entre conjuntos, que A no cumplía. Con ruido $\sigma = 0.05$ coincide con A; con $\sigma = 0.10$ queda por debajo de A y de ViT-B16.
+- **Las condiciones de B se declaran en el capítulo 32:** exposición previa del conjunto de prueba, hardware mezclado (A100 y T4) y una ejecución que empezó después de la hora de corte registrada.

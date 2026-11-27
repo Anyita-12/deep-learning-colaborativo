@@ -65,6 +65,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="32. Opción B: segundo intento con otras ramas (protocolo v4)" href="32_e3_opcion_b.html" />
     <link rel="prev" title="30. Conclusiones" href="30_e3_conclusiones.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -273,6 +274,8 @@
 <li class="toctree-l1"><a class="reference internal" href="29_e3_dashboard.html">29. Dashboard</a></li>
 <li class="toctree-l1"><a class="reference internal" href="30_e3_conclusiones.html">30. Conclusiones</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">31. Reproducibilidad, autoría y uso de herramientas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="32_e3_opcion_b.html">32. Opción B: segundo intento con otras ramas (protocolo v4)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="32a_e3_opcion_b.html">32a. Reproducción de la opción B</a></li>
 </ul>
 
     </div>
@@ -473,15 +476,19 @@
 <td><p><code class="docutils literal notranslate"><span class="pre">entregable3/notebooks/E3_entrenamiento_colab.ipynb</span></code> con <code class="docutils literal notranslate"><span class="pre">REF</span> <span class="pre">=</span> <span class="pre">&quot;e3-protocolo-v3&quot;</span></code></p></td>
 <td><p>≈ 19 h en A100</p></td>
 </tr>
-<tr class="row-odd"><td><p>Análisis desde los resultados versionados</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">entregable3/analisis</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">cargar.py</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">confirmatorio.py</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">secundario.py</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">conforme.py</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">tablas_y_figuras.py</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">datos_dashboard.py</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">congelar.py</span></code></p></td>
+<tr class="row-odd"><td><p>Opción B: piloto y fase confirmatoria</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">entregable3/notebooks/E3_entrenamiento_B_colab.ipynb</span></code> con <code class="docutils literal notranslate"><span class="pre">FASE</span> <span class="pre">=</span> <span class="pre">&quot;piloto&quot;</span></code> y luego <code class="docutils literal notranslate"><span class="pre">FASE</span> <span class="pre">=</span> <span class="pre">&quot;confirmatoria&quot;</span></code></p></td>
+<td><p>0.4 h en A100 (piloto); 7.9 h en A100 y T4 (20 semillas)</p></td>
+</tr>
+<tr class="row-even"><td><p>Análisis desde los resultados versionados</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">entregable3/analisis</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">cargar.py</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">confirmatorio.py</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">secundario.py</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">conforme.py</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">tablas_y_figuras.py</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">datos_dashboard.py</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">congelar.py</span></code>; para la opción B, <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">analisis_b.py</span></code> después de <code class="docutils literal notranslate"><span class="pre">cargar.py</span></code></p></td>
 <td><p>≈ 3 min (CPU)</p></td>
 </tr>
-<tr class="row-even"><td><p>Dashboard</p></td>
+<tr class="row-odd"><td><p>Dashboard</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">dashboard</span> <span class="pre">&amp;&amp;</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span> <span class="pre">&amp;&amp;</span> <span class="pre">python</span> <span class="pre">app.py</span></code></p></td>
 <td><p>—</p></td>
 </tr>
-<tr class="row-odd"><td><p>Contenedor</p></td>
+<tr class="row-even"><td><p>Contenedor</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span> <span class="pre">-t</span> <span class="pre">nagfuse</span> <span class="pre">.</span> <span class="pre">&amp;&amp;</span> <span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-p</span> <span class="pre">8050:8050</span> <span class="pre">nagfuse</span></code></p></td>
 <td><p>—</p></td>
 </tr>
@@ -489,7 +496,7 @@
 </table>
 </div>
 <p><strong>Determinismo.</strong> <code class="docutils literal notranslate"><span class="pre">cudnn.deterministic</span> <span class="pre">=</span> <span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">benchmark</span> <span class="pre">=</span> <span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">use_deterministic_algorithms(True,</span> <span class="pre">warn_only=True)</span></code>, <code class="docutils literal notranslate"><span class="pre">CUBLAS_WORKSPACE_CONFIG=:4096:8</span></code>. Dos operaciones no tienen implementación determinista en CUDA (la mediana con índices y el <em>backward</em> de la atención con Flash Attention); se aceptan con advertencia. Por eso la reproducción de una corrida puede diferir en el último decimal.</p>
-<p><strong>Resultados versionados.</strong> Las 232 corridas (sin pesos) están en <code class="docutils literal notranslate"><span class="pre">results/</span></code>, <code class="docutils literal notranslate"><span class="pre">entregable2/results/</span></code> y <code class="docutils literal notranslate"><span class="pre">entregable3/results/</span></code>, con los hashes del capítulo 21. Los pesos de NAGFuse (semillas 0–2) y de cada rival (semilla 8), y los modelos exportados, están fuera del repositorio por su tamaño: Zenodo, DOI en <code class="docutils literal notranslate"><span class="pre">CITATION.cff</span></code>. Herramienta Render: <a class="reference external" href="https://nagfuse-trashnet.onrender.com">https://nagfuse-trashnet.onrender.com</a>
+<p><strong>Resultados versionados.</strong> Las 232 corridas de la versión A y de los rivales, y las 23 de la opción B (3 de piloto y 20 confirmatorias), están sin pesos en <code class="docutils literal notranslate"><span class="pre">results/</span></code>, <code class="docutils literal notranslate"><span class="pre">entregable2/results/</span></code> y <code class="docutils literal notranslate"><span class="pre">entregable3/results/</span></code>, con los hashes de los capítulos 21 y 32. Los pesos de NAGFuse-B no están en el repositorio ni en Zenodo. Los pesos de NAGFuse (semillas 0–2) y de cada rival (semilla 8), y los modelos exportados, están fuera del repositorio por su tamaño: Zenodo, DOI en <code class="docutils literal notranslate"><span class="pre">CITATION.cff</span></code>. Herramienta Render: <a class="reference external" href="https://nagfuse-trashnet.onrender.com">https://nagfuse-trashnet.onrender.com</a>
 <strong>Prueba de humo del despliegue (anexo).</strong> Ejecutada el 23-11-2026 a las 22:44 (hora de Bogotá) con <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">dashboard/tests/prueba_humo.py</span> <span class="pre">https://nagfuse-trashnet.onrender.com</span></code>. La primera parte construye cada página y ejecuta cada callback en el equipo local; la segunda consulta cada ruta del servicio público en Render.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Prueba de humo · 2026-11-23 22:44
 página /                                      OK              6 ms
@@ -552,9 +559,10 @@ GET https://nagfuse-trashnet.onrender.com/_dash-layout           200       248 m
 <li><p>redactar y revisar código (entrenamiento reanudable, análisis estadístico, exportación y dashboard);</p></li>
 <li><p>proponer la estructura de la demostración;</p></li>
 <li><p>buscar literatura;</p></li>
-<li><p>redactar borradores de los capítulos.</p></li>
+<li><p>redactar borradores de los capítulos;</p></li>
+<li><p>en la opción B (capítulo 32): implementar los candidatos y el cuaderno de entrenamiento en Colab, redactar <code class="docutils literal notranslate"><span class="pre">analisis_b.py</span></code>, guiar paso a paso la ejecución en Colab y en GitHub Desktop, revisar la consistencia de los resultados y redactar el borrador del capítulo 32.</p></li>
 </ul>
-<p>Las decisiones de diseño, el preregistro, la ejecución de los experimentos y la revisión final del texto y del código son responsabilidad de los autores. Toda cifra del informe sale de código versionado y ejecutable.</p>
+<p>Las decisiones de diseño, el preregistro, la elección de la opción B, la ejecución de los experimentos y la revisión final del texto y del código son responsabilidad de los autores. Toda cifra del informe sale de código versionado y ejecutable.</p>
 </section>
 <section id="referencias-del-entregable-3">
 <h2>31.5 Referencias del Entregable 3<a class="headerlink" href="#referencias-del-entregable-3" title="Link to this heading">#</a></h2>
@@ -618,6 +626,15 @@ GET https://nagfuse-trashnet.onrender.com/_dash-layout           200       248 m
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">30. Conclusiones</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="32_e3_opcion_b.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">32. Opción B: segundo intento con otras ramas (protocolo v4)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

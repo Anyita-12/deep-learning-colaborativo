@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
@@ -268,11 +268,16 @@
 <li class="toctree-l1"><a class="reference internal" href="24_e3_literatura_novedad.html">24. Literatura y verificación de novedad</a></li>
 <li class="toctree-l1"><a class="reference internal" href="25_e3_diseno.html">25. Diseño de NAGFuse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="26_e3_implementacion_demostracion.html">26. Implementación y demostración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26a_e3_curvas_entrenamiento.html">26a. Curvas de entrenamiento y diagnóstico de sobreajuste</a></li>
 <li class="toctree-l1"><a class="reference internal" href="27_e3_protocolo_validacion.html">27. Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27a_e3_pruebas_hipotesis.html">27a. Reproducción de las pruebas de hipótesis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="28_e3_evaluacion_ampliada.html">28. Evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28a_e3_evaluacion_ampliada.html">28a. Reproducción de la evaluación ampliada</a></li>
 <li class="toctree-l1"><a class="reference internal" href="29_e3_dashboard.html">29. Dashboard</a></li>
 <li class="toctree-l1"><a class="reference internal" href="30_e3_conclusiones.html">30. Conclusiones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="32_e3_opcion_b.html">32. Opción B: segundo intento con otras ramas (protocolo v4)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="32a_e3_opcion_b.html">32a. Reproducción de la opción B</a></li>
 </ul>
 
     </div>
@@ -456,7 +461,7 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="n">ROOT</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">&quot;src&quot;</span> <span class="o">/</span> <span class="s2">&quot;config.py&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+<span class="n">ROOT</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"src"</span> <span class="o">/</span> <span class="s2">"config.py"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ROOT</span><span class="p">))</span>
 
@@ -471,8 +476,8 @@
 
 <span class="n">P</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
 <span class="n">C</span><span class="o">.</span><span class="n">ensure_dirs</span><span class="p">()</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.precision&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Resultados:&quot;</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">RESULTS</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;| modelos:&quot;</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">))</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.precision"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Resultados:"</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">RESULTS</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"| modelos:"</span><span class="p">,</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -531,11 +536,11 @@
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">MODELS</span><span class="p">:</span>
     <span class="n">info</span> <span class="o">=</span> <span class="n">model_info</span><span class="p">(</span><span class="n">build_model</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">m</span><span class="p">)</span>
-    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;modelo&quot;</span><span class="p">:</span> <span class="n">m</span><span class="p">,</span> <span class="s2">&quot;parámetros&quot;</span><span class="p">:</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;params_total&quot;</span><span class="p">],</span> <span class="s2">&quot;tamaño (MB)&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;size_mb&quot;</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span>
-                 <span class="s2">&quot;GMAC por imagen&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;gmacs&quot;</span><span class="p">],</span> <span class="mi">2</span><span class="p">)})</span>
-<span class="n">tabla_modelos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;modelo&quot;</span><span class="p">)</span>
-<span class="n">save_pickle</span><span class="p">(</span><span class="n">tabla_modelos</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">&quot;tabla_modelos.pkl&quot;</span><span class="p">)</span>
-<span class="n">tabla_modelos</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">&quot;tabla_modelos.csv&quot;</span><span class="p">)</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="n">m</span><span class="p">,</span> <span class="s2">"parámetros"</span><span class="p">:</span> <span class="n">info</span><span class="p">[</span><span class="s2">"params_total"</span><span class="p">],</span> <span class="s2">"tamaño (MB)"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">"size_mb"</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span>
+                 <span class="s2">"GMAC por imagen"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">"gmacs"</span><span class="p">],</span> <span class="mi">2</span><span class="p">)})</span>
+<span class="n">tabla_modelos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span>
+<span class="n">save_pickle</span><span class="p">(</span><span class="n">tabla_modelos</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"tabla_modelos.pkl"</span><span class="p">)</span>
+<span class="n">tabla_modelos</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">SUMMARY</span> <span class="o">/</span> <span class="s2">"tabla_modelos.csv"</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">tabla_modelos</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -627,11 +632,11 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">src.seeds</span><span class="w"> </span><span class="kn">import</span> <span class="n">configure_determinism</span>
 
 <span class="n">env</span> <span class="o">=</span> <span class="n">env_info</span><span class="p">(</span><span class="n">configure_determinism</span><span class="p">())</span>
-<span class="n">save_pickle</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">COMMON</span> <span class="o">/</span> <span class="s2">&quot;env.pkl&quot;</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">&quot;determinism&quot;</span><span class="p">},</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">&quot;valor&quot;</span><span class="p">))</span>
-<span class="n">write_requirements_lock</span><span class="p">(</span><span class="n">ROOT</span> <span class="o">/</span> <span class="s2">&quot;requirements-lock.txt&quot;</span><span class="p">)</span>
+<span class="n">save_pickle</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">COMMON</span> <span class="o">/</span> <span class="s2">"env.pkl"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">"determinism"</span><span class="p">},</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">"valor"</span><span class="p">))</span>
+<span class="n">write_requirements_lock</span><span class="p">(</span><span class="n">ROOT</span> <span class="o">/</span> <span class="s2">"requirements-lock.txt"</span><span class="p">)</span>
 <span class="n">pre</span> <span class="o">=</span> <span class="n">write_preregistro</span><span class="p">()</span>          <span class="c1"># si ya existe, se conserva el original (fecha anterior a las corridas)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Preregistro:&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Preregistro:"</span><span class="p">,</span> <span class="n">pre</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -728,7 +733,7 @@
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="n">pre</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="n">pre</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>

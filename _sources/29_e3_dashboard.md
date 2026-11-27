@@ -25,6 +25,8 @@ El dashboard (Dash + Plotly) tiene tres páginas y una ficha del modelo y lee **
 
 **Prueba de humo.** `dashboard/tests/prueba_humo.py` construye cada página, ejecuta cada callback con una entrada de ejemplo (incluida una predicción en vivo si el ONNX está disponible) y, si se le pasa la URL pública, comprueba que cada ruta responde. Su salida se anexa en el capítulo 31.
 
+**Opción B.** La tabla de líderes, las curvas de entrenamiento y el diagnóstico por modelo incluyen a NAGFuse-B (capítulo 32), con los datos de la misma tabla maestra. La predicción en vivo usa el modelo exportado de la versión A; NAGFuse-B no se exportó.
+
 **Limitaciones del dashboard (declaradas).**
 
 - La aplicación enruta con `dcc.Location` en un solo `app.py` en lugar de `use_pages=True` y una carpeta `pages/`, y usa una hoja de estilos propia en lugar de `dash-bootstrap-components`. La separación entre interfaz, datos y artefactos se mantiene: la aplicación no importa PyTorch ni código de entrenamiento.

@@ -276,6 +276,8 @@
 <li class="toctree-l1"><a class="reference internal" href="29_e3_dashboard.html">29. Dashboard</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">30. Conclusiones</a></li>
 <li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="32_e3_opcion_b.html">32. Opción B: segundo intento con otras ramas (protocolo v4)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="32a_e3_opcion_b.html">32a. Reproducción de la opción B</a></li>
 </ul>
 
     </div>
@@ -440,6 +442,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-aporta">30.2 Qué aporta</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites">30.3 Límites</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">30.4 Trabajo futuro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opcion-b">30.5 Opción B</a></li>
 </ul>
             </nav>
         </div>
@@ -500,6 +503,18 @@
 <li><p><strong>Ruido realista.</strong> Poisson-gaussiano y compresión JPEG, en el marco de ImageNet-C (Hendrycks y Dietterich, 2019).</p></li>
 <li><p><strong>Destilar NAGFuse</strong> en una sola red ligera con la compuerta como señal de entrenamiento.</p></li>
 </ol>
+</section>
+<section id="opcion-b">
+<h2>30.5 Opción B<a class="headerlink" href="#opcion-b" title="Link to this heading">#</a></h2>
+<p>El segundo intento (protocolo v4, capítulo 32) cambia solo las redes de las ramas: Swin-S como rama robusta y EfficientNet-B0 como rama convolucional. Se decide con <span class="math notranslate nohighlight">\(\alpha_B = 0.025\)</span> porque el conjunto de prueba ya se había usado con A.</p>
+<ul class="simple">
+<li><p><strong>P1 (H1-B). No.</strong> NAGFuse-B supera a 10 de los 12 rivales, uno más que A (GFN). Frente a ViT-B16 y RWCNet la diferencia es positiva (+0.0115 y +0.0109) y su IC excluye el cero, pero es menor que <span class="math notranslate nohighlight">\(\delta\)</span>. La potencia para detectar <span class="math notranslate nohighlight">\(\delta\)</span> era de 0.99, de modo que el resultado no se debe a falta de semillas.</p></li>
+<li><p><strong>P2 (H2-B). Frente a las CNN, sí; frente a ViT-B16, no</strong> (+0.012, no significativo), igual que A.</p></li>
+<li><p><strong>P3 (H3-B). Sí.</strong> La diferencia con RWCNet está dentro de <span class="math notranslate nohighlight">\(\pm\delta\)</span> (TOST <span class="math notranslate nohighlight">\(p = 0.006\)</span>).</p></li>
+<li><p><strong>P4 (mecanismo).</strong> La compuerta se abre del todo con ruido en todas las imágenes, como en A. Apagarla reduce el F1 con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span> en 0.006, más que en A pero menos que <span class="math notranslate nohighlight">\(\delta\)</span>.</p></li>
+<li><p><strong>P5 (generalización). En parte.</strong> B tiene la mejor media en RealWaste y Garbage v2, y en WaRP-C queda por debajo de ViT-B16 sin diferencia significativa: cumple el criterio de consistencia entre conjuntos, que A no cumplía.</p></li>
+</ul>
+<p>Frente a A, B gana +0.011 de F1 en limpio con 41 % menos de parámetros y la mitad de GFLOPs, y queda por debajo con ruido <span class="math notranslate nohighlight">\(\sigma = 0.10\)</span> (0.827 frente a 0.859). Estas comparaciones con A son exploratorias y mezclan hardware: las semillas 3 a 19 de B se entrenaron en T4 y todas las de A en A100.</p>
 </section>
 </section>
 
@@ -573,6 +588,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-aporta">30.2 Qué aporta</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites">30.3 Límites</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trabajo-futuro">30.4 Trabajo futuro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opcion-b">30.5 Opción B</a></li>
 </ul>
   </nav></div>
 

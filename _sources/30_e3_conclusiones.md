@@ -36,3 +36,15 @@
 2. **Medir $\pi$ y $\hat\sigma$ en los conjuntos adicionales**, para separar el efecto de la rama CNN del de la compuerta.
 3. **Ruido realista.** Poisson-gaussiano y compresión JPEG, en el marco de ImageNet-C (Hendrycks y Dietterich, 2019).
 4. **Destilar NAGFuse** en una sola red ligera con la compuerta como señal de entrenamiento.
+
+## 30.5 Opción B
+
+El segundo intento (protocolo v4, capítulo 32) cambia solo las redes de las ramas: Swin-S como rama robusta y EfficientNet-B0 como rama convolucional. Se decide con $\alpha_B = 0.025$ porque el conjunto de prueba ya se había usado con A.
+
+- **P1 (H1-B). No.** NAGFuse-B supera a 10 de los 12 rivales, uno más que A (GFN). Frente a ViT-B16 y RWCNet la diferencia es positiva (+0.0115 y +0.0109) y su IC excluye el cero, pero es menor que $\delta$. La potencia para detectar $\delta$ era de 0.99, de modo que el resultado no se debe a falta de semillas.
+- **P2 (H2-B). Frente a las CNN, sí; frente a ViT-B16, no** (+0.012, no significativo), igual que A.
+- **P3 (H3-B). Sí.** La diferencia con RWCNet está dentro de $\pm\delta$ (TOST $p = 0.006$).
+- **P4 (mecanismo).** La compuerta se abre del todo con ruido en todas las imágenes, como en A. Apagarla reduce el F1 con $\sigma = 0.05$ en 0.006, más que en A pero menos que $\delta$.
+- **P5 (generalización). En parte.** B tiene la mejor media en RealWaste y Garbage v2, y en WaRP-C queda por debajo de ViT-B16 sin diferencia significativa: cumple el criterio de consistencia entre conjuntos, que A no cumplía.
+
+Frente a A, B gana +0.011 de F1 en limpio con 41 % menos de parámetros y la mitad de GFLOPs, y queda por debajo con ruido $\sigma = 0.10$ (0.827 frente a 0.859). Estas comparaciones con A son exploratorias y mezclan hardware: las semillas 3 a 19 de B se entrenaron en T4 y todas las de A en A100.
