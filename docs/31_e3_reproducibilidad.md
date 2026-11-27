@@ -7,13 +7,14 @@
 | Entorno de entrenamiento | `entregable3/requirements-train.txt` (PyTorch 2.14.1, pandas 3.1.1) | — |
 | Pruebas | `cd entregable3 && python -m pytest -q tests` | < 1 min (CPU) |
 | Entrenamiento completo | `entregable3/notebooks/E3_entrenamiento_colab.ipynb` con `REF = "e3-protocolo-v3"` | ≈ 19 h en A100 |
-| Análisis desde los resultados versionados | `cd entregable3/analisis && python cargar.py && python confirmatorio.py && python secundario.py && python conforme.py && python tablas_y_figuras.py && python datos_dashboard.py && python congelar.py` | ≈ 3 min (CPU) |
+| Opción B: piloto y fase confirmatoria | `entregable3/notebooks/E3_entrenamiento_B_colab.ipynb` con `FASE = "piloto"` y luego `FASE = "confirmatoria"` | 0.4 h en A100 (piloto); 7.9 h en A100 y T4 (20 semillas) |
+| Análisis desde los resultados versionados | `cd entregable3/analisis && python cargar.py && python confirmatorio.py && python secundario.py && python conforme.py && python tablas_y_figuras.py && python datos_dashboard.py && python congelar.py`; para la opción B, `python analisis_b.py` después de `cargar.py` | ≈ 3 min (CPU) |
 | Dashboard | `cd dashboard && pip install -r requirements.txt && python app.py` | — |
 | Contenedor | `docker build -t nagfuse . && docker run -p 8050:8050 nagfuse` | — |
 
 **Determinismo.** `cudnn.deterministic = True`, `benchmark = False`, `use_deterministic_algorithms(True, warn_only=True)`, `CUBLAS_WORKSPACE_CONFIG=:4096:8`. Dos operaciones no tienen implementación determinista en CUDA (la mediana con índices y el *backward* de la atención con Flash Attention); se aceptan con advertencia. Por eso la reproducción de una corrida puede diferir en el último decimal.
 
-**Resultados versionados.** Las 232 corridas (sin pesos) están en `results/`, `entregable2/results/` y `entregable3/results/`, con los hashes del capítulo 21. Los pesos de NAGFuse (semillas 0–2) y de cada rival (semilla 8), y los modelos exportados, están fuera del repositorio por su tamaño: Zenodo, DOI en `CITATION.cff`. Herramienta Render: https://nagfuse-trashnet.onrender.com
+**Resultados versionados.** Las 232 corridas de la versión A y de los rivales, y las 23 de la opción B (3 de piloto y 20 confirmatorias), están sin pesos en `results/`, `entregable2/results/` y `entregable3/results/`, con los hashes de los capítulos 21 y 32. Los pesos de NAGFuse-B no están en el repositorio ni en Zenodo. Los pesos de NAGFuse (semillas 0–2) y de cada rival (semilla 8), y los modelos exportados, están fuera del repositorio por su tamaño: Zenodo, DOI en `CITATION.cff`. Herramienta Render: https://nagfuse-trashnet.onrender.com
 **Prueba de humo del despliegue (anexo).** Ejecutada el 23-11-2026 a las 22:44 (hora de Bogotá) con `python dashboard/tests/prueba_humo.py https://nagfuse-trashnet.onrender.com`. La primera parte construye cada página y ejecuta cada callback en el equipo local; la segunda consulta cada ruta del servicio público en Render.
 
 ```text
@@ -68,9 +69,10 @@ Durante el Entregable 3 se usó un asistente de IA generativa (Claude, de Anthro
 - redactar y revisar código (entrenamiento reanudable, análisis estadístico, exportación y dashboard);
 - proponer la estructura de la demostración;
 - buscar literatura;
-- redactar borradores de los capítulos.
+- redactar borradores de los capítulos;
+- en la opción B (capítulo 32): implementar los candidatos y el cuaderno de entrenamiento en Colab, redactar `analisis_b.py`, guiar paso a paso la ejecución en Colab y en GitHub Desktop, revisar la consistencia de los resultados y redactar el borrador del capítulo 32.
 
-Las decisiones de diseño, el preregistro, la ejecución de los experimentos y la revisión final del texto y del código son responsabilidad de los autores. Toda cifra del informe sale de código versionado y ejecutable. 
+Las decisiones de diseño, el preregistro, la elección de la opción B, la ejecución de los experimentos y la revisión final del texto y del código son responsabilidad de los autores. Toda cifra del informe sale de código versionado y ejecutable. 
 
 ## 31.5 Referencias del Entregable 3
 

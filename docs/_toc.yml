@@ -47,3 +47,5 @@ parts:
       - file: 29_e3_dashboard
       - file: 30_e3_conclusiones
       - file: 31_e3_reproducibilidad
+      - file: 32_e3_opcion_b
+      - file: 32a_e3_opcion_b

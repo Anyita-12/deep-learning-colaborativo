@@ -44,3 +44,5 @@ Los benchmarks quedan congelados con estos SHA-256 (rutas y contenido de cada ar
 | `entregable2/results/summary` | `f9a837e5c3ea458c98936f7de7908e31e537cea9908a924e52a0ae5cb329d601` |
 | `entregable3/results` | `85559d88625eb96255ed8a76357e1890a75aff00bd5f257f221df9e232168953` |
 | `entregable3/resultados` | `f479ad1c43f375f40ea0b2dbe81168e619c2d87c73f084a5575d7d8bb5ff4e5d` |
+
+Estos valores corresponden a la versión A. La opción B (capítulo 32) añadió corridas a `entregable3/results` y una fila a la tabla maestra, por lo que esos dos directorios tienen hashes nuevos, que se listan en la sección 32.10. Los dos primeros no cambian.
