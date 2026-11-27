@@ -278,6 +278,7 @@
 <li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="32_e3_opcion_b.html">32. Opción B: segundo intento con otras ramas (protocolo v4)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="32a_e3_opcion_b.html">32a. Reproducción de la opción B</a></li>
+<li class="toctree-l1"><a class="reference internal" href="32b_e3_opcion_b_diagnostico.html">32b. Diagnóstico de entrenamiento y evaluación complementaria de NAGFuse-B</a></li>
 </ul>
 
     </div>
@@ -514,7 +515,7 @@
 <li><p><strong>P4 (mecanismo).</strong> La compuerta se abre del todo con ruido en todas las imágenes, como en A. Apagarla reduce el F1 con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span> en 0.006, más que en A pero menos que <span class="math notranslate nohighlight">\(\delta\)</span>.</p></li>
 <li><p><strong>P5 (generalización). En parte.</strong> B tiene la mejor media en RealWaste y Garbage v2, y en WaRP-C queda por debajo de ViT-B16 sin diferencia significativa: cumple el criterio de consistencia entre conjuntos, que A no cumplía.</p></li>
 </ul>
-<p>Frente a A, B gana +0.011 de F1 en limpio con 41 % menos de parámetros y la mitad de GFLOPs, y queda por debajo con ruido <span class="math notranslate nohighlight">\(\sigma = 0.10\)</span> (0.827 frente a 0.859). Estas comparaciones con A son exploratorias y mezclan hardware: las semillas 3 a 19 de B se entrenaron en T4 y todas las de A en A100.</p>
+<p>Frente a A, B gana +0.011 de F1 en limpio con 41 % menos de parámetros y la mitad de GFLOPs, y queda por debajo con ruido <span class="math notranslate nohighlight">\(\sigma = 0.10\)</span> (0.827 frente a 0.859), porque con ruido la salida es la de la rama Swin-S, que se degrada más que ViT-B/16. Estas comparaciones con A son exploratorias y mezclan hardware: las semillas 3 a 19 de B se entrenaron en T4 y todas las de A en A100.</p>
 </section>
 </section>
 

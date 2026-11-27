@@ -1,0 +1,1909 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>32b. Diagnóstico de entrenamiento y evaluación complementaria de NAGFuse-B &#8212; Clasificación de residuos con TrashNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="_static/autores.css?v=fc0dcfce" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '32b_e3_opcion_b_diagnostico';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="32a. Reproducción de la opción B" href="32a_e3_opcion_b.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Clasificación de residuos con TrashNet</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><div class="sidebar-autores">
+  <div class="autor">
+    <img src="_static/autores/anyely.jpg" alt="Anyely Sanjuan Benavides">
+    <p class="autor-nombre">Anyely Sanjuan Benavides</p>
+    <p class="autor-detalle">Msc. Analítica de Datos<br>Universidad del Norte</p>
+  </div>
+  <div class="autor">
+    <img src="_static/autores/juan.jpg" alt="Juan David Díaz Fernández">
+    <p class="autor-nombre">Juan David Díaz Fernández</p>
+    <p class="autor-detalle">Msc. Ingeniería Mecánica<br>Universidad del Norte</p>
+  </div>
+</div></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Clasificación de residuos con TrashNet
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 1: modelos base</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_problema_dataset.html">1. Definición del problema y conjunto de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_eda.html">2. Análisis exploratorio de datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_estado_del_arte.html">3. Revisión del estado del arte y selección de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="40_diseno_experimental.html">4.1 Diseño experimental</a></li>
+<li class="toctree-l1"><a class="reference internal" href="41_particion_y_preprocesamiento.html">4.2 Partición y preprocesamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="42_busqueda_hiperparametros.html">4.3 Búsqueda de hiperparámetros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="43_piloto_y_tamano_de_muestra.html">4.4 Estudio piloto y tamaño de muestra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="44_entrenamiento_final.html">4.5 Entrenamiento final</a></li>
+<li class="toctree-l1"><a class="reference internal" href="45_evaluacion_resultados.html">5.1 Resultados de los modelos base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="46_benchmark_baseline_estadistica.html">5.2 Comparación estadística y modelo de referencia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="47_analisis_cualitativo_robustez.html">5.3 Análisis cualitativo, robustez y discusión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_declaracion_apriori.html">6. Declaración a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_conclusiones.html">7. Conclusiones</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 2: benchmark de diez modelos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_benchmark_introduccion.html">8. Benchmark de diez modelos: problema, preguntas e hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datos_auditoria.html">9. Datos: ficha técnica, contrato de datos y auditoría de fuga</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_revision_sistematica.html">10. Revisión sistemática ampliada y selección de los modelos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_protocolo_preregistro.html">11. Preregistro, protocolo común y fichas de modelo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_paper_guia.html">12. Paper guía: réplica, limitaciones y ablación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_benchmark_estadistica.html">13. Benchmark: resultados e inferencia estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_ajuste_calibracion_incertidumbre.html">14. Bondad de ajuste, sobreajuste, calibración e incertidumbre</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_robustez_interpretabilidad_errores.html">15. Robustez, interpretabilidad, errores y techo de desempeño</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_discusion_benchmark.html">16. Discusión del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_reproducibilidad.html">17. Reproducibilidad del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_conclusiones_benchmark.html">18. Conclusiones del benchmark</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_referencias_benchmark.html">19. Referencias del benchmark</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Entregable 3: modelo propio y evaluación ampliada</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20_e3_introduccion.html">20. Entregable 3: introducción</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_e3_correcciones.html">21. Correcciones del Entregable 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_e3_datos.html">22. Datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_e3_benchmark.html">23. Benchmark: configuraciones, semillas y artefactos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_e3_literatura_novedad.html">24. Literatura y verificación de novedad</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25_e3_diseno.html">25. Diseño de NAGFuse</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_e3_implementacion_demostracion.html">26. Implementación y demostración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26a_e3_curvas_entrenamiento.html">26a. Curvas de entrenamiento y diagnóstico de sobreajuste</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_e3_protocolo_validacion.html">27. Protocolo y validación estadística</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27a_e3_pruebas_hipotesis.html">27a. Reproducción de las pruebas de hipótesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_e3_evaluacion_ampliada.html">28. Evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28a_e3_evaluacion_ampliada.html">28a. Reproducción de la evaluación ampliada</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_e3_dashboard.html">29. Dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_e3_conclusiones.html">30. Conclusiones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="32_e3_opcion_b.html">32. Opción B: segundo intento con otras ramas (protocolo v4)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="32a_e3_opcion_b.html">32a. Reproducción de la opción B</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">32b. Diagnóstico de entrenamiento y evaluación complementaria de NAGFuse-B</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Anyita-12/deep-learning-colaborativo" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/32b_e3_opcion_b_diagnostico.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>32b. Diagnóstico de entrenamiento y evaluación complementaria de NAGFuse-B</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-entrenamiento-y-sobreajuste-equivalente-a-26a">1. Curvas de entrenamiento y sobreajuste (equivalente a 26a)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-hipotesis-equivalente-a-27a">2. Pruebas de hipótesis (equivalente a 27a)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-ampliada-equivalente-a-28a">3. Evaluación ampliada (equivalente a 28a)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanismo-ramas-compuerta-y-errores-equivalente-a-la-parte-de-mecanismo-de-28a">4. Mecanismo: ramas, compuerta y errores (equivalente a la parte de mecanismo de 28a)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="b-diagnostico-de-entrenamiento-y-evaluacion-complementaria-de-nagfuse-b">
+<h1>32b. Diagnóstico de entrenamiento y evaluación complementaria de NAGFuse-B<a class="headerlink" href="#b-diagnostico-de-entrenamiento-y-evaluacion-complementaria-de-nagfuse-b" title="Link to this heading">#</a></h1>
+<p>Este cuaderno repite para NAGFuse-B los análisis que los cuadernos <a class="reference internal" href="26a_e3_curvas_entrenamiento.html"><span class="doc">26a. Curvas de entrenamiento y diagnóstico de sobreajuste</span></a>,
+<a class="reference internal" href="27a_e3_pruebas_hipotesis.html"><span class="doc">27a. Reproducción de las pruebas de hipótesis</span></a> y <a class="reference internal" href="28a_e3_evaluacion_ampliada.html"><span class="doc">28a. Reproducción de la evaluación ampliada</span></a> hacen para la versión A: curvas de entrenamiento y
+sobreajuste, verificación de la corrección de Holm, sensibilidad del veredicto, comparación global, F1 por clase,
+predicción conforme, calibración, sensibilidad de la compuerta, análisis por rama y análisis de errores. Todo se calcula
+desde las 20 corridas versionadas de NAGFuse-B (<code class="docutils literal notranslate"><span class="pre">entregable3/results/results_e2/NAGFuse-B/</span></code>) y desde las tablas de
+<code class="docutils literal notranslate"><span class="pre">entregable3/resultados/</span></code> y <code class="docutils literal notranslate"><span class="pre">entregable3/resultados_b/</span></code>. Ningún análisis de este cuaderno es confirmatorio: la decisión
+sobre R3 es la del capítulo 32.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuración común. El cuaderno funciona desde docs/ (Jupyter Book) o desde la raíz del repositorio.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">REPO</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">(),</span> <span class="o">*</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="s2">"entregable3"</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">())</span>
+<span class="n">RES</span><span class="p">,</span> <span class="n">RESB</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s2">"entregable3"</span> <span class="o">/</span> <span class="s2">"resultados"</span><span class="p">,</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s2">"entregable3"</span> <span class="o">/</span> <span class="s2">"resultados_b"</span>
+<span class="n">RUNS</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s2">"entregable3"</span> <span class="o">/</span> <span class="s2">"results"</span> <span class="o">/</span> <span class="s2">"results_e2"</span>
+<span class="n">FIG</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s2">"docs"</span> <span class="o">/</span> <span class="s2">"images"</span> <span class="o">/</span> <span class="s2">"e3"</span>
+<span class="n">CLASES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"cardboard"</span><span class="p">,</span> <span class="s2">"glass"</span><span class="p">,</span> <span class="s2">"metal"</span><span class="p">,</span> <span class="s2">"paper"</span><span class="p">,</span> <span class="s2">"plastic"</span><span class="p">,</span> <span class="s2">"trash"</span><span class="p">]</span>
+<span class="n">COLOR</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"NAGFuse-B"</span><span class="p">:</span> <span class="s2">"#e67e22"</span><span class="p">,</span> <span class="s2">"NAGFuse"</span><span class="p">:</span> <span class="s2">"#c0392b"</span><span class="p">,</span> <span class="s2">"ViT-B16"</span><span class="p">:</span> <span class="s2">"#2e86c1"</span><span class="p">,</span> <span class="s2">"RWCNet"</span><span class="p">:</span> <span class="s2">"#27ae60"</span><span class="p">,</span> <span class="s2">"GFN"</span><span class="p">:</span> <span class="s2">"#8e44ad"</span><span class="p">,</span> <span class="s2">"Celik-HC"</span><span class="p">:</span> <span class="s2">"#d68910"</span><span class="p">}</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"axes.grid"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"grid.alpha"</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s2">"font.size"</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.precision"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">LectorSinTorch</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">Unpickler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Lee los .pkl de las corridas sin instalar torch: las clases ausentes se sustituyen por objetos vacíos."""</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modulo</span><span class="p">,</span> <span class="n">nombre</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">find_class</span><span class="p">(</span><span class="n">modulo</span><span class="p">,</span> <span class="n">nombre</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{</span><span class="s2">"__init__"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"__setstate__"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="kc">None</span><span class="p">})</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">leer</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">LectorSinTorch</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">semillas</span><span class="p">(</span><span class="n">modelo</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Carpetas de las corridas terminadas (con archivo DONE) de un modelo, ordenadas por semilla."""</span>
+    <span class="k">return</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="mi">5</span><span class="p">:]):</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">RUNS</span> <span class="o">/</span> <span class="n">modelo</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"seed_*"</span><span class="p">))</span> <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="s2">"DONE"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f1_macro</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">yp</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">c</span><span class="p">))</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">yp</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">c</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">)])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Repositorio:"</span><span class="p">,</span> <span class="n">REPO</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">"| semillas de NAGFuse-B:"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">semillas</span><span class="p">(</span><span class="s2">"NAGFuse-B"</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Repositorio: deep-learning-colaborativo | semillas de NAGFuse-B: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="curvas-de-entrenamiento-y-sobreajuste-equivalente-a-26a">
+<h2>1. Curvas de entrenamiento y sobreajuste (equivalente a 26a)<a class="headerlink" href="#curvas-de-entrenamiento-y-sobreajuste-equivalente-a-26a" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Historiales por época de NAGFuse-B, NAGFuse (A) y los dos rivales más fuertes</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">historiales</span><span class="p">(</span><span class="n">modelo</span><span class="p">):</span>
+    <span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">semillas</span><span class="p">(</span><span class="n">modelo</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">h</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">leer</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">"history.pkl"</span><span class="p">),</span> <span class="n">leer</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">"timing.pkl"</span><span class="p">)</span>       <span class="c1"># dict de listas (una entrada por época) y tiempos</span>
+        <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="n">modelo</span><span class="p">,</span> <span class="s2">"semilla"</span><span class="p">:</span> <span class="n">s</span><span class="p">,</span> <span class="s2">"epoca"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"epoch"</span><span class="p">],</span>
+                                   <span class="s2">"train_loss"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"train_loss"</span><span class="p">],</span> <span class="s2">"val_loss"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"val_loss"</span><span class="p">],</span>
+                                   <span class="s2">"train_f1"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"train_f1_macro"</span><span class="p">],</span> <span class="s2">"val_f1"</span><span class="p">:</span> <span class="n">h</span><span class="p">[</span><span class="s2">"val_f1_macro"</span><span class="p">],</span>
+                                   <span class="s2">"mejor_epoca"</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="s2">"best_epoch"</span><span class="p">]}))</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+
+<span class="n">MODELOS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"NAGFuse-B"</span><span class="p">,</span> <span class="s2">"NAGFuse"</span><span class="p">,</span> <span class="s2">"ViT-B16"</span><span class="p">,</span> <span class="s2">"RWCNet"</span><span class="p">]</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">historiales</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">MODELOS</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">H</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span><span class="o">.</span><span class="n">semilla</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>modelo
+NAGFuse      20
+NAGFuse-B    20
+RWCNet       12
+ViT-B16      12
+Name: semilla, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figura 32b.1 (images/e3/opcion_b_curvas.png): pérdida y F1 macro por época, media ± DE entre semillas</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ejes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">met</span><span class="p">,</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">ejes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"loss"</span><span class="p">,</span> <span class="s2">"Pérdida (nats)"</span><span class="p">),</span> <span class="p">(</span><span class="n">ejes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"f1"</span><span class="p">,</span> <span class="s2">"F1 macro"</span><span class="p">)]:</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">MODELOS</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">H</span><span class="p">[</span><span class="n">H</span><span class="o">.</span><span class="n">modelo</span> <span class="o">==</span> <span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"epoca"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">parte</span><span class="p">,</span> <span class="n">estilo</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"train"</span><span class="p">,</span> <span class="s2">"--"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"val"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)]:</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">parte</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">met</span><span class="si">}</span><span class="s2">"</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">();</span> <span class="n">ok</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>      <span class="c1"># épocas a las que llegó al menos la mitad de las semillas</span>
+            <span class="n">mu</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="n">ok</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="n">ok</span><span class="p">]</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mu</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">estilo</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span> <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="s2">"NAGFuse-B"</span> <span class="k">else</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="s1">'entrenamiento'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">parte</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'train'</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'validación'</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">mu</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">mu</span> <span class="o">-</span> <span class="n">sd</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">sd</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.12</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">H</span><span class="p">[</span><span class="n">H</span><span class="o">.</span><span class="n">modelo</span> <span class="o">==</span> <span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"semilla"</span><span class="p">)</span><span class="o">.</span><span class="n">mejor_epoca</span><span class="o">.</span><span class="n">first</span><span class="p">()</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">":"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Época"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
+<span class="n">ejes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.005</span><span class="p">);</span> <span class="n">ejes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Figura 32b.1. Curvas de entrenamiento (línea punteada vertical: mediana de la época elegida)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">FIG</span> <span class="o">/</span> <span class="s2">"opcion_b_curvas.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3f7a7d7ca3e591f9a068f0dd1a37aecd40ef68042ebcab6a70c86c02c587d881.png" src="_images/3f7a7d7ca3e591f9a068f0dd1a37aecd40ef68042ebcab6a70c86c02c587d881.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 32b.1: diagnóstico de sobreajuste en la época elegida (media y DE entre semillas)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">en_mejor</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">epoca</span> <span class="o">==</span> <span class="n">d</span><span class="o">.</span><span class="n">mejor_epoca</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s2">"mejor_epoca"</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">epoca</span><span class="p">,</span> <span class="s2">"epocas_corridas"</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">epoca</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"F1_train"</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">train_f1</span><span class="p">,</span>
+                      <span class="s2">"F1_val"</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">val_f1</span><span class="p">,</span> <span class="s2">"brecha_F1"</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">train_f1</span> <span class="o">-</span> <span class="n">r</span><span class="o">.</span><span class="n">val_f1</span><span class="p">,</span> <span class="s2">"perdida_train"</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">train_loss</span><span class="p">,</span>
+                      <span class="s2">"perdida_val"</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">val_loss</span><span class="p">})</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"modelo"</span><span class="p">,</span> <span class="s2">"semilla"</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">en_mejor</span><span class="p">,</span> <span class="n">include_groups</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">SOBRE</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">MODELOS</span><span class="p">]</span>
+<span class="n">SOBRE</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="s1">'media'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'mean'</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'DE'</span><span class="si">}</span><span class="s2">)"</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">SOBRE</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+<span class="n">SOBRE</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mejor_epoca (media)</th>
+      <th>mejor_epoca (DE)</th>
+      <th>epocas_corridas (media)</th>
+      <th>epocas_corridas (DE)</th>
+      <th>F1_train (media)</th>
+      <th>F1_train (DE)</th>
+      <th>F1_val (media)</th>
+      <th>F1_val (DE)</th>
+      <th>brecha_F1 (media)</th>
+      <th>brecha_F1 (DE)</th>
+      <th>perdida_train (media)</th>
+      <th>perdida_train (DE)</th>
+      <th>perdida_val (media)</th>
+      <th>perdida_val (DE)</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>NAGFuse-B</th>
+      <td>25.4000</td>
+      <td>12.9143</td>
+      <td>37.7000</td>
+      <td>11.2535</td>
+      <td>0.9976</td>
+      <td>0.0035</td>
+      <td>0.9730</td>
+      <td>0.0058</td>
+      <td>0.0246</td>
+      <td>0.0060</td>
+      <td>0.0548</td>
+      <td>0.0464</td>
+      <td>0.1204</td>
+      <td>0.0193</td>
+    </tr>
+    <tr>
+      <th>NAGFuse</th>
+      <td>26.9000</td>
+      <td>10.8865</td>
+      <td>39.7000</td>
+      <td>10.4484</td>
+      <td>0.9979</td>
+      <td>0.0024</td>
+      <td>0.9665</td>
+      <td>0.0063</td>
+      <td>0.0314</td>
+      <td>0.0054</td>
+      <td>0.0506</td>
+      <td>0.0341</td>
+      <td>0.1335</td>
+      <td>0.0145</td>
+    </tr>
+    <tr>
+      <th>ViT-B16</th>
+      <td>15.4167</td>
+      <td>6.5430</td>
+      <td>28.4167</td>
+      <td>6.5430</td>
+      <td>0.9949</td>
+      <td>0.0075</td>
+      <td>0.9648</td>
+      <td>0.0065</td>
+      <td>0.0301</td>
+      <td>0.0054</td>
+      <td>0.0170</td>
+      <td>0.0247</td>
+      <td>0.1517</td>
+      <td>0.0351</td>
+    </tr>
+    <tr>
+      <th>RWCNet</th>
+      <td>19.1667</td>
+      <td>9.3501</td>
+      <td>32.1667</td>
+      <td>9.3501</td>
+      <td>0.9924</td>
+      <td>0.0083</td>
+      <td>0.9587</td>
+      <td>0.0077</td>
+      <td>0.0337</td>
+      <td>0.0070</td>
+      <td>0.1456</td>
+      <td>0.0884</td>
+      <td>0.1626</td>
+      <td>0.0292</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación.</strong> NAGFuse-B sigue el mismo patrón de <em>fine-tuning</em> que A y los rivales: la pérdida de
+entrenamiento baja casi a cero y la de validación se estabiliza después de las primeras épocas, mientras el F1 de
+validación se mantiene estable. En los dos modelos de fusión la pérdida de entrenamiento incluye la supervisión de cada
+rama (NLL de la mezcla más 0.5 por la entropía cruzada de cada rama), por eso empieza más alta; la de validación es la
+entropía cruzada de la mezcla. En la época elegida, NAGFuse-B tiene el mayor F1 de validación y la menor brecha con el de
+entrenamiento de los cuatro modelos. ViT-B16 y RWCNet muestran 12 semillas (8 a 19), las que se entrenaron en el
+Entregable 3, como en el cuaderno 26a. La brecha entre el F1 de entrenamiento y el de validación en la época elegida mide el
+sobreajuste que queda después del <em>early stopping</em>. La curva de aprendizaje frente al tamaño de muestra (10 %, 25 % y
+50 % del entrenamiento) no se calculó para ningún modelo, por presupuesto de cómputo (capítulos 26a y 30).</p>
+</section>
+<section id="pruebas-de-hipotesis-equivalente-a-27a">
+<h2>2. Pruebas de hipótesis (equivalente a 27a)<a class="headerlink" href="#pruebas-de-hipotesis-equivalente-a-27a" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificación independiente de la corrección de Holm para H1-B y H2-B (decisión: máximo de las tres pruebas)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">holm</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="nb">float</span><span class="p">);</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">);</span> <span class="n">o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">aj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="o">.</span><span class="n">accumulate</span><span class="p">((</span><span class="n">m</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="n">o</span><span class="p">]))</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">m</span><span class="p">);</span> <span class="n">out</span><span class="p">[</span><span class="n">o</span><span class="p">]</span> <span class="o">=</span> <span class="n">aj</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="n">ALFA_B</span><span class="p">,</span> <span class="n">DELTA</span> <span class="o">=</span> <span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.02</span>
+<span class="n">H1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESB</span> <span class="o">/</span> <span class="s2">"contrastes_H1_f1.csv"</span><span class="p">);</span> <span class="n">H2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESB</span> <span class="o">/</span> <span class="s2">"contrastes_H2_ruido005.csv"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"H1-B"</span><span class="p">,</span> <span class="n">H1</span><span class="p">),</span> <span class="p">(</span><span class="s2">"H2-B"</span><span class="p">,</span> <span class="n">H2</span><span class="p">)]:</span>
+    <span class="n">p_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">holm</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">c</span><span class="p">])</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"p_t"</span><span class="p">,</span> <span class="s2">"p_w"</span><span class="p">,</span> <span class="s2">"p_boot"</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">supera</span> <span class="o">=</span> <span class="p">(</span><span class="n">p_max</span> <span class="o">&lt;</span> <span class="n">ALFA_B</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">media_dif</span> <span class="o">&gt;</span> <span class="n">DELTA</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">ic_lo</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">: m = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="si">}</span><span class="s2">, discrepancia máxima de Holm = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p_max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t</span><span class="o">.</span><span class="n">p_max_holm</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">, "</span>
+          <span class="sa">f</span><span class="s2">"mismo veredicto: </span><span class="si">{</span><span class="nb">bool</span><span class="p">((</span><span class="n">supera</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">t</span><span class="o">.</span><span class="n">supera</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span><span class="si">}</span><span class="s2">, supera a </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">supera</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">p_max</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">p_max_holm</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">supera</span> <span class="o">==</span> <span class="n">t</span><span class="o">.</span><span class="n">supera</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H1-B: m = 12, discrepancia máxima de Holm = 0.0e+00, mismo veredicto: True, supera a 10
+H2-B: m = 10, discrepancia máxima de Holm = 0.0e+00, mismo veredicto: True, supera a 9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 32b.2: sensibilidad del veredicto de H1-B a la métrica (MCC) y al subconjunto de semillas (0–9)</span>
+<span class="n">MCC</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESB</span> <span class="o">/</span> <span class="s2">"contrastes_H1_mcc.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"rival"</span><span class="p">)</span>
+<span class="n">S09</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESB</span> <span class="o">/</span> <span class="s2">"contrastes_H1_seeds0-9.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"rival"</span><span class="p">)</span>
+<span class="n">sens</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"F1, 20 semillas"</span><span class="p">:</span> <span class="n">H1</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"rival"</span><span class="p">)</span><span class="o">.</span><span class="n">supera</span><span class="p">,</span> <span class="s2">"MCC, 20 semillas"</span><span class="p">:</span> <span class="n">MCC</span><span class="o">.</span><span class="n">supera</span><span class="p">,</span>
+                     <span class="s2">"F1, semillas 0–9"</span><span class="p">:</span> <span class="n">S09</span><span class="o">.</span><span class="n">supera</span><span class="p">,</span> <span class="s2">"dif. F1 semillas 0–9"</span><span class="p">:</span> <span class="n">S09</span><span class="o">.</span><span class="n">media_dif</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)})</span>
+<span class="n">sens</span><span class="p">[</span><span class="s2">"veredicto estable"</span><span class="p">]</span> <span class="o">=</span> <span class="n">sens</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="n">sens</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>F1, 20 semillas</th>
+      <th>MCC, 20 semillas</th>
+      <th>F1, semillas 0–9</th>
+      <th>dif. F1 semillas 0–9</th>
+      <th>veredicto estable</th>
+    </tr>
+    <tr>
+      <th>rival</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Celik-HC</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.0330</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>MbXception</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.0844</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>ViT-B16</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.0106</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>GFN</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.0245</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>FocusRCNet</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.1382</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>ResMsCapsule</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.0455</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>RWCNet</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.0051</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>CNN</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.1259</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>MobileNetV2</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.1388</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>ResNet-18</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.0852</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>HistGradientBoosting</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.1870</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>Trivial</th>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+      <td>0.8836</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figura 32b.2: rango medio de Friedman con la diferencia crítica de Nemenyi (11 modelos, semillas 0 a 11)</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESB</span> <span class="o">/</span> <span class="s2">"friedman_nemenyi.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"rango_medio"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"χ²_F = </span><span class="si">{</span><span class="n">F</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, F_ID = </span><span class="si">{</span><span class="n">F</span><span class="o">.</span><span class="n">F_ID</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, p = </span><span class="si">{</span><span class="n">F</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">, CD = </span><span class="si">{</span><span class="n">F</span><span class="o">.</span><span class="n">CD</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">modelo</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">rango_medio</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="n">F</span><span class="o">.</span><span class="n">CD</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">COLOR</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s2">"#95a5a6"</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">F</span><span class="o">.</span><span class="n">modelo</span><span class="p">],</span>
+        <span class="n">error_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">ecolor</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">();</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Rango medio (1 = mejor); barras de error: ± CD/2"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Figura 32b.2. Friedman con NAGFuse-B en lugar de A y diferencia crítica de Nemenyi"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>χ²_F = 109.36, F_ID = 113.10, p = 4.2e-53, CD = 4.36
+</pre></div>
+</div>
+<img alt="_images/42c31ddf0cc3073e86823cc9a5e2ab5b95888077e4675baac41029fddc70c53a.png" src="_images/42c31ddf0cc3073e86823cc9a5e2ab5b95888077e4675baac41029fddc70c53a.png" />
+</div>
+</div>
+</section>
+<section id="evaluacion-ampliada-equivalente-a-28a">
+<h2>3. Evaluación ampliada (equivalente a 28a)<a class="headerlink" href="#evaluacion-ampliada-equivalente-a-28a" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 32b.3: F1 por clase en prueba (media entre semillas) de NAGFuse-B, A y los dos rivales más fuertes</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">MODELOS</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">semillas</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="n">m</span><span class="p">,</span> <span class="s2">"semilla"</span><span class="p">:</span> <span class="n">s</span><span class="p">,</span> <span class="o">**</span><span class="n">leer</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">"metrics_test.pkl"</span><span class="p">)[</span><span class="s2">"f1_per_class"</span><span class="p">]})</span>
+<span class="n">PC</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)[</span><span class="n">CLASES</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">MODELOS</span><span class="p">]</span>
+<span class="n">PC</span><span class="p">[</span><span class="s2">"peor clase"</span><span class="p">]</span> <span class="o">=</span> <span class="n">PC</span><span class="p">[</span><span class="n">CLASES</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">PC</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cardboard</th>
+      <th>glass</th>
+      <th>metal</th>
+      <th>paper</th>
+      <th>plastic</th>
+      <th>trash</th>
+      <th>peor clase</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>NAGFuse-B</th>
+      <td>0.9873</td>
+      <td>0.9548</td>
+      <td>0.9595</td>
+      <td>0.9605</td>
+      <td>0.9426</td>
+      <td>0.8816</td>
+      <td>trash</td>
+    </tr>
+    <tr>
+      <th>NAGFuse</th>
+      <td>0.9800</td>
+      <td>0.9366</td>
+      <td>0.9529</td>
+      <td>0.9463</td>
+      <td>0.9285</td>
+      <td>0.8744</td>
+      <td>trash</td>
+    </tr>
+    <tr>
+      <th>ViT-B16</th>
+      <td>0.9878</td>
+      <td>0.9329</td>
+      <td>0.9505</td>
+      <td>0.9597</td>
+      <td>0.9219</td>
+      <td>0.8589</td>
+      <td>trash</td>
+    </tr>
+    <tr>
+      <th>RWCNet</th>
+      <td>0.9700</td>
+      <td>0.9373</td>
+      <td>0.9514</td>
+      <td>0.9503</td>
+      <td>0.9358</td>
+      <td>0.8440</td>
+      <td>trash</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figura 32b.3: F1 macro por escenario (barras con IC 95 %) para NAGFuse-B, A y los dos rivales más fuertes</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RES</span> <span class="o">/</span> <span class="s2">"tabla_maestra.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span>
+<span class="n">ESC</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"F1 limpio"</span><span class="p">,</span> <span class="s2">"F1 ruido 0.05"</span><span class="p">,</span> <span class="s2">"F1 ruido 0.10"</span><span class="p">,</span> <span class="s2">"F1 desenfoque"</span><span class="p">,</span> <span class="s2">"F1 oclusión"</span><span class="p">,</span> <span class="s2">"F1 fondo"</span><span class="p">,</span>
+       <span class="s2">"F1 RealWaste"</span><span class="p">,</span> <span class="s2">"F1 Garbage v2"</span><span class="p">,</span> <span class="s2">"F1 WaRP-C"</span><span class="p">]</span>
+<span class="n">w</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">MODELOS</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">ESC</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="o">-</span> <span class="n">M</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="s2">" IC_lo"</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ESC</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="s2">" IC_hi"</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ESC</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span> <span class="o">-</span> <span class="n">y</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ESC</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mf">1.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">err</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ESC</span><span class="p">)),</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"F1 "</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ESC</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"F1 macro (IC 95 %)"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncol</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Figura 32b.3. Robustez y cambio de dominio (los tres últimos conjuntos, sin reentrenar)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c8672407224ce6e14a478517f4d35bbefd8e41b508f5e58e323a652b739dc934.png" src="_images/c8672407224ce6e14a478517f4d35bbefd8e41b508f5e58e323a652b739dc934.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 32b.4: predicción conforme dividida (LAC, alfa = 0.10) de NAGFuse-B con el mismo código que conforme.py,</span>
+<span class="c1"># junto a la tabla congelada de A y los rivales (entregable3/resultados/conforme.csv)</span>
+<span class="n">A_CONF</span> <span class="o">=</span> <span class="mf">0.10</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">semillas</span><span class="p">(</span><span class="s2">"NAGFuse-B"</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">v</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">leer</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">"val_predictions.pkl"</span><span class="p">),</span> <span class="n">leer</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">"test_predictions.pkl"</span><span class="p">)</span>
+    <span class="n">pv</span><span class="p">,</span> <span class="n">yv</span><span class="p">,</span> <span class="n">pt</span><span class="p">,</span> <span class="n">yt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">"probs"</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">"y_true"</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">"probs"</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s2">"y_true"</span><span class="p">])</span>
+    <span class="n">sc</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">pv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yv</span><span class="p">)),</span> <span class="n">yv</span><span class="p">];</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>                         <span class="c1"># puntaje de no conformidad en validación</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">A_CONF</span><span class="p">))</span> <span class="o">/</span> <span class="n">n</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"higher"</span><span class="p">)</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pt</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">q</span><span class="p">;</span> <span class="n">cob</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yt</span><span class="p">)),</span> <span class="n">yt</span><span class="p">]</span>                       <span class="c1"># conjuntos y cobertura en prueba</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="s2">"NAGFuse-B"</span><span class="p">,</span> <span class="s2">"semilla"</span><span class="p">:</span> <span class="n">s</span><span class="p">,</span> <span class="s2">"cobertura"</span><span class="p">:</span> <span class="n">cob</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="s2">"tamano"</span><span class="p">:</span> <span class="n">S</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                  <span class="s2">"vacios"</span><span class="p">:</span> <span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="o">**</span><span class="p">{</span><span class="sa">f</span><span class="s2">"cob_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">"</span><span class="p">:</span> <span class="n">cob</span><span class="p">[</span><span class="n">yt</span> <span class="o">==</span> <span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">CLASES</span><span class="p">)}})</span>
+<span class="n">CB</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+<span class="n">fila_b</span> <span class="o">=</span> <span class="n">CB</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">"semilla"</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">fila_b</span><span class="p">[</span><span class="s2">"R"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">CB</span><span class="p">);</span> <span class="n">fila_b</span><span class="p">[</span><span class="s2">"peor_clase"</span><span class="p">]</span> <span class="o">=</span> <span class="n">fila_b</span><span class="p">[[</span><span class="sa">f</span><span class="s2">"cob_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">CLASES</span><span class="p">]]</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">CONF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">fila_b</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">"vacios"</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RES</span> <span class="o">/</span> <span class="s2">"conforme.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"NAGFuse-B: fracción media de conjuntos vacíos = </span><span class="si">{</span><span class="n">fila_b</span><span class="o">.</span><span class="n">vacios</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">CONF</span><span class="p">[[</span><span class="s2">"R"</span><span class="p">,</span> <span class="s2">"cobertura"</span><span class="p">,</span> <span class="s2">"tamano"</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"cob_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">CLASES</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"cobertura"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NAGFuse-B: fracción media de conjuntos vacíos = 0.103
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>R</th>
+      <th>cobertura</th>
+      <th>tamano</th>
+      <th>cob_cardboard</th>
+      <th>cob_glass</th>
+      <th>cob_metal</th>
+      <th>cob_paper</th>
+      <th>cob_plastic</th>
+      <th>cob_trash</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>RWCNet</th>
+      <td>20</td>
+      <td>0.884</td>
+      <td>0.900</td>
+      <td>0.899</td>
+      <td>0.888</td>
+      <td>0.919</td>
+      <td>0.933</td>
+      <td>0.812</td>
+      <td>0.755</td>
+    </tr>
+    <tr>
+      <th>GFN</th>
+      <td>20</td>
+      <td>0.883</td>
+      <td>0.911</td>
+      <td>0.912</td>
+      <td>0.865</td>
+      <td>0.923</td>
+      <td>0.933</td>
+      <td>0.820</td>
+      <td>0.737</td>
+    </tr>
+    <tr>
+      <th>NAGFuse-B</th>
+      <td>20</td>
+      <td>0.882</td>
+      <td>0.897</td>
+      <td>0.924</td>
+      <td>0.901</td>
+      <td>0.921</td>
+      <td>0.929</td>
+      <td>0.781</td>
+      <td>0.718</td>
+    </tr>
+    <tr>
+      <th>Celik-HC</th>
+      <td>20</td>
+      <td>0.882</td>
+      <td>0.915</td>
+      <td>0.923</td>
+      <td>0.901</td>
+      <td>0.896</td>
+      <td>0.937</td>
+      <td>0.807</td>
+      <td>0.663</td>
+    </tr>
+    <tr>
+      <th>NAGFuse</th>
+      <td>20</td>
+      <td>0.879</td>
+      <td>0.896</td>
+      <td>0.917</td>
+      <td>0.890</td>
+      <td>0.917</td>
+      <td>0.922</td>
+      <td>0.782</td>
+      <td>0.763</td>
+    </tr>
+    <tr>
+      <th>ViT-B16</th>
+      <td>20</td>
+      <td>0.872</td>
+      <td>0.890</td>
+      <td>0.934</td>
+      <td>0.874</td>
+      <td>0.878</td>
+      <td>0.916</td>
+      <td>0.803</td>
+      <td>0.700</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figura 32b.4 (images/e3/opcion_b_confiabilidad.png): diagramas de confiabilidad de NAGFuse-B y de A (semilla 0)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ejes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ejes</span><span class="p">,</span> <span class="p">[</span><span class="s2">"NAGFuse-B"</span><span class="p">,</span> <span class="s2">"NAGFuse"</span><span class="p">]):</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">leer</span><span class="p">(</span><span class="n">semillas</span><span class="p">(</span><span class="n">m</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="s2">"test_predictions.pkl"</span><span class="p">)</span>
+    <span class="n">P</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tp</span><span class="p">[</span><span class="s2">"probs"</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tp</span><span class="p">[</span><span class="s2">"y_true"</span><span class="p">])</span>
+    <span class="n">conf</span><span class="p">,</span> <span class="n">acierto</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">((</span><span class="n">conf</span> <span class="o">*</span> <span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="mi">14</span><span class="p">)</span>                              <span class="c1"># 15 intervalos de confianza de igual ancho</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">acierto</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="n">cmed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ece</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">acc</span> <span class="o">-</span> <span class="n">cmed</span><span class="p">));</span> <span class="n">v</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="n">ee</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">acc</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">acc</span><span class="p">[</span><span class="n">v</span><span class="p">])</span> <span class="o">/</span> <span class="n">n</span><span class="p">[</span><span class="n">v</span><span class="p">])</span> <span class="o">*</span> <span class="mf">1.96</span>                        <span class="c1"># IC 95 % binomial aproximado</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">ee</span><span class="p">,</span> <span class="n">acc</span><span class="p">[</span><span class="n">v</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">ee</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">acc</span><span class="p">[</span><span class="n">v</span><span class="p">])]</span>               <span class="c1"># el intervalo se recorta a [0, 1]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">cmed</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">acc</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">err</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">m</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"exactitud por intervalo"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">"k--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"calibración perfecta"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Confianza media del intervalo"</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">, semilla 0 (ECE = </span><span class="si">{</span><span class="n">ece</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="n">ejes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Exactitud"</span><span class="p">);</span> <span class="n">ejes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">"Figura 32b.4. Diagramas de confiabilidad en prueba"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">FIG</span> <span class="o">/</span> <span class="s2">"opcion_b_confiabilidad.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cfe812488db8b6670ec58553c5153a4bc6b25291844f3e88f200dce5fd35c722.png" src="_images/cfe812488db8b6670ec58553c5153a4bc6b25291844f3e88f200dce5fd35c722.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 32b.5: calibración antes y después del escalado de temperatura (ajustado en validación), media entre semillas</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"NAGFuse-B"</span><span class="p">,</span> <span class="s2">"NAGFuse"</span><span class="p">,</span> <span class="s2">"ViT-B16"</span><span class="p">,</span> <span class="s2">"RWCNet"</span><span class="p">,</span> <span class="s2">"GFN"</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">semillas</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">"calibration.pkl"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">leer</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">"calibration.pkl"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"aplicable"</span><span class="p">):</span>
+                <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="n">m</span><span class="p">,</span> <span class="s2">"T"</span><span class="p">:</span> <span class="n">c</span><span class="p">[</span><span class="s2">"temperature"</span><span class="p">],</span> <span class="o">**</span><span class="p">{</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> antes"</span><span class="p">:</span> <span class="n">c</span><span class="p">[</span><span class="s2">"antes"</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ece"</span><span class="p">,</span> <span class="s2">"nll"</span><span class="p">,</span> <span class="s2">"brier"</span><span class="p">]},</span>
+                              <span class="o">**</span><span class="p">{</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> después"</span><span class="p">:</span> <span class="n">c</span><span class="p">[</span><span class="s2">"despues"</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"ece"</span><span class="p">,</span> <span class="s2">"nll"</span><span class="p">,</span> <span class="s2">"brier"</span><span class="p">]}})</span>
+<span class="n">CAL</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"modelo"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">"NAGFuse-B"</span><span class="p">,</span> <span class="s2">"NAGFuse"</span><span class="p">,</span> <span class="s2">"ViT-B16"</span><span class="p">,</span> <span class="s2">"RWCNet"</span><span class="p">,</span> <span class="s2">"GFN"</span><span class="p">]]</span>
+<span class="n">CAL</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>T</th>
+      <th>ece antes</th>
+      <th>nll antes</th>
+      <th>brier antes</th>
+      <th>ece después</th>
+      <th>nll después</th>
+      <th>brier después</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>NAGFuse-B</th>
+      <td>1.1167</td>
+      <td>0.0268</td>
+      <td>0.1718</td>
+      <td>0.0120</td>
+      <td>0.0252</td>
+      <td>0.1642</td>
+      <td>0.0120</td>
+    </tr>
+    <tr>
+      <th>NAGFuse</th>
+      <td>1.0752</td>
+      <td>0.0297</td>
+      <td>0.1911</td>
+      <td>0.0142</td>
+      <td>0.0282</td>
+      <td>0.1879</td>
+      <td>0.0141</td>
+    </tr>
+    <tr>
+      <th>ViT-B16</th>
+      <td>1.2346</td>
+      <td>0.0365</td>
+      <td>0.2143</td>
+      <td>0.0149</td>
+      <td>0.0291</td>
+      <td>0.1917</td>
+      <td>0.0145</td>
+    </tr>
+    <tr>
+      <th>RWCNet</th>
+      <td>1.2749</td>
+      <td>0.0312</td>
+      <td>0.1944</td>
+      <td>0.0146</td>
+      <td>0.0238</td>
+      <td>0.1785</td>
+      <td>0.0142</td>
+    </tr>
+    <tr>
+      <th>GFN</th>
+      <td>1.5564</td>
+      <td>0.0509</td>
+      <td>0.3055</td>
+      <td>0.0179</td>
+      <td>0.0319</td>
+      <td>0.2294</td>
+      <td>0.0167</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="mecanismo-ramas-compuerta-y-errores-equivalente-a-la-parte-de-mecanismo-de-28a">
+<h2>4. Mecanismo: ramas, compuerta y errores (equivalente a la parte de mecanismo de 28a)<a class="headerlink" href="#mecanismo-ramas-compuerta-y-errores-equivalente-a-la-parte-de-mecanismo-de-28a" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Salidas por imagen guardadas en cada corrida (nagfuse_analisis.pkl): sigma estimada, pi, p de cada rama, por condición</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">analisis</span><span class="p">(</span><span class="n">modelo</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">semillas</span><span class="p">(</span><span class="n">modelo</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">leer</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">"nagfuse_analisis.pkl"</span><span class="p">);</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">leer</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">"test_predictions.pkl"</span><span class="p">)[</span><span class="s2">"y_true"</span><span class="p">])</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="n">AN</span> <span class="o">=</span> <span class="p">{</span><span class="n">m</span><span class="p">:</span> <span class="n">analisis</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"NAGFuse-B"</span><span class="p">,</span> <span class="s2">"NAGFuse"</span><span class="p">]}</span>
+<span class="n">CONDS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"limpio"</span><span class="p">,</span> <span class="s2">"ruido_0.05"</span><span class="p">,</span> <span class="s2">"ruido_0.10"</span><span class="p">]</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">runs</span> <span class="ow">in</span> <span class="n">AN</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">runs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">CONDS</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="s2">"detalles"</span><span class="p">][</span><span class="n">c</span><span class="p">];</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">"pi"</span><span class="p">][:,</span> <span class="kc">None</span><span class="p">]</span>
+            <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"modelo"</span><span class="p">:</span> <span class="n">m</span><span class="p">,</span> <span class="s2">"semilla"</span><span class="p">:</span> <span class="n">s</span><span class="p">,</span> <span class="s2">"cond"</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span>
+                          <span class="s2">"F1 mezcla"</span><span class="p">:</span> <span class="n">f1_macro</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">pi</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="s2">"p_v"</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="s2">"p_c"</span><span class="p">])</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+                          <span class="s2">"F1 compuerta apagada"</span><span class="p">:</span> <span class="n">f1_macro</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s2">"pi0"</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="s2">"p_v"</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="s2">"pi0"</span><span class="p">])</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="s2">"p_c"</span><span class="p">])</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+                          <span class="s2">"F1 rama robusta"</span><span class="p">:</span> <span class="n">f1_macro</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="s2">"p_v"</span><span class="p">]</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span> <span class="s2">"F1 rama CNN"</span><span class="p">:</span> <span class="n">f1_macro</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="s2">"p_c"</span><span class="p">]</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+                          <span class="s2">"sigma mediana"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">"sigma"</span><span class="p">]),</span> <span class="s2">"fracción pi = 1"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="s2">"pi"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">1e-6</span><span class="p">)})</span>
+<span class="n">RAMAS</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+<span class="c1"># Control. La mezcla recombinada aquí reproduce el F1 oficial de cada condición. La compuerta apagada de analisis_b.py</span>
+<span class="c1"># (mecanismo.csv) sale de una pasada propia del modelo en el worker; aquí se recombina con las salidas por rama, que se</span>
+<span class="c1"># guardan en float16, de modo que unas pocas predicciones cercanas al empate cambian y el F1 difiere en algunas semillas.</span>
+<span class="n">MEC</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RESB</span> <span class="o">/</span> <span class="s2">"mecanismo.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"semilla"</span><span class="p">)</span>
+<span class="n">rb</span> <span class="o">=</span> <span class="n">RAMAS</span><span class="p">[(</span><span class="n">RAMAS</span><span class="o">.</span><span class="n">modelo</span> <span class="o">==</span> <span class="s2">"NAGFuse-B"</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">RAMAS</span><span class="o">.</span><span class="n">cond</span> <span class="o">==</span> <span class="s2">"ruido_0.05"</span><span class="p">)]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"semilla"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mezcla recombinada frente al F1 oficial con ruido 0.05: </span><span class="si">{</span><span class="n">rb</span><span class="p">[</span><span class="s1">'F1 mezcla'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> frente a "</span>
+      <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">MEC</span><span class="o">.</span><span class="n">f1_ruido005_on</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Compuerta apagada: media </span><span class="si">{</span><span class="n">rb</span><span class="p">[</span><span class="s1">'F1 compuerta apagada'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> aquí y </span><span class="si">{</span><span class="n">MEC</span><span class="o">.</span><span class="n">f1_ruido005_off</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> en "</span>
+      <span class="sa">f</span><span class="s2">"mecanismo.csv; diferencia máxima por semilla </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rb</span><span class="p">[</span><span class="s1">'F1 compuerta apagada'</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">MEC</span><span class="o">.</span><span class="n">f1_ruido005_off</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="c1"># Tabla 32b.6: F1 de la mezcla y de cada rama dentro del mismo modelo (sin reentrenar), media entre semillas</span>
+<span class="n">RAMAS</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"modelo"</span><span class="p">,</span> <span class="s2">"cond"</span><span class="p">])[[</span><span class="s2">"F1 mezcla"</span><span class="p">,</span> <span class="s2">"F1 compuerta apagada"</span><span class="p">,</span> <span class="s2">"F1 rama robusta"</span><span class="p">,</span> <span class="s2">"F1 rama CNN"</span><span class="p">,</span>
+                                   <span class="s2">"sigma mediana"</span><span class="p">,</span> <span class="s2">"fracción pi = 1"</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mezcla recombinada frente al F1 oficial con ruido 0.05: 0.9034 frente a 0.9034
+Compuerta apagada: media 0.8975 aquí y 0.8971 en mecanismo.csv; diferencia máxima por semilla 0.0081
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>F1 mezcla</th>
+      <th>F1 compuerta apagada</th>
+      <th>F1 rama robusta</th>
+      <th>F1 rama CNN</th>
+      <th>sigma mediana</th>
+      <th>fracción pi = 1</th>
+    </tr>
+    <tr>
+      <th>modelo</th>
+      <th>cond</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">NAGFuse</th>
+      <th>limpio</th>
+      <td>0.9365</td>
+      <td>0.9365</td>
+      <td>0.9252</td>
+      <td>0.9242</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>ruido_0.05</th>
+      <td>0.9035</td>
+      <td>0.9009</td>
+      <td>0.9035</td>
+      <td>0.6373</td>
+      <td>0.0507</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>ruido_0.10</th>
+      <td>0.8594</td>
+      <td>0.8449</td>
+      <td>0.8594</td>
+      <td>0.3824</td>
+      <td>0.0982</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">NAGFuse-B</th>
+      <th>limpio</th>
+      <td>0.9477</td>
+      <td>0.9477</td>
+      <td>0.9433</td>
+      <td>0.9211</td>
+      <td>0.0000</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>ruido_0.05</th>
+      <td>0.9034</td>
+      <td>0.8975</td>
+      <td>0.9034</td>
+      <td>0.6479</td>
+      <td>0.0507</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>ruido_0.10</th>
+      <td>0.8270</td>
+      <td>0.8162</td>
+      <td>0.8270</td>
+      <td>0.3810</td>
+      <td>0.0982</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 32b.7: las predicciones P1 a P5 del protocolo evaluadas en NAGFuse-B (exploratorio; en A eran secundarias)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">RAMAS</span><span class="p">[</span><span class="n">RAMAS</span><span class="o">.</span><span class="n">modelo</span> <span class="o">==</span> <span class="s2">"NAGFuse-B"</span><span class="p">]</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"semilla"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"cond"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s2">"F1 mezcla"</span><span class="p">,</span> <span class="s2">"F1 compuerta apagada"</span><span class="p">])</span>
+<span class="n">d005</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">"F1 mezcla"</span><span class="p">][</span><span class="s2">"ruido_0.05"</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="s2">"F1 compuerta apagada"</span><span class="p">][</span><span class="s2">"ruido_0.05"</span><span class="p">])</span>
+<span class="n">d0</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">"F1 mezcla"</span><span class="p">][</span><span class="s2">"limpio"</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="s2">"F1 compuerta apagada"</span><span class="p">][</span><span class="s2">"limpio"</span><span class="p">])</span>
+<span class="n">RUN</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">RES</span> <span class="o">/</span> <span class="s2">"por_corrida.csv"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">serie</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span> <span class="k">return</span> <span class="n">RUN</span><span class="p">[</span><span class="n">RUN</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"seed"</span><span class="p">)[</span><span class="n">col</span><span class="p">]</span>
+<span class="n">v005</span> <span class="o">=</span> <span class="p">(</span><span class="n">serie</span><span class="p">(</span><span class="s2">"NAGFuse-B"</span><span class="p">,</span> <span class="s2">"rob_ruido_0.05"</span><span class="p">)</span> <span class="o">-</span> <span class="n">serie</span><span class="p">(</span><span class="s2">"RWCNet"</span><span class="p">,</span> <span class="s2">"rob_ruido_0.05"</span><span class="p">))</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">v010</span> <span class="o">=</span> <span class="p">(</span><span class="n">serie</span><span class="p">(</span><span class="s2">"NAGFuse-B"</span><span class="p">,</span> <span class="s2">"rob_ruido_0.10"</span><span class="p">)</span> <span class="o">-</span> <span class="n">serie</span><span class="p">(</span><span class="s2">"RWCNet"</span><span class="p">,</span> <span class="s2">"rob_ruido_0.10"</span><span class="p">))</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">sg</span> <span class="o">=</span> <span class="n">RAMAS</span><span class="p">[</span><span class="n">RAMAS</span><span class="o">.</span><span class="n">modelo</span> <span class="o">==</span> <span class="s2">"NAGFuse-B"</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"cond"</span><span class="p">)[</span><span class="s2">"sigma mediana"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">fpi</span> <span class="o">=</span> <span class="n">RAMAS</span><span class="p">[(</span><span class="n">RAMAS</span><span class="o">.</span><span class="n">modelo</span> <span class="o">==</span> <span class="s2">"NAGFuse-B"</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">RAMAS</span><span class="o">.</span><span class="n">cond</span> <span class="o">==</span> <span class="s2">"ruido_0.05"</span><span class="p">)][</span><span class="s2">"fracción pi = 1"</span><span class="p">]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">"predicción"</span><span class="p">:</span> <span class="s2">"P1. Apagar la compuerta reduce el F1 con σ = 0.05 en al menos δ"</span><span class="p">,</span>
+     <span class="s2">"resultado en B"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">d005</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">+.4f</span><span class="si">}</span><span class="s2"> (t pareada p = </span><span class="si">{</span><span class="n">stats</span><span class="o">.</span><span class="n">ttest_rel</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">'F1 mezcla'</span><span class="p">][</span><span class="s1">'ruido_0.05'</span><span class="p">],</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="s1">'F1 compuerta apagada'</span><span class="p">][</span><span class="s1">'ruido_0.05'</span><span class="p">])</span><span class="o">.</span><span class="n">pvalue</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span>
+     <span class="s2">"¿se cumple?"</span><span class="p">:</span> <span class="s2">"No"</span> <span class="k">if</span> <span class="n">d005</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">DELTA</span> <span class="k">else</span> <span class="s2">"Sí"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"predicción"</span><span class="p">:</span> <span class="s2">"P2. Apagar la compuerta no cambia el F1 limpio en más de 0.005"</span><span class="p">,</span>
+     <span class="s2">"resultado en B"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">d0</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">+.4f</span><span class="si">}</span><span class="s2"> (máximo absoluto por semilla </span><span class="si">{</span><span class="n">d0</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span> <span class="s2">"¿se cumple?"</span><span class="p">:</span> <span class="s2">"Sí"</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d0</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="mf">0.005</span> <span class="k">else</span> <span class="s2">"No"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"predicción"</span><span class="p">:</span> <span class="s2">"P3. La ventaja sobre la mejor CNN (RWCNet) crece de σ = 0.05 a 0.10"</span><span class="p">,</span>
+     <span class="s2">"resultado en B"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">v005</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">v010</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"¿se cumple?"</span><span class="p">:</span> <span class="s2">"Sí"</span> <span class="k">if</span> <span class="n">v010</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">v005</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">else</span> <span class="s2">"No"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"predicción"</span><span class="p">:</span> <span class="s2">"P4. σ̂ crece con σ y la compuerta se abre del todo en ≥ 95 </span><span class="si">% d</span><span class="s2">e las imágenes con σ = 0.05"</span><span class="p">,</span>
+     <span class="s2">"resultado en B"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"σ̂: </span><span class="si">{</span><span class="n">sg</span><span class="p">[</span><span class="s1">'limpio'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">sg</span><span class="p">[</span><span class="s1">'ruido_0.05'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">sg</span><span class="p">[</span><span class="s1">'ruido_0.10'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">; π = 1 en </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fpi</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> % (mínimo entre semillas)"</span><span class="p">,</span>
+     <span class="s2">"¿se cumple?"</span><span class="p">:</span> <span class="s2">"Sí"</span> <span class="k">if</span> <span class="n">fpi</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mf">0.95</span> <span class="ow">and</span> <span class="n">sg</span><span class="p">[</span><span class="s2">"ruido_0.10"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">sg</span><span class="p">[</span><span class="s2">"ruido_0.05"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">sg</span><span class="p">[</span><span class="s2">"limpio"</span><span class="p">]</span> <span class="k">else</span> <span class="s2">"No"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"predicción"</span><span class="p">:</span> <span class="s2">"P5. La contracción de Haar mejora la rama CNN con ruido"</span><span class="p">,</span>
+     <span class="s2">"resultado en B"</span><span class="p">:</span> <span class="s2">"No evaluable: exige la variante sin contracción reentrenada, que no se entrenó para B"</span><span class="p">,</span> <span class="s2">"¿se cumple?"</span><span class="p">:</span> <span class="s2">"—"</span><span class="p">},</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>predicción</th>
+      <th>resultado en B</th>
+      <th>¿se cumple?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>P1. Apagar la compuerta reduce el F1 con σ = 0...</td>
+      <td>+0.0059 (t pareada p = 0.006)</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>P2. Apagar la compuerta no cambia el F1 limpio...</td>
+      <td>+0.0000 (máximo absoluto por semilla 0.0000)</td>
+      <td>Sí</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>P3. La ventaja sobre la mejor CNN (RWCNet) cre...</td>
+      <td>0.307 → 0.484</td>
+      <td>Sí</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>P4. σ̂ crece con σ y la compuerta se abre del ...</td>
+      <td>σ̂: 0.000 / 0.051 / 0.098; π = 1 en 100 % (mín...</td>
+      <td>Sí</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>P5. La contracción de Haar mejora la rama CNN ...</td>
+      <td>No evaluable: exige la variante sin contracció...</td>
+      <td>—</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 32b.8: sensibilidad del F1 a rho y s_lo en NAGFuse-B (20 semillas). pi se recalcula con las salidas guardadas</span>
+<span class="c1"># de cada rama y la mezcla se rehace sin reentrenar, porque ninguna rama depende de rho ni de s_lo. Exploratorio.</span>
+<span class="n">SLO</span> <span class="o">=</span> <span class="mf">0.014535</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">rho</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">fac</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]:</span>
+        <span class="n">fila</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"ρ"</span><span class="p">:</span> <span class="n">rho</span><span class="p">,</span> <span class="s2">"s_lo"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">fac</span><span class="si">}</span><span class="s2"> × </span><span class="si">{</span><span class="n">SLO</span><span class="si">}</span><span class="s2">"</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">CONDS</span><span class="p">:</span>
+            <span class="n">f1s</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">AN</span><span class="p">[</span><span class="s2">"NAGFuse-B"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="s2">"detalles"</span><span class="p">][</span><span class="n">c</span><span class="p">];</span> <span class="n">s_lo</span> <span class="o">=</span> <span class="n">fac</span> <span class="o">*</span> <span class="n">SLO</span>
+                <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">((</span><span class="n">v</span><span class="p">[</span><span class="s2">"sigma"</span><span class="p">]</span> <span class="o">-</span> <span class="n">s_lo</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">rho</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">s_lo</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>      <span class="c1"># compuerta g(σ̂)</span>
+                <span class="n">pi</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s2">"pi0"</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="s2">"pi0"</span><span class="p">])</span> <span class="o">*</span> <span class="n">g</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+                <span class="n">f1s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f1_macro</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">pi</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="s2">"p_v"</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="s2">"p_c"</span><span class="p">])</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+            <span class="n">fila</span><span class="p">[</span><span class="sa">f</span><span class="s2">"F1 </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">f1s</span><span class="p">)</span>
+        <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fila</span><span class="p">)</span>
+<span class="n">SENS</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+<span class="n">base</span> <span class="o">=</span> <span class="n">SENS</span><span class="p">[(</span><span class="n">SENS</span><span class="p">[</span><span class="s2">"ρ"</span><span class="p">]</span> <span class="o">==</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">SENS</span><span class="o">.</span><span class="n">s_lo</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"1.0"</span><span class="p">))]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Cambio máximo frente al valor preregistrado (ρ = 2, 1.0 × s_lo):"</span><span class="p">,</span>
+      <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">((</span><span class="n">SENS</span><span class="p">[</span><span class="sa">f</span><span class="s1">'F1 </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s1">'</span><span class="p">]</span> <span class="o">-</span> <span class="n">base</span><span class="p">[</span><span class="sa">f</span><span class="s1">'F1 </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s1">'</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">CONDS</span><span class="p">})</span>
+<span class="n">SENS</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cambio máximo frente al valor preregistrado (ρ = 2, 1.0 × s_lo): {'limpio': 0.0002, 'ruido_0.05': 0.0004, 'ruido_0.10': 0.0011}
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ρ</th>
+      <th>s_lo</th>
+      <th>F1 limpio</th>
+      <th>F1 ruido_0.05</th>
+      <th>F1 ruido_0.10</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.5</td>
+      <td>0.5 × 0.014535</td>
+      <td>0.9479</td>
+      <td>0.9034</td>
+      <td>0.8270</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.5</td>
+      <td>1.0 × 0.014535</td>
+      <td>0.9477</td>
+      <td>0.9034</td>
+      <td>0.8270</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.5</td>
+      <td>2.0 × 0.014535</td>
+      <td>0.9477</td>
+      <td>0.9034</td>
+      <td>0.8270</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.0</td>
+      <td>0.5 × 0.014535</td>
+      <td>0.9478</td>
+      <td>0.9034</td>
+      <td>0.8270</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.0</td>
+      <td>1.0 × 0.014535</td>
+      <td>0.9477</td>
+      <td>0.9034</td>
+      <td>0.8270</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2.0</td>
+      <td>2.0 × 0.014535</td>
+      <td>0.9477</td>
+      <td>0.9038</td>
+      <td>0.8270</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>3.0</td>
+      <td>0.5 × 0.014535</td>
+      <td>0.9478</td>
+      <td>0.9034</td>
+      <td>0.8270</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>3.0</td>
+      <td>1.0 × 0.014535</td>
+      <td>0.9477</td>
+      <td>0.9034</td>
+      <td>0.8270</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>3.0</td>
+      <td>2.0 × 0.014535</td>
+      <td>0.9477</td>
+      <td>0.9033</td>
+      <td>0.8270</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>4.0</td>
+      <td>0.5 × 0.014535</td>
+      <td>0.9478</td>
+      <td>0.9034</td>
+      <td>0.8270</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>4.0</td>
+      <td>1.0 × 0.014535</td>
+      <td>0.9477</td>
+      <td>0.9036</td>
+      <td>0.8270</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>4.0</td>
+      <td>2.0 × 0.014535</td>
+      <td>0.9477</td>
+      <td>0.9031</td>
+      <td>0.8281</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla 32b.9: análisis de errores de NAGFuse-B (semilla 0): confusiones más frecuentes y comparación con su rama robusta</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">AN</span><span class="p">[</span><span class="s2">"NAGFuse-B"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">CONDS</span><span class="p">:</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="s2">"detalles"</span><span class="p">][</span><span class="n">c</span><span class="p">];</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">"pi"</span><span class="p">][:,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">yn</span> <span class="o">=</span> <span class="p">(</span><span class="n">pi</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="s2">"p_v"</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="s2">"p_c"</span><span class="p">])</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">"p_v"</span><span class="p">]</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pares</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">CLASES</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">CLASES</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">yn</span> <span class="o">!=</span> <span class="n">y</span><span class="p">],</span> <span class="n">yn</span><span class="p">[</span><span class="n">yn</span> <span class="o">!=</span> <span class="n">y</span><span class="p">])])</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"condición"</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span> <span class="s2">"errores NAGFuse-B"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">yn</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="s2">"errores rama robusta"</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">yv</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                  <span class="s2">"B falla y la rama acierta"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(((</span><span class="n">yn</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">yv</span> <span class="o">==</span> <span class="n">y</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                  <span class="s2">"la rama falla y B acierta"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(((</span><span class="n">yv</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">yn</span> <span class="o">==</span> <span class="n">y</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                  <span class="s2">"3 confusiones más frecuentes"</span><span class="p">:</span> <span class="s2">"; "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)"</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">pares</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>condición</th>
+      <th>errores NAGFuse-B</th>
+      <th>errores rama robusta</th>
+      <th>B falla y la rama acierta</th>
+      <th>la rama falla y B acierta</th>
+      <th>3 confusiones más frecuentes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>limpio</td>
+      <td>20</td>
+      <td>18</td>
+      <td>3</td>
+      <td>1</td>
+      <td>plastic → glass (4); glass → metal (2); paper ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ruido_0.05</td>
+      <td>27</td>
+      <td>27</td>
+      <td>0</td>
+      <td>0</td>
+      <td>glass → metal (3); glass → plastic (3); trash ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ruido_0.10</td>
+      <td>49</td>
+      <td>49</td>
+      <td>0</td>
+      <td>0</td>
+      <td>glass → plastic (6); paper → cardboard (5); gl...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Lo que no se repite para B.</strong> La ablación reentrenada de A (variantes sin contracción, solo rama ViT y solo
+rama CNN, 12 semillas cada una) exige entrenar tres modelos más y no se hizo para B. La tabla 32b.6 muestra en su lugar
+el F1 de cada rama dentro del mismo modelo entrenado, que no equivale a una variante entrenada por separado. Tampoco se
+calculó para ningún modelo la curva de aprendizaje frente al tamaño de muestra.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="32a_e3_opcion_b.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">32a. Reproducción de la opción B</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-entrenamiento-y-sobreajuste-equivalente-a-26a">1. Curvas de entrenamiento y sobreajuste (equivalente a 26a)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-hipotesis-equivalente-a-27a">2. Pruebas de hipótesis (equivalente a 27a)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-ampliada-equivalente-a-28a">3. Evaluación ampliada (equivalente a 28a)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanismo-ramas-compuerta-y-errores-equivalente-a-la-parte-de-mecanismo-de-28a">4. Mecanismo: ramas, compuerta y errores (equivalente a la parte de mecanismo de 28a)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anyely Sanjuan Benavides y Juan David Díaz Fernández
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

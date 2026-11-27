@@ -278,6 +278,7 @@
 <li class="toctree-l1"><a class="reference internal" href="31_e3_reproducibilidad.html">31. Reproducibilidad, autoría y uso de herramientas</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">32. Opción B: segundo intento con otras ramas (protocolo v4)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="32a_e3_opcion_b.html">32a. Reproducción de la opción B</a></li>
+<li class="toctree-l1"><a class="reference internal" href="32b_e3_opcion_b_diagnostico.html">32b. Diagnóstico de entrenamiento y evaluación complementaria de NAGFuse-B</a></li>
 </ul>
 
     </div>
@@ -448,6 +449,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanismo-y-comparacion-con-a-exploratorios">32.8 Mecanismo y comparación con A (exploratorios)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaraciones">32.9 Declaraciones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reproduccion">32.10 Reproducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-de-entrenamiento-y-evaluacion-complementaria">32.11 Diagnóstico de entrenamiento y evaluación complementaria</a></li>
 </ul>
             </nav>
         </div>
@@ -463,7 +465,7 @@
 <h1>32. Opción B: segundo intento con otras ramas (protocolo v4)<a class="headerlink" href="#opcion-b-segundo-intento-con-otras-ramas-protocolo-v4" title="Link to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Las tablas y figuras de este capítulo se reproducen con código ejecutable en el cuaderno <a class="reference internal" href="32a_e3_opcion_b.html"><span class="doc">32a. Reproducción de la opción B</span></a>. Todas las cifras salen de <code class="docutils literal notranslate"><span class="pre">entregable3/resultados_b/</span></code> (análisis de la opción B), de <code class="docutils literal notranslate"><span class="pre">entregable3/resultados/tabla_maestra.csv</span></code> (la misma tabla que lee el dashboard) y de las corridas versionadas en <code class="docutils literal notranslate"><span class="pre">entregable3/results/</span></code>.</p>
+<p>Las tablas y figuras de este capítulo se reproducen con código ejecutable en los cuadernos <a class="reference internal" href="32a_e3_opcion_b.html"><span class="doc">32a. Reproducción de la opción B</span></a> y <a class="reference internal" href="32b_e3_opcion_b_diagnostico.html"><span class="doc">32b. Diagnóstico de entrenamiento y evaluación complementaria de NAGFuse-B</span></a>. Todas las cifras salen de <code class="docutils literal notranslate"><span class="pre">entregable3/resultados_b/</span></code> (análisis de la opción B), de <code class="docutils literal notranslate"><span class="pre">entregable3/resultados/tabla_maestra.csv</span></code> (la misma tabla que lee el dashboard) y de las corridas versionadas en <code class="docutils literal notranslate"><span class="pre">entregable3/results/</span></code>.</p>
 </div>
 <p>Los resultados de la versión A (NAGFuse, protocolos v1 a v3) no cambian y siguen siendo los de los capítulos 27, 28 y 30. Este capítulo añade un segundo intento, la opción B, con su propio protocolo y su propia exposición declarada.</p>
 <section id="motivo-y-contexto">
@@ -842,7 +844,7 @@
 <ul class="simple">
 <li><p><strong>B tiene la mayor media en limpio, desenfoque, oclusión y fondo sustituido, y el menor ECE y NLL.</strong> Su IC del ECE ([0.024, 0.029]) se solapa con los de A y RWCNet.</p></li>
 <li><p><strong>Con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span>, B y A coinciden</strong> (0.903 y 0.904).</p></li>
-<li><p><strong>Con <span class="math notranslate nohighlight">\(\sigma = 0.10\)</span>, B (0.827) queda por debajo de A (0.859) y de ViT-B16 (0.840).</strong> El protocolo no incluía este contraste y no analizamos su causa.</p></li>
+<li><p><strong>Con <span class="math notranslate nohighlight">\(\sigma = 0.10\)</span>, B (0.827) queda por debajo de A (0.859) y de ViT-B16 (0.840).</strong> El protocolo no incluía este contraste. Con ruido la compuerta deja la salida en la rama robusta, y Swin-S se degrada más que ViT-B/16 con ruido fuerte (sección 32.11).</p></li>
 </ul>
 <p><strong>Conjuntos adicionales</strong> (sin reentrenar; media de las semillas disponibles de cada modelo):</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -925,7 +927,7 @@
 <td><p><code class="docutils literal notranslate"><span class="pre">entregable3/resultados_b/</span></code> (contrastes, H3, conjuntos adicionales, Friedman, mecanismo, B frente a A y <code class="docutils literal notranslate"><span class="pre">resumen_b.json</span></code>)</p></td>
 </tr>
 <tr class="row-odd"><td><p>Figuras y tablas de este capítulo</p></td>
-<td><p><a class="reference internal" href="32a_e3_opcion_b.html"><span class="doc">32a. Reproducción de la opción B</span></a></p></td>
+<td><p><a class="reference internal" href="32a_e3_opcion_b.html"><span class="doc">32a. Reproducción de la opción B</span></a> y <a class="reference internal" href="32b_e3_opcion_b_diagnostico.html"><span class="doc">32b. Diagnóstico de entrenamiento y evaluación complementaria de NAGFuse-B</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -958,6 +960,174 @@
 </table>
 </div>
 <p>Los dos primeros coinciden con los del capítulo 21. Los dos siguientes cambian porque ahora incluyen las corridas de NAGFuse-B y su fila en la tabla maestra; el último se calcula con la misma función.</p>
+</section>
+<section id="diagnostico-de-entrenamiento-y-evaluacion-complementaria">
+<h2>32.11 Diagnóstico de entrenamiento y evaluación complementaria<a class="headerlink" href="#diagnostico-de-entrenamiento-y-evaluacion-complementaria" title="Link to this heading">#</a></h2>
+<p>Esta sección repite para NAGFuse-B los análisis que los capítulos 26 a 28 hacen para A. Todos son exploratorios y salen de las 20 corridas versionadas; el detalle está en el cuaderno <a class="reference internal" href="32b_e3_opcion_b_diagnostico.html"><span class="doc">32b. Diagnóstico de entrenamiento y evaluación complementaria de NAGFuse-B</span></a>.</p>
+<p><strong>Curvas de entrenamiento y sobreajuste.</strong></p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/opcion_b_curvas.png"><img alt="_images/opcion_b_curvas.png" src="_images/opcion_b_curvas.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Pérdida y F1 macro por época (media ± DE entre semillas) de NAGFuse-B, A, ViT-B16 y RWCNet. La línea punteada vertical marca la mediana de la época elegida por <em>early stopping</em>.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Semillas</p></th>
+<th class="head"><p>Época elegida</p></th>
+<th class="head"><p>F1 entrenamiento</p></th>
+<th class="head"><p>F1 validación</p></th>
+<th class="head"><p>Brecha de F1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>NAGFuse-B</strong></p></td>
+<td><p>20</p></td>
+<td><p>25.4 ± 12.9</p></td>
+<td><p>0.998</p></td>
+<td><p><strong>0.973 ± 0.006</strong></p></td>
+<td><p><strong>0.025 ± 0.006</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>NAGFuse (A)</p></td>
+<td><p>20</p></td>
+<td><p>26.9 ± 10.9</p></td>
+<td><p>0.998</p></td>
+<td><p>0.967 ± 0.006</p></td>
+<td><p>0.031 ± 0.005</p></td>
+</tr>
+<tr class="row-even"><td><p>ViT-B16</p></td>
+<td><p>12</p></td>
+<td><p>15.4 ± 6.5</p></td>
+<td><p>0.995</p></td>
+<td><p>0.965 ± 0.007</p></td>
+<td><p>0.030 ± 0.005</p></td>
+</tr>
+<tr class="row-odd"><td><p>RWCNet</p></td>
+<td><p>12</p></td>
+<td><p>19.2 ± 9.4</p></td>
+<td><p>0.992</p></td>
+<td><p>0.959 ± 0.008</p></td>
+<td><p>0.034 ± 0.007</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>NAGFuse-B tiene el mayor F1 de validación y la menor brecha con el de entrenamiento.</strong> El patrón es el de un <em>fine-tuning</em> sobre 1800 imágenes: la pérdida de entrenamiento baja casi a cero, la de validación se estabiliza después de las primeras épocas y el <em>early stopping</em> corta donde el F1 de validación ya es estable.</p></li>
+<li><p><strong>La pérdida de entrenamiento de los dos modelos de fusión empieza más alta</strong> porque incluye la supervisión de cada rama; la de validación es la entropía cruzada de la mezcla.</p></li>
+<li><p><strong>ViT-B16 y RWCNet muestran 12 semillas</strong> (8 a 19), las entrenadas en el Entregable 3, como en el capítulo 26a.</p></li>
+</ul>
+<p><strong>Pruebas.</strong> Recalculamos la corrección de Holm desde los p sin ajustar de cada prueba: coincide exactamente con la publicada en H1-B y H2-B, y el veredicto es el mismo. El veredicto de H1-B no cambia para ninguno de los 12 rivales con MCC ni con las semillas 0 a 9.</p>
+<p><strong>F1 por clase</strong> (media entre semillas):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>cardboard</p></th>
+<th class="head"><p>glass</p></th>
+<th class="head"><p>metal</p></th>
+<th class="head"><p>paper</p></th>
+<th class="head"><p>plastic</p></th>
+<th class="head"><p>trash</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>NAGFuse-B</strong></p></td>
+<td><p>0.987</p></td>
+<td><p><strong>0.955</strong></p></td>
+<td><p><strong>0.960</strong></p></td>
+<td><p><strong>0.961</strong></p></td>
+<td><p><strong>0.943</strong></p></td>
+<td><p><strong>0.882</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>NAGFuse (A)</p></td>
+<td><p>0.980</p></td>
+<td><p>0.937</p></td>
+<td><p>0.953</p></td>
+<td><p>0.946</p></td>
+<td><p>0.929</p></td>
+<td><p>0.874</p></td>
+</tr>
+<tr class="row-even"><td><p>ViT-B16</p></td>
+<td><p><strong>0.988</strong></p></td>
+<td><p>0.933</p></td>
+<td><p>0.951</p></td>
+<td><p>0.960</p></td>
+<td><p>0.922</p></td>
+<td><p>0.859</p></td>
+</tr>
+<tr class="row-odd"><td><p>RWCNet</p></td>
+<td><p>0.970</p></td>
+<td><p>0.937</p></td>
+<td><p>0.951</p></td>
+<td><p>0.950</p></td>
+<td><p>0.936</p></td>
+<td><p>0.844</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>B tiene el mayor F1 en cinco de las seis clases. Trash sigue siendo la peor clase en todos los modelos.</p>
+<p><strong>Predicción conforme</strong> (LAC, <span class="math notranslate nohighlight">\(\alpha = 0.10\)</span>, calibrada en validación, mismo código que <code class="docutils literal notranslate"><span class="pre">conforme.py</span></code>). La cobertura de B es 0.882, con un tamaño medio de conjunto de 0.90 y un 10 % de conjuntos vacíos, en línea con los demás modelos. Su cobertura en trash (0.718) es menor que la de A (0.763) y la de RWCNet (0.755), y mayor que la de ViT-B16 (0.700).</p>
+<p><strong>Calibración.</strong></p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="_images/opcion_b_confiabilidad.png"><img alt="_images/opcion_b_confiabilidad.png" src="_images/opcion_b_confiabilidad.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Diagramas de confiabilidad en prueba de NAGFuse-B y de A (semilla 0), con IC 95 % binomial por intervalo.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>El escalado de temperatura, ajustado en validación, da <span class="math notranslate nohighlight">\(T = 1.12\)</span> para B (1.08 para A). El ECE baja de 0.027 a 0.025 y la NLL de 0.172 a 0.164, la menor de los cinco modelos comparados. Después del escalado, RWCNet tiene un ECE algo menor (0.024). En la semilla 0 el ECE de B (0.029) es mayor que el de A (0.022); en la media de 20 semillas es menor (0.027 frente a 0.030).</p>
+<p><strong>Ramas y compuerta.</strong> Las salidas por imagen guardadas en cada corrida permiten medir cada rama dentro del mismo modelo entrenado, sin reentrenar:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Condición</p></th>
+<th class="head"><p>B: mezcla</p></th>
+<th class="head"><p>B: rama robusta (Swin-S)</p></th>
+<th class="head"><p>B: rama CNN</p></th>
+<th class="head"><p>A: mezcla</p></th>
+<th class="head"><p>A: rama robusta (ViT-B/16)</p></th>
+<th class="head"><p>A: rama CNN</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Limpio</p></td>
+<td><p>0.948</p></td>
+<td><p>0.943</p></td>
+<td><p>0.921</p></td>
+<td><p>0.936</p></td>
+<td><p>0.925</p></td>
+<td><p>0.924</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ruido 0.05</p></td>
+<td><p>0.903</p></td>
+<td><p>0.903</p></td>
+<td><p>0.648</p></td>
+<td><p>0.904</p></td>
+<td><p>0.904</p></td>
+<td><p>0.637</p></td>
+</tr>
+<tr class="row-even"><td><p>Ruido 0.10</p></td>
+<td><p>0.827</p></td>
+<td><p>0.827</p></td>
+<td><p>0.381</p></td>
+<td><p>0.859</p></td>
+<td><p>0.859</p></td>
+<td><p>0.382</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>En limpio, la mezcla mejora a la rama robusta</strong> en 0.004 en B y en 0.011 en A. La mejora de B sobre A en limpio viene sobre todo de la rama robusta: Swin-S sola (0.943) ya supera a la mezcla de A.</p></li>
+<li><p><strong>Con ruido, la salida es la de la rama robusta</strong> (<span class="math notranslate nohighlight">\(\pi = 1\)</span>). Con <span class="math notranslate nohighlight">\(\sigma = 0.10\)</span>, la rama Swin-S de B (0.827) se degrada más que la rama ViT-B/16 de A (0.859); de ahí la diferencia entre B y A en ese escenario.</p></li>
+<li><p><strong>Las ramas CNN de los dos modelos se comportan casi igual</strong>: tienen la misma arquitectura (EfficientNet-B0 con contracción), entrenada por separado en cada modelo.</p></li>
+</ul>
+<p><strong>Predicciones del mecanismo en B.</strong> P1 no se cumple (apagar la compuerta reduce el F1 con ruido en 0.006, menos que <span class="math notranslate nohighlight">\(\delta\)</span>). P2, P3 y P4 se cumplen: apagar la compuerta no cambia el F1 limpio, la ventaja sobre RWCNet crece de 0.307 con <span class="math notranslate nohighlight">\(\sigma = 0.05\)</span> a 0.484 con <span class="math notranslate nohighlight">\(\sigma = 0.10\)</span>, y <span class="math notranslate nohighlight">\(\hat\sigma\)</span> crece con el ruido (0.000, 0.051 y 0.098) con la compuerta abierta en el 100 % de las imágenes. P5 no se puede evaluar en B, porque exige la variante sin contracción reentrenada.</p>
+<p><strong>Sensibilidad de la compuerta.</strong> Con <span class="math notranslate nohighlight">\(\rho\)</span> entre 1.5 y 4 y <span class="math notranslate nohighlight">\(s_{lo}\)</span> entre la mitad y el doble del valor preregistrado, el F1 medio de B cambia como máximo 0.001 en las tres condiciones, como en A.</p>
+<p><strong>Errores (semilla 0).</strong> En limpio, B comete 20 errores y su rama robusta 18: la mezcla corrige 1 error de la rama y añade 3. En la media de las 20 semillas, la mezcla mejora a la rama robusta (tabla anterior). Con ruido, B y su rama robusta cometen exactamente los mismos errores. Las confusiones más frecuentes son entre plástico y vidrio, vidrio y metal, y papel y cartón.</p>
+<p><strong>Lo que no se repite.</strong> No entrenamos para B la ablación reentrenada de A (variantes sin contracción, solo rama robusta y solo rama CNN), que exige tres modelos más con 12 semillas cada uno; la tabla de ramas la sustituye en parte, pero no equivale a una variante entrenada por separado. La curva de aprendizaje frente al tamaño de muestra no se calculó para ningún modelo.</p>
 </section>
 </section>
 
@@ -1037,6 +1207,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mecanismo-y-comparacion-con-a-exploratorios">32.8 Mecanismo y comparación con A (exploratorios)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaraciones">32.9 Declaraciones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reproduccion">32.10 Reproducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-de-entrenamiento-y-evaluacion-complementaria">32.11 Diagnóstico de entrenamiento y evaluación complementaria</a></li>
 </ul>
   </nav></div>
 
