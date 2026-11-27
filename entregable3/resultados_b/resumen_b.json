@@ -1,0 +1,31 @@
+{
+  "semillas": 20,
+  "alfa_B": 0.025,
+  "delta": 0.02,
+  "H1_supera_a": 10,
+  "H1_de": 12,
+  "R3_cumple": false,
+  "R3_cumple_con_alfa_005": false,
+  "no_supera": [
+    "ViT-B16",
+    "RWCNet"
+  ],
+  "F1_limpio_B": 0.9477342894518245,
+  "F1_limpio_A": 0.9364576193877563,
+  "B_menos_A": {
+    "dif": 0.011276670064067972,
+    "ic": [
+      0.002064495459198952,
+      0.020530137345194814
+    ]
+  },
+  "H2_supera_a": 9,
+  "H2_de": 10,
+  "H3": {
+    "mejor_rival": "RWCNet",
+    "R": 20.0,
+    "dif": 0.010859584061683991,
+    "p_no_inferioridad": 6.1935381982367255e-09,
+    "p_tost": 0.005620298076838374
+  }
+}

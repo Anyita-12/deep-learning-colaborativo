@@ -1,0 +1,1527 @@
+[2026-11-26 00:00:00]   NAGFuse-B     seed_00 ep  39 | loss 0.020/0.112 | F1 val 0.9692 (mejor 0.9743 @ 34) |  12.2s
+[2026-11-26 00:00:16]   NAGFuse-B     seed_00 ep  40 | loss 0.016/0.119 | F1 val 0.9574 (mejor 0.9743 @ 34) |  12.3s
+[2026-11-26 00:00:33]   NAGFuse-B     seed_00 ep  41 | loss 0.014/0.116 | F1 val 0.9696 (mejor 0.9743 @ 34) |  12.4s
+[2026-11-26 00:00:49]   NAGFuse-B     seed_00 ep  42 | loss 0.015/0.104 | F1 val 0.9723 (mejor 0.9743 @ 34) |  12.2s
+[2026-11-26 00:01:05]   NAGFuse-B     seed_00 ep  43 | loss 0.012/0.116 | F1 val 0.9592 (mejor 0.9743 @ 34) |  12.2s
+[2026-11-26 00:01:21]   NAGFuse-B     seed_00 ep  44 | loss 0.017/0.100 | F1 val 0.9572 (mejor 0.9743 @ 34) |  12.5s
+[2026-11-26 00:01:37]   NAGFuse-B     seed_00 ep  45 | loss 0.010/0.101 | F1 val 0.9663 (mejor 0.9743 @ 34) |  12.5s
+[2026-11-26 00:01:53]   NAGFuse-B     seed_00 ep  46 | loss 0.020/0.099 | F1 val 0.9737 (mejor 0.9743 @ 34) |  12.2s
+[2026-11-26 00:02:31]   NAGFuse-B seed_00: F1 macro prueba 0.9374
+[2026-11-26 00:03:01]   análisis NAGFuse: pi0 = 0.513, F1 con ruido 0.05: compuerta on 0.9087 / off 0.9052
+[2026-11-26 00:03:11]   NAGFuse-B/seed_00 en realwaste: F1 macro 0.5267 (n = 2640)
+[2026-11-26 00:03:23]   NAGFuse-B/seed_00 en gd_v2: F1 macro 0.5954 (n = 3000)
+[2026-11-26 00:03:26]   NAGFuse-B/seed_00 en warp_c: F1 macro 0.4413 (n = 863)
+[2026-11-26 00:03:27]   pesos de NAGFuse-B seed_00 conservados en /content/drive/MyDrive/E3_TrashNet/weights/NAGFuse-B/seed_00
+[2026-11-26 00:04:01]   NAGFuse-B     seed_01 ep   0 | loss 3.077/1.085 | F1 val 0.7395 (mejor 0.7395 @ 0) |  19.5s *
+[2026-11-26 00:04:19]   NAGFuse-B     seed_01 ep   1 | loss 1.929/0.667 | F1 val 0.8537 (mejor 0.8537 @ 1) |  12.8s *
+[2026-11-26 00:04:36]   NAGFuse-B     seed_01 ep   2 | loss 1.356/0.404 | F1 val 0.8940 (mejor 0.8940 @ 2) |  12.7s *
+[2026-11-26 00:04:53]   NAGFuse-B     seed_01 ep   3 | loss 0.837/0.317 | F1 val 0.8910 (mejor 0.8940 @ 2) |  12.5s
+[2026-11-26 00:05:10]   NAGFuse-B     seed_01 ep   4 | loss 0.598/0.268 | F1 val 0.9036 (mejor 0.9036 @ 4) |  12.6s *
+[2026-11-26 00:05:27]   NAGFuse-B     seed_01 ep   5 | loss 0.429/0.195 | F1 val 0.9372 (mejor 0.9372 @ 5) |  12.4s *
+[2026-11-26 00:05:44]   NAGFuse-B     seed_01 ep   6 | loss 0.297/0.158 | F1 val 0.9421 (mejor 0.9421 @ 6) |  12.5s *
+[2026-11-26 00:06:01]   NAGFuse-B     seed_01 ep   7 | loss 0.267/0.190 | F1 val 0.9294 (mejor 0.9421 @ 6) |  12.6s
+[2026-11-26 00:06:18]   NAGFuse-B     seed_01 ep   8 | loss 0.209/0.145 | F1 val 0.9695 (mejor 0.9695 @ 8) |  12.7s *
+[2026-11-26 00:06:35]   NAGFuse-B     seed_01 ep   9 | loss 0.157/0.172 | F1 val 0.9413 (mejor 0.9695 @ 8) |  12.5s
+[2026-11-26 00:06:51]   NAGFuse-B     seed_01 ep  10 | loss 0.131/0.132 | F1 val 0.9694 (mejor 0.9695 @ 8) |  12.5s
+[2026-11-26 00:07:08]   NAGFuse-B     seed_01 ep  11 | loss 0.110/0.130 | F1 val 0.9569 (mejor 0.9695 @ 8) |  12.5s
+[2026-11-26 00:07:24]   NAGFuse-B     seed_01 ep  12 | loss 0.091/0.133 | F1 val 0.9517 (mejor 0.9695 @ 8) |  12.5s
+[2026-11-26 00:07:40]   NAGFuse-B     seed_01 ep  13 | loss 0.106/0.125 | F1 val 0.9597 (mejor 0.9695 @ 8) |  12.6s
+[2026-11-26 00:07:57]   NAGFuse-B     seed_01 ep  14 | loss 0.093/0.162 | F1 val 0.9384 (mejor 0.9695 @ 8) |  12.6s
+[2026-11-26 00:08:13]   NAGFuse-B     seed_01 ep  15 | loss 0.085/0.104 | F1 val 0.9641 (mejor 0.9695 @ 8) |  12.7s
+[2026-11-26 00:08:30]   NAGFuse-B     seed_01 ep  16 | loss 0.064/0.135 | F1 val 0.9503 (mejor 0.9695 @ 8) |  12.5s
+[2026-11-26 00:08:46]   NAGFuse-B     seed_01 ep  17 | loss 0.063/0.117 | F1 val 0.9590 (mejor 0.9695 @ 8) |  12.4s
+[2026-11-26 00:09:02]   NAGFuse-B     seed_01 ep  18 | loss 0.046/0.148 | F1 val 0.9659 (mejor 0.9695 @ 8) |  12.5s
+[2026-11-26 00:09:19]   NAGFuse-B     seed_01 ep  19 | loss 0.059/0.132 | F1 val 0.9642 (mejor 0.9695 @ 8) |  12.5s
+[2026-11-26 00:09:35]   NAGFuse-B     seed_01 ep  20 | loss 0.050/0.114 | F1 val 0.9608 (mejor 0.9695 @ 8) |  12.5s
+[2026-11-26 00:10:12]   NAGFuse-B seed_01: F1 macro prueba 0.9423
+[2026-11-26 00:10:43]   análisis NAGFuse: pi0 = 0.508, F1 con ruido 0.05: compuerta on 0.8814 / off 0.8723
+[2026-11-26 00:10:55]   NAGFuse-B/seed_01 en realwaste: F1 macro 0.5325 (n = 2640)
+[2026-11-26 00:11:07]   NAGFuse-B/seed_01 en gd_v2: F1 macro 0.5974 (n = 3000)
+[2026-11-26 00:11:11]   NAGFuse-B/seed_01 en warp_c: F1 macro 0.3783 (n = 863)
+[2026-11-26 00:11:12]   pesos de NAGFuse-B seed_01 conservados en /content/drive/MyDrive/E3_TrashNet/weights/NAGFuse-B/seed_01
+[2026-11-26 00:11:44]   NAGFuse-B     seed_02 ep   0 | loss 2.916/0.872 | F1 val 0.8603 (mejor 0.8603 @ 0) |  19.6s *
+[2026-11-26 00:12:02]   NAGFuse-B     seed_02 ep   1 | loss 1.840/0.626 | F1 val 0.8702 (mejor 0.8702 @ 1) |  12.7s *
+[2026-11-26 00:12:20]   NAGFuse-B     seed_02 ep   2 | loss 1.298/0.431 | F1 val 0.8873 (mejor 0.8873 @ 2) |  12.7s *
+[2026-11-26 00:12:36]   NAGFuse-B     seed_02 ep   3 | loss 0.864/0.330 | F1 val 0.8811 (mejor 0.8873 @ 2) |  12.7s
+[2026-11-26 00:12:54]   NAGFuse-B     seed_02 ep   4 | loss 0.601/0.271 | F1 val 0.8971 (mejor 0.8971 @ 4) |  12.8s *
+[2026-11-26 00:13:11]   NAGFuse-B     seed_02 ep   5 | loss 0.415/0.239 | F1 val 0.9195 (mejor 0.9195 @ 5) |  12.8s *
+[2026-11-26 00:13:28]   NAGFuse-B     seed_02 ep   6 | loss 0.307/0.196 | F1 val 0.9156 (mejor 0.9195 @ 5) |  12.7s
+[2026-11-26 00:13:46]   NAGFuse-B     seed_02 ep   7 | loss 0.259/0.170 | F1 val 0.9580 (mejor 0.9580 @ 7) |  12.6s *
+[2026-11-26 00:14:02]   NAGFuse-B     seed_02 ep   8 | loss 0.188/0.216 | F1 val 0.9361 (mejor 0.9580 @ 7) |  12.6s
+[2026-11-26 00:14:18]   NAGFuse-B     seed_02 ep   9 | loss 0.188/0.157 | F1 val 0.9303 (mejor 0.9580 @ 7) |  12.5s
+[2026-11-26 00:14:35]   NAGFuse-B     seed_02 ep  10 | loss 0.142/0.203 | F1 val 0.9536 (mejor 0.9580 @ 7) |  12.7s
+[2026-11-26 00:14:51]   NAGFuse-B     seed_02 ep  11 | loss 0.140/0.127 | F1 val 0.9543 (mejor 0.9580 @ 7) |  12.6s
+[2026-11-26 00:15:09]   NAGFuse-B     seed_02 ep  12 | loss 0.125/0.119 | F1 val 0.9596 (mejor 0.9596 @ 12) |  12.6s *
+[2026-11-26 00:15:25]   NAGFuse-B     seed_02 ep  13 | loss 0.119/0.126 | F1 val 0.9511 (mejor 0.9596 @ 12) |  12.6s
+[2026-11-26 00:15:42]   NAGFuse-B     seed_02 ep  14 | loss 0.096/0.139 | F1 val 0.9483 (mejor 0.9596 @ 12) |  12.5s
+[2026-11-26 00:15:58]   NAGFuse-B     seed_02 ep  15 | loss 0.080/0.136 | F1 val 0.9541 (mejor 0.9596 @ 12) |  12.7s
+[2026-11-26 00:16:15]   NAGFuse-B     seed_02 ep  16 | loss 0.071/0.130 | F1 val 0.9534 (mejor 0.9596 @ 12) |  12.8s
+[2026-11-26 00:16:31]   NAGFuse-B     seed_02 ep  17 | loss 0.060/0.159 | F1 val 0.9446 (mejor 0.9596 @ 12) |  12.8s
+[2026-11-26 00:16:48]   NAGFuse-B     seed_02 ep  18 | loss 0.070/0.191 | F1 val 0.9500 (mejor 0.9596 @ 12) |  12.7s
+[2026-11-26 00:17:05]   NAGFuse-B     seed_02 ep  19 | loss 0.052/0.130 | F1 val 0.9671 (mejor 0.9671 @ 19) |  12.5s *
+[2026-11-26 00:17:22]   NAGFuse-B     seed_02 ep  20 | loss 0.057/0.115 | F1 val 0.9701 (mejor 0.9701 @ 20) |  12.4s *
+[2026-11-26 00:17:39]   NAGFuse-B     seed_02 ep  21 | loss 0.057/0.156 | F1 val 0.9605 (mejor 0.9701 @ 20) |  12.7s
+[2026-11-26 00:17:55]   NAGFuse-B     seed_02 ep  22 | loss 0.040/0.113 | F1 val 0.9594 (mejor 0.9701 @ 20) |  12.5s
+[2026-11-26 00:18:13]   NAGFuse-B     seed_02 ep  23 | loss 0.039/0.123 | F1 val 0.9789 (mejor 0.9789 @ 23) |  12.7s *
+[2026-11-26 00:18:29]   NAGFuse-B     seed_02 ep  24 | loss 0.051/0.143 | F1 val 0.9664 (mejor 0.9789 @ 23) |  12.6s
+[2026-11-26 00:18:46]   NAGFuse-B     seed_02 ep  25 | loss 0.044/0.140 | F1 val 0.9656 (mejor 0.9789 @ 23) |  12.6s
+[2026-11-26 00:19:02]   NAGFuse-B     seed_02 ep  26 | loss 0.043/0.112 | F1 val 0.9404 (mejor 0.9789 @ 23) |  12.6s
+[2026-11-26 00:19:19]   NAGFuse-B     seed_02 ep  27 | loss 0.033/0.117 | F1 val 0.9606 (mejor 0.9789 @ 23) |  12.7s
+[2026-11-26 00:19:35]   NAGFuse-B     seed_02 ep  28 | loss 0.030/0.124 | F1 val 0.9734 (mejor 0.9789 @ 23) |  12.6s
+[2026-11-26 00:19:52]   NAGFuse-B     seed_02 ep  29 | loss 0.028/0.111 | F1 val 0.9758 (mejor 0.9789 @ 23) |  12.6s
+[2026-11-26 00:20:08]   NAGFuse-B     seed_02 ep  30 | loss 0.018/0.120 | F1 val 0.9702 (mejor 0.9789 @ 23) |  12.6s
+[2026-11-26 00:20:24]   NAGFuse-B     seed_02 ep  31 | loss 0.036/0.134 | F1 val 0.9634 (mejor 0.9789 @ 23) |  12.6s
+[2026-11-26 00:20:41]   NAGFuse-B     seed_02 ep  32 | loss 0.029/0.104 | F1 val 0.9663 (mejor 0.9789 @ 23) |  12.6s
+[2026-11-26 00:20:58]   NAGFuse-B     seed_02 ep  33 | loss 0.027/0.096 | F1 val 0.9795 (mejor 0.9795 @ 33) |  12.4s *
+[2026-11-26 00:21:14]   NAGFuse-B     seed_02 ep  34 | loss 0.017/0.103 | F1 val 0.9653 (mejor 0.9795 @ 33) |  12.4s
+[2026-11-26 00:21:31]   NAGFuse-B     seed_02 ep  35 | loss 0.018/0.107 | F1 val 0.9633 (mejor 0.9795 @ 33) |  12.5s
+[2026-11-26 00:21:48]   NAGFuse-B     seed_02 ep  36 | loss 0.022/0.117 | F1 val 0.9705 (mejor 0.9795 @ 33) |  12.9s
+[2026-11-26 00:22:04]   NAGFuse-B     seed_02 ep  37 | loss 0.016/0.105 | F1 val 0.9682 (mejor 0.9795 @ 33) |  12.8s
+[2026-11-26 00:22:21]   NAGFuse-B     seed_02 ep  38 | loss 0.015/0.113 | F1 val 0.9680 (mejor 0.9795 @ 33) |  12.6s
+[2026-11-26 00:22:37]   NAGFuse-B     seed_02 ep  39 | loss 0.017/0.114 | F1 val 0.9740 (mejor 0.9795 @ 33) |  12.6s
+[2026-11-26 00:22:54]   NAGFuse-B     seed_02 ep  40 | loss 0.013/0.107 | F1 val 0.9734 (mejor 0.9795 @ 33) |  12.6s
+[2026-11-26 00:23:10]   NAGFuse-B     seed_02 ep  41 | loss 0.015/0.110 | F1 val 0.9658 (mejor 0.9795 @ 33) |  12.6s
+[2026-11-26 00:23:27]   NAGFuse-B     seed_02 ep  42 | loss 0.019/0.104 | F1 val 0.9595 (mejor 0.9795 @ 33) |  12.8s
+[2026-11-26 00:23:43]   NAGFuse-B     seed_02 ep  43 | loss 0.017/0.095 | F1 val 0.9673 (mejor 0.9795 @ 33) |  12.7s
+[2026-11-26 00:24:00]   NAGFuse-B     seed_02 ep  44 | loss 0.014/0.107 | F1 val 0.9718 (mejor 0.9795 @ 33) |  12.7s
+[2026-11-26 00:24:16]   NAGFuse-B     seed_02 ep  45 | loss 0.021/0.108 | F1 val 0.9718 (mejor 0.9795 @ 33) |  12.7s
+[2026-11-26 00:24:53]   NAGFuse-B seed_02: F1 macro prueba 0.9445
+[2026-11-26 00:25:24]   análisis NAGFuse: pi0 = 0.514, F1 con ruido 0.05: compuerta on 0.9246 / off 0.9163
+[2026-11-26 00:25:36]   NAGFuse-B/seed_02 en realwaste: F1 macro 0.5453 (n = 2640)
+[2026-11-26 00:25:49]   NAGFuse-B/seed_02 en gd_v2: F1 macro 0.6291 (n = 3000)
+[2026-11-26 00:25:53]   NAGFuse-B/seed_02 en warp_c: F1 macro 0.3733 (n = 863)
+[2026-11-26 00:25:53]   pesos de NAGFuse-B seed_02 conservados en /content/drive/MyDrive/E3_TrashNet/weights/NAGFuse-B/seed_02
+[2026-11-26 00:26:25]   NAGFuse-B     seed_03 ep   0 | loss 3.013/0.973 | F1 val 0.8103 (mejor 0.8103 @ 0) |  19.5s *
+[2026-11-26 00:26:43]   NAGFuse-B     seed_03 ep   1 | loss 1.855/0.617 | F1 val 0.8732 (mejor 0.8732 @ 1) |  12.6s *
+[2026-11-26 00:27:00]   NAGFuse-B     seed_03 ep   2 | loss 1.274/0.432 | F1 val 0.8878 (mejor 0.8878 @ 2) |  12.6s *
+[2026-11-26 00:27:18]   NAGFuse-B     seed_03 ep   3 | loss 0.805/0.286 | F1 val 0.9110 (mejor 0.9110 @ 3) |  12.7s *
+[2026-11-26 00:27:35]   NAGFuse-B     seed_03 ep   4 | loss 0.607/0.243 | F1 val 0.9221 (mejor 0.9221 @ 4) |  12.7s *
+[2026-11-26 00:27:53]   NAGFuse-B     seed_03 ep   5 | loss 0.437/0.203 | F1 val 0.9357 (mejor 0.9357 @ 5) |  12.6s *
+[2026-11-26 00:28:09]   NAGFuse-B     seed_03 ep   6 | loss 0.304/0.210 | F1 val 0.9293 (mejor 0.9357 @ 5) |  12.5s
+[2026-11-26 00:28:26]   NAGFuse-B     seed_03 ep   7 | loss 0.278/0.145 | F1 val 0.9640 (mejor 0.9640 @ 7) |  12.5s *
+[2026-11-26 00:28:43]   NAGFuse-B     seed_03 ep   8 | loss 0.197/0.145 | F1 val 0.9416 (mejor 0.9640 @ 7) |  12.5s
+[2026-11-26 00:28:59]   NAGFuse-B     seed_03 ep   9 | loss 0.189/0.150 | F1 val 0.9321 (mejor 0.9640 @ 7) |  12.7s
+[2026-11-26 00:29:15]   NAGFuse-B     seed_03 ep  10 | loss 0.169/0.140 | F1 val 0.9469 (mejor 0.9640 @ 7) |  12.6s
+[2026-11-26 00:29:33]   NAGFuse-B     seed_03 ep  11 | loss 0.134/0.103 | F1 val 0.9719 (mejor 0.9719 @ 11) |  12.6s *
+[2026-11-26 00:29:49]   NAGFuse-B     seed_03 ep  12 | loss 0.112/0.140 | F1 val 0.9612 (mejor 0.9719 @ 11) |  12.7s
+[2026-11-26 00:30:06]   NAGFuse-B     seed_03 ep  13 | loss 0.112/0.122 | F1 val 0.9537 (mejor 0.9719 @ 11) |  12.6s
+[2026-11-26 00:30:22]   NAGFuse-B     seed_03 ep  14 | loss 0.101/0.156 | F1 val 0.9610 (mejor 0.9719 @ 11) |  12.6s
+[2026-11-26 00:30:38]   NAGFuse-B     seed_03 ep  15 | loss 0.076/0.125 | F1 val 0.9658 (mejor 0.9719 @ 11) |  12.5s
+[2026-11-26 00:30:55]   NAGFuse-B     seed_03 ep  16 | loss 0.083/0.132 | F1 val 0.9617 (mejor 0.9719 @ 11) |  12.6s
+[2026-11-26 00:31:11]   NAGFuse-B     seed_03 ep  17 | loss 0.051/0.131 | F1 val 0.9686 (mejor 0.9719 @ 11) |  12.4s
+[2026-11-26 00:31:28]   NAGFuse-B     seed_03 ep  18 | loss 0.066/0.126 | F1 val 0.9556 (mejor 0.9719 @ 11) |  12.6s
+[2026-11-26 00:31:43] ERROR en nag-final-NAGFuse-B-s03: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 115, in train_run
+    return _train_run(model_name, seed, hp, run, common, stage, subset, log, extra_config or {})
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 158, in _train_run
+    return _loop(model_name, spec, seed, hp, run, common, stage, subset, log, dev, mean, std, cache,
+                 tr_rows, tr_y, va_rows, te_rows, te_y, sampler, dl_tr, dl_va, micro)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 257, in _loop
+    save_torch({"model": model.state_dict(), "optimizer": opt.state_dict(), "scheduler": sched.state_dict(),
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                "scaler": scaler.state_dict(), "epoch": epoch, "history": hist, "best_f1": best_f1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                "best_epoch": best_epoch, "bad_epochs": bad, "train_time_s": train_time, "stopped_early": stopped,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                "rng": get_rng_state(), "best_model": best_state}, ck_last, keep_previous=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 142, in save_torch_mirrored
+    r = orig(obj, path, *a, **k)
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 103, in save_torch
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:31:49] ERROR en nag-final-NAGFuse-B-s03: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:31:54] ERROR en nag-final-NAGFuse-B-s04: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:31:59] ERROR en nag-final-NAGFuse-B-s04: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:32:05] ERROR en nag-final-NAGFuse-B-s05: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:32:10] ERROR en nag-final-NAGFuse-B-s05: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:32:15] ERROR en nag-final-NAGFuse-B-s06: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:32:21] ERROR en nag-final-NAGFuse-B-s06: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:32:26] ERROR en nag-final-NAGFuse-B-s07: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:32:31] ERROR en nag-final-NAGFuse-B-s07: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:32:37] ERROR en nag-final-NAGFuse-B-s08: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:32:42] ERROR en nag-final-NAGFuse-B-s08: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:32:48] ERROR en nag-final-NAGFuse-B-s09: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:32:53] ERROR en nag-final-NAGFuse-B-s09: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:32:59] ERROR en nag-final-NAGFuse-B-s10: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:33:04] ERROR en nag-final-NAGFuse-B-s10: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:33:09] ERROR en nag-final-NAGFuse-B-s11: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:33:14] ERROR en nag-final-NAGFuse-B-s11: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:33:19] ERROR en nag-final-NAGFuse-B-s12: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:33:25] ERROR en nag-final-NAGFuse-B-s12: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:33:30] ERROR en nag-final-NAGFuse-B-s13: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:33:35] ERROR en nag-final-NAGFuse-B-s13: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:33:40] ERROR en nag-final-NAGFuse-B-s14: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:33:46] ERROR en nag-final-NAGFuse-B-s14: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:33:51] ERROR en nag-final-NAGFuse-B-s15: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:33:56] ERROR en nag-final-NAGFuse-B-s15: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:34:01] ERROR en nag-final-NAGFuse-B-s16: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:34:07] ERROR en nag-final-NAGFuse-B-s16: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:34:12] ERROR en nag-final-NAGFuse-B-s17: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:34:18] ERROR en nag-final-NAGFuse-B-s17: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:34:23] ERROR en nag-final-NAGFuse-B-s18: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:34:28] ERROR en nag-final-NAGFuse-B-s18: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:34:34] ERROR en nag-final-NAGFuse-B-s19: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 00:34:39] ERROR en nag-final-NAGFuse-B-s19: OSError(5, 'Input/output error')
+Traceback (most recent call last):
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 539, in main
+    task_e2(t, worker)
+    ~~~~~~~^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable3/e3/worker.py", line 349, in task_e2
+    r = T.train_run(name, t["seed"], hp, run, common, stage="final", subset=subset, log=log, extra_config=extra)
+  File "/content/deep-learning-colaborativo/entregable2/src/train.py", line 111, in train_run
+    if not acquire_lock(run):
+           ~~~~~~~~~~~~^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 193, in acquire_lock
+    save_json({"pid": os.getpid(), "host": socket.gethostname(), "since": time.strftime("%Y-%m-%d %H:%M:%S")}, p)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 79, in save_json
+    return _write_atomic(path, lambda f: f.write(data))
+  File "/content/deep-learning-colaborativo/entregable2/src/persist.py", line 48, in _write_atomic
+    os.fsync(f.fileno())
+    ~~~~~~~~^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+[2026-11-26 02:47:36] Descargando TrashNet desde https://github.com/garythung/trashnet/raw/master/data/dataset-resized.zip
+[2026-11-26 02:48:06] Caché y partición del E1 verificadas.
+[2026-11-26 02:48:54]   NAGFuse-B     seed_03 ep   0 | loss 2.999/0.955 | F1 val 0.8125 (mejor 0.8125 @ 0) |  33.8s *
+[2026-11-26 02:49:27]   NAGFuse-B     seed_03 ep   1 | loss 1.826/0.580 | F1 val 0.8982 (mejor 0.8982 @ 1) |  28.4s *
+[2026-11-26 02:49:59]   NAGFuse-B     seed_03 ep   2 | loss 1.213/0.430 | F1 val 0.8913 (mejor 0.8982 @ 1) |  29.1s
+[2026-11-26 02:50:33]   NAGFuse-B     seed_03 ep   3 | loss 0.774/0.271 | F1 val 0.9248 (mejor 0.9248 @ 3) |  29.9s *
+[2026-11-26 02:51:06]   NAGFuse-B     seed_03 ep   4 | loss 0.594/0.242 | F1 val 0.9147 (mejor 0.9248 @ 3) |  29.7s
+[2026-11-26 02:51:40]   NAGFuse-B     seed_03 ep   5 | loss 0.441/0.188 | F1 val 0.9497 (mejor 0.9497 @ 5) |  29.7s *
+[2026-11-26 02:52:13]   NAGFuse-B     seed_03 ep   6 | loss 0.315/0.191 | F1 val 0.9340 (mejor 0.9497 @ 5) |  29.7s
+[2026-11-26 02:52:47]   NAGFuse-B     seed_03 ep   7 | loss 0.254/0.157 | F1 val 0.9539 (mejor 0.9539 @ 7) |  29.6s *
+[2026-11-26 02:53:20]   NAGFuse-B     seed_03 ep   8 | loss 0.187/0.136 | F1 val 0.9465 (mejor 0.9539 @ 7) |  29.6s
+[2026-11-26 02:53:53]   NAGFuse-B     seed_03 ep   9 | loss 0.179/0.151 | F1 val 0.9521 (mejor 0.9539 @ 7) |  29.7s
+[2026-11-26 02:54:25]   NAGFuse-B     seed_03 ep  10 | loss 0.145/0.134 | F1 val 0.9485 (mejor 0.9539 @ 7) |  29.6s
+[2026-11-26 02:54:58]   NAGFuse-B     seed_03 ep  11 | loss 0.129/0.137 | F1 val 0.9432 (mejor 0.9539 @ 7) |  29.6s
+[2026-11-26 02:55:32]   NAGFuse-B     seed_03 ep  12 | loss 0.113/0.144 | F1 val 0.9702 (mejor 0.9702 @ 12) |  29.6s *
+[2026-11-26 02:56:05]   NAGFuse-B     seed_03 ep  13 | loss 0.112/0.120 | F1 val 0.9695 (mejor 0.9702 @ 12) |  29.5s
+[2026-11-26 02:56:37]   NAGFuse-B     seed_03 ep  14 | loss 0.109/0.130 | F1 val 0.9671 (mejor 0.9702 @ 12) |  29.5s
+[2026-11-26 02:57:10]   NAGFuse-B     seed_03 ep  15 | loss 0.085/0.130 | F1 val 0.9613 (mejor 0.9702 @ 12) |  29.5s
+[2026-11-26 02:57:43]   NAGFuse-B     seed_03 ep  16 | loss 0.090/0.137 | F1 val 0.9634 (mejor 0.9702 @ 12) |  29.5s
+[2026-11-26 02:58:16]   NAGFuse-B     seed_03 ep  17 | loss 0.060/0.109 | F1 val 0.9650 (mejor 0.9702 @ 12) |  29.6s
+[2026-11-26 02:58:49]   NAGFuse-B     seed_03 ep  18 | loss 0.064/0.118 | F1 val 0.9635 (mejor 0.9702 @ 12) |  29.6s
+[2026-11-26 02:59:21]   NAGFuse-B     seed_03 ep  19 | loss 0.064/0.115 | F1 val 0.9603 (mejor 0.9702 @ 12) |  29.6s
+[2026-11-26 02:59:54]   NAGFuse-B     seed_03 ep  20 | loss 0.052/0.108 | F1 val 0.9652 (mejor 0.9702 @ 12) |  29.6s
+[2026-11-26 03:00:27]   NAGFuse-B     seed_03 ep  21 | loss 0.055/0.118 | F1 val 0.9701 (mejor 0.9702 @ 12) |  29.5s
+[2026-11-26 03:01:00]   NAGFuse-B     seed_03 ep  22 | loss 0.050/0.113 | F1 val 0.9384 (mejor 0.9702 @ 12) |  29.6s
+[2026-11-26 03:01:33]   NAGFuse-B     seed_03 ep  23 | loss 0.038/0.105 | F1 val 0.9654 (mejor 0.9702 @ 12) |  29.6s
+[2026-11-26 03:02:05]   NAGFuse-B     seed_03 ep  24 | loss 0.046/0.102 | F1 val 0.9688 (mejor 0.9702 @ 12) |  29.5s
+[2026-11-26 03:03:37]   NAGFuse-B seed_03: F1 macro prueba 0.9517
+[2026-11-26 03:05:05]   análisis NAGFuse: pi0 = 0.509, F1 con ruido 0.05: compuerta on 0.9006 / off 0.9029
+[2026-11-26 03:05:47]   NAGFuse-B/seed_03 en realwaste: F1 macro 0.5312 (n = 2640)
+[2026-11-26 03:06:35]   NAGFuse-B/seed_03 en gd_v2: F1 macro 0.5854 (n = 3000)
+[2026-11-26 03:06:49]   NAGFuse-B/seed_03 en warp_c: F1 macro 0.3881 (n = 863)
+[2026-11-26 03:07:34]   NAGFuse-B     seed_04 ep   0 | loss 2.985/0.909 | F1 val 0.8030 (mejor 0.8030 @ 0) |  32.6s *
+[2026-11-26 03:08:09]   NAGFuse-B     seed_04 ep   1 | loss 1.762/0.573 | F1 val 0.8810 (mejor 0.8810 @ 1) |  29.9s *
+[2026-11-26 03:08:42]   NAGFuse-B     seed_04 ep   2 | loss 1.167/0.384 | F1 val 0.8942 (mejor 0.8942 @ 2) |  29.7s *
+[2026-11-26 03:09:16]   NAGFuse-B     seed_04 ep   3 | loss 0.729/0.244 | F1 val 0.9350 (mejor 0.9350 @ 3) |  29.8s *
+[2026-11-26 03:09:49]   NAGFuse-B     seed_04 ep   4 | loss 0.527/0.200 | F1 val 0.9232 (mejor 0.9350 @ 3) |  29.8s
+[2026-11-26 03:10:22]   NAGFuse-B     seed_04 ep   5 | loss 0.380/0.204 | F1 val 0.9183 (mejor 0.9350 @ 3) |  29.9s
+[2026-11-26 03:10:56]   NAGFuse-B     seed_04 ep   6 | loss 0.297/0.180 | F1 val 0.9397 (mejor 0.9397 @ 6) |  29.8s *
+[2026-11-26 03:11:30]   NAGFuse-B     seed_04 ep   7 | loss 0.242/0.169 | F1 val 0.9407 (mejor 0.9407 @ 7) |  29.7s *
+[2026-11-26 03:12:03]   NAGFuse-B     seed_04 ep   8 | loss 0.213/0.179 | F1 val 0.9379 (mejor 0.9407 @ 7) |  29.8s
+[2026-11-26 03:12:37]   NAGFuse-B     seed_04 ep   9 | loss 0.166/0.157 | F1 val 0.9440 (mejor 0.9440 @ 9) |  29.8s *
+[2026-11-26 03:13:11]   NAGFuse-B     seed_04 ep  10 | loss 0.167/0.169 | F1 val 0.9522 (mejor 0.9522 @ 10) |  29.6s *
+[2026-11-26 03:13:45]   NAGFuse-B     seed_04 ep  11 | loss 0.138/0.188 | F1 val 0.9542 (mejor 0.9542 @ 11) |  29.7s *
+[2026-11-26 03:14:18]   NAGFuse-B     seed_04 ep  12 | loss 0.130/0.173 | F1 val 0.9416 (mejor 0.9542 @ 11) |  29.6s
+[2026-11-26 03:14:51]   NAGFuse-B     seed_04 ep  13 | loss 0.080/0.178 | F1 val 0.9444 (mejor 0.9542 @ 11) |  29.6s
+[2026-11-26 03:15:23]   NAGFuse-B     seed_04 ep  14 | loss 0.084/0.180 | F1 val 0.9492 (mejor 0.9542 @ 11) |  29.6s
+[2026-11-26 03:15:57]   NAGFuse-B     seed_04 ep  15 | loss 0.063/0.116 | F1 val 0.9672 (mejor 0.9672 @ 15) |  29.6s *
+[2026-11-26 03:16:30]   NAGFuse-B     seed_04 ep  16 | loss 0.082/0.147 | F1 val 0.9520 (mejor 0.9672 @ 15) |  29.5s
+[2026-11-26 03:17:03]   NAGFuse-B     seed_04 ep  17 | loss 0.066/0.124 | F1 val 0.9447 (mejor 0.9672 @ 15) |  29.7s
+[2026-11-26 03:17:35]   NAGFuse-B     seed_04 ep  18 | loss 0.059/0.134 | F1 val 0.9487 (mejor 0.9672 @ 15) |  29.5s
+[2026-11-26 03:18:08]   NAGFuse-B     seed_04 ep  19 | loss 0.067/0.169 | F1 val 0.9424 (mejor 0.9672 @ 15) |  29.5s
+[2026-11-26 03:18:41]   NAGFuse-B     seed_04 ep  20 | loss 0.059/0.158 | F1 val 0.9276 (mejor 0.9672 @ 15) |  29.5s
+[2026-11-26 03:19:14]   NAGFuse-B     seed_04 ep  21 | loss 0.059/0.139 | F1 val 0.9539 (mejor 0.9672 @ 15) |  29.5s
+[2026-11-26 03:19:46]   NAGFuse-B     seed_04 ep  22 | loss 0.045/0.156 | F1 val 0.9400 (mejor 0.9672 @ 15) |  29.7s
+[2026-11-26 03:20:19]   NAGFuse-B     seed_04 ep  23 | loss 0.053/0.139 | F1 val 0.9437 (mejor 0.9672 @ 15) |  29.6s
+[2026-11-26 03:20:52]   NAGFuse-B     seed_04 ep  24 | loss 0.046/0.141 | F1 val 0.9577 (mejor 0.9672 @ 15) |  29.5s
+[2026-11-26 03:21:25]   NAGFuse-B     seed_04 ep  25 | loss 0.039/0.151 | F1 val 0.9554 (mejor 0.9672 @ 15) |  29.8s
+[2026-11-26 03:21:58]   NAGFuse-B     seed_04 ep  26 | loss 0.033/0.172 | F1 val 0.9285 (mejor 0.9672 @ 15) |  29.5s
+[2026-11-26 03:22:30]   NAGFuse-B     seed_04 ep  27 | loss 0.041/0.132 | F1 val 0.9474 (mejor 0.9672 @ 15) |  29.5s
+[2026-11-26 03:24:04]   NAGFuse-B seed_04: F1 macro prueba 0.9409
+[2026-11-26 03:25:33]   análisis NAGFuse: pi0 = 0.510, F1 con ruido 0.05: compuerta on 0.9267 / off 0.9259
+[2026-11-26 03:26:17]   NAGFuse-B/seed_04 en realwaste: F1 macro 0.5142 (n = 2640)
+[2026-11-26 03:27:08]   NAGFuse-B/seed_04 en gd_v2: F1 macro 0.5835 (n = 3000)
+[2026-11-26 03:27:22]   NAGFuse-B/seed_04 en warp_c: F1 macro 0.3964 (n = 863)
+[2026-11-26 03:28:08]   NAGFuse-B     seed_05 ep   0 | loss 3.002/0.988 | F1 val 0.7804 (mejor 0.7804 @ 0) |  32.9s *
+[2026-11-26 03:28:42]   NAGFuse-B     seed_05 ep   1 | loss 1.820/0.599 | F1 val 0.8817 (mejor 0.8817 @ 1) |  29.9s *
+[2026-11-26 03:29:15]   NAGFuse-B     seed_05 ep   2 | loss 1.265/0.424 | F1 val 0.8739 (mejor 0.8817 @ 1) |  29.7s
+[2026-11-26 03:29:49]   NAGFuse-B     seed_05 ep   3 | loss 0.827/0.270 | F1 val 0.9294 (mejor 0.9294 @ 3) |  29.9s *
+[2026-11-26 03:30:22]   NAGFuse-B     seed_05 ep   4 | loss 0.547/0.224 | F1 val 0.9159 (mejor 0.9294 @ 3) |  29.8s
+[2026-11-26 03:30:55]   NAGFuse-B     seed_05 ep   5 | loss 0.403/0.196 | F1 val 0.9227 (mejor 0.9294 @ 3) |  29.8s
+[2026-11-26 03:31:29]   NAGFuse-B     seed_05 ep   6 | loss 0.315/0.151 | F1 val 0.9299 (mejor 0.9299 @ 6) |  29.8s *
+[2026-11-26 03:32:03]   NAGFuse-B     seed_05 ep   7 | loss 0.254/0.176 | F1 val 0.9441 (mejor 0.9441 @ 7) |  29.9s *
+[2026-11-26 03:32:36]   NAGFuse-B     seed_05 ep   8 | loss 0.196/0.171 | F1 val 0.9355 (mejor 0.9441 @ 7) |  29.6s
+[2026-11-26 03:33:10]   NAGFuse-B     seed_05 ep   9 | loss 0.148/0.168 | F1 val 0.9629 (mejor 0.9629 @ 9) |  29.7s *
+[2026-11-26 03:33:43]   NAGFuse-B     seed_05 ep  10 | loss 0.116/0.165 | F1 val 0.9395 (mejor 0.9629 @ 9) |  29.9s
+[2026-11-26 03:34:16]   NAGFuse-B     seed_05 ep  11 | loss 0.141/0.147 | F1 val 0.9370 (mejor 0.9629 @ 9) |  29.6s
+[2026-11-26 03:34:49]   NAGFuse-B     seed_05 ep  12 | loss 0.113/0.148 | F1 val 0.9579 (mejor 0.9629 @ 9) |  29.6s
+[2026-11-26 03:35:21]   NAGFuse-B     seed_05 ep  13 | loss 0.099/0.172 | F1 val 0.9268 (mejor 0.9629 @ 9) |  29.6s
+[2026-11-26 03:35:54]   NAGFuse-B     seed_05 ep  14 | loss 0.091/0.115 | F1 val 0.9593 (mejor 0.9629 @ 9) |  29.5s
+[2026-11-26 03:36:28]   NAGFuse-B     seed_05 ep  15 | loss 0.069/0.132 | F1 val 0.9664 (mejor 0.9664 @ 15) |  29.7s *
+[2026-11-26 03:37:01]   NAGFuse-B     seed_05 ep  16 | loss 0.070/0.150 | F1 val 0.9521 (mejor 0.9664 @ 15) |  29.5s
+[2026-11-26 03:37:33]   NAGFuse-B     seed_05 ep  17 | loss 0.066/0.133 | F1 val 0.9612 (mejor 0.9664 @ 15) |  29.5s
+[2026-11-26 03:38:07]   NAGFuse-B     seed_05 ep  18 | loss 0.063/0.158 | F1 val 0.9699 (mejor 0.9699 @ 18) |  29.5s *
+[2026-11-26 03:38:40]   NAGFuse-B     seed_05 ep  19 | loss 0.069/0.119 | F1 val 0.9644 (mejor 0.9699 @ 18) |  29.6s
+[2026-11-26 03:39:13]   NAGFuse-B     seed_05 ep  20 | loss 0.045/0.123 | F1 val 0.9689 (mejor 0.9699 @ 18) |  29.5s
+[2026-11-26 03:39:46]   NAGFuse-B     seed_05 ep  21 | loss 0.050/0.121 | F1 val 0.9592 (mejor 0.9699 @ 18) |  29.5s
+[2026-11-26 03:40:18]   NAGFuse-B     seed_05 ep  22 | loss 0.047/0.164 | F1 val 0.9277 (mejor 0.9699 @ 18) |  29.5s
+[2026-11-26 03:40:51]   NAGFuse-B     seed_05 ep  23 | loss 0.036/0.151 | F1 val 0.9508 (mejor 0.9699 @ 18) |  29.5s
+[2026-11-26 03:41:24]   NAGFuse-B     seed_05 ep  24 | loss 0.030/0.157 | F1 val 0.9606 (mejor 0.9699 @ 18) |  29.5s
+[2026-11-26 03:41:56]   NAGFuse-B     seed_05 ep  25 | loss 0.037/0.134 | F1 val 0.9617 (mejor 0.9699 @ 18) |  29.5s
+[2026-11-26 03:42:29]   NAGFuse-B     seed_05 ep  26 | loss 0.038/0.185 | F1 val 0.9561 (mejor 0.9699 @ 18) |  29.6s
+[2026-11-26 03:43:02]   NAGFuse-B     seed_05 ep  27 | loss 0.047/0.138 | F1 val 0.9559 (mejor 0.9699 @ 18) |  29.5s
+[2026-11-26 03:43:36]   NAGFuse-B     seed_05 ep  28 | loss 0.029/0.129 | F1 val 0.9721 (mejor 0.9721 @ 28) |  29.5s *
+[2026-11-26 03:44:09]   NAGFuse-B     seed_05 ep  29 | loss 0.032/0.156 | F1 val 0.9582 (mejor 0.9721 @ 28) |  29.5s
+[2026-11-26 03:44:41]   NAGFuse-B     seed_05 ep  30 | loss 0.022/0.154 | F1 val 0.9689 (mejor 0.9721 @ 28) |  29.4s
+[2026-11-26 03:45:14]   NAGFuse-B     seed_05 ep  31 | loss 0.026/0.160 | F1 val 0.9540 (mejor 0.9721 @ 28) |  29.4s
+[2026-11-26 03:45:47]   NAGFuse-B     seed_05 ep  32 | loss 0.019/0.119 | F1 val 0.9710 (mejor 0.9721 @ 28) |  29.5s
+[2026-11-26 03:46:19]   NAGFuse-B     seed_05 ep  33 | loss 0.022/0.139 | F1 val 0.9663 (mejor 0.9721 @ 28) |  29.4s
+[2026-11-26 03:46:53]   NAGFuse-B     seed_05 ep  34 | loss 0.018/0.121 | F1 val 0.9723 (mejor 0.9723 @ 34) |  29.5s *
+[2026-11-26 03:47:26]   NAGFuse-B     seed_05 ep  35 | loss 0.018/0.120 | F1 val 0.9648 (mejor 0.9723 @ 34) |  29.4s
+[2026-11-26 03:47:58]   NAGFuse-B     seed_05 ep  36 | loss 0.021/0.129 | F1 val 0.9632 (mejor 0.9723 @ 34) |  29.4s
+[2026-11-26 03:48:31]   NAGFuse-B     seed_05 ep  37 | loss 0.019/0.122 | F1 val 0.9685 (mejor 0.9723 @ 34) |  29.4s
+[2026-11-26 03:49:04]   NAGFuse-B     seed_05 ep  38 | loss 0.021/0.121 | F1 val 0.9670 (mejor 0.9723 @ 34) |  29.4s
+[2026-11-26 03:49:36]   NAGFuse-B     seed_05 ep  39 | loss 0.023/0.124 | F1 val 0.9646 (mejor 0.9723 @ 34) |  29.6s
+[2026-11-26 03:50:09]   NAGFuse-B     seed_05 ep  40 | loss 0.016/0.117 | F1 val 0.9646 (mejor 0.9723 @ 34) |  29.4s
+[2026-11-26 03:50:42]   NAGFuse-B     seed_05 ep  41 | loss 0.018/0.121 | F1 val 0.9667 (mejor 0.9723 @ 34) |  29.3s
+[2026-11-26 03:51:14]   NAGFuse-B     seed_05 ep  42 | loss 0.022/0.116 | F1 val 0.9606 (mejor 0.9723 @ 34) |  29.4s
+[2026-11-26 03:51:47]   NAGFuse-B     seed_05 ep  43 | loss 0.018/0.117 | F1 val 0.9634 (mejor 0.9723 @ 34) |  29.5s
+[2026-11-26 03:52:20]   NAGFuse-B     seed_05 ep  44 | loss 0.015/0.114 | F1 val 0.9632 (mejor 0.9723 @ 34) |  29.4s
+[2026-11-26 03:52:52]   NAGFuse-B     seed_05 ep  45 | loss 0.013/0.116 | F1 val 0.9632 (mejor 0.9723 @ 34) |  29.4s
+[2026-11-26 03:53:25]   NAGFuse-B     seed_05 ep  46 | loss 0.011/0.128 | F1 val 0.9610 (mejor 0.9723 @ 34) |  29.4s
+[2026-11-26 03:54:59]   NAGFuse-B seed_05: F1 macro prueba 0.9553
+[2026-11-26 03:56:28]   análisis NAGFuse: pi0 = 0.515, F1 con ruido 0.05: compuerta on 0.9257 / off 0.9172
+[2026-11-26 03:57:13]   NAGFuse-B/seed_05 en realwaste: F1 macro 0.5214 (n = 2640)
+[2026-11-26 03:58:03]   NAGFuse-B/seed_05 en gd_v2: F1 macro 0.5983 (n = 3000)
+[2026-11-26 03:58:18]   NAGFuse-B/seed_05 en warp_c: F1 macro 0.4214 (n = 863)
+[2026-11-26 03:59:03]   NAGFuse-B     seed_06 ep   0 | loss 3.043/0.957 | F1 val 0.8195 (mejor 0.8195 @ 0) |  32.9s *
+[2026-11-26 03:59:37]   NAGFuse-B     seed_06 ep   1 | loss 1.780/0.568 | F1 val 0.8847 (mejor 0.8847 @ 1) |  29.9s *
+[2026-11-26 04:00:11]   NAGFuse-B     seed_06 ep   2 | loss 1.165/0.402 | F1 val 0.9090 (mejor 0.9090 @ 2) |  29.7s *
+[2026-11-26 04:00:44]   NAGFuse-B     seed_06 ep   3 | loss 0.776/0.329 | F1 val 0.8995 (mejor 0.9090 @ 2) |  29.8s
+[2026-11-26 04:01:18]   NAGFuse-B     seed_06 ep   4 | loss 0.533/0.246 | F1 val 0.9165 (mejor 0.9165 @ 4) |  29.7s *
+[2026-11-26 04:01:52]   NAGFuse-B     seed_06 ep   5 | loss 0.416/0.191 | F1 val 0.9367 (mejor 0.9367 @ 5) |  29.7s *
+[2026-11-26 04:02:26]   NAGFuse-B     seed_06 ep   6 | loss 0.291/0.169 | F1 val 0.9596 (mejor 0.9596 @ 6) |  29.7s *
+[2026-11-26 04:02:59]   NAGFuse-B     seed_06 ep   7 | loss 0.254/0.149 | F1 val 0.9582 (mejor 0.9596 @ 6) |  29.7s
+[2026-11-26 04:03:32]   NAGFuse-B     seed_06 ep   8 | loss 0.196/0.171 | F1 val 0.9568 (mejor 0.9596 @ 6) |  29.8s
+[2026-11-26 04:04:05]   NAGFuse-B     seed_06 ep   9 | loss 0.186/0.161 | F1 val 0.9469 (mejor 0.9596 @ 6) |  29.7s
+[2026-11-26 04:04:38]   NAGFuse-B     seed_06 ep  10 | loss 0.144/0.163 | F1 val 0.9463 (mejor 0.9596 @ 6) |  29.7s
+[2026-11-26 04:05:11]   NAGFuse-B     seed_06 ep  11 | loss 0.126/0.133 | F1 val 0.9349 (mejor 0.9596 @ 6) |  29.5s
+[2026-11-26 04:05:45]   NAGFuse-B     seed_06 ep  12 | loss 0.120/0.160 | F1 val 0.9612 (mejor 0.9612 @ 12) |  29.7s *
+[2026-11-26 04:06:18]   NAGFuse-B     seed_06 ep  13 | loss 0.079/0.177 | F1 val 0.9575 (mejor 0.9612 @ 12) |  29.6s
+[2026-11-26 04:06:51]   NAGFuse-B     seed_06 ep  14 | loss 0.100/0.136 | F1 val 0.9289 (mejor 0.9612 @ 12) |  29.5s
+[2026-11-26 04:07:23]   NAGFuse-B     seed_06 ep  15 | loss 0.082/0.154 | F1 val 0.9444 (mejor 0.9612 @ 12) |  29.7s
+[2026-11-26 04:07:56]   NAGFuse-B     seed_06 ep  16 | loss 0.070/0.144 | F1 val 0.9592 (mejor 0.9612 @ 12) |  29.6s
+[2026-11-26 04:08:29]   NAGFuse-B     seed_06 ep  17 | loss 0.065/0.179 | F1 val 0.9482 (mejor 0.9612 @ 12) |  29.5s
+[2026-11-26 04:09:02]   NAGFuse-B     seed_06 ep  18 | loss 0.076/0.150 | F1 val 0.9532 (mejor 0.9612 @ 12) |  29.6s
+[2026-11-26 04:09:35]   NAGFuse-B     seed_06 ep  19 | loss 0.054/0.128 | F1 val 0.9552 (mejor 0.9612 @ 12) |  29.5s
+[2026-11-26 04:10:08]   NAGFuse-B     seed_06 ep  20 | loss 0.050/0.128 | F1 val 0.9614 (mejor 0.9614 @ 20) |  29.6s *
+[2026-11-26 04:10:42]   NAGFuse-B     seed_06 ep  21 | loss 0.044/0.109 | F1 val 0.9641 (mejor 0.9641 @ 21) |  29.5s *
+[2026-11-26 04:11:15]   NAGFuse-B     seed_06 ep  22 | loss 0.047/0.123 | F1 val 0.9636 (mejor 0.9641 @ 21) |  29.5s
+[2026-11-26 04:11:48]   NAGFuse-B     seed_06 ep  23 | loss 0.043/0.149 | F1 val 0.9354 (mejor 0.9641 @ 21) |  29.6s
+[2026-11-26 04:12:21]   NAGFuse-B     seed_06 ep  24 | loss 0.029/0.138 | F1 val 0.9570 (mejor 0.9641 @ 21) |  29.5s
+[2026-11-26 04:12:53]   NAGFuse-B     seed_06 ep  25 | loss 0.035/0.146 | F1 val 0.9532 (mejor 0.9641 @ 21) |  29.5s
+[2026-11-26 04:13:26]   NAGFuse-B     seed_06 ep  26 | loss 0.027/0.158 | F1 val 0.9485 (mejor 0.9641 @ 21) |  29.5s
+[2026-11-26 04:13:59]   NAGFuse-B     seed_06 ep  27 | loss 0.033/0.142 | F1 val 0.9641 (mejor 0.9641 @ 21) |  29.5s
+[2026-11-26 04:14:32]   NAGFuse-B     seed_06 ep  28 | loss 0.049/0.099 | F1 val 0.9561 (mejor 0.9641 @ 21) |  29.6s
+[2026-11-26 04:15:05]   NAGFuse-B     seed_06 ep  29 | loss 0.033/0.123 | F1 val 0.9544 (mejor 0.9641 @ 21) |  29.6s
+[2026-11-26 04:15:38]   NAGFuse-B     seed_06 ep  30 | loss 0.029/0.137 | F1 val 0.9511 (mejor 0.9641 @ 21) |  29.5s
+[2026-11-26 04:16:11]   NAGFuse-B     seed_06 ep  31 | loss 0.031/0.136 | F1 val 0.9642 (mejor 0.9642 @ 31) |  29.5s *
+[2026-11-26 04:16:44]   NAGFuse-B     seed_06 ep  32 | loss 0.026/0.124 | F1 val 0.9641 (mejor 0.9642 @ 31) |  29.5s
+[2026-11-26 04:17:17]   NAGFuse-B     seed_06 ep  33 | loss 0.018/0.145 | F1 val 0.9560 (mejor 0.9642 @ 31) |  29.4s
+[2026-11-26 04:17:50]   NAGFuse-B     seed_06 ep  34 | loss 0.021/0.155 | F1 val 0.9534 (mejor 0.9642 @ 31) |  29.4s
+[2026-11-26 04:18:22]   NAGFuse-B     seed_06 ep  35 | loss 0.021/0.137 | F1 val 0.9462 (mejor 0.9642 @ 31) |  29.5s
+[2026-11-26 04:18:55]   NAGFuse-B     seed_06 ep  36 | loss 0.017/0.143 | F1 val 0.9537 (mejor 0.9642 @ 31) |  29.5s
+[2026-11-26 04:19:28]   NAGFuse-B     seed_06 ep  37 | loss 0.012/0.143 | F1 val 0.9611 (mejor 0.9642 @ 31) |  29.5s
+[2026-11-26 04:20:00]   NAGFuse-B     seed_06 ep  38 | loss 0.017/0.121 | F1 val 0.9561 (mejor 0.9642 @ 31) |  29.5s
+[2026-11-26 04:20:33]   NAGFuse-B     seed_06 ep  39 | loss 0.013/0.128 | F1 val 0.9532 (mejor 0.9642 @ 31) |  29.4s
+[2026-11-26 04:21:06]   NAGFuse-B     seed_06 ep  40 | loss 0.017/0.137 | F1 val 0.9486 (mejor 0.9642 @ 31) |  29.4s
+[2026-11-26 04:21:38]   NAGFuse-B     seed_06 ep  41 | loss 0.016/0.120 | F1 val 0.9484 (mejor 0.9642 @ 31) |  29.4s
+[2026-11-26 04:22:11]   NAGFuse-B     seed_06 ep  42 | loss 0.023/0.131 | F1 val 0.9580 (mejor 0.9642 @ 31) |  29.4s
+[2026-11-26 04:22:44]   NAGFuse-B     seed_06 ep  43 | loss 0.011/0.133 | F1 val 0.9556 (mejor 0.9642 @ 31) |  29.4s
+[2026-11-26 04:24:18]   NAGFuse-B seed_06: F1 macro prueba 0.9414
+[2026-11-26 04:25:47]   análisis NAGFuse: pi0 = 0.513, F1 con ruido 0.05: compuerta on 0.8216 / off 0.8190
+[2026-11-26 04:26:29]   NAGFuse-B/seed_06 en realwaste: F1 macro 0.4497 (n = 2640)
+[2026-11-26 04:27:17]   NAGFuse-B/seed_06 en gd_v2: F1 macro 0.5809 (n = 3000)
+[2026-11-26 04:27:31]   NAGFuse-B/seed_06 en warp_c: F1 macro 0.3302 (n = 863)
+[2026-11-26 04:28:17]   NAGFuse-B     seed_07 ep   0 | loss 3.121/1.040 | F1 val 0.7264 (mejor 0.7264 @ 0) |  32.9s *
+[2026-11-26 04:28:51]   NAGFuse-B     seed_07 ep   1 | loss 1.903/0.661 | F1 val 0.8606 (mejor 0.8606 @ 1) |  29.9s *
+[2026-11-26 04:29:25]   NAGFuse-B     seed_07 ep   2 | loss 1.316/0.414 | F1 val 0.8985 (mejor 0.8985 @ 2) |  30.0s *
+[2026-11-26 04:29:59]   NAGFuse-B     seed_07 ep   3 | loss 0.844/0.335 | F1 val 0.9087 (mejor 0.9087 @ 3) |  29.9s *
+[2026-11-26 04:30:32]   NAGFuse-B     seed_07 ep   4 | loss 0.579/0.263 | F1 val 0.9061 (mejor 0.9087 @ 3) |  29.8s
+[2026-11-26 04:31:05]   NAGFuse-B     seed_07 ep   5 | loss 0.412/0.283 | F1 val 0.9077 (mejor 0.9087 @ 3) |  29.8s
+[2026-11-26 04:31:39]   NAGFuse-B     seed_07 ep   6 | loss 0.303/0.226 | F1 val 0.9151 (mejor 0.9151 @ 6) |  29.9s *
+[2026-11-26 04:32:13]   NAGFuse-B     seed_07 ep   7 | loss 0.250/0.167 | F1 val 0.9268 (mejor 0.9268 @ 7) |  29.8s *
+[2026-11-26 04:32:46]   NAGFuse-B     seed_07 ep   8 | loss 0.199/0.175 | F1 val 0.9266 (mejor 0.9268 @ 7) |  29.8s
+[2026-11-26 04:33:20]   NAGFuse-B     seed_07 ep   9 | loss 0.174/0.169 | F1 val 0.9466 (mejor 0.9466 @ 9) |  29.7s *
+[2026-11-26 04:33:53]   NAGFuse-B     seed_07 ep  10 | loss 0.150/0.151 | F1 val 0.9414 (mejor 0.9466 @ 9) |  29.7s
+[2026-11-26 04:34:26]   NAGFuse-B     seed_07 ep  11 | loss 0.143/0.188 | F1 val 0.9210 (mejor 0.9466 @ 9) |  29.7s
+[2026-11-26 04:34:59]   NAGFuse-B     seed_07 ep  12 | loss 0.100/0.169 | F1 val 0.9334 (mejor 0.9466 @ 9) |  29.6s
+[2026-11-26 04:35:33]   NAGFuse-B     seed_07 ep  13 | loss 0.086/0.143 | F1 val 0.9495 (mejor 0.9495 @ 13) |  29.6s *
+[2026-11-26 04:36:06]   NAGFuse-B     seed_07 ep  14 | loss 0.088/0.161 | F1 val 0.9224 (mejor 0.9495 @ 13) |  29.6s
+[2026-11-26 04:36:39]   NAGFuse-B     seed_07 ep  15 | loss 0.112/0.163 | F1 val 0.9429 (mejor 0.9495 @ 13) |  29.6s
+[2026-11-26 04:37:12]   NAGFuse-B     seed_07 ep  16 | loss 0.074/0.108 | F1 val 0.9638 (mejor 0.9638 @ 16) |  29.5s *
+[2026-11-26 04:37:45]   NAGFuse-B     seed_07 ep  17 | loss 0.062/0.170 | F1 val 0.9482 (mejor 0.9638 @ 16) |  29.8s
+[2026-11-26 04:38:18]   NAGFuse-B     seed_07 ep  18 | loss 0.071/0.142 | F1 val 0.9497 (mejor 0.9638 @ 16) |  29.6s
+[2026-11-26 04:38:51]   NAGFuse-B     seed_07 ep  19 | loss 0.059/0.149 | F1 val 0.9474 (mejor 0.9638 @ 16) |  29.6s
+[2026-11-26 04:39:24]   NAGFuse-B     seed_07 ep  20 | loss 0.043/0.111 | F1 val 0.9495 (mejor 0.9638 @ 16) |  29.6s
+[2026-11-26 04:39:58]   NAGFuse-B     seed_07 ep  21 | loss 0.051/0.105 | F1 val 0.9736 (mejor 0.9736 @ 21) |  29.5s *
+[2026-11-26 04:40:31]   NAGFuse-B     seed_07 ep  22 | loss 0.052/0.111 | F1 val 0.9638 (mejor 0.9736 @ 21) |  29.6s
+[2026-11-26 04:41:03]   NAGFuse-B     seed_07 ep  23 | loss 0.055/0.130 | F1 val 0.9580 (mejor 0.9736 @ 21) |  29.5s
+[2026-11-26 04:41:36]   NAGFuse-B     seed_07 ep  24 | loss 0.055/0.119 | F1 val 0.9629 (mejor 0.9736 @ 21) |  29.5s
+[2026-11-26 04:42:09]   NAGFuse-B     seed_07 ep  25 | loss 0.043/0.101 | F1 val 0.9679 (mejor 0.9736 @ 21) |  29.5s
+[2026-11-26 04:42:41]   NAGFuse-B     seed_07 ep  26 | loss 0.043/0.142 | F1 val 0.9629 (mejor 0.9736 @ 21) |  29.4s
+[2026-11-26 04:43:14]   NAGFuse-B     seed_07 ep  27 | loss 0.029/0.116 | F1 val 0.9663 (mejor 0.9736 @ 21) |  29.4s
+[2026-11-26 04:43:47]   NAGFuse-B     seed_07 ep  28 | loss 0.034/0.122 | F1 val 0.9680 (mejor 0.9736 @ 21) |  29.4s
+[2026-11-26 04:44:20]   NAGFuse-B     seed_07 ep  29 | loss 0.036/0.110 | F1 val 0.9773 (mejor 0.9773 @ 29) |  29.4s *
+[2026-11-26 04:44:53]   NAGFuse-B     seed_07 ep  30 | loss 0.033/0.124 | F1 val 0.9656 (mejor 0.9773 @ 29) |  29.5s
+[2026-11-26 04:45:26]   NAGFuse-B     seed_07 ep  31 | loss 0.028/0.117 | F1 val 0.9550 (mejor 0.9773 @ 29) |  29.5s
+[2026-11-26 04:45:59]   NAGFuse-B     seed_07 ep  32 | loss 0.019/0.110 | F1 val 0.9696 (mejor 0.9773 @ 29) |  29.7s
+[2026-11-26 04:46:32]   NAGFuse-B     seed_07 ep  33 | loss 0.018/0.129 | F1 val 0.9693 (mejor 0.9773 @ 29) |  29.5s
+[2026-11-26 04:47:04]   NAGFuse-B     seed_07 ep  34 | loss 0.024/0.101 | F1 val 0.9683 (mejor 0.9773 @ 29) |  29.4s
+[2026-11-26 04:47:37]   NAGFuse-B     seed_07 ep  35 | loss 0.022/0.104 | F1 val 0.9683 (mejor 0.9773 @ 29) |  29.5s
+[2026-11-26 04:48:10]   NAGFuse-B     seed_07 ep  36 | loss 0.019/0.111 | F1 val 0.9664 (mejor 0.9773 @ 29) |  29.5s
+[2026-11-26 04:48:43]   NAGFuse-B     seed_07 ep  37 | loss 0.017/0.117 | F1 val 0.9683 (mejor 0.9773 @ 29) |  29.5s
+[2026-11-26 04:49:15]   NAGFuse-B     seed_07 ep  38 | loss 0.010/0.124 | F1 val 0.9687 (mejor 0.9773 @ 29) |  29.4s
+[2026-11-26 04:49:48]   NAGFuse-B     seed_07 ep  39 | loss 0.019/0.133 | F1 val 0.9707 (mejor 0.9773 @ 29) |  29.4s
+[2026-11-26 04:50:21]   NAGFuse-B     seed_07 ep  40 | loss 0.011/0.115 | F1 val 0.9661 (mejor 0.9773 @ 29) |  29.5s
+[2026-11-26 04:50:53]   NAGFuse-B     seed_07 ep  41 | loss 0.016/0.108 | F1 val 0.9661 (mejor 0.9773 @ 29) |  29.4s
+[2026-11-26 04:52:27]   NAGFuse-B seed_07: F1 macro prueba 0.9607
+[2026-11-26 04:53:58]   análisis NAGFuse: pi0 = 0.514, F1 con ruido 0.05: compuerta on 0.9325 / off 0.9222
+[2026-11-26 04:54:42]   NAGFuse-B/seed_07 en realwaste: F1 macro 0.5368 (n = 2640)
+[2026-11-26 04:55:31]   NAGFuse-B/seed_07 en gd_v2: F1 macro 0.6408 (n = 3000)
+[2026-11-26 04:55:45]   NAGFuse-B/seed_07 en warp_c: F1 macro 0.4915 (n = 863)
+[2026-11-26 04:56:31]   NAGFuse-B     seed_08 ep   0 | loss 2.977/0.907 | F1 val 0.8215 (mejor 0.8215 @ 0) |  33.1s *
+[2026-11-26 04:57:05]   NAGFuse-B     seed_08 ep   1 | loss 1.810/0.643 | F1 val 0.8799 (mejor 0.8799 @ 1) |  29.9s *
+[2026-11-26 04:57:39]   NAGFuse-B     seed_08 ep   2 | loss 1.232/0.471 | F1 val 0.8903 (mejor 0.8903 @ 2) |  29.8s *
+[2026-11-26 04:58:12]   NAGFuse-B     seed_08 ep   3 | loss 0.847/0.331 | F1 val 0.8765 (mejor 0.8903 @ 2) |  29.9s
+[2026-11-26 04:58:46]   NAGFuse-B     seed_08 ep   4 | loss 0.564/0.252 | F1 val 0.9149 (mejor 0.9149 @ 4) |  29.9s *
+[2026-11-26 04:59:19]   NAGFuse-B     seed_08 ep   5 | loss 0.388/0.223 | F1 val 0.9122 (mejor 0.9149 @ 4) |  29.8s
+[2026-11-26 04:59:53]   NAGFuse-B     seed_08 ep   6 | loss 0.276/0.191 | F1 val 0.9305 (mejor 0.9305 @ 6) |  29.8s *
+[2026-11-26 05:00:27]   NAGFuse-B     seed_08 ep   7 | loss 0.256/0.172 | F1 val 0.9356 (mejor 0.9356 @ 7) |  29.7s *
+[2026-11-26 05:01:00]   NAGFuse-B     seed_08 ep   8 | loss 0.215/0.184 | F1 val 0.9309 (mejor 0.9356 @ 7) |  29.7s
+[2026-11-26 05:01:34]   NAGFuse-B     seed_08 ep   9 | loss 0.182/0.164 | F1 val 0.9429 (mejor 0.9429 @ 9) |  29.7s *
+[2026-11-26 05:02:06]   NAGFuse-B     seed_08 ep  10 | loss 0.149/0.167 | F1 val 0.9263 (mejor 0.9429 @ 9) |  29.5s
+[2026-11-26 05:02:40]   NAGFuse-B     seed_08 ep  11 | loss 0.117/0.136 | F1 val 0.9463 (mejor 0.9463 @ 11) |  29.7s *
+[2026-11-26 05:03:13]   NAGFuse-B     seed_08 ep  12 | loss 0.093/0.148 | F1 val 0.9437 (mejor 0.9463 @ 11) |  29.6s
+[2026-11-26 05:03:47]   NAGFuse-B     seed_08 ep  13 | loss 0.081/0.121 | F1 val 0.9506 (mejor 0.9506 @ 13) |  29.7s *
+[2026-11-26 05:04:21]   NAGFuse-B     seed_08 ep  14 | loss 0.079/0.114 | F1 val 0.9594 (mejor 0.9594 @ 14) |  29.6s *
+[2026-11-26 05:04:54]   NAGFuse-B     seed_08 ep  15 | loss 0.088/0.128 | F1 val 0.9515 (mejor 0.9594 @ 14) |  29.6s
+[2026-11-26 05:05:27]   NAGFuse-B     seed_08 ep  16 | loss 0.080/0.134 | F1 val 0.9542 (mejor 0.9594 @ 14) |  29.6s
+[2026-11-26 05:06:00]   NAGFuse-B     seed_08 ep  17 | loss 0.062/0.141 | F1 val 0.9456 (mejor 0.9594 @ 14) |  29.7s
+[2026-11-26 05:06:33]   NAGFuse-B     seed_08 ep  18 | loss 0.054/0.137 | F1 val 0.9619 (mejor 0.9619 @ 18) |  29.6s *
+[2026-11-26 05:07:06]   NAGFuse-B     seed_08 ep  19 | loss 0.075/0.156 | F1 val 0.9333 (mejor 0.9619 @ 18) |  29.6s
+[2026-11-26 05:07:39]   NAGFuse-B     seed_08 ep  20 | loss 0.051/0.125 | F1 val 0.9607 (mejor 0.9619 @ 18) |  29.7s
+[2026-11-26 05:08:12]   NAGFuse-B     seed_08 ep  21 | loss 0.048/0.125 | F1 val 0.9607 (mejor 0.9619 @ 18) |  29.6s
+[2026-11-26 05:08:45]   NAGFuse-B     seed_08 ep  22 | loss 0.042/0.139 | F1 val 0.9602 (mejor 0.9619 @ 18) |  29.6s
+[2026-11-26 05:09:18]   NAGFuse-B     seed_08 ep  23 | loss 0.047/0.156 | F1 val 0.9469 (mejor 0.9619 @ 18) |  29.5s
+[2026-11-26 05:09:50]   NAGFuse-B     seed_08 ep  24 | loss 0.052/0.120 | F1 val 0.9534 (mejor 0.9619 @ 18) |  29.5s
+[2026-11-26 05:10:23]   NAGFuse-B     seed_08 ep  25 | loss 0.042/0.121 | F1 val 0.9469 (mejor 0.9619 @ 18) |  29.6s
+[2026-11-26 05:10:56]   NAGFuse-B     seed_08 ep  26 | loss 0.040/0.120 | F1 val 0.9535 (mejor 0.9619 @ 18) |  29.5s
+[2026-11-26 05:11:30]   NAGFuse-B     seed_08 ep  27 | loss 0.045/0.132 | F1 val 0.9639 (mejor 0.9639 @ 27) |  29.6s *
+[2026-11-26 05:12:03]   NAGFuse-B     seed_08 ep  28 | loss 0.032/0.111 | F1 val 0.9589 (mejor 0.9639 @ 27) |  29.6s
+[2026-11-26 05:12:37]   NAGFuse-B     seed_08 ep  29 | loss 0.031/0.103 | F1 val 0.9641 (mejor 0.9641 @ 29) |  29.5s *
+[2026-11-26 05:13:09]   NAGFuse-B     seed_08 ep  30 | loss 0.030/0.119 | F1 val 0.9448 (mejor 0.9641 @ 29) |  29.5s
+[2026-11-26 05:13:42]   NAGFuse-B     seed_08 ep  31 | loss 0.023/0.153 | F1 val 0.9517 (mejor 0.9641 @ 29) |  29.5s
+[2026-11-26 05:14:15]   NAGFuse-B     seed_08 ep  32 | loss 0.027/0.111 | F1 val 0.9614 (mejor 0.9641 @ 29) |  29.4s
+[2026-11-26 05:14:48]   NAGFuse-B     seed_08 ep  33 | loss 0.021/0.120 | F1 val 0.9615 (mejor 0.9641 @ 29) |  29.5s
+[2026-11-26 05:15:20]   NAGFuse-B     seed_08 ep  34 | loss 0.024/0.124 | F1 val 0.9616 (mejor 0.9641 @ 29) |  29.4s
+[2026-11-26 05:15:53]   NAGFuse-B     seed_08 ep  35 | loss 0.019/0.117 | F1 val 0.9593 (mejor 0.9641 @ 29) |  29.7s
+[2026-11-26 05:16:26]   NAGFuse-B     seed_08 ep  36 | loss 0.011/0.096 | F1 val 0.9640 (mejor 0.9641 @ 29) |  29.5s
+[2026-11-26 05:16:59]   NAGFuse-B     seed_08 ep  37 | loss 0.013/0.101 | F1 val 0.9594 (mejor 0.9641 @ 29) |  29.5s
+[2026-11-26 05:17:32]   NAGFuse-B     seed_08 ep  38 | loss 0.015/0.098 | F1 val 0.9619 (mejor 0.9641 @ 29) |  29.6s
+[2026-11-26 05:18:04]   NAGFuse-B     seed_08 ep  39 | loss 0.022/0.110 | F1 val 0.9619 (mejor 0.9641 @ 29) |  29.4s
+[2026-11-26 05:18:38]   NAGFuse-B     seed_08 ep  40 | loss 0.017/0.110 | F1 val 0.9665 (mejor 0.9665 @ 40) |  29.6s *
+[2026-11-26 05:19:11]   NAGFuse-B     seed_08 ep  41 | loss 0.021/0.100 | F1 val 0.9639 (mejor 0.9665 @ 40) |  29.4s
+[2026-11-26 05:19:44]   NAGFuse-B     seed_08 ep  42 | loss 0.009/0.100 | F1 val 0.9593 (mejor 0.9665 @ 40) |  29.4s
+[2026-11-26 05:20:16]   NAGFuse-B     seed_08 ep  43 | loss 0.012/0.095 | F1 val 0.9593 (mejor 0.9665 @ 40) |  29.4s
+[2026-11-26 05:20:49]   NAGFuse-B     seed_08 ep  44 | loss 0.017/0.098 | F1 val 0.9619 (mejor 0.9665 @ 40) |  29.4s
+[2026-11-26 05:21:23]   NAGFuse-B     seed_08 ep  45 | loss 0.012/0.103 | F1 val 0.9667 (mejor 0.9667 @ 45) |  29.4s *
+[2026-11-26 05:21:56]   NAGFuse-B     seed_08 ep  46 | loss 0.018/0.104 | F1 val 0.9614 (mejor 0.9667 @ 45) |  29.6s
+[2026-11-26 05:22:29]   NAGFuse-B     seed_08 ep  47 | loss 0.010/0.104 | F1 val 0.9714 (mejor 0.9714 @ 47) |  29.4s *
+[2026-11-26 05:23:02]   NAGFuse-B     seed_08 ep  48 | loss 0.012/0.113 | F1 val 0.9640 (mejor 0.9714 @ 47) |  29.4s
+[2026-11-26 05:23:35]   NAGFuse-B     seed_08 ep  49 | loss 0.014/0.114 | F1 val 0.9640 (mejor 0.9714 @ 47) |  29.4s
+[2026-11-26 05:24:08]   NAGFuse-B     seed_08 ep  50 | loss 0.009/0.099 | F1 val 0.9741 (mejor 0.9741 @ 50) |  29.4s *
+[2026-11-26 05:24:41]   NAGFuse-B     seed_08 ep  51 | loss 0.014/0.102 | F1 val 0.9691 (mejor 0.9741 @ 50) |  29.4s
+[2026-11-26 05:25:14]   NAGFuse-B     seed_08 ep  52 | loss 0.013/0.090 | F1 val 0.9741 (mejor 0.9741 @ 50) |  29.4s
+[2026-11-26 05:25:46]   NAGFuse-B     seed_08 ep  53 | loss 0.013/0.091 | F1 val 0.9666 (mejor 0.9741 @ 50) |  29.4s
+[2026-11-26 05:26:19]   NAGFuse-B     seed_08 ep  54 | loss 0.016/0.084 | F1 val 0.9715 (mejor 0.9741 @ 50) |  29.4s
+[2026-11-26 05:26:52]   NAGFuse-B     seed_08 ep  55 | loss 0.010/0.091 | F1 val 0.9715 (mejor 0.9741 @ 50) |  29.4s
+[2026-11-26 05:27:25]   NAGFuse-B     seed_08 ep  56 | loss 0.020/0.093 | F1 val 0.9715 (mejor 0.9741 @ 50) |  29.5s
+[2026-11-26 05:27:57]   NAGFuse-B     seed_08 ep  57 | loss 0.015/0.093 | F1 val 0.9715 (mejor 0.9741 @ 50) |  29.5s
+[2026-11-26 05:28:30]   NAGFuse-B     seed_08 ep  58 | loss 0.011/0.087 | F1 val 0.9715 (mejor 0.9741 @ 50) |  29.4s
+[2026-11-26 05:29:04]   NAGFuse-B     seed_08 ep  59 | loss 0.014/0.097 | F1 val 0.9765 (mejor 0.9765 @ 59) |  29.6s *
+[2026-11-26 05:30:37]   NAGFuse-B seed_08: F1 macro prueba 0.9556
+[2026-11-26 05:32:06]   análisis NAGFuse: pi0 = 0.515, F1 con ruido 0.05: compuerta on 0.9195 / off 0.9168
+[2026-11-26 05:32:48]   NAGFuse-B/seed_08 en realwaste: F1 macro 0.5333 (n = 2640)
+[2026-11-26 05:33:37]   NAGFuse-B/seed_08 en gd_v2: F1 macro 0.6270 (n = 3000)
+[2026-11-26 05:33:50]   NAGFuse-B/seed_08 en warp_c: F1 macro 0.4128 (n = 863)
+[2026-11-26 05:34:36]   NAGFuse-B     seed_09 ep   0 | loss 2.957/0.882 | F1 val 0.8262 (mejor 0.8262 @ 0) |  32.9s *
+[2026-11-26 05:35:11]   NAGFuse-B     seed_09 ep   1 | loss 1.781/0.601 | F1 val 0.8992 (mejor 0.8992 @ 1) |  30.0s *
+[2026-11-26 05:35:44]   NAGFuse-B     seed_09 ep   2 | loss 1.227/0.497 | F1 val 0.8366 (mejor 0.8992 @ 1) |  29.8s
+[2026-11-26 05:36:18]   NAGFuse-B     seed_09 ep   3 | loss 0.817/0.264 | F1 val 0.9160 (mejor 0.9160 @ 3) |  29.9s *
+[2026-11-26 05:36:52]   NAGFuse-B     seed_09 ep   4 | loss 0.606/0.231 | F1 val 0.9227 (mejor 0.9227 @ 4) |  29.8s *
+[2026-11-26 05:37:27]   NAGFuse-B     seed_09 ep   5 | loss 0.418/0.174 | F1 val 0.9344 (mejor 0.9344 @ 5) |  30.1s *
+[2026-11-26 05:38:01]   NAGFuse-B     seed_09 ep   6 | loss 0.302/0.187 | F1 val 0.9370 (mejor 0.9370 @ 6) |  29.9s *
+[2026-11-26 05:38:34]   NAGFuse-B     seed_09 ep   7 | loss 0.245/0.174 | F1 val 0.9200 (mejor 0.9370 @ 6) |  29.7s
+[2026-11-26 05:39:08]   NAGFuse-B     seed_09 ep   8 | loss 0.207/0.150 | F1 val 0.9561 (mejor 0.9561 @ 8) |  29.8s *
+[2026-11-26 05:39:41]   NAGFuse-B     seed_09 ep   9 | loss 0.148/0.141 | F1 val 0.9454 (mejor 0.9561 @ 8) |  29.8s
+[2026-11-26 05:40:14]   NAGFuse-B     seed_09 ep  10 | loss 0.150/0.153 | F1 val 0.9398 (mejor 0.9561 @ 8) |  29.8s
+[2026-11-26 05:40:48]   NAGFuse-B     seed_09 ep  11 | loss 0.141/0.122 | F1 val 0.9641 (mejor 0.9641 @ 11) |  29.9s *
+[2026-11-26 05:41:21]   NAGFuse-B     seed_09 ep  12 | loss 0.101/0.121 | F1 val 0.9546 (mejor 0.9641 @ 11) |  29.8s
+[2026-11-26 05:41:54]   NAGFuse-B     seed_09 ep  13 | loss 0.101/0.122 | F1 val 0.9693 (mejor 0.9693 @ 13) |  29.7s *
+[2026-11-26 05:42:28]   NAGFuse-B     seed_09 ep  14 | loss 0.078/0.115 | F1 val 0.9586 (mejor 0.9693 @ 13) |  29.8s
+[2026-11-26 05:43:00]   NAGFuse-B     seed_09 ep  15 | loss 0.095/0.136 | F1 val 0.9608 (mejor 0.9693 @ 13) |  29.7s
+[2026-11-26 05:43:33]   NAGFuse-B     seed_09 ep  16 | loss 0.102/0.159 | F1 val 0.9398 (mejor 0.9693 @ 13) |  29.7s
+[2026-11-26 05:44:06]   NAGFuse-B     seed_09 ep  17 | loss 0.079/0.132 | F1 val 0.9649 (mejor 0.9693 @ 13) |  29.8s
+[2026-11-26 05:44:39]   NAGFuse-B     seed_09 ep  18 | loss 0.069/0.156 | F1 val 0.9604 (mejor 0.9693 @ 13) |  29.6s
+[2026-11-26 05:45:12]   NAGFuse-B     seed_09 ep  19 | loss 0.060/0.115 | F1 val 0.9589 (mejor 0.9693 @ 13) |  29.6s
+[2026-11-26 05:45:45]   NAGFuse-B     seed_09 ep  20 | loss 0.058/0.123 | F1 val 0.9565 (mejor 0.9693 @ 13) |  29.6s
+[2026-11-26 05:46:18]   NAGFuse-B     seed_09 ep  21 | loss 0.044/0.166 | F1 val 0.9484 (mejor 0.9693 @ 13) |  29.6s
+[2026-11-26 05:46:51]   NAGFuse-B     seed_09 ep  22 | loss 0.044/0.155 | F1 val 0.9593 (mejor 0.9693 @ 13) |  29.7s
+[2026-11-26 05:47:24]   NAGFuse-B     seed_09 ep  23 | loss 0.037/0.144 | F1 val 0.9627 (mejor 0.9693 @ 13) |  29.6s
+[2026-11-26 05:47:57]   NAGFuse-B     seed_09 ep  24 | loss 0.029/0.127 | F1 val 0.9661 (mejor 0.9693 @ 13) |  29.5s
+[2026-11-26 05:48:30]   NAGFuse-B     seed_09 ep  25 | loss 0.039/0.135 | F1 val 0.9615 (mejor 0.9693 @ 13) |  29.6s
+[2026-11-26 05:50:03]   NAGFuse-B seed_09: F1 macro prueba 0.9414
+[2026-11-26 05:51:31]   análisis NAGFuse: pi0 = 0.509, F1 con ruido 0.05: compuerta on 0.8981 / off 0.8993
+[2026-11-26 05:52:13]   NAGFuse-B/seed_09 en realwaste: F1 macro 0.5238 (n = 2640)
+[2026-11-26 05:53:01]   NAGFuse-B/seed_09 en gd_v2: F1 macro 0.6000 (n = 3000)
+[2026-11-26 05:53:14]   NAGFuse-B/seed_09 en warp_c: F1 macro 0.4015 (n = 863)
+[2026-11-26 05:53:59]   NAGFuse-B     seed_10 ep   0 | loss 2.974/0.971 | F1 val 0.8113 (mejor 0.8113 @ 0) |  32.9s *
+[2026-11-26 05:54:34]   NAGFuse-B     seed_10 ep   1 | loss 1.797/0.576 | F1 val 0.8738 (mejor 0.8738 @ 1) |  30.0s *
+[2026-11-26 05:55:08]   NAGFuse-B     seed_10 ep   2 | loss 1.205/0.413 | F1 val 0.8798 (mejor 0.8798 @ 2) |  29.7s *
+[2026-11-26 05:55:42]   NAGFuse-B     seed_10 ep   3 | loss 0.796/0.324 | F1 val 0.8909 (mejor 0.8909 @ 3) |  29.9s *
+[2026-11-26 05:56:16]   NAGFuse-B     seed_10 ep   4 | loss 0.520/0.209 | F1 val 0.9388 (mejor 0.9388 @ 4) |  29.9s *
+[2026-11-26 05:56:50]   NAGFuse-B     seed_10 ep   5 | loss 0.390/0.173 | F1 val 0.9411 (mejor 0.9411 @ 5) |  29.8s *
+[2026-11-26 05:57:23]   NAGFuse-B     seed_10 ep   6 | loss 0.324/0.212 | F1 val 0.9349 (mejor 0.9411 @ 5) |  29.8s
+[2026-11-26 05:57:57]   NAGFuse-B     seed_10 ep   7 | loss 0.274/0.160 | F1 val 0.9461 (mejor 0.9461 @ 7) |  29.7s *
+[2026-11-26 05:58:30]   NAGFuse-B     seed_10 ep   8 | loss 0.190/0.182 | F1 val 0.9317 (mejor 0.9461 @ 7) |  29.7s
+[2026-11-26 05:59:03]   NAGFuse-B     seed_10 ep   9 | loss 0.193/0.171 | F1 val 0.9369 (mejor 0.9461 @ 7) |  29.6s
+[2026-11-26 05:59:36]   NAGFuse-B     seed_10 ep  10 | loss 0.141/0.140 | F1 val 0.9427 (mejor 0.9461 @ 7) |  29.7s
+[2026-11-26 06:00:10]   NAGFuse-B     seed_10 ep  11 | loss 0.124/0.125 | F1 val 0.9601 (mejor 0.9601 @ 11) |  29.6s *
+[2026-11-26 06:00:42]   NAGFuse-B     seed_10 ep  12 | loss 0.116/0.159 | F1 val 0.9573 (mejor 0.9601 @ 11) |  29.6s
+[2026-11-26 06:01:15]   NAGFuse-B     seed_10 ep  13 | loss 0.097/0.145 | F1 val 0.9536 (mejor 0.9601 @ 11) |  29.8s
+[2026-11-26 06:01:48]   NAGFuse-B     seed_10 ep  14 | loss 0.087/0.155 | F1 val 0.9415 (mejor 0.9601 @ 11) |  29.6s
+[2026-11-26 06:02:21]   NAGFuse-B     seed_10 ep  15 | loss 0.078/0.117 | F1 val 0.9437 (mejor 0.9601 @ 11) |  29.5s
+[2026-11-26 06:02:55]   NAGFuse-B     seed_10 ep  16 | loss 0.110/0.151 | F1 val 0.9644 (mejor 0.9644 @ 16) |  29.6s *
+[2026-11-26 06:03:29]   NAGFuse-B     seed_10 ep  17 | loss 0.077/0.133 | F1 val 0.9684 (mejor 0.9684 @ 17) |  29.6s *
+[2026-11-26 06:04:01]   NAGFuse-B     seed_10 ep  18 | loss 0.052/0.120 | F1 val 0.9612 (mejor 0.9684 @ 17) |  29.6s
+[2026-11-26 06:04:34]   NAGFuse-B     seed_10 ep  19 | loss 0.062/0.122 | F1 val 0.9553 (mejor 0.9684 @ 17) |  29.5s
+[2026-11-26 06:05:07]   NAGFuse-B     seed_10 ep  20 | loss 0.074/0.125 | F1 val 0.9602 (mejor 0.9684 @ 17) |  29.5s
+[2026-11-26 06:05:40]   NAGFuse-B     seed_10 ep  21 | loss 0.050/0.123 | F1 val 0.9604 (mejor 0.9684 @ 17) |  29.6s
+[2026-11-26 06:06:13]   NAGFuse-B     seed_10 ep  22 | loss 0.052/0.151 | F1 val 0.9329 (mejor 0.9684 @ 17) |  29.6s
+[2026-11-26 06:06:46]   NAGFuse-B     seed_10 ep  23 | loss 0.035/0.123 | F1 val 0.9709 (mejor 0.9709 @ 23) |  29.5s *
+[2026-11-26 06:07:19]   NAGFuse-B     seed_10 ep  24 | loss 0.052/0.126 | F1 val 0.9508 (mejor 0.9709 @ 23) |  29.7s
+[2026-11-26 06:07:52]   NAGFuse-B     seed_10 ep  25 | loss 0.037/0.139 | F1 val 0.9485 (mejor 0.9709 @ 23) |  29.6s
+[2026-11-26 06:08:25]   NAGFuse-B     seed_10 ep  26 | loss 0.030/0.151 | F1 val 0.9458 (mejor 0.9709 @ 23) |  29.6s
+[2026-11-26 06:08:58]   NAGFuse-B     seed_10 ep  27 | loss 0.038/0.115 | F1 val 0.9669 (mejor 0.9709 @ 23) |  29.6s
+[2026-11-26 06:09:31]   NAGFuse-B     seed_10 ep  28 | loss 0.031/0.116 | F1 val 0.9507 (mejor 0.9709 @ 23) |  29.5s
+[2026-11-26 06:10:03]   NAGFuse-B     seed_10 ep  29 | loss 0.023/0.141 | F1 val 0.9387 (mejor 0.9709 @ 23) |  29.5s
+[2026-11-26 06:10:37]   NAGFuse-B     seed_10 ep  30 | loss 0.031/0.124 | F1 val 0.9744 (mejor 0.9744 @ 30) |  29.4s *
+[2026-11-26 06:11:10]   NAGFuse-B     seed_10 ep  31 | loss 0.024/0.122 | F1 val 0.9429 (mejor 0.9744 @ 30) |  29.4s
+[2026-11-26 06:11:43]   NAGFuse-B     seed_10 ep  32 | loss 0.028/0.162 | F1 val 0.9456 (mejor 0.9744 @ 30) |  29.6s
+[2026-11-26 06:12:15]   NAGFuse-B     seed_10 ep  33 | loss 0.019/0.136 | F1 val 0.9551 (mejor 0.9744 @ 30) |  29.4s
+[2026-11-26 06:12:48]   NAGFuse-B     seed_10 ep  34 | loss 0.023/0.126 | F1 val 0.9612 (mejor 0.9744 @ 30) |  29.4s
+[2026-11-26 06:13:21]   NAGFuse-B     seed_10 ep  35 | loss 0.019/0.149 | F1 val 0.9633 (mejor 0.9744 @ 30) |  29.4s
+[2026-11-26 06:13:53]   NAGFuse-B     seed_10 ep  36 | loss 0.016/0.143 | F1 val 0.9689 (mejor 0.9744 @ 30) |  29.3s
+[2026-11-26 06:14:26]   NAGFuse-B     seed_10 ep  37 | loss 0.022/0.128 | F1 val 0.9605 (mejor 0.9744 @ 30) |  29.5s
+[2026-11-26 06:14:59]   NAGFuse-B     seed_10 ep  38 | loss 0.018/0.125 | F1 val 0.9638 (mejor 0.9744 @ 30) |  29.4s
+[2026-11-26 06:15:32]   NAGFuse-B     seed_10 ep  39 | loss 0.014/0.128 | F1 val 0.9663 (mejor 0.9744 @ 30) |  29.4s
+[2026-11-26 06:16:04]   NAGFuse-B     seed_10 ep  40 | loss 0.020/0.120 | F1 val 0.9663 (mejor 0.9744 @ 30) |  29.4s
+[2026-11-26 06:16:37]   NAGFuse-B     seed_10 ep  41 | loss 0.017/0.113 | F1 val 0.9653 (mejor 0.9744 @ 30) |  29.4s
+[2026-11-26 06:17:10]   NAGFuse-B     seed_10 ep  42 | loss 0.015/0.108 | F1 val 0.9629 (mejor 0.9744 @ 30) |  29.6s
+[2026-11-26 06:18:42]   NAGFuse-B seed_10: F1 macro prueba 0.9405
+[2026-11-26 06:20:09]   análisis NAGFuse: pi0 = 0.514, F1 con ruido 0.05: compuerta on 0.9259 / off 0.9228
+[2026-11-26 06:20:52]   NAGFuse-B/seed_10 en realwaste: F1 macro 0.5087 (n = 2640)
+[2026-11-26 06:21:40]   NAGFuse-B/seed_10 en gd_v2: F1 macro 0.6136 (n = 3000)
+[2026-11-26 06:21:54]   NAGFuse-B/seed_10 en warp_c: F1 macro 0.4001 (n = 863)
+[2026-11-26 06:22:39]   NAGFuse-B     seed_11 ep   0 | loss 2.904/0.948 | F1 val 0.7643 (mejor 0.7643 @ 0) |  33.1s *
+[2026-11-26 06:23:13]   NAGFuse-B     seed_11 ep   1 | loss 1.864/0.629 | F1 val 0.8752 (mejor 0.8752 @ 1) |  29.9s *
+[2026-11-26 06:23:47]   NAGFuse-B     seed_11 ep   2 | loss 1.237/0.410 | F1 val 0.8936 (mejor 0.8936 @ 2) |  29.8s *
+[2026-11-26 06:24:21]   NAGFuse-B     seed_11 ep   3 | loss 0.831/0.317 | F1 val 0.9015 (mejor 0.9015 @ 3) |  29.9s *
+[2026-11-26 06:24:56]   NAGFuse-B     seed_11 ep   4 | loss 0.527/0.240 | F1 val 0.9262 (mejor 0.9262 @ 4) |  29.9s *
+[2026-11-26 06:25:30]   NAGFuse-B     seed_11 ep   5 | loss 0.435/0.203 | F1 val 0.9284 (mejor 0.9284 @ 5) |  29.8s *
+[2026-11-26 06:26:04]   NAGFuse-B     seed_11 ep   6 | loss 0.317/0.157 | F1 val 0.9508 (mejor 0.9508 @ 6) |  29.8s *
+[2026-11-26 06:26:38]   NAGFuse-B     seed_11 ep   7 | loss 0.251/0.165 | F1 val 0.9543 (mejor 0.9543 @ 7) |  29.7s *
+[2026-11-26 06:27:11]   NAGFuse-B     seed_11 ep   8 | loss 0.186/0.179 | F1 val 0.9364 (mejor 0.9543 @ 7) |  29.8s
+[2026-11-26 06:27:44]   NAGFuse-B     seed_11 ep   9 | loss 0.176/0.173 | F1 val 0.9373 (mejor 0.9543 @ 7) |  29.7s
+[2026-11-26 06:28:16]   NAGFuse-B     seed_11 ep  10 | loss 0.163/0.132 | F1 val 0.9485 (mejor 0.9543 @ 7) |  29.7s
+[2026-11-26 06:28:49]   NAGFuse-B     seed_11 ep  11 | loss 0.140/0.142 | F1 val 0.9447 (mejor 0.9543 @ 7) |  29.7s
+[2026-11-26 06:29:23]   NAGFuse-B     seed_11 ep  12 | loss 0.102/0.126 | F1 val 0.9610 (mejor 0.9610 @ 12) |  29.6s *
+[2026-11-26 06:29:56]   NAGFuse-B     seed_11 ep  13 | loss 0.104/0.165 | F1 val 0.9367 (mejor 0.9610 @ 12) |  29.8s
+[2026-11-26 06:30:30]   NAGFuse-B     seed_11 ep  14 | loss 0.082/0.160 | F1 val 0.9614 (mejor 0.9614 @ 14) |  29.6s *
+[2026-11-26 06:31:03]   NAGFuse-B     seed_11 ep  15 | loss 0.089/0.162 | F1 val 0.9452 (mejor 0.9614 @ 14) |  29.6s
+[2026-11-26 06:31:36]   NAGFuse-B     seed_11 ep  16 | loss 0.074/0.149 | F1 val 0.9604 (mejor 0.9614 @ 14) |  29.6s
+[2026-11-26 06:32:09]   NAGFuse-B     seed_11 ep  17 | loss 0.088/0.139 | F1 val 0.9693 (mejor 0.9693 @ 17) |  29.5s *
+[2026-11-26 06:32:42]   NAGFuse-B     seed_11 ep  18 | loss 0.066/0.151 | F1 val 0.9588 (mejor 0.9693 @ 17) |  29.6s
+[2026-11-26 06:33:15]   NAGFuse-B     seed_11 ep  19 | loss 0.047/0.137 | F1 val 0.9457 (mejor 0.9693 @ 17) |  29.6s
+[2026-11-26 06:33:48]   NAGFuse-B     seed_11 ep  20 | loss 0.067/0.128 | F1 val 0.9674 (mejor 0.9693 @ 17) |  29.6s
+[2026-11-26 06:34:21]   NAGFuse-B     seed_11 ep  21 | loss 0.049/0.146 | F1 val 0.9689 (mejor 0.9693 @ 17) |  29.8s
+[2026-11-26 06:34:54]   NAGFuse-B     seed_11 ep  22 | loss 0.048/0.176 | F1 val 0.9481 (mejor 0.9693 @ 17) |  29.5s
+[2026-11-26 06:35:27]   NAGFuse-B     seed_11 ep  23 | loss 0.043/0.109 | F1 val 0.9688 (mejor 0.9693 @ 17) |  29.5s
+[2026-11-26 06:35:59]   NAGFuse-B     seed_11 ep  24 | loss 0.027/0.137 | F1 val 0.9629 (mejor 0.9693 @ 17) |  29.5s
+[2026-11-26 06:36:32]   NAGFuse-B     seed_11 ep  25 | loss 0.026/0.163 | F1 val 0.9482 (mejor 0.9693 @ 17) |  29.6s
+[2026-11-26 06:37:06]   NAGFuse-B     seed_11 ep  26 | loss 0.033/0.111 | F1 val 0.9715 (mejor 0.9715 @ 26) |  29.7s *
+[2026-11-26 06:37:39]   NAGFuse-B     seed_11 ep  27 | loss 0.020/0.152 | F1 val 0.9655 (mejor 0.9715 @ 26) |  29.6s
+[2026-11-26 06:38:12]   NAGFuse-B     seed_11 ep  28 | loss 0.044/0.162 | F1 val 0.9538 (mejor 0.9715 @ 26) |  29.5s
+[2026-11-26 06:38:45]   NAGFuse-B     seed_11 ep  29 | loss 0.033/0.115 | F1 val 0.9616 (mejor 0.9715 @ 26) |  29.6s
+[2026-11-26 06:39:17]   NAGFuse-B     seed_11 ep  30 | loss 0.036/0.129 | F1 val 0.9606 (mejor 0.9715 @ 26) |  29.6s
+[2026-11-26 06:39:51]   NAGFuse-B     seed_11 ep  31 | loss 0.021/0.126 | F1 val 0.9583 (mejor 0.9715 @ 26) |  29.6s
+[2026-11-26 06:40:23]   NAGFuse-B     seed_11 ep  32 | loss 0.030/0.122 | F1 val 0.9609 (mejor 0.9715 @ 26) |  29.5s
+[2026-11-26 06:40:56]   NAGFuse-B     seed_11 ep  33 | loss 0.021/0.125 | F1 val 0.9525 (mejor 0.9715 @ 26) |  29.4s
+[2026-11-26 06:41:29]   NAGFuse-B     seed_11 ep  34 | loss 0.030/0.116 | F1 val 0.9631 (mejor 0.9715 @ 26) |  29.7s
+[2026-11-26 06:42:02]   NAGFuse-B     seed_11 ep  35 | loss 0.025/0.125 | F1 val 0.9621 (mejor 0.9715 @ 26) |  29.5s
+[2026-11-26 06:42:35]   NAGFuse-B     seed_11 ep  36 | loss 0.022/0.125 | F1 val 0.9673 (mejor 0.9715 @ 26) |  29.5s
+[2026-11-26 06:43:07]   NAGFuse-B     seed_11 ep  37 | loss 0.014/0.139 | F1 val 0.9613 (mejor 0.9715 @ 26) |  29.4s
+[2026-11-26 06:43:41]   NAGFuse-B     seed_11 ep  38 | loss 0.020/0.120 | F1 val 0.9721 (mejor 0.9721 @ 38) |  29.4s *
+[2026-11-26 06:44:14]   NAGFuse-B     seed_11 ep  39 | loss 0.017/0.125 | F1 val 0.9613 (mejor 0.9721 @ 38) |  29.4s
+[2026-11-26 06:44:46]   NAGFuse-B     seed_11 ep  40 | loss 0.018/0.133 | F1 val 0.9634 (mejor 0.9721 @ 38) |  29.4s
+[2026-11-26 06:45:19]   NAGFuse-B     seed_11 ep  41 | loss 0.010/0.122 | F1 val 0.9675 (mejor 0.9721 @ 38) |  29.4s
+[2026-11-26 06:45:52]   NAGFuse-B     seed_11 ep  42 | loss 0.013/0.124 | F1 val 0.9651 (mejor 0.9721 @ 38) |  29.4s
+[2026-11-26 06:46:24]   NAGFuse-B     seed_11 ep  43 | loss 0.012/0.138 | F1 val 0.9651 (mejor 0.9721 @ 38) |  29.4s
+[2026-11-26 06:46:57]   NAGFuse-B     seed_11 ep  44 | loss 0.013/0.146 | F1 val 0.9651 (mejor 0.9721 @ 38) |  29.6s
+[2026-11-26 06:47:30]   NAGFuse-B     seed_11 ep  45 | loss 0.016/0.121 | F1 val 0.9651 (mejor 0.9721 @ 38) |  29.4s
+[2026-11-26 06:48:02]   NAGFuse-B     seed_11 ep  46 | loss 0.011/0.124 | F1 val 0.9651 (mejor 0.9721 @ 38) |  29.4s
+[2026-11-26 06:48:35]   NAGFuse-B     seed_11 ep  47 | loss 0.023/0.122 | F1 val 0.9710 (mejor 0.9721 @ 38) |  29.4s
+[2026-11-26 06:49:08]   NAGFuse-B     seed_11 ep  48 | loss 0.014/0.132 | F1 val 0.9676 (mejor 0.9721 @ 38) |  29.4s
+[2026-11-26 06:49:42]   NAGFuse-B     seed_11 ep  49 | loss 0.010/0.125 | F1 val 0.9760 (mejor 0.9760 @ 49) |  29.6s *
+[2026-11-26 06:50:14]   NAGFuse-B     seed_11 ep  50 | loss 0.019/0.124 | F1 val 0.9676 (mejor 0.9760 @ 49) |  29.4s
+[2026-11-26 06:50:47]   NAGFuse-B     seed_11 ep  51 | loss 0.013/0.130 | F1 val 0.9624 (mejor 0.9760 @ 49) |  29.4s
+[2026-11-26 06:51:20]   NAGFuse-B     seed_11 ep  52 | loss 0.012/0.129 | F1 val 0.9679 (mejor 0.9760 @ 49) |  29.5s
+[2026-11-26 06:51:53]   NAGFuse-B     seed_11 ep  53 | loss 0.019/0.135 | F1 val 0.9614 (mejor 0.9760 @ 49) |  29.4s
+[2026-11-26 06:52:25]   NAGFuse-B     seed_11 ep  54 | loss 0.013/0.130 | F1 val 0.9678 (mejor 0.9760 @ 49) |  29.5s
+[2026-11-26 06:52:58]   NAGFuse-B     seed_11 ep  55 | loss 0.012/0.131 | F1 val 0.9614 (mejor 0.9760 @ 49) |  29.4s
+[2026-11-26 06:53:31]   NAGFuse-B     seed_11 ep  56 | loss 0.011/0.133 | F1 val 0.9678 (mejor 0.9760 @ 49) |  29.5s
+[2026-11-26 06:54:04]   NAGFuse-B     seed_11 ep  57 | loss 0.010/0.137 | F1 val 0.9678 (mejor 0.9760 @ 49) |  29.5s
+[2026-11-26 06:54:36]   NAGFuse-B     seed_11 ep  58 | loss 0.011/0.136 | F1 val 0.9685 (mejor 0.9760 @ 49) |  29.4s
+[2026-11-26 06:55:09]   NAGFuse-B     seed_11 ep  59 | loss 0.009/0.128 | F1 val 0.9678 (mejor 0.9760 @ 49) |  29.5s
+[2026-11-26 06:56:43]   NAGFuse-B seed_11: F1 macro prueba 0.9631
+[2026-11-26 06:58:14]   análisis NAGFuse: pi0 = 0.515, F1 con ruido 0.05: compuerta on 0.9279 / off 0.9062
+[2026-11-26 06:58:58]   NAGFuse-B/seed_11 en realwaste: F1 macro 0.5317 (n = 2640)
+[2026-11-26 06:59:47]   NAGFuse-B/seed_11 en gd_v2: F1 macro 0.5998 (n = 3000)
+[2026-11-26 07:00:02]   NAGFuse-B/seed_11 en warp_c: F1 macro 0.3762 (n = 863)
+[2026-11-26 07:00:47]   NAGFuse-B     seed_12 ep   0 | loss 3.046/0.998 | F1 val 0.8038 (mejor 0.8038 @ 0) |  33.0s *
+[2026-11-26 07:01:22]   NAGFuse-B     seed_12 ep   1 | loss 1.822/0.577 | F1 val 0.8941 (mejor 0.8941 @ 1) |  30.0s *
+[2026-11-26 07:01:56]   NAGFuse-B     seed_12 ep   2 | loss 1.318/0.453 | F1 val 0.8957 (mejor 0.8957 @ 2) |  29.8s *
+[2026-11-26 07:02:30]   NAGFuse-B     seed_12 ep   3 | loss 0.880/0.312 | F1 val 0.9148 (mejor 0.9148 @ 3) |  29.9s *
+[2026-11-26 07:03:03]   NAGFuse-B     seed_12 ep   4 | loss 0.580/0.265 | F1 val 0.9125 (mejor 0.9148 @ 3) |  29.8s
+[2026-11-26 07:03:37]   NAGFuse-B     seed_12 ep   5 | loss 0.451/0.168 | F1 val 0.9590 (mejor 0.9590 @ 5) |  29.8s *
+[2026-11-26 07:04:10]   NAGFuse-B     seed_12 ep   6 | loss 0.321/0.266 | F1 val 0.9187 (mejor 0.9590 @ 5) |  29.8s
+[2026-11-26 07:04:43]   NAGFuse-B     seed_12 ep   7 | loss 0.275/0.157 | F1 val 0.9451 (mejor 0.9590 @ 5) |  29.7s
+[2026-11-26 07:05:16]   NAGFuse-B     seed_12 ep   8 | loss 0.206/0.160 | F1 val 0.9452 (mejor 0.9590 @ 5) |  29.7s
+[2026-11-26 07:05:50]   NAGFuse-B     seed_12 ep   9 | loss 0.198/0.136 | F1 val 0.9628 (mejor 0.9628 @ 9) |  29.8s *
+[2026-11-26 07:06:23]   NAGFuse-B     seed_12 ep  10 | loss 0.179/0.146 | F1 val 0.9464 (mejor 0.9628 @ 9) |  29.8s
+[2026-11-26 07:06:56]   NAGFuse-B     seed_12 ep  11 | loss 0.141/0.168 | F1 val 0.9396 (mejor 0.9628 @ 9) |  29.7s
+[2026-11-26 07:07:29]   NAGFuse-B     seed_12 ep  12 | loss 0.119/0.148 | F1 val 0.9393 (mejor 0.9628 @ 9) |  29.7s
+[2026-11-26 07:08:02]   NAGFuse-B     seed_12 ep  13 | loss 0.105/0.140 | F1 val 0.9320 (mejor 0.9628 @ 9) |  29.7s
+[2026-11-26 07:08:35]   NAGFuse-B     seed_12 ep  14 | loss 0.084/0.126 | F1 val 0.9406 (mejor 0.9628 @ 9) |  29.9s
+[2026-11-26 07:09:08]   NAGFuse-B     seed_12 ep  15 | loss 0.072/0.122 | F1 val 0.9613 (mejor 0.9628 @ 9) |  29.7s
+[2026-11-26 07:09:42]   NAGFuse-B     seed_12 ep  16 | loss 0.069/0.124 | F1 val 0.9670 (mejor 0.9670 @ 16) |  29.6s *
+[2026-11-26 07:10:16]   NAGFuse-B     seed_12 ep  17 | loss 0.067/0.114 | F1 val 0.9716 (mejor 0.9716 @ 17) |  29.6s *
+[2026-11-26 07:10:49]   NAGFuse-B     seed_12 ep  18 | loss 0.073/0.179 | F1 val 0.9383 (mejor 0.9716 @ 17) |  29.6s
+[2026-11-26 07:11:22]   NAGFuse-B     seed_12 ep  19 | loss 0.064/0.156 | F1 val 0.9500 (mejor 0.9716 @ 17) |  29.6s
+[2026-11-26 07:11:54]   NAGFuse-B     seed_12 ep  20 | loss 0.068/0.126 | F1 val 0.9547 (mejor 0.9716 @ 17) |  29.6s
+[2026-11-26 07:12:27]   NAGFuse-B     seed_12 ep  21 | loss 0.041/0.097 | F1 val 0.9690 (mejor 0.9716 @ 17) |  29.5s
+[2026-11-26 07:13:00]   NAGFuse-B     seed_12 ep  22 | loss 0.036/0.103 | F1 val 0.9572 (mejor 0.9716 @ 17) |  29.5s
+[2026-11-26 07:13:33]   NAGFuse-B     seed_12 ep  23 | loss 0.042/0.125 | F1 val 0.9538 (mejor 0.9716 @ 17) |  29.5s
+[2026-11-26 07:14:06]   NAGFuse-B     seed_12 ep  24 | loss 0.048/0.124 | F1 val 0.9493 (mejor 0.9716 @ 17) |  29.6s
+[2026-11-26 07:14:39]   NAGFuse-B     seed_12 ep  25 | loss 0.057/0.120 | F1 val 0.9675 (mejor 0.9716 @ 17) |  29.6s
+[2026-11-26 07:15:11]   NAGFuse-B     seed_12 ep  26 | loss 0.043/0.112 | F1 val 0.9663 (mejor 0.9716 @ 17) |  29.6s
+[2026-11-26 07:15:44]   NAGFuse-B     seed_12 ep  27 | loss 0.041/0.100 | F1 val 0.9715 (mejor 0.9716 @ 17) |  29.7s
+[2026-11-26 07:16:17]   NAGFuse-B     seed_12 ep  28 | loss 0.027/0.104 | F1 val 0.9632 (mejor 0.9716 @ 17) |  29.6s
+[2026-11-26 07:16:50]   NAGFuse-B     seed_12 ep  29 | loss 0.021/0.095 | F1 val 0.9645 (mejor 0.9716 @ 17) |  29.5s
+[2026-11-26 07:18:24]   NAGFuse-B seed_12: F1 macro prueba 0.9416
+[2026-11-26 07:19:54]   análisis NAGFuse: pi0 = 0.511, F1 con ruido 0.05: compuerta on 0.8707 / off 0.8755
+[2026-11-26 07:20:38]   NAGFuse-B/seed_12 en realwaste: F1 macro 0.5487 (n = 2640)
+[2026-11-26 07:21:28]   NAGFuse-B/seed_12 en gd_v2: F1 macro 0.6412 (n = 3000)
+[2026-11-26 07:21:42]   NAGFuse-B/seed_12 en warp_c: F1 macro 0.3914 (n = 863)
+[2026-11-26 07:22:27]   NAGFuse-B     seed_13 ep   0 | loss 2.981/0.948 | F1 val 0.7929 (mejor 0.7929 @ 0) |  33.0s *
+[2026-11-26 07:23:01]   NAGFuse-B     seed_13 ep   1 | loss 1.845/0.634 | F1 val 0.8723 (mejor 0.8723 @ 1) |  29.9s *
+[2026-11-26 07:23:35]   NAGFuse-B     seed_13 ep   2 | loss 1.232/0.421 | F1 val 0.8964 (mejor 0.8964 @ 2) |  29.8s *
+[2026-11-26 07:24:09]   NAGFuse-B     seed_13 ep   3 | loss 0.802/0.302 | F1 val 0.9348 (mejor 0.9348 @ 3) |  29.8s *
+[2026-11-26 07:24:42]   NAGFuse-B     seed_13 ep   4 | loss 0.566/0.239 | F1 val 0.9101 (mejor 0.9348 @ 3) |  29.8s
+[2026-11-26 07:25:15]   NAGFuse-B     seed_13 ep   5 | loss 0.413/0.209 | F1 val 0.9208 (mejor 0.9348 @ 3) |  29.7s
+[2026-11-26 07:25:48]   NAGFuse-B     seed_13 ep   6 | loss 0.312/0.195 | F1 val 0.9347 (mejor 0.9348 @ 3) |  29.9s
+[2026-11-26 07:26:22]   NAGFuse-B     seed_13 ep   7 | loss 0.276/0.200 | F1 val 0.9460 (mejor 0.9460 @ 7) |  29.8s *
+[2026-11-26 07:26:55]   NAGFuse-B     seed_13 ep   8 | loss 0.257/0.163 | F1 val 0.9326 (mejor 0.9460 @ 7) |  29.7s
+[2026-11-26 07:27:28]   NAGFuse-B     seed_13 ep   9 | loss 0.168/0.171 | F1 val 0.9422 (mejor 0.9460 @ 7) |  29.7s
+[2026-11-26 07:28:01]   NAGFuse-B     seed_13 ep  10 | loss 0.133/0.191 | F1 val 0.9443 (mejor 0.9460 @ 7) |  29.7s
+[2026-11-26 07:28:34]   NAGFuse-B     seed_13 ep  11 | loss 0.126/0.147 | F1 val 0.9394 (mejor 0.9460 @ 7) |  29.7s
+[2026-11-26 07:29:08]   NAGFuse-B     seed_13 ep  12 | loss 0.122/0.137 | F1 val 0.9630 (mejor 0.9630 @ 12) |  29.8s *
+[2026-11-26 07:29:41]   NAGFuse-B     seed_13 ep  13 | loss 0.087/0.168 | F1 val 0.9510 (mejor 0.9630 @ 12) |  29.6s
+[2026-11-26 07:30:14]   NAGFuse-B     seed_13 ep  14 | loss 0.093/0.138 | F1 val 0.9458 (mejor 0.9630 @ 12) |  29.6s
+[2026-11-26 07:30:46]   NAGFuse-B     seed_13 ep  15 | loss 0.088/0.127 | F1 val 0.9458 (mejor 0.9630 @ 12) |  29.6s
+[2026-11-26 07:31:19]   NAGFuse-B     seed_13 ep  16 | loss 0.076/0.145 | F1 val 0.9527 (mejor 0.9630 @ 12) |  29.6s
+[2026-11-26 07:31:53]   NAGFuse-B     seed_13 ep  17 | loss 0.075/0.148 | F1 val 0.9634 (mejor 0.9634 @ 17) |  29.6s *
+[2026-11-26 07:32:27]   NAGFuse-B     seed_13 ep  18 | loss 0.063/0.093 | F1 val 0.9707 (mejor 0.9707 @ 18) |  29.6s *
+[2026-11-26 07:33:00]   NAGFuse-B     seed_13 ep  19 | loss 0.052/0.132 | F1 val 0.9528 (mejor 0.9707 @ 18) |  29.5s
+[2026-11-26 07:33:34]   NAGFuse-B     seed_13 ep  20 | loss 0.056/0.120 | F1 val 0.9737 (mejor 0.9737 @ 20) |  29.5s *
+[2026-11-26 07:34:07]   NAGFuse-B     seed_13 ep  21 | loss 0.046/0.131 | F1 val 0.9714 (mejor 0.9737 @ 20) |  29.6s
+[2026-11-26 07:34:39]   NAGFuse-B     seed_13 ep  22 | loss 0.051/0.174 | F1 val 0.9555 (mejor 0.9737 @ 20) |  29.6s
+[2026-11-26 07:35:12]   NAGFuse-B     seed_13 ep  23 | loss 0.051/0.142 | F1 val 0.9505 (mejor 0.9737 @ 20) |  29.5s
+[2026-11-26 07:35:45]   NAGFuse-B     seed_13 ep  24 | loss 0.042/0.134 | F1 val 0.9630 (mejor 0.9737 @ 20) |  29.5s
+[2026-11-26 07:36:18]   NAGFuse-B     seed_13 ep  25 | loss 0.057/0.136 | F1 val 0.9420 (mejor 0.9737 @ 20) |  29.5s
+[2026-11-26 07:36:51]   NAGFuse-B     seed_13 ep  26 | loss 0.029/0.130 | F1 val 0.9687 (mejor 0.9737 @ 20) |  29.4s
+[2026-11-26 07:37:23]   NAGFuse-B     seed_13 ep  27 | loss 0.027/0.139 | F1 val 0.9461 (mejor 0.9737 @ 20) |  29.4s
+[2026-11-26 07:37:56]   NAGFuse-B     seed_13 ep  28 | loss 0.027/0.102 | F1 val 0.9609 (mejor 0.9737 @ 20) |  29.5s
+[2026-11-26 07:38:29]   NAGFuse-B     seed_13 ep  29 | loss 0.027/0.101 | F1 val 0.9543 (mejor 0.9737 @ 20) |  29.5s
+[2026-11-26 07:39:02]   NAGFuse-B     seed_13 ep  30 | loss 0.027/0.094 | F1 val 0.9587 (mejor 0.9737 @ 20) |  29.5s
+[2026-11-26 07:39:34]   NAGFuse-B     seed_13 ep  31 | loss 0.033/0.100 | F1 val 0.9608 (mejor 0.9737 @ 20) |  29.3s
+[2026-11-26 07:40:07]   NAGFuse-B     seed_13 ep  32 | loss 0.017/0.157 | F1 val 0.9491 (mejor 0.9737 @ 20) |  29.5s
+[2026-11-26 07:41:41]   NAGFuse-B seed_13: F1 macro prueba 0.9477
+[2026-11-26 07:43:11]   análisis NAGFuse: pi0 = 0.512, F1 con ruido 0.05: compuerta on 0.9040 / off 0.8903
+[2026-11-26 07:43:55]   NAGFuse-B/seed_13 en realwaste: F1 macro 0.5415 (n = 2640)
+[2026-11-26 07:44:44]   NAGFuse-B/seed_13 en gd_v2: F1 macro 0.6125 (n = 3000)
+[2026-11-26 07:44:59]   NAGFuse-B/seed_13 en warp_c: F1 macro 0.3934 (n = 863)
+[2026-11-26 07:45:44]   NAGFuse-B     seed_14 ep   0 | loss 3.053/1.013 | F1 val 0.7977 (mejor 0.7977 @ 0) |  33.3s *
+[2026-11-26 07:46:19]   NAGFuse-B     seed_14 ep   1 | loss 1.915/0.633 | F1 val 0.8241 (mejor 0.8241 @ 1) |  30.0s *
+[2026-11-26 07:46:53]   NAGFuse-B     seed_14 ep   2 | loss 1.179/0.369 | F1 val 0.8956 (mejor 0.8956 @ 2) |  29.8s *
+[2026-11-26 07:47:27]   NAGFuse-B     seed_14 ep   3 | loss 0.768/0.261 | F1 val 0.9318 (mejor 0.9318 @ 3) |  29.9s *
+[2026-11-26 07:48:00]   NAGFuse-B     seed_14 ep   4 | loss 0.534/0.211 | F1 val 0.9195 (mejor 0.9318 @ 3) |  29.8s
+[2026-11-26 07:48:33]   NAGFuse-B     seed_14 ep   5 | loss 0.383/0.184 | F1 val 0.9297 (mejor 0.9318 @ 3) |  29.9s
+[2026-11-26 07:49:07]   NAGFuse-B     seed_14 ep   6 | loss 0.291/0.189 | F1 val 0.9397 (mejor 0.9397 @ 6) |  29.8s *
+[2026-11-26 07:49:40]   NAGFuse-B     seed_14 ep   7 | loss 0.224/0.162 | F1 val 0.9357 (mejor 0.9397 @ 6) |  29.8s
+[2026-11-26 07:50:14]   NAGFuse-B     seed_14 ep   8 | loss 0.188/0.171 | F1 val 0.9461 (mejor 0.9461 @ 8) |  29.7s *
+[2026-11-26 07:50:48]   NAGFuse-B     seed_14 ep   9 | loss 0.148/0.152 | F1 val 0.9527 (mejor 0.9527 @ 9) |  29.7s *
+[2026-11-26 07:51:22]   NAGFuse-B     seed_14 ep  10 | loss 0.139/0.154 | F1 val 0.9582 (mejor 0.9582 @ 10) |  29.9s *
+[2026-11-26 07:51:56]   NAGFuse-B     seed_14 ep  11 | loss 0.104/0.122 | F1 val 0.9597 (mejor 0.9597 @ 11) |  29.7s *
+[2026-11-26 07:52:29]   NAGFuse-B     seed_14 ep  12 | loss 0.131/0.152 | F1 val 0.9374 (mejor 0.9597 @ 11) |  29.7s
+[2026-11-26 07:53:02]   NAGFuse-B     seed_14 ep  13 | loss 0.107/0.139 | F1 val 0.9469 (mejor 0.9597 @ 11) |  29.8s
+[2026-11-26 07:53:35]   NAGFuse-B     seed_14 ep  14 | loss 0.076/0.147 | F1 val 0.9372 (mejor 0.9597 @ 11) |  29.7s
+[2026-11-26 07:54:08]   NAGFuse-B     seed_14 ep  15 | loss 0.084/0.127 | F1 val 0.9586 (mejor 0.9597 @ 11) |  29.9s
+[2026-11-26 07:54:42]   NAGFuse-B     seed_14 ep  16 | loss 0.074/0.135 | F1 val 0.9680 (mejor 0.9680 @ 16) |  29.7s *
+[2026-11-26 07:55:15]   NAGFuse-B     seed_14 ep  17 | loss 0.065/0.125 | F1 val 0.9608 (mejor 0.9680 @ 16) |  29.7s
+[2026-11-26 07:55:48]   NAGFuse-B     seed_14 ep  18 | loss 0.070/0.111 | F1 val 0.9566 (mejor 0.9680 @ 16) |  29.7s
+[2026-11-26 07:56:22]   NAGFuse-B     seed_14 ep  19 | loss 0.064/0.158 | F1 val 0.9709 (mejor 0.9709 @ 19) |  29.7s *
+[2026-11-26 07:56:55]   NAGFuse-B     seed_14 ep  20 | loss 0.057/0.141 | F1 val 0.9636 (mejor 0.9709 @ 19) |  29.6s
+[2026-11-26 07:57:28]   NAGFuse-B     seed_14 ep  21 | loss 0.042/0.119 | F1 val 0.9667 (mejor 0.9709 @ 19) |  29.7s
+[2026-11-26 07:58:01]   NAGFuse-B     seed_14 ep  22 | loss 0.043/0.129 | F1 val 0.9642 (mejor 0.9709 @ 19) |  29.5s
+[2026-11-26 07:58:33]   NAGFuse-B     seed_14 ep  23 | loss 0.038/0.113 | F1 val 0.9684 (mejor 0.9709 @ 19) |  29.7s
+[2026-11-26 07:59:07]   NAGFuse-B     seed_14 ep  24 | loss 0.053/0.114 | F1 val 0.9555 (mejor 0.9709 @ 19) |  29.6s
+[2026-11-26 07:59:40]   NAGFuse-B     seed_14 ep  25 | loss 0.032/0.119 | F1 val 0.9488 (mejor 0.9709 @ 19) |  29.6s
+[2026-11-26 08:00:12]   NAGFuse-B     seed_14 ep  26 | loss 0.032/0.106 | F1 val 0.9632 (mejor 0.9709 @ 19) |  29.5s
+[2026-11-26 08:00:45]   NAGFuse-B     seed_14 ep  27 | loss 0.033/0.129 | F1 val 0.9517 (mejor 0.9709 @ 19) |  29.6s
+[2026-11-26 08:01:18]   NAGFuse-B     seed_14 ep  28 | loss 0.031/0.100 | F1 val 0.9608 (mejor 0.9709 @ 19) |  29.4s
+[2026-11-26 08:01:51]   NAGFuse-B     seed_14 ep  29 | loss 0.029/0.110 | F1 val 0.9666 (mejor 0.9709 @ 19) |  29.5s
+[2026-11-26 08:02:24]   NAGFuse-B     seed_14 ep  30 | loss 0.025/0.148 | F1 val 0.9581 (mejor 0.9709 @ 19) |  29.5s
+[2026-11-26 08:02:56]   NAGFuse-B     seed_14 ep  31 | loss 0.024/0.132 | F1 val 0.9628 (mejor 0.9709 @ 19) |  29.6s
+[2026-11-26 08:04:29]   NAGFuse-B seed_14: F1 macro prueba 0.9472
+[2026-11-26 08:06:00]   análisis NAGFuse: pi0 = 0.512, F1 con ruido 0.05: compuerta on 0.9133 / off 0.8761
+[2026-11-26 08:06:44]   NAGFuse-B/seed_14 en realwaste: F1 macro 0.5255 (n = 2640)
+[2026-11-26 08:07:33]   NAGFuse-B/seed_14 en gd_v2: F1 macro 0.5991 (n = 3000)
+[2026-11-26 08:07:48]   NAGFuse-B/seed_14 en warp_c: F1 macro 0.3570 (n = 863)
+[2026-11-26 08:08:34]   NAGFuse-B     seed_15 ep   0 | loss 3.004/0.962 | F1 val 0.7749 (mejor 0.7749 @ 0) |  33.1s *
+[2026-11-26 08:09:08]   NAGFuse-B     seed_15 ep   1 | loss 1.813/0.598 | F1 val 0.8770 (mejor 0.8770 @ 1) |  30.0s *
+[2026-11-26 08:09:43]   NAGFuse-B     seed_15 ep   2 | loss 1.292/0.451 | F1 val 0.9070 (mejor 0.9070 @ 2) |  30.0s *
+[2026-11-26 08:10:17]   NAGFuse-B     seed_15 ep   3 | loss 0.851/0.284 | F1 val 0.9082 (mejor 0.9082 @ 3) |  29.9s *
+[2026-11-26 08:10:50]   NAGFuse-B     seed_15 ep   4 | loss 0.592/0.250 | F1 val 0.9075 (mejor 0.9082 @ 3) |  29.8s
+[2026-11-26 08:11:24]   NAGFuse-B     seed_15 ep   5 | loss 0.433/0.294 | F1 val 0.9335 (mejor 0.9335 @ 5) |  29.9s *
+[2026-11-26 08:11:57]   NAGFuse-B     seed_15 ep   6 | loss 0.322/0.240 | F1 val 0.9131 (mejor 0.9335 @ 5) |  29.8s
+[2026-11-26 08:12:31]   NAGFuse-B     seed_15 ep   7 | loss 0.258/0.197 | F1 val 0.9495 (mejor 0.9495 @ 7) |  29.9s *
+[2026-11-26 08:13:05]   NAGFuse-B     seed_15 ep   8 | loss 0.222/0.170 | F1 val 0.9587 (mejor 0.9587 @ 8) |  29.8s *
+[2026-11-26 08:13:38]   NAGFuse-B     seed_15 ep   9 | loss 0.178/0.166 | F1 val 0.9452 (mejor 0.9587 @ 8) |  29.8s
+[2026-11-26 08:14:11]   NAGFuse-B     seed_15 ep  10 | loss 0.171/0.183 | F1 val 0.9287 (mejor 0.9587 @ 8) |  29.7s
+[2026-11-26 08:14:44]   NAGFuse-B     seed_15 ep  11 | loss 0.128/0.156 | F1 val 0.9489 (mejor 0.9587 @ 8) |  29.8s
+[2026-11-26 08:15:18]   NAGFuse-B     seed_15 ep  12 | loss 0.130/0.140 | F1 val 0.9602 (mejor 0.9602 @ 12) |  29.6s *
+[2026-11-26 08:15:51]   NAGFuse-B     seed_15 ep  13 | loss 0.099/0.151 | F1 val 0.9447 (mejor 0.9602 @ 12) |  29.6s
+[2026-11-26 08:16:24]   NAGFuse-B     seed_15 ep  14 | loss 0.092/0.157 | F1 val 0.9546 (mejor 0.9602 @ 12) |  29.7s
+[2026-11-26 08:16:57]   NAGFuse-B     seed_15 ep  15 | loss 0.092/0.151 | F1 val 0.9462 (mejor 0.9602 @ 12) |  29.6s
+[2026-11-26 08:17:31]   NAGFuse-B     seed_15 ep  16 | loss 0.061/0.133 | F1 val 0.9646 (mejor 0.9646 @ 16) |  29.9s *
+[2026-11-26 08:18:04]   NAGFuse-B     seed_15 ep  17 | loss 0.078/0.161 | F1 val 0.9465 (mejor 0.9646 @ 16) |  29.7s
+[2026-11-26 08:18:37]   NAGFuse-B     seed_15 ep  18 | loss 0.073/0.158 | F1 val 0.9472 (mejor 0.9646 @ 16) |  29.6s
+[2026-11-26 08:19:10]   NAGFuse-B     seed_15 ep  19 | loss 0.054/0.171 | F1 val 0.9491 (mejor 0.9646 @ 16) |  29.7s
+[2026-11-26 08:19:43]   NAGFuse-B     seed_15 ep  20 | loss 0.055/0.168 | F1 val 0.9517 (mejor 0.9646 @ 16) |  29.6s
+[2026-11-26 08:20:16]   NAGFuse-B     seed_15 ep  21 | loss 0.044/0.181 | F1 val 0.9419 (mejor 0.9646 @ 16) |  29.6s
+[2026-11-26 08:20:49]   NAGFuse-B     seed_15 ep  22 | loss 0.050/0.162 | F1 val 0.9522 (mejor 0.9646 @ 16) |  29.6s
+[2026-11-26 08:21:22]   NAGFuse-B     seed_15 ep  23 | loss 0.046/0.168 | F1 val 0.9563 (mejor 0.9646 @ 16) |  29.6s
+[2026-11-26 08:21:54]   NAGFuse-B     seed_15 ep  24 | loss 0.043/0.158 | F1 val 0.9503 (mejor 0.9646 @ 16) |  29.6s
+[2026-11-26 08:22:27]   NAGFuse-B     seed_15 ep  25 | loss 0.030/0.153 | F1 val 0.9573 (mejor 0.9646 @ 16) |  29.5s
+[2026-11-26 08:23:00]   NAGFuse-B     seed_15 ep  26 | loss 0.032/0.177 | F1 val 0.9496 (mejor 0.9646 @ 16) |  29.6s
+[2026-11-26 08:23:33]   NAGFuse-B     seed_15 ep  27 | loss 0.025/0.152 | F1 val 0.9609 (mejor 0.9646 @ 16) |  29.5s
+[2026-11-26 08:24:06]   NAGFuse-B     seed_15 ep  28 | loss 0.026/0.172 | F1 val 0.9543 (mejor 0.9646 @ 16) |  29.5s
+[2026-11-26 08:25:40]   NAGFuse-B seed_15: F1 macro prueba 0.9385
+[2026-11-26 08:27:11]   análisis NAGFuse: pi0 = 0.510, F1 con ruido 0.05: compuerta on 0.8871 / off 0.8882
+[2026-11-26 08:27:55]   NAGFuse-B/seed_15 en realwaste: F1 macro 0.5269 (n = 2640)
+[2026-11-26 08:28:45]   NAGFuse-B/seed_15 en gd_v2: F1 macro 0.5974 (n = 3000)
+[2026-11-26 08:28:59]   NAGFuse-B/seed_15 en warp_c: F1 macro 0.3413 (n = 863)
+[2026-11-26 08:29:45]   NAGFuse-B     seed_16 ep   0 | loss 2.986/0.945 | F1 val 0.8000 (mejor 0.8000 @ 0) |  33.3s *
+[2026-11-26 08:30:20]   NAGFuse-B     seed_16 ep   1 | loss 1.836/0.562 | F1 val 0.8946 (mejor 0.8946 @ 1) |  30.2s *
+[2026-11-26 08:30:54]   NAGFuse-B     seed_16 ep   2 | loss 1.268/0.396 | F1 val 0.8969 (mejor 0.8969 @ 2) |  29.9s *
+[2026-11-26 08:31:28]   NAGFuse-B     seed_16 ep   3 | loss 0.814/0.272 | F1 val 0.9322 (mejor 0.9322 @ 3) |  30.0s *
+[2026-11-26 08:32:01]   NAGFuse-B     seed_16 ep   4 | loss 0.541/0.214 | F1 val 0.9082 (mejor 0.9322 @ 3) |  29.9s
+[2026-11-26 08:32:36]   NAGFuse-B     seed_16 ep   5 | loss 0.412/0.178 | F1 val 0.9406 (mejor 0.9406 @ 5) |  29.9s *
+[2026-11-26 08:33:10]   NAGFuse-B     seed_16 ep   6 | loss 0.287/0.153 | F1 val 0.9475 (mejor 0.9475 @ 6) |  29.8s *
+[2026-11-26 08:33:43]   NAGFuse-B     seed_16 ep   7 | loss 0.245/0.149 | F1 val 0.9389 (mejor 0.9475 @ 6) |  29.9s
+[2026-11-26 08:34:16]   NAGFuse-B     seed_16 ep   8 | loss 0.212/0.177 | F1 val 0.9377 (mejor 0.9475 @ 6) |  29.8s
+[2026-11-26 08:34:49]   NAGFuse-B     seed_16 ep   9 | loss 0.152/0.163 | F1 val 0.9444 (mejor 0.9475 @ 6) |  29.8s
+[2026-11-26 08:35:22]   NAGFuse-B     seed_16 ep  10 | loss 0.152/0.180 | F1 val 0.9276 (mejor 0.9475 @ 6) |  29.8s
+[2026-11-26 08:35:55]   NAGFuse-B     seed_16 ep  11 | loss 0.132/0.141 | F1 val 0.9422 (mejor 0.9475 @ 6) |  29.8s
+[2026-11-26 08:36:29]   NAGFuse-B     seed_16 ep  12 | loss 0.117/0.156 | F1 val 0.9486 (mejor 0.9486 @ 12) |  29.8s *
+[2026-11-26 08:37:03]   NAGFuse-B     seed_16 ep  13 | loss 0.112/0.173 | F1 val 0.9609 (mejor 0.9609 @ 13) |  29.8s *
+[2026-11-26 08:37:37]   NAGFuse-B     seed_16 ep  14 | loss 0.103/0.109 | F1 val 0.9672 (mejor 0.9672 @ 14) |  29.8s *
+[2026-11-26 08:38:10]   NAGFuse-B     seed_16 ep  15 | loss 0.071/0.197 | F1 val 0.9474 (mejor 0.9672 @ 14) |  29.7s
+[2026-11-26 08:38:43]   NAGFuse-B     seed_16 ep  16 | loss 0.065/0.110 | F1 val 0.9616 (mejor 0.9672 @ 14) |  29.7s
+[2026-11-26 08:39:16]   NAGFuse-B     seed_16 ep  17 | loss 0.057/0.168 | F1 val 0.9608 (mejor 0.9672 @ 14) |  29.6s
+[2026-11-26 08:39:49]   NAGFuse-B     seed_16 ep  18 | loss 0.051/0.162 | F1 val 0.9636 (mejor 0.9672 @ 14) |  29.7s
+[2026-11-26 08:40:22]   NAGFuse-B     seed_16 ep  19 | loss 0.059/0.176 | F1 val 0.9571 (mejor 0.9672 @ 14) |  29.6s
+[2026-11-26 08:40:56]   NAGFuse-B     seed_16 ep  20 | loss 0.062/0.101 | F1 val 0.9686 (mejor 0.9686 @ 20) |  29.7s *
+[2026-11-26 08:41:30]   NAGFuse-B     seed_16 ep  21 | loss 0.038/0.121 | F1 val 0.9769 (mejor 0.9769 @ 21) |  29.5s *
+[2026-11-26 08:42:03]   NAGFuse-B     seed_16 ep  22 | loss 0.041/0.151 | F1 val 0.9624 (mejor 0.9769 @ 21) |  29.6s
+[2026-11-26 08:42:35]   NAGFuse-B     seed_16 ep  23 | loss 0.035/0.125 | F1 val 0.9393 (mejor 0.9769 @ 21) |  29.6s
+[2026-11-26 08:43:08]   NAGFuse-B     seed_16 ep  24 | loss 0.037/0.132 | F1 val 0.9663 (mejor 0.9769 @ 21) |  29.7s
+[2026-11-26 08:43:41]   NAGFuse-B     seed_16 ep  25 | loss 0.049/0.193 | F1 val 0.9578 (mejor 0.9769 @ 21) |  29.6s
+[2026-11-26 08:44:14]   NAGFuse-B     seed_16 ep  26 | loss 0.043/0.135 | F1 val 0.9562 (mejor 0.9769 @ 21) |  29.6s
+[2026-11-26 08:44:47]   NAGFuse-B     seed_16 ep  27 | loss 0.026/0.151 | F1 val 0.9542 (mejor 0.9769 @ 21) |  29.6s
+[2026-11-26 08:45:20]   NAGFuse-B     seed_16 ep  28 | loss 0.046/0.096 | F1 val 0.9690 (mejor 0.9769 @ 21) |  29.6s
+[2026-11-26 08:45:53]   NAGFuse-B     seed_16 ep  29 | loss 0.031/0.100 | F1 val 0.9582 (mejor 0.9769 @ 21) |  29.6s
+[2026-11-26 08:46:26]   NAGFuse-B     seed_16 ep  30 | loss 0.031/0.097 | F1 val 0.9757 (mejor 0.9769 @ 21) |  29.6s
+[2026-11-26 08:46:59]   NAGFuse-B     seed_16 ep  31 | loss 0.019/0.096 | F1 val 0.9719 (mejor 0.9769 @ 21) |  29.6s
+[2026-11-26 08:47:32]   NAGFuse-B     seed_16 ep  32 | loss 0.026/0.108 | F1 val 0.9583 (mejor 0.9769 @ 21) |  29.6s
+[2026-11-26 08:48:06]   NAGFuse-B     seed_16 ep  33 | loss 0.016/0.088 | F1 val 0.9896 (mejor 0.9896 @ 33) |  29.6s *
+[2026-11-26 08:48:39]   NAGFuse-B     seed_16 ep  34 | loss 0.021/0.100 | F1 val 0.9766 (mejor 0.9896 @ 33) |  29.8s
+[2026-11-26 08:49:12]   NAGFuse-B     seed_16 ep  35 | loss 0.017/0.110 | F1 val 0.9708 (mejor 0.9896 @ 33) |  29.6s
+[2026-11-26 08:49:45]   NAGFuse-B     seed_16 ep  36 | loss 0.020/0.096 | F1 val 0.9726 (mejor 0.9896 @ 33) |  29.5s
+[2026-11-26 08:50:17]   NAGFuse-B     seed_16 ep  37 | loss 0.016/0.082 | F1 val 0.9807 (mejor 0.9896 @ 33) |  29.6s
+[2026-11-26 08:50:50]   NAGFuse-B     seed_16 ep  38 | loss 0.020/0.096 | F1 val 0.9690 (mejor 0.9896 @ 33) |  29.5s
+[2026-11-26 08:51:23]   NAGFuse-B     seed_16 ep  39 | loss 0.013/0.086 | F1 val 0.9743 (mejor 0.9896 @ 33) |  29.7s
+[2026-11-26 08:51:56]   NAGFuse-B     seed_16 ep  40 | loss 0.019/0.090 | F1 val 0.9698 (mejor 0.9896 @ 33) |  29.6s
+[2026-11-26 08:52:29]   NAGFuse-B     seed_16 ep  41 | loss 0.010/0.097 | F1 val 0.9759 (mejor 0.9896 @ 33) |  29.5s
+[2026-11-26 08:53:02]   NAGFuse-B     seed_16 ep  42 | loss 0.020/0.103 | F1 val 0.9559 (mejor 0.9896 @ 33) |  29.5s
+[2026-11-26 08:53:34]   NAGFuse-B     seed_16 ep  43 | loss 0.014/0.086 | F1 val 0.9748 (mejor 0.9896 @ 33) |  29.4s
+[2026-11-26 08:54:07]   NAGFuse-B     seed_16 ep  44 | loss 0.013/0.087 | F1 val 0.9748 (mejor 0.9896 @ 33) |  29.8s
+[2026-11-26 08:54:40]   NAGFuse-B     seed_16 ep  45 | loss 0.016/0.098 | F1 val 0.9748 (mejor 0.9896 @ 33) |  29.6s
+[2026-11-26 08:56:14]   NAGFuse-B seed_16: F1 macro prueba 0.9618
+[2026-11-26 08:57:44]   análisis NAGFuse: pi0 = 0.514, F1 con ruido 0.05: compuerta on 0.9108 / off 0.9037
+[2026-11-26 08:58:27]   NAGFuse-B/seed_16 en realwaste: F1 macro 0.5369 (n = 2640)
+[2026-11-26 08:59:15]   NAGFuse-B/seed_16 en gd_v2: F1 macro 0.5887 (n = 3000)
+[2026-11-26 08:59:29]   NAGFuse-B/seed_16 en warp_c: F1 macro 0.3826 (n = 863)
+[2026-11-26 09:00:15]   NAGFuse-B     seed_17 ep   0 | loss 2.960/0.912 | F1 val 0.8058 (mejor 0.8058 @ 0) |  33.3s *
+[2026-11-26 09:00:50]   NAGFuse-B     seed_17 ep   1 | loss 1.824/0.650 | F1 val 0.8665 (mejor 0.8665 @ 1) |  30.0s *
+[2026-11-26 09:01:24]   NAGFuse-B     seed_17 ep   2 | loss 1.361/0.413 | F1 val 0.9076 (mejor 0.9076 @ 2) |  29.8s *
+[2026-11-26 09:01:58]   NAGFuse-B     seed_17 ep   3 | loss 0.769/0.329 | F1 val 0.9163 (mejor 0.9163 @ 3) |  29.9s *
+[2026-11-26 09:02:32]   NAGFuse-B     seed_17 ep   4 | loss 0.558/0.235 | F1 val 0.9416 (mejor 0.9416 @ 4) |  29.9s *
+[2026-11-26 09:03:05]   NAGFuse-B     seed_17 ep   5 | loss 0.409/0.178 | F1 val 0.9408 (mejor 0.9416 @ 4) |  29.8s
+[2026-11-26 09:03:39]   NAGFuse-B     seed_17 ep   6 | loss 0.338/0.161 | F1 val 0.9610 (mejor 0.9610 @ 6) |  29.8s *
+[2026-11-26 09:04:12]   NAGFuse-B     seed_17 ep   7 | loss 0.256/0.151 | F1 val 0.9450 (mejor 0.9610 @ 6) |  29.9s
+[2026-11-26 09:04:45]   NAGFuse-B     seed_17 ep   8 | loss 0.204/0.167 | F1 val 0.9301 (mejor 0.9610 @ 6) |  29.8s
+[2026-11-26 09:05:18]   NAGFuse-B     seed_17 ep   9 | loss 0.173/0.135 | F1 val 0.9320 (mejor 0.9610 @ 6) |  29.7s
+[2026-11-26 09:05:52]   NAGFuse-B     seed_17 ep  10 | loss 0.159/0.164 | F1 val 0.9268 (mejor 0.9610 @ 6) |  29.8s
+[2026-11-26 09:06:24]   NAGFuse-B     seed_17 ep  11 | loss 0.122/0.113 | F1 val 0.9485 (mejor 0.9610 @ 6) |  29.6s
+[2026-11-26 09:06:57]   NAGFuse-B     seed_17 ep  12 | loss 0.113/0.161 | F1 val 0.9402 (mejor 0.9610 @ 6) |  29.6s
+[2026-11-26 09:07:30]   NAGFuse-B     seed_17 ep  13 | loss 0.099/0.152 | F1 val 0.9497 (mejor 0.9610 @ 6) |  29.7s
+[2026-11-26 09:08:03]   NAGFuse-B     seed_17 ep  14 | loss 0.110/0.145 | F1 val 0.9489 (mejor 0.9610 @ 6) |  29.6s
+[2026-11-26 09:08:36]   NAGFuse-B     seed_17 ep  15 | loss 0.100/0.174 | F1 val 0.9447 (mejor 0.9610 @ 6) |  29.7s
+[2026-11-26 09:09:10]   NAGFuse-B     seed_17 ep  16 | loss 0.082/0.128 | F1 val 0.9637 (mejor 0.9637 @ 16) |  29.6s *
+[2026-11-26 09:09:44]   NAGFuse-B     seed_17 ep  17 | loss 0.060/0.147 | F1 val 0.9670 (mejor 0.9670 @ 17) |  29.7s *
+[2026-11-26 09:10:17]   NAGFuse-B     seed_17 ep  18 | loss 0.053/0.136 | F1 val 0.9562 (mejor 0.9670 @ 17) |  29.6s
+[2026-11-26 09:10:50]   NAGFuse-B     seed_17 ep  19 | loss 0.058/0.190 | F1 val 0.9475 (mejor 0.9670 @ 17) |  29.6s
+[2026-11-26 09:11:23]   NAGFuse-B     seed_17 ep  20 | loss 0.040/0.145 | F1 val 0.9510 (mejor 0.9670 @ 17) |  29.5s
+[2026-11-26 09:11:56]   NAGFuse-B     seed_17 ep  21 | loss 0.048/0.128 | F1 val 0.9493 (mejor 0.9670 @ 17) |  29.6s
+[2026-11-26 09:12:28]   NAGFuse-B     seed_17 ep  22 | loss 0.049/0.149 | F1 val 0.9398 (mejor 0.9670 @ 17) |  29.5s
+[2026-11-26 09:13:01]   NAGFuse-B     seed_17 ep  23 | loss 0.048/0.146 | F1 val 0.9541 (mejor 0.9670 @ 17) |  29.7s
+[2026-11-26 09:13:34]   NAGFuse-B     seed_17 ep  24 | loss 0.033/0.129 | F1 val 0.9598 (mejor 0.9670 @ 17) |  29.5s
+[2026-11-26 09:14:07]   NAGFuse-B     seed_17 ep  25 | loss 0.034/0.141 | F1 val 0.9539 (mejor 0.9670 @ 17) |  29.6s
+[2026-11-26 09:14:40]   NAGFuse-B     seed_17 ep  26 | loss 0.037/0.146 | F1 val 0.9550 (mejor 0.9670 @ 17) |  29.5s
+[2026-11-26 09:15:13]   NAGFuse-B     seed_17 ep  27 | loss 0.029/0.124 | F1 val 0.9543 (mejor 0.9670 @ 17) |  29.5s
+[2026-11-26 09:15:46]   NAGFuse-B     seed_17 ep  28 | loss 0.046/0.100 | F1 val 0.9545 (mejor 0.9670 @ 17) |  29.7s
+[2026-11-26 09:16:19]   NAGFuse-B     seed_17 ep  29 | loss 0.040/0.103 | F1 val 0.9635 (mejor 0.9670 @ 17) |  29.6s
+[2026-11-26 09:17:53]   NAGFuse-B seed_17: F1 macro prueba 0.9421
+[2026-11-26 09:19:22]   análisis NAGFuse: pi0 = 0.511, F1 con ruido 0.05: compuerta on 0.8821 / off 0.8834
+[2026-11-26 09:20:05]   NAGFuse-B/seed_17 en realwaste: F1 macro 0.5335 (n = 2640)
+[2026-11-26 09:20:53]   NAGFuse-B/seed_17 en gd_v2: F1 macro 0.6015 (n = 3000)
+[2026-11-26 09:21:07]   NAGFuse-B/seed_17 en warp_c: F1 macro 0.4106 (n = 863)
+[2026-11-26 09:21:53]   NAGFuse-B     seed_18 ep   0 | loss 2.919/0.909 | F1 val 0.8054 (mejor 0.8054 @ 0) |  33.2s *
+[2026-11-26 09:22:27]   NAGFuse-B     seed_18 ep   1 | loss 1.817/0.612 | F1 val 0.8726 (mejor 0.8726 @ 1) |  30.0s *
+[2026-11-26 09:23:01]   NAGFuse-B     seed_18 ep   2 | loss 1.207/0.382 | F1 val 0.9079 (mejor 0.9079 @ 2) |  30.0s *
+[2026-11-26 09:23:36]   NAGFuse-B     seed_18 ep   3 | loss 0.775/0.283 | F1 val 0.9228 (mejor 0.9228 @ 3) |  29.9s *
+[2026-11-26 09:24:10]   NAGFuse-B     seed_18 ep   4 | loss 0.558/0.208 | F1 val 0.9253 (mejor 0.9253 @ 4) |  29.9s *
+[2026-11-26 09:24:44]   NAGFuse-B     seed_18 ep   5 | loss 0.375/0.200 | F1 val 0.9391 (mejor 0.9391 @ 5) |  30.0s *
+[2026-11-26 09:25:17]   NAGFuse-B     seed_18 ep   6 | loss 0.340/0.198 | F1 val 0.9320 (mejor 0.9391 @ 5) |  29.9s
+[2026-11-26 09:25:51]   NAGFuse-B     seed_18 ep   7 | loss 0.235/0.158 | F1 val 0.9542 (mejor 0.9542 @ 7) |  29.8s *
+[2026-11-26 09:26:25]   NAGFuse-B     seed_18 ep   8 | loss 0.197/0.187 | F1 val 0.9577 (mejor 0.9577 @ 8) |  29.8s *
+[2026-11-26 09:26:59]   NAGFuse-B     seed_18 ep   9 | loss 0.174/0.177 | F1 val 0.9479 (mejor 0.9577 @ 8) |  29.8s
+[2026-11-26 09:27:32]   NAGFuse-B     seed_18 ep  10 | loss 0.146/0.178 | F1 val 0.9332 (mejor 0.9577 @ 8) |  29.9s
+[2026-11-26 09:28:05]   NAGFuse-B     seed_18 ep  11 | loss 0.123/0.189 | F1 val 0.9358 (mejor 0.9577 @ 8) |  29.6s
+[2026-11-26 09:28:39]   NAGFuse-B     seed_18 ep  12 | loss 0.100/0.136 | F1 val 0.9580 (mejor 0.9580 @ 12) |  29.7s *
+[2026-11-26 09:29:12]   NAGFuse-B     seed_18 ep  13 | loss 0.108/0.172 | F1 val 0.9293 (mejor 0.9580 @ 12) |  29.9s
+[2026-11-26 09:29:46]   NAGFuse-B     seed_18 ep  14 | loss 0.093/0.122 | F1 val 0.9599 (mejor 0.9599 @ 14) |  29.7s *
+[2026-11-26 09:30:19]   NAGFuse-B     seed_18 ep  15 | loss 0.073/0.174 | F1 val 0.9514 (mejor 0.9599 @ 14) |  29.7s
+[2026-11-26 09:30:53]   NAGFuse-B     seed_18 ep  16 | loss 0.072/0.110 | F1 val 0.9672 (mejor 0.9672 @ 16) |  29.9s *
+[2026-11-26 09:31:26]   NAGFuse-B     seed_18 ep  17 | loss 0.050/0.157 | F1 val 0.9569 (mejor 0.9672 @ 16) |  29.7s
+[2026-11-26 09:31:59]   NAGFuse-B     seed_18 ep  18 | loss 0.073/0.124 | F1 val 0.9606 (mejor 0.9672 @ 16) |  29.6s
+[2026-11-26 09:32:32]   NAGFuse-B     seed_18 ep  19 | loss 0.048/0.133 | F1 val 0.9572 (mejor 0.9672 @ 16) |  29.6s
+[2026-11-26 09:33:05]   NAGFuse-B     seed_18 ep  20 | loss 0.039/0.140 | F1 val 0.9527 (mejor 0.9672 @ 16) |  29.5s
+[2026-11-26 09:33:38]   NAGFuse-B     seed_18 ep  21 | loss 0.060/0.129 | F1 val 0.9626 (mejor 0.9672 @ 16) |  29.6s
+[2026-11-26 09:34:11]   NAGFuse-B     seed_18 ep  22 | loss 0.072/0.126 | F1 val 0.9635 (mejor 0.9672 @ 16) |  29.6s
+[2026-11-26 09:34:45]   NAGFuse-B     seed_18 ep  23 | loss 0.046/0.123 | F1 val 0.9691 (mejor 0.9691 @ 23) |  29.6s *
+[2026-11-26 09:35:19]   NAGFuse-B     seed_18 ep  24 | loss 0.034/0.110 | F1 val 0.9736 (mejor 0.9736 @ 24) |  29.7s *
+[2026-11-26 09:35:52]   NAGFuse-B     seed_18 ep  25 | loss 0.027/0.123 | F1 val 0.9648 (mejor 0.9736 @ 24) |  29.6s
+[2026-11-26 09:36:24]   NAGFuse-B     seed_18 ep  26 | loss 0.031/0.112 | F1 val 0.9735 (mejor 0.9736 @ 24) |  29.4s
+[2026-11-26 09:36:57]   NAGFuse-B     seed_18 ep  27 | loss 0.034/0.128 | F1 val 0.9484 (mejor 0.9736 @ 24) |  29.5s
+[2026-11-26 09:37:30]   NAGFuse-B     seed_18 ep  28 | loss 0.027/0.141 | F1 val 0.9627 (mejor 0.9736 @ 24) |  29.5s
+[2026-11-26 09:38:03]   NAGFuse-B     seed_18 ep  29 | loss 0.024/0.130 | F1 val 0.9673 (mejor 0.9736 @ 24) |  29.6s
+[2026-11-26 09:38:35]   NAGFuse-B     seed_18 ep  30 | loss 0.022/0.126 | F1 val 0.9596 (mejor 0.9736 @ 24) |  29.4s
+[2026-11-26 09:39:08]   NAGFuse-B     seed_18 ep  31 | loss 0.022/0.135 | F1 val 0.9565 (mejor 0.9736 @ 24) |  29.6s
+[2026-11-26 09:39:41]   NAGFuse-B     seed_18 ep  32 | loss 0.024/0.130 | F1 val 0.9581 (mejor 0.9736 @ 24) |  29.5s
+[2026-11-26 09:40:14]   NAGFuse-B     seed_18 ep  33 | loss 0.016/0.136 | F1 val 0.9652 (mejor 0.9736 @ 24) |  29.5s
+[2026-11-26 09:40:47]   NAGFuse-B     seed_18 ep  34 | loss 0.023/0.128 | F1 val 0.9690 (mejor 0.9736 @ 24) |  29.5s
+[2026-11-26 09:41:20]   NAGFuse-B     seed_18 ep  35 | loss 0.020/0.129 | F1 val 0.9549 (mejor 0.9736 @ 24) |  29.5s
+[2026-11-26 09:41:53]   NAGFuse-B     seed_18 ep  36 | loss 0.026/0.123 | F1 val 0.9688 (mejor 0.9736 @ 24) |  29.6s
+[2026-11-26 09:43:26]   NAGFuse-B seed_18: F1 macro prueba 0.9448
+[2026-11-26 09:44:56]   análisis NAGFuse: pi0 = 0.512, F1 con ruido 0.05: compuerta on 0.9025 / off 0.9042
+[2026-11-26 09:45:40]   NAGFuse-B/seed_18 en realwaste: F1 macro 0.4759 (n = 2640)
+[2026-11-26 09:46:29]   NAGFuse-B/seed_18 en gd_v2: F1 macro 0.5802 (n = 3000)
+[2026-11-26 09:46:44]   NAGFuse-B/seed_18 en warp_c: F1 macro 0.3673 (n = 863)
+[2026-11-26 09:47:29]   NAGFuse-B     seed_19 ep   0 | loss 2.967/0.906 | F1 val 0.8146 (mejor 0.8146 @ 0) |  33.0s *
+[2026-11-26 09:48:03]   NAGFuse-B     seed_19 ep   1 | loss 1.847/0.613 | F1 val 0.8723 (mejor 0.8723 @ 1) |  30.0s *
+[2026-11-26 09:48:37]   NAGFuse-B     seed_19 ep   2 | loss 1.255/0.441 | F1 val 0.8992 (mejor 0.8992 @ 2) |  29.8s *
+[2026-11-26 09:49:12]   NAGFuse-B     seed_19 ep   3 | loss 0.804/0.295 | F1 val 0.9147 (mejor 0.9147 @ 3) |  29.9s *
+[2026-11-26 09:49:46]   NAGFuse-B     seed_19 ep   4 | loss 0.533/0.258 | F1 val 0.9316 (mejor 0.9316 @ 4) |  29.9s *
+[2026-11-26 09:50:19]   NAGFuse-B     seed_19 ep   5 | loss 0.377/0.211 | F1 val 0.9271 (mejor 0.9316 @ 4) |  29.8s
+[2026-11-26 09:50:53]   NAGFuse-B     seed_19 ep   6 | loss 0.312/0.185 | F1 val 0.9343 (mejor 0.9343 @ 6) |  29.7s *
+[2026-11-26 09:51:27]   NAGFuse-B     seed_19 ep   7 | loss 0.226/0.163 | F1 val 0.9359 (mejor 0.9359 @ 7) |  29.8s *
+[2026-11-26 09:52:01]   NAGFuse-B     seed_19 ep   8 | loss 0.193/0.168 | F1 val 0.9373 (mejor 0.9373 @ 8) |  29.7s *
+[2026-11-26 09:52:34]   NAGFuse-B     seed_19 ep   9 | loss 0.190/0.155 | F1 val 0.9391 (mejor 0.9391 @ 9) |  29.7s *
+[2026-11-26 09:53:08]   NAGFuse-B     seed_19 ep  10 | loss 0.148/0.178 | F1 val 0.9482 (mejor 0.9482 @ 10) |  29.7s *
+[2026-11-26 09:53:41]   NAGFuse-B     seed_19 ep  11 | loss 0.133/0.149 | F1 val 0.9287 (mejor 0.9482 @ 10) |  29.7s
+[2026-11-26 09:54:15]   NAGFuse-B     seed_19 ep  12 | loss 0.100/0.125 | F1 val 0.9516 (mejor 0.9516 @ 12) |  29.7s *
+[2026-11-26 09:54:48]   NAGFuse-B     seed_19 ep  13 | loss 0.095/0.134 | F1 val 0.9487 (mejor 0.9516 @ 12) |  29.7s
+[2026-11-26 09:55:22]   NAGFuse-B     seed_19 ep  14 | loss 0.075/0.111 | F1 val 0.9582 (mejor 0.9582 @ 14) |  29.6s *
+[2026-11-26 09:55:56]   NAGFuse-B     seed_19 ep  15 | loss 0.072/0.094 | F1 val 0.9774 (mejor 0.9774 @ 15) |  29.6s *
+[2026-11-26 09:56:29]   NAGFuse-B     seed_19 ep  16 | loss 0.067/0.136 | F1 val 0.9619 (mejor 0.9774 @ 15) |  29.6s
+[2026-11-26 09:57:02]   NAGFuse-B     seed_19 ep  17 | loss 0.070/0.131 | F1 val 0.9655 (mejor 0.9774 @ 15) |  29.6s
+[2026-11-26 09:57:35]   NAGFuse-B     seed_19 ep  18 | loss 0.069/0.103 | F1 val 0.9520 (mejor 0.9774 @ 15) |  29.7s
+[2026-11-26 09:58:07]   NAGFuse-B     seed_19 ep  19 | loss 0.066/0.108 | F1 val 0.9469 (mejor 0.9774 @ 15) |  29.6s
+[2026-11-26 09:58:40]   NAGFuse-B     seed_19 ep  20 | loss 0.043/0.094 | F1 val 0.9611 (mejor 0.9774 @ 15) |  29.6s
+[2026-11-26 09:59:13]   NAGFuse-B     seed_19 ep  21 | loss 0.054/0.110 | F1 val 0.9607 (mejor 0.9774 @ 15) |  29.6s
+[2026-11-26 09:59:46]   NAGFuse-B     seed_19 ep  22 | loss 0.045/0.135 | F1 val 0.9343 (mejor 0.9774 @ 15) |  29.6s
+[2026-11-26 10:00:19]   NAGFuse-B     seed_19 ep  23 | loss 0.039/0.140 | F1 val 0.9460 (mejor 0.9774 @ 15) |  29.5s
+[2026-11-26 10:00:52]   NAGFuse-B     seed_19 ep  24 | loss 0.041/0.106 | F1 val 0.9612 (mejor 0.9774 @ 15) |  29.7s
+[2026-11-26 10:01:25]   NAGFuse-B     seed_19 ep  25 | loss 0.039/0.107 | F1 val 0.9608 (mejor 0.9774 @ 15) |  29.5s
+[2026-11-26 10:01:58]   NAGFuse-B     seed_19 ep  26 | loss 0.035/0.138 | F1 val 0.9419 (mejor 0.9774 @ 15) |  29.5s
+[2026-11-26 10:02:30]   NAGFuse-B     seed_19 ep  27 | loss 0.030/0.149 | F1 val 0.9504 (mejor 0.9774 @ 15) |  29.5s
+[2026-11-26 10:04:05]   NAGFuse-B seed_19: F1 macro prueba 0.9560
+[2026-11-26 10:05:34]   análisis NAGFuse: pi0 = 0.510, F1 con ruido 0.05: compuerta on 0.9044 / off 0.8954
+[2026-11-26 10:06:17]   NAGFuse-B/seed_19 en realwaste: F1 macro 0.5511 (n = 2640)
+[2026-11-26 10:07:05]   NAGFuse-B/seed_19 en gd_v2: F1 macro 0.6052 (n = 3000)
+[2026-11-26 10:07:19]   NAGFuse-B/seed_19 en warp_c: F1 macro 0.4715 (n = 863)
