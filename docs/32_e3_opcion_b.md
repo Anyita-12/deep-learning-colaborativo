@@ -1,7 +1,7 @@
 # 32. Opción B: segundo intento con otras ramas (protocolo v4)
 
 ```{note}
-Las tablas y figuras de este capítulo se reproducen con código ejecutable en el cuaderno {doc}`32a_e3_opcion_b`. Todas las cifras salen de `entregable3/resultados_b/` (análisis de la opción B), de `entregable3/resultados/tabla_maestra.csv` (la misma tabla que lee el dashboard) y de las corridas versionadas en `entregable3/results/`.
+Las tablas y figuras de este capítulo se reproducen con código ejecutable en los cuadernos {doc}`32a_e3_opcion_b` y {doc}`32b_e3_opcion_b_diagnostico`. Todas las cifras salen de `entregable3/resultados_b/` (análisis de la opción B), de `entregable3/resultados/tabla_maestra.csv` (la misma tabla que lee el dashboard) y de las corridas versionadas en `entregable3/results/`.
 ```
 
 Los resultados de la versión A (NAGFuse, protocolos v1 a v3) no cambian y siguen siendo los de los capítulos 27, 28 y 30. Este capítulo añade un segundo intento, la opción B, con su propio protocolo y su propia exposición declarada.
@@ -129,7 +129,7 @@ Diferencias pareadas NAGFuse-B − rival con IC 95 % (H1 en limpio y H2 con ruid
 
 - **B tiene la mayor media en limpio, desenfoque, oclusión y fondo sustituido, y el menor ECE y NLL.** Su IC del ECE ([0.024, 0.029]) se solapa con los de A y RWCNet.
 - **Con $\sigma = 0.05$, B y A coinciden** (0.903 y 0.904).
-- **Con $\sigma = 0.10$, B (0.827) queda por debajo de A (0.859) y de ViT-B16 (0.840).** El protocolo no incluía este contraste y no analizamos su causa.
+- **Con $\sigma = 0.10$, B (0.827) queda por debajo de A (0.859) y de ViT-B16 (0.840).** El protocolo no incluía este contraste. Con ruido la compuerta deja la salida en la rama robusta, y Swin-S se degrada más que ViT-B/16 con ruido fuerte (sección 32.11).
 
 **Conjuntos adicionales** (sin reentrenar; media de las semillas disponibles de cada modelo):
 
@@ -172,7 +172,7 @@ Esta comparación mezcla hardware. A se entrenó en A100; B, en A100 las semilla
 | Entrenamiento | `entregable3/notebooks/E3_entrenamiento_B_colab.ipynb` con `FASE = "piloto"` y luego `FASE = "confirmatoria"` (código del tag `e3-protocolo-v4`) |
 | Análisis | `cd entregable3/analisis && python cargar.py && python analisis_b.py`, y luego `confirmatorio.py`, `secundario.py`, `conforme.py`, `tablas_y_figuras.py`, `datos_dashboard.py`, `datos_dashboard_diagnostico.py` y `congelar.py` |
 | Resultados | `entregable3/resultados_b/` (contrastes, H3, conjuntos adicionales, Friedman, mecanismo, B frente a A y `resumen_b.json`) |
-| Figuras y tablas de este capítulo | {doc}`32a_e3_opcion_b` |
+| Figuras y tablas de este capítulo | {doc}`32a_e3_opcion_b` y {doc}`32b_e3_opcion_b_diagnostico` |
 
 Al regenerar el análisis, los contrastes de A difieren de los versionados solo en las últimas cifras decimales (del orden de $10^{-16}$), según la versión de las bibliotecas numéricas. Conservamos los archivos de A tal como estaban.
 
@@ -187,3 +187,70 @@ Al regenerar el análisis, los contrastes de A difieren de los versionados solo 
 | `entregable3/resultados_b` | `b5d6d9e62ca9ae1a08b0163af42e11e17ac1ca15153d737d229def1a41a88375` |
 
 Los dos primeros coinciden con los del capítulo 21. Los dos siguientes cambian porque ahora incluyen las corridas de NAGFuse-B y su fila en la tabla maestra; el último se calcula con la misma función.
+
+## 32.11 Diagnóstico de entrenamiento y evaluación complementaria
+
+Esta sección repite para NAGFuse-B los análisis que los capítulos 26 a 28 hacen para A. Todos son exploratorios y salen de las 20 corridas versionadas; el detalle está en el cuaderno {doc}`32b_e3_opcion_b_diagnostico`.
+
+**Curvas de entrenamiento y sobreajuste.**
+
+```{figure} images/e3/opcion_b_curvas.png
+:width: 100%
+Pérdida y F1 macro por época (media ± DE entre semillas) de NAGFuse-B, A, ViT-B16 y RWCNet. La línea punteada vertical marca la mediana de la época elegida por *early stopping*.
+```
+
+| Modelo | Semillas | Época elegida | F1 entrenamiento | F1 validación | Brecha de F1 |
+|---|---|---|---|---|---|
+| **NAGFuse-B** | 20 | 25.4 ± 12.9 | 0.998 | **0.973 ± 0.006** | **0.025 ± 0.006** |
+| NAGFuse (A) | 20 | 26.9 ± 10.9 | 0.998 | 0.967 ± 0.006 | 0.031 ± 0.005 |
+| ViT-B16 | 12 | 15.4 ± 6.5 | 0.995 | 0.965 ± 0.007 | 0.030 ± 0.005 |
+| RWCNet | 12 | 19.2 ± 9.4 | 0.992 | 0.959 ± 0.008 | 0.034 ± 0.007 |
+
+- **NAGFuse-B tiene el mayor F1 de validación y la menor brecha con el de entrenamiento.** El patrón es el de un *fine-tuning* sobre 1800 imágenes: la pérdida de entrenamiento baja casi a cero, la de validación se estabiliza después de las primeras épocas y el *early stopping* corta donde el F1 de validación ya es estable.
+- **La pérdida de entrenamiento de los dos modelos de fusión empieza más alta** porque incluye la supervisión de cada rama; la de validación es la entropía cruzada de la mezcla.
+- **ViT-B16 y RWCNet muestran 12 semillas** (8 a 19), las entrenadas en el Entregable 3, como en el capítulo 26a.
+
+**Pruebas.** Recalculamos la corrección de Holm desde los p sin ajustar de cada prueba: coincide exactamente con la publicada en H1-B y H2-B, y el veredicto es el mismo. El veredicto de H1-B no cambia para ninguno de los 12 rivales con MCC ni con las semillas 0 a 9.
+
+**F1 por clase** (media entre semillas):
+
+| Modelo | cardboard | glass | metal | paper | plastic | trash |
+|---|---|---|---|---|---|---|
+| **NAGFuse-B** | 0.987 | **0.955** | **0.960** | **0.961** | **0.943** | **0.882** |
+| NAGFuse (A) | 0.980 | 0.937 | 0.953 | 0.946 | 0.929 | 0.874 |
+| ViT-B16 | **0.988** | 0.933 | 0.951 | 0.960 | 0.922 | 0.859 |
+| RWCNet | 0.970 | 0.937 | 0.951 | 0.950 | 0.936 | 0.844 |
+
+B tiene el mayor F1 en cinco de las seis clases. Trash sigue siendo la peor clase en todos los modelos.
+
+**Predicción conforme** (LAC, $\alpha = 0.10$, calibrada en validación, mismo código que `conforme.py`). La cobertura de B es 0.882, con un tamaño medio de conjunto de 0.90 y un 10 % de conjuntos vacíos, en línea con los demás modelos. Su cobertura en trash (0.718) es menor que la de A (0.763) y la de RWCNet (0.755), y mayor que la de ViT-B16 (0.700).
+
+**Calibración.**
+
+```{figure} images/e3/opcion_b_confiabilidad.png
+:width: 90%
+Diagramas de confiabilidad en prueba de NAGFuse-B y de A (semilla 0), con IC 95 % binomial por intervalo.
+```
+
+El escalado de temperatura, ajustado en validación, da $T = 1.12$ para B (1.08 para A). El ECE baja de 0.027 a 0.025 y la NLL de 0.172 a 0.164, la menor de los cinco modelos comparados. Después del escalado, RWCNet tiene un ECE algo menor (0.024). En la semilla 0 el ECE de B (0.029) es mayor que el de A (0.022); en la media de 20 semillas es menor (0.027 frente a 0.030).
+
+**Ramas y compuerta.** Las salidas por imagen guardadas en cada corrida permiten medir cada rama dentro del mismo modelo entrenado, sin reentrenar:
+
+| Condición | B: mezcla | B: rama robusta (Swin-S) | B: rama CNN | A: mezcla | A: rama robusta (ViT-B/16) | A: rama CNN |
+|---|---|---|---|---|---|---|
+| Limpio | 0.948 | 0.943 | 0.921 | 0.936 | 0.925 | 0.924 |
+| Ruido 0.05 | 0.903 | 0.903 | 0.648 | 0.904 | 0.904 | 0.637 |
+| Ruido 0.10 | 0.827 | 0.827 | 0.381 | 0.859 | 0.859 | 0.382 |
+
+- **En limpio, la mezcla mejora a la rama robusta** en 0.004 en B y en 0.011 en A. La mejora de B sobre A en limpio viene sobre todo de la rama robusta: Swin-S sola (0.943) ya supera a la mezcla de A.
+- **Con ruido, la salida es la de la rama robusta** ($\pi = 1$). Con $\sigma = 0.10$, la rama Swin-S de B (0.827) se degrada más que la rama ViT-B/16 de A (0.859); de ahí la diferencia entre B y A en ese escenario.
+- **Las ramas CNN de los dos modelos se comportan casi igual**: tienen la misma arquitectura (EfficientNet-B0 con contracción), entrenada por separado en cada modelo.
+
+**Predicciones del mecanismo en B.** P1 no se cumple (apagar la compuerta reduce el F1 con ruido en 0.006, menos que $\delta$). P2, P3 y P4 se cumplen: apagar la compuerta no cambia el F1 limpio, la ventaja sobre RWCNet crece de 0.307 con $\sigma = 0.05$ a 0.484 con $\sigma = 0.10$, y $\hat\sigma$ crece con el ruido (0.000, 0.051 y 0.098) con la compuerta abierta en el 100 % de las imágenes. P5 no se puede evaluar en B, porque exige la variante sin contracción reentrenada.
+
+**Sensibilidad de la compuerta.** Con $\rho$ entre 1.5 y 4 y $s_{lo}$ entre la mitad y el doble del valor preregistrado, el F1 medio de B cambia como máximo 0.001 en las tres condiciones, como en A.
+
+**Errores (semilla 0).** En limpio, B comete 20 errores y su rama robusta 18: la mezcla corrige 1 error de la rama y añade 3. En la media de las 20 semillas, la mezcla mejora a la rama robusta (tabla anterior). Con ruido, B y su rama robusta cometen exactamente los mismos errores. Las confusiones más frecuentes son entre plástico y vidrio, vidrio y metal, y papel y cartón.
+
+**Lo que no se repite.** No entrenamos para B la ablación reentrenada de A (variantes sin contracción, solo rama robusta y solo rama CNN), que exige tres modelos más con 12 semillas cada uno; la tabla de ramas la sustituye en parte, pero no equivale a una variante entrenada por separado. La curva de aprendizaje frente al tamaño de muestra no se calculó para ningún modelo.
+

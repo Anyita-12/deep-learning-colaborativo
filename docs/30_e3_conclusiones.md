@@ -47,4 +47,4 @@ El segundo intento (protocolo v4, capítulo 32) cambia solo las redes de las ram
 - **P4 (mecanismo).** La compuerta se abre del todo con ruido en todas las imágenes, como en A. Apagarla reduce el F1 con $\sigma = 0.05$ en 0.006, más que en A pero menos que $\delta$.
 - **P5 (generalización). En parte.** B tiene la mejor media en RealWaste y Garbage v2, y en WaRP-C queda por debajo de ViT-B16 sin diferencia significativa: cumple el criterio de consistencia entre conjuntos, que A no cumplía.
 
-Frente a A, B gana +0.011 de F1 en limpio con 41 % menos de parámetros y la mitad de GFLOPs, y queda por debajo con ruido $\sigma = 0.10$ (0.827 frente a 0.859). Estas comparaciones con A son exploratorias y mezclan hardware: las semillas 3 a 19 de B se entrenaron en T4 y todas las de A en A100.
+Frente a A, B gana +0.011 de F1 en limpio con 41 % menos de parámetros y la mitad de GFLOPs, y queda por debajo con ruido $\sigma = 0.10$ (0.827 frente a 0.859), porque con ruido la salida es la de la rama Swin-S, que se degrada más que ViT-B/16. Estas comparaciones con A son exploratorias y mezclan hardware: las semillas 3 a 19 de B se entrenaron en T4 y todas las de A en A100.
